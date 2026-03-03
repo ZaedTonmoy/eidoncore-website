@@ -12,40 +12,62 @@
 
     // --- Inject Navbar ---
     function createNav() {
+        // Skip-to-content link
+        const skip = document.createElement('a');
+        skip.href = '#main-content';
+        skip.className = 'skip-link';
+        skip.textContent = 'Skip to main content';
+        document.body.prepend(skip);
+
+        // Add id to main
+        const main = document.querySelector('main');
+        if (main) main.id = 'main-content';
+
         const nav = document.createElement('nav');
         nav.className = 'navbar';
         nav.id = 'navbar';
+        nav.setAttribute('role', 'navigation');
+        nav.setAttribute('aria-label', 'Main navigation');
         nav.innerHTML = `
       <div class="nav-container">
-        <a href="${prefix}./" class="nav-logo">
+        <a href="${prefix}./" class="nav-logo" aria-label="Eidoncore home">
           <span class="logo-icon">◆</span> Eidoncore
         </a>
-        <ul class="nav-links" id="navLinks">
-          <li class="nav-dropdown">
-            <a href="${prefix}features/" class="dropdown-trigger">Features <span class="dropdown-arrow">▾</span></a>
-            <div class="dropdown-menu">
-              <a href="${prefix}projects/">Projects</a>
-              <a href="${prefix}tasks/">Tasks</a>
-              <a href="${prefix}crm/">CRM &amp; Clients</a>
-              <a href="${prefix}invoicing/">Invoicing</a>
-              <a href="${prefix}services/">Services</a>
-              <a href="${prefix}automations/">Automations</a>
-              <a href="${prefix}portal/">Client Portal</a>
-              <a href="${prefix}notifications/">Notifications</a>
-              <a href="${prefix}reports/">Reports</a>
+        <ul class="nav-links" id="navLinks" role="menubar">
+          <li class="nav-dropdown" role="none">
+            <a href="${prefix}features/" class="dropdown-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false">Features <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu" role="menu">
+              <a href="${prefix}projects/" role="menuitem">Projects</a>
+              <a href="${prefix}tasks/" role="menuitem">Tasks</a>
+              <a href="${prefix}crm/" role="menuitem">CRM &amp; Clients</a>
+              <a href="${prefix}invoicing/" role="menuitem">Invoicing</a>
+              <a href="${prefix}services/" role="menuitem">Services</a>
+              <a href="${prefix}automations/" role="menuitem">Automations</a>
+              <a href="${prefix}portal/" role="menuitem">Client Portal</a>
+              <a href="${prefix}notifications/" role="menuitem">Notifications</a>
+              <a href="${prefix}reports/" role="menuitem">Reports</a>
             </div>
           </li>
-          <li><a href="${prefix}pricing/">Pricing</a></li>
-          <li><a href="${prefix}about/">About</a></li>
-          <li><a href="${prefix}contact/">Contact</a></li>
-          <li class="mobile-cta-item"><a href="https://register.eidoncore.com/login" class="btn btn-ghost btn-block">Log In</a></li>
-          <li class="mobile-cta-item"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-block">Start Free Trial</a></li>
+          <li class="nav-dropdown" role="none">
+            <a href="${prefix}blog/" class="dropdown-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false">Resources <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu" role="menu">
+              <a href="${prefix}blog/" role="menuitem">Blog</a>
+              <a href="${prefix}docs/" role="menuitem">Documentation</a>
+              <a href="${prefix}integrations/" role="menuitem">Integrations</a>
+              <a href="${prefix}changelog/" role="menuitem">Changelog</a>
+            </div>
+          </li>
+          <li role="none"><a href="${prefix}pricing/" role="menuitem">Pricing</a></li>
+          <li role="none"><a href="${prefix}about/" role="menuitem">About</a></li>
+          <li role="none"><a href="${prefix}contact/" role="menuitem">Contact</a></li>
+          <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/login" class="btn btn-ghost btn-block" role="menuitem">Log In</a></li>
+          <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-block" role="menuitem">Start Free Trial</a></li>
         </ul>
         <div class="nav-actions" id="navActions">
           <a href="https://register.eidoncore.com/login" class="btn btn-ghost">Log In</a>
           <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial</a>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -103,10 +125,16 @@
           </div>
         </div>
         <div class="footer-bottom">
+          <div class="footer-social">
+            <a href="https://github.com/ZaedTonmoy" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+            <a href="https://twitter.com/eidoncore" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://linkedin.com/company/eidoncore" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
           <p>&copy; 2026 Eidoncore. All rights reserved.</p>
         </div>
       </div>
     `;
+        footer.setAttribute('role', 'contentinfo');
         return footer;
     }
 
@@ -128,6 +156,7 @@
             navToggle.addEventListener('click', () => {
                 const open = navLinks.classList.toggle('open');
                 navToggle.classList.toggle('active', open);
+                navToggle.setAttribute('aria-expanded', String(open));
             });
 
             // Close mobile on link click (but not dropdown triggers)
@@ -136,6 +165,7 @@
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('open');
                     navToggle.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
                 });
             });
         }
@@ -198,16 +228,17 @@
         // --- Dropdown menus ---
         const isMobile = () => window.innerWidth <= 768;
         document.querySelectorAll('.nav-dropdown').forEach(dd => {
-            // Desktop: hover
-            dd.addEventListener('mouseenter', () => { if (!isMobile()) dd.classList.add('active'); });
-            dd.addEventListener('mouseleave', () => { if (!isMobile()) dd.classList.remove('active'); });
-            // Mobile: tap the trigger to toggle
             const trigger = dd.querySelector('.dropdown-trigger');
+            // Desktop: hover
+            dd.addEventListener('mouseenter', () => { if (!isMobile()) { dd.classList.add('active'); if (trigger) trigger.setAttribute('aria-expanded', 'true'); } });
+            dd.addEventListener('mouseleave', () => { if (!isMobile()) { dd.classList.remove('active'); if (trigger) trigger.setAttribute('aria-expanded', 'false'); } });
+            // Mobile: tap the trigger to toggle
             if (trigger) {
                 trigger.addEventListener('click', (e) => {
                     if (isMobile()) {
                         e.preventDefault();
-                        dd.classList.toggle('active');
+                        const isOpen = dd.classList.toggle('active');
+                        trigger.setAttribute('aria-expanded', String(isOpen));
                     }
                 });
             }
@@ -269,6 +300,71 @@
                 });
             }, { passive: true });
         }
+
+        // --- Back to Top button ---
+        const btt = document.createElement('button');
+        btt.className = 'back-to-top';
+        btt.id = 'backToTop';
+        btt.setAttribute('aria-label', 'Back to top');
+        btt.innerHTML = '↑';
+        document.body.appendChild(btt);
+        window.addEventListener('scroll', () => {
+            btt.classList.toggle('visible', window.scrollY > 500);
+        }, { passive: true });
+        btt.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- Cookie Consent ---
+        if (!localStorage.getItem('eidon_cookie_consent')) {
+            const banner = document.createElement('div');
+            banner.className = 'cookie-banner';
+            banner.id = 'cookieBanner';
+            banner.setAttribute('role', 'alert');
+            banner.innerHTML = `
+                <p>We use cookies to improve your experience. By using this site, you agree to our <a href="${prefix}privacy/">Privacy Policy</a>.</p>
+                <button class="btn btn-primary btn-sm" id="cookieAccept">Accept</button>
+            `;
+            document.body.appendChild(banner);
+            setTimeout(() => banner.classList.add('visible'), 1000);
+            document.getElementById('cookieAccept').addEventListener('click', () => {
+                localStorage.setItem('eidon_cookie_consent', '1');
+                banner.classList.remove('visible');
+                setTimeout(() => banner.remove(), 400);
+            });
+        }
+
+        // --- Breadcrumb JSON-LD ---
+        const bc = document.querySelector('.breadcrumb');
+        if (bc) {
+            const links = bc.querySelectorAll('a');
+            const current = bc.querySelector('.current');
+            if (links.length && current) {
+                const items = [];
+                links.forEach((a, i) => {
+                    items.push({ '@type': 'ListItem', 'position': i + 1, 'name': a.textContent.trim(), 'item': a.href });
+                });
+                items.push({ '@type': 'ListItem', 'position': items.length + 1, 'name': current.textContent.trim() });
+                const schema = document.createElement('script');
+                schema.type = 'application/ld+json';
+                schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': items });
+                document.head.appendChild(schema);
+            }
+        }
+
+        // --- Mobile comparison table scroll ---
+        document.querySelectorAll('.comparison-table').forEach(table => {
+            if (!table.parentElement.classList.contains('table-scroll')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-scroll';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            }
+        });
+
+        // --- Main landmark role ---
+        const mainEl = document.querySelector('main');
+        if (mainEl) mainEl.setAttribute('role', 'main');
     }
 
     // --- Animate counter value ---

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact — Eidoncore | Get in Touch, Request a Demo</title>
     <meta name="description"
@@ -16,16 +17,29 @@
     <link rel="canonical" href="https://eidoncore.com/contact/">
     <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
     <link rel="icon" type="image/png" href="../images/og-image.png">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../components.css">
-    <script src="../components.js"></script>
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I request a live demo?","acceptedAnswer":{"@type":"Answer","text":"Fill out the contact form and select 'Request a Demo' as the subject. Our team will schedule a personalized walkthrough within 1-2 business days."}},{"@type":"Question","name":"Is there a free trial available?","acceptedAnswer":{"@type":"Answer","text":"Yes! Every new account starts with a 14-day free Pro trial — no credit card required. You get access to all Pro features."}},{"@type":"Question","name":"What kind of support do you offer?","acceptedAnswer":{"@type":"Answer","text":"All plans include email support. Pro plans get priority email support, and Enterprise customers receive dedicated onboarding, live chat, and priority response times."}},{"@type":"Question","name":"Can I migrate from another tool?","acceptedAnswer":{"@type":"Answer","text":"We offer CSV import for clients, projects, and tasks. Enterprise customers get hands-on migration assistance."}}]}
     </script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Contact Eidoncore — Request a Demo or Get Support">
+    <meta name="twitter:description"
+        content="Get in touch with the Eidoncore team. Request a demo, sales inquiry, or technical support.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
 </head>
 
 <body>
@@ -44,20 +58,21 @@
             <div class="container">
                 <div class="contact-form-grid">
                     <div class="anim-slide-left">
-                        <form class="contact-form" id="contactForm">
+                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID"
+                            method="POST">
                             <div class="form-row">
                                 <div class="form-group"><label for="contact-name">Full Name</label><input type="text"
-                                        id="contact-name" placeholder="Jane Doe" required></div>
+                                        id="contact-name" name="name" placeholder="Jane Doe" required></div>
                                 <div class="form-group"><label for="contact-email">Email</label><input type="email"
-                                        id="contact-email" placeholder="jane@agency.com" required></div>
+                                        id="contact-email" name="email" placeholder="jane@agency.com" required></div>
                             </div>
                             <div class="form-group">
                                 <label for="contact-company">Company / Agency</label>
-                                <input type="text" id="contact-company" placeholder="Your agency name">
+                                <input type="text" id="contact-company" name="company" placeholder="Your agency name">
                             </div>
                             <div class="form-group">
                                 <label for="contact-subject">Subject</label>
-                                <select id="contact-subject">
+                                <select id="contact-subject" name="subject">
                                     <option value="">Select a topic</option>
                                     <option value="demo">Request a Demo</option>
                                     <option value="sales">Sales Inquiry</option>
@@ -69,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="contact-message">Message</label>
-                                <textarea id="contact-message"
+                                <textarea id="contact-message" name="message"
                                     placeholder="Tell us about your agency and how we can help..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Send Message <span
