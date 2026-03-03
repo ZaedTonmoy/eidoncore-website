@@ -38,8 +38,8 @@
           <li><a href="${prefix}contact/">Contact</a></li>
         </ul>
         <div class="nav-actions" id="navActions">
-          <a href="${prefix}pricing/" class="btn btn-ghost">Log In</a>
-          <a href="${prefix}pricing/" class="btn btn-primary">Start Free Trial</a>
+          <a href="https://register.eidoncore.com/login" class="btn btn-ghost">Log In</a>
+          <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial</a>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
