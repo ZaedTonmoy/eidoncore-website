@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrations — Eidoncore | Stripe, Slack, SMTP, Webhooks & API</title>
+    <meta name="description"
+        content="Eidoncore integrates with Stripe for payments, Slack for notifications, custom SMTP for branded emails, webhooks for automation, and custom domains for white-label portals.">
+    <meta property="og:title" content="Integrations — Eidoncore | Connect Your Favorite Tools">
+    <meta property="og:description"
+        content="Stripe payments, Slack alerts, custom SMTP, webhooks, custom domains, and cloud storage — all built in.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/integrations/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/integrations/">
+    <link rel="icon" type="image/png" href="../images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <script src="../components.js"></script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
+                        class="current">Integrations</span></div>
+                <h1 class="page-title anim-blur">Powerful <span class="gradient-text">integrations</span> built in</h1>
+                <p class="page-subtitle anim-blur">Eidoncore connects with the tools your agency already uses — no
+                    third-party connectors or middleware required.</p>
+            </div>
+        </section>
+
+        <!-- Integration Cards -->
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Payments</span>
+                    <h2>Stripe Connect</h2>
+                    <p>Accept payments from clients with Stripe's secure payment infrastructure. Support for one-time
+                        invoices, recurring billing, saved cards, and automatic payment reconciliation.</p>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">💳</div>
+                        <h4>Invoice Payments</h4>
+                        <p>Clients pay invoices online via Stripe Checkout with card, bank transfer, or saved payment
+                            methods</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔄</div>
+                        <h4>Recurring Billing</h4>
+                        <p>Automatic subscription billing for retainer clients with Stripe-managed renewal cycles</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🛒</div>
+                        <h4>Service Checkout</h4>
+                        <p>Clients browse your service catalog and purchase directly through a branded Stripe-powered
+                            checkout</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">📊</div>
+                        <h4>Payment Webhooks</h4>
+                        <p>Real-time payment status sync via Stripe webhooks — invoices auto-mark as paid</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Notifications</span>
+                        <h2>Slack Integration</h2>
+                        <p>Get real-time notifications delivered to your Slack workspace. Critical alerts like overdue
+                            invoices, budget thresholds, and automation failures are sent instantly — keeping your team
+                            informed without checking the app.</p>
+                        <ul>
+                            <li>Channel-based alerts for team visibility</li>
+                            <li>Critical P1 events bypass digest batching</li>
+                            <li>Invoice payment confirmations in real-time</li>
+                            <li>Project milestone and deadline alerts</li>
+                            <li>Automation failure notifications</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/notifications.png"
+                            alt="Slack integration delivering real-time agency notifications" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Email</span>
+                        <h2>Custom SMTP</h2>
+                        <p>Send all transactional emails — invoices, task assignments, team invitations, and
+                            notifications — from your own email domain. Your clients see your brand in every
+                            communication, never Eidoncore.</p>
+                        <ul>
+                            <li>Use your own email domain (e.g., hello@youragency.com)</li>
+                            <li>Branded email templates with your logo and colors</li>
+                            <li>AES-256 encrypted SMTP credentials</li>
+                            <li>Automatic fallback to platform SMTP if not configured</li>
+                            <li>Enterprise plan feature</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/settings-content.png" alt="Custom SMTP configuration in agency settings"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Infrastructure</span>
+                    <h2>More built-in integrations</h2>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🌐</div>
+                        <h4>Custom Domains</h4>
+                        <p>Map your own domain to your client portal. DNS verification via HTTPS ensures secure
+                            routing</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">☁️</div>
+                        <h4>Cloud Storage</h4>
+                        <p>Supabase-powered file storage with per-agency quotas, image previews, and file versioning</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔗</div>
+                        <h4>Webhooks & API</h4>
+                        <p>tRPC-based API with full CRUD operations. Build custom integrations with any external
+                            tool</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🤖</div>
+                        <h4>Automation Engine</h4>
+                        <p>Trigger→Condition→Action automation builder to connect internal events with external
+                            actions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>All the integrations you need — zero setup</h2>
+                    <p>Start your 14-day free trial and connect your tools in minutes.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../contact/" class="btn btn-outline btn-lg">Book a Demo</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+
+</html>

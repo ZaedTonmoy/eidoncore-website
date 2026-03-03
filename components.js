@@ -76,6 +76,8 @@
             <h4>Product</h4>
             <a href="${prefix}features/">Features</a>
             <a href="${prefix}pricing/">Pricing</a>
+            <a href="${prefix}integrations/">Integrations</a>
+            <a href="${prefix}changelog/">Changelog</a>
             <a href="${prefix}about/">About</a>
             <a href="${prefix}contact/">Contact</a>
           </div>
@@ -93,7 +95,8 @@
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
-            <a href="${prefix}contact/">Help Center</a>
+            <a href="${prefix}docs/">Documentation</a>
+            <a href="${prefix}blog/">Blog</a>
             <a href="${prefix}security/">Security</a>
             <a href="${prefix}privacy/">Privacy Policy</a>
             <a href="${prefix}terms/">Terms of Service</a>

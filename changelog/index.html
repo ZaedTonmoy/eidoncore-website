@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog — Eidoncore | Latest Updates & New Features</title>
+    <meta name="description"
+        content="See what's new in Eidoncore. Browse our complete changelog with new features, improvements, and bug fixes across every release.">
+    <meta property="og:title" content="Changelog — Eidoncore | Product Updates">
+    <meta property="og:description"
+        content="Explore the full Eidoncore changelog. New features, improvements, and fixes shipped in every release.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/changelog/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/changelog/">
+    <link rel="icon" type="image/png" href="../images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <script src="../components.js"></script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
+                        class="current">Changelog</span></div>
+                <h1 class="page-title anim-blur">What's <span class="gradient-text">new</span></h1>
+                <p class="page-subtitle anim-blur">Every feature, improvement, and bug fix — shipped and documented.
+                    This page auto-updates from our latest releases.</p>
+            </div>
+        </section>
+
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="changelog-search anim-blur">
+                    <input type="text" id="changelogSearch" placeholder="Search changelog..." class="changelog-input">
+                </div>
+                <div id="changelogContainer" class="changelog-list">
+                    <div class="changelog-loading">
+                        <div class="loading-skeleton"></div>
+                        <div class="loading-skeleton short"></div>
+                        <div class="loading-skeleton"></div>
+                        <div class="loading-skeleton short"></div>
+                    </div>
+                </div>
+                <div id="changelogLoadMore" class="changelog-load-more" style="display:none">
+                    <button class="btn btn-outline" id="loadMoreBtn">Load more versions</button>
+                </div>
+                <div id="changelogError" class="changelog-error" style="display:none">
+                    <p>Unable to load changelog at the moment. Please try again later or view it on <a
+                            href="https://github.com/ZaedTonmoy/cw_agency" target="_blank"
+                            rel="noopener noreferrer">GitHub</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Always improving, always shipping</h2>
+                    <p>Start your 14-day free trial and experience the latest features.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../features/" class="btn btn-outline btn-lg">All Features</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/ZaedTonmoy/cw_agency/main/src/data/changelog.json';
+            const container = document.getElementById('changelogContainer');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            const loadMoreWrap = document.getElementById('changelogLoadMore');
+            const errorEl = document.getElementById('changelogError');
+            const searchInput = document.getElementById('changelogSearch');
+            let allEntries = [];
+            let visibleCount = 10;
+
+            function badgeClass(type) {
+                return type === 'feature' ? 'badge-feature' : type === 'fix' ? 'badge-fix' : 'badge-improvement';
+            }
+            function badgeLabel(type) {
+                return type === 'feature' ? 'Feature' : type === 'fix' ? 'Fix' : 'Improvement';
+            }
+
+            function renderEntries(entries) {
+                if (!entries.length) {
+                    container.innerHTML = '<p class="changelog-empty">No matching entries found.</p>';
+                    loadMoreWrap.style.display = 'none';
+                    return;
+                }
+                const visible = entries.slice(0, visibleCount);
+                container.innerHTML = visible.map(entry => `
+                    <div class="changelog-entry animate-on-scroll">
+                        <div class="changelog-header">
+                            <div>
+                                <span class="changelog-version">v${entry.version}</span>
+                                <span class="changelog-date">${new Date(entry.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                            </div>
+                        </div>
+                        <h3 class="changelog-title">${entry.title}</h3>
+                        <p class="changelog-summary">${entry.summary}</p>
+                        <div class="changelog-changes">
+                            ${entry.changes.map(c => `
+                                <div class="changelog-change">
+                                    <span class="changelog-badge ${badgeClass(c.type)}">${badgeLabel(c.type)}</span>
+                                    <span>${c.text}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+                loadMoreWrap.style.display = entries.length > visibleCount ? '' : 'none';
+            }
+
+            function filterEntries() {
+                const q = searchInput.value.toLowerCase().trim();
+                if (!q) { renderEntries(allEntries); return; }
+                const filtered = allEntries.filter(e =>
+                    e.title.toLowerCase().includes(q) ||
+                    e.summary.toLowerCase().includes(q) ||
+                    e.version.includes(q) ||
+                    e.changes.some(c => c.text.toLowerCase().includes(q))
+                );
+                renderEntries(filtered);
+            }
+
+            fetch(GITHUB_RAW_URL)
+                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(data => {
+                    allEntries = data;
+                    renderEntries(allEntries);
+                })
+                .catch(() => {
+                    container.innerHTML = '';
+                    errorEl.style.display = '';
+                });
+
+            loadMoreBtn.addEventListener('click', () => {
+                visibleCount += 10;
+                filterEntries();
+            });
+            searchInput.addEventListener('input', () => {
+                visibleCount = 10;
+                filterEntries();
+            });
+        })();
+    </script>
+    <script src="../script.js"></script>
+</body>
+
+</html>
