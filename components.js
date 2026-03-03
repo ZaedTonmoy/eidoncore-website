@@ -31,6 +31,8 @@
               <a href="${prefix}services/">Services</a>
               <a href="${prefix}automations/">Automations</a>
               <a href="${prefix}portal/">Client Portal</a>
+              <a href="${prefix}notifications/">Notifications</a>
+              <a href="${prefix}reports/">Reports</a>
             </div>
           </li>
           <li><a href="${prefix}pricing/">Pricing</a></li>
@@ -86,6 +88,8 @@
             <a href="${prefix}automations/">Automations</a>
             <a href="${prefix}services/">Services</a>
             <a href="${prefix}portal/">Client Portal</a>
+            <a href="${prefix}notifications/">Notifications</a>
+            <a href="${prefix}reports/">Reports</a>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
