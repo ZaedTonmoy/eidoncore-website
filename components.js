@@ -36,6 +36,8 @@
           <li><a href="${prefix}pricing/">Pricing</a></li>
           <li><a href="${prefix}about/">About</a></li>
           <li><a href="${prefix}contact/">Contact</a></li>
+          <li class="mobile-cta-item"><a href="https://register.eidoncore.com/login" class="btn btn-ghost btn-block">Log In</a></li>
+          <li class="mobile-cta-item"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-block">Start Free Trial</a></li>
         </ul>
         <div class="nav-actions" id="navActions">
           <a href="https://register.eidoncore.com/login" class="btn btn-ghost">Log In</a>
@@ -115,19 +117,17 @@
         // Mobile toggle
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
-        const navActions = document.getElementById('navActions');
         if (navToggle && navLinks) {
             navToggle.addEventListener('click', () => {
                 const open = navLinks.classList.toggle('open');
-                if (navActions) navActions.classList.toggle('open', open);
                 navToggle.classList.toggle('active', open);
             });
 
-            // Close mobile on link click
+            // Close mobile on link click (but not dropdown triggers)
             navLinks.querySelectorAll('a').forEach(link => {
+                if (link.classList.contains('dropdown-trigger')) return;
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('open');
-                    if (navActions) navActions.classList.remove('open');
                     navToggle.classList.remove('active');
                 });
             });
@@ -188,10 +188,22 @@
             });
         });
 
-        // --- Dropdown menus (desktop) ---
+        // --- Dropdown menus ---
+        const isMobile = () => window.innerWidth <= 768;
         document.querySelectorAll('.nav-dropdown').forEach(dd => {
-            dd.addEventListener('mouseenter', () => dd.classList.add('active'));
-            dd.addEventListener('mouseleave', () => dd.classList.remove('active'));
+            // Desktop: hover
+            dd.addEventListener('mouseenter', () => { if (!isMobile()) dd.classList.add('active'); });
+            dd.addEventListener('mouseleave', () => { if (!isMobile()) dd.classList.remove('active'); });
+            // Mobile: tap the trigger to toggle
+            const trigger = dd.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', (e) => {
+                    if (isMobile()) {
+                        e.preventDefault();
+                        dd.classList.toggle('active');
+                    }
+                });
+            }
         });
 
         // --- FAQ Accordion (if on page) ---
