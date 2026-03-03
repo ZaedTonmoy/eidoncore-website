@@ -111,6 +111,7 @@
               </form>
             </div>
           </div>
+          <div class="footer-link-columns">
           <div class="footer-col">
             <h4>Product</h4>
             <a href="${prefix}features/">Features</a>
@@ -139,6 +140,7 @@
             <a href="${prefix}security/">Security</a>
             <a href="${prefix}privacy/">Privacy Policy</a>
             <a href="${prefix}terms/">Terms of Service</a>
+          </div>
           </div>
         </div>
         <div class="footer-bottom">
