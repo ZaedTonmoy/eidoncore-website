@@ -739,6 +739,61 @@ img {
   color: #EF4444;
 }
 
+/* --- Screenshot Window (replaces old mockup-window) --- */
+.screenshot-window {
+  background: rgba(15, 15, 35, 0.8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow), 0 0 80px rgba(108, 99, 255, 0.08);
+}
+
+.screenshot-dots {
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(15, 15, 35, 0.95);
+}
+
+.screenshot-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.screenshot-dots span:nth-child(1) {
+  background: #FF5F57;
+}
+
+.screenshot-dots span:nth-child(2) {
+  background: #FFBD2E;
+}
+
+.screenshot-dots span:nth-child(3) {
+  background: #28CA42;
+}
+
+.screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Detail-visual screenshot for sub-pages */
+.detail-screenshot {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow), 0 0 40px rgba(108, 99, 255, 0.06);
+}
+
+.detail-screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* --- Pricing --- */
 .pricing {
   padding: 100px 0;
