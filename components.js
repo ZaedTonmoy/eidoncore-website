@@ -6,6 +6,23 @@
 (function () {
     'use strict';
 
+    // --- Google Analytics (gtag.js) ---
+    const gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-708D36YCMR';
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-708D36YCMR');
+
+    // --- Microsoft Clarity ---
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "vq6ikthh3w");
+
     // --- Determine depth for relative paths ---
     const depth = document.documentElement.dataset.depth || '0';
     const prefix = depth === '1' ? '../' : '';
