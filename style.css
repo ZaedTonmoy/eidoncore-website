@@ -1642,3 +1642,112 @@ img {
     font-size: 0.95rem;
   }
 }
+
+/* --- Legal Content Pages --- */
+.legal-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-section {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.legal-section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.legal-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.legal-section p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.legal-section ul {
+  margin: 12px 0 16px;
+  padding-left: 20px;
+}
+
+.legal-section li {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  padding: 4px 0;
+  position: relative;
+  padding-left: 8px;
+}
+
+.legal-section li::marker {
+  color: var(--primary);
+}
+
+/* --- Why Eidoncore (Differentiators) --- */
+.differentiators {
+  padding: 100px 0;
+  background: linear-gradient(180deg, transparent, rgba(108, 99, 255, 0.03), transparent);
+}
+
+.differentiators-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.diff-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 28px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.diff-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+
+.diff-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.diff-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+}
+
+.diff-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .differentiators-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security — Eidoncore | Enterprise-Grade Data Protection</title>
+    <meta name="description"
+        content="Learn how Eidoncore protects your agency data with AES-256 encryption, two-factor authentication, tenant isolation, audit logging, session controls, and SOC2-ready security architecture.">
+    <meta property="og:title" content="Security — Eidoncore | Enterprise-Grade Data Protection">
+    <meta property="og:description"
+        content="AES-256 encryption, 2FA, tenant isolation, audit logging, and SOC2-ready architecture protecting your agency data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/security/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/security/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <script src="../components.js"></script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
+                        class="current">Security</span></div>
+                <h1 class="page-title anim-blur">Security you can <span class="gradient-text">trust</span></h1>
+                <p class="page-subtitle anim-blur">Eidoncore is built with defense-in-depth security at every layer —
+                    from encryption and authentication to tenant isolation and audit logging. Your agency data is
+                    protected by enterprise-grade controls.</p>
+            </div>
+        </section>
+
+        <!-- Encryption -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Encryption</span>
+                    <h2>Data protection at rest and in transit</h2>
+                    <p>All sensitive data is encrypted using industry-standard algorithms. Connections are secured with
+                        HTTPS/TLS at all times.</p>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔐</div>
+                        <h4>AES-256-GCM</h4>
+                        <p>Sensitive data encrypted at rest with HKDF key derivation</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔒</div>
+                        <h4>TLS 1.3 in Transit</h4>
+                        <p>All connections encrypted between browser and server</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔑</div>
+                        <h4>bcrypt Hashing</h4>
+                        <p>Passwords hashed with bcrypt cost-12 — never stored in plain text</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🛡️</div>
+                        <h4>HMAC-Signed Tokens</h4>
+                        <p>Password resets, invitations, and impersonation use tamper-proof signed tokens</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Authentication</span>
+                        <h2>Two-factor authentication and session controls</h2>
+                        <p>Protect your account with TOTP-based two-factor authentication using any authenticator app.
+                            Agency owners can require 2FA for the entire team. Manage active sessions, revoke
+                            unauthorized access, and configure idle timeouts — all from your security settings.</p>
+                        <ul>
+                            <li>TOTP-based 2FA with 8 recovery codes</li>
+                            <li>Agency-wide 2FA enforcement for owners</li>
+                            <li>Active session monitoring with device and location info</li>
+                            <li>Configurable idle timeout and max session lifetime</li>
+                            <li>One-click revoke of single or all sessions</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/settings-content.png"
+                            alt="Security settings with two-factor authentication, session management, and policy controls"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tenant Isolation -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Tenant Isolation</span>
+                        <h2>Complete data isolation between workspaces</h2>
+                        <p>Every agency workspace is fully isolated at the database level. Subdomain routing,
+                            organization-scoped queries, and hostname-bound session cookies ensure no data ever leaks
+                            between agencies — even if the same email address is used across multiple workspaces.</p>
+                        <ul>
+                            <li>Organization-scoped database queries on every request</li>
+                            <li>Subdomain and custom domain routing at the edge</li>
+                            <li>Hostname-scoped session cookies — no cross-subdomain leaking</li>
+                            <li>Per-agency passwords, profiles, and role assignments</li>
+                            <li>Reserved slug protection for system subdomains</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/dashboard.png"
+                            alt="Isolated agency workspace with subdomain routing and tenant-scoped data"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Policies & Audit -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Policies & Auditing</span>
+                        <h2>Security policies, audit logs, and compliance</h2>
+                        <p>Agency owners can enforce security rules across their workspace. Every significant action is
+                            recorded in a comprehensive audit log with field-level detail — perfect for compliance,
+                            troubleshooting, and accountability.</p>
+                        <ul>
+                            <li>Require 2FA for all team members</li>
+                            <li>Email domain allowlist for team invites</li>
+                            <li>Re-authentication required for sensitive actions</li>
+                            <li>Full audit log with who, what, when, and from where</li>
+                            <li>Security event history for authentication changes</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/settings-content.png"
+                            alt="Audit log showing user actions, timestamps, and field-level change details"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Threat Protection -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Threat Protection</span>
+                    <h2>Built-in protection against common threats</h2>
+                    <p>Security headers, rate limiting, and input sanitization protect your workspace from attacks.</p>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🚫</div>
+                        <h4>Brute Force</h4>
+                        <p>Rate limiting on login, 2FA, password reset, and registration</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🧹</div>
+                        <h4>XSS Prevention</h4>
+                        <p>CSP headers, server-side HTML sanitization, and React auto-escaping</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔗</div>
+                        <h4>CSRF Protection</h4>
+                        <p>Origin header validation and signed tokens on sensitive endpoints</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">📡</div>
+                        <h4>HSTS Enforcement</h4>
+                        <p>Strict Transport Security with 1-year max-age and subdomain coverage</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🖼️</div>
+                        <h4>Clickjacking</h4>
+                        <p>X-Frame-Options DENY prevents embedding in iframes</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon">🔍</div>
+                        <h4>DNS Verification</h4>
+                        <p>DNS-over-HTTPS verification for custom domain security</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Your data deserves enterprise-grade protection</h2>
+                    <p>Start your 14-day free trial with full security features from day one.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../about/" class="btn btn-outline btn-lg">About
+                            Eidoncore</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+
+</html>

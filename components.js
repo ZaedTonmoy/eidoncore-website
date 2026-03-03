@@ -94,9 +94,9 @@
           <div class="footer-col">
             <h4>Resources</h4>
             <a href="${prefix}contact/">Help Center</a>
-            <a href="${prefix}about/#security">Security</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="${prefix}security/">Security</a>
+            <a href="${prefix}privacy/">Privacy Policy</a>
+            <a href="${prefix}terms/">Terms of Service</a>
           </div>
         </div>
         <div class="footer-bottom">
