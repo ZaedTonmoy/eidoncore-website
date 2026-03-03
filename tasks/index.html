@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks — Eidoncore | Kanban, Lists, Subtasks & Time Tracking</title>
+    <meta name="description"
+        content="Manage tasks with Kanban boards, list views, subtasks, checklists, dependencies, labels, live timers, and threaded comments.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <script src="../components.js"></script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Tasks</span></div>
+                <h1 class="page-title anim-blur">Every task, <span class="gradient-text">perfectly organized</span></h1>
+                <p class="page-subtitle anim-blur">Kanban boards, list views, subtasks, checklists, dependencies,
+                    labels, live timers, and threaded comments — your team's productivity engine.</p>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Views</span>
+                        <h2>Kanban boards & list views</h2>
+                        <p>Switch between Kanban and list views instantly. Drag tasks between columns, filter by label,
+                            priority, or assignee, and sort by due date, creation time, or custom order.</p>
+                        <ul>
+                            <li>Drag-and-drop Kanban columns</li>
+                            <li>List view with bulk actions</li>
+                            <li>Filter by label, priority, status, assignee</li>
+                            <li>Custom column ordering</li>
+                        </ul>
+                        <a href="../pricing/" class="btn btn-primary">Try It Free <span class="btn-arrow">→</span></a>
+                    </div>
+                    <div class="detail-visual anim-scale float-anim">
+                        <div class="mock-kanban">
+                            <div class="mock-column">
+                                <div class="mock-column-title">To Do</div>
+                                <div class="mock-task">Homepage redesign</div>
+                                <div class="mock-task">Brand guidelines</div>
+                            </div>
+                            <div class="mock-column">
+                                <div class="mock-column-title">In Progress</div>
+                                <div class="mock-task">API integration</div>
+                            </div>
+                            <div class="mock-column">
+                                <div class="mock-column-title">Review</div>
+                                <div class="mock-task">Landing page copy</div>
+                            </div>
+                            <div class="mock-column">
+                                <div class="mock-column-title">Done</div>
+                                <div class="mock-task">Logo design</div>
+                                <div class="mock-task">Color palette</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Structure</span>
+                        <h2>Subtasks, checklists & dependencies</h2>
+                        <p>Break complex work into subtasks, add checklists for step-by-step progress, and set task
+                            dependencies so nothing starts before prerequisites are complete.</p>
+                        <ul>
+                            <li>Unlimited nested subtasks</li>
+                            <li>Checklists with progress tracking</li>
+                            <li>Blocking & waiting-on dependencies</li>
+                            <li>Labels for categorization</li>
+                        </ul>
+                    </div>
+                    <div class="detail-visual anim-slide-left float-anim">
+                        <div class="mock-row">
+                            <div class="mock-item"><span class="label">Task</span><br>Website Redesign <span
+                                    class="mock-badge blue">In Progress</span></div>
+                        </div>
+                        <div style="padding-left:20px">
+                            <div class="mock-row">
+                                <div class="mock-item" style="opacity:0.8"><span class="label">Subtask</span><br>✓
+                                    Wireframes <span class="mock-badge green">Done</span></div>
+                            </div>
+                            <div class="mock-row">
+                                <div class="mock-item" style="opacity:0.8"><span class="label">Subtask</span><br>→
+                                    Visual Design <span class="mock-badge yellow">Active</span></div>
+                            </div>
+                            <div class="mock-row">
+                                <div class="mock-item" style="opacity:0.6"><span class="label">Subtask</span><br>🔒
+                                    Development <span class="mock-badge red">Blocked</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Collaboration</span>
+                        <h2>Timers, comments & collaboration</h2>
+                        <p>Start a live timer on any task. Leave threaded comments with @mentions. Attach files, link
+                            related tasks, and keep everyone in sync — without ever leaving Eidoncore.</p>
+                        <ul>
+                            <li>One-click live timers on tasks</li>
+                            <li>Threaded comments with @mentions</li>
+                            <li>File attachments per task</li>
+                            <li>Activity timeline for full audit trail</li>
+                        </ul>
+                    </div>
+                    <div class="detail-visual anim-slide-right float-anim">
+                        <div class="mock-row">
+                            <div class="mock-item"><span class="label">Time Logged</span><span class="value">3h
+                                    24m</span></div>
+                            <div class="mock-item"><span class="label">Comments</span><span class="value">12</span>
+                            </div>
+                        </div>
+                        <div class="mock-row">
+                            <div class="mock-item"><span class="label">Attachments</span><span class="value">5
+                                    files</span></div>
+                            <div class="mock-item"><span class="label">Watchers</span><span class="value">3</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Get your tasks under control</h2>
+                    <p>Start your 14-day free PRO trial and experience the full task management suite.</p>
+                    <div class="hero-ctas"><a href="../pricing/" class="btn btn-primary btn-lg">Start Free Trial <span
+                                class="btn-arrow">→</span></a><a href="../features/" class="btn btn-outline btn-lg">View
+                            All Features</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+
+</html>

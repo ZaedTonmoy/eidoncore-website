@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Eidoncore | Get in Touch</title>
+    <meta name="description"
+        content="Contact the Eidoncore team. Request a demo, get sales support, or ask a question. Subscribe to our newsletter for product updates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <script src="../components.js"></script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
+                        class="current">Contact</span></div>
+                <h1 class="page-title anim-blur">Let's <span class="gradient-text">talk</span></h1>
+                <p class="page-subtitle anim-blur">Have a question, want a demo, or need help choosing a plan? We'd love
+                    to hear from you.</p>
+            </div>
+        </section>
+
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="contact-form-grid">
+                    <div class="anim-slide-left">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group"><label for="contact-name">Full Name</label><input type="text"
+                                        id="contact-name" placeholder="Jane Doe" required></div>
+                                <div class="form-group"><label for="contact-email">Email</label><input type="email"
+                                        id="contact-email" placeholder="jane@agency.com" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-company">Company / Agency</label>
+                                <input type="text" id="contact-company" placeholder="Your agency name">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <select id="contact-subject">
+                                    <option value="">Select a topic</option>
+                                    <option value="demo">Request a Demo</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="enterprise">Enterprise Plan</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message"
+                                    placeholder="Tell us about your agency and how we can help..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Send Message <span
+                                    class="btn-arrow">→</span></button>
+                        </form>
+                    </div>
+
+                    <div class="anim-slide-right">
+                        <div class="contact-info-card">
+                            <h3>Get in touch</h3>
+                            <div class="info-item">
+                                <div class="info-icon">📧</div>
+                                <div>
+                                    <h4>Email Us</h4>
+                                    <p>hello@eidoncore.com</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">💬</div>
+                                <div>
+                                    <h4>Live Chat</h4>
+                                    <p>Available Mon–Fri, 9am–6pm EST</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">🕐</div>
+                                <div>
+                                    <h4>Response Time</h4>
+                                    <p>We respond within 24 hours</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">📍</div>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Remote-first, worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card" style="margin-top:20px">
+                            <h3>Quick links</h3>
+                            <div class="info-item">
+                                <div class="info-icon">📖</div>
+                                <div>
+                                    <h4><a href="../features/" style="color:var(--primary)">Explore Features</a></h4>
+                                    <p>See everything Eidoncore offers</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">💰</div>
+                                <div>
+                                    <h4><a href="../pricing/" style="color:var(--primary)">View Pricing</a></h4>
+                                    <p>Compare plans and start free</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">🔒</div>
+                                <div>
+                                    <h4><a href="../about/#security" style="color:var(--primary)">Security</a></h4>
+                                    <p>Learn about our security practices</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-scale">
+                    <h3>Subscribe to our newsletter</h3>
+                    <p>Product updates, agency tips, and early access to new features. No spam, unsubscribe anytime.</p>
+                    <form class="newsletter-form"><input type="email" placeholder="Enter your email" required><button
+                            type="submit">Subscribe</button></form>
+                    <div class="newsletter-success">🎉 You're subscribed! Welcome aboard.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '✓ Message Sent!';
+            btn.style.background = 'var(--accent-green)';
+            this.reset();
+            setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 4000);
+        });
+    </script>
+</body>
+
+</html>
