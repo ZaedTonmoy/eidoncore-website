@@ -32,6 +32,46 @@
     <meta name="twitter:title" content="Service Catalog — Eidoncore">
     <meta name="twitter:description" content="Productized services with tiered pricing, cart, checkout, and delivery tracking.">
     <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Service Catalog?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Service Catalog lets you define reusable service offerings with prices, descriptions, and categories. Clients can browse services and place orders through the Client Portal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can clients order services directly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Through the Client Portal, clients can add services to a cart and check out. Orders automatically create invoices and optionally spin up new projects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I set different prices for different clients?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Create client-specific pricing tiers or offer volume discounts. Custom pricing overrides are supported per client or per service item."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are service orders tracked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each order creates an auditable trail with status tracking (pending, in progress, completed). Orders link to invoices and projects for full lifecycle visibility."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 
 <body>
@@ -120,6 +160,70 @@
                         <img src="../images/services-content.webp"
                             alt="Service tracking with hours, credits, milestones, and client reviews" loading="lazy">
                     </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What is the Service Catalog?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>The Service Catalog lets you define reusable service offerings with prices, descriptions, and categories. Clients can browse services and place orders through the Client Portal.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can clients order services directly?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Through the Client Portal, clients can add services to a cart and check out. Orders automatically create invoices and optionally spin up new projects.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I set different prices for different clients?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Create client-specific pricing tiers or offer volume discounts. Custom pricing overrides are supported per client or per service item.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">How are service orders tracked?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Each order creates an auditable trail with status tracking (pending, in progress, completed). Orders link to invoices and projects for full lifecycle visibility.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../invoicing/" class="related-card">
+                        <div class="related-icon" data-icon="wallet"></div>
+                        <h3>Invoicing</h3>
+                        <p>Auto-generate invoices from service orders.</p>
+                    </a>
+                    <a href="../portal/" class="related-card">
+                        <div class="related-icon" data-icon="globe"></div>
+                        <h3>Client Portal</h3>
+                        <p>Clients browse and order through your portal.</p>
+                    </a>
+                    <a href="../crm/" class="related-card">
+                        <div class="related-icon" data-icon="users"></div>
+                        <h3>CRM & Clients</h3>
+                        <p>Track service usage per client.</p>
+                    </a>
                 </div>
             </div>
         </section>

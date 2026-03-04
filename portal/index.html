@@ -32,6 +32,46 @@
     <meta name="twitter:title" content="Client Portal — Eidoncore">
     <meta name="twitter:description" content="White-label client portal with project views, invoice payments, service catalog, and branding.">
     <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I customize the portal with my own branding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Upload your logo, set brand colors, and customize the portal layout. Enterprise users can also use custom domains so the portal appears at portal.youragency.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can clients do in the portal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clients can view project progress, download deliverables, approve work, pay invoices, upload documents, and communicate with your team \u2014 all in a clean, self-service interface."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do clients need an account to access the portal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clients receive a magic link via email \u2014 no password required. For enhanced security, Enterprise users can enable optional client-side two-factor authentication."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I control what clients see?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Configure visibility per project \u2014 show or hide tasks, budgets, time entries, and internal notes. Clients only see what you want them to see."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 
 <body>
@@ -120,6 +160,70 @@
                         <img src="../images/services-content.webp"
                             alt="Client portal service catalog with cart, checkout, and intake forms" loading="lazy">
                     </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">Can I customize the portal with my own branding?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Upload your logo, set brand colors, and customize the portal layout. Enterprise users can also use custom domains so the portal appears at portal.youragency.com.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">What can clients do in the portal?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Clients can view project progress, download deliverables, approve work, pay invoices, upload documents, and communicate with your team — all in a clean, self-service interface.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Do clients need an account to access the portal?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Clients receive a magic link via email — no password required. For enhanced security, Enterprise users can enable optional client-side two-factor authentication.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I control what clients see?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Absolutely. Configure visibility per project — show or hide tasks, budgets, time entries, and internal notes. Clients only see what you want them to see.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../crm/" class="related-card">
+                        <div class="related-icon" data-icon="users"></div>
+                        <h3>CRM & Clients</h3>
+                        <p>Client profiles and relationship management.</p>
+                    </a>
+                    <a href="../invoicing/" class="related-card">
+                        <div class="related-icon" data-icon="wallet"></div>
+                        <h3>Invoicing</h3>
+                        <p>Clients can view and pay invoices in the portal.</p>
+                    </a>
+                    <a href="../services/" class="related-card">
+                        <div class="related-icon" data-icon="shopping-cart"></div>
+                        <h3>Service Catalog</h3>
+                        <p>Let clients browse and order services.</p>
+                    </a>
                 </div>
             </div>
         </section>

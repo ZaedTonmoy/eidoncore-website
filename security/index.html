@@ -32,6 +32,46 @@
     <meta name="twitter:title" content="Security — Eidoncore | Enterprise-Grade Data Protection">
     <meta name="twitter:description" content="AES-256 encryption, 2FA, tenant isolation, audit logging, and SOC2-ready architecture protecting your agency data.">
     <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Eidoncore SOC 2 compliant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eidoncore is SOC 2 ready with enterprise-grade security controls including AES-256 encryption, complete tenant isolation, audit logging, and role-based access control."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is data isolated between agencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every agency operates in a fully isolated tenant. Database queries are scoped to the authenticated tenant, middleware enforces isolation, and cross-tenant access is architecturally impossible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Eidoncore support two-factor authentication?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. TOTP-based two-factor authentication is available for all accounts. Enterprise users can enforce 2FA for all team members as a security policy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is my data stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eidoncore runs on enterprise-grade cloud infrastructure with data encrypted at rest (AES-256) and in transit (TLS 1.3). Regional deployment options are available for Enterprise customers."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 
 <body>
@@ -201,6 +241,70 @@
                         <h4>DNS Verification</h4>
                         <p>DNS-over-HTTPS verification for custom domain security</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">Is Eidoncore SOC 2 compliant?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Eidoncore is SOC 2 ready with enterprise-grade security controls including AES-256 encryption, complete tenant isolation, audit logging, and role-based access control.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">How is data isolated between agencies?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Every agency operates in a fully isolated tenant. Database queries are scoped to the authenticated tenant, middleware enforces isolation, and cross-tenant access is architecturally impossible.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Does Eidoncore support two-factor authentication?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. TOTP-based two-factor authentication is available for all accounts. Enterprise users can enforce 2FA for all team members as a security policy.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Where is my data stored?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Eidoncore runs on enterprise-grade cloud infrastructure with data encrypted at rest (AES-256) and in transit (TLS 1.3). Regional deployment options are available for Enterprise customers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../portal/" class="related-card">
+                        <div class="related-icon" data-icon="globe"></div>
+                        <h3>Client Portal</h3>
+                        <p>Branded, secure portal for client access.</p>
+                    </a>
+                    <a href="../integrations/" class="related-card">
+                        <div class="related-icon" data-icon="link"></div>
+                        <h3>Integrations</h3>
+                        <p>Secure API and webhook connections.</p>
+                    </a>
+                    <a href="../reports/" class="related-card">
+                        <div class="related-icon" data-icon="bar-chart"></div>
+                        <h3>Reports</h3>
+                        <p>Audit logs and security event reports.</p>
+                    </a>
                 </div>
             </div>
         </section>
