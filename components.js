@@ -48,7 +48,7 @@
         nav.innerHTML = `
       <div class="nav-container">
         <a href="${prefix}./" class="nav-logo" aria-label="Eidoncore home">
-          <span class="logo-icon">◆</span> Eidoncore
+          <img src="${prefix}images/logo.png" alt="Eidoncore" class="logo-icon" style="height:24px;width:24px;"> Eidoncore
         </a>
         <ul class="nav-links" id="navLinks" role="menubar">
           <li class="nav-dropdown" role="none">
@@ -111,7 +111,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="${prefix}./" class="nav-logo"><span class="logo-icon">◆</span> Eidoncore</a>
+            <a href="${prefix}./" class="nav-logo"><img src="${prefix}images/logo.png" alt="Eidoncore" class="logo-icon" style="height:24px;width:24px;"> Eidoncore</a>
             <p>The all-in-one agency management platform.</p>
             <div class="footer-newsletter">
               <p>Subscribe to our newsletter</p>
