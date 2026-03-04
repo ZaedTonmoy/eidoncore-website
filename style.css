@@ -515,6 +515,25 @@ img {
   transform: translateY(-4px);
 }
 
+.step-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(108, 99, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+.step-card:hover .step-icon {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.3);
+}
+
 .step-number {
   font-size: 3rem;
   font-weight: 900;
