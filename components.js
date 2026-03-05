@@ -484,6 +484,7 @@
             document.body.appendChild(createFooter());
             injectIcons();
             initShared();
+            injectZipchat();
         });
     } else {
         // DOM already loaded
@@ -491,5 +492,16 @@
         document.body.appendChild(createFooter());
         injectIcons();
         initShared();
+        injectZipchat();
+    }
+
+    // --- Zipchat AI Widget ---
+    function injectZipchat() {
+        if (document.querySelector('script[src*="zipchat.ai"]')) return; // prevent duplicates
+        var s = document.createElement('script');
+        s.src = 'https://app.zipchat.ai/widget/zipchat.js?id=E82fNxKy6w2EGkD6tg3C';
+        s.setAttribute('data-no-optimize', '1');
+        s.defer = true;
+        document.body.appendChild(s);
     }
 })();
