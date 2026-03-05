@@ -2568,7 +2568,7 @@ a:focus-visible {
 /* --- Back to Top --- */
 .back-to-top {
   position: fixed;
-  bottom: 32px;
+  bottom: 90px;
   right: 32px;
   width: 44px;
   height: 44px;
