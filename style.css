@@ -2681,3 +2681,10 @@ a:focus-visible {
 .table-scroll .comparison-table {
   min-width: 700px;
 }
+
+/* --- Zipchat AI Widget z-index fix --- */
+#zipchat-widget-wrapper,
+[id*="zipchat"],
+iframe[src*="zipchat"] {
+  z-index: 10000 !important;
+}
