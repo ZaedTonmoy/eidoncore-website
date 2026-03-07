@@ -18,19 +18,25 @@
     <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <style>body{background:#0a0a1a}</style>
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
     <link rel="stylesheet" href="../style.min.css">
     <link rel="stylesheet" href="../components.min.css">
     <script src="../components.min.js"></script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@eidoncore">
     <meta name="twitter:title" content="Notifications — Eidoncore">
-    <meta name="twitter:description" content="In-app, email, and Slack notifications with quiet hours, priority filters, and digest scheduling.">
+    <meta name="twitter:description"
+        content="In-app, email, and Slack notifications with quiet hours, priority filters, and digest scheduling.">
     <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
     <script type="application/ld+json">
 {
@@ -200,9 +206,11 @@
                 <div class="testimonials-grid" style="max-width:640px;margin:0 auto">
                     <div class="testimonial-card animate-on-scroll">
                         <div class="stars">★★★★★</div>
-                        <p>"The Slack integration means our team never misses a client update. Smart batching prevents notification fatigue — it's perfectly balanced."</p>
+                        <p>"The Slack integration means our team never misses a client update. Smart batching prevents
+                            notification fatigue — it's perfectly balanced."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar" style="background:linear-gradient(135deg,#A78BFA,#6C63FF)">EV</div>
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#A78BFA,#6C63FF)">EV
+                            </div>
                             <div><strong>Elena Vasquez</strong><br><span>Ops Manager, Summit Digital</span></div>
                         </div>
                     </div>
@@ -250,28 +258,35 @@
                     <h2>Frequently asked questions</h2>
                 </div>
                 <div class="faq-list">
-                    <div class="faq-item"><button class="faq-question">What types of notifications does Eidoncore send?<span
-                                class="faq-icon">+</span></button>
+                    <div class="faq-item"><button class="faq-question">What types of notifications does Eidoncore
+                            send?<span class="faq-icon">+</span></button>
                         <div class="faq-answer">
-                            <p>Task assignments, due date reminders, invoice payments, client messages, @mentions, project updates, automation alerts, and security notifications — all configurable per user.</p>
+                            <p>Task assignments, due date reminders, invoice payments, client messages, @mentions,
+                                project updates, automation alerts, and security notifications — all configurable per
+                                user.</p>
                         </div>
                     </div>
                     <div class="faq-item"><button class="faq-question">Can I control which notifications I receive?<span
                                 class="faq-icon">+</span></button>
                         <div class="faq-answer">
-                            <p>Yes. Each user can customize their notification preferences — choose which events trigger in-app alerts, email notifications, or both. Mute specific projects or clients as needed.</p>
+                            <p>Yes. Each user can customize their notification preferences — choose which events trigger
+                                in-app alerts, email notifications, or both. Mute specific projects or clients as
+                                needed.</p>
                         </div>
                     </div>
                     <div class="faq-item"><button class="faq-question">Are notifications sent in real-time?<span
                                 class="faq-icon">+</span></button>
                         <div class="faq-answer">
-                            <p>In-app notifications appear instantly. Email notifications are sent within seconds of the triggering event, with smart batching to avoid inbox flooding during high-activity periods.</p>
+                            <p>In-app notifications appear instantly. Email notifications are sent within seconds of the
+                                triggering event, with smart batching to avoid inbox flooding during high-activity
+                                periods.</p>
                         </div>
                     </div>
                     <div class="faq-item"><button class="faq-question">Can I integrate notifications with Slack?<span
                                 class="faq-icon">+</span></button>
                         <div class="faq-answer">
-                            <p>Yes. Connect your Slack workspace to receive Eidoncore notifications directly in your team channels. Choose which events post to Slack and customize the message format.</p>
+                            <p>Yes. Connect your Slack workspace to receive Eidoncore notifications directly in your
+                                team channels. Choose which events post to Slack and customize the message format.</p>
                         </div>
                     </div>
                 </div>
@@ -305,6 +320,52 @@
             </div>
         </section>
 
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">How It Works</span>
+                    <h2>From event to alert in milliseconds</h2>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">1</div>
+                        <h3>Event Occurs</h3>
+                        <p>A task is assigned, an invoice is paid, a comment is posted, or an <a
+                                href="../automations/">automation</a> fires — Eidoncore detects the event instantly.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">2</div>
+                        <h3>Smart Routing</h3>
+                        <p>The notification engine checks each user's preferences — channel (in-app, email, Slack),
+                            priority level, quiet hours, and category filters.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">3</div>
+                        <h3>Instant Delivery</h3>
+                        <p>Alerts arrive in the right channel at the right time. Critical items get immediate delivery;
+                            routine updates batch into digests to reduce noise.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Stay updated on Eidoncore</h3>
+                    <p>Product updates, feature releases, and tips for keeping your agency in sync.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
+                        You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
         <section class="cta-section">
             <div class="container">
                 <div class="cta-content anim-cinematic">
@@ -312,8 +373,8 @@
                     <p>Smart notifications that respect your focus. Start your 14-day free trial.</p>
                     <div class="hero-ctas"><a href="https://register.eidoncore.com/"
                             class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
-                            href="../automations/" class="btn btn-outline btn-lg">Explore
-                            Automations</a></div>
+                            href="../tasks/" class="btn btn-outline btn-lg">Explore
+                            Tasks</a></div>
                 </div>
             </div>
         </section>
