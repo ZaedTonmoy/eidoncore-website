@@ -18,19 +18,25 @@
     <link rel="canonical" href="https://eidoncore.com/changelog/">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <style>body{background:#0a0a1a}</style>
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
     <link rel="stylesheet" href="../style.min.css">
     <link rel="stylesheet" href="../components.min.css">
     <script src="../components.min.js"></script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@eidoncore">
     <meta name="twitter:title" content="Changelog — Eidoncore | Product Updates">
-    <meta name="twitter:description" content="Explore the full Eidoncore changelog. New features, improvements, and fixes shipped in every release.">
+    <meta name="twitter:description"
+        content="Explore the full Eidoncore changelog. New features, improvements, and fixes shipped in every release.">
     <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
 </head>
 
@@ -85,7 +91,7 @@
 
     <script>
         (function () {
-            const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/ZaedTonmoy/cw_agency/main/src/data/changelog.json';
+            const CHANGELOG_URL = 'changelog.json';
             const container = document.getElementById('changelogContainer');
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             const loadMoreWrap = document.getElementById('changelogLoadMore');
@@ -143,7 +149,7 @@
                 renderEntries(filtered);
             }
 
-            fetch(GITHUB_RAW_URL)
+            fetch(CHANGELOG_URL)
                 .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
                 .then(data => {
                     allEntries = data;

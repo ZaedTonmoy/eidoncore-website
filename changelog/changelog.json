@@ -1,0 +1,3674 @@
+[
+    {
+        "version": "8.0.0",
+        "date": "2026-03-07",
+        "title": "Service Pricing Engine, Quota System & Catalog Redesign",
+        "summary": "Major release \u2014 complete service pricing architecture overhaul with 4 quota types (Standard, Time-Based, Credit-Based, Usage-Based), dual-ledger quota engine with 105 edge cases covered, inline task creation pattern, field tooltips and conditional form logic, slug availability checking, and a premium catalog service page redesign with glass cards, animations, and gallery lightbox.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "4 Quota Types \u2014 STANDARD (task count), TIME_BASED (hours with overtime), CREDIT_BASED (credits per task), USAGE_BASED (metered billing) with full lifecycle support including rollover, expiry, and top-ups"
+            },
+            {
+                "type": "feature",
+                "text": "Dual-ledger quota engine \u2014 base balance + top-up balance with SELECT...FOR UPDATE row-locking, Stateful Ledger Memory (deductedFromBase/deductedFromTopUp stamps), and atomic spillover deduction"
+            },
+            {
+                "type": "feature",
+                "text": "Inline task creation \u2014 '+ New Task' now instantly creates a task and opens the full TaskDrawer with comments, reactions, attachments, and activity. TaskCreateDrawer deprecated"
+            },
+            {
+                "type": "feature",
+                "text": "Quota top-ups \u2014 manual top-ups for agency/org owners with QuotaTopUp model, Stripe webhook handler (fulfillQuotaTopUp), state-machine idempotency, and separate balance columns"
+            },
+            {
+                "type": "feature",
+                "text": "Time entry overtime split \u2014 splitTimeEntryMinutes() calculates regularMinutes/overtimeMinutes with billedHourlyRate/billedOvertimeRate snapshotted onto each TimeEntry for invoice accuracy"
+            },
+            {
+                "type": "feature",
+                "text": "USAGE_BASED auto-invoicing \u2014 renewals cron generates DRAFT invoices with usage line items at period end, sweeps unbilled TIME_BASED overtime entries, and stamps entries with invoiceId"
+            },
+            {
+                "type": "feature",
+                "text": "Cancellation final invoice sweep \u2014 auto-stops running timers, sweeps unbilled USAGE_BASED + TIME_BASED overtime, generates closing DRAFT invoice before setting CANCELLED status"
+            },
+            {
+                "type": "feature",
+                "text": "Config snapshot isolation \u2014 12+ fields snapshotted from Service to OrgService at purchase time, so agency template changes never affect active client contracts"
+            },
+            {
+                "type": "feature",
+                "text": "Project quota status bar \u2014 visual progress bar in project OverviewTab showing base + top-up usage for all 4 quota types, with '+ New Task' disabled when quota exhausted"
+            },
+            {
+                "type": "feature",
+                "text": "Gallery lightbox \u2014 click-to-open full-screen lightbox on catalog service page with blur backdrop, prev/next navigation arrows, and close button"
+            },
+            {
+                "type": "feature",
+                "text": "Slug availability check \u2014 real-time debounced (500ms) slug uniqueness validation in the Service Builder with \u2705/\u274c indicators and clickable suggestions for conflicts"
+            },
+            {
+                "type": "improvement",
+                "text": "Catalog service page premium redesign \u2014 taller hero with gradient overlay and frosted-glass category pill, content cards with staggered fade-in animation, gradient accent section titles, deliverable hover highlights, animated FAQ accordion, review cards with accent border"
+            },
+            {
+                "type": "improvement",
+                "text": "Pricing sidebar upgrade \u2014 gradient stripe header, elevated shadow, structured detail rows for included hours/credits, shimmer CTA button on hover, active subscriber and in-cart badges"
+            },
+            {
+                "type": "improvement",
+                "text": "Service Builder tooltips \u2014 explanatory FieldHint tooltips on all pricing and quota fields with contextual descriptions and profit calculation examples"
+            },
+            {
+                "type": "improvement",
+                "text": "Conditional form fields \u2014 Included Hours shown only for TIME_BASED/USAGE_BASED, Included Credits only for CREDIT_BASED, Max Rollover Periods only for CAPPED rollover, Credits Per Task only for CREDIT_BASED"
+            },
+            {
+                "type": "improvement",
+                "text": "Shared service-utils.ts \u2014 extracted 13 helper functions from 6 duplicate locations into a single shared module with backward compatibility for both pricingModel and billingType/quotaType"
+            },
+            {
+                "type": "improvement",
+                "text": "Automation quota gate \u2014 automation engine's create_task action now routes through checkAndDeductQuota(), preventing unlimited task creation that bypassed tRPC quota gate"
+            },
+            {
+                "type": "improvement",
+                "text": "Renewals cron upgraded \u2014 migrated from hardcoded RECURRING_MONTHLY to billingType: RECURRING, added rollover logic per RolloverPolicy, dual-sweep for USAGE_BASED + TIME_BASED overtime"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed Lazarus re-activation exploit \u2014 isRefunded flag prevents refunded tasks from being re-activated without re-checking quota"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed subtask promotion bypass \u2014 parentTaskId null transitions now run checkQuota() to prevent creating free subtasks then promoting to root-level"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed billed time immutability \u2014 timeEntryUpdate and timeEntryDelete throw FORBIDDEN if invoiceId is set, preventing modification of invoiced entries"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed active timer ghost on cancel/pause \u2014 auto-stops all running timers (endTime: null) when OrgService status transitions to PAUSED or CANCELLED"
+            },
+            {
+                "type": "feature",
+                "text": "Convert catalog gallery from grid to responsive slider"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 1 catalog detail enhancements"
+            },
+            {
+                "type": "feature",
+                "text": "Add reusable demo services seed script"
+            },
+            {
+                "type": "fix",
+                "text": "Hero quote picks best review (highest rated + has comment + newest)"
+            },
+            {
+                "type": "fix",
+                "text": "CTA button - remove icon, solid color using branding var(--accent-primary)"
+            },
+            {
+                "type": "fix",
+                "text": "Related services grid stretches to fill width (auto-fit)"
+            },
+            {
+                "type": "fix",
+                "text": "PublicCategoryList now includes _count for published+public services"
+            },
+            {
+                "type": "feature",
+                "text": "Guest cart for public visitors"
+            },
+            {
+                "type": "fix",
+                "text": "Darken hero overlay for better text readability on cover images"
+            },
+            {
+                "type": "fix",
+                "text": "Center FAQ collapse minus icon in pill toggle"
+            },
+            {
+                "type": "feature",
+                "text": "Make pricing card '+N more included' clickable to expand all deliverables"
+            },
+            {
+                "type": "fix",
+                "text": "Admin sidebar not loading on login + block /admin on non-admin subdomains"
+            },
+            {
+                "type": "fix",
+                "text": "Use hard navigation after admin login to force layout re-render"
+            },
+            {
+                "type": "improvement",
+                "text": "Harden admin panel \u2014 strip spoofable header + enforce 2FA at tRPC level"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar logo now reactively switches on theme toggle"
+            },
+            {
+                "type": "feature",
+                "text": "Add Enterprise plan lock overlay to SMTP settings page"
+            },
+            {
+                "type": "feature",
+                "text": "Add Email Logo upload to Brand Identity tab"
+            },
+            {
+                "type": "fix",
+                "text": "Use live DB query for SMTP plan gate instead of stale session JWT"
+            },
+            {
+                "type": "improvement",
+                "text": "Deduplicate email sender fields \u2014 SMTP page is single source"
+            },
+            {
+                "type": "fix",
+                "text": "Add programmatic file type validation to ImageUpload component"
+            }
+        ]
+    },
+    {
+        "version": "7.6.0",
+        "date": "2026-03-05",
+        "title": "Intake Form Builder v2 \u2014 Multi-Page, Repeater & Preview",
+        "summary": "Major intake form upgrade \u2014 multi-page forms with step wizard, repeater/group fields with dynamic rows, full-screen preview modal, public catalog redesign with share links and SEO, and field type expansion to 27 types.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Multi-page intake forms \u2014 add pages via page tabs in the builder; clients see a step wizard with numbered indicators, Previous/Next navigation, and per-page validation"
+            },
+            {
+                "type": "feature",
+                "text": "Repeater / Group fields \u2014 new field type for repeatable data (e.g. team members, project phases); clients can dynamically add and remove rows, each with configurable sub-fields"
+            },
+            {
+                "type": "feature",
+                "text": "Form Preview modal \u2014 full-screen preview in the builder showing exactly how clients will see the form, with multi-page navigation and all 27 field types rendered"
+            },
+            {
+                "type": "feature",
+                "text": "Public service catalog redesign \u2014 refreshed catalog grid with share links, SEO metadata (title, description, Open Graph), and improved service detail pages"
+            },
+            {
+                "type": "improvement",
+                "text": "Expanded to 27 field types \u2014 all types now fully rendered on the client success page, in the form preview, and in the generated HTML document (buildIntakeDocHtml)"
+            },
+            {
+                "type": "improvement",
+                "text": "All icons now use proper SVG components from the icon library \u2014 replaced 25+ emoji and inline SVG instances with consistent IconX, IconEye, IconStar, etc."
+            },
+            {
+                "type": "fix",
+                "text": "Fixed API field type validation \u2014 Zod enum was limited to 18 types, silently rejecting forms with newer field types like address, currency, toggle, color_picker, and slider"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed repeater data display in generated documents \u2014 submitted repeater rows now render as a clean nested table in the HTML document"
+            },
+            {
+                "type": "feature",
+                "text": "Restructure intake forms - page-based builder, 18 field types, draft support"
+            },
+            {
+                "type": "improvement",
+                "text": "Uplift intake form builder UI - premium visuals"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar cutoff, button consistency, branding vars + add conditional logic"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar lifts off bottom when scrolling - remove alignSelf flex-start"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar gap at bottom when scrolling - split into outer wrapper + inner sticky"
+            },
+            {
+                "type": "fix",
+                "text": "Move bottom padding from flex parent to canvas only - fixes sidebar gap"
+            }
+        ]
+    },
+    {
+        "version": "7.5.1",
+        "date": "2026-03-05",
+        "title": "Kanban Redesign, Task Drag-and-Drop & Custom Statuses",
+        "summary": "Visual Kanban board overhaul with shadow cards and priority badges, drag-and-drop task reordering in list view, project-scoped custom task statuses, guest checkout for public catalog, and invoice discount safety.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Kanban board redesign \u2014 shadow-elevated cards with colored status pills, priority badges, progress bars, project names, due date pills, grip handles, and card overflow menu"
+            },
+            {
+                "type": "feature",
+                "text": "Task list drag-and-drop \u2014 drag tasks between status groups in the grouped list view with full-row drag overlay, scroll position preservation, and optimistic updates"
+            },
+            {
+                "type": "feature",
+                "text": "Project-scoped custom task statuses \u2014 define custom status columns per project with drag-and-drop reordering on the Kanban board"
+            },
+            {
+                "type": "feature",
+                "text": "Guest checkout \u2014 public catalog now supports purchases without requiring login, streamlining the client onboarding flow"
+            },
+            {
+                "type": "feature",
+                "text": "Kanban card context menu \u2014 right-click or overflow menu on cards for quick actions"
+            },
+            {
+                "type": "improvement",
+                "text": "Tasks view mode persists via URL hash (#board, #list, #workload) \u2014 survives page reloads and browser back/forward"
+            },
+            {
+                "type": "improvement",
+                "text": "Service gallery \u2014 extracted shared ServiceBuilderForm component with image gallery support on the service detail page"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed discount safety \u2014 fixed discounts now clamped to prevent negative invoice totals"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed duplicate file entries and enforced storage quota limits on all upload paths"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed pricing validation blocking progression and cover image display issues in service builder"
+            }
+        ]
+    },
+    {
+        "version": "7.5.0",
+        "date": "2026-03-05",
+        "title": "Typography Refactor & SF Pro Display Default Font",
+        "summary": "Comprehensive typography standardization across the entire codebase \u2014 replaced 1,476 inline font declarations with CSS design tokens, introduced utility classes, and switched the default system font from Plus Jakarta Sans to SF Pro Display.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "SF Pro Display is now the default system font \u2014 loaded via @font-face (Regular 400, Medium 500, Bold 700) with system-ui fallback. Replaced Plus Jakarta Sans (Google Fonts)."
+            },
+            {
+                "type": "improvement",
+                "text": "Typography design tokens \u2014 17 font-size tokens (--text-2xs through --text-7xl), 5 font-weight tokens (--fw-normal through --fw-extrabold), 3 letter-spacing tokens, and 26 utility classes in globals.css"
+            },
+            {
+                "type": "improvement",
+                "text": "Full inline style tokenization \u2014 converted 985 inline fontSize declarations and 491 inline fontWeight declarations to CSS variable references across 82+ TSX files"
+            },
+            {
+                "type": "improvement",
+                "text": "Letter-spacing standardization \u2014 unified all letter-spacing values from pixel units to em units across dashboard and admin CSS"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed non-standard font-weight: 650 to 700 in .svc-card-title and font-size: 12.5px to 13px in .svc-card-desc"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed bare-number letterSpacing values (e.g. 0.5 \u2192 '0.04em') that browsers could misinterpret as pixel values"
+            },
+            {
+                "type": "feature",
+                "text": "Admin direct password change + impersonation token-based auto-login"
+            },
+            {
+                "type": "feature",
+                "text": "KanbanBoard visual redesign \u2014 shadow cards, progress bars, project names, priority icons, date pills, column add-task button"
+            },
+            {
+                "type": "fix",
+                "text": "KanbanBoard card refinements \u2014 task title on top, always-show progress/counts/menu"
+            },
+            {
+                "type": "fix",
+                "text": "Make progress bar track visible at 0% \u2014 use border-primary instead of bg-tertiary"
+            },
+            {
+                "type": "fix",
+                "text": "Drag overlay now renders full card instead of partial 3-row preview"
+            },
+            {
+                "type": "feature",
+                "text": "Persist Tasks view mode in URL hash (#board, #list, #workload) \u2014 survives page reload"
+            },
+            {
+                "type": "feature",
+                "text": "Add drag-and-drop to GroupedTaskList \u2014 drag tasks between status groups in list view"
+            },
+            {
+                "type": "fix",
+                "text": "List view drag overlay shows full row \u2014 title, priority, assignee, due date, status"
+            },
+            {
+                "type": "fix",
+                "text": "Preserve scroll position after drag-and-drop in list view \u2014 await refetch + double-rAF"
+            },
+            {
+                "type": "fix",
+                "text": "Capture scroll position before drag mutation \u2014 use ref for reliable scroll preservation"
+            },
+            {
+                "type": "fix",
+                "text": "Re-enable autoScroll for list DnD + capture/restore scroll in handleDragEnd to prevent jump"
+            },
+            {
+                "type": "fix",
+                "text": "Use table-layout:fixed on grouped task list \u2014 aligns columns across all status groups"
+            },
+            {
+                "type": "fix",
+                "text": "Clamp fixed discounts to prevent negative invoice totals"
+            },
+            {
+                "type": "improvement",
+                "text": "Extract shared CreateOrganizationModal component"
+            },
+            {
+                "type": "feature",
+                "text": "Add platform admin security log page"
+            },
+            {
+                "type": "feature",
+                "text": "Add functional kanban card context menu & polish board icons"
+            },
+            {
+                "type": "feature",
+                "text": "Project-scoped task statuses with optimistic DnD"
+            },
+            {
+                "type": "fix",
+                "text": "Duplicate file entries, storage quota enforcement, and doc updates"
+            },
+            {
+                "type": "fix",
+                "text": "Pricing validation blocks progression + cover image display"
+            },
+            {
+                "type": "improvement",
+                "text": "Extract shared ServiceBuilderForm + add gallery to detail page"
+            },
+            {
+                "type": "feature",
+                "text": "Guest checkout flow for public catalog"
+            }
+        ]
+    },
+    {
+        "version": "7.4.0",
+        "date": "2026-03-03",
+        "title": "Invoice Form Redesign \u2014 Live Preview, Edit Parity & Print Template",
+        "summary": "Redesigned invoice creation with a 55/45 form+preview split layout, live A4-proportioned preview panel, unified edit page, aligned line-item sub-rows, and pixel-perfect print template matching the preview.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Live invoice preview \u2014 InvoicePreview component shows a real-time A4-proportioned mirror of the invoice form with accent-colored headers, dashed dividers, and branded footer"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice form layout \u2014 55/45 split with consolidated 'Details' card on the left and sticky preview panel on the right"
+            },
+            {
+                "type": "improvement",
+                "text": "Edit Invoice parity \u2014 edit page now mirrors the new invoice form exactly with same layout, preview, and compact styling"
+            },
+            {
+                "type": "improvement",
+                "text": "Line item alignment \u2014 Tax % label and input split into separate grid columns aligning perfectly with Qty and Price fields above"
+            },
+            {
+                "type": "improvement",
+                "text": "Print template redesign \u2014 PrintableInvoice rewritten with identical inline styles as InvoicePreview for pixel-perfect matching when printing"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed edit invoice crash \u2014 added missing totals, billToCompany, billToAddress, and paymentTerms props to InvoicePreview"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed extra blank page in print \u2014 removed spacer div that pushed content past A4 boundary"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar display name duplication, dashboard greeting uses live profile, mobile header layout"
+            }
+        ]
+    },
+    {
+        "version": "7.3.0",
+        "date": "2026-03-02",
+        "title": "Dashboard Greeting Enhancements & Daily Motivational Quotes",
+        "summary": "Time-aware greeting with contextual icons, daily motivational quotes that rotate through 345+ curated entries, and polished header layout with quote and greeting side-by-side.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Daily motivational quotes \u2014 345 curated business, productivity, and inspirational quotes displayed on the dashboard, rotating daily with a year-shifted pattern so the same date never shows the same quote across years"
+            },
+            {
+                "type": "improvement",
+                "text": "Time-aware greeting \u2014 dashboard now shows 'Good Morning' (before noon), 'Good Afternoon' (noon\u20135 PM), or 'Good Evening' (after 5 PM) with matching sun/moon icon"
+            },
+            {
+                "type": "improvement",
+                "text": "Dashboard header layout \u2014 motivational quote displayed on the left side of the info bar alongside the greeting on the right, with prominent italic styling"
+            },
+            {
+                "type": "improvement",
+                "text": "Page component \u2014 description prop now accepts ReactNode for custom styling; non-detail pages render description and actions side-by-side in a horizontal bar"
+            },
+            {
+                "type": "fix",
+                "text": "Removed tinted background color from project page summary card icons for visual consistency"
+            },
+            {
+                "type": "fix",
+                "text": "Build error \u2014 getDashboardStats \u2192 getOverview + docs updates"
+            }
+        ]
+    },
+    {
+        "version": "7.2.0",
+        "date": "2026-03-02",
+        "title": "Bug Reports Button, Tasks Filter Bar & UI Polish",
+        "summary": "Restored missing Report a Bug button on the bug reports page, moved the List/Board/Workload view toggle into the tasks filter bar alongside filters and New Task, and fixed several layout and overflow issues.",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Bug Reports page \u2014 restored the '+ Report a Bug' button in the page header (was missing due to a rendering issue with the Page component)"
+            },
+            {
+                "type": "improvement",
+                "text": "Tasks page \u2014 moved List/Board/Workload view toggle into the filter bar on the same line as search, filters, and '+ New Task' button"
+            },
+            {
+                "type": "improvement",
+                "text": "Tasks page \u2014 '+ New Task' button now uses compact sizing to match the other buttons in the filter bar"
+            },
+            {
+                "type": "fix",
+                "text": "Bug Reports \u2014 status dropdown on the last row no longer goes off-screen; it now opens upward when near the bottom of the viewport"
+            },
+            {
+                "type": "fix",
+                "text": "Bug Reports \u2014 sort icons now display beside column headings instead of below them"
+            },
+            {
+                "type": "feature",
+                "text": "Add PlatformAdmin dashboard (Phase 1 \u2014 read-only)"
+            },
+            {
+                "type": "fix",
+                "text": "Isolate PlatformAdmin auth from per-agency passwords"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 2 \u2014 administrative actions"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 3 \u2014 impersonation via signed redirect URL"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 4 \u2014 Revenue & Analytics + Onboarding Insights"
+            },
+            {
+                "type": "feature",
+                "text": "Mandatory 2FA with 3-day grace period"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 6 \u2014 Bug Report System"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 6b \u2014 Bug Report Notifications (bell + email)"
+            },
+            {
+                "type": "fix",
+                "text": "Verify Now button \u2014 wrong PlatformAdminLog fields"
+            },
+            {
+                "type": "fix",
+                "text": "Replace browser confirm() with inline confirmation for Verify Now button"
+            },
+            {
+                "type": "fix",
+                "text": "Admin.eidoncore.com \u2014 use NEXT_PUBLIC_APP_DOMAIN in Edge middleware"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 6c \u2014 Screenshot capture in bug reports"
+            },
+            {
+                "type": "feature",
+                "text": "Global Bug Report FAB \u2014 floating bug button on all pages"
+            },
+            {
+                "type": "fix",
+                "text": "Admin.eidoncore.com 'Workspace Not Found' \u2014 login page didn't exclude admin subdomain"
+            },
+            {
+                "type": "fix",
+                "text": "BugReportFAB modal stays centered after screenshot, add close X button"
+            },
+            {
+                "type": "fix",
+                "text": "Submit button always visible in BugReportFAB modal \u2014 disabled state uses opacity instead of transparent bg"
+            },
+            {
+                "type": "feature",
+                "text": "Bug report notifications clickable \u2014 navigate to /bug-reports/[id]"
+            },
+            {
+                "type": "feature",
+                "text": "2FA setup countdown banner in admin panel"
+            },
+            {
+                "type": "fix",
+                "text": "Replace emoji icons with SVG icons in contact modal"
+            },
+            {
+                "type": "feature",
+                "text": "Add image upload to BugReportFAB"
+            },
+            {
+                "type": "feature",
+                "text": "Add all platform admin notification triggers"
+            },
+            {
+                "type": "fix",
+                "text": "Restructure admin layout \u2014 bell in header, user info in sidebar footer"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-include full page URL in bug reports (strip query params for privacy)"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-prefix https:// on website/URL fields"
+            },
+            {
+                "type": "fix",
+                "text": "Add debug logging to bugReport notification catch + cleanup"
+            },
+            {
+                "type": "fix",
+                "text": "Make invoice rows clickable on org detail page \u2192 navigates to /invoices/:id"
+            },
+            {
+                "type": "improvement",
+                "text": "Unify bug report modals \u2014 page & FAB now share the same BugReportModal"
+            },
+            {
+                "type": "feature",
+                "text": "Bulk actions on admin agencies page"
+            }
+        ]
+    },
+    {
+        "version": "7.1.0",
+        "date": "2026-03-01",
+        "title": "Monetization Fixes, Consolidated Invoice Settings & UI Polish",
+        "summary": "Aligned monetization plan data with spec, merged duplicate Invoice Settings into Branding, removed misleading email badge, and relocated team invite button to filter bar.",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Fixed FREE plan automations limit \u2014 was 1, now correctly set to 0 per spec"
+            },
+            {
+                "type": "fix",
+                "text": "Added intakeForms checkLimit enforcement \u2014 intake form creation now respects FREE:1 / PRO:10 / ENTERPRISE:\u221e limits"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed sidebar lock icon \u2014 replaced emoji with proper IconLock SVG component"
+            },
+            {
+                "type": "improvement",
+                "text": "Plan settings page \u2014 updated all plan cards and comparison table to match platform_monetization.md spec (corrected team members, storage, services, automations, intake forms)"
+            },
+            {
+                "type": "improvement",
+                "text": "Consolidated Invoice Settings \u2014 merged the standalone Invoice Settings page into the Branding \u2192 Invoices tab, eliminating 4 duplicate fields and adding Print & Display Options section (show/hide logo, payment history, bank details, notes + paper size)"
+            },
+            {
+                "type": "improvement",
+                "text": "Team page \u2014 moved 'Invite Member' button from page header into the filter bar (right-aligned) with UserPlus icon, matching the Projects page pattern"
+            },
+            {
+                "type": "improvement",
+                "text": "Removed misleading 'Email Unverified' badge from profile page \u2014 email verification is handled at the organization level, not per-user"
+            },
+            {
+                "type": "improvement",
+                "text": "Updated platform_monetization.md \u2014 documented intakeForms limits, serviceTemplates, fullBranding flags, and corrected exportData description"
+            },
+            {
+                "type": "fix",
+                "text": "File downloads \u2014 add Supabase to CSP, force download disposition, error handling"
+            },
+            {
+                "type": "feature",
+                "text": "Replace all alert() with showToast() toast notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Cross-tenant profile data isolation via per-membership overrides"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar live-updates after profile save + per-agency profile isolation"
+            },
+            {
+                "type": "feature",
+                "text": "Email-confirmed agency registration + workspace-not-found"
+            },
+            {
+                "type": "fix",
+                "text": "Per-agency password consistency across all password flows"
+            },
+            {
+                "type": "fix",
+                "text": "Set per-agency nickname on team invite and client invite memberships"
+            },
+            {
+                "type": "fix",
+                "text": "Per-agency password for reauth + mfaDisable; update all docs"
+            },
+            {
+                "type": "fix",
+                "text": "Clarify addContact comment \u2014 membership created in resendContactInvite"
+            },
+            {
+                "type": "fix",
+                "text": "Wrap login page useSearchParams in Suspense boundary for build"
+            },
+            {
+                "type": "fix",
+                "text": "Validate subdomain slug matches session in dashboard layout \u2014 prevent cross-subdomain auto-login"
+            },
+            {
+                "type": "improvement",
+                "text": "Scope session cookie per-subdomain \u2014 remove shared .eidoncore.com domain"
+            },
+            {
+                "type": "feature",
+                "text": "Enforce branded email PRO+ gate & portal branding PRO+"
+            },
+            {
+                "type": "fix",
+                "text": "Set invoiceReminders=true for FREE plan, update docs"
+            },
+            {
+                "type": "feature",
+                "text": "7-day unverified agency cleanup + 2-min resend cooldown"
+            },
+            {
+                "type": "feature",
+                "text": "Add 'Change email' option on registration check-email screen"
+            },
+            {
+                "type": "fix",
+                "text": "Consistent action button placement in filter bar across tasks, projects, organizations"
+            },
+            {
+                "type": "improvement",
+                "text": "Fix cross-tenant password leakage in authorize + settings"
+            },
+            {
+                "type": "feature",
+                "text": "Move 2FA fields to OrganizationMember for per-tenant isolation"
+            },
+            {
+                "type": "fix",
+                "text": "Tenant isolation sweep \u2014 scope dashboard queries by organizationId"
+            },
+            {
+                "type": "fix",
+                "text": "Scope resolveOrgScope userId lookup + getSecurityEvents by organizationId"
+            },
+            {
+                "type": "fix",
+                "text": "Scope file operations in project.ts by organizationId"
+            },
+            {
+                "type": "fix",
+                "text": "Scope email-digest cron by organizationId per membership"
+            },
+            {
+                "type": "fix",
+                "text": "Scope exportAccountData and requestAccountDeletion to current org"
+            },
+            {
+                "type": "fix",
+                "text": "Close 5 remaining v2 audit tenant isolation gaps"
+            },
+            {
+                "type": "fix",
+                "text": "Scope team.ts getWorkload assignedTasks by organizationId"
+            },
+            {
+                "type": "fix",
+                "text": "Align plan data with spec, enforce intakeForms limit, use IconLock SVG"
+            }
+        ]
+    },
+    {
+        "version": "7.0.0",
+        "date": "2026-02-28",
+        "title": "Redesigned Headers, Cleaner Settings & Sidebar Polish",
+        "summary": "Major UI overhaul \u2014 simplified settings page, more compact sidebar, redesigned page headers that align with the sidebar, and consistent styling across all pages.",
+        "changes": [
+            {
+                "type": "improvement",
+                "text": "Simplified the Settings page \u2014 removed redundant settings cards since buttons for each setting already exist in the sidebar"
+            },
+            {
+                "type": "improvement",
+                "text": "More compact sidebar \u2014 tightened spacing between menu items to feel cleaner and match the settings sidebar style"
+            },
+            {
+                "type": "improvement",
+                "text": "Redesigned page headers \u2014 headers are now minimal with only the page title, shopping cart, and notification bell"
+            },
+            {
+                "type": "improvement",
+                "text": "Headers now perfectly align with the sidebar logo section \u2014 the divider line runs straight across for a polished, consistent look"
+            },
+            {
+                "type": "improvement",
+                "text": "Action buttons (like 'New Project' and 'Add Organization') moved from the header into the filter bar alongside search and filters"
+            },
+            {
+                "type": "improvement",
+                "text": "Header shows a subtle border line at rest, which smoothly transitions to a shadow when you scroll \u2014 giving a cleaner feel"
+            },
+            {
+                "type": "improvement",
+                "text": "Standardized button sizes across Organizations and Projects pages for visual consistency"
+            },
+            {
+                "type": "improvement",
+                "text": "View toggle icons (grid/list) on Projects page now use proper icons from the icon library instead of inline SVGs, matching the style of other filter icons"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed view toggle icons showing reversed colors \u2014 default and hover states were swapped"
+            },
+            {
+                "type": "feature",
+                "text": "Password toggle, folder icon, trial banner fix, file upload fix"
+            },
+            {
+                "type": "fix",
+                "text": "Show actual upload error message for debugging"
+            },
+            {
+                "type": "fix",
+                "text": "Remove test script breaking build"
+            },
+            {
+                "type": "feature",
+                "text": "Show trial days on plan page, always show trial banner, sidebar avatar"
+            },
+            {
+                "type": "feature",
+                "text": "Improve Files page UI, fix delete modal"
+            },
+            {
+                "type": "feature",
+                "text": "Add detailed plan comparison table to Plan & Billing page"
+            },
+            {
+                "type": "feature",
+                "text": "Flat file list with filter sidebar, remove confusing folder hierarchy"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar flex-direction column for vertical filter stacking"
+            },
+            {
+                "type": "fix",
+                "text": "Download button now triggers real file download instead of opening in new tab"
+            },
+            {
+                "type": "feature",
+                "text": "Add bulk download button for selected files"
+            },
+            {
+                "type": "feature",
+                "text": "Add styled file type icons (PDF/DOC/XLS/generic) to icons.tsx and FileThumbnail"
+            },
+            {
+                "type": "improvement",
+                "text": "Remove redundant settings cards grid, keep audit trail as landing page content"
+            },
+            {
+                "type": "improvement",
+                "text": "Compact main sidebar \u2014 tighter padding, smaller font, reduced section gaps"
+            },
+            {
+                "type": "improvement",
+                "text": "Minimal page headers \u2014 smaller title, white bg, scroll shadow, info bar for detail pages"
+            }
+        ]
+    },
+    {
+        "version": "6.9.0",
+        "date": "2026-02-28",
+        "title": "Platform Monetization \u2014 Subscription Billing, Plan Gating & Security Hardening",
+        "summary": "Full platform monetization system with FREE/PRO/ENTERPRISE tiers, Stripe subscription billing, plan-gating middleware, quantity limits, billing lifecycle management, global status banners, and comprehensive security hardening across auth, rate limiting, and encryption.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "3-tier subscription plans (FREE/PRO/ENTERPRISE) \u2014 self-serve Stripe Checkout with monthly and annual pricing, 14-day PRO trial for new agencies"
+            },
+            {
+                "type": "feature",
+                "text": "Plan management page \u2014 Settings \u2192 Plan with tier comparison cards, usage bars, upgrade/downgrade flow, billing portal link, billing history, and data export"
+            },
+            {
+                "type": "feature",
+                "text": "requirePlan() middleware \u2014 16 plan gates across 10 routers blocking feature access by tier (PRO+ for recurring invoices, automations, reports; ENTERPRISE for SMTP, domains, impersonation)"
+            },
+            {
+                "type": "feature",
+                "text": "checkLimit() enforcement \u2014 9 quantity limits (team members, clients, projects, services, automations, recurring invoices, custom roles, intake forms, storage) with live COUNT queries"
+            },
+            {
+                "type": "feature",
+                "text": "5 Stripe webhook handlers \u2014 checkout.session.completed, subscription.updated, subscription.deleted, invoice.paid, invoice.payment_failed with plan status sync and pausedBySystem management"
+            },
+            {
+                "type": "feature",
+                "text": "Plan status lifecycle \u2014 ACTIVE \u2192 PAST_DUE \u2192 FROZEN with global PlanStatusBanner (amber warning for payment issues, red critical for frozen accounts)"
+            },
+            {
+                "type": "feature",
+                "text": "Billing sync cron \u2014 daily Stripe subscription reconciliation and trial expiry enforcement with automatic downgrade to FREE"
+            },
+            {
+                "type": "feature",
+                "text": "5 plan notification types \u2014 PLAN_UPGRADED, PLAN_DOWNGRADED, PLAN_PAYMENT_FAILED (P1 critical), PLAN_CANCELLATION_SCHEDULED, PLAN_TRIAL_ENDING with icons and email deep-links"
+            },
+            {
+                "type": "feature",
+                "text": "Sidebar plan badges \u2014 \ud83d\udd12 lock icon on Reports, Automations, and Intake Forms for agencies below required tier"
+            },
+            {
+                "type": "feature",
+                "text": "Soft downgrade behavior \u2014 existing data never deleted, excess automations and recurring invoices auto-paused with pausedBySystem flag, auto-restored on re-upgrade"
+            },
+            {
+                "type": "feature",
+                "text": "Branding field stripping \u2014 updateBranding silently strips tier-restricted fields (portal/white-label for non-ENTERPRISE, email/invoice for FREE) instead of blocking"
+            },
+            {
+                "type": "feature",
+                "text": "Cancel with reason tracking \u2014 6 structured reasons (too expensive, missing features, switching competitor, business closed, temporary pause, other) with reactivation before period end"
+            },
+            {
+                "type": "improvement",
+                "text": "Security hardening \u2014 rate limiting on registration/login/2FA, AES-256-GCM encryption for SMTP passwords and 2FA secrets, HMAC-signed impersonation cookies, timing-safe cron secret comparison"
+            },
+            {
+                "type": "improvement",
+                "text": "Password strength enforcement \u2014 minimum 8 chars with uppercase, lowercase, number, and special character required on registration, change password, and contact password reset"
+            },
+            {
+                "type": "improvement",
+                "text": "Contact invite security \u2014 cryptographically random passwords with password-reset-link flow replacing hardcoded temporary passwords"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed TRIALING missing from PlanStatus enum \u2014 registration would fail when setting planStatus to TRIALING"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed webhook planStatus sync \u2014 handleSubscriptionUpdated now correctly maps Stripe subscription status (active/past_due/canceled/trialing) to internal PlanStatus"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed PlanStatusBanner CTA \u2014 'Upgrade' button now correctly links to /settings/plan instead of /billing"
+            },
+            {
+                "type": "improvement",
+                "text": "Fix 9 audit findings (IDOR, XSS, open redirect, email escaping)"
+            },
+            {
+                "type": "fix",
+                "text": "Security hardening and domain management improvements"
+            },
+            {
+                "type": "fix",
+                "text": "Custom domain DNS verification, routing, auth cookies, and docs"
+            }
+        ]
+    },
+    {
+        "version": "6.8.0",
+        "date": "2026-02-27",
+        "title": "Task Assignment Emails, Team Invitations & Agency Name in Sidebar",
+        "summary": "Rich task assignment email on drawer close, branded team invitation email with password-setup link and workspace URL, and agency name now displays in sidebar from registration.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Task assignment email \u2014 rich branded email sent on TaskDrawer close with task title, description, priority badge, due date, project, and direct link to the task"
+            },
+            {
+                "type": "feature",
+                "text": "Team invitation email \u2014 branded email with inviter name, agency name, role, workspace URL (custom domain if available), and a 'Set Your Password' button for new users"
+            },
+            {
+                "type": "feature",
+                "text": "Agency name now appears in the sidebar \u2014 registration sets brandName from organizationName so agencies see their real name instead of 'Agency'"
+            },
+            {
+                "type": "improvement",
+                "text": "Notification docs reorganized \u2014 task assignment email documented as 'Rich Email Supplement' alongside the existing bell notification"
+            },
+            {
+                "type": "improvement",
+                "text": "HTML sanitization added to task description on create, update, public share, and assignment email rendering"
+            },
+            {
+                "type": "fix",
+                "text": "Handle FK errors in notification changelog dismissal gracefully"
+            },
+            {
+                "type": "fix",
+                "text": "Multi-tenant auth \u2014 subdomain-aware login, tRPC context validation, forgot-password routing"
+            },
+            {
+                "type": "fix",
+                "text": "SignOut uses redirect:false + manual redirect to stay on agency subdomain"
+            },
+            {
+                "type": "feature",
+                "text": "Limit changelog notifications to 7-day rolling window"
+            },
+            {
+                "type": "feature",
+                "text": "Service slug-based URLs, edit multi-step form, fix Save & Continue icon"
+            },
+            {
+                "type": "fix",
+                "text": "Defer task_created automation + notification for placeholder tasks, fix record payment modal overlay"
+            }
+        ]
+    },
+    {
+        "version": "6.7.0",
+        "date": "2026-02-26",
+        "title": "Multi-Tenant Workspaces \u2014 Subdomains, Onboarding & Welcome Emails",
+        "summary": "Full subdomain-based tenant resolution with automated provisioning, post-registration onboarding questionnaire, workspace finder, welcome emails with SMTP fallback, wildcard domain support, and logout fix for agency portals.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Subdomain-based tenant resolution \u2014 each agency gets its own subdomain (agency.eidoncore.com) with middleware slug extraction via x-workspace-slug header"
+            },
+            {
+                "type": "feature",
+                "text": "Automated subdomain provisioning \u2014 registration auto-creates Cloudflare CNAME + Vercel domain for each new agency workspace"
+            },
+            {
+                "type": "feature",
+                "text": "Post-registration onboarding questionnaire \u2014 5-step animated survey (team size, agency type, experience, tools, referral source) with progress bar and auto-advance"
+            },
+            {
+                "type": "feature",
+                "text": "Workspace finder page \u2014 register.eidoncore.com/find-workspace lets users look up their agency URL by email"
+            },
+            {
+                "type": "feature",
+                "text": "Welcome email on registration \u2014 branded email sent to agency owner with workspace URL and getting started tips"
+            },
+            {
+                "type": "feature",
+                "text": "Platform-level SMTP fallback \u2014 agencies without custom SMTP config fall back to platform-wide SMTP settings for transactional emails"
+            },
+            {
+                "type": "feature",
+                "text": "Wildcard domain support \u2014 Vercel Pro wildcard domain (*.eidoncore.com) for instant subdomain resolution without per-subdomain DNS setup"
+            },
+            {
+                "type": "improvement",
+                "text": "Onboarding icons migrated from emojis to inline SVG components in icons.tsx for consistent styling across all themes"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed register.eidoncore.com routing \u2014 middleware now correctly rewrites register subdomain requests to the /register path"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed cross-subdomain session cookie \u2014 session now persists across agency subdomains with .eidoncore.com domain cookie"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed Vercel CNAME target \u2014 auto-provisioning now uses project-specific CNAME target instead of generic cname.vercel-dns.com"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed logout redirect \u2014 signing out now returns to the current agency's login page instead of always redirecting to app.eidoncore.com"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed invite modal role dropdown \u2014 now shows placeholder text while roles are loading instead of empty state"
+            },
+            {
+                "type": "fix",
+                "text": "Wrap otplib.verifySync in try/catch for recovery code login"
+            },
+            {
+                "type": "fix",
+                "text": "Create_comment automation action validates required fields"
+            },
+            {
+                "type": "feature",
+                "text": "Clickable AUTOMATION_FAILED notifications \u2192 edit modal"
+            },
+            {
+                "type": "improvement",
+                "text": "Replace automation modal with page-based create/edit"
+            },
+            {
+                "type": "feature",
+                "text": "Add 4 new dashboard alert types + dashboard alerts documentation"
+            },
+            {
+                "type": "fix",
+                "text": "Deduplicate saved cards on billing tab & show saved cards at checkout"
+            },
+            {
+                "type": "feature",
+                "text": "Sync account page tabs with URL hash (#subscriptions, #payments, #billing)"
+            },
+            {
+                "type": "fix",
+                "text": "Move Invoices to Finance section, remove Cart from sidebar (header has CartButton)"
+            },
+            {
+                "type": "fix",
+                "text": "Remove custom save-card checkbox \u2014 Stripe CustomerSession handles it natively"
+            },
+            {
+                "type": "feature",
+                "text": "Add email notifications (instant + digest + per-category control)"
+            },
+            {
+                "type": "fix",
+                "text": "Complete remaining email notification items"
+            },
+            {
+                "type": "fix",
+                "text": "Add 14 missing notification categories to settings UI + update docs"
+            },
+            {
+                "type": "fix",
+                "text": "Add paymentFailed to Org Owner notification visibility"
+            },
+            {
+                "type": "fix",
+                "text": "Email toggle icon no longer overlaps main toggle"
+            },
+            {
+                "type": "fix",
+                "text": "Move email/bell icons to column headers above toggles"
+            },
+            {
+                "type": "fix",
+                "text": "Use title child element instead of title prop on SVGs"
+            },
+            {
+                "type": "fix",
+                "text": "Enlarge column header icons (20px) and align to toggle columns"
+            },
+            {
+                "type": "improvement",
+                "text": "Use IconEmail/IconNotifications from global icons file"
+            },
+            {
+                "type": "feature",
+                "text": "Implement provider-specific SMTP support (SendGrid, Postmark, Mailgun, Resend, Emailit)"
+            },
+            {
+                "type": "feature",
+                "text": "Wire sendInvoice to actually send email via SMTP"
+            },
+            {
+                "type": "fix",
+                "text": "Move invoice email sending to correct procedure (invoice.send)"
+            },
+            {
+                "type": "feature",
+                "text": "Add resend invitation email button to organization contacts tab"
+            },
+            {
+                "type": "fix",
+                "text": "Add resend invite button inside ContactProfileModal"
+            },
+            {
+                "type": "fix",
+                "text": "Send invite for no-account contacts, remove redundant button for existing accounts, update docs"
+            },
+            {
+                "type": "fix",
+                "text": "Show temp password only for new accounts, existing users see forgot-password link"
+            },
+            {
+                "type": "feature",
+                "text": "Add forgot-password flow with branded reset email, HMAC tokens, and login link"
+            },
+            {
+                "type": "fix",
+                "text": "Wrap reset-password page in Suspense for Next.js 16 build"
+            },
+            {
+                "type": "fix",
+                "text": "Use CSS variable overrides for branding color on auth pages to prevent flash"
+            }
+        ]
+    },
+    {
+        "version": "6.6.0",
+        "date": "2026-02-25",
+        "title": "Automation Engine \u2014 Full Wiring & UI Upgrade",
+        "summary": "Fixed 4 critical automation engine bugs, wired executeAutomations() into all 6 routers (11 triggers), added edit modal and enhanced execution logs with expandable detail rows and filtering, and added config forms for all 7 action types.",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Fixed automation log status enum mismatch \u2014 changed from 'FAILURE' to 'FAILED' to match AutomationStatus enum"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed send_notification action \u2014 now uses createNotification() helper with organizationId, cooldown, priority tiers, and Slack integration"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed send_email action \u2014 now uses sendBrandedEmail() with organization SMTP settings and graceful fallback when SMTP is not configured"
+            },
+            {
+                "type": "feature",
+                "text": "AUTOMATION_FAILED notifications \u2014 P1 critical notification fired to agency owners when the automation engine encounters an error, bypassing digest and quiet hours"
+            },
+            {
+                "type": "feature",
+                "text": "Automation engine wiring \u2014 executeAutomations() now called from task, invoice, project, client, comment, and team routers as fire-and-forget (11 triggers total)"
+            },
+            {
+                "type": "feature",
+                "text": "Edit automation modal \u2014 'Edit' button on each automation card opens pre-populated modal with name, description, trigger, and action config; saves via update mutation"
+            },
+            {
+                "type": "feature",
+                "text": "Enhanced execution logs \u2014 expandable rows showing error messages, action results, and trigger payloads; filter by status (All/Success/Failed) and by automation"
+            },
+            {
+                "type": "improvement",
+                "text": "Action config forms for all 7 types \u2014 added UI fields for send_email (to/subject/body), update_task_status (status dropdown), update_project_status (status dropdown), and log_activity (message)"
+            },
+            {
+                "type": "improvement",
+                "text": "Execution log limit increased from 20 to 50 for better debugging visibility"
+            },
+            {
+                "type": "fix",
+                "text": "Client catalog shows all published services, not just assigned ones"
+            },
+            {
+                "type": "fix",
+                "text": "Block client roles from internal /services management page"
+            },
+            {
+                "type": "fix",
+                "text": "Use SERVICES_CREATE/EDIT permission check instead of isRestrictedUser"
+            },
+            {
+                "type": "fix",
+                "text": "Catalog detail page works for services without slugs"
+            },
+            {
+                "type": "feature",
+                "text": "Harden agency catalog model \u2014 strip internal data, add CTA, fix visibility"
+            },
+            {
+                "type": "feature",
+                "text": "Shared PageLayout template \u2014 enhance Page.tsx, migrate orgs & projects list"
+            },
+            {
+                "type": "feature",
+                "text": "Migrate org detail page to shared Page component with breadcrumb, tabs, headerMeta"
+            },
+            {
+                "type": "fix",
+                "text": "Project detail mobile header broken after Page migration"
+            },
+            {
+                "type": "fix",
+                "text": "Show notification bell on mobile detail headers (inline, no flex-grow)"
+            },
+            {
+                "type": "fix",
+                "text": "Scroll listener uses window fallback for mobile header collapse"
+            },
+            {
+                "type": "improvement",
+                "text": "Uplift service catalog card design \u2014 better spacing, hover effects, mobile proportions"
+            },
+            {
+                "type": "fix",
+                "text": "Eliminate header collapse flickering \u2014 hysteresis + grid-row transition"
+            },
+            {
+                "type": "feature",
+                "text": "Match catalog filters to services page \u2014 category pills + filter bar"
+            },
+            {
+                "type": "fix",
+                "text": "Use display:none for header extras collapse \u2014 eliminates white space"
+            },
+            {
+                "type": "improvement",
+                "text": "Catalog detail page \u2014 proper padding, hero margins, pricing card polish, mobile fixes"
+            },
+            {
+                "type": "feature",
+                "text": "Add missing catalog features \u2014 links section, pricing model badge, included hours/credits"
+            },
+            {
+                "type": "feature",
+                "text": "Add seed-catalog-content script \u2014 10 demo services with full catalog data"
+            },
+            {
+                "type": "fix",
+                "text": "Review form layout \u2014 proper flex-column structure with labeled fields"
+            },
+            {
+                "type": "feature",
+                "text": "Clickable active service cards + RichTextEditor for review form"
+            },
+            {
+                "type": "fix",
+                "text": "Seed script targets correct org via owner email instead of findFirst()"
+            },
+            {
+                "type": "fix",
+                "text": "Hide project creation UI from org roles"
+            },
+            {
+                "type": "feature",
+                "text": "Redesign cart success page + add service/cart notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Migrate Stripe Connect from OAuth to API-based Express onboarding"
+            },
+            {
+                "type": "fix",
+                "text": "Remove invalid Stripe API version + update docs"
+            },
+            {
+                "type": "fix",
+                "text": "Remove audit log from callback route (foreign key violation on userId: system)"
+            },
+            {
+                "type": "fix",
+                "text": "Pass stripeAccountId to Elements provider for Connect direct charges"
+            },
+            {
+                "type": "fix",
+                "text": "Keep cart visible during checkout by including CHECKOUT status in queries"
+            },
+            {
+                "type": "fix",
+                "text": "Make Stripe payment element theme-aware for light/dark mode"
+            },
+            {
+                "type": "fix",
+                "text": "Include CHECKOUT status in all cart mutations (addItem, removeItem, clear)"
+            },
+            {
+                "type": "fix",
+                "text": "TS build error (undefined in Tab bg) + cart orderBy for consistency"
+            },
+            {
+                "type": "feature",
+                "text": "Add My Account page for org owner/member roles"
+            },
+            {
+                "type": "feature",
+                "text": "Add Stripe saved payment methods to My Account"
+            },
+            {
+                "type": "improvement",
+                "text": "Remove Reports Billing tab, enhance My Account with full spending"
+            },
+            {
+                "type": "fix",
+                "text": "Remove invalid COMPLETED enum value from OrgService queries"
+            },
+            {
+                "type": "fix",
+                "text": "Wrap OrgService spending query in try-catch, use select instead of include"
+            },
+            {
+                "type": "feature",
+                "text": "Subscription cancellation with reason + agency notification"
+            },
+            {
+                "type": "feature",
+                "text": "Complete branding system \u2014 portal tab, audit fixes, docs"
+            },
+            {
+                "type": "feature",
+                "text": "Email SMTP transport + branding polish"
+            },
+            {
+                "type": "fix",
+                "text": "DatePicker positioning flash on first click after page load"
+            },
+            {
+                "type": "feature",
+                "text": "Allow re-purchasing active services + use logo as favicon fallback"
+            },
+            {
+                "type": "fix",
+                "text": "Remove setup_future_usage to hide Stripe save-card consent text"
+            },
+            {
+                "type": "feature",
+                "text": "Optional save-card checkbox + subscription auto-renewal cron"
+            },
+            {
+                "type": "fix",
+                "text": "Terms.card expects string not object for PaymentElement"
+            },
+            {
+                "type": "feature",
+                "text": "Add Intake Forms feature \u2014 schema, backend, frontend, docs"
+            },
+            {
+                "type": "fix",
+                "text": "Eliminate branding FOUC with localStorage cache + blocking inline script"
+            },
+            {
+                "type": "fix",
+                "text": "Hide sidebar logo/name during hydration to prevent FOUC"
+            },
+            {
+                "type": "fix",
+                "text": "Add sidebar skeleton to prevent nav items loading in stages"
+            },
+            {
+                "type": "fix",
+                "text": "Prevent white flash when dark mode is active on page refresh"
+            },
+            {
+                "type": "fix",
+                "text": "2FA login flow, addContact password overwrite, auth docs"
+            },
+            {
+                "type": "fix",
+                "text": "Prevent favicon reverting to default on client-side navigation"
+            }
+        ]
+    },
+    {
+        "version": "6.5.0",
+        "date": "2026-02-24",
+        "title": "Intake Forms \u2014 Client Onboarding Data Collection",
+        "summary": "Custom intake forms that agency owners can create and assign to services. Clients fill them post-purchase on the success page, generating a pinned project document for the team.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Intake Form builder \u2014 standalone /intake-forms page with drag-reorderable fields, 8 field types (text, textarea, email, phone, URL, number, dropdown, checkbox), required/optional toggle, and placeholder text"
+            },
+            {
+                "type": "feature",
+                "text": "Service assignment \u2014 assign one form to multiple services via checkbox selection; form auto-appears on the success page after purchase"
+            },
+            {
+                "type": "feature",
+                "text": "Success page integration \u2014 IntakeFormSection renders dynamically after the 'What happens next' stepper for services with assigned forms; validates required fields before submission"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-generated ProjectDoc \u2014 form submission creates a pinned document in the project with formatted HTML table of all responses"
+            },
+            {
+                "type": "feature",
+                "text": "Submission tracking \u2014 IntakeFormSubmission model records who submitted, when, and links to the generated ProjectDoc"
+            },
+            {
+                "type": "improvement",
+                "text": "Sidebar gating \u2014 Intake Forms menu item visible only to Agency Owner, Admin, and Project Manager via SERVICES_EDIT or SERVICES_VIEW_ALL permissions"
+            },
+            {
+                "type": "improvement",
+                "text": "Owner notification \u2014 agency owner receives INTAKE_FORM_SUBMITTED notification when a client completes an intake form"
+            }
+        ]
+    },
+    {
+        "version": "6.4.0",
+        "date": "2026-02-24",
+        "title": "Dual Service System \u2014 Client Catalog & Review Moderation",
+        "summary": "Complete internal/external service separation with client-facing catalog, review moderation, visibility controls, slug-based routing, and per-user access grants",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Client service catalog \u2014 /catalog/services grid page showing published services with category filters, 'My Active Services' dashboard, and subscription badges"
+            },
+            {
+                "type": "feature",
+                "text": "Client service detail \u2014 /catalog/services/[slug] landing page with hero, description, deliverables, FAQ accordion, gallery, reviews, and pricing sidebar"
+            },
+            {
+                "type": "feature",
+                "text": "Service reviews \u2014 clients can submit star ratings and comments; agency moderates via Reviews tab with approve/reject queue and pending count badge"
+            },
+            {
+                "type": "feature",
+                "text": "Client visibility controls \u2014 5 toggles in Edit Service modal (Pricing, FAQ, Deliverables, Gallery, Reviews) controlling what clients see on catalog pages"
+            },
+            {
+                "type": "feature",
+                "text": "Service slug editing \u2014 URL-friendly slugs with live preview, regex validation, and uniqueness enforcement per agency"
+            },
+            {
+                "type": "feature",
+                "text": "Per-user service access \u2014 ServiceAccess model with canView/canEdit/canAssign grants for agency staff without view_all permission"
+            },
+            {
+                "type": "feature",
+                "text": "Reviews tab on internal service detail \u2014 average rating summary, pending moderation queue with approve/reject, approved reviews list"
+            },
+            {
+                "type": "improvement",
+                "text": "Role-based API scoping \u2014 clients see only published/assigned services; agency staff without services:view_all see only explicitly granted services"
+            },
+            {
+                "type": "improvement",
+                "text": "Security hardening \u2014 all mutations verify organizationId, client roles blocked from create/edit/delete, slug-based endpoints strip all internal fields"
+            },
+            {
+                "type": "improvement",
+                "text": "Sidebar routing \u2014 client roles automatically routed to /catalog/services instead of internal /services management page"
+            },
+            {
+                "type": "fix",
+                "text": "Changelog notifications show 'just now' for today's entries"
+            },
+            {
+                "type": "fix",
+                "text": "Settings sidebar sticky behavior restored"
+            },
+            {
+                "type": "fix",
+                "text": "Service detail notification bell positioned top-right on desktop"
+            },
+            {
+                "type": "fix",
+                "text": "RichTextEditor list items now display bullets and numbers"
+            },
+            {
+                "type": "feature",
+                "text": "Threaded comment replies & subtask descriptions in TaskDrawer"
+            },
+            {
+                "type": "improvement",
+                "text": "Rename /clients route to /organizations"
+            },
+            {
+                "type": "fix",
+                "text": "Notification bell now inline with action buttons on project/org pages"
+            },
+            {
+                "type": "fix",
+                "text": "Remove Enter-to-send, redesign comment/reply thread UI"
+            },
+            {
+                "type": "feature",
+                "text": "Mobile TaskDrawer resizable sidebar panel"
+            },
+            {
+                "type": "fix",
+                "text": "Change reaction button from laughing emoji to thumbs-up icon"
+            },
+            {
+                "type": "feature",
+                "text": "Clicking task notification opens TaskDrawer directly"
+            },
+            {
+                "type": "feature",
+                "text": "Comment interaction notifications + one-reaction-per-user + mobile sidebar 20%"
+            },
+            {
+                "type": "fix",
+                "text": "Kanban drag snap-back + changelog v5.8.0"
+            },
+            {
+                "type": "feature",
+                "text": "@mention support in task descriptions, comments, and replies"
+            },
+            {
+                "type": "fix",
+                "text": "RTE link validation, attachment button, public HTML, print dark mode, heading dropdown"
+            },
+            {
+                "type": "fix",
+                "text": "Quote button now toggles off when clicked again"
+            },
+            {
+                "type": "feature",
+                "text": "Project file upload + fix RTE isEmpty for attachments"
+            },
+            {
+                "type": "fix",
+                "text": "Stricter link validation (TLD required) + link editing support"
+            },
+            {
+                "type": "fix",
+                "text": "Time entry form with hours + minutes inputs"
+            },
+            {
+                "type": "feature",
+                "text": "ClickUp-style grouped collapsible task list"
+            },
+            {
+                "type": "feature",
+                "text": "File preview modal in project Files tab"
+            },
+            {
+                "type": "feature",
+                "text": "Image lightbox with zoom for all uploaded images"
+            },
+            {
+                "type": "fix",
+                "text": "Move sort headers inside each status group table"
+            },
+            {
+                "type": "fix",
+                "text": "Allow org owners and members to upload project files"
+            },
+            {
+                "type": "fix",
+                "text": "TaskDrawer crash, code toggle, and RTE toolbar position"
+            },
+            {
+                "type": "fix",
+                "text": "Move hooks above early returns to fix React error #310"
+            },
+            {
+                "type": "improvement",
+                "text": "Refine TaskDrawer Details tab visual hierarchy"
+            },
+            {
+                "type": "fix",
+                "text": "Description blank on tab switch, PDF in attachments tab, PDF preview"
+            },
+            {
+                "type": "improvement",
+                "text": "Add gap between comment editor and first comment"
+            },
+            {
+                "type": "fix",
+                "text": "Kanban DnD middle columns, RTE code toggle, link Enter, services pricing"
+            },
+            {
+                "type": "fix",
+                "text": "Align columns consistently across task status groups"
+            },
+            {
+                "type": "feature",
+                "text": "Settings tab CSS uplift + save fix + backfill slugs"
+            },
+            {
+                "type": "improvement",
+                "text": "Rename Client \u2192 Organization across entire codebase"
+            },
+            {
+                "type": "fix",
+                "text": "Replace all remaining user-facing 'client' text with 'organization'"
+            },
+            {
+                "type": "fix",
+                "text": "Resolve all remaining client\u2192org rename inconsistencies"
+            },
+            {
+                "type": "fix",
+                "text": "Resolve runtime bugs - CSS class mismatches and p.org guard"
+            },
+            {
+                "type": "feature",
+                "text": "V6.1 notification expansion \u2014 10 new types, cron route, mutation triggers"
+            },
+            {
+                "type": "feature",
+                "text": "Notification Intelligence v7 \u2014 priority tiers, cooldown engine, escalation logic"
+            },
+            {
+                "type": "improvement",
+                "text": "Split TaskDrawer.tsx (93KB) into 6 focused components"
+            },
+            {
+                "type": "fix",
+                "text": "Add 'as const' to entityType literals in notification arrays"
+            },
+            {
+                "type": "feature",
+                "text": "File pinning, file type icons, tab hash persistence, task list layout fixes"
+            },
+            {
+                "type": "fix",
+                "text": "Project task list health column, dynamic title width, view URL persistence"
+            },
+            {
+                "type": "feature",
+                "text": "Project URL slugs, docs/files hash, file styling, expanded settings"
+            },
+            {
+                "type": "fix",
+                "text": "Settings tab crash from wrong router response shape, update docs"
+            },
+            {
+                "type": "feature",
+                "text": "Slug edit field in settings, replace date inputs with DatePicker"
+            },
+            {
+                "type": "fix",
+                "text": "Slug save overwritten by name - only regenerate from name if name changed"
+            },
+            {
+                "type": "fix",
+                "text": "Org slug auto-regeneration only when companyName actually changes"
+            },
+            {
+                "type": "fix",
+                "text": "Task list column cropping \u2014 switch from tableLayout fixed to auto"
+            },
+            {
+                "type": "fix",
+                "text": "Redirect to new slug URL after project rename"
+            },
+            {
+                "type": "fix",
+                "text": "Use cuid (not slug) for all task operations on project page"
+            },
+            {
+                "type": "fix",
+                "text": "Pin icon visual state + truncate long file names"
+            },
+            {
+                "type": "fix",
+                "text": "File name ellipsis now visible with proper flex layout"
+            }
+        ]
+    },
+    {
+        "version": "6.3.0",
+        "date": "2026-02-23",
+        "title": "Slug URLs, Hash Tab Persistence & File UX",
+        "summary": "Human-readable slug URLs for projects and organizations, hash-based tab and view persistence, file list UX polish, task list column fix, and settings improvements",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Project slug URLs \u2014 projects accessible via /projects/my-project-slug instead of cuid; slug auto-generated from name, editable in settings"
+            },
+            {
+                "type": "feature",
+                "text": "Organization slug URLs \u2014 organizations accessible via /organizations/company-slug; getById accepts both cuid and slug with automatic fallback"
+            },
+            {
+                "type": "feature",
+                "text": "Hash-based tab persistence for projects \u2014 URL hash (#tasks-board, #docs-files, #settings, etc.) persists active tab and view across reloads and browser navigation"
+            },
+            {
+                "type": "feature",
+                "text": "Hash-based tab persistence for organizations \u2014 URL hash (#contacts, #invoices, #settings, etc.) persists active tab across reloads"
+            },
+            {
+                "type": "feature",
+                "text": "URL slug field in project settings \u2014 editable slug input with /projects/ prefix, real-time sanitization (lowercase, alphanumeric, hyphens)"
+            },
+            {
+                "type": "feature",
+                "text": "Pinned files \u2014 toggle pin on project files with visual pin icon state (colored when pinned, dimmed when unpinned)"
+            },
+            {
+                "type": "improvement",
+                "text": "Slug-change redirect \u2014 renaming a project or organization automatically redirects to the new slug URL, preserving the current tab hash"
+            },
+            {
+                "type": "improvement",
+                "text": "File name truncation \u2014 long file names in project file list truncated with visible ellipsis (...) instead of wrapping to multiple lines"
+            },
+            {
+                "type": "improvement",
+                "text": "DatePicker integration \u2014 project settings Start Date and Due Date now use the global DatePicker component instead of raw date inputs"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed task list column cropping \u2014 switched to tableLayout auto with fixed pixel widths on non-title columns; title column takes remaining space"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed slug rename breaking project data \u2014 task queries and mutations now use the resolved cuid instead of the URL slug, preventing 'Project not found' errors"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed organization slug auto-sync \u2014 custom slugs no longer overwritten when saving settings without changing the company name"
+            }
+        ]
+    },
+    {
+        "version": "6.2.0",
+        "date": "2026-02-23",
+        "title": "Notification Intelligence v7",
+        "summary": "Priority tier system (P1-P4), notification cooldown engine, invoice escalation logic, PAYMENT_REMINDER downgrade, client-facing status filtering, and priority accent UI in the notification panel",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Priority tier system \u2014 4-tier classification (P1 Critical, P2 Risk, P3 Action Required, P4 Informational) stored at creation time on every notification, controlling delivery behavior and visual weight"
+            },
+            {
+                "type": "feature",
+                "text": "Notification cooldown engine \u2014 prevents duplicate notifications (same type + entity + user) within 24 hours; P1 critical events bypass cooldown for escalation support"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice escalation logic \u2014 cron checks for Day 7+ and Day 30+ overdue invoices, upgrading severity to P1 with stronger copy and Slack alerts to agency owners"
+            },
+            {
+                "type": "feature",
+                "text": "Priority accent UI \u2014 notification panel items now display colored left borders: red (P1 critical), orange (P2 risk), blue (P3 action required)"
+            },
+            {
+                "type": "improvement",
+                "text": "PAYMENT_REMINDER downgraded from critical to P2 \u2014 reminders now respect quiet hours for org users instead of bypassing them"
+            },
+            {
+                "type": "improvement",
+                "text": "PROJECT_STATUS_CHANGED client filtering \u2014 org users only notified on meaningful status shifts (Delayed, Completed, On Hold, Blocked, Cancelled), not internal workflow transitions"
+            },
+            {
+                "type": "improvement",
+                "text": "PriorityTier enum (P1-P4) and priorityTier field added to Notification model in schema"
+            }
+        ]
+    },
+    {
+        "version": "6.1.0",
+        "date": "2026-02-23",
+        "title": "Notification System \u2014 Full Coverage",
+        "summary": "10 new notification types with mutation-based triggers, cron-driven time-based alerts, and 2 new preference categories (timeTracking, projectDocs)",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Task intelligence \u2014 TIME_LOGGED notifies assignees when someone else logs time; SUBTASK_COMPLETED alerts parent task owners; CHECKLIST_COMPLETED fires when all items are done; MENTION detects @[Name](userId) in comments"
+            },
+            {
+                "type": "feature",
+                "text": "Project awareness \u2014 SERVICE_ASSIGNED notifies project lead when a service is linked; DOC_CREATED and DOC_UPDATED types registered for future project document mutations"
+            },
+            {
+                "type": "feature",
+                "text": "Organization \u2014 NEW_ORG_CREATED notifies agency owners when a new client organization is created"
+            },
+            {
+                "type": "feature",
+                "text": "Cron-based alerts \u2014 /api/cron/notifications runs daily checks for TASK_DUE_TOMORROW, FOLLOW_UP_DUE/OVERDUE, CONTRACT_EXPIRING, PAYMENT_REMINDER, and PROJECT_DEADLINE_APPROACHING with built-in deduplication"
+            },
+            {
+                "type": "improvement",
+                "text": "PAYMENT_REMINDER added to critical events list \u2014 bypasses digest batching for urgent invoice reminders"
+            },
+            {
+                "type": "improvement",
+                "text": "Two new preference categories (timeTracking, projectDocs) added to all role configs and visibility arrays"
+            }
+        ]
+    },
+    {
+        "version": "6.0.0",
+        "date": "2026-02-23",
+        "title": "Comprehensive Notification System Expansion",
+        "summary": "18 new notification types covering project lifecycle, CRM & client management, invoice awareness, team operations, and operational intelligence \u2014 with role-based visibility and per-type icons",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Project lifecycle notifications \u2014 PROJECT_COMPLETED, PROJECT_STATUS_CHANGED, MILESTONE_COMPLETED trigger for all project members when statuses change"
+            },
+            {
+                "type": "feature",
+                "text": "Project membership notifications \u2014 PROJECT_MEMBER_ADDED and PROJECT_MEMBER_REMOVED notify affected users with project name and role context"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice awareness \u2014 INVOICE_VIEWED notifies creator + agency owners when a client views an invoice; INVOICE_VOIDED alerts client contacts"
+            },
+            {
+                "type": "feature",
+                "text": "Team operations \u2014 ROLE_CHANGED notifies users when their role is updated (with from/to names); MEMBER_REMOVED alerts the member and agency owners"
+            },
+            {
+                "type": "feature",
+                "text": "Budget threshold alerts \u2014 BUDGET_THRESHOLD warns agency owners when project budget reaches 80%+ utilization"
+            },
+            {
+                "type": "feature",
+                "text": "File upload notifications \u2014 FILE_UPLOADED notifies project members when new files are added"
+            },
+            {
+                "type": "feature",
+                "text": "CRM notifications \u2014 FOLLOW_UP_DUE, FOLLOW_UP_OVERDUE, CONTRACT_EXPIRING, CLIENT_HEALTH_CHANGED types registered for future CRM automation"
+            },
+            {
+                "type": "feature",
+                "text": "Operational intelligence \u2014 TASK_DUE_TOMORROW and AUTOMATION_FAILED types registered for future cron-based triggers"
+            },
+            {
+                "type": "improvement",
+                "text": "4 new critical event types \u2014 CONTRACT_EXPIRING, CLIENT_HEALTH_CHANGED, BUDGET_THRESHOLD, AUTOMATION_FAILED bypass digest batching"
+            },
+            {
+                "type": "improvement",
+                "text": "10 new notification categories with per-role visibility and default preferences configured for all 7 roles"
+            },
+            {
+                "type": "improvement",
+                "text": "16 new SVG icons in NotificationPanel for visual distinction of each notification type"
+            }
+        ]
+    },
+    {
+        "version": "5.9.0",
+        "date": "2026-02-22",
+        "title": "Grouped Task List, File Preview & Image Lightbox",
+        "summary": "ClickUp-style collapsible task list grouped by status, file preview modal for project files, image lightbox with zoom/pan across all uploaded images, and rich text editor improvements",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Grouped Task List \u2014 tasks organized into collapsible sections by status (To Do, In Progress, In Review, Done) with colored borders, chevron toggle, and task count badges"
+            },
+            {
+                "type": "feature",
+                "text": "Sortable column headers \u2014 Task, Priority, Health, Assignee, Due Date, Project columns with A\u2192Z / Z\u2192A sort toggle, sorting within each status group"
+            },
+            {
+                "type": "feature",
+                "text": "File Preview Modal \u2014 click any file name in project Files tab to preview images inline, PDFs in iframe, video/audio with native controls"
+            },
+            {
+                "type": "feature",
+                "text": "Image Lightbox with Zoom \u2014 click any uploaded image in comments, descriptions, or project files to open full-screen modal with zoom in/out (25%\u2013500%), mouse wheel zoom, drag-to-pan"
+            },
+            {
+                "type": "feature",
+                "text": "RTE Link Editing \u2014 click link button while cursor is inside an existing link to edit it in-place; link button highlights when active"
+            },
+            {
+                "type": "feature",
+                "text": "RTE Attachment Support \u2014 file picker for images (embed inline) and other files (download links); Send button enables with attachment-only content"
+            },
+            {
+                "type": "improvement",
+                "text": "URL validation now requires a valid TLD (e.g. example.com) \u2014 random strings are rejected with user-friendly alert"
+            },
+            {
+                "type": "improvement",
+                "text": "Time Entry form upgraded to dual Hours + Minutes inputs; duration column shows 'Xh Ym' format"
+            },
+            {
+                "type": "improvement",
+                "text": "Reusable GroupedTaskList component shared across All Tasks page and Project Tasks page"
+            },
+            {
+                "type": "fix",
+                "text": "RTE isEmpty \u2014 editor no longer considered empty when only images, file attachments, or @mentions are present"
+            },
+            {
+                "type": "fix",
+                "text": "Quote button now toggles off properly when clicked again"
+            }
+        ]
+    },
+    {
+        "version": "5.8.0",
+        "date": "2026-02-22",
+        "title": "Smart Notifications, Kanban Polish & Mobile UX",
+        "summary": "Comment interaction notifications, Kanban drag-and-drop fix, mobile TaskDrawer resizable sidebar, reaction system improvements, and notification deep-linking",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Notifications for comment replies \u2014 parent comment author is notified when someone replies"
+            },
+            {
+                "type": "feature",
+                "text": "Notifications for comment reactions \u2014 comment author is notified when someone reacts with an emoji"
+            },
+            {
+                "type": "feature",
+                "text": "Mobile TaskDrawer resizable sidebar \u2014 drag handle between description and metadata panel; default 20% height"
+            },
+            {
+                "type": "feature",
+                "text": "Clicking a task notification now opens the TaskDrawer directly instead of just navigating to tasks list"
+            },
+            {
+                "type": "improvement",
+                "text": "Reaction system enforces one reaction per user per comment \u2014 new emoji overwrites the previous one"
+            },
+            {
+                "type": "improvement",
+                "text": "Reaction button changed from smiley emoji to a cleaner thumbs-up outline icon"
+            },
+            {
+                "type": "improvement",
+                "text": "Service detail header actions (Assign, Edit, Archive) and notification bell aligned to the right on desktop"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed Kanban board drag-and-drop snap-back \u2014 tasks no longer visually return to original position after being dropped"
+            }
+        ]
+    },
+    {
+        "version": "5.7.0",
+        "date": "2026-02-22",
+        "title": "Mobile UI Polish & Team Page Upgrade",
+        "summary": "Comprehensive mobile responsiveness fixes across Service Detail, Invoice Analytics, Team cards, and Reports pages, plus team page filter modernization",
+        "changes": [
+            {
+                "type": "improvement",
+                "text": "Service Detail mobile layout \u2014 header now stacks vertically: breadcrumb, title, badges, action buttons; notification bell positioned top-right"
+            },
+            {
+                "type": "improvement",
+                "text": "Service description moved from header to dedicated card in Overview tab for cleaner mobile layout"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice analytics cards now stack into single column on mobile instead of overflowing"
+            },
+            {
+                "type": "improvement",
+                "text": "Team member cards \u2014 removed duplicate Owner badge, name on its own line, badges grouped on same row, metrics stay inline"
+            },
+            {
+                "type": "improvement",
+                "text": "Team page filters upgraded from inline selects to shared FilterIconBtn component with icon dropdowns for Role, Department, and Status"
+            },
+            {
+                "type": "fix",
+                "text": "Reports page notification bell no longer pushed off-screen by date range buttons on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Team card actions moved to dedicated bottom row to prevent cramped horizontal layout"
+            },
+            {
+                "type": "fix",
+                "text": "Changelog summary text clipping"
+            },
+            {
+                "type": "feature",
+                "text": "Stack project dropdown items vertically"
+            },
+            {
+                "type": "feature",
+                "text": "Safe rich paste in RichTextEditor"
+            },
+            {
+                "type": "feature",
+                "text": "Use RichTextEditor in project docs"
+            },
+            {
+                "type": "feature",
+                "text": "Revamp RichTextEditor to premium Asana-level editor"
+            },
+            {
+                "type": "improvement",
+                "text": "Move RichTextEditor to components/shared/"
+            },
+            {
+                "type": "fix",
+                "text": "Render comments as HTML instead of markdown"
+            },
+            {
+                "type": "feature",
+                "text": "Sortable columns in task list view"
+            },
+            {
+                "type": "fix",
+                "text": "Add rich-text styles for comment/description HTML rendering"
+            },
+            {
+                "type": "fix",
+                "text": "Notification system for all user roles"
+            },
+            {
+                "type": "fix",
+                "text": "Notify client contacts on invoice edit-after-send + hide Record Payment for org roles"
+            },
+            {
+                "type": "fix",
+                "text": "Align invoice edit form with create form"
+            },
+            {
+                "type": "fix",
+                "text": "Restore Pay button for org users + rename to Pay"
+            },
+            {
+                "type": "fix",
+                "text": "Line items CSS layout and handle-only drag"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-populate bill-to on org change in edit form + remove Company Name"
+            },
+            {
+                "type": "feature",
+                "text": "Replace all native date inputs with DatePicker component"
+            },
+            {
+                "type": "fix",
+                "text": "DatePicker dropdown overflow in narrow containers"
+            },
+            {
+                "type": "fix",
+                "text": "DatePicker now uses position:fixed to escape overflow clipping"
+            },
+            {
+                "type": "fix",
+                "text": "Mobile responsive fixes for all pages"
+            },
+            {
+                "type": "fix",
+                "text": "Project detail stat cards and overview grid stacking on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Task drawer description and fields un-editable on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Services page search input too large and filters not compact on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Client detail header - add left padding to clear hamburger menu"
+            },
+            {
+                "type": "fix",
+                "text": "Add spacing between CHURNED badge and tags row"
+            },
+            {
+                "type": "feature",
+                "text": "Clicking pinned docs in project overview navigates to Docs tab"
+            },
+            {
+                "type": "fix",
+                "text": "Restructure contact cards into 3 clear rows"
+            }
+        ]
+    },
+    {
+        "version": "5.6.0",
+        "date": "2026-02-22",
+        "title": "Task Visibility Scoping & Assignee Improvements",
+        "summary": "Role-based task visibility, project-scoped assignees, mandatory project selection, and bug fixes",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Role-based task visibility \u2014 Agency Owner sees all tasks, Agency Staff sees assigned/created tasks, Org Owner/Member sees tasks in their organization's projects"
+            },
+            {
+                "type": "feature",
+                "text": "Project-scoped assignee dropdown \u2014 shows only project team members + Agency Owner when editing tasks within a project"
+            },
+            {
+                "type": "feature",
+                "text": "Mandatory project selection \u2014 new tasks now require a project via a searchable dropdown in the task drawer sidebar"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-cleanup of untouched tasks \u2014 closing a task with default title and no description automatically deletes it"
+            },
+            {
+                "type": "improvement",
+                "text": "WYSIWYG comment/description editor \u2014 real-time formatting with bold, italic, links, lists, code blocks, and blockquotes"
+            },
+            {
+                "type": "improvement",
+                "text": "Org Owner & Org Member can now create, edit, assign, and change status on tasks"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed double placeholder text in the comment editor"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed negative 'Avg Completion' hours caused by tasks with null completedAt dates"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed tasks page not showing newly created tasks due to default 'My Tasks' filter and client scoping"
+            },
+            {
+                "type": "feature",
+                "text": "Role-specific dashboards, settings for all, org reports"
+            },
+            {
+                "type": "fix",
+                "text": "Auto-migrate old role names in database on load"
+            },
+            {
+                "type": "fix",
+                "text": "Dashboard crash for org owner \u2014 category was a relation object"
+            },
+            {
+                "type": "feature",
+                "text": "View As / Impersonation for agency owners"
+            },
+            {
+                "type": "fix",
+                "text": "View As now fully switches to target user's experience"
+            },
+            {
+                "type": "fix",
+                "text": "Auto-sync permissions on existing system roles"
+            },
+            {
+                "type": "fix",
+                "text": "Strictly separate Team (agency staff) from Organization (client contacts)"
+            },
+            {
+                "type": "fix",
+                "text": "Impersonation bugs \u2014 settings respects client role, View As for pending users"
+            },
+            {
+                "type": "feature",
+                "text": "Contact profile modal on clients page"
+            },
+            {
+                "type": "feature",
+                "text": "Password reset for contacts in profile modal"
+            },
+            {
+                "type": "fix",
+                "text": "Hide agency-only buttons from org owners on invoice page + fix edit grid"
+            },
+            {
+                "type": "fix",
+                "text": "Replace old Add Task modal with Asana-like CreateTaskDrawer on project page"
+            },
+            {
+                "type": "fix",
+                "text": "Invoice page \u2014 hide drafts, simplify stats & analytics for org users"
+            },
+            {
+                "type": "fix",
+                "text": "Remove misleading per-project invoice stats (same values for all projects)"
+            },
+            {
+                "type": "feature",
+                "text": "Add per-project invoice tracking with projectId on Invoice"
+            },
+            {
+                "type": "fix",
+                "text": "Scope getAnalytics to client for org users \u2014 stats were showing agency-wide totals"
+            },
+            {
+                "type": "fix",
+                "text": "Restore financial strip on project cards with client-level fallback"
+            },
+            {
+                "type": "fix",
+                "text": "Repair CreateTaskDrawer CSS \u2014 use correct td-* class names"
+            },
+            {
+                "type": "fix",
+                "text": "Notification panel empty state + hide service buttons for org users"
+            },
+            {
+                "type": "fix",
+                "text": "Scope task analytics to client projects for org owners"
+            },
+            {
+                "type": "feature",
+                "text": "Add full header actions to CreateTaskDrawer matching TaskDrawer"
+            },
+            {
+                "type": "improvement",
+                "text": "Delete CreateTaskDrawer, use instant-create + TaskDrawer"
+            },
+            {
+                "type": "fix",
+                "text": "Add error handling to +New Task button to surface failures"
+            },
+            {
+                "type": "fix",
+                "text": "Render markdown formatting in task comments"
+            },
+            {
+                "type": "fix",
+                "text": "Link modal z-index \u2014 use position:fixed with z-index:10000"
+            },
+            {
+                "type": "feature",
+                "text": "Convert RichTextEditor to true WYSIWYG"
+            }
+        ]
+    },
+    {
+        "version": "5.5.0",
+        "date": "2026-02-22",
+        "title": "Multi-Layer Permission System & Public Task Sharing",
+        "summary": "Complete permission architecture overhaul with per-item sidebar filtering, role-based access aligned to the multi-tenant hierarchy (Agency \u2192 Team \u2192 Organization \u2192 Client), public shared task pages, and rich text editor fix",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Per-nav-item sidebar filtering \u2014 each menu item is shown/hidden based on the user's actual permissions instead of binary all-or-nothing"
+            },
+            {
+                "type": "feature",
+                "text": "NAV_PERMISSION_MAP \u2014 centralized permission map for sidebar items: Billing (owner-only), Team (manage_team), Reports (reports_view), etc."
+            },
+            {
+                "type": "feature",
+                "text": "Public shared task page at /shared/task/[token] \u2014 read-only view with no login required, premium card layout for external sharing"
+            },
+            {
+                "type": "improvement",
+                "text": "Role defaults aligned to spec \u2014 PM gets invoice view/edit + team management, Team Member gets invoice create only, Client gets services view + task status change"
+            },
+            {
+                "type": "improvement",
+                "text": "Settings restricted \u2014 non-admin users only see Account + About sections; org management sections hidden"
+            },
+            {
+                "type": "fix",
+                "text": "Rich text editor toolbar \u2014 fixed blur/focus conflict preventing formatting buttons from inserting markdown"
+            },
+            {
+                "type": "fix",
+                "text": "Role label display \u2014 sidebar now shows actual role name from session instead of hardcoded 'Member'"
+            },
+            {
+                "type": "feature",
+                "text": "Add Asana-style rich text toolbars to task description & comments"
+            },
+            {
+                "type": "feature",
+                "text": "Fix task print, Asana close icon, and public share toggle"
+            },
+            {
+                "type": "feature",
+                "text": "Multi-layer permission system v5.5.0"
+            }
+        ]
+    },
+    {
+        "version": "5.4.0",
+        "date": "2026-02-21",
+        "title": "Updated Task Details Panel",
+        "summary": "Complete redesign of task details from a basic 520px drawer to a premium 860px two-column detail panel inspired by Asana/Linear, with rich metadata, tabbed content, and modern micro-interactions",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Two-column detail panel \u2014 main content area (65%) with tabbed interface and metadata sidebar (35%) replacing the narrow drawer"
+            },
+            {
+                "type": "feature",
+                "text": "Three-tab interface \u2014 Details (description, checklist, dependencies, comments), Subtasks (progress bar, inline creation), Activity (time tracking, timeline)"
+            },
+            {
+                "type": "feature",
+                "text": "Custom status pill selector \u2014 colored dot indicators with dropdown, replacing native select elements"
+            },
+            {
+                "type": "feature",
+                "text": "Custom priority pill selector \u2014 directional icon-based selector with color coding"
+            },
+            {
+                "type": "feature",
+                "text": "Dependency visualization \u2014 blocking/blocked-by chips with task status indicators"
+            },
+            {
+                "type": "feature",
+                "text": "Inline subtask creation \u2014 dashed-border input with progress bar and completion counter"
+            },
+            {
+                "type": "feature",
+                "text": "Labels and tags display \u2014 colored tag pills from task labels with per-label color theming"
+            },
+            {
+                "type": "feature",
+                "text": "Time tracking stats in sidebar \u2014 logged and billable time displayed with formatted hours/minutes"
+            },
+            {
+                "type": "improvement",
+                "text": "Glassmorphic backdrop \u2014 blur(6px) overlay with smooth fade-in animation"
+            },
+            {
+                "type": "improvement",
+                "text": "Gradient accent bar \u2014 primary \u2192 secondary \u2192 info gradient at panel top"
+            },
+            {
+                "type": "improvement",
+                "text": "Spring-like slide animation \u2014 cubic-bezier(0.16, 1, 0.3, 1) easing for premium feel"
+            },
+            {
+                "type": "improvement",
+                "text": "Searchable assignee dropdown \u2014 avatar-based team member selector with search filtering"
+            },
+            {
+                "type": "improvement",
+                "text": "Rich comment section \u2014 avatar bubbles, relative timestamps, Enter-to-send"
+            },
+            {
+                "type": "improvement",
+                "text": "Health badge \u2014 visual health status indicator in header (On Track, At Risk, Overdue, Blocked, Stalled)"
+            },
+            {
+                "type": "improvement",
+                "text": "Responsive layout \u2014 two-column on desktop, stacked with grid sidebar on tablet, single column on mobile"
+            },
+            {
+                "type": "improvement",
+                "text": "Keyboard shortcut \u2014 Esc to close the detail panel"
+            },
+            {
+                "type": "feature",
+                "text": "Add portal password field to Add Contact form"
+            },
+            {
+                "type": "fix",
+                "text": "Blank print page \u2014 use visibility trick instead of nuclear display:none"
+            },
+            {
+                "type": "fix",
+                "text": "Add display:block to print-invoice in @media print"
+            },
+            {
+                "type": "feature",
+                "text": "Suppress browser print headers, add org tagline, inline org creation on invoices"
+            },
+            {
+                "type": "fix",
+                "text": "Rename Organization to Agency in settings, add contact permission gating, sync tagline column to DB"
+            },
+            {
+                "type": "feature",
+                "text": "World-class task details panel redesign"
+            }
+        ]
+    },
+    {
+        "version": "5.3.0",
+        "date": "2026-02-21",
+        "title": "Printable Invoices Revamp",
+        "summary": "Dedicated premium print template with agency branding, professional layout, and configurable print settings",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Premium print template \u2014 dedicated branded header (logo, agency info, invoice number, status badge, dates), two-column bill-to/org block, enhanced line items table, totals section, payment history, notes, legal footer"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice Print Settings page \u2014 configure what appears on printed invoices (logo, payments, bank details, notes, paper size) from Settings > Organization > Invoice Settings"
+            },
+            {
+                "type": "feature",
+                "text": "Organization branding integration \u2014 printed invoices pull logo, legal name, address, tax ID, registration number, footer note, bank details, and payment instructions from org settings"
+            },
+            {
+                "type": "improvement",
+                "text": "Template-based print approach \u2014 hides all app chrome and shows only the dedicated print template, ensuring clean paper output"
+            },
+            {
+                "type": "improvement",
+                "text": "Configurable paper size \u2014 A4 and US Letter supported"
+            }
+        ]
+    },
+    {
+        "version": "5.2.0",
+        "date": "2026-02-21",
+        "title": "New Printable Invoices",
+        "summary": "Complete overhaul of invoice print styles \u2014 clean, paper-ready layout with all app chrome hidden and professional typography",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Professional print layout \u2014 A4 page setup with proper margins, clean black-and-white typography"
+            },
+            {
+                "type": "feature",
+                "text": "All app chrome hidden in print \u2014 sidebar, hamburger menu, notifications, buttons, Activity Timeline, back links"
+            },
+            {
+                "type": "improvement",
+                "text": "Single-column layout \u2014 2-column grid collapses for clean paper output"
+            },
+            {
+                "type": "improvement",
+                "text": "Professional table formatting \u2014 uppercase headers, clean borders, proper alignment"
+            },
+            {
+                "type": "improvement",
+                "text": "Totals section \u2014 bold amounts, clear visual hierarchy for subtotal/total/paid/due"
+            },
+            {
+                "type": "improvement",
+                "text": "Page break control \u2014 sections avoid splitting across pages"
+            },
+            {
+                "type": "feature",
+                "text": "Professional printable invoice styles (v5.2.0)"
+            }
+        ]
+    },
+    {
+        "version": "5.1.0",
+        "date": "2026-02-21",
+        "title": "Organizations Rename & Contact Stakeholders",
+        "summary": "Renamed 'Clients' to 'Organizations' across the entire UI for clarity, and upgraded contacts into operational stakeholders with billing, approver, and status flags",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Renamed 'Clients' \u2192 'Organizations' across sidebar, list page, detail page, invoices, and permissions"
+            },
+            {
+                "type": "feature",
+                "text": "Contact stakeholder flags \u2014 isBilling and isApprover booleans for operational role assignment"
+            },
+            {
+                "type": "feature",
+                "text": "Contact status \u2014 ACTIVE/INACTIVE enum for soft-disabling contacts without deletion"
+            },
+            {
+                "type": "feature",
+                "text": "Contact business title field \u2014 separate from role for clearer stakeholder identification"
+            },
+            {
+                "type": "feature",
+                "text": "Flexible socials storage \u2014 JSON field supporting any number of social/communication channels"
+            },
+            {
+                "type": "improvement",
+                "text": "Email uniqueness constraint per organization prevents duplicate contacts"
+            },
+            {
+                "type": "improvement",
+                "text": "Contacts tab upgraded with toggle actions for Billing, Active/Inactive, and badge indicators"
+            },
+            {
+                "type": "improvement",
+                "text": "Organization detail page shows Primary, Billing, Approver, and Inactive badges on contacts"
+            },
+            {
+                "type": "feature",
+                "text": "Replace all native date inputs with premium DatePicker component"
+            },
+            {
+                "type": "feature",
+                "text": "Rename Clients \u2192 Organizations + upgrade contacts to stakeholders (v5.1.0)"
+            }
+        ]
+    },
+    {
+        "version": "5.0.0",
+        "date": "2026-02-21",
+        "title": "Service Builder & Financial Intelligence",
+        "summary": "Multi-step service creation wizard with draft/publish lifecycle, flexible billing intervals (monthly/quarterly/yearly), normalized ARR/MRR dashboard reporting, and in-app changelog",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Multi-step Service Builder \u2014 4-step wizard at /services/new (Basics, Description, Pricing, Review & Publish) replacing the single modal"
+            },
+            {
+                "type": "feature",
+                "text": "Draft/Publish lifecycle \u2014 services start as drafts, publish requires name + pricing validation, drafts blocked from client assignment"
+            },
+            {
+                "type": "feature",
+                "text": "Flexible billing intervals \u2014 monthly, quarterly, and yearly recurring options with per-interval pricing"
+            },
+            {
+                "type": "feature",
+                "text": "Rich service content \u2014 cover images, gallery (up to 8), shareable links (up to 10), FAQ entries (up to 15)"
+            },
+            {
+                "type": "feature",
+                "text": "Normalized MRR \u2014 dashboard MRR now includes yearly\u00f712 and quarterly\u00f73 equivalents alongside monthly direct"
+            },
+            {
+                "type": "feature",
+                "text": "ARR KPI \u2014 annual recurring revenue card with breakdown (fromMonthly, fromYearly, fromQuarterly)"
+            },
+            {
+                "type": "feature",
+                "text": "Changelog settings tab \u2014 full version history with timeline layout, type-colored badges, and release stats"
+            },
+            {
+                "type": "improvement",
+                "text": "Service cards now show Draft/Published status badges on the services list"
+            },
+            {
+                "type": "improvement",
+                "text": "Server-side publish validation \u2014 recurring services must specify billing interval, all services need pricing"
+            },
+            {
+                "type": "improvement",
+                "text": "Extended Prisma schema with BillingType, BillingInterval, ServiceStatus enums and 8 new Service fields"
+            }
+        ]
+    },
+    {
+        "version": "4.0.0",
+        "date": "2026-02-21",
+        "title": "CRM Command Center",
+        "summary": "Comprehensive client relationship management with financial intelligence, follow-ups, communication logs, document hub, contract tracking, health scoring, and lead pipeline",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Financial intelligence panel \u2014 6 stats: revenue, active projects, unpaid (with invoice count), overdue count, avg payment delay, on-time payment %"
+            },
+            {
+                "type": "feature",
+                "text": "Contract & renewal tracking \u2014 start/end dates, renewal type, notice period, SLA tier, approaching-expiry warnings"
+            },
+            {
+                "type": "feature",
+                "text": "Lead pipeline card \u2014 expected value, deal probability, weighted value, close date, source (visible for LEAD/CONTACTED/PROPOSAL_SENT)"
+            },
+            {
+                "type": "feature",
+                "text": "Follow-up engine \u2014 create/complete/delete follow-ups with priority levels, due dates, inline forms on Overview tab"
+            },
+            {
+                "type": "feature",
+                "text": "Communication log tab \u2014 log calls, meetings, emails, decisions, issues, change requests with pin-as-decision support"
+            },
+            {
+                "type": "feature",
+                "text": "Document hub tab \u2014 upload contracts, NDAs, SOWs, brand assets with categorization and team attribution"
+            },
+            {
+                "type": "feature",
+                "text": "Health scoring engine \u2014 deterministic server-side computation from overdue invoices, payment delays, activity gaps, overdue tasks"
+            },
+            {
+                "type": "feature",
+                "text": "Enhanced client list \u2014 Revenue, Unpaid, Health badge, Last Activity columns + 8 sort options"
+            },
+            {
+                "type": "feature",
+                "text": "Unified timeline API \u2014 aggregated events from audit logs, follow-ups, and communication logs"
+            },
+            {
+                "type": "improvement",
+                "text": "Client contact upgrades \u2014 role type (Decision Maker/Finance/Technical/Ops), preferred channel, timezone fields"
+            },
+            {
+                "type": "improvement",
+                "text": "All mutations update lastActivityAt for accurate recency tracking"
+            },
+            {
+                "type": "improvement",
+                "text": "Server-side permission checks on all 23 procedures with strict org-scoping"
+            },
+            {
+                "type": "feature",
+                "text": "Recurring invoice system + financial metric hardening"
+            },
+            {
+                "type": "feature",
+                "text": "Role-based defaults, critical events, scoped prefs, history, Slack webhook"
+            },
+            {
+                "type": "feature",
+                "text": "Advanced organization branding system"
+            },
+            {
+                "type": "feature",
+                "text": "Team page revamp"
+            },
+            {
+                "type": "improvement",
+                "text": "Replace all emoji icons with minimalistic SVG icons across 18 files"
+            },
+            {
+                "type": "fix",
+                "text": "Populate changelog entries in notification panel"
+            },
+            {
+                "type": "fix",
+                "text": "Team member profile 500 error \u2014 invalid ProjectStatus enum + unsynced schema"
+            }
+        ]
+    },
+    {
+        "version": "3.10.0",
+        "date": "2026-02-21",
+        "title": "Team Management Hub",
+        "summary": "Full operational team hub with member profiles, workload analytics, pending invites, and department management",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "7-stat analytics strip \u2014 total, active, invited, active tasks, avg tasks/member, overloaded, overdue (all server-computed)"
+            },
+            {
+                "type": "feature",
+                "text": "Member profile modal \u2014 identity, 6 work metrics (assigned/completed/overdue/completion rate/active projects/billable hours), activity timeline"
+            },
+            {
+                "type": "feature",
+                "text": "Pending invites panel \u2014 separate section with resend and cancel actions"
+            },
+            {
+                "type": "feature",
+                "text": "Department management \u2014 assign departments to members, filter by department"
+            },
+            {
+                "type": "feature",
+                "text": "Member status system \u2014 active/invited/suspended with visual badges"
+            },
+            {
+                "type": "feature",
+                "text": "Employment type tracking \u2014 full-time, contractor, intern"
+            },
+            {
+                "type": "feature",
+                "text": "Team description block \u2014 editable org-level text above analytics"
+            },
+            {
+                "type": "feature",
+                "text": "Completion rate rings \u2014 SVG donut per member card"
+            },
+            {
+                "type": "feature",
+                "text": "Activity pulse indicator \u2014 green/yellow/gray dot based on last activity"
+            },
+            {
+                "type": "improvement",
+                "text": "11 backend procedures with server-computed metrics, audit logging, and overload detection"
+            }
+        ]
+    },
+    {
+        "version": "3.9.0",
+        "date": "2026-02-21",
+        "title": "Team Page Revamp",
+        "summary": "Complete team page rewrite with analytics, search, role management, member removal, and workload capacity bars",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Team Analytics Strip \u2014 total members, active tasks, overdue tasks, avg tasks per member"
+            },
+            {
+                "type": "feature",
+                "text": "Search & Role Filter \u2014 search by name or email, filter by role"
+            },
+            {
+                "type": "feature",
+                "text": "Inline Role Management \u2014 change member roles directly from the member card dropdown"
+            },
+            {
+                "type": "feature",
+                "text": "Member Removal \u2014 remove button with confirmation modal, owner protection"
+            },
+            {
+                "type": "feature",
+                "text": "Workload Capacity Bars \u2014 color-coded indicators (green light / yellow medium / red heavy) per member"
+            },
+            {
+                "type": "improvement",
+                "text": "Enhanced member cards with joined date, active/overdue counts, task pills with overdue warnings"
+            }
+        ]
+    },
+    {
+        "version": "3.8.0",
+        "date": "2026-02-21",
+        "title": "Advanced Organization Branding System",
+        "summary": "Centralized branding engine with 5-tabbed settings, email/invoice/portal identity, white label controls, and live preview",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Brand Identity \u2014 secondary color, semantic colors (success/warning/danger), font family selector (system/Inter/Poppins/Roboto/Outfit), border radius preference (sharp/medium/rounded)"
+            },
+            {
+                "type": "feature",
+                "text": "Email Branding Engine \u2014 from name/email, reply-to, header/footer logos, HTML signature, footer text, social links"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice & Document Branding \u2014 invoice logo, accent color, footer note, bank details, payment instructions, signature image, tax ID display, registration number, powered-by toggle"
+            },
+            {
+                "type": "feature",
+                "text": "Portal Branding \u2014 background, headline, subtext, welcome message, 404 message, footer, default landing page selector"
+            },
+            {
+                "type": "feature",
+                "text": "White Label Control Panel \u2014 hide platform name/logo/footer credits, custom page title format, support email/URL"
+            },
+            {
+                "type": "improvement",
+                "text": "5-tabbed branding settings UI with live color preview and unsaved changes warning"
+            },
+            {
+                "type": "improvement",
+                "text": "40+ new Organization schema fields with full server-side validation (hex colors, email format, enum values)"
+            }
+        ]
+    },
+    {
+        "version": "3.7.0",
+        "date": "2026-02-21",
+        "title": "Notifications System Enhancement",
+        "summary": "Role-aware defaults, critical event system, scoped preferences, notification history, Slack webhook integration, and digest improvements",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Role-Based Notification Defaults \u2014 new users inherit preferences based on role (Owner/Admin/Finance/PM/Member)"
+            },
+            {
+                "type": "feature",
+                "text": "Critical Event System \u2014 INVOICE_OVERDUE, PAYMENT_FAILED, PROJECT_DELAYED, TASK_OVERDUE_BATCH bypass digest and quiet hours"
+            },
+            {
+                "type": "feature",
+                "text": "Scoped Notification Preferences \u2014 per-category scope selector (All / Only mine / My projects)"
+            },
+            {
+                "type": "feature",
+                "text": "Notification History Page \u2014 paginated log with type/unread/critical filters, mark-read, and delete"
+            },
+            {
+                "type": "feature",
+                "text": "Slack Webhook Integration \u2014 org-level incoming webhook URL, per-category toggles, test button"
+            },
+            {
+                "type": "improvement",
+                "text": "5 new NotificationType values: INVOICE_OVERDUE, PAYMENT_FAILED, PROJECT_DELAYED, TASK_OVERDUE_BATCH, RECURRING_GENERATED"
+            },
+            {
+                "type": "improvement",
+                "text": "Notification model enhanced with isCritical flag and deliveryChannel tracking"
+            },
+            {
+                "type": "improvement",
+                "text": "Digest formatter groups notifications by project/entity, sorts critical-first"
+            },
+            {
+                "type": "improvement",
+                "text": "Expanded notification categories: invoice overdue, payment failed, project delayed, recurring generated, deadline approaching"
+            }
+        ]
+    },
+    {
+        "version": "3.6.0",
+        "date": "2026-02-21",
+        "title": "Invoicing System Upgrade",
+        "summary": "Financial metric hardening and native recurring invoice creation with template-based MRR computation",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Recurring Invoice Creation \u2014 toggle in invoice form to create recurring templates with frequency, dates, lead days, auto-send/charge"
+            },
+            {
+                "type": "feature",
+                "text": "Recurring Template Management \u2014 list, get, pause, resume, cancel recurring templates with audit logging"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice Generation Engine \u2014 idempotent generation from templates with line item cloning, dedup, and next-date computation"
+            },
+            {
+                "type": "improvement",
+                "text": "Collection Rate fixed \u2014 now uses total_collected / total_issued (excluding draft/void/bad debt) instead of paid/(paid+outstanding)"
+            },
+            {
+                "type": "improvement",
+                "text": "Avg Days Late metric \u2014 new collection discipline metric showing 'X days early' or 'X days late' with color coding"
+            },
+            {
+                "type": "improvement",
+                "text": "MRR recomputed from active recurring templates with monthly-equivalent conversion (weekly\u00d74.33, quarterly\u00f73, yearly\u00f712)"
+            },
+            {
+                "type": "improvement",
+                "text": "Monthly Collection Rate \u2014 this-month variant alongside lifetime rate"
+            },
+            {
+                "type": "improvement",
+                "text": "Recurring stats in analytics \u2014 active templates count, recurring clients, upcoming invoices"
+            },
+            {
+                "type": "improvement",
+                "text": "Recurring badge on invoice detail page for invoices generated from templates"
+            },
+            {
+                "type": "improvement",
+                "text": "Forecast now includes SCHEDULED status invoices alongside unpaid"
+            }
+        ]
+    },
+    {
+        "version": "3.5.0",
+        "date": "2026-02-21",
+        "title": "Settings Security Upgrade",
+        "summary": "Comprehensive security hardening with re-auth gating, org policies, audit log, account deletion, and data export",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Re-authentication modal \u2014 password + TOTP verification before sensitive actions (2FA disable, backup code regen, account deletion)"
+            },
+            {
+                "type": "feature",
+                "text": "Backup codes regeneration \u2014 generate new recovery codes with re-auth, one-time display, copy-all support"
+            },
+            {
+                "type": "feature",
+                "text": "Security activity log \u2014 user-level append-only event feed with 15+ event types and icons"
+            },
+            {
+                "type": "feature",
+                "text": "Organization Security Policies page \u2014 enforce 2FA with member compliance table, session idle/max timeouts, domain restrictions"
+            },
+            {
+                "type": "feature",
+                "text": "Organization Audit Log page \u2014 paginated, filterable by event type, with actor details and change metadata"
+            },
+            {
+                "type": "feature",
+                "text": "Account deletion with 7-day grace period \u2014 request/cancel flow, owner transfer check, scheduled deletion countdown"
+            },
+            {
+                "type": "feature",
+                "text": "Data export \u2014 download profile, memberships, preferences, and security log as JSON"
+            },
+            {
+                "type": "improvement",
+                "text": "Email verification badge on profile page \u2014 shows Verified/Unverified status"
+            },
+            {
+                "type": "improvement",
+                "text": "Sign Out All Sessions \u2014 requires re-authentication, revokes all devices including current"
+            },
+            {
+                "type": "improvement",
+                "text": "Sessions now show created timestamp alongside last active"
+            },
+            {
+                "type": "feature",
+                "text": "Settings security upgrade v3.5.0 \u2014 reauth, org policies, audit log, account deletion, data export"
+            }
+        ]
+    },
+    {
+        "version": "3.4.0",
+        "date": "2026-02-21",
+        "title": "Task Management System Upgrade",
+        "summary": "Transformed the task board into an agency-grade operations engine with health intelligence, time tracking, workload view, and operational safeguards",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Task Health Intelligence \u2014 auto-computed ON_TRACK / AT_RISK / OVERDUE / BLOCKED / STALLED status with colored indicators"
+            },
+            {
+                "type": "feature",
+                "text": "Task Detail Command Center \u2014 tabbed panel with details, time tracking, checklist, and activity timeline"
+            },
+            {
+                "type": "feature",
+                "text": "Time Tracking \u2014 start/stop timer, manual time logging, logged vs billable hours"
+            },
+            {
+                "type": "feature",
+                "text": "Checklist System \u2014 nested items with auto-progress bar calculation"
+            },
+            {
+                "type": "feature",
+                "text": "Task Dependencies \u2014 circular detection, blocking safeguards, lock icons on blocked tasks"
+            },
+            {
+                "type": "feature",
+                "text": "Workload View \u2014 per-team-member capacity bars, active/overdue counts, hours tracking"
+            },
+            {
+                "type": "feature",
+                "text": "Analytics Strip \u2014 7 real-time metrics (active, overdue, due today/this week, completion rate)"
+            },
+            {
+                "type": "feature",
+                "text": "Activity Timeline \u2014 auto-logged events for all task mutations"
+            },
+            {
+                "type": "feature",
+                "text": "Changelog Notifications \u2014 new versions broadcast to all team members via notification bell"
+            },
+            {
+                "type": "improvement",
+                "text": "Advanced task filters \u2014 health status, priority, project, date range, stale days, dependency presence"
+            },
+            {
+                "type": "improvement",
+                "text": "Operational safeguards \u2014 block DONE if deps incomplete, soft-delete tasks with time logs, prevent overlapping timers"
+            },
+            {
+                "type": "feature",
+                "text": "Task management system upgrade v3.4.0 \u2014 health intelligence, time tracking, workload, checklists, analytics, changelog notifications"
+            }
+        ]
+    },
+    {
+        "version": "3.3.0",
+        "date": "2026-02-21",
+        "title": "Invoicing System Upgrade",
+        "summary": "Full finance control center with analytics, recurring invoices, credit notes, refunds, and activity timeline",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Finance Analytics Dashboard \u2014 MRR, collection rate, avg days to pay, aging buckets, revenue by client"
+            },
+            {
+                "type": "feature",
+                "text": "Recurring Invoice Engine \u2014 templates, auto-generation on schedule"
+            },
+            {
+                "type": "feature",
+                "text": "Credit Note System \u2014 issue and apply credit notes to invoices"
+            },
+            {
+                "type": "feature",
+                "text": "Refund Processing \u2014 partial/full refunds with audit trail"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice Timeline \u2014 chronological view of all invoice events"
+            },
+            {
+                "type": "improvement",
+                "text": "Bad Debt marking capability with financial impact tracking"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice type badges and enhanced status management"
+            },
+            {
+                "type": "fix",
+                "text": "Settings cards + mobile hamburger alignment + notification bell fix"
+            },
+            {
+                "type": "fix",
+                "text": "Mobile notification dropdown now visible \u2014 removed conflicting CSS"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice system upgrade v3.3.0 \u2014 analytics, recurring, credit notes, refunds, timeline"
+            }
+        ]
+    },
+    {
+        "version": "3.2.2",
+        "date": "2026-02-21",
+        "title": "Settings Cards + Mobile Hamburger Fix",
+        "summary": "Added missing Integrations & Billing cards to settings, fixed mobile hamburger to sit beside page title",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Mobile hamburger now sits beside the page title instead of floating above it"
+            },
+            {
+                "type": "fix",
+                "text": "Added missing Integrations and Billing & Plans cards to settings dashboard"
+            },
+            {
+                "type": "fix",
+                "text": "Removed duplicate Settings title (layout provides it via page-header)"
+            },
+            {
+                "type": "fix",
+                "text": "Notification bell on mobile now has proper 40x40 touch target and z-index for reliable taps"
+            }
+        ]
+    },
+    {
+        "version": "3.2.1",
+        "date": "2026-02-21",
+        "title": "Inline Breadcrumbs + Settings Header",
+        "summary": "Breadcrumbs now sit inline with page titles, settings pages get a proper header with notification bell",
+        "changes": [
+            {
+                "type": "improvement",
+                "text": "Breadcrumb back links now display inline with page titles (\u2190 Projects / Project Name) instead of floating on a separate row"
+            },
+            {
+                "type": "improvement",
+                "text": "Settings layout now has a proper page-header with title, description, and notification bell"
+            }
+        ]
+    },
+    {
+        "version": "3.2.0",
+        "date": "2026-02-21",
+        "title": "Project Workspace Header Upgrade",
+        "summary": "Upgraded single project page header to match the polished service detail layout, added notification bell to detail pages",
+        "changes": [
+            {
+                "type": "improvement",
+                "text": "Project detail page header now matches the service detail layout \u2014 back link, title with inline status/health badges, metadata row (client, dates, PM)"
+            },
+            {
+                "type": "improvement",
+                "text": "Project header uses page-header class for consistent sticky positioning and background"
+            },
+            {
+                "type": "fix",
+                "text": "Notification bell now present on single project and single service detail pages"
+            },
+            {
+                "type": "fix",
+                "text": "Notification deep links \u2014 clicks go to specific entity pages"
+            },
+            {
+                "type": "fix",
+                "text": "Mobile UI polish \u2014 inline header, sidebar logo, responsive bell"
+            }
+        ]
+    },
+    {
+        "version": "3.1.1",
+        "date": "2026-02-21",
+        "title": "Mobile UI Polish",
+        "summary": "Fixed mobile header layout and sidebar logo overlap for a clean responsive experience",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Page header stays as single row on mobile \u2014 title truncates, actions stay right"
+            },
+            {
+                "type": "fix",
+                "text": "Sidebar logo no longer hidden by hamburger close button on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Notification dropdown properly fills mobile width with correct z-index"
+            },
+            {
+                "type": "improvement",
+                "text": "Smaller buttons and bell icon on mobile for better touch targets"
+            },
+            {
+                "type": "improvement",
+                "text": "Subtitle/description hidden on mobile to save space"
+            }
+        ]
+    },
+    {
+        "version": "3.1.0",
+        "date": "2026-02-21",
+        "title": "Notification UX + Mobile Polish",
+        "summary": "Fixed notification click navigation, full-width mobile dropdown, and responsive header layout across all pages",
+        "changes": [
+            {
+                "type": "fix",
+                "text": "Clicking a notification now navigates to the relevant page (tasks, projects, invoices, clients)"
+            },
+            {
+                "type": "fix",
+                "text": "Notification dropdown now appears correctly on mobile \u2014 full-width with proper z-index"
+            },
+            {
+                "type": "improvement",
+                "text": "Mobile page headers reorganized: notification bell, actions, and hamburger menu no longer overlap"
+            },
+            {
+                "type": "improvement",
+                "text": "Notification bell moved inline into every page header \u2014 consistent position beside action buttons"
+            },
+            {
+                "type": "improvement",
+                "text": "Client names now display as clickable pill badges linking to client detail page"
+            },
+            {
+                "type": "improvement",
+                "text": "Green PAID \u2713 tag appears on project cards when all invoices are fully settled"
+            },
+            {
+                "type": "feature",
+                "text": "Relocate notification bell to top-right + seed test notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Projects page UI issues \u2014 header bg, search alignment, card styling"
+            },
+            {
+                "type": "feature",
+                "text": "Reviewer micro-upgrades \u2014 client pill, PAID tag, invoice action"
+            }
+        ]
+    },
+    {
+        "version": "3.0.0",
+        "date": "2026-02-21",
+        "title": "Projects \u2192 Agency Command Center",
+        "summary": "Transformed the All Projects page into an intelligent agency control center with financial visibility, automated health scoring, and rich project intelligence",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Circular progress rings replacing linear bars \u2014 color-coded by completion rate with smooth animated transitions"
+            },
+            {
+                "type": "feature",
+                "text": "Financial metrics strip on each card: Invoiced, Paid, and Outstanding amounts with formatted currency"
+            },
+            {
+                "type": "feature",
+                "text": "Automated project health scoring (On Track / At Risk / Delayed) computed server-side from overdue tasks, deadline proximity, and completion rate"
+            },
+            {
+                "type": "feature",
+                "text": "Activity pulse indicators: green (active), yellow (stale 3+ days), red (inactive 7+ days) \u2014 computed automatically from task activity"
+            },
+            {
+                "type": "feature",
+                "text": "Urgency timeline with days remaining counter: color-coded from neutral \u2192 warning \u2192 high alert \u2192 critical/overdue"
+            },
+            {
+                "type": "feature",
+                "text": "Hover-reveal quick action buttons on each project card for instant navigation"
+            },
+            {
+                "type": "feature",
+                "text": "In-app notification system: bell icon in sidebar with unread badge, dropdown panel, mark-as-read, and clickable notifications"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-notifications: task assigned, invoice paid/sent, new team member joined, and comment on task"
+            },
+            {
+                "type": "improvement",
+                "text": "Enhanced table view with Health, Budget, Activity columns and priority border accents"
+            },
+            {
+                "type": "improvement",
+                "text": "Priority-based left border accent on all project cards for instant visual differentiation"
+            },
+            {
+                "type": "improvement",
+                "text": "Team avatars with member count badges on each card for ownership visibility"
+            },
+            {
+                "type": "improvement",
+                "text": "All enrichment data (financial, overdue, time, activity, health) computed server-side with batched queries \u2014 zero N+1 issues"
+            }
+        ]
+    },
+    {
+        "version": "1.1.0",
+        "date": "2026-02-21",
+        "title": "Service Page UX + Categorization Upgrade",
+        "summary": "Redesigned the All Services page with structured categorization, visual card improvements, and enhanced filtering capabilities",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Service Categories: create named categories with custom colors and workspace-scoped slugs to organize your service catalog"
+            },
+            {
+                "type": "feature",
+                "text": "Category pills filter bar: horizontal scrollable row with color dots and count badges for instant filtering"
+            },
+            {
+                "type": "feature",
+                "text": "Redesigned service cards: gradient cover areas (driven by category color), status/pricing badges, category labels, and footer metadata"
+            },
+            {
+                "type": "feature",
+                "text": "Category creation modal with 10-color picker, accessible inline from the service creation form"
+            },
+            {
+                "type": "feature",
+                "text": "Status filter (Active/Inactive) and pricing model dropdown alongside search and sort controls"
+            },
+            {
+                "type": "improvement",
+                "text": "Service cards now show client count and project count in a styled footer with icons"
+            },
+            {
+                "type": "improvement",
+                "text": "Search input has integrated icon and focus ring; filters row is compact and responsive"
+            },
+            {
+                "type": "improvement",
+                "text": "Empty state uses SVG icon instead of emoji; messaging adapts to active filters"
+            },
+            {
+                "type": "feature",
+                "text": "Replace project page emoji icons with minimalistic SVG vectors"
+            },
+            {
+                "type": "fix",
+                "text": "Hide logo entirely when sidebar collapsed"
+            },
+            {
+                "type": "fix",
+                "text": "Redesign sidebar collapse/expand button"
+            },
+            {
+                "type": "fix",
+                "text": "Remove border from sidebar collapse button, match nav icon style"
+            },
+            {
+                "type": "feature",
+                "text": "Service page UX + categorization upgrade (v1.1.0)"
+            }
+        ]
+    },
+    {
+        "version": "1.0.0",
+        "date": "2026-02-20",
+        "title": "Executive Dashboard",
+        "summary": "Complete dashboard redesign \u2014 strategic executive control center with financial intelligence, project health, workload visibility, and smart alerts",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Executive KPI snapshot: Total Revenue, MRR, Outstanding, Overdue, Active Clients, Active Projects, At Risk, Tasks Due This Week \u2014 all with trend indicators"
+            },
+            {
+                "type": "feature",
+                "text": "Revenue & Cash Flow: 6-month revenue trend bar chart, outstanding vs overdue split, upcoming payments due in 14 days"
+            },
+            {
+                "type": "feature",
+                "text": "Project Health Matrix: server-side health scoring (Green/Yellow/Red) based on deadline proximity, task completion %, overdue tasks, and milestone status"
+            },
+            {
+                "type": "feature",
+                "text": "Workload & Team Utilization: tasks by status breakdown, team load by assignee, top 5 overdue tasks"
+            },
+            {
+                "type": "feature",
+                "text": "Intelligent Alerts: auto-detects overdue invoices, critical projects, stale tasks (3+ days overdue), and inactive clients (30+ days) \u2014 clickable and dismissible"
+            },
+            {
+                "type": "feature",
+                "text": "Time period filtering (This Month, Last 30 Days, This Quarter, This Year) with previous-period trend comparison"
+            },
+            {
+                "type": "improvement",
+                "text": "MRR now correctly calculated from active RECURRING_MONTHLY services instead of dividing total revenue by 12"
+            },
+            {
+                "type": "improvement",
+                "text": "All financial and risk calculations are server-side with batched queries for performance"
+            },
+            {
+                "type": "improvement",
+                "text": "Every KPI card is clickable and routes to the relevant filtered page"
+            },
+            {
+                "type": "fix",
+                "text": "Wire up Invite Member button with modal on team page"
+            },
+            {
+                "type": "feature",
+                "text": "Portfolio dashboard revamp for All Projects page"
+            },
+            {
+                "type": "fix",
+                "text": "Changelog Next button now advances to next entry instead of staying in place"
+            },
+            {
+                "type": "fix",
+                "text": "Remove max-width constraint on settings page content area"
+            },
+            {
+                "type": "feature",
+                "text": "Stripe Connect integration in Settings > Integrations"
+            },
+            {
+                "type": "feature",
+                "text": "Full Stripe payment flow \u2014 Checkout, webhook, public pay page"
+            },
+            {
+                "type": "fix",
+                "text": "Stripe Connect auth \u2014 use tRPC instead of API route"
+            },
+            {
+                "type": "fix",
+                "text": "Add Stripe env vars + speed up integrations page"
+            },
+            {
+                "type": "feature",
+                "text": "Add comprehensive Reports module with 5 tabs"
+            },
+            {
+                "type": "fix",
+                "text": "Reports page responsiveness - mobile layout, KPI grid, donut charts"
+            },
+            {
+                "type": "feature",
+                "text": "Reports page header/padding + collapsible sidebar"
+            },
+            {
+                "type": "feature",
+                "text": "TOTP Multi-Factor Authentication"
+            },
+            {
+                "type": "feature",
+                "text": "Replace emoji icons with SVG vectors, fix collapsed sidebar logo"
+            },
+            {
+                "type": "feature",
+                "text": "Executive Dashboard v1.0.0 \u2014 complete redesign"
+            }
+        ]
+    },
+    {
+        "version": "0.4.1",
+        "date": "2026-02-20",
+        "title": "Icon Overhaul & UI Refinement",
+        "summary": "Replaced all emoji icons with minimalistic SVG vector icons and fixed collapsed sidebar",
+        "changes": [
+            {
+                "type": "improvement",
+                "text": "Replaced all emoji icons across sidebar navigation, settings sidebar, and settings overview with clean, minimalistic SVG vector icons (Lucide-inspired stroke style)"
+            },
+            {
+                "type": "improvement",
+                "text": "Created shared icon library (icons.tsx) with 22 reusable SVG icon components"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed logo peeking through when sidebar is collapsed (added overflow clipping)"
+            },
+            {
+                "type": "improvement",
+                "text": "Hamburger menu, close button, and collapse toggle now use SVG icons instead of text characters"
+            }
+        ]
+    },
+    {
+        "version": "0.4.0",
+        "date": "2026-02-20",
+        "title": "Security & UI Polish",
+        "summary": "Two-Factor Authentication, collapsible sidebar, and page consistency improvements",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "TOTP Multi-Factor Authentication: enable 2FA via authenticator app (Google Authenticator, Authy, etc.) from Settings \u2192 Security"
+            },
+            {
+                "type": "feature",
+                "text": "QR code setup flow with manual secret key fallback and 8 one-time recovery codes"
+            },
+            {
+                "type": "feature",
+                "text": "Login now supports two-step verification: enter email/password, then 6-digit TOTP code"
+            },
+            {
+                "type": "feature",
+                "text": "Collapsible sidebar: toggle button to collapse to icon-only mode (64px), state saved across sessions"
+            },
+            {
+                "type": "improvement",
+                "text": "Reports page now uses the shared Page component for consistent header background, sticky header, and padding"
+            },
+            {
+                "type": "improvement",
+                "text": "Smooth CSS transitions on sidebar width and main content area when collapsing/expanding"
+            }
+        ]
+    },
+    {
+        "version": "0.3.2",
+        "date": "2026-02-20",
+        "title": "Stripe Payment Flow",
+        "summary": "End-to-end payment collection via Stripe Checkout",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Stripe Checkout integration: send invoice pay links to clients, they pay via Stripe-hosted checkout"
+            },
+            {
+                "type": "feature",
+                "text": "Public pay page (/pay/[token]): branded invoice summary with line items, totals, and Pay with Stripe button"
+            },
+            {
+                "type": "feature",
+                "text": "Stripe webhook handler: auto-records payments and updates invoice status (PAID/PARTIALLY_PAID) on checkout completion"
+            },
+            {
+                "type": "feature",
+                "text": "Copy Pay Link button on invoice detail page \u2014 share a payment link with clients"
+            },
+            {
+                "type": "feature",
+                "text": "Pay with Stripe button on invoice detail page for quick staff-initiated payments"
+            },
+            {
+                "type": "improvement",
+                "text": "Payment model extended with Stripe session and payment intent IDs for audit trail"
+            }
+        ]
+    },
+    {
+        "version": "0.3.1",
+        "date": "2026-02-20",
+        "title": "Stripe Integration",
+        "summary": "Connect your Stripe account to accept payments",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Stripe Connect integration: link your Stripe account to accept invoice, subscription, and one-time payments"
+            },
+            {
+                "type": "feature",
+                "text": "Stripe status dashboard showing account ID, onboarding status, and payouts state"
+            },
+            {
+                "type": "feature",
+                "text": "One-click connect and disconnect with audit logging"
+            },
+            {
+                "type": "improvement",
+                "text": "Integrations page redesigned with Stripe card and upcoming integrations preview"
+            },
+            {
+                "type": "improvement",
+                "text": "Settings page now uses full width layout to match other pages"
+            }
+        ]
+    },
+    {
+        "version": "0.3.0",
+        "date": "2026-02-20",
+        "title": "Project Management System",
+        "summary": "Full project workspace, portfolio dashboard, and team management",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "8-tab Project Workspace: Overview, Tasks, Timeline, Docs & Files, Team, Budget & Time, Activity, and Settings"
+            },
+            {
+                "type": "feature",
+                "text": "Portfolio dashboard with executive summary bar showing total, active, completed, overdue, on hold, and at-risk projects"
+            },
+            {
+                "type": "feature",
+                "text": "Project card grid view with real-time progress bars, urgency indicators, and quick action menus"
+            },
+            {
+                "type": "feature",
+                "text": "Bulk actions: multi-select projects to change status, archive, or delete in one click"
+            },
+            {
+                "type": "feature",
+                "text": "Project documents system with create, edit, pin, and delete support"
+            },
+            {
+                "type": "feature",
+                "text": "Milestone tracking with status, due dates, ownership, and task counts"
+            },
+            {
+                "type": "feature",
+                "text": "Budget and time tracking: budget configuration (fixed/hourly/retainer), time entry logging, and billable/non-billable breakdowns"
+            },
+            {
+                "type": "feature",
+                "text": "Project team management: add/remove members, assign roles (Lead, Member, Viewer)"
+            },
+            {
+                "type": "feature",
+                "text": "Comprehensive activity log with filtering for all project changes"
+            },
+            {
+                "type": "feature",
+                "text": "Project archiving (soft-delete) with restore capability"
+            },
+            {
+                "type": "improvement",
+                "text": "Server-side at-risk detection: projects with 20%+ overdue tasks or due within 3 days at under 50% progress"
+            },
+            {
+                "type": "improvement",
+                "text": "Enhanced table view with column sorting, inline status editing, and multi-filter search"
+            },
+            {
+                "type": "improvement",
+                "text": "Editable project header with inline status, health, dates, and PM controls"
+            },
+            {
+                "type": "improvement",
+                "text": "Full audit logging on all project mutations with old/new value tracking"
+            }
+        ]
+    },
+    {
+        "version": "0.2.1",
+        "date": "2026-02-20",
+        "title": "What's New Popup",
+        "summary": "Stay in the loop with every update",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "In-app changelog popup that appears when you log in"
+            },
+            {
+                "type": "feature",
+                "text": "Missed updates stack so you never miss a release"
+            },
+            {
+                "type": "improvement",
+                "text": "Version tracking with semantic versioning across the platform"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 1 - Agency Management Platform foundation"
+            },
+            {
+                "type": "fix",
+                "text": "Prisma v7 adapter with pg.Pool for Supabase pooler"
+            },
+            {
+                "type": "feature",
+                "text": "Phase 2 (Billing & Client Portal) + Phase 3 (Automations)"
+            },
+            {
+                "type": "feature",
+                "text": "Premium UI overhaul - light/dark mode, Plus Jakarta Sans, responsive design"
+            },
+            {
+                "type": "feature",
+                "text": "Task system overhaul \u2014 drag-and-drop Kanban, task drawer, assignee picker"
+            },
+            {
+                "type": "feature",
+                "text": "Agency CRM upgrade \u2014 client profiles, notes, contacts, activity"
+            },
+            {
+                "type": "fix",
+                "text": "Layout full-width, add Page wrapper, Tasks sidebar + /tasks route"
+            },
+            {
+                "type": "feature",
+                "text": "Services overhaul + schema fixes + new routes"
+            },
+            {
+                "type": "fix",
+                "text": "Core platform bugs - client creation, optional project/client, task visibility, Add Task button"
+            },
+            {
+                "type": "feature",
+                "text": "Upgrade invoicing module \u2014 full agency-grade system"
+            }
+        ]
+    },
+    {
+        "version": "0.2.0",
+        "date": "2026-02-20",
+        "title": "Major Platform Upgrade",
+        "summary": "Services catalog, Kanban tasks, and much more",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Full services catalog with 5 pricing models (recurring, one-time, credit packs, hourly blocks, hourly rate)"
+            },
+            {
+                "type": "feature",
+                "text": "Client service management with balance tracking, rollovers, and credit ledger"
+            },
+            {
+                "type": "feature",
+                "text": "Kanban board view for tasks with drag-and-drop support"
+            },
+            {
+                "type": "feature",
+                "text": "List \u2194 Board view toggle on the tasks page"
+            },
+            {
+                "type": "feature",
+                "text": "Service templates for quick project creation"
+            },
+            {
+                "type": "improvement",
+                "text": "Redesigned services page with detailed service profiles"
+            },
+            {
+                "type": "improvement",
+                "text": "Active services now visible on client detail pages"
+            },
+            {
+                "type": "improvement",
+                "text": "Enhanced project page with service linkage"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed task creation foreign key constraint error"
+            },
+            {
+                "type": "fix",
+                "text": "Resolved build errors across all platform modules"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed tRPC router name collisions"
+            }
+        ]
+    }
+]
