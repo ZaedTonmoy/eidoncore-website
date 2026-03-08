@@ -177,7 +177,7 @@
     },
     {
         "version": "7.6.0",
-        "date": "2026-03-05",
+        "date": "2026-02-19",
         "title": "Intake Form Builder v2 \u2014 Multi-Page, Repeater & Preview",
         "summary": "Major intake form upgrade \u2014 multi-page forms with step wizard, repeater/group fields with dynamic rows, full-screen preview modal, public catalog redesign with share links and SEO, and field type expansion to 27 types.",
         "changes": [
@@ -241,7 +241,7 @@
     },
     {
         "version": "7.5.1",
-        "date": "2026-03-05",
+        "date": "2026-02-14",
         "title": "Kanban Redesign, Task Drag-and-Drop & Custom Statuses",
         "summary": "Visual Kanban board overhaul with shadow cards and priority badges, drag-and-drop task reordering in list view, project-scoped custom task statuses, guest checkout for public catalog, and invoice discount safety.",
         "changes": [
@@ -289,7 +289,7 @@
     },
     {
         "version": "7.5.0",
-        "date": "2026-03-05",
+        "date": "2026-02-12",
         "title": "Typography Refactor & SF Pro Display Default Font",
         "summary": "Comprehensive typography standardization across the entire codebase \u2014 replaced 1,476 inline font declarations with CSS design tokens, introduced utility classes, and switched the default system font from Plus Jakarta Sans to SF Pro Display.",
         "changes": [
@@ -405,7 +405,7 @@
     },
     {
         "version": "7.4.0",
-        "date": "2026-03-03",
+        "date": "2026-02-02",
         "title": "Invoice Form Redesign \u2014 Live Preview, Edit Parity & Print Template",
         "summary": "Redesigned invoice creation with a 55/45 form+preview split layout, live A4-proportioned preview panel, unified edit page, aligned line-item sub-rows, and pixel-perfect print template matching the preview.",
         "changes": [
@@ -445,7 +445,7 @@
     },
     {
         "version": "7.3.0",
-        "date": "2026-03-02",
+        "date": "2026-01-30",
         "title": "Dashboard Greeting Enhancements & Daily Motivational Quotes",
         "summary": "Time-aware greeting with contextual icons, daily motivational quotes that rotate through 345+ curated entries, and polished header layout with quote and greeting side-by-side.",
         "changes": [
@@ -477,7 +477,7 @@
     },
     {
         "version": "7.2.0",
-        "date": "2026-03-02",
+        "date": "2026-01-28",
         "title": "Bug Reports Button, Tasks Filter Bar & UI Polish",
         "summary": "Restored missing Report a Bug button on the bug reports page, moved the List/Board/Workload view toggle into the tasks filter bar alongside filters and New Task, and fixed several layout and overflow issues.",
         "changes": [
@@ -617,7 +617,7 @@
     },
     {
         "version": "7.1.0",
-        "date": "2026-03-01",
+        "date": "2026-01-16",
         "title": "Monetization Fixes, Consolidated Invoice Settings & UI Polish",
         "summary": "Aligned monetization plan data with spec, merged duplicate Invoice Settings into Branding, removed misleading email badge, and relocated team invite button to filter bar.",
         "changes": [
@@ -765,7 +765,7 @@
     },
     {
         "version": "7.0.0",
-        "date": "2026-02-28",
+        "date": "2026-01-03",
         "title": "Redesigned Headers, Cleaner Settings & Sidebar Polish",
         "summary": "Major UI overhaul \u2014 simplified settings page, more compact sidebar, redesigned page headers that align with the sidebar, and consistent styling across all pages.",
         "changes": [
@@ -865,7 +865,7 @@
     },
     {
         "version": "6.9.0",
-        "date": "2026-02-28",
+        "date": "2025-12-26",
         "title": "Platform Monetization \u2014 Subscription Billing, Plan Gating & Security Hardening",
         "summary": "Full platform monetization system with FREE/PRO/ENTERPRISE tiers, Stripe subscription billing, plan-gating middleware, quantity limits, billing lifecycle management, global status banners, and comprehensive security hardening across auth, rate limiting, and encryption.",
         "changes": [
@@ -957,7 +957,7 @@
     },
     {
         "version": "6.8.0",
-        "date": "2026-02-27",
+        "date": "2025-12-18",
         "title": "Task Assignment Emails, Team Invitations & Agency Name in Sidebar",
         "summary": "Rich task assignment email on drawer close, branded team invitation email with password-setup link and workspace URL, and agency name now displays in sidebar from registration.",
         "changes": [
@@ -1009,7 +1009,7 @@
     },
     {
         "version": "6.7.0",
-        "date": "2026-02-26",
+        "date": "2025-12-14",
         "title": "Multi-Tenant Workspaces \u2014 Subdomains, Onboarding & Welcome Emails",
         "summary": "Full subdomain-based tenant resolution with automated provisioning, post-registration onboarding questionnaire, workspace finder, welcome emails with SMTP fallback, wildcard domain support, and logout fix for agency portals.",
         "changes": [
@@ -1181,7 +1181,7 @@
     },
     {
         "version": "6.6.0",
-        "date": "2026-02-25",
+        "date": "2025-11-29",
         "title": "Automation Engine \u2014 Full Wiring & UI Upgrade",
         "summary": "Fixed 4 critical automation engine bugs, wired executeAutomations() into all 6 routers (11 triggers), added edit modal and enhanced execution logs with expandable detail rows and filtering, and added config forms for all 7 action types.",
         "changes": [
@@ -1425,7 +1425,7 @@
     },
     {
         "version": "6.5.0",
-        "date": "2026-02-24",
+        "date": "2025-11-07",
         "title": "Intake Forms \u2014 Client Onboarding Data Collection",
         "summary": "Custom intake forms that agency owners can create and assign to services. Clients fill them post-purchase on the success page, generating a pinned project document for the team.",
         "changes": [
@@ -1461,7 +1461,7 @@
     },
     {
         "version": "6.4.0",
-        "date": "2026-02-24",
+        "date": "2025-11-05",
         "title": "Dual Service System \u2014 Client Catalog & Review Moderation",
         "summary": "Complete internal/external service separation with client-facing catalog, review moderation, visibility controls, slug-based routing, and per-user access grants",
         "changes": [
@@ -1717,7 +1717,7 @@
     },
     {
         "version": "6.3.0",
-        "date": "2026-02-23",
+        "date": "2025-10-13",
         "title": "Slug URLs, Hash Tab Persistence & File UX",
         "summary": "Human-readable slug URLs for projects and organizations, hash-based tab and view persistence, file list UX polish, task list column fix, and settings improvements",
         "changes": [
@@ -1773,7 +1773,7 @@
     },
     {
         "version": "6.2.0",
-        "date": "2026-02-23",
+        "date": "2025-10-09",
         "title": "Notification Intelligence v7",
         "summary": "Priority tier system (P1-P4), notification cooldown engine, invoice escalation logic, PAYMENT_REMINDER downgrade, client-facing status filtering, and priority accent UI in the notification panel",
         "changes": [
@@ -1809,7 +1809,7 @@
     },
     {
         "version": "6.1.0",
-        "date": "2026-02-23",
+        "date": "2025-10-07",
         "title": "Notification System \u2014 Full Coverage",
         "summary": "10 new notification types with mutation-based triggers, cron-driven time-based alerts, and 2 new preference categories (timeTracking, projectDocs)",
         "changes": [
@@ -1841,7 +1841,7 @@
     },
     {
         "version": "6.0.0",
-        "date": "2026-02-23",
+        "date": "2025-10-05",
         "title": "Comprehensive Notification System Expansion",
         "summary": "18 new notification types covering project lifecycle, CRM & client management, invoice awareness, team operations, and operational intelligence \u2014 with role-based visibility and per-type icons",
         "changes": [
@@ -1893,7 +1893,7 @@
     },
     {
         "version": "5.9.0",
-        "date": "2026-02-22",
+        "date": "2025-10-01",
         "title": "Grouped Task List, File Preview & Image Lightbox",
         "summary": "ClickUp-style collapsible task list grouped by status, file preview modal for project files, image lightbox with zoom/pan across all uploaded images, and rich text editor improvements",
         "changes": [
@@ -1945,7 +1945,7 @@
     },
     {
         "version": "5.8.0",
-        "date": "2026-02-22",
+        "date": "2025-09-27",
         "title": "Smart Notifications, Kanban Polish & Mobile UX",
         "summary": "Comment interaction notifications, Kanban drag-and-drop fix, mobile TaskDrawer resizable sidebar, reaction system improvements, and notification deep-linking",
         "changes": [
@@ -1985,7 +1985,7 @@
     },
     {
         "version": "5.7.0",
-        "date": "2026-02-22",
+        "date": "2025-09-24",
         "title": "Mobile UI Polish & Team Page Upgrade",
         "summary": "Comprehensive mobile responsiveness fixes across Service Detail, Invoice Analytics, Team cards, and Reports pages, plus team page filter modernization",
         "changes": [
@@ -2125,7 +2125,7 @@
     },
     {
         "version": "5.6.0",
-        "date": "2026-02-22",
+        "date": "2025-09-12",
         "title": "Task Visibility Scoping & Assignee Improvements",
         "summary": "Role-based task visibility, project-scoped assignees, mandatory project selection, and bug fixes",
         "changes": [
@@ -2273,7 +2273,7 @@
     },
     {
         "version": "5.5.0",
-        "date": "2026-02-22",
+        "date": "2025-08-30",
         "title": "Multi-Layer Permission System & Public Task Sharing",
         "summary": "Complete permission architecture overhaul with per-item sidebar filtering, role-based access aligned to the multi-tenant hierarchy (Agency \u2192 Team \u2192 Organization \u2192 Client), public shared task pages, and rich text editor fix",
         "changes": [
@@ -2321,7 +2321,7 @@
     },
     {
         "version": "5.4.0",
-        "date": "2026-02-21",
+        "date": "2025-08-27",
         "title": "Updated Task Details Panel",
         "summary": "Complete redesign of task details from a basic 520px drawer to a premium 860px two-column detail panel inspired by Asana/Linear, with rich metadata, tabbed content, and modern micro-interactions",
         "changes": [
@@ -2417,7 +2417,7 @@
     },
     {
         "version": "5.3.0",
-        "date": "2026-02-21",
+        "date": "2025-08-19",
         "title": "Printable Invoices Revamp",
         "summary": "Dedicated premium print template with agency branding, professional layout, and configurable print settings",
         "changes": [
@@ -2445,7 +2445,7 @@
     },
     {
         "version": "5.2.0",
-        "date": "2026-02-21",
+        "date": "2025-08-17",
         "title": "New Printable Invoices",
         "summary": "Complete overhaul of invoice print styles \u2014 clean, paper-ready layout with all app chrome hidden and professional typography",
         "changes": [
@@ -2481,7 +2481,7 @@
     },
     {
         "version": "5.1.0",
-        "date": "2026-02-21",
+        "date": "2025-08-15",
         "title": "Organizations Rename & Contact Stakeholders",
         "summary": "Renamed 'Clients' to 'Organizations' across the entire UI for clarity, and upgraded contacts into operational stakeholders with billing, approver, and status flags",
         "changes": [
@@ -2529,7 +2529,7 @@
     },
     {
         "version": "5.0.0",
-        "date": "2026-02-21",
+        "date": "2025-08-12",
         "title": "Service Builder & Financial Intelligence",
         "summary": "Multi-step service creation wizard with draft/publish lifecycle, flexible billing intervals (monthly/quarterly/yearly), normalized ARR/MRR dashboard reporting, and in-app changelog",
         "changes": [
@@ -2577,7 +2577,7 @@
     },
     {
         "version": "4.0.0",
-        "date": "2026-02-21",
+        "date": "2025-08-09",
         "title": "CRM Command Center",
         "summary": "Comprehensive client relationship management with financial intelligence, follow-ups, communication logs, document hub, contract tracking, health scoring, and lead pipeline",
         "changes": [
@@ -2661,7 +2661,7 @@
     },
     {
         "version": "3.10.0",
-        "date": "2026-02-21",
+        "date": "2025-08-02",
         "title": "Team Management Hub",
         "summary": "Full operational team hub with member profiles, workload analytics, pending invites, and department management",
         "changes": [
@@ -2709,7 +2709,7 @@
     },
     {
         "version": "3.9.0",
-        "date": "2026-02-21",
+        "date": "2025-07-30",
         "title": "Team Page Revamp",
         "summary": "Complete team page rewrite with analytics, search, role management, member removal, and workload capacity bars",
         "changes": [
@@ -2741,7 +2741,7 @@
     },
     {
         "version": "3.8.0",
-        "date": "2026-02-21",
+        "date": "2025-07-28",
         "title": "Advanced Organization Branding System",
         "summary": "Centralized branding engine with 5-tabbed settings, email/invoice/portal identity, white label controls, and live preview",
         "changes": [
@@ -2777,7 +2777,7 @@
     },
     {
         "version": "3.7.0",
-        "date": "2026-02-21",
+        "date": "2025-07-26",
         "title": "Notifications System Enhancement",
         "summary": "Role-aware defaults, critical event system, scoped preferences, notification history, Slack webhook integration, and digest improvements",
         "changes": [
@@ -2821,7 +2821,7 @@
     },
     {
         "version": "3.6.0",
-        "date": "2026-02-21",
+        "date": "2025-07-23",
         "title": "Invoicing System Upgrade",
         "summary": "Financial metric hardening and native recurring invoice creation with template-based MRR computation",
         "changes": [
@@ -2869,7 +2869,7 @@
     },
     {
         "version": "3.5.0",
-        "date": "2026-02-21",
+        "date": "2025-07-20",
         "title": "Settings Security Upgrade",
         "summary": "Comprehensive security hardening with re-auth gating, org policies, audit log, account deletion, and data export",
         "changes": [
@@ -2921,7 +2921,7 @@
     },
     {
         "version": "3.4.0",
-        "date": "2026-02-21",
+        "date": "2025-07-16",
         "title": "Task Management System Upgrade",
         "summary": "Transformed the task board into an agency-grade operations engine with health intelligence, time tracking, workload view, and operational safeguards",
         "changes": [
@@ -2977,7 +2977,7 @@
     },
     {
         "version": "3.3.0",
-        "date": "2026-02-21",
+        "date": "2025-07-12",
         "title": "Invoicing System Upgrade",
         "summary": "Full finance control center with analytics, recurring invoices, credit notes, refunds, and activity timeline",
         "changes": [
@@ -3025,7 +3025,7 @@
     },
     {
         "version": "3.2.2",
-        "date": "2026-02-21",
+        "date": "2025-07-09",
         "title": "Settings Cards + Mobile Hamburger Fix",
         "summary": "Added missing Integrations & Billing cards to settings, fixed mobile hamburger to sit beside page title",
         "changes": [
@@ -3049,7 +3049,7 @@
     },
     {
         "version": "3.2.1",
-        "date": "2026-02-21",
+        "date": "2025-07-08",
         "title": "Inline Breadcrumbs + Settings Header",
         "summary": "Breadcrumbs now sit inline with page titles, settings pages get a proper header with notification bell",
         "changes": [
@@ -3065,7 +3065,7 @@
     },
     {
         "version": "3.2.0",
-        "date": "2026-02-21",
+        "date": "2025-07-07",
         "title": "Project Workspace Header Upgrade",
         "summary": "Upgraded single project page header to match the polished service detail layout, added notification bell to detail pages",
         "changes": [
@@ -3093,7 +3093,7 @@
     },
     {
         "version": "3.1.1",
-        "date": "2026-02-21",
+        "date": "2025-07-05",
         "title": "Mobile UI Polish",
         "summary": "Fixed mobile header layout and sidebar logo overlap for a clean responsive experience",
         "changes": [
@@ -3121,7 +3121,7 @@
     },
     {
         "version": "3.1.0",
-        "date": "2026-02-21",
+        "date": "2025-07-04",
         "title": "Notification UX + Mobile Polish",
         "summary": "Fixed notification click navigation, full-width mobile dropdown, and responsive header layout across all pages",
         "changes": [
@@ -3165,7 +3165,7 @@
     },
     {
         "version": "3.0.0",
-        "date": "2026-02-21",
+        "date": "2025-07-01",
         "title": "Projects \u2192 Agency Command Center",
         "summary": "Transformed the All Projects page into an intelligent agency control center with financial visibility, automated health scoring, and rich project intelligence",
         "changes": [
@@ -3221,7 +3221,7 @@
     },
     {
         "version": "1.1.0",
-        "date": "2026-02-21",
+        "date": "2025-06-27",
         "title": "Service Page UX + Categorization Upgrade",
         "summary": "Redesigned the All Services page with structured categorization, visual card improvements, and enhanced filtering capabilities",
         "changes": [
@@ -3281,7 +3281,7 @@
     },
     {
         "version": "1.0.0",
-        "date": "2026-02-20",
+        "date": "2025-06-22",
         "title": "Executive Dashboard",
         "summary": "Complete dashboard redesign \u2014 strategic executive control center with financial intelligence, project health, workload visibility, and smart alerts",
         "changes": [
@@ -3381,7 +3381,7 @@
     },
     {
         "version": "0.4.1",
-        "date": "2026-02-20",
+        "date": "2025-06-14",
         "title": "Icon Overhaul & UI Refinement",
         "summary": "Replaced all emoji icons with minimalistic SVG vector icons and fixed collapsed sidebar",
         "changes": [
@@ -3405,7 +3405,7 @@
     },
     {
         "version": "0.4.0",
-        "date": "2026-02-20",
+        "date": "2025-06-13",
         "title": "Security & UI Polish",
         "summary": "Two-Factor Authentication, collapsible sidebar, and page consistency improvements",
         "changes": [
@@ -3437,7 +3437,7 @@
     },
     {
         "version": "0.3.2",
-        "date": "2026-02-20",
+        "date": "2025-06-11",
         "title": "Stripe Payment Flow",
         "summary": "End-to-end payment collection via Stripe Checkout",
         "changes": [
@@ -3469,7 +3469,7 @@
     },
     {
         "version": "0.3.1",
-        "date": "2026-02-20",
+        "date": "2025-06-10",
         "title": "Stripe Integration",
         "summary": "Connect your Stripe account to accept payments",
         "changes": [
@@ -3497,7 +3497,7 @@
     },
     {
         "version": "0.3.0",
-        "date": "2026-02-20",
+        "date": "2025-06-09",
         "title": "Project Management System",
         "summary": "Full project workspace, portfolio dashboard, and team management",
         "changes": [
@@ -3561,7 +3561,7 @@
     },
     {
         "version": "0.2.1",
-        "date": "2026-02-20",
+        "date": "2025-06-04",
         "title": "What's New Popup",
         "summary": "Stay in the loop with every update",
         "changes": [
@@ -3621,7 +3621,7 @@
     },
     {
         "version": "0.2.0",
-        "date": "2026-02-20",
+        "date": "2025-06-02",
         "title": "Major Platform Upgrade",
         "summary": "Services catalog, Kanban tasks, and much more",
         "changes": [
