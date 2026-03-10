@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging — Eidoncore | Real-Time Team & Client Chat</title>
+    <meta name="description"
+        content="Built-in real-time messaging for agencies. Project channels, organization channels, direct messages, typing indicators, read receipts, reactions, internal messages, and file attachments — all inside Eidoncore.">
+    <meta property="og:title" content="Messaging — Real-Time Chat for Agencies | Eidoncore">
+    <meta property="og:description"
+        content="Communicate with your team and clients in real time. Project channels, DMs, reactions, read receipts, typing indicators — built into your agency platform.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/messaging/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/messaging/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Messaging — Real-Time Chat for Agencies | Eidoncore">
+    <meta name="twitter:description"
+        content="Communicate with your team and clients in real time. Project channels, DMs, reactions, read receipts, typing indicators — built into your agency platform.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can clients use the messaging feature?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Clients can participate in project channels, organization channels, and direct messages with agency staff. They see standard messages but not internal messages, giving agencies a private discussion layer within shared channels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is messaging included on the Free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Messaging is included on all plans with plan-based limits: Free (10 channels, 10 members/channel, 30 days retention), Pro (50 channels, 30 members/channel, 90 days), and Enterprise (unlimited everything)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I have private messages within a shared channel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Mark any message as 'internal' in project or organization channels. Internal messages are only visible to agency staff — client contacts in the same channel won't see them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Eidoncore support file sharing in chat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Drag and drop or click to attach files in any channel. Over 30 file types are supported, with attachment size limits based on your plan (5 MB Free, 10 MB Pro, 25 MB Enterprise)."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Messaging</span></div>
+                <h1 class="page-title anim-blur">Real-time <span class="gradient-text">team chat</span></h1>
+                <p class="page-subtitle anim-blur">Communicate with your team and clients without leaving the platform.
+                    Project channels, direct messages, reactions, read receipts — all built in.</p>
+            </div>
+        </section>
+
+        <!-- Channel Types -->
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Channels</span>
+                    <h2>Three ways to communicate</h2>
+                    <p>Organized conversations that keep context where it belongs.</p>
+                </div>
+                <div class="features-grid stagger-children">
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#6C63FF"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 20a2 2 0 002-2V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2z"/>
+                            </svg></div>
+                        <h3>Project Channels</h3>
+                        <p>Auto-created for every project. Membership syncs automatically with your project team — no
+                            setup needed.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#00D4FF"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+                                <path d="M9 22v-4h6v4"/>
+                                <path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/>
+                                <path d="M12 10h.01"/><path d="M12 14h.01"/>
+                                <path d="M16 10h.01"/><path d="M16 14h.01"/>
+                                <path d="M8 10h.01"/><path d="M8 14h.01"/>
+                            </svg></div>
+                        <h3>Organization Channels</h3>
+                        <p>Company-wide channels for each client organization. Discuss across projects with all team
+                            members.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#FF6B9D"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7.9 20A9 9 0 104 16.1L2 22z"/>
+                            </svg></div>
+                        <h3>Direct Messages</h3>
+                        <p>Private one-on-one conversations with any team member or client contact in your workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-Time Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Real-Time</span>
+                    <h2>Conversations that feel alive</h2>
+                    <p>Instant feedback with typing indicators, read receipts, and optimistic send.</p>
+                </div>
+                <div class="built-for-grid stagger-children">
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="zap"></div>
+                        <h3>Instant Send</h3>
+                        <p>Messages appear immediately with optimistic rendering — no loading spinners, no waiting.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="clock"></div>
+                        <h3>Typing Indicators</h3>
+                        <p>See "{Name} is typing..." with animated dots when someone is composing a message.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="check-circle"></div>
+                        <h3>Read Receipts</h3>
+                        <p>Tiny avatar circles show who has seen your messages — Messenger-style seen indicators.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="bell"></div>
+                        <h3>Unread Badges</h3>
+                        <p>Sidebar count badge, channel-level indicators, and a branded favicon dot — never miss a
+                            message.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message Actions -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Interactions</span>
+                    <h2>Rich message interactions</h2>
+                </div>
+                <div class="docs-grid stagger-children">
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="message-circle"></div>
+                        <h4>Threaded Replies</h4>
+                        <p>Reply to any message to start a thread. Keep conversations organized without flooding the
+                            main channel.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="star"></div>
+                        <h4>Emoji Reactions</h4>
+                        <p>React with emojis — one per person per message. Quick acknowledgments without cluttering the
+                            chat.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="file-text"></div>
+                        <h4>File Attachments</h4>
+                        <p>Drag and drop files into any conversation. 30+ supported file types including images, docs,
+                            and media.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="search"></div>
+                        <h4>Inline DM Search</h4>
+                        <p>Find anyone in your workspace instantly. Search filters channels and shows DM candidates as
+                            you type.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="lock"></div>
+                        <h4>Internal Messages</h4>
+                        <p>Mark messages as internal in shared channels. Agency staff only — clients never see them.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="wrench"></div>
+                        <h4>Edit & Delete</h4>
+                        <p>Edit your messages within 5 minutes. Delete anytime. Admins can delete any message.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan Limits -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Plans</span>
+                    <h2>Messaging scales with your plan</h2>
+                    <p>Messaging is included on every plan — with limits that grow as your agency does.</p>
+                </div>
+                <div class="anim-scale" style="overflow-x:auto">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Resource</th>
+                                <th>Free</th>
+                                <th>Pro</th>
+                                <th>Enterprise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chat Channels</td>
+                                <td>10</td>
+                                <td>50</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td>Members per Channel</td>
+                                <td>10</td>
+                                <td>30</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td>Message Retention</td>
+                                <td>30 days</td>
+                                <td>90 days</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td>Max Attachment Size</td>
+                                <td>5 MB</td>
+                                <td>10 MB</td>
+                                <td>25 MB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align:center;margin-top:40px">
+                    <a href="../pricing/" class="btn btn-outline">Compare All Plans <span
+                            class="btn-arrow">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number" data-target="3">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Channel Types</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="30">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">File Types Supported</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="200">0</span><span class="stat-suffix">ms</span>
+                        <span class="stat-label">Send Latency</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="5">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Permission Keys</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>Communication made simple</h2>
+                </div>
+                <div class="testimonials-grid" style="max-width:640px;margin:0 auto">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"We used to rely on Slack for client comms and it was chaos — threads everywhere, no context.
+                            Eidoncore's project channels keep everything where it belongs."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#06B6D4,#6C63FF)">JR
+                            </div>
+                            <div><strong>James Rivera</strong><br><span>PM, Catalyst Agency</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Security</span>
+                    <h2>Enterprise-grade chat security</h2>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="shield"></div>
+                        <h3>Content Sanitization</h3>
+                        <p>All message content is sanitized server-side to prevent XSS attacks.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="lock"></div>
+                        <h3>Rate Limiting</h3>
+                        <p>10 messages per minute per user prevents spam and abuse.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="key"></div>
+                        <h3>Channel Auth</h3>
+                        <p>Every channel subscription is authenticated — no unauthorized access.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="lock-keyhole"></div>
+                        <h3>File Safety</h3>
+                        <p>30 allowed file types enforced server-side. No executable uploads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">Can clients use the messaging feature?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Clients can participate in project channels, organization channels, and direct
+                                messages with agency staff. They see standard messages but not internal messages, giving
+                                agencies a private discussion layer within shared channels.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Is messaging included on the Free plan?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Messaging is included on all plans with plan-based limits: Free (10 channels, 10
+                                members/channel, 30 days retention), Pro (50 channels, 30 members/channel, 90 days),
+                                and Enterprise (unlimited everything).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I have private messages within a shared
+                            channel?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Mark any message as "internal" in project or organization channels. Internal
+                                messages are only visible to agency staff — client contacts in the same channel won't
+                                see them.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Does Eidoncore support file sharing in
+                            chat?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Drag and drop or click to attach files in any channel. Over 30 file types are
+                                supported, with attachment size limits based on your plan (5 MB Free, 10 MB Pro, 25 MB
+                                Enterprise).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Related</span>
+                    <h2>Works great with</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../projects/" class="related-card">
+                        <div class="related-icon" data-icon="folder"></div>
+                        <h3>Projects</h3>
+                        <p>Every project gets its own chat channel automatically.</p>
+                    </a>
+                    <a href="../notifications/" class="related-card">
+                        <div class="related-icon" data-icon="bell"></div>
+                        <h3>Notifications</h3>
+                        <p>@mentions, replies, and reactions trigger instant notifications.</p>
+                    </a>
+                    <a href="../portal/" class="related-card">
+                        <div class="related-icon" data-icon="globe"></div>
+                        <h3>Client Portal</h3>
+                        <p>Clients message your team directly from their portal.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Product updates & tips</h3>
+                    <p>Get notified about new messaging features, agency best practices, and product updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
+                        You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Start chatting with your team today</h2>
+                    <p>Real-time messaging is included on every plan — even Free.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span
+                                class="btn-arrow">→</span></a><a href="../contact/"
+                            class="btn btn-outline btn-lg">Book a Demo</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+
+</html>

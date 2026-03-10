@@ -126,6 +126,7 @@
               <a href="${prefix}crm/" role="menuitem">CRM &amp; Clients</a>
               <a href="${prefix}invoicing/" role="menuitem">Invoicing</a>
               <a href="${prefix}services/" role="menuitem">Services</a>
+              <a href="${prefix}messaging/" role="menuitem">Messaging</a>
               <a href="${prefix}automations/" role="menuitem">Automations</a>
               <a href="${prefix}portal/" role="menuitem">Client Portal</a>
               <a href="${prefix}notifications/" role="menuitem">Notifications</a>
@@ -195,6 +196,7 @@
             <a href="${prefix}tasks/">Tasks</a>
             <a href="${prefix}invoicing/">Invoicing</a>
             <a href="${prefix}crm/">CRM</a>
+            <a href="${prefix}messaging/">Messaging</a>
             <a href="${prefix}automations/">Automations</a>
             <a href="${prefix}services/">Services</a>
             <a href="${prefix}portal/">Client Portal</a>
