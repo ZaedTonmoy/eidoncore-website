@@ -2682,9 +2682,22 @@ a:focus-visible {
   min-width: 700px;
 }
 
-/* --- Zipchat AI Widget z-index fix --- */
+/* --- Zipchat AI Widget positioning fix --- */
 #zipchat-widget-wrapper,
 [id*="zipchat"],
 iframe[src*="zipchat"] {
   z-index: 10000 !important;
+}
+
+/* On mobile, move back-to-top to bottom-left to avoid Zipchat widget overlap */
+@media (max-width: 768px) {
+  .back-to-top {
+    right: auto;
+    left: 20px;
+    bottom: 24px;
+  }
+
+  .back-to-top:hover {
+    transform: translateY(-4px);
+  }
 }
