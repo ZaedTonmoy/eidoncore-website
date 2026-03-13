@@ -202,6 +202,7 @@
             <a href="${prefix}portal/">Client Portal</a>
             <a href="${prefix}notifications/">Notifications</a>
             <a href="${prefix}reports/">Reports</a>
+            <a href="${prefix}digital-products/">Digital Products</a>
           </div>
           <div class="footer-col">
             <h4>Use Cases</h4>
@@ -210,11 +211,17 @@
             <a href="${prefix}use-cases/development-agencies/">Dev Agencies</a>
             <a href="${prefix}use-cases/consulting-firms/">Consulting Firms</a>
             <a href="${prefix}use-cases/freelancers/">Freelancers</a>
+            <a href="${prefix}customers/">Customer Stories</a>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <a href="${prefix}docs/">Documentation</a>
             <a href="${prefix}blog/">Blog</a>
+            <a href="${prefix}faq/">FAQ</a>
+            <a href="${prefix}compare/">Compare</a>
+            <a href="${prefix}demo/">Product Tour</a>
+            <a href="${prefix}developers/">Developers</a>
+            <a href="${prefix}partners/">Partners</a>
             <a href="${prefix}security/">Security</a>
             <a href="${prefix}privacy/">Privacy Policy</a>
             <a href="${prefix}terms/">Terms of Service</a>
