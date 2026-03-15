@@ -1,5 +1,245 @@
 [
     {
+        "version": "8.3.0",
+        "date": "2026-03-14",
+        "title": "Performance Boost & Modular Architecture",
+        "summary": "Server-side caching for branding and config data, composite database indexes for faster queries, ~300KB bundle reduction via dynamic imports, service query pagination, and modular component architecture across the organization, service, invoice, and dashboard pages.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Server-side branding cache — branding data cached with 5-min TTL and tag-based invalidation, eliminating redundant DB lookups on every page load"
+            },
+            {
+                "type": "improvement",
+                "text": "Organization page modularized — split into 6 focused tab components (Overview, Notes, Communications, Documents, Settings, Contacts) for faster rendering"
+            },
+            {
+                "type": "improvement",
+                "text": "Component architecture overhaul — icons, project tabs, service builder, and intake form builder split into focused modules for better code organization"
+            },
+            {
+                "type": "improvement",
+                "text": "Service list pagination — service queries now bounded to prevent slow unbounded fetches on large catalogs"
+            },
+            {
+                "type": "improvement",
+                "text": "~300KB bundle reduction — jsPDF dynamically imported only when generating invoice PDFs instead of loaded on every page"
+            },
+            {
+                "type": "improvement",
+                "text": "3 composite database indexes — Task (assignee + status), Notification (user + read state), OrgService (org + status) for faster filtered queries"
+            },
+            {
+                "type": "improvement",
+                "text": "Task status config caching — lookups now use server-side cache with tag-based invalidation instead of per-request DB queries"
+            }
+        ]
+    },
+    {
+        "version": "8.2.0",
+        "date": "2026-03-12",
+        "title": "Digital Products Sales Tracker, Invoice PDF & Org Self-Service",
+        "summary": "New digital products Sales Tracker with sortable table and slide-out management panel, proper PDF invoice email attachments, styled confirmation dialogs replacing browser prompts, organization self-service member management, chat member panel with auto-join, and invoice preview enhancements.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Digital Products Sales Tracker — dedicated page with MRR, revenue, active sales, and churn stats cards, status filter pills, search, and sortable table (A-Z/Z-A on all 7 columns)"
+            },
+            {
+                "type": "feature",
+                "text": "Sale Detail Panel — slide-out drawer for managing digital product sales: change status, fulfillment, dates (styled DatePicker), auto-renew toggle, internal notes, intake form display, and sale timeline"
+            },
+            {
+                "type": "feature",
+                "text": "Invoice PDF attachment — emails now include a proper PDF invoice instead of an HTML file, generated via jsPDF with accurate layout matching the print template"
+            },
+            {
+                "type": "feature",
+                "text": "Styled confirmation dialogs — replaced all native browser confirm() prompts with a polished modal component across the entire app"
+            },
+            {
+                "type": "feature",
+                "text": "Organization self-service member management — org owners can now invite, edit roles, and remove their own team members"
+            },
+            {
+                "type": "feature",
+                "text": "Chat member panel — view channel members in messaging, with org contacts auto-joined to project channels on link"
+            },
+            {
+                "type": "feature",
+                "text": "Multi-page invoice preview — InvoicePreview now shows page break indicators for long invoices and scales to 1:1 match with the print version"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-sync showPoweredBy and hideFooterCredits toggles for consistent branding control"
+            },
+            {
+                "type": "improvement",
+                "text": "Internal note toggle hidden from organization users — only agency staff can see the internal note option in messaging"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice email subject now uses the client company name for easier identification"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice signature field and logo positioning — logo moved to billed-from position, signature line added to preview and print"
+            },
+            {
+                "type": "fix",
+                "text": "Organization page tabs no longer invisible — fixed min-height and CSS scoping issues"
+            },
+            {
+                "type": "fix",
+                "text": "Team sidebar item and restricted pages now properly hidden from organization roles with page-level access guards"
+            },
+            {
+                "type": "fix",
+                "text": "Print dialog title shows invoice number instead of generic 'Dashboard'"
+            },
+            {
+                "type": "fix",
+                "text": "Preserve newlines in agency address on invoice preview and print"
+            },
+            {
+                "type": "fix",
+                "text": "PDF logo format — WebP and SVG logos automatically converted to PNG for PDF compatibility"
+            },
+            {
+                "type": "fix",
+                "text": "showPoweredBy toggle now respected in print invoice view"
+            }
+        ]
+    },
+    {
+        "version": "8.1.0",
+        "date": "2026-03-10",
+        "title": "Live Messaging, Reactions, Read Receipts & Real-Time UX",
+        "summary": "Complete real-time messaging system — live chat via Pusher Channels, message reactions & thread replies, Facebook-style read receipts, typing indicators, optimistic message sending, unread badges (sidebar + favicon dot), inline DM search, notification grouping, settings search, reports UX upgrade, and mobile responsive layouts.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Live Messaging (Phases 1–8) — real-time chat via Pusher Channels with private/presence channels, channel sync, DM finder, message retention cron, chat digest emails, plan gating, and 90-day retention"
+            },
+            {
+                "type": "feature",
+                "text": "Message reactions — emoji reaction bar with one-per-user swap logic, hover action bar (😊 react, ↩️ reply, ⋮ more), and click-to-open emoji picker"
+            },
+            {
+                "type": "feature",
+                "text": "Thread replies — reply-to with swipe gesture, reply preview in chat, and CHAT_REPLY notifications"
+            },
+            {
+                "type": "feature",
+                "text": "Facebook-style read receipts — tiny avatar circles at bottom-right of your sent messages showing who's seen them, readReceipts tRPC query with 10s polling"
+            },
+            {
+                "type": "feature",
+                "text": "Typing indicator — 'Name is typing...' with animated dots, client-typing Pusher events with 2s throttle, auto-clear after 3s"
+            },
+            {
+                "type": "feature",
+                "text": "Optimistic message sending — messages appear instantly (opacity 0.6), matched by clientId on server confirmation, ~200ms perceived send time"
+            },
+            {
+                "type": "feature",
+                "text": "Favicon unread dot — branded primary-color dot overlay on tab favicon using 32×32 canvas, polls in background even when tab is inactive"
+            },
+            {
+                "type": "feature",
+                "text": "Sidebar unread badge — count pill next to Messages nav item (expanded: number badge, collapsed: dot), globalUnreadCount query with background polling"
+            },
+            {
+                "type": "feature",
+                "text": "Inline DM search — replaced '+New DM' button with search box that filters existing channels and shows DM candidates"
+            },
+            {
+                "type": "feature",
+                "text": "@mention autocomplete — type @ in chat to see org member suggestions with avatar and name"
+            },
+            {
+                "type": "feature",
+                "text": "Drag-and-drop file uploads — drop files anywhere in the chat area to attach"
+            },
+            {
+                "type": "feature",
+                "text": "Settings search — deep keyword search across 13 settings pages with 200+ terms, flash-highlight on navigate, collapsible plan table"
+            },
+            {
+                "type": "feature",
+                "text": "Reports page UX upgrade — tooltips, data caching, CSV export, KPI trends"
+            },
+            {
+                "type": "feature",
+                "text": "Mobile responsive CSS — kanban board, filter bar, and table layouts adapt to small screens"
+            },
+            {
+                "type": "feature",
+                "text": "Integrations hub — refactored sub-pages pattern for Stripe and Slack integrations with search routing"
+            },
+            {
+                "type": "feature",
+                "text": "Bell notification on onboarding completion"
+            },
+            {
+                "type": "improvement",
+                "text": "Fire-and-forget message send — notifications, Pusher broadcast, and unread updates run in background for instant response"
+            },
+            {
+                "type": "improvement",
+                "text": "Notification grouping — CHAT_REPLY and CHAT_REACTION now grouped by type + same day (batch threshold ≥2)"
+            },
+            {
+                "type": "improvement",
+                "text": "Auto-focus message input — editor focuses on channel load and reply click for instant typing"
+            },
+            {
+                "type": "improvement",
+                "text": "Bell notification deep links — clicking a chat mention notification navigates directly to the mentioned channel"
+            },
+            {
+                "type": "fix",
+                "text": "Fix React hooks violation — globalUnreadCount query moved before early return in Sidebar (rules of hooks)"
+            },
+            {
+                "type": "fix",
+                "text": "Fix favicon distortion — use fixed 32×32 canvas to prevent SVG natural dimension stretch"
+            },
+            {
+                "type": "fix",
+                "text": "Fix message order — newest messages now correctly at bottom, oldest at top"
+            },
+            {
+                "type": "fix",
+                "text": "Fix full page scroll on messages — constrain chat panel height"
+            },
+            {
+                "type": "fix",
+                "text": "Fix unread badge clearing + send button active state"
+            },
+            {
+                "type": "fix",
+                "text": "Fix sender's channel showing unread after sending own message"
+            },
+            {
+                "type": "fix",
+                "text": "Fix emoji picker z-index stacking on column-reverse layout"
+            },
+            {
+                "type": "fix",
+                "text": "Fix bubble squeeze — 65% max-width with proper action bar positioning"
+            },
+            {
+                "type": "fix",
+                "text": "Fix agency security page infinite loading for PM role"
+            },
+            {
+                "type": "fix",
+                "text": "Scope settings audit log by role — team members see only their own changes"
+            }
+        ]
+    },
+    {
         "version": "8.0.0",
         "date": "2026-03-07",
         "title": "Service Pricing Engine, Quota System & Catalog Redesign",
