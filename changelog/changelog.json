@@ -1707,11 +1707,11 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Client service catalog \u2014 /catalog/services grid page showing published services with category filters, 'My Active Services' dashboard, and subscription badges"
+                "text": "Client service catalog \u2014 /catalog/offerings grid page showing published services with category filters, 'My Active Services' dashboard, and subscription badges"
             },
             {
                 "type": "feature",
-                "text": "Client service detail \u2014 /catalog/services/[slug] landing page with hero, description, deliverables, FAQ accordion, gallery, reviews, and pricing sidebar"
+                "text": "Client service detail \u2014 /catalog/offerings/[slug] landing page with hero, description, deliverables, FAQ accordion, gallery, reviews, and pricing sidebar"
             },
             {
                 "type": "feature",
@@ -1803,7 +1803,7 @@
             },
             {
                 "type": "improvement",
-                "text": "Sidebar routing \u2014 client roles automatically routed to /catalog/services instead of internal /services management page"
+                "text": "Sidebar routing \u2014 client roles automatically routed to /catalog/offerings instead of internal /services management page"
             },
             {
                 "type": "improvement",
