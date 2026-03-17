@@ -1,0 +1,38 @@
+name: Sync Changelog to Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'changelog/changelog.json'
+  workflow_dispatch:
+
+jobs:
+  sync-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+        with:
+          repository: ZaedTonmoy/eidoncore-docs
+          token: ${{ secrets.DOCS_SYNC_TOKEN }}
+          path: docs-repo
+
+      - name: Generate changelog.md
+        run: python3 sync-changelog.py changelog/changelog.json docs-repo/changelog.md
+
+      - name: Commit and push
+        working-directory: docs-repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add changelog.md
+          if git diff --staged --quiet; then
+            echo "No changes to changelog.md"
+          else
+            git commit -m "chore: sync changelog from website [automated]"
+            git push
+          fi
