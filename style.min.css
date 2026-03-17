@@ -2834,12 +2834,20 @@ img {
 
   .docs-sidebar-toggle {
     display: block;
-    position: sticky;
-    top: 0;
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
     z-index: 998;
+    width: auto;
+    margin-bottom: 0;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(10, 10, 26, 0.85);
+    background: rgba(10, 10, 26, 0.92);
+    border-color: var(--primary);
+    box-shadow: 0 4px 24px rgba(108, 99, 255, 0.25);
+    border-radius: 40px;
+    padding: 12px 24px;
+    font-weight: 600;
   }
 
   .docs-sidebar {
