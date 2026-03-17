@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="theme-color" content="#0a0a1a">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eidoncore Docs — Help Center & Getting Started</title>
+    <title>Eidoncore Docs — Help Center &amp; Getting Started</title>
     <meta name="description"
         content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
     <meta property="og:title" content="Documentation — Eidoncore Help Center">
@@ -48,7 +48,7 @@
       "name": "Is there a getting started guide?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice \u2014 typically under 15 minutes."
+        "text": "Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice — typically under 15 minutes."
       }
     },
     {
@@ -88,132 +88,41 @@
                         class="current">Documentation</span></div>
                 <h1 class="page-title anim-blur">Help <span class="gradient-text">Center</span></h1>
                 <p class="page-subtitle anim-blur">Everything you need to get started and master every feature of
-                    Eidoncore.</p>
+                    Eidoncore. Synced directly from our latest documentation.</p>
             </div>
         </section>
 
-        <!-- Getting Started -->
+        <!-- Documentation Browser -->
         <section class="feature-detail" style="padding-top:20px">
             <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Start Here</span>
-                    <h2>Getting started</h2>
-                    <p>New to Eidoncore? Follow these steps to set up your agency workspace.</p>
-                </div>
-                <div class="docs-steps stagger-children">
-                    <div class="doc-step animate-on-scroll">
-                        <div class="step-number">1</div>
-                        <h4>Create your workspace</h4>
-                        <p>Register at register.eidoncore.com. Choose your agency name and subdomain. You'll get a
-                            14-day free PRO trial.</p>
-                    </div>
-                    <div class="doc-step animate-on-scroll">
-                        <div class="step-number">2</div>
-                        <h4>Invite your team</h4>
-                        <p>Go to Team → Invite Member. Assign roles (Owner, Admin, Project Manager, Staff). Team
-                            members get branded invitation emails.</p>
-                    </div>
-                    <div class="doc-step animate-on-scroll">
-                        <div class="step-number">3</div>
-                        <h4>Add your first client</h4>
-                        <p>Navigate to CRM → New Organization. Add contacts, set health scores, and start tracking
-                            follow-ups.</p>
-                    </div>
-                    <div class="doc-step animate-on-scroll">
-                        <div class="step-number">4</div>
-                        <h4>Create a project</h4>
-                        <p>Go to Projects → New Project. Set budgets, milestones, and assign team members. Then add
-                            tasks via Kanban or List view.</p>
+                <button class="docs-sidebar-toggle" id="sidebarToggle">☰ Browse Documentation</button>
+                <div class="docs-sidebar-backdrop" id="sidebarBackdrop"></div>
+                <div class="docs-browser">
+                    <nav class="docs-sidebar" id="docsSidebar">
+                        <div class="docs-search">
+                            <div class="docs-search-wrap">
+                                <input type="text" id="docsSearch" class="docs-search-input"
+                                    placeholder="Search docs...">
+                            </div>
+                        </div>
+                        <div id="docsNav"></div>
+                    </nav>
+                    <div class="docs-article" id="docsArticle">
+                        <div class="docs-welcome">
+                            <div class="loading-skeleton"></div>
+                            <div class="loading-skeleton short"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Documentation Topics -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Topics</span>
-                    <h2>Browse by feature</h2>
-                </div>
-                <div class="docs-grid stagger-children">
-                    <a href="../projects/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="folder"></div>
-                        <h4>Projects</h4>
-                        <p>Budgets, milestones, health scoring, team assignments, and time tracking.</p>
-                    </a>
-                    <a href="../tasks/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="check-circle"></div>
-                        <h4>Tasks</h4>
-                        <p>Kanban boards, list views, subtasks, checklists, labels, timers, and comments.</p>
-                    </a>
-                    <a href="../crm/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="users"></div>
-                        <h4>CRM & Clients</h4>
-                        <p>Client pipeline, contacts, follow-ups, health scoring, and documents.</p>
-                    </a>
-                    <a href="../invoicing/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="wallet"></div>
-                        <h4>Invoicing</h4>
-                        <p>Create invoices, recurring billing, credit notes, refunds, and payment tracking.</p>
-                    </a>
-                    <a href="../services/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="wrench"></div>
-                        <h4>Services</h4>
-                        <p>Service catalog, 5 pricing models, client assignments, and intake forms.</p>
-                    </a>
-                    <a href="../automations/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="zap"></div>
-                        <h4>Automations</h4>
-                        <p>Trigger→Condition→Action workflows, execution logs, and debugging.</p>
-                    </a>
-                    <a href="../portal/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="globe"></div>
-                        <h4>Client Portal</h4>
-                        <p>Branded portal, service catalog, checkout, and self-service access.</p>
-                    </a>
-                    <a href="../notifications/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="bell"></div>
-                        <h4>Notifications</h4>
-                        <p>53 notification types, email digests, Slack integration, and priority tiers.</p>
-                    </a>
-                    <a href="../messaging/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="message-circle"></div>
-                        <h4>Messaging</h4>
-                        <p>Real-time chat: project channels, DMs, reactions, read receipts, and file sharing.</p>
-                    </a>
-                    <a href="../reports/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="bar-chart"></div>
-                        <h4>Reports</h4>
-                        <p>Revenue KPIs, project health, task analytics, and team workload dashboards.</p>
-                    </a>
-                    <a href="../security/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="lock"></div>
-                        <h4>Security</h4>
-                        <p>Encryption, 2FA, tenant isolation, audit logging, and security policies.</p>
-                    </a>
-                    <a href="../integrations/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="link"></div>
-                        <h4>Integrations</h4>
-                        <p>Stripe, Slack, custom SMTP, webhooks, custom domains, and file storage.</p>
-                    </a>
-                    <a href="../pricing/" class="doc-card animate-on-scroll">
-                        <div class="doc-icon" data-icon="gem"></div>
-                        <h4>Plans & Billing</h4>
-                        <p>Free, Pro, and Enterprise plans. Limits, upgrades, and billing management.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-
 
         <!-- Stats -->
         <section class="feature-detail">
             <div class="container">
                 <div class="page-stats anim-blur">
                     <div class="stat">
-                        <span class="stat-number">50</span><span class="stat-suffix">+</span>
+                        <span class="stat-number">18</span><span class="stat-suffix">+</span>
                         <span class="stat-label">Help Articles</span>
                     </div>
                     <div class="stat">
@@ -249,38 +158,6 @@
                             </div>
                             <div><strong>Tomás Silva</strong><br><span>Lead Dev, CodeCraft Agency</span></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Built For -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Who It's For</span>
-                    <h2>Built for teams like yours</h2>
-                </div>
-                <div class="built-for-grid">
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="user"></div>
-                        <h3>New Users</h3>
-                        <p>Step-by-step guides to get your agency up and running fast.</p>
-                    </div>
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="code"></div>
-                        <h3>Developers</h3>
-                        <p>REST API reference, webhook docs, and integration examples.</p>
-                    </div>
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="users"></div>
-                        <h3>Team Admins</h3>
-                        <p>User management, permissions, and workspace configuration guides.</p>
-                    </div>
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="briefcase"></div>
-                        <h3>Agency Owners</h3>
-                        <p>Best practices for billing, client management, and scaling operations.</p>
                     </div>
                 </div>
             </div>
@@ -327,109 +204,7 @@
             </div>
         </section>
 
-        <!-- Related Features -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Explore More</span>
-                    <h2>Related features</h2>
-                </div>
-                <div class="related-grid">
-                    <a href="../features/" class="related-card">
-                        <div class="related-icon" data-icon="puzzle"></div>
-                        <h3>All Features</h3>
-                        <p>Explore all 13+ core modules in detail.</p>
-                    </a>
-                    <a href="../integrations/" class="related-card">
-                        <div class="related-icon" data-icon="link"></div>
-                        <h3>Integrations</h3>
-                        <p>API docs, webhooks, and third-party connections.</p>
-                    </a>
-                    <a href="../security/" class="related-card">
-                        <div class="related-icon" data-icon="shield"></div>
-                        <h3>Security</h3>
-                        <p>Enterprise-grade encryption and tenant isolation.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="how-it-works">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Quick Start</span>
-                    <h2>Get productive in minutes</h2>
-                </div>
-                <div class="steps-grid">
-                    <div class="step-card animate-on-scroll">
-                        <div class="step-number">1</div>
-                        <h3>Sign Up</h3>
-                        <p><a href="https://register.eidoncore.com/">Create your account</a> in 30 seconds. No credit
-                            card needed — your 14-day PRO trial starts right away.</p>
-                    </div>
-                    <div class="step-card animate-on-scroll">
-                        <div class="step-number">2</div>
-                        <h3>Follow the Guide</h3>
-                        <p>Use the getting started steps above to set up your workspace, invite your team, and create
-                            your first <a href="../projects/">project</a>.</p>
-                    </div>
-                    <div class="step-card animate-on-scroll">
-                        <div class="step-number">3</div>
-                        <h3>Explore & Build</h3>
-                        <p>Browse feature docs, set up <a href="../automations/">automations</a>, configure your <a
-                                href="../portal/">client portal</a>, and make it yours.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Teaser -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">Plans</span>
-                    <h2>Choose the right plan for your agency</h2>
-                </div>
-                <div class="built-for-grid">
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="gift"></div>
-                        <h3>Free — $0/mo</h3>
-                        <p>2 members, 3 clients, 5 projects. Everything to get started.</p>
-                    </div>
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="zap"></div>
-                        <h3>Pro — $29/mo</h3>
-                        <p>15 members, automations, reports, branded portal.</p>
-                    </div>
-                    <div class="built-for-card">
-                        <div class="built-for-icon" data-icon="star"></div>
-                        <h3>Enterprise — $79/mo</h3>
-                        <p>Unlimited everything plus priority support.</p>
-                    </div>
-                </div>
-                <div style="text-align:center;margin-top:40px">
-                    <a href="../pricing/" class="btn btn-outline">Compare Plans <span class="btn-arrow">→</span></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter -->
-        <section class="newsletter-section">
-            <div class="container">
-                <div class="newsletter-box anim-blur">
-                    <h3>Product updates & tips</h3>
-                    <p>Get notified about new features, documentation updates, and agency best practices.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="you@agency.com" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
-                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
-                        You're subscribed!</p>
-                </div>
-            </div>
-        </section>
-
+        <!-- CTA -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-content anim-cinematic">
@@ -443,6 +218,338 @@
             </div>
         </section>
     </main>
+
+    <script>
+        (function () {
+            /* ─── Lightweight Markdown → HTML ─── */
+            function md(src) {
+                let html = '';
+                const lines = src.split('\n');
+                let i = 0;
+                while (i < lines.length) {
+                    const line = lines[i];
+
+                    // Code block
+                    if (line.startsWith('```')) {
+                        let code = '';
+                        i++;
+                        while (i < lines.length && !lines[i].startsWith('```')) {
+                            code += esc(lines[i]) + '\n';
+                            i++;
+                        }
+                        i++;
+                        html += '<pre><code>' + code.trimEnd() + '</code></pre>\n';
+                        continue;
+                    }
+
+                    // Table
+                    if (line.includes('|') && line.trim().startsWith('|')) {
+                        let rows = [];
+                        while (i < lines.length && lines[i].includes('|') && lines[i].trim().startsWith('|')) {
+                            rows.push(lines[i]);
+                            i++;
+                        }
+                        html += parseTable(rows);
+                        continue;
+                    }
+
+                    // Headings
+                    const hm = line.match(/^(#{2,4})\s+(.+)/);
+                    if (hm) {
+                        const lvl = hm[1].length;
+                        const id = hm[2].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                        html += `<h${lvl} id="${id}">${inline(hm[2])}</h${lvl}>\n`;
+                        i++;
+                        continue;
+                    }
+
+                    // Horizontal rule
+                    if (/^---+$/.test(line.trim())) {
+                        html += '<hr>\n';
+                        i++;
+                        continue;
+                    }
+
+                    // Blockquote
+                    if (line.startsWith('>')) {
+                        let bq = '';
+                        while (i < lines.length && lines[i].startsWith('>')) {
+                            bq += lines[i].replace(/^>\s?/, '') + '\n';
+                            i++;
+                        }
+                        html += '<blockquote>' + md(bq.trim()) + '</blockquote>\n';
+                        continue;
+                    }
+
+                    // Ordered list
+                    if (/^\d+\.\s/.test(line)) {
+                        html += '<ol>\n';
+                        while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+                            let li = lines[i].replace(/^\d+\.\s+/, '');
+                            i++;
+                            // Continuation lines (indented)
+                            while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^\d+\.\s/.test(lines[i].trim()) && !lines[i].trim().startsWith('- ')) {
+                                li += ' ' + lines[i].trim();
+                                i++;
+                            }
+                            html += '<li>' + inline(li) + '</li>\n';
+                        }
+                        html += '</ol>\n';
+                        continue;
+                    }
+
+                    // Unordered list
+                    if (/^[-*]\s/.test(line)) {
+                        html += '<ul>\n';
+                        while (i < lines.length && /^[-*]\s/.test(lines[i])) {
+                            let li = lines[i].replace(/^[-*]\s+/, '');
+                            i++;
+                            while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^[-*]\s/.test(lines[i].trim())) {
+                                li += ' ' + lines[i].trim();
+                                i++;
+                            }
+                            html += '<li>' + inline(li) + '</li>\n';
+                        }
+                        html += '</ul>\n';
+                        continue;
+                    }
+
+                    // Blank line
+                    if (!line.trim()) {
+                        i++;
+                        continue;
+                    }
+
+                    // Paragraph
+                    let para = line;
+                    i++;
+                    while (i < lines.length && lines[i].trim() && !lines[i].startsWith('#') && !lines[i].startsWith('>') && !lines[i].startsWith('```') && !lines[i].startsWith('- ') && !lines[i].startsWith('* ') && !/^\d+\.\s/.test(lines[i]) && !(lines[i].includes('|') && lines[i].trim().startsWith('|')) && !/^---+$/.test(lines[i].trim())) {
+                        para += ' ' + lines[i];
+                        i++;
+                    }
+                    html += '<p>' + inline(para) + '</p>\n';
+                }
+                return html;
+            }
+
+            function esc(s) {
+                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            function inline(s) {
+                return esc(s)
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                    .replace(/`(.+?)`/g, '<code>$1</code>')
+                    .replace(/\[(.+?)\]\((.+?)\)/g, function (_, text, href) {
+                        // Convert internal .md links to hash links
+                        if (href.startsWith('./') && href.endsWith('.md')) {
+                            const slug = href.replace('./', '').replace('.md', '').split('#')[0];
+                            const anchor = href.includes('#') ? '#' + href.split('#')[1] : '';
+                            return '<a href="#' + slug + '" class="docs-internal-link">' + text + '</a>';
+                        }
+                        if (href.startsWith('./') && href.includes('.md#')) {
+                            const parts = href.replace('./', '').split('.md#');
+                            return '<a href="#' + parts[0] + '" class="docs-internal-link">' + text + '</a>';
+                        }
+                        return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+                    });
+            }
+
+            function parseTable(rows) {
+                if (rows.length < 2) return '';
+                const parse = r => r.split('|').map(c => c.trim()).filter(c => c !== '');
+                const headers = parse(rows[0]);
+                // Skip separator row (row[1] is ------|-----)
+                const startIdx = (rows.length > 1 && /^[\s|:-]+$/.test(rows[1])) ? 2 : 1;
+                let t = '<table><thead><tr>';
+                headers.forEach(h => t += '<th>' + inline(h) + '</th>');
+                t += '</tr></thead><tbody>';
+                for (let r = startIdx; r < rows.length; r++) {
+                    const cells = parse(rows[r]);
+                    if (cells.length === 0) continue;
+                    t += '<tr>';
+                    cells.forEach(c => t += '<td>' + inline(c) + '</td>');
+                    t += '</tr>';
+                }
+                t += '</tbody></table>';
+                return t;
+            }
+
+            /* ─── Icon map (inline SVGs) ─── */
+            const _s = (d) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+            const ICONS = {
+                'play-circle':    _s('<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>'),
+                'clipboard':      _s('<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>'),
+                'layout':         _s('<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/>'),
+                'folder':         _s('<path d="M20 20a2 2 0 002-2V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2z"/>'),
+                'check-circle':   _s('<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
+                'users':          _s('<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>'),
+                'wallet':         _s('<path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4z"/>'),
+                'wrench':         _s('<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>'),
+                'message-circle': _s('<path d="M7.9 20A9 9 0 104 16.1L2 22z"/>'),
+                'user-plus':      _s('<path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" x2="20" y1="8" y2="14"/><line x1="23" x2="17" y1="11" y2="11"/>'),
+                'zap':            _s('<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),
+                'bar-chart':      _s('<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>'),
+                'bell':           _s('<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 003.4 0"/>'),
+                'settings':       _s('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>'),
+                'globe':          _s('<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/>'),
+                'file':           _s('<path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/>'),
+                'edit':           _s('<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>'),
+                'lock':           _s('<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>'),
+                'book':           _s('<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>'),
+            };
+
+            /* ─── State ─── */
+            const nav = document.getElementById('docsNav');
+            const article = document.getElementById('docsArticle');
+            const search = document.getElementById('docsSearch');
+            const sidebar = document.getElementById('docsSidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const toggle = document.getElementById('sidebarToggle');
+            let allDocs = [];
+            let activeSlug = null;
+
+            /* ─── Build sidebar ─── */
+            function buildNav(docs, query) {
+                const q = (query || '').toLowerCase().trim();
+                const groups = {};
+                const catOrder = ['Getting Started', 'Core Features', 'Team & Workflow', 'Configuration'];
+
+                docs.forEach(d => {
+                    if (!groups[d.category]) groups[d.category] = [];
+                    groups[d.category].push(d);
+                });
+
+                let html = '';
+                catOrder.forEach(cat => {
+                    const items = groups[cat];
+                    if (!items) return;
+
+                    const filtered = q ? items.filter(d =>
+                        d.title.toLowerCase().includes(q) ||
+                        d.content.toLowerCase().includes(q)
+                    ) : items;
+
+                    if (filtered.length === 0) return;
+
+                    html += '<div class="docs-nav-group">';
+                    html += '<div class="docs-nav-category">' + esc(cat) + '</div>';
+                    filtered.forEach(d => {
+                        const cls = d.slug === activeSlug ? 'docs-nav-link active' : 'docs-nav-link';
+                        const icon = ICONS[d.icon] || '📖';
+                        html += `<button class="${cls}" data-slug="${d.slug}">
+                            <span class="nav-icon">${icon}</span>
+                            ${esc(d.title)}
+                        </button>`;
+                    });
+                    html += '</div>';
+                });
+
+                if (!html) {
+                    html = '<p style="color:var(--text-muted);padding:20px;text-align:center;font-size:0.9rem">No matching articles found.</p>';
+                }
+
+                nav.innerHTML = html;
+
+                // Bind click events
+                nav.querySelectorAll('.docs-nav-link').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const slug = btn.dataset.slug;
+                        showArticle(slug);
+                        window.location.hash = slug;
+                        closeSidebar();
+                    });
+                });
+            }
+
+            /* ─── Render article ─── */
+            function showArticle(slug) {
+                const doc = allDocs.find(d => d.slug === slug);
+                if (!doc) {
+                    article.innerHTML = `<div class="docs-welcome">
+                        <h2>Welcome to the docs</h2>
+                        <p>Pick an article from the sidebar to get started, or use the search to find what you need.</p>
+                    </div>`;
+                    activeSlug = null;
+                    buildNav(allDocs, search.value);
+                    return;
+                }
+
+                activeSlug = slug;
+                const rendered = md(doc.content);
+
+                article.innerHTML = `
+                    <div class="docs-article-header">
+                        <h2 class="docs-article-title">${esc(doc.title)}</h2>
+                        <div class="docs-article-meta">
+                            <span class="docs-article-category">${esc(doc.category)}</span>
+                        </div>
+                    </div>
+                    <div class="docs-article-body">${rendered}</div>
+                `;
+
+                // Handle internal doc links
+                article.querySelectorAll('.docs-internal-link').forEach(a => {
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = a.getAttribute('href').replace('#', '');
+                        showArticle(target);
+                        window.location.hash = target;
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                });
+
+                buildNav(allDocs, search.value);
+
+                // Update page title
+                document.title = doc.title + ' — Eidoncore Docs';
+            }
+
+            /* ─── Mobile sidebar ─── */
+            function openSidebar() {
+                sidebar.classList.add('open');
+                backdrop.classList.add('open');
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                backdrop.classList.remove('open');
+            }
+            toggle.addEventListener('click', openSidebar);
+            backdrop.addEventListener('click', closeSidebar);
+
+            /* ─── Search ─── */
+            search.addEventListener('input', () => {
+                buildNav(allDocs, search.value);
+            });
+
+            /* ─── Load data ─── */
+            fetch('docs.json')
+                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(data => {
+                    allDocs = data;
+                    const hash = window.location.hash.replace('#', '');
+                    if (hash && allDocs.find(d => d.slug === hash)) {
+                        showArticle(hash);
+                    } else {
+                        // Default to first article
+                        showArticle(allDocs[0]?.slug || '');
+                    }
+                })
+                .catch(() => {
+                    article.innerHTML = '<div class="docs-welcome"><h2>Unable to load documentation</h2><p>Please try again later.</p></div>';
+                    nav.innerHTML = '';
+                });
+
+            /* ─── Hash change ─── */
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash.replace('#', '');
+                if (hash && hash !== activeSlug) {
+                    showArticle(hash);
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
