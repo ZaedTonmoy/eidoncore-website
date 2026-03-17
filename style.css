@@ -2834,6 +2834,12 @@ img {
 
   .docs-sidebar-toggle {
     display: block;
+    position: sticky;
+    top: 0;
+    z-index: 998;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 10, 26, 0.85);
   }
 
   .docs-sidebar {
