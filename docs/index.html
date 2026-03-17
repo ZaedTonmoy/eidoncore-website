@@ -28,6 +28,49 @@
         body {
             background: #0a0a1a
         }
+
+        /* Accordion TOC sub-links */
+        .docs-toc-list {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+            padding-left: 0;
+        }
+        .docs-toc-list.open {
+            max-height: 600px;
+        }
+        .docs-toc-link {
+            display: block;
+            width: 100%;
+            padding: 5px 12px 5px 42px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.8rem;
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.15s, background 0.15s;
+            border-radius: 6px;
+            line-height: 1.4;
+            font-family: inherit;
+        }
+        .docs-toc-link:hover {
+            color: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .docs-toc-link.active {
+            color: #a78bfa;
+        }
+        .docs-nav-link .nav-chevron {
+            margin-left: auto;
+            transition: transform 0.25s ease;
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+        .docs-nav-link.active .nav-chevron {
+            transform: rotate(90deg);
+            opacity: 0.7;
+        }
     </style>
     <link rel="stylesheet" href="../style.min.css">
     <link rel="stylesheet" href="../components.min.css">
@@ -410,6 +453,23 @@
             let allDocs = [];
             let activeSlug = null;
 
+            /* ─── Extract ## headings for TOC ─── */
+            function extractHeadings(content) {
+                const headings = [];
+                const lines = content.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    const m = lines[i].match(/^##\s+(.+)/);
+                    if (m) {
+                        const text = m[1];
+                        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                        headings.push({ text, id });
+                    }
+                }
+                return headings;
+            }
+
+            const chevronSvg = `<svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
             /* ─── Build sidebar ─── */
             function buildNav(docs, query) {
                 const q = (query || '').toLowerCase().trim();
@@ -436,12 +496,26 @@
                     html += '<div class="docs-nav-group">';
                     html += '<div class="docs-nav-category">' + esc(cat) + '</div>';
                     filtered.forEach(d => {
-                        const cls = d.slug === activeSlug ? 'docs-nav-link active' : 'docs-nav-link';
+                        const isActive = d.slug === activeSlug;
+                        const cls = isActive ? 'docs-nav-link active' : 'docs-nav-link';
                         const icon = ICONS[d.icon] || '📖';
+                        const headings = extractHeadings(d.content);
+                        const hasHeadings = headings.length > 0;
+
                         html += `<button class="${cls}" data-slug="${d.slug}">
                             <span class="nav-icon">${icon}</span>
                             ${esc(d.title)}
+                            ${hasHeadings ? chevronSvg : ''}
                         </button>`;
+
+                        // TOC sub-links (only render if has headings)
+                        if (hasHeadings) {
+                            html += `<div class="docs-toc-list${isActive ? ' open' : ''}">`;
+                            headings.forEach(h => {
+                                html += `<button class="docs-toc-link" data-heading-id="${h.id}" data-slug="${d.slug}">${esc(h.text)}</button>`;
+                            });
+                            html += '</div>';
+                        }
                     });
                     html += '</div>';
                 });
@@ -452,12 +526,36 @@
 
                 nav.innerHTML = html;
 
-                // Bind click events
+                // Bind click events for main nav links
                 nav.querySelectorAll('.docs-nav-link').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const slug = btn.dataset.slug;
                         showArticle(slug);
                         window.location.hash = slug;
+                        closeSidebar();
+                    });
+                });
+
+                // Bind click events for TOC sub-links
+                nav.querySelectorAll('.docs-toc-link').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const slug = btn.dataset.slug;
+                        const headingId = btn.dataset.headingId;
+                        // If not already on this article, navigate to it first
+                        if (slug !== activeSlug) {
+                            showArticle(slug);
+                            window.location.hash = slug;
+                        }
+                        // Scroll to the heading
+                        setTimeout(() => {
+                            const el = document.getElementById(headingId);
+                            if (el) {
+                                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                // Highlight active TOC link
+                                nav.querySelectorAll('.docs-toc-link').forEach(l => l.classList.remove('active'));
+                                btn.classList.add('active');
+                            }
+                        }, slug !== activeSlug ? 100 : 0);
                         closeSidebar();
                     });
                 });
@@ -501,6 +599,9 @@
                 });
 
                 buildNav(allDocs, search.value);
+
+                // Scroll article into view (fixes long→short article scroll position)
+                article.scrollIntoView({ behavior: 'instant', block: 'start' });
 
                 // Update page title
                 document.title = doc.title + ' — Eidoncore Docs';
