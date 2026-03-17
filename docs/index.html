@@ -386,15 +386,14 @@
                     .replace(/\*(.+?)\*/g, '<em>$1</em>')
                     .replace(/`(.+?)`/g, '<code>$1</code>')
                     .replace(/\[(.+?)\]\((.+?)\)/g, function (_, text, href) {
-                        // Convert internal .md links to hash links
-                        if (href.startsWith('./') && href.endsWith('.md')) {
-                            const slug = href.replace('./', '').replace('.md', '').split('#')[0];
-                            const anchor = href.includes('#') ? '#' + href.split('#')[1] : '';
-                            return '<a href="#' + slug + '" class="docs-internal-link">' + text + '</a>';
-                        }
-                        if (href.startsWith('./') && href.includes('.md#')) {
-                            const parts = href.replace('./', '').split('.md#');
-                            return '<a href="#' + parts[0] + '" class="docs-internal-link">' + text + '</a>';
+                        // Convert internal doc links to hash links
+                        // Matches: ./slug, ./slug.md, ./slug#anchor, ./slug.md#anchor
+                        if (href.startsWith('./')) {
+                            var clean = href.replace('./', '').replace('.md', '');
+                            var slug = clean.split('#')[0];
+                            if (slug && allDocs.find(function(d) { return d.slug === slug; }) || slug.match(/^[a-z][-a-z]*$/)) {
+                                return '<a href="#' + slug + '" class="docs-internal-link">' + text + '</a>';
+                            }
                         }
                         return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
                     });
