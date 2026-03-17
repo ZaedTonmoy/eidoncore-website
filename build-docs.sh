@@ -61,12 +61,25 @@ for fname in sorted(os.listdir(docs_src)):
     with open(filepath, 'r', encoding='utf-8') as f:
         raw = f.read()
 
-    # Extract title from first H1
-    title_match = re.match(r'^#\s+(.+)', raw)
-    title = title_match.group(1).strip() if title_match else slug.replace('-', ' ').title()
+    # Parse optional YAML frontmatter
+    title = None
+    body = raw
+    if raw.startswith('---'):
+        end = raw.find('---', 3)
+        if end != -1:
+            fm = raw[3:end]
+            body = raw[end+3:].strip()
+            for line in fm.strip().split('\n'):
+                if line.startswith('title:'):
+                    title = line[6:].strip().strip('"').strip("'")
 
-    # Content = everything after the first H1 line
-    lines = raw.split('\n')
+    # Fallback: extract title from first H1
+    if not title:
+        title_match = re.match(r'^#\s+(.+)', body)
+        title = title_match.group(1).strip() if title_match else slug.replace('-', ' ').title()
+
+    # Content = everything after frontmatter, skip H1 if present
+    lines = body.split('\n')
     content_start = 0
     for i, line in enumerate(lines):
         if line.startswith('# '):
