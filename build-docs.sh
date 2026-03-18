@@ -34,6 +34,13 @@ CATEGORIES = {
     'intake-forms': 'Configuration', 'security': 'Configuration',
 }
 
+# Human-readable titles for directory-based (merged) articles
+DIR_TITLES = {
+    'settings': 'Settings', 'invoicing': 'Invoicing', 'clients': 'Clients',
+    'tasks': 'Tasks', 'client-portal': 'Client Portal', 'notifications': 'Notifications',
+    'security': 'Security', 'services': 'Services',
+}
+
 ICONS = {
     'getting-started': 'play-circle', 'onboarding': 'clipboard', 'dashboard': 'layout',
     'projects': 'folder', 'tasks': 'check-circle', 'clients': 'users',
@@ -70,17 +77,11 @@ def strip_jsx_tags(text):
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
 
-articles = []
-
-for fname in sorted(os.listdir(docs_src)):
-    if not fname.endswith('.md') or fname == 'index.md' or fname == 'changelog.md':
-        continue
-    slug = fname[:-3]
-    filepath = os.path.join(docs_src, fname)
+def parse_md_file(filepath):
+    """Parse a markdown file, returning (title, body_content)."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw = f.read()
 
-    # Parse optional YAML frontmatter
     title = None
     body = raw
     if raw.startswith('---'):
@@ -95,7 +96,7 @@ for fname in sorted(os.listdir(docs_src)):
     # Fallback: extract title from first H1
     if not title:
         title_match = re.match(r'^#\s+(.+)', body)
-        title = title_match.group(1).strip() if title_match else slug.replace('-', ' ').title()
+        title = title_match.group(1).strip() if title_match else None
 
     # Content = everything after frontmatter, skip H1 if present
     lines = body.split('\n')
@@ -105,8 +106,65 @@ for fname in sorted(os.listdir(docs_src)):
             content_start = i + 1
             break
     content = '\n'.join(lines[content_start:]).strip()
+    return title, content
 
-    # Strip Documentation.ai JSX tags for clean website rendering
+
+articles = []
+processed_slugs = set()
+
+# First pass: process subdirectories (e.g., services/) — merge all .md files into one article
+for entry in sorted(os.listdir(docs_src)):
+    entry_path = os.path.join(docs_src, entry)
+    if not os.path.isdir(entry_path) or entry.startswith('.'):
+        continue
+    slug = entry
+    if slug not in CATEGORIES:
+        continue
+
+    # Collect .md files, putting overview.md first then rest alphabetically
+    all_md = sorted(f for f in os.listdir(entry_path) if f.endswith('.md'))
+    if not all_md:
+        continue
+    md_files = []
+    if 'overview.md' in all_md:
+        md_files.append('overview.md')
+        all_md.remove('overview.md')
+    md_files.extend(all_md)
+
+    # Use the directory title map, then fall back to slug
+    article_title = DIR_TITLES.get(slug, slug.replace('-', ' ').title())
+
+    # Merge content from all sub-files
+    parts = []
+    for md_file in md_files:
+        _, content = parse_md_file(os.path.join(entry_path, md_file))
+        if content:
+            parts.append(content)
+
+    merged_content = strip_jsx_tags('\n\n---\n\n'.join(parts))
+
+    articles.append({
+        'slug': slug,
+        'title': article_title,
+        'category': CATEGORIES.get(slug, 'General'),
+        'icon': ICONS.get(slug, 'book'),
+        'order': ORDER.get(slug, 99),
+        'content': merged_content,
+    })
+    processed_slugs.add(slug)
+
+# Second pass: process top-level .md files (skip if slug already handled by a subdirectory)
+for fname in sorted(os.listdir(docs_src)):
+    if not fname.endswith('.md') or fname == 'index.md' or fname == 'changelog.md':
+        continue
+    slug = fname[:-3]
+    if slug in processed_slugs:
+        continue
+    filepath = os.path.join(docs_src, fname)
+    title, content = parse_md_file(filepath)
+    if not title:
+        title = slug.replace('-', ' ').title()
+
     content = strip_jsx_tags(content)
 
     articles.append({
