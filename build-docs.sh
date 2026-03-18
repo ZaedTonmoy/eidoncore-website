@@ -51,10 +51,29 @@ ORDER = {
     'client-portal': 15, 'files': 16, 'intake-forms': 17, 'security': 18,
 }
 
+# Documentation.ai JSX component tags to strip for website rendering
+JSX_COMPONENTS = [
+    'Steps', 'Step', 'Tabs', 'Tab', 'Card', 'Columns',
+    'Callout', 'Expandable', 'ExpandableGroup', 'Update',
+]
+
+def strip_jsx_tags(text):
+    """Remove Documentation.ai JSX component tags, keeping inner text content."""
+    for comp in JSX_COMPONENTS:
+        # Remove self-closing tags: <Component ... />
+        text = re.sub(rf'<{comp}\s+[^>]*/>', '', text)
+        # Remove opening tags with attributes: <Component attr="val">
+        text = re.sub(rf'<{comp}(?:\s+[^>]*)?>',  '', text)
+        # Remove closing tags: </Component>
+        text = re.sub(rf'</{comp}>', '', text)
+    # Clean up excessive blank lines left behind
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
 articles = []
 
 for fname in sorted(os.listdir(docs_src)):
-    if not fname.endswith('.md') or fname == 'index.md':
+    if not fname.endswith('.md') or fname == 'index.md' or fname == 'changelog.md':
         continue
     slug = fname[:-3]
     filepath = os.path.join(docs_src, fname)
@@ -86,6 +105,9 @@ for fname in sorted(os.listdir(docs_src)):
             content_start = i + 1
             break
     content = '\n'.join(lines[content_start:]).strip()
+
+    # Strip Documentation.ai JSX tags for clean website rendering
+    content = strip_jsx_tags(content)
 
     articles.append({
         'slug': slug,
