@@ -32,6 +32,7 @@ CATEGORIES = {
     'reports': 'Team & Workflow', 'notifications': 'Team & Workflow',
     'settings': 'Configuration', 'client-portal': 'Configuration', 'files': 'Configuration',
     'intake-forms': 'Configuration', 'security': 'Configuration',
+    'keyboard-shortcuts': 'Configuration',
 }
 
 # Human-readable titles for directory-based (merged) articles
@@ -48,6 +49,7 @@ ICONS = {
     'team': 'user-plus', 'automations': 'zap', 'reports': 'bar-chart',
     'notifications': 'bell', 'settings': 'settings', 'client-portal': 'globe',
     'files': 'file', 'intake-forms': 'edit', 'security': 'lock',
+    'keyboard-shortcuts': 'command',
 }
 
 ORDER = {
@@ -56,6 +58,7 @@ ORDER = {
     'services': 8, 'messaging': 9, 'team': 10, 'automations': 11,
     'reports': 12, 'notifications': 13, 'settings': 14,
     'client-portal': 15, 'files': 16, 'intake-forms': 17, 'security': 18,
+    'keyboard-shortcuts': 19,
 }
 
 # Documentation.ai JSX component tags to strip for website rendering
