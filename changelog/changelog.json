@@ -1,5 +1,153 @@
 [
     {
+        "version": "8.4.0",
+        "date": "2026-03-21",
+        "title": "Keyboard Shortcuts, Command Palette & Smart Invoicing",
+        "summary": "Power-user productivity with ⌘K Command Palette and 20+ keyboard shortcuts, partial invoice payments, time-to-invoice generation, email-first guest checkout with inline login, Slack integration, intake form nudges, deferred task creation, and display preferences.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "⌘K Command Palette — universal search across pages, tasks, projects, invoices, and settings with instant navigation"
+            },
+            {
+                "type": "feature",
+                "text": "Keyboard shortcuts — J/K to navigate lists, X to complete tasks, E to edit, G→ for quick navigation, ⌘⇧N new task, ⌘D duplicate, ⌘\\\\ toggle sidebar"
+            },
+            {
+                "type": "feature",
+                "text": "Shortcuts help overlay — press ? to see all available shortcuts for your role, with OS-aware modifier keys (⌘ on Mac, Ctrl+ on Windows)"
+            },
+            {
+                "type": "feature",
+                "text": "Partial payments — accept and track multiple partial payments per invoice with running balance"
+            },
+            {
+                "type": "feature",
+                "text": "Generate invoice from time entries — convert tracked project time into invoice line items"
+            },
+            {
+                "type": "feature",
+                "text": "PM & Team Member invoice access — can create invoices and view only the ones they personally created"
+            },
+            {
+                "type": "feature",
+                "text": "Timer controls in project header — Start, Pause, and Stop buttons directly on project pages with budget integration"
+            },
+            {
+                "type": "feature",
+                "text": "Email-first guest checkout — enter email, get matched to existing account or continue as guest"
+            },
+            {
+                "type": "feature",
+                "text": "Inline login on checkout — existing members can log in without leaving the checkout page, with seamless cart transfer"
+            },
+            {
+                "type": "feature",
+                "text": "Intake form reminders — progressive nudges for pending submissions with in-page popup and dashboard alerts"
+            },
+            {
+                "type": "feature",
+                "text": "Intake form submission tracking — see which buyers have completed their forms in the sales tracker"
+            },
+            {
+                "type": "feature",
+                "text": "Slack integration — receive notifications in Slack channels with rich formatting"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-create messaging channel — optionally create a conversation channel when a service is purchased"
+            },
+            {
+                "type": "feature",
+                "text": "Deferred task creation — enter a title before the task is saved (no more blank tasks)"
+            },
+            {
+                "type": "feature",
+                "text": "Custom task status colors — pick colors for task statuses in the status manager"
+            },
+            {
+                "type": "feature",
+                "text": "Configurable task list columns — choose which columns appear in task list view"
+            },
+            {
+                "type": "feature",
+                "text": "Font size & UI density preferences — customize text size and interface spacing in Settings"
+            },
+            {
+                "type": "feature",
+                "text": "Delete comments — agency owners and admins can delete task comments"
+            },
+            {
+                "type": "improvement",
+                "text": "Auto-assign project when creating tasks from the global Tasks page"
+            },
+            {
+                "type": "improvement",
+                "text": "Board vs. list view preference is now remembered across sessions"
+            },
+            {
+                "type": "improvement",
+                "text": "Shortcut badges on search bar and New Task button hint at available keyboard shortcuts"
+            },
+            {
+                "type": "improvement",
+                "text": "Confirmation dialog before deleting time entries"
+            },
+            {
+                "type": "improvement",
+                "text": "Agency user sidebar menu — Documentation, Help, and Logout grouped in a popover"
+            },
+            {
+                "type": "fix",
+                "text": "Organization users now only see data belonging to their organization across dashboard, team, and onboarding"
+            },
+            {
+                "type": "fix",
+                "text": "Buttons for invoicing, time tracking, and admin functions hidden from users without permission"
+            },
+            {
+                "type": "fix",
+                "text": "Organization owners can now view invoices correctly"
+            },
+            {
+                "type": "fix",
+                "text": "Chat @mention notifications now correctly trigger bell and email notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Improved email delivery reliability for batch notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Hourly unread message digest emails restored"
+            },
+            {
+                "type": "fix",
+                "text": "Collapsed sidebar header now matches the page header height"
+            },
+            {
+                "type": "fix",
+                "text": "Mobile bottom navigation no longer overlaps sidebars, modals, or drawers"
+            },
+            {
+                "type": "fix",
+                "text": "Timer pause no longer resets the displayed time to zero"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed inline editing double-submit and Escape key issues"
+            },
+            {
+                "type": "fix",
+                "text": "Improved file upload timeout handling and progress feedback"
+            },
+            {
+                "type": "fix",
+                "text": "Organization name hidden on project cards for org users (redundant info)"
+            }
+        ]
+    },
+    {
         "version": "8.3.0",
         "date": "2026-03-14",
         "title": "Performance Boost & Modular Architecture",
