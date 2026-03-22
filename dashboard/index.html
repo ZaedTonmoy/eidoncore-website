@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Eidoncore | Executive KPIs & Agency Analytics</title>
+    <meta name="description"
+        content="Executive dashboards with revenue KPIs, project health scoring, team workload heatmaps, real-time alerts, and role-based views for agency owners, team members, and clients.">
+    <meta property="og:title" content="Dashboard — Eidoncore">
+    <meta property="og:description"
+        content="Executive dashboards with revenue KPIs, project health scoring, team workload, and real-time alerts.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/dashboard/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/dashboard/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{background:#0a0a1a}</style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Dashboard — Eidoncore">
+    <meta name="twitter:description" content="Executive dashboards with revenue KPIs, project health scoring, and real-time alerts.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What metrics does the executive dashboard show?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Total revenue, MRR, ARR, outstanding invoices, overdue amounts, project health scores, team workload distribution, and real-time alerts for critical issues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do different roles see different dashboards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Owners and admins see the full executive dashboard. Team members see their task-focused view. Client users see their organization-scoped projects, invoices, and services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are dashboard alerts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Real-time alert banners that appear when action is needed — overdue invoices, off-track projects, failed automations, stale tasks, expiring contracts, and more. Click any alert to navigate directly to the issue."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- 1. Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Dashboard</span></div>
+                <h1 class="page-title anim-blur">Your agency at a <span class="gradient-text">single glance</span></h1>
+                <p class="page-subtitle anim-blur">Executive KPIs, project health scores, team workload heatmaps,
+                    and real-time alerts — tailored to every role in your agency.</p>
+            </div>
+        </section>
+
+        <!-- 2. Revenue KPIs -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Revenue</span>
+                        <h2>Financial health in real time</h2>
+                        <p>Track every dollar flowing through your agency. The executive dashboard surfaces the
+                            KPIs that matter — revenue, recurring income, and outstanding payments — with period
+                            comparison built in.</p>
+                        <ul>
+                            <li>Total revenue with period-over-period comparison</li>
+                            <li>Monthly Recurring Revenue (MRR) and ARR</li>
+                            <li>Outstanding and overdue invoice totals</li>
+                            <li>6-month revenue trend chart</li>
+                            <li>Filter by: This Month, Last Month, Quarter, Year</li>
+                        </ul>
+                        <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial <span
+                                class="btn-arrow">→</span></a>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Executive dashboard showing revenue KPIs, MRR, ARR, and trend charts" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Project Health -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Project Health</span>
+                        <h2>Spot at-risk projects before they derail</h2>
+                        <p>Every active project is automatically scored based on task completion and deadline proximity.
+                            Green means on track. Yellow means at risk. Red means off track — and you need to act.</p>
+                        <ul>
+                            <li><strong>On Track:</strong> ≥50% tasks done, no overdue milestones</li>
+                            <li><strong>At Risk:</strong> &lt;50% done, some overdue, or due within 7 days</li>
+                            <li><strong>Off Track:</strong> &lt;25% done and past due, or &gt;50% milestones overdue</li>
+                            <li>Color-coded health indicators across all projects</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Project health scoring with green, yellow, and red status indicators" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Team Workload -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Team Workload</span>
+                        <h2>See who's overloaded in seconds</h2>
+                        <p>The workload panel shows task distribution across your entire team — by status, by member,
+                            by urgency. Spot bottlenecks and rebalance work before deadlines slip.</p>
+                        <ul>
+                            <li>Tasks by status: To Do, In Progress, In Review</li>
+                            <li>Per-member task load with overload flagging (10+ active = flagged)</li>
+                            <li>Top 5 overdue tasks sorted by urgency</li>
+                            <li>Completion rate percentages per team member</li>
+                            <li>Estimated vs. logged hours comparison</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Team workload heatmap showing task distribution and overload flags" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Real-Time Alerts -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Smart Alerts</span>
+                        <h2>Know what needs attention — right now</h2>
+                        <p>Dashboard alerts surface critical issues the moment they happen. No digging through
+                            pages or checking spreadsheets — problems come to you.</p>
+                        <ul>
+                            <li><strong>Critical:</strong> Overdue invoices, off-track projects, failed automations</li>
+                            <li><strong>Warning:</strong> Stale tasks (3+ days), expiring contracts (30 days)</li>
+                            <li><strong>Info:</strong> Inactive clients, unassigned tasks, pending draft invoices</li>
+                            <li>Click any alert to jump directly to the issue</li>
+                            <li>Dismiss alerts — they reappear if the condition persists</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Real-time dashboard alerts showing critical, warning, and info banners" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Role-Based Views -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Role Views</span>
+                        <h2>Every role gets their own dashboard</h2>
+                        <p>The dashboard adapts to who's looking. Executives see the big picture. Individual
+                            contributors see their tasks. Clients see their projects and invoices.</p>
+                        <ul>
+                            <li><strong>Executive:</strong> Full agency overview — revenue, projects, team, alerts</li>
+                            <li><strong>Team Member:</strong> My tasks, upcoming deadlines, recent notifications</li>
+                            <li><strong>Client:</strong> Org-scoped projects, task stats, invoices, active services</li>
+                            <li>Time-aware greeting that changes by time of day</li>
+                            <li>Daily motivational quote from 345 curated quotes</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Three different dashboard views for executives, team members, and clients" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Onboarding Checklist -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Onboarding</span>
+                        <h2>Guided setup for every new user</h2>
+                        <p>A personalized checklist appears on first login — with role-specific steps, a progress
+                            ring, and automatic completion detection. Hit 100% and get a confetti celebration.</p>
+                        <ul>
+                            <li>Role-specific steps (Owner, Admin, PM, Accountant, Team Member, Client)</li>
+                            <li>Auto-detects when steps are completed</li>
+                            <li>Progress ring with completion percentage</li>
+                            <li>Confetti animation on full completion</li>
+                            <li>Skip anytime — re-show from profile settings</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Onboarding checklist with progress ring and confetti celebration" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number">6</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Revenue KPIs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Alert Levels</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Dashboard Types</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">345</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Daily Quotes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>Where agency leaders start their day</h2>
+                </div>
+                <div class="testimonials-grid" style="max-width:640px;margin:0 auto">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"First thing I do every morning is check the dashboard. Revenue, project health, who's overloaded — all in one place. It's replaced three other tools."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#6C63FF,#00D4FF)">MK</div>
+                            <div><strong>Marcus Klein</strong><br><span>Director, Orbital Digital</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Built For -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Who It's For</span>
+                    <h2>Built for every role</h2>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="briefcase"></div>
+                        <h3>Agency Owners</h3>
+                        <p>Revenue KPIs, project health, and team workload at a single glance.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="users"></div>
+                        <h3>Project Managers</h3>
+                        <p>Spot at-risk projects and rebalance team workloads before deadlines slip.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="check-circle"></div>
+                        <h3>Team Members</h3>
+                        <p>See your assigned tasks, upcoming deadlines, and recent notifications.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="star"></div>
+                        <h3>Clients</h3>
+                        <p>Track your projects, invoices, and services in a clean, scoped view.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What metrics does the executive dashboard show?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Total revenue, MRR, ARR, outstanding invoices, overdue amounts, project health scores, team workload distribution, and real-time alerts for critical issues.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Do different roles see different dashboards?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Owners and admins see the full executive dashboard. Team members see their task-focused view. Client users see their organization-scoped projects, invoices, and services.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">What are dashboard alerts?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Real-time alert banners that appear when action is needed — overdue invoices, off-track projects, failed automations, stale tasks, expiring contracts, and more. Click any alert to navigate directly to the issue.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../reports/" class="related-card">
+                        <div class="related-icon" data-icon="bar-chart-2"></div>
+                        <h3>Reports</h3>
+                        <p>In-depth analytics and exportable data.</p>
+                    </a>
+                    <a href="../notifications/" class="related-card">
+                        <div class="related-icon" data-icon="bell"></div>
+                        <h3>Notifications</h3>
+                        <p>Real-time alerts across the platform.</p>
+                    </a>
+                    <a href="../tasks/" class="related-card">
+                        <div class="related-icon" data-icon="check-circle"></div>
+                        <h3>Tasks</h3>
+                        <p>Task management with boards and lists.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Agency management tips & product updates</h3>
+                    <p>Join agency leaders who receive strategies for running data-driven agencies and Eidoncore updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓ You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>See your agency clearly for the first time</h2>
+                    <p>Revenue, projects, team, clients — all in one dashboard. 14-day free trial.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../reports/" class="btn btn-outline btn-lg">Explore Reports</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Management — Eidoncore | Upload, Organize & Share Agency Files</title>
+    <meta name="description"
+        content="Upload, organize, and manage files across projects and tasks with drag-and-drop, three view modes, smart filtering, and plan-based storage limits up to 100GB.">
+    <meta property="og:title" content="File Management — Eidoncore">
+    <meta property="og:description"
+        content="Agency-wide file browser with drag-and-drop uploads, three view modes, and plan-based storage.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/files/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/files/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{background:#0a0a1a}</style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="File Management — Eidoncore">
+    <meta name="twitter:description" content="Agency-wide file browser with drag-and-drop uploads, filtering, and plan-based storage.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What file types does Eidoncore support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Images (JPG, PNG, GIF, SVG, WebP), documents (PDF, DOC, DOCX, TXT), spreadsheets (XLS, XLSX, CSV), archives (ZIP), and media (MP4, MP3, WAV, WebM). Maximum 10MB per file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much storage do I get?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free plan: 500MB. Pro plan: 10GB. Enterprise plan: 100GB. Storage is shared across all projects, tasks, and direct uploads."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see where a file was uploaded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every file shows a context breadcrumb — Client → Project → Task — so you always know where each file lives. Direct uploads are tagged accordingly."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- 1. Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">File Management</span></div>
+                <h1 class="page-title anim-blur">All your files, <span class="gradient-text">one place</span></h1>
+                <p class="page-subtitle anim-blur">Upload, organize, and manage files across projects and tasks
+                    with drag-and-drop, smart filtering, and plan-based storage up to 100GB.</p>
+            </div>
+        </section>
+
+        <!-- 2. Upload Everywhere -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Upload</span>
+                        <h2>Drag, drop, done</h2>
+                        <p>Upload files anywhere — project files tabs, task attachments, the agency-wide file browser,
+                            or branding settings. Every upload uses the same simple drag-and-drop interface.</p>
+                        <ul>
+                            <li>Drag-and-drop or click to browse</li>
+                            <li>Upload from projects, tasks, or the central file browser</li>
+                            <li>Branding uploads: logos, favicons, signatures</li>
+                            <li>Invoice signature attachments</li>
+                            <li>MIME type validation on every upload</li>
+                        </ul>
+                        <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial <span
+                                class="btn-arrow">→</span></a>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Drag and drop file upload interface with progress indicator" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Supported File Types -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">File Types</span>
+                        <h2>Every format your agency needs</h2>
+                        <p>From design files to contracts to video — Eidoncore accepts all common file types
+                            with automatic type validation and safe upload handling.</p>
+                        <ul>
+                            <li><strong>Images:</strong> JPG, PNG, GIF, SVG, WebP</li>
+                            <li><strong>Documents:</strong> PDF, DOC, DOCX, TXT</li>
+                            <li><strong>Spreadsheets:</strong> XLS, XLSX, CSV</li>
+                            <li><strong>Archives:</strong> ZIP</li>
+                            <li><strong>Media:</strong> MP4, MP3, WAV, WebM</li>
+                            <li>10MB max per file, 5MB for branding images</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Supported file types with icons for images, documents, spreadsheets, and media" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Agency File Browser -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">File Browser</span>
+                        <h2>See every file across your agency</h2>
+                        <p>The central file browser aggregates all files from projects, tasks, and direct uploads
+                            into one searchable, filterable interface with stats at the top.</p>
+                        <ul>
+                            <li>Stats dashboard: total files, total size, images, documents</li>
+                            <li>Context breadcrumbs: Client → Project → Task</li>
+                            <li>Owner info and upload dates</li>
+                            <li>Download via signed URLs</li>
+                            <li>Bulk delete with select-all support</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Agency file browser with stats dashboard, filters, and file list" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. View Modes -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Views</span>
+                        <h2>Three ways to browse your files</h2>
+                        <p>Switch between view modes depending on how you work — compact list, detail cards,
+                            or a visual thumbnail grid.</p>
+                        <ul>
+                            <li><strong>List:</strong> Compact rows — name, type, size, date, context</li>
+                            <li><strong>Detail:</strong> Thumbnail previews with uploader info</li>
+                            <li><strong>Grid:</strong> Large thumbnail grid for visual browsing</li>
+                            <li>Filter sidebar: source, type, client</li>
+                            <li>Combine filters with search by file name</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Three file view modes — list, detail, and grid — with filter sidebar" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Project Files & Task Attachments -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Projects & Tasks</span>
+                        <h2>Files live where the work happens</h2>
+                        <p>Files uploaded to projects appear in the project's Files tab. Task attachments live on
+                            the task and link back to the parent project. Pin important files for quick access.</p>
+                        <ul>
+                            <li>Project Files tab with all members access</li>
+                            <li>Pinned files on project overview for quick access</li>
+                            <li>Task drawer attachments section</li>
+                            <li>Cross-linked: task files also appear in project</li>
+                            <li>Upload notifications to all project members</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Project files tab with pinned files and task attachments" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number">100</span><span class="stat-suffix">GB</span>
+                        <span class="stat-label">Max Storage</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">File Formats</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span><span class="stat-suffix"></span>
+                        <span class="stat-label">View Modes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10</span><span class="stat-suffix">MB</span>
+                        <span class="stat-label">Max File Size</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Pricing Teaser -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Storage Plans</span>
+                    <h2>Storage that grows with your agency</h2>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="gift"></div>
+                        <h3>Free — 500 MB</h3>
+                        <p>Enough for small projects and getting started. Perfect for solo freelancers.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="zap"></div>
+                        <h3>Pro — 10 GB</h3>
+                        <p>Room for growing agencies with multiple active projects and clients.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="star"></div>
+                        <h3>Enterprise — 100 GB</h3>
+                        <p>Massive storage for large agencies with years of project history.</p>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:40px">
+                    <a href="../pricing/" class="btn btn-outline">Compare All Plans <span class="btn-arrow">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>No more Dropbox chaos</h2>
+                </div>
+                <div class="testimonials-grid" style="max-width:640px;margin:0 auto">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"We stopped using shared Google Drive folders. Everything is in the project now — designs, contracts, briefs. The context breadcrumbs are genius."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#6C63FF,#00D4FF)">RJ</div>
+                            <div><strong>Rachel Jenkins</strong><br><span>PM, Cascade Agency</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Security -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Trust & Security</span>
+                    <h2>Your files are safe with us</h2>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="shield"></div>
+                        <h3>Signed URLs</h3>
+                        <p>Downloads use time-limited signed URLs — no public links.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="lock"></div>
+                        <h3>Type Validation</h3>
+                        <p>MIME type checked on every upload — unsafe files are rejected.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="key"></div>
+                        <h3>Owner-Only Access</h3>
+                        <p>The central file browser is restricted to workspace owners.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="globe"></div>
+                        <h3>Encrypted Storage</h3>
+                        <p>All files encrypted at rest and in transit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What file types does Eidoncore support?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Images (JPG, PNG, GIF, SVG, WebP), documents (PDF, DOC, DOCX, TXT), spreadsheets (XLS, XLSX, CSV), archives (ZIP), and media (MP4, MP3, WAV, WebM). Maximum 10MB per file.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">How much storage do I get?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Free plan: 500MB. Pro plan: 10GB. Enterprise plan: 100GB. Storage is shared across all projects, tasks, and direct uploads.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I see where a file was uploaded?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Every file shows a context breadcrumb — Client → Project → Task — so you always know where each file lives.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../projects/" class="related-card">
+                        <div class="related-icon" data-icon="folder"></div>
+                        <h3>Projects</h3>
+                        <p>Upload and pin files to your projects.</p>
+                    </a>
+                    <a href="../tasks/" class="related-card">
+                        <div class="related-icon" data-icon="check-circle"></div>
+                        <h3>Tasks</h3>
+                        <p>Attach files directly to tasks.</p>
+                    </a>
+                    <a href="../intake-forms/" class="related-card">
+                        <div class="related-icon" data-icon="clipboard"></div>
+                        <h3>Intake Forms</h3>
+                        <p>Collect file uploads from clients via forms.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Productivity tips & product updates</h3>
+                    <p>Join agency operators who receive strategies for staying organized and Eidoncore updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓ You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Stop scattering files across tools</h2>
+                    <p>One file browser for your whole agency. 14-day free trial — no credit card required.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../projects/" class="btn btn-outline btn-lg">Explore Projects</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

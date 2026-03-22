@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intake Forms — Eidoncore | Drag-and-Drop Form Builder for Agencies</title>
+    <meta name="description"
+        content="Build custom client intake forms with 27 field types, drag-and-drop builder, multi-page support, conditional logic, and automatic submission to projects. Pro feature.">
+    <meta property="og:title" content="Intake Forms — Eidoncore">
+    <meta property="og:description"
+        content="Drag-and-drop form builder with 27 field types, multi-page support, conditional logic, and automatic project integration.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/intake-forms/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/intake-forms/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{background:#0a0a1a}</style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Intake Forms — Eidoncore">
+    <meta name="twitter:description" content="Drag-and-drop form builder with 27 field types, multi-page support, and conditional logic.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are intake forms in Eidoncore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Intake forms let you collect project requirements, preferences, and onboarding information from clients automatically after they purchase a service. Build custom forms with a drag-and-drop builder and assign them to any service in your catalog."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many field types are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eidoncore supports 27 field types across 6 categories: text inputs, selection inputs, date and time, rich inputs (file upload, signature, rating, color picker, slider), layout elements, and advanced fields like repeaters."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create multi-page forms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Organize longer forms across multiple pages with a step wizard interface, numbered progress indicators, and per-page validation. Ideal for comprehensive onboarding questionnaires."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are intake forms available on all plans?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Intake Forms is a Pro plan feature. On the Free plan, the sidebar item shows a lock badge, and clicking it shows an upgrade prompt."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- 1. Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Intake Forms</span></div>
+                <h1 class="page-title anim-blur">Collect what you need <span class="gradient-text">before you start</span></h1>
+                <p class="page-subtitle anim-blur">Build custom intake forms with drag-and-drop — 27 field types,
+                    multi-page wizards, conditional logic, and automatic project integration.</p>
+            </div>
+        </section>
+
+        <!-- 2. Drag-and-Drop Builder -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Form Builder</span>
+                        <h2>Drag, drop, and publish</h2>
+                        <p>Build professional intake forms without touching code. Drag fields into place, configure
+                            validation, set widths, and preview exactly what clients will see — all from a visual
+                            editor.</p>
+                        <ul>
+                            <li>Drag-and-drop field reordering</li>
+                            <li>Full and half-width field layouts</li>
+                            <li>Real-time preview mode</li>
+                            <li>Draft → Published → Archived lifecycle</li>
+                            <li>Duplicate existing forms as templates</li>
+                        </ul>
+                        <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial <span
+                                class="btn-arrow">→</span></a>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Drag and drop intake form builder with field configuration panel" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 27 Field Types -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Field Types</span>
+                        <h2>27 field types across 6 categories</h2>
+                        <p>From simple text inputs to advanced repeaters — every question type you could need to
+                            onboard a client properly.</p>
+                        <ul>
+                            <li><strong>Text:</strong> Short text, textarea, email, phone, URL, number, address, currency</li>
+                            <li><strong>Selection:</strong> Dropdown, multi-select, checkbox, radio, toggle</li>
+                            <li><strong>Date & Time:</strong> Date picker, time, datetime</li>
+                            <li><strong>Rich:</strong> File upload, image upload, rating, signature, color picker, slider</li>
+                            <li><strong>Layout:</strong> Headings, paragraphs, dividers, hidden fields</li>
+                            <li><strong>Advanced:</strong> Repeater groups with configurable sub-fields</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="27 field types available in the intake form builder" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Multi-Page Forms -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Multi-Page</span>
+                        <h2>Step wizards for complex onboarding</h2>
+                        <p>Break long questionnaires into logical pages. Clients see numbered progress indicators
+                            and per-page validation — ensuring nothing gets missed before moving to the next step.</p>
+                        <ul>
+                            <li>Add and organize pages with tab bar</li>
+                            <li>Numbered step wizard with progress tracking</li>
+                            <li>Per-page required field validation</li>
+                            <li>Submit button on the last page only</li>
+                            <li>Ideal for Company Info → Scope → Brand → Technical sections</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-scale float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Multi-page intake form with step wizard and progress indicators" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Conditional Logic -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Smart Logic</span>
+                        <h2>Show fields based on answers</h2>
+                        <p>Not every client needs every question. Use conditional visibility to show or hide fields
+                            based on previous responses — keeping forms clean and focused.</p>
+                        <ul>
+                            <li>Select a source field, operator, and trigger value</li>
+                            <li>Supports equals, not equals, contains, and more</li>
+                            <li>Example: Show "Custom Budget" only when "Budget Range" equals "Custom"</li>
+                            <li>Reduces form fatigue and improves completion rates</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Conditional field visibility configuration panel" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Validation & Configuration -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-content anim-slide-left">
+                        <span class="section-tag">Validation</span>
+                        <h2>Enforce input quality automatically</h2>
+                        <p>Every field supports granular validation rules to ensure you receive clean, usable data
+                            from clients — no more back-and-forth asking for missing information.</p>
+                        <ul>
+                            <li>Min/max character length for text fields</li>
+                            <li>Regex pattern matching for structured inputs</li>
+                            <li>File type and size restrictions for uploads</li>
+                            <li>Numeric range limits for sliders and numbers</li>
+                            <li>Configurable star count (3-10) for ratings</li>
+                            <li>Labels, placeholders, and help text per field</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-right float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Field validation settings with min/max, pattern, and file type rules" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Service Integration -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="detail-grid reverse">
+                    <div class="detail-content anim-slide-right">
+                        <span class="section-tag">Service Integration</span>
+                        <h2>Assign forms to services</h2>
+                        <p>Link intake forms to your service catalog. When a client purchases a service, the form
+                            appears automatically on the confirmation page — zero manual follow-up needed.</p>
+                        <ul>
+                            <li>One form can serve multiple services</li>
+                            <li>Each service links to exactly one form</li>
+                            <li>Works with project-based services and digital products</li>
+                            <li>24-hour nudge notification if form isn't submitted</li>
+                            <li>Unlinking a form from a service doesn't delete it</li>
+                        </ul>
+                    </div>
+                    <div class="detail-screenshot anim-slide-left float-anim">
+                        <img src="../images/automations-content.webp"
+                            alt="Intake form assigned to multiple services in the catalog" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number">27</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Field Types</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">6</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Field Categories</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Follow-Up Emails</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100</span><span class="stat-suffix">%</span>
+                        <span class="stat-label">Automated</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. What Happens After Submission -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">After Submission</span>
+                    <h2>Responses flow directly into your project</h2>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">1</div>
+                        <h3>Document Created</h3>
+                        <p>Responses are formatted into a readable HTML document and pinned to the project automatically.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">2</div>
+                        <h3>Record Saved</h3>
+                        <p>A submission record links the response data to the form, project, and the client who submitted.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-number">3</div>
+                        <h3>You're Notified</h3>
+                        <p>An in-app notification lands immediately so you can review responses and start work right away.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>Loved by client-facing teams</h2>
+                </div>
+                <div class="testimonials-grid" style="max-width:640px;margin:0 auto">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"We used to email questionnaires back and forth. Now clients fill out the form right after purchase. We get structured data in the project instantly."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#6C63FF,#00D4FF)">SP</div>
+                            <div><strong>Sarah Park</strong><br><span>Partner, Velocity Studio</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Built For -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Who It's For</span>
+                    <h2>Built for teams like yours</h2>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="briefcase"></div>
+                        <h3>Agency Owners</h3>
+                        <p>Standardize client onboarding across all services with reusable form templates.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="users"></div>
+                        <h3>Project Managers</h3>
+                        <p>Get structured requirements before kickoff — no more digging through email threads.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="code"></div>
+                        <h3>Dev & Design Teams</h3>
+                        <p>Collect assets, brand guidelines, and technical specs with file uploads and rich inputs.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="star"></div>
+                        <h3>Freelancers</h3>
+                        <p>Look professional with branded forms that collect everything upfront.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What are intake forms in Eidoncore?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Intake forms let you collect project requirements, preferences, and onboarding information from clients automatically after they purchase a service. Build custom forms with a drag-and-drop builder and assign them to any service in your catalog.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">How many field types are supported?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Eidoncore supports 27 field types across 6 categories: text inputs, selection inputs, date and time, rich inputs (file upload, signature, rating, color picker, slider), layout elements, and advanced fields like repeaters.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I create multi-page forms?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Organize longer forms across multiple pages with a step wizard interface, numbered progress indicators, and per-page validation. Ideal for comprehensive onboarding questionnaires.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Are intake forms available on all plans?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Intake Forms is a Pro plan feature. On the Free plan, the sidebar item shows a lock badge, and clicking it shows an upgrade prompt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../services/" class="related-card">
+                        <div class="related-icon" data-icon="briefcase"></div>
+                        <h3>Services</h3>
+                        <p>Build your service catalog and link intake forms.</p>
+                    </a>
+                    <a href="../portal/" class="related-card">
+                        <div class="related-icon" data-icon="layout"></div>
+                        <h3>Client Portal</h3>
+                        <p>Where clients fill forms after purchase.</p>
+                    </a>
+                    <a href="../projects/" class="related-card">
+                        <div class="related-icon" data-icon="folder"></div>
+                        <h3>Projects</h3>
+                        <p>Submissions are saved as pinned project docs.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Client onboarding tips & product updates</h3>
+                    <p>Join agency operators who receive strategies for streamlining client intake and Eidoncore updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓ You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15. CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Stop chasing requirements over email</h2>
+                    <p>Automate client onboarding with intake forms. 14-day free trial — no credit card required.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../services/" class="btn btn-outline btn-lg">Explore Services</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
