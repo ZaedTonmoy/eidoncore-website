@@ -1,5 +1,57 @@
 [
     {
+        "version": "8.5.0",
+        "date": "2026-03-23",
+        "title": "Proposals — Block-Based Proposal Builder & Client Delivery",
+        "summary": "Complete proposal management system — create professional proposals with an 18-block visual builder, send to clients for review, track views and engagement, accept signatures, and convert accepted proposals to projects or invoices.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Proposal builder — drag-and-drop block editor with 18 content types: headings, rich text, images, pricing tables, deliverables, timeline, terms, signature, testimonials, case studies, attachments, video embeds, team bios, and interactive pricing configurator"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal lifecycle — full status workflow from Draft → Pending Review → Sent → Viewed → Accepted/Declined/Expired with withdraw, revise, and counter-proposal support"
+            },
+            {
+                "type": "feature",
+                "text": "Client acceptance — clients can review proposals via a branded public share link, accept with e-signature, decline with reason, or submit counter-proposals"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal-to-project/invoice conversion — convert accepted proposals to projects, invoices, or both with a single click"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal analytics — track view counts, unique viewers, average view duration, completion rate, device breakdown, and time-to-decision"
+            },
+            {
+                "type": "feature",
+                "text": "Internal review workflow — submit proposals for team review before sending, with approve/reject feedback loop"
+            },
+            {
+                "type": "feature",
+                "text": "Version history — track changes across proposal revisions with total difference comparison"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal templates — save and reuse proposal structures for consistent client communications"
+            },
+            {
+                "type": "improvement",
+                "text": "Proposals tab on organization detail page — view all proposals for a client with status, amount, and quick-create button"
+            },
+            {
+                "type": "improvement",
+                "text": "Proposal notifications — new 'Proposal activity' category in notification settings for sent, viewed, accepted, declined, and expired events"
+            },
+            {
+                "type": "fix",
+                "text": "Fixed organization list not loading in create proposal modal — limit parameter exceeded backend maximum"
+            }
+        ]
+    },
+    {
         "version": "8.4.0",
         "date": "2026-03-21",
         "title": "Keyboard Shortcuts, Command Palette & Smart Invoicing",
