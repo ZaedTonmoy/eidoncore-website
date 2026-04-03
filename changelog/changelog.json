@@ -1,5 +1,269 @@
 [
     {
+        "version": "8.6.0",
+        "date": "2026-04-03",
+        "title": "Project Sidebar, Task Lists, Messaging Upgrades & Column Resizing",
+        "summary": "Major update — project sidebar with collapsible task hierarchy tree, sections and lists with drag-and-drop reordering, 12+ messaging upgrades (floating chat widget, pinned messages, message search, forwarding, slash commands, personal notes), task column resizing with sticky frozen columns, project templates, URL unfurling, task bulk actions, and proposal auto-checkout with PDF export.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Project sidebar — collapsible sidebar with task hierarchy tree, section views, list navigation, project switcher, and URL state management"
+            },
+            {
+                "type": "feature",
+                "text": "Task lists & sections — organize tasks into lists within sections, drag-and-drop reorder, cross-container drag from kanban/list view to sidebar lists"
+            },
+            {
+                "type": "feature",
+                "text": "Floating chat widget — Messenger-style floating chat bubble with channel search, message actions, optimistic sending, and display preferences compliance"
+            },
+            {
+                "type": "feature",
+                "text": "Message search — server-side full-text search across all channels with results list and jump-to-message"
+            },
+            {
+                "type": "feature",
+                "text": "Pinned messages — pin important messages to channels for quick reference"
+            },
+            {
+                "type": "feature",
+                "text": "Message forwarding — forward messages to other channels via picker modal"
+            },
+            {
+                "type": "feature",
+                "text": "Slash command entity mentions — /task, /project, /org, /proposal commands to link entities in chat"
+            },
+            {
+                "type": "feature",
+                "text": "Personal notes per channel — private notes with RichTextEditor, per-channel storage, and confirm-before-clear"
+            },
+            {
+                "type": "feature",
+                "text": "Notification sound & mute toggle — audio alerts for new messages with per-channel mute control"
+            },
+            {
+                "type": "feature",
+                "text": "Channel info side-drawer — unified channel info panel with member list, accessible via ⓘ button"
+            },
+            {
+                "type": "feature",
+                "text": "Task column resizing — drag column headers to resize widths with per-group independent sizing and localStorage persistence"
+            },
+            {
+                "type": "feature",
+                "text": "Sticky frozen columns — drag handle, checkbox, and title columns stay fixed during horizontal scroll with shadow indicator"
+            },
+            {
+                "type": "feature",
+                "text": "Task bulk action bar — multi-select tasks with floating action bar for bulk status change, assignment, priority, and deletion"
+            },
+            {
+                "type": "feature",
+                "text": "Project templates — save and reuse project structures with task lists, sections, and custom statuses for consistent project setup"
+            },
+            {
+                "type": "feature",
+                "text": "URL unfurling — link preview cards with title, description, and thumbnail for URLs shared in chat and rich text editors"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal auto-checkout — automatic Stripe checkout on proposal acceptance with deferred service provisioning"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal PDF — download, print, and email proposals as PDF with smart date labels, recurring badges, and cursive signature font"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal auto-save — optimistic debounced auto-save in proposal builder with visual save indicator"
+            },
+            {
+                "type": "feature",
+                "text": "11 proposal transactional emails — dedicated email templates for sent, viewed, accepted, declined, expired, counter-proposal, review, and reminder events"
+            },
+            {
+                "type": "feature",
+                "text": "HIDDEN service visibility — mark service templates as internal-only, invisible on the public catalog"
+            },
+            {
+                "type": "feature",
+                "text": "Dashboard lifetime filter — view all-time KPI stats with new Lifetime period option"
+            },
+            {
+                "type": "feature",
+                "text": "Auto-linkify URLs — URLs in chat messages are automatically converted to clickable links"
+            },
+            {
+                "type": "improvement",
+                "text": "Project name initials — replaced project lead avatar with project name initials and hashed accent colors for consistent project identification"
+            },
+            {
+                "type": "improvement",
+                "text": "Sidebar collapse/expand — single chevron toggle in header, hidden back-to-projects link when collapsed, standardized 56px rail width"
+            },
+            {
+                "type": "improvement",
+                "text": "Configurable invoice defaults — set default payment terms, notes, and footer text in branding settings for all new invoices"
+            },
+            {
+                "type": "improvement",
+                "text": "Cross-section list dragging — drag lists between sections in the project sidebar"
+            },
+            {
+                "type": "fix",
+                "text": "Org-role users seeing 0 projects — fixed project query scoping for Organization Owner/Admin/Member roles"
+            },
+            {
+                "type": "fix",
+                "text": "Proposal-generated invoices now support the full payment flow and recurring billing"
+            },
+            {
+                "type": "fix",
+                "text": "OrgService provisioning via webhook when proposal invoice is paid through Stripe fallback path"
+            },
+            {
+                "type": "fix",
+                "text": "YouTube/Vimeo embeds — added to CSP frame-src for video embed support"
+            },
+            {
+                "type": "fix",
+                "text": "RTE upload hang + click-to-open links in rich text editor"
+            },
+            {
+                "type": "fix",
+                "text": "DnD conflict resolution — fixed dnd-kit vs native drag conflicts for task and list dragging"
+            }
+        ]
+    },
+    {
+        "version": "8.5.5",
+        "date": "2026-04-03",
+        "title": "PM Role Restrictions, Billing Fixes & Email Reliability",
+        "summary": "Comprehensive PM/Team Member financial data gating across all pages, Stripe renewal fixes for all payment method types, signed URL expiry fix for avatars and branding, email digest deduplication, task assignment email refactor, and multiple UX improvements.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Keyboard shortcuts expanded — added shortcuts to Projects, Invoices, and Organizations pages with G→O quick navigation"
+            },
+            {
+                "type": "feature",
+                "text": "File details panel — view file metadata, download history, and tracking in the file manager"
+            },
+            {
+                "type": "feature",
+                "text": "File Browser Picker — browse and select from existing uploaded files (owner-only)"
+            },
+            {
+                "type": "feature",
+                "text": "File manager bulk actions — floating action bar for multi-select file operations"
+            },
+            {
+                "type": "improvement",
+                "text": "PM financial data gating — hide financial KPIs, revenue columns, invoices tab, time tracking data, and Generate Invoice button from PM/Team Member roles across dashboard, reports, projects, and organizations pages"
+            },
+            {
+                "type": "improvement",
+                "text": "Backend time entry filtering — enforce server-side filtering for non-financial roles to prevent data leaks"
+            },
+            {
+                "type": "improvement",
+                "text": "PM team management restricted — removed MANAGE_TEAM_MEMBERS from PM role defaults"
+            },
+            {
+                "type": "improvement",
+                "text": "PM/Team Member own-invoice access — PMs and Team Members can only view invoices they personally created"
+            },
+            {
+                "type": "improvement",
+                "text": "Role rename — Owner → Agency Owner, Team Member → Agency Member for clarity"
+            },
+            {
+                "type": "improvement",
+                "text": "CSS architecture — split features.css (5,951 lines) into 7 focused domain-specific stylesheets"
+            },
+            {
+                "type": "improvement",
+                "text": "Task Status vs Column Settings buttons visually differentiated for clarity"
+            },
+            {
+                "type": "improvement",
+                "text": "Email branding — role-aware wording, enriched digests, and consistent proposal email formatting"
+            },
+            {
+                "type": "fix",
+                "text": "Signed URL expiry breaking avatars and branding images — switched to permanent public URLs"
+            },
+            {
+                "type": "fix",
+                "text": "Renewals cron now supports all Stripe payment method types (card, link, etc.) — not just card"
+            },
+            {
+                "type": "fix",
+                "text": "Catalog checkout now saves card for recurring renewals and persists stripeCustomerId"
+            },
+            {
+                "type": "fix",
+                "text": "Chat digest emails — only notify about NEW messages since last digest, fixed dedup and subject count"
+            },
+            {
+                "type": "fix",
+                "text": "Task assignment email refactor — moved to server-side fire-at-assignment, prevents duplicate emails, respects user email preferences"
+            },
+            {
+                "type": "fix",
+                "text": "Upload placeholder text no longer persists to database"
+            },
+            {
+                "type": "fix",
+                "text": "Org owner can now view invoices correctly — fixed requireAnyPermission OR logic"
+            },
+            {
+                "type": "fix",
+                "text": "Payment link uses correct relation name and centers agency logo"
+            },
+            {
+                "type": "fix",
+                "text": "Workload view filtered to agency staff only — org-role members excluded"
+            },
+            {
+                "type": "fix",
+                "text": "MRR KPI now uses active subscriptions instead of catalog prices"
+            },
+            {
+                "type": "fix",
+                "text": "OverviewTab audit — pinned notes priority, field dropdowns, and other corrections"
+            },
+            {
+                "type": "fix",
+                "text": "Chat digest cron SQL error — ungrouped column in subquery"
+            },
+            {
+                "type": "fix",
+                "text": "Custom domain support in chat-digest, Slack deep links, and top-up checkout"
+            },
+            {
+                "type": "fix",
+                "text": "Collapsed sidebar logo area height aligned to match expanded state"
+            },
+            {
+                "type": "fix",
+                "text": "Reaction swap, reply buttons on replies, RTE drag-drop upload fixes"
+            },
+            {
+                "type": "fix",
+                "text": "Replace native confirm() with styled useConfirm hook in proposal detail"
+            },
+            {
+                "type": "fix",
+                "text": "Stripe customer ID saved on proposal conversion payment"
+            },
+            {
+                "type": "fix",
+                "text": "Line item billing badges and custom domain redirect for proposal auto-checkout"
+            }
+        ]
+    },
+    {
         "version": "8.5.0",
         "date": "2026-03-23",
         "title": "Proposals — Block-Based Proposal Builder & Client Delivery",
