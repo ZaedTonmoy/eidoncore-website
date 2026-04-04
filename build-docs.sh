@@ -28,6 +28,7 @@ CATEGORIES = {
     'getting-started': 'Getting Started', 'onboarding': 'Getting Started', 'dashboard': 'Getting Started',
     'projects': 'Core Features', 'tasks': 'Core Features', 'clients': 'Core Features',
     'invoicing': 'Core Features', 'services': 'Core Features', 'messaging': 'Core Features',
+    'proposals': 'Core Features',
     'team': 'Team & Workflow', 'automations': 'Team & Workflow',
     'reports': 'Team & Workflow', 'notifications': 'Team & Workflow',
     'settings': 'Configuration', 'client-portal': 'Configuration', 'files': 'Configuration',
@@ -39,13 +40,14 @@ CATEGORIES = {
 DIR_TITLES = {
     'settings': 'Settings', 'invoicing': 'Invoicing', 'clients': 'Clients',
     'tasks': 'Tasks', 'client-portal': 'Client Portal', 'notifications': 'Notifications',
-    'security': 'Security', 'services': 'Services',
+    'security': 'Security', 'services': 'Services', 'proposals': 'Proposals',
 }
 
 ICONS = {
     'getting-started': 'play-circle', 'onboarding': 'clipboard', 'dashboard': 'layout',
     'projects': 'folder', 'tasks': 'check-circle', 'clients': 'users',
     'invoicing': 'wallet', 'services': 'wrench', 'messaging': 'message-circle',
+    'proposals': 'file-text',
     'team': 'user-plus', 'automations': 'zap', 'reports': 'bar-chart',
     'notifications': 'bell', 'settings': 'settings', 'client-portal': 'globe',
     'files': 'file', 'intake-forms': 'edit', 'security': 'lock',
@@ -55,16 +57,20 @@ ICONS = {
 ORDER = {
     'getting-started': 1, 'onboarding': 2, 'dashboard': 3,
     'projects': 4, 'tasks': 5, 'clients': 6, 'invoicing': 7,
-    'services': 8, 'messaging': 9, 'team': 10, 'automations': 11,
-    'reports': 12, 'notifications': 13, 'settings': 14,
-    'client-portal': 15, 'files': 16, 'intake-forms': 17, 'security': 18,
-    'keyboard-shortcuts': 19,
+    'services': 8, 'messaging': 9, 'proposals': 10,
+    'team': 11, 'automations': 12,
+    'reports': 13, 'notifications': 14, 'settings': 15,
+    'client-portal': 16, 'files': 17, 'intake-forms': 18, 'security': 19,
+    'keyboard-shortcuts': 20,
 }
 
 # Documentation.ai JSX component tags to strip for website rendering
 JSX_COMPONENTS = [
     'Steps', 'Step', 'Tabs', 'Tab', 'Card', 'Columns',
     'Callout', 'Expandable', 'ExpandableGroup', 'Update',
+    'CodeGroup', 'Request', 'Response',
+    'ParamField', 'ResponseField',
+    'Image', 'Video', 'Iframe',
 ]
 
 def strip_jsx_tags(text):

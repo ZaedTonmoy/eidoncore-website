@@ -18,7 +18,7 @@ get_priority() {
     "./about/"*|"./contact/"*) echo "0.8" ;;
     "./use-cases/index.html") echo "0.8" ;;
     "./use-cases/"*) echo "0.7" ;;
-    "./projects/"*|"./tasks/"*|"./crm/"*|"./invoicing/"*|"./services/"*|"./automations/"*|"./portal/"*|"./notifications/"*|"./reports/"*) echo "0.7" ;;
+    "./projects/"*|"./tasks/"*|"./crm/"*|"./invoicing/"*|"./services/"*|"./automations/"*|"./portal/"*|"./notifications/"*|"./reports/"*|"./proposals/"*) echo "0.7" ;;
     "./integrations/"*) echo "0.7" ;;
     "./blog/"*|"./changelog/"*|"./docs/"*) echo "0.6" ;;
     "./security/"*) echo "0.6" ;;

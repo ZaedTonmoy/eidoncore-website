@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposals — Eidoncore | Professional Client Proposals with E-Signatures</title>
+    <meta name="description"
+        content="Create professional proposals with a block-based builder, line item pricing, client e-signatures, and auto-conversion to projects and invoices. Built into Eidoncore.">
+    <meta property="og:title" content="Proposals — Professional Agency Proposals | Eidoncore">
+    <meta property="og:description"
+        content="Block-based proposal builder with 18+ content types, line item pricing, e-signatures, analytics, and one-click conversion to projects and invoices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/proposals/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/proposals/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Proposals — Professional Agency Proposals | Eidoncore">
+    <meta name="twitter:description"
+        content="Block-based proposal builder with 18+ content types, line item pricing, e-signatures, analytics, and one-click conversion to projects and invoices.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can clients sign proposals electronically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Clients can accept proposals with a typed or drawn signature. The system records the signer's name, IP address, and timestamp for a complete legally-compliant audit trail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can proposals automatically create projects and invoices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can configure auto-conversion so when a client accepts a proposal, it automatically creates a project, an invoice, or both. The client is redirected to Stripe Checkout for immediate payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the proposal feature available on the Free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Proposals is a Pro plan feature. Free plan users will see an upgrade prompt when trying to access proposals. Pro and Enterprise users get full access to the proposal builder, templates, analytics, and conversion tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I track how clients interact with my proposals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Analytics tab on each proposal shows total views, average view time, time to first view, time to decision, device breakdown, and a view timeline chart — giving you complete visibility into client engagement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can proposals include recurring services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can add line items from your Service Catalog, including recurring services. When the proposal is converted to an invoice, recurring items automatically provision active subscriptions with scheduled billing."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Proposals</span></div>
+                <h1 class="page-title anim-blur">Win more clients with <span class="gradient-text">beautiful proposals</span></h1>
+                <p class="page-subtitle anim-blur">Create professional proposals with a block-based builder, collect
+                    e-signatures, track engagement analytics, and auto-convert accepted proposals into projects and
+                    invoices — all from one platform.</p>
+            </div>
+        </section>
+
+        <!-- Block Builder -->
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Builder</span>
+                    <h2>18+ content blocks at your fingertips</h2>
+                    <p>Build proposals visually with drag-and-drop blocks. Auto-saved as you work.</p>
+                </div>
+                <div class="docs-grid stagger-children">
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="type"></div>
+                        <h4>Rich Content</h4>
+                        <p>Headings, text paragraphs, images, dividers, spacers, and video embeds (YouTube, Vimeo, Loom).</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="calculator"></div>
+                        <h4>Pricing Tables</h4>
+                        <p>Line items with quantity, unit price, discounts, and tax. Plus a total summary block with grand total.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="clipboard"></div>
+                        <h4>Scope & Deliverables</h4>
+                        <p>Scope of work descriptions, deliverables checklists, timelines, and terms & conditions blocks.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="pen-tool"></div>
+                        <h4>Signature Block</h4>
+                        <p>Add a signature capture area. Clients can type or draw their signature to accept.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="users"></div>
+                        <h4>Team & Social Proof</h4>
+                        <p>Team bio cards, client testimonials, and case study showcases — build trust in every proposal.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="sliders"></div>
+                        <h4>Pricing Configurator</h4>
+                        <p>Interactive pricing option selector — let clients choose packages and see totals update in real time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Line Items & Pricing -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Pricing</span>
+                    <h2>Flexible line item pricing</h2>
+                    <p>Add items manually or pull from your service catalog. Support for discounts, tax, optional items, and deposit payments.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>Line item features</h3>
+                        <ul class="feature-checklist">
+                            <li>Manual items or import from your <a href="../services/">Service Catalog</a></li>
+                            <li>Per-item quantity, unit price, discount, and tax</li>
+                            <li>Mark items as <strong>optional</strong> — clients choose during acceptance</li>
+                            <li>Billing type badges: Recurring, Hourly, One-time, Service</li>
+                            <li>Document-level discount and tax overrides</li>
+                            <li>Deposit payments — percentage or fixed amount splits</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">Website Design</span><span class="ui-value">$4,500</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">SEO Audit</span><span class="ui-value">$1,200</span></div>
+                                <div class="ui-stat-row" style="opacity:0.6"><span class="ui-label">☐ Monthly Hosting (optional)</span><span class="ui-value">$99/mo</span></div>
+                                <div class="ui-stat-row" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:4px"><span class="ui-label" style="font-weight:600">Total</span><span class="ui-badge">$5,700</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proposal Lifecycle -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Lifecycle</span>
+                    <h2>Track every proposal from draft to signed</h2>
+                    <p>A structured lifecycle with 10 statuses keeps your pipeline organized.</p>
+                </div>
+                <div class="built-for-grid stagger-children">
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="edit"></div>
+                        <h3>Draft & Review</h3>
+                        <p>Build your proposal, then submit for <strong>internal review</strong> before sending. Approvers can approve or reject with feedback.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="send"></div>
+                        <h3>Send & Schedule</h3>
+                        <p>Send immediately or <strong>schedule</strong> for a specific date and time. Includes PDF attachment and public share link.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="eye"></div>
+                        <h3>View & Track</h3>
+                        <p>Know exactly when clients open your proposal. <strong>Analytics</strong> show views, time spent, and device breakdown.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="check-circle"></div>
+                        <h3>Accept & Sign</h3>
+                        <p>Clients accept with e-signature (typed or drawn). Full <strong>audit trail</strong> with name, IP address, and timestamp.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Actions -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Client Experience</span>
+                    <h2>Multiple response options for clients</h2>
+                    <p>Beyond simple accept/decline — clients can counter-propose, request extensions, and choose optional items.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">✓ Accept & Sign</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Primary</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">✗ Decline</span><span class="ui-value">With reason</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">↔ Counter-Propose</span><span class="ui-value">With message</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">⏰ Request Extension</span><span class="ui-value">More time</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-split-content">
+                        <h3>Negotiation built in</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>Accept & sign</strong> — select optional items, sign with typed or drawn signature</li>
+                            <li><strong>Decline</strong> — with a reason sent back to the agency</li>
+                            <li><strong>Counter-propose</strong> — submit requested changes for agency review</li>
+                            <li><strong>Request extension</strong> — ask for more time before expiry</li>
+                            <li><strong>Send reminders</strong> — nudge clients who haven't responded</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auto-Conversion -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Conversion</span>
+                    <h2>One-click conversion to projects & invoices</h2>
+                    <p>Turn accepted proposals into actionable work instantly — or let it happen automatically.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>Conversion options</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>To Project</strong> — create a linked project with client organization</li>
+                            <li><strong>To Invoice</strong> — generate a draft invoice with line items</li>
+                            <li><strong>To Both</strong> — project + invoice created simultaneously</li>
+                            <li><strong>Multi-Invoice</strong> — milestone-based payment schedule</li>
+                            <li><strong>Deposits</strong> — split into deposit and balance invoices</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">Auto-Convert</span><span class="ui-badge">On Accept</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">→ Project</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Created</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">→ Invoice</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Created</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">→ Stripe Checkout</span><span class="ui-value">Redirected</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-split animate-on-scroll" style="margin-top:60px">
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">🔄 Monthly Hosting</span><span class="ui-badge">Recurring</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Subscription Created</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Active</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Next Billing</span><span class="ui-value">May 1, 2026</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-split-content">
+                        <h3>Service-linked line items</h3>
+                        <ul class="feature-checklist">
+                            <li>Import items from your <a href="../services/">Service Catalog</a> with pre-configured pricing</li>
+                            <li>Recurring services auto-provision <strong>active subscriptions</strong> on conversion</li>
+                            <li>One-time fees and recurring billing combined in a single proposal</li>
+                            <li>Seamless handoff from proposal → invoice → <a href="../invoicing/">payment via Stripe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Analytics</span>
+                    <h2>Know exactly how clients engage</h2>
+                    <p>The Analytics tab on every proposal gives you complete visibility into client behavior.</p>
+                </div>
+                <div class="built-for-grid stagger-children">
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="eye"></div>
+                        <h3>Total Views</h3>
+                        <p>How many times the client opened your proposal.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="clock"></div>
+                        <h3>Time Spent</h3>
+                        <p>Average time clients spend reading — gauge engagement depth.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="zap"></div>
+                        <h3>Time to First View</h3>
+                        <p>How quickly the client opened after you sent it.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="bar-chart"></div>
+                        <h3>Time to Decision</h3>
+                        <p>Duration between first view and acceptance or decline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Templates & Extras -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Productivity</span>
+                    <h2>Templates, versioning & more</h2>
+                    <p>Save time with reusable templates and keep a full revision history.</p>
+                </div>
+                <div class="docs-grid stagger-children">
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="copy"></div>
+                        <h4>Templates</h4>
+                        <p>Save any proposal as a reusable template — blocks, line items, and settings preserved for instant reuse.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="git-branch"></div>
+                        <h4>Version History</h4>
+                        <p>Revise withdrawn or counter-addressed proposals. The system maintains a linked chain of versions.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="download"></div>
+                        <h4>PDF Download</h4>
+                        <p>Download any proposal as a professional PDF. Sent proposals include the PDF as an email attachment.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="link"></div>
+                        <h4>Share Links</h4>
+                        <p>Copy a public share link for sent proposals — recipients can view without logging in.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="layout"></div>
+                        <h4>Table & Card Views</h4>
+                        <p>Browse proposals in a sortable table or visual card grid. Status filter tabs and view preference saved.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="shield"></div>
+                        <h4>Permissions</h4>
+                        <p>Granular per-role permissions — view, create, edit, send, convert, and manage templates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number" data-target="18">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Block Types</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="10">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Lifecycle Statuses</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="4">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Conversion Modes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="6">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Analytics Metrics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>Close deals faster</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"We used to send proposals as PDF attachments and had no idea if clients even opened them.
+                            Now we see exactly when they view it, how long they spend reading, and get instant
+                            notifications when they sign. Our close rate jumped 35%."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#6C63FF,#A78BFA)">NP
+                            </div>
+                            <div><strong>Natasha Prokov</strong><br><span>Founder, Orbit Creative</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"The auto-conversion is a game changer. Client accepts the proposal, Stripe checkout pops up,
+                            they pay, and the project is already created with tasks ready to go. Zero manual work."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#4ADE80,#06B6D4)">TK
+                            </div>
+                            <div><strong>Tom Kendall</strong><br><span>Director, Nexus Digital</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">Can clients sign proposals electronically?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Clients can accept proposals with a typed or drawn signature. The system records
+                                the signer's name, IP address, and timestamp for a complete audit trail.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can proposals automatically create projects and invoices?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Configure auto-conversion so when a client accepts, it automatically creates a
+                                project, an invoice, or both. The client is redirected to Stripe Checkout for
+                                immediate payment.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Is the proposal feature available on the Free plan?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Proposals is a Pro plan feature. Free plan users will see an upgrade prompt. Pro and
+                                Enterprise users get full access to the builder, templates, analytics, and conversion
+                                tools.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can I track how clients interact with my proposals?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. The Analytics tab shows total views, average view time, time to first view, time
+                                to decision, and device breakdown — complete visibility into client engagement.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can proposals include recurring services?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Add line items from your Service Catalog, including recurring services. When
+                                converted, recurring items auto-provision active subscriptions with scheduled billing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Related</span>
+                    <h2>Works great with</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../projects/" class="related-card">
+                        <div class="related-icon" data-icon="folder"></div>
+                        <h3>Projects</h3>
+                        <p>Convert accepted proposals directly into projects.</p>
+                    </a>
+                    <a href="../invoicing/" class="related-card">
+                        <div class="related-icon" data-icon="wallet"></div>
+                        <h3>Invoicing</h3>
+                        <p>Auto-generate invoices from proposal line items.</p>
+                    </a>
+                    <a href="../services/" class="related-card">
+                        <div class="related-icon" data-icon="wrench"></div>
+                        <h3>Services</h3>
+                        <p>Import catalog items into proposals with pre-set pricing.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Product updates & tips</h3>
+                    <p>Get notified about new proposal features, agency best practices, and product updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
+                        You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Start closing deals faster</h2>
+                    <p>Professional proposals with e-signatures, analytics, and auto-conversion — included in every Pro plan.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span
+                                class="btn-arrow">→</span></a><a href="../contact/"
+                            class="btn btn-outline btn-lg">Book a Demo</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
