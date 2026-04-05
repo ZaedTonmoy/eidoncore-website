@@ -28,7 +28,7 @@ CATEGORIES = {
     'getting-started': 'Getting Started', 'onboarding': 'Getting Started', 'dashboard': 'Getting Started',
     'projects': 'Core Features', 'tasks': 'Core Features', 'clients': 'Core Features',
     'invoicing': 'Core Features', 'services': 'Core Features', 'messaging': 'Core Features',
-    'proposals': 'Core Features',
+    'proposals': 'Core Features', 'tickets': 'Core Features',
     'team': 'Team & Workflow', 'automations': 'Team & Workflow',
     'reports': 'Team & Workflow', 'notifications': 'Team & Workflow',
     'settings': 'Configuration', 'client-portal': 'Configuration', 'files': 'Configuration',
@@ -41,6 +41,7 @@ DIR_TITLES = {
     'settings': 'Settings', 'invoicing': 'Invoicing', 'clients': 'Clients',
     'tasks': 'Tasks', 'client-portal': 'Client Portal', 'notifications': 'Notifications',
     'security': 'Security', 'services': 'Services', 'proposals': 'Proposals',
+    'tickets': 'Tickets',
 }
 
 ICONS = {
@@ -48,6 +49,7 @@ ICONS = {
     'projects': 'folder', 'tasks': 'check-circle', 'clients': 'users',
     'invoicing': 'wallet', 'services': 'wrench', 'messaging': 'message-circle',
     'proposals': 'file-text',
+    'tickets': 'ticket',
     'team': 'user-plus', 'automations': 'zap', 'reports': 'bar-chart',
     'notifications': 'bell', 'settings': 'settings', 'client-portal': 'globe',
     'files': 'file', 'intake-forms': 'edit', 'security': 'lock',
@@ -58,10 +60,11 @@ ORDER = {
     'getting-started': 1, 'onboarding': 2, 'dashboard': 3,
     'projects': 4, 'tasks': 5, 'clients': 6, 'invoicing': 7,
     'services': 8, 'messaging': 9, 'proposals': 10,
-    'team': 11, 'automations': 12,
-    'reports': 13, 'notifications': 14, 'settings': 15,
-    'client-portal': 16, 'files': 17, 'intake-forms': 18, 'security': 19,
-    'keyboard-shortcuts': 20,
+    'tickets': 11,
+    'team': 12, 'automations': 13,
+    'reports': 14, 'notifications': 15, 'settings': 16,
+    'client-portal': 17, 'files': 18, 'intake-forms': 19, 'security': 20,
+    'keyboard-shortcuts': 21,
 }
 
 # Documentation.ai JSX component tags to strip for website rendering

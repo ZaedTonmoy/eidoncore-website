@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets & Support — Eidoncore | Client Support Ticketing with SLA & CSAT</title>
+    <meta name="description"
+        content="Manage client support requests with structured ticketing, SLA tracking, CSAT ratings, auto-assignment, canned responses, and full client portal integration. Built into Eidoncore.">
+    <meta property="og:title" content="Tickets & Support — Client Ticketing System | Eidoncore">
+    <meta property="og:description"
+        content="Structured client support ticketing with SLA tracking, CSAT ratings, auto-assignment rules, canned templates, and seamless portal integration for agencies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/tickets/">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/tickets/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="Tickets & Support — Client Ticketing System | Eidoncore">
+    <meta name="twitter:description"
+        content="Structured client support ticketing with SLA tracking, CSAT ratings, auto-assignment rules, canned templates, and seamless portal integration for agencies.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between tickets and tasks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tickets represent external support requests from your clients (bug reports, questions, change requests). Tasks represent internal work for your agency team. A ticket CAN generate a linked task when work is needed, but the two systems stay separate — tickets track the conversation and resolution, tasks track the work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does SLA tracking work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SLA targets are configurable per priority level (response time and resolution time). The system uses an accumulator approach that pauses the SLA clock when tickets are in 'Waiting on Client' status, ensuring accurate measurement of your actual response time — not wall-clock time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can clients submit tickets from the portal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Clients can submit and track tickets from a dedicated Tickets page in the portal, a 'Need Help?' floating button on every portal page, or a 'Report an Issue' button on project pages. Organization Owners and Admins see all tickets, while Members see only tickets they created or are watching."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the ticketing feature available on the Free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Core ticketing requires the Starter plan or higher. SLA tracking, CSAT ratings, custom statuses, canned templates, and ticket merging are available on Pro plans. Auto-assignment rules and email-to-ticket are Enterprise features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can ticket time be billed to clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Time logged on tickets follows a separate billing pipeline from project time. If the ticket is linked to a support retainer service, hours auto-deduct. Otherwise, unbilled ticket time surfaces on the client's CRM page for invoice generation."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><a
+                        href="../features/">Features</a><span class="separator">/</span><span
+                        class="current">Tickets</span></div>
+                <h1 class="page-title anim-blur">Deliver exceptional support with <span class="gradient-text">structured ticketing</span></h1>
+                <p class="page-subtitle anim-blur">Manage client support requests with SLA tracking, CSAT ratings,
+                    auto-assignment, canned responses, and full portal integration — separate from your task system,
+                    connected to your entire workflow.</p>
+            </div>
+        </section>
+
+        <!-- Why Tickets -->
+        <section class="feature-detail" style="padding-top:20px">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Overview</span>
+                    <h2>Support requests deserve their own system</h2>
+                    <p>Tickets are external requests from clients. Tasks are internal work for your team. Keep them separate, connect them when needed.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>Tickets vs Tasks</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>Tickets</strong> — created by clients (bug reports, questions, change requests)</li>
+                            <li><strong>Tasks</strong> — created by your team (internal work, deliverables)</li>
+                            <li><strong>Ticket → Task bridge</strong> — convert a ticket into a linked task when work is needed</li>
+                            <li><strong>Separate lifecycles</strong> — tickets have SLA tracking, CSAT ratings, and priority escalation</li>
+                            <li><strong>Separate billing</strong> — ticket time and project time stay in distinct pipelines</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">🎫 TKT-104</span><span class="ui-badge" style="background:#14b8a6;color:#000">Open</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Client: Acme Corp</span><span class="ui-value">Jane Smith</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Priority</span><span class="ui-badge">High 🔴</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">SLA Response</span><span class="ui-value">⏱ 2h remaining</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ticket Lifecycle -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Lifecycle</span>
+                    <h2>A clear path from request to resolution</h2>
+                    <p>Six default statuses guide every ticket through a structured workflow. Customize with your own statuses on Pro plans.</p>
+                </div>
+                <div class="workflow-pipeline anim-blur">
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="circle"></div>
+                        <span>Open</span>
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="search"></div>
+                        <span>Triaged</span>
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="play"></div>
+                        <span>In Progress</span>
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="clock"></div>
+                        <span>Waiting</span>
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="check-circle"></div>
+                        <span>Resolved</span>
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon" data-icon="lock"></div>
+                        <span>Closed</span>
+                    </div>
+                </div>
+                <div class="built-for-grid stagger-children" style="margin-top:60px">
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="tag"></div>
+                        <h3>7 Ticket Types</h3>
+                        <p>Bug, Question, Feature Request, Change Request, Support, Billing, and Other — color-coded badges for instant recognition.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="alert-triangle"></div>
+                        <h3>5 Priority Levels</h3>
+                        <p>Low, Normal, High, Urgent, and Critical — each with configurable SLA targets and escalation rules.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="hash"></div>
+                        <h3>Sequential Numbering</h3>
+                        <p>Every ticket gets a human-readable number (TKT-001, TKT-002) — sequential per agency, race-condition safe.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="users"></div>
+                        <h3>Watchers & CC</h3>
+                        <p>Add stakeholders as watchers — they receive all notifications and can follow progress without being the reporter or assignee.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLA Tracking -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">SLA</span>
+                    <h2>Never miss a service level commitment</h2>
+                    <p>Configurable first-response and resolution targets per priority level. The SLA clock pauses automatically when you're waiting on the client.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>Smart SLA computation</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>Per-priority targets</strong> — set response and resolution times for each priority level</li>
+                            <li><strong>Pause-aware</strong> — SLA clock pauses in "Waiting on Client" status automatically</li>
+                            <li><strong>Warning at 80%</strong> — notification to assigned agent and agency owner</li>
+                            <li><strong>Breach at 100%</strong> — escalation notification to owner and admin</li>
+                            <li><strong>Live timer</strong> — real-time SLA countdown visible in ticket detail</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">Critical</span><span class="ui-value">30min / 4h</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Urgent</span><span class="ui-value">1h / 8h</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">High</span><span class="ui-value">4h / 1 day</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Normal</span><span class="ui-value">8h / 3 days</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Low</span><span class="ui-value">24h / 5 days</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Portal -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Portal</span>
+                    <h2>Clients submit and track tickets from their portal</h2>
+                    <p>Three ways for clients to reach you — dedicated tickets page, floating help button, and project-level issue reporting.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">📋 Tickets Page</span><span class="ui-badge">Sidebar Nav</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">❓ Need Help?</span><span class="ui-badge">Every Page</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">🐛 Report Issue</span><span class="ui-badge">Project Page</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-split-content">
+                        <h3>Role-based visibility</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>Org Owner & Admin</strong> — see all tickets for their organization</li>
+                            <li><strong>Org Member</strong> — sees only tickets they created or are watching</li>
+                            <li>Clients can <strong>reply</strong>, <strong>upload attachments</strong>, and <strong>rate resolutions</strong></li>
+                            <li>Org Owner and Admin can <strong>reopen</strong> resolved tickets and manage watchers</li>
+                            <li><strong>Internal notes</strong> stay hidden — clients never see your private agent discussions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CSAT -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Satisfaction</span>
+                    <h2>Measure client satisfaction after every resolution</h2>
+                    <p>When a ticket is resolved, clients can rate their experience on a 1–5 scale with optional feedback — closing the support feedback loop.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>CSAT ratings built in</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>1–5 star rating</strong> with optional text comment</li>
+                            <li>Prompted via <strong>email notification</strong> and in-app on ticket resolution</li>
+                            <li>Feeds into <strong>CRM health scoring</strong> — low CSAT signals at-risk clients</li>
+                            <li>CSAT trend charts in the <strong>Reports → Support</strong> tab</li>
+                            <li>Resolution events logged to the <strong>CRM activity timeline</strong></li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">★★★★★</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Excellent</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Avg CSAT</span><span class="ui-value">4.6 / 5.0</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Rated Tickets</span><span class="ui-value">87%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Advanced</span>
+                    <h2>Power features for high-volume support</h2>
+                    <p>Canned templates, ticket merging, auto-assignment, custom statuses, and conversion to proposals — available on Pro and Enterprise plans.</p>
+                </div>
+                <div class="docs-grid stagger-children">
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="copy"></div>
+                        <h4>Canned Templates</h4>
+                        <p>Save frequently used responses as templates with categories and shortcuts. Agents insert them with one click.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="git-merge"></div>
+                        <h4>Ticket Merging</h4>
+                        <p>Merge duplicate tickets — replies, time entries, and watchers are consolidated into the target ticket automatically.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="shuffle"></div>
+                        <h4>Auto-Assignment</h4>
+                        <p>Route tickets automatically with rules: assign to a specific agent, round-robin across a team, or route to the least busy member.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="palette"></div>
+                        <h4>Custom Statuses</h4>
+                        <p>Create, rename, recolor, and reorder ticket statuses beyond the 6 defaults. Full drag-and-drop management.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="arrow-right-circle"></div>
+                        <h4>Convert to Task</h4>
+                        <p>When work is needed, convert a ticket into a linked task in any project. The ticket tracks resolution; the task tracks work.</p>
+                    </div>
+                    <div class="doc-card animate-on-scroll">
+                        <div class="doc-icon" data-icon="file-text"></div>
+                        <h4>Convert to Proposal</h4>
+                        <p>Turn feature requests and change requests into proposals — bridging support requests to your sales pipeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automations -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Automations</span>
+                    <h2>Automate your support workflow</h2>
+                    <p>5 ticket triggers and 3 ticket actions integrate seamlessly with the automation engine — no code required.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-content">
+                        <h3>Triggers & actions</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>ticket_created</strong> — auto-assign, notify, or create a linked task</li>
+                            <li><strong>ticket_status_changed</strong> — escalate, reassign, or send follow-ups</li>
+                            <li><strong>ticket_assigned</strong> — welcome message to the assigned agent</li>
+                            <li><strong>ticket_resolved</strong> — log to CRM, send CSAT prompt</li>
+                            <li><strong>ticket_sla_breached</strong> — escalate to owner + send urgent email</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">When</span><span class="ui-badge">Ticket Created</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">If</span><span class="ui-value">Type = BUG</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">Then</span><span class="ui-badge" style="background:var(--accent-green);color:#000">Assign → Dev Lead</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports & Dashboard -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Analytics</span>
+                    <h2>Reports & dashboard widgets</h2>
+                    <p>A dedicated Support tab in Reports with KPIs, 7 chart types, and 3 dashboard widgets — giving you complete visibility into support operations.</p>
+                </div>
+                <div class="built-for-grid stagger-children">
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="bar-chart"></div>
+                        <h3>5 KPI Cards</h3>
+                        <p>Open tickets, avg first response time, avg resolution time, SLA compliance rate, and CSAT score.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="trending-up"></div>
+                        <h3>7 Chart Types</h3>
+                        <p>Volume over time, by type, by client, resolution trend, SLA compliance, team workload, and CSAT trend.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="layout"></div>
+                        <h3>3 Dashboard Widgets</h3>
+                        <p>Open tickets count, SLA breaches today, and overdue tickets — right on your executive dashboard.</p>
+                    </div>
+                    <div class="built-for-card animate-on-scroll">
+                        <div class="built-for-icon" data-icon="heart"></div>
+                        <h3>Health Score Impact</h3>
+                        <p>Ticket data feeds into CRM health scoring — SLA breaches and low CSAT signal at-risk clients automatically.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Tracking & Billing -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Billing</span>
+                    <h2>Track and bill support time</h2>
+                    <p>Log time on tickets with manual entries or live timers. Bill support hours separately from project work.</p>
+                </div>
+                <div class="feature-split animate-on-scroll">
+                    <div class="feature-split-visual">
+                        <div class="ui-preview">
+                            <div class="ui-preview-bar"><span></span><span></span><span></span></div>
+                            <div class="ui-preview-content">
+                                <div class="ui-stat-row"><span class="ui-label">Path A: Retainer</span><span class="ui-badge">Auto-Deduct</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">→ Service Hours</span><span class="ui-value">-2.5h</span></div>
+                                <div class="ui-stat-row" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:4px"><span class="ui-label">Path B: Invoice</span><span class="ui-badge">Generate</span></div>
+                                <div class="ui-stat-row"><span class="ui-label">→ Support Invoice</span><span class="ui-value">$375.00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-split-content">
+                        <h3>Two billing pathways</h3>
+                        <ul class="feature-checklist">
+                            <li><strong>Retainer deduction</strong> — if linked to a support service, hours auto-deduct from the retainer balance</li>
+                            <li><strong>Invoice generation</strong> — unbilled ticket time surfaces on the CRM page with a "Generate Support Invoice" button</li>
+                            <li><strong>Separate from projects</strong> — ticket time never appears in project budget tabs</li>
+                            <li><strong>Live timer</strong> — start/stop timer directly from the ticket detail drawer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number" data-target="7">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Ticket Types</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="5">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Priority Levels</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="6">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Default Statuses</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="9">0</span><span class="stat-suffix"></span>
+                        <span class="stat-label">Notifications</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Agencies Say</span>
+                    <h2>Support that scales with you</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"Before Eidoncore, client support was scattered across emails, Slack, and spreadsheets.
+                            Now every request is tracked with SLA timers, and our resolution time dropped by 60%.
+                            The CSAT ratings showed us exactly where we needed to improve."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#14B8A6,#06B6D4)">RH
+                            </div>
+                            <div><strong>Rachel Huang</strong><br><span>COO, Summit Digital Agency</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"The auto-assignment rules save us hours every week. Bug tickets go straight to our dev
+                            team, billing questions route to accounts, and everything has an SLA attached.
+                            Our clients love being able to submit tickets from their portal."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#A78BFA,#6C63FF)">JT
+                            </div>
+                            <div><strong>Jake Torres</strong><br><span>Founder, Prism Creative Co.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What is the difference between tickets and tasks?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Tickets represent external support requests from your clients (bug reports, questions,
+                                change requests). Tasks represent internal work for your agency team. A ticket CAN
+                                generate a linked task when work is needed, but the two systems stay separate — tickets
+                                track the conversation and resolution, tasks track the work.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">How does SLA tracking work?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>SLA targets are configurable per priority level (first response time and resolution time).
+                                The system uses an accumulator approach that pauses the SLA clock when tickets are in
+                                "Waiting on Client" status, ensuring accurate measurement of your actual response time —
+                                not wall-clock time. You'll receive warning notifications at 80% and breach alerts at
+                                100%.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can clients submit tickets from the portal?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Clients can submit and track tickets from a dedicated Tickets page in the portal,
+                                a "Need Help?" floating button on every portal page, or a "Report an Issue" button on
+                                project detail pages. Organization Owners and Admins see all tickets, while Members see
+                                only tickets they created or are watching.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Is the ticketing feature available on the Free plan?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Core ticketing requires the Starter plan or higher (limited to 50 open tickets). SLA
+                                tracking, CSAT ratings, custom statuses, canned templates, and ticket merging are
+                                available on Pro plans (unlimited tickets). Auto-assignment rules and email-to-ticket
+                                are Enterprise features.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can ticket time be billed to clients?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. Time logged on tickets follows a separate billing pipeline from project time. If
+                                the ticket is linked to a support retainer (OrgService), hours auto-deduct from the
+                                balance. Otherwise, unbilled ticket time surfaces on the client's CRM page with a
+                                "Generate Support Invoice" button.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Related</span>
+                    <h2>Works great with</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../crm/" class="related-card">
+                        <div class="related-icon" data-icon="users"></div>
+                        <h3>CRM & Clients</h3>
+                        <p>Ticket data feeds into health scoring and CRM activity timelines.</p>
+                    </a>
+                    <a href="../tasks/" class="related-card">
+                        <div class="related-icon" data-icon="check-circle"></div>
+                        <h3>Tasks</h3>
+                        <p>Convert tickets into linked tasks when internal work is needed.</p>
+                    </a>
+                    <a href="../automations/" class="related-card">
+                        <div class="related-icon" data-icon="zap"></div>
+                        <h3>Automations</h3>
+                        <p>5 ticket triggers and 3 actions for your automation workflows.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>Product updates & tips</h3>
+                    <p>Get notified about new ticketing features, support best practices, and agency growth strategies.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
+                        You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Turn client support into a competitive advantage</h2>
+                    <p>Structured ticketing, SLA tracking, and CSAT ratings — included in every Starter plan and above. Start your 14-day free trial.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span
+                                class="btn-arrow">→</span></a><a href="../contact/"
+                            class="btn btn-outline btn-lg">Book a Demo</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
