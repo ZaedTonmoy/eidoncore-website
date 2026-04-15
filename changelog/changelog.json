@@ -1,5 +1,217 @@
 [
     {
+        "version": "8.7.0",
+        "date": "2026-04-15",
+        "title": "AI Connector, Client Portal, PWA & Mobile Overhaul",
+        "summary": "Landmark release — AI Connector with 66 MCP tools and OAuth 2.1 for Claude/Cursor/Windsurf integration, Client Portal Sprints 1-3 (action-first dashboard, approval workflows, file requests, milestone celebrations), PWA with Web Push notifications and offline support, Ticketing Phase 4 (intake forms, message-to-ticket, merge, convert to proposal), Client Reports with branded PDF delivery, CRM Tiers 1-5 with Docs & Files tab, comprehensive mobile responsiveness sweep, Settings restructured into 5 role-based sections, edge middleware for instant auth, and 30+ critical bug fixes including Stripe webhook reliability, timer race conditions, and connection pool exhaustion.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "AI Connector (MCP) — connect Claude, Cursor, Windsurf, and any MCP client to your workspace via OAuth 2.1. 66 tools across 15 modules: tasks, projects, invoices, proposals, clients, tickets, reports, messaging, services, files, search, dashboard, team, automations, and client reports"
+            },
+            {
+                "type": "feature",
+                "text": "MCP OAuth 2.1 — industry-standard authentication with PKCE, dynamic client registration, RFC 9728/8414 discovery endpoints, single-use refresh token rotation with reuse detection, and branded consent screen"
+            },
+            {
+                "type": "feature",
+                "text": "AI Connector settings — master toggle, exposed modules control, eligible roles, configurable rate limits (10/25/60 per min), workspace-level AI instructions, active session management, audit trail, and Module Reference with example prompts"
+            },
+            {
+                "type": "feature",
+                "text": "Client Portal Sprint 1 — action-first dashboard transformation with task-centric widgets and streamlined client experience"
+            },
+            {
+                "type": "feature",
+                "text": "Client Portal Sprint 2 — approval workflows with Approve/Request Changes email buttons, file requests, project timeline, and work requests"
+            },
+            {
+                "type": "feature",
+                "text": "Client Portal Sprint 3 — per-client welcome messages, quiet hours with timezone support, and milestone celebration animations"
+            },
+            {
+                "type": "feature",
+                "text": "PWA foundation — installable Progressive Web App with app shell caching, background sync, Web Push notifications via VAPID, share target, and badging API"
+            },
+            {
+                "type": "feature",
+                "text": "Service Worker v3 — navigation preload for instant page loads, cache-first statics, LRU image cache, stale-while-revalidate API responses, and offline fallback"
+            },
+            {
+                "type": "feature",
+                "text": "PWA install banner — mobile install prompt encouraging users to add the app to their home screen"
+            },
+            {
+                "type": "feature",
+                "text": "Ticketing Phase 4 — settings page with status pipeline management, canned response template picker, ticket merge modal, and convert ticket to proposal"
+            },
+            {
+                "type": "feature",
+                "text": "Intake forms on tickets — dynamic form mapping to ticket types with field configuration"
+            },
+            {
+                "type": "feature",
+                "text": "Create ticket from message — convert chat messages into support tickets directly from the messaging interface"
+            },
+            {
+                "type": "feature",
+                "text": "Client Reports — generate, send, and track branded client reports with milestone queries, PDF delivery, and CLIENT_REPORT_SENT notifications"
+            },
+            {
+                "type": "feature",
+                "text": "CRM Tiers 1-5 — Docs & Files tab with file upload, link creation, rich text documents, type-specific icons, image thumbnails, lightbox preview, file pinning, and PDF inline preview"
+            },
+            {
+                "type": "feature",
+                "text": "Organization Member role expansion — project-work permissions added for Org Members to participate in assigned projects"
+            },
+            {
+                "type": "feature",
+                "text": "Last Worked By column — see who last worked on each task in list views"
+            },
+            {
+                "type": "feature",
+                "text": "Last month & custom date range filters — new time period options for dashboard and reports"
+            },
+            {
+                "type": "feature",
+                "text": "Health endpoint — /api/health keep-alive to prevent Vercel cold starts"
+            },
+            {
+                "type": "feature",
+                "text": "InfoPopover shared component — platform-wide contextual help tooltips with portal rendering"
+            },
+            {
+                "type": "feature",
+                "text": "Refundable badge — info popover on tasks showing refund eligibility, gated behind TASKS_DELETE permission"
+            },
+            {
+                "type": "feature",
+                "text": "Unviewed report badge — sidebar notification badge for org users when new client reports arrive"
+            },
+            {
+                "type": "feature",
+                "text": "Project file request badges — visual indicators in sidebar, project sidebar, and list page for pending file requests"
+            },
+            {
+                "type": "improvement",
+                "text": "Settings restructured into 5 role-based sections — Account, Agency Settings, Workspace, Billing, and About with per-item permission filtering"
+            },
+            {
+                "type": "improvement",
+                "text": "AI Connector read-only mode — non-admin users see Module Reference, Connection Details, Compatible Tools, and Security sections without admin controls"
+            },
+            {
+                "type": "improvement",
+                "text": "Reports sidebar navigation — collapsible sidebar replacing tab bar for better navigation across report types"
+            },
+            {
+                "type": "improvement",
+                "text": "Comprehensive mobile responsiveness — platform-wide sweep across all pages with proper KPI cards, filter dropdowns, action buttons, and table layouts on small screens"
+            },
+            {
+                "type": "improvement",
+                "text": "Edge middleware fast auth — skip cold start for unauthenticated users, root redirect moved to edge layer"
+            },
+            {
+                "type": "improvement",
+                "text": "Login page renders immediately — no longer blocks on branding API call"
+            },
+            {
+                "type": "improvement",
+                "text": "Page layout standardization — Automations, Intake Forms, and Bug Reports modernized to consistent layout pattern"
+            },
+            {
+                "type": "improvement",
+                "text": "ProjectSidebar nav grouping — organized into TASKS, PROJECT, and ADMIN sections with visual dividers"
+            },
+            {
+                "type": "improvement",
+                "text": "SVG icon migration — replaced all remaining emoji icons (CRM, locks, badges) with consistent SVG icons"
+            },
+            {
+                "type": "improvement",
+                "text": "Collapsed OrgSidebar dividers — visual separators between icon groups when sidebar is collapsed"
+            },
+            {
+                "type": "improvement",
+                "text": "Ticket UI branding compliance — branded fonts, display preference support, and SLA audit fixes"
+            },
+            {
+                "type": "improvement",
+                "text": "Dark logo on auth pages — better contrast on dark backgrounds for login and signup"
+            },
+            {
+                "type": "improvement",
+                "text": "PWA skyline logo — new icon design with maskable variants to remove Chrome badge overlay on Android"
+            },
+            {
+                "type": "fix",
+                "text": "Stripe webhook notifications never fired — critical FK crash on audit log prevented all webhook-triggered notifications"
+            },
+            {
+                "type": "fix",
+                "text": "Connection pool exhaustion — lastActiveAt fire-and-forget updates causing deadlocks, fixed with 5s timeout and pool increase (2 → 5)"
+            },
+            {
+                "type": "fix",
+                "text": "Login timeout — idle_in_transaction_session_timeout added to prevent abandoned transaction locks"
+            },
+            {
+                "type": "fix",
+                "text": "Timer vanishing on start — use mutation response instead of refetch to eliminate race conditions"
+            },
+            {
+                "type": "fix",
+                "text": "Timer widget positioning — now renders above chat bubble to prevent overlap"
+            },
+            {
+                "type": "fix",
+                "text": "PWA navigation preload — cancelled preload causing false offline page on resume from screen lock"
+            },
+            {
+                "type": "fix",
+                "text": "PWA HTML page caching reverted — was causing auth/session failures after login"
+            },
+            {
+                "type": "fix",
+                "text": "Financial data gating — Total Spent/Outstanding stripped from client insights for PM role, Activity Timeline invoice data gated behind canViewFinancials"
+            },
+            {
+                "type": "fix",
+                "text": "Tenant scoping — agencyId added to all Sprint 2 queries to prevent cross-tenant data access"
+            },
+            {
+                "type": "fix",
+                "text": "React hydration mismatches — fixed #418, #310 (Decimal object), viewMode localStorage read, and dashboard quote"
+            },
+            {
+                "type": "fix",
+                "text": "Org switcher and project switcher dropdowns no longer clipped on mobile phones"
+            },
+            {
+                "type": "fix",
+                "text": "Filter dropdowns no longer overflow off-screen on mobile"
+            },
+            {
+                "type": "fix",
+                "text": "Chat line breaks preserved — white-space: pre-wrap applied to message content"
+            },
+            {
+                "type": "fix",
+                "text": "System user ID lookups — replaced all userId: 'system' with real user lookups to prevent FK constraint violations"
+            },
+            {
+                "type": "fix",
+                "text": "Client Report milestone query — use COMPLETED status instead of nonexistent completedAt, correct field names"
+            },
+            {
+                "type": "fix",
+                "text": "MobileBottomNav clearance — fixed across 4 pages where fixed elements were overlapping the bottom navigation"
+            }
+        ]
+    },
+    {
         "version": "8.6.0",
         "date": "2026-04-03",
         "title": "Project Sidebar, Task Lists, Messaging Upgrades & Column Resizing",
