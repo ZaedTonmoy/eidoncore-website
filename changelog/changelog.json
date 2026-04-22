@@ -1,5 +1,181 @@
 [
     {
+        "version": "8.8.0",
+        "date": "2026-04-23",
+        "title": "Email Replies, Credit Notes, Ticketing Upgrades & Security Hardening",
+        "summary": "Reply to tickets and tasks directly from email, credit notes on invoices, AI Connector expanded to 111 tools across 19 modules, portal announcements for client communication, overhauled Roles & Permissions editor, premium portal invite emails, Turnstile bot protection, Plan page with resource usage and billing history, and 20+ bug fixes for caching, notifications, and email reliability.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Inbound email replies — reply to ticket notifications and task comments directly from your email client without logging in. Replies are automatically threaded back to the correct ticket or task"
+            },
+            {
+                "type": "feature",
+                "text": "Email threading — unique reply-to addresses per conversation with Message-ID/References headers for proper email thread grouping in all mail clients"
+            },
+            {
+                "type": "feature",
+                "text": "Credit Notes — create, apply, and track credit notes on invoices with remaining balance, applied allocations, and contextual tooltips"
+            },
+            {
+                "type": "feature",
+                "text": "AI Connector Phase 5–6 — expanded from 66 to 111 tools across 19 modules with admin-configurable write modules per plan"
+            },
+            {
+                "type": "feature",
+                "text": "Portal announcements — agency-wide or per-client announcements with dismissible banners, scheduling via DatePicker, and admin CRUD management"
+            },
+            {
+                "type": "feature",
+                "text": "Ticket @mentions — mention team members in ticket replies with autocomplete, triggering in-app and email notifications"
+            },
+            {
+                "type": "feature",
+                "text": "Default ticket responders — configure automatic assignees for new tickets, plus assignee dropdown in TicketDrawer"
+            },
+            {
+                "type": "feature",
+                "text": "TicketDrawer actions — delete tickets, change priority, update SLA, and edit descriptions with Rich Text Editor directly from the drawer"
+            },
+            {
+                "type": "feature",
+                "text": "Roles & Permissions editor — split into Agency Roles and Organization Roles sections, sorted by power level, with all 85 permissions visible across 15 groups and assigned member counts per role"
+            },
+            {
+                "type": "feature",
+                "text": "Premium portal invite emails — redesigned welcome and account setup email templates with distinct visual layouts for new contacts vs. invited users"
+            },
+            {
+                "type": "feature",
+                "text": "Plan page — resource usage dashboard, cancel/reactivate subscription, billing history, and data export all on a single settings page"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal bulk action bar — multi-select proposals with floating action bar for bulk status updates"
+            },
+            {
+                "type": "feature",
+                "text": "Proposal extension banner — notification banner for proposals nearing expiry with quick-extend action"
+            },
+            {
+                "type": "feature",
+                "text": "Cloudflare Turnstile — bot protection on login, registration, and forgot-password forms"
+            },
+            {
+                "type": "feature",
+                "text": "Centralized HMAC utility — unified token signing and verification for password resets, impersonation, and email unsubscribe links"
+            },
+            {
+                "type": "feature",
+                "text": "Session enforcement on all API routes — consistent authentication checks across all 20+ REST endpoints"
+            },
+            {
+                "type": "feature",
+                "text": "Settings template tabs — Project Templates and Proposal Templates split into dedicated tab components for cleaner navigation"
+            },
+            {
+                "type": "improvement",
+                "text": "AI Connector module reference — replaced bulky accordion layout with compact searchable grid and slide-out drawer for detailed tool information"
+            },
+            {
+                "type": "improvement",
+                "text": "Invoice action bar — all action buttons (edit, send, void, refund, record payment, delete) now permission-gated per role with proper visibility controls"
+            },
+            {
+                "type": "improvement",
+                "text": "Service Worker v4 — improved real-time cache invalidation with Pusher task event listeners and cross-query invalidation for ticket and task data"
+            },
+            {
+                "type": "improvement",
+                "text": "Ticket settings typography — replaced hardcoded font sizes with design system variables for consistent branding"
+            },
+            {
+                "type": "improvement",
+                "text": "Session section descriptions — clearer wording on Security and AI Connector pages explaining active session management"
+            },
+            {
+                "type": "improvement",
+                "text": "Notification delivery — all delivery channels (in-app, email, push, Slack) now run in parallel via Promise.allSettled for faster, more reliable delivery"
+            },
+            {
+                "type": "improvement",
+                "text": "PWA push subscription auto-healing — automatically re-subscribes to push notifications when the subscription expires or is lost"
+            },
+            {
+                "type": "improvement",
+                "text": "Mobile bottom nav badges — unread notification and message count badges now appear on mobile tab bar items"
+            },
+            {
+                "type": "improvement",
+                "text": "Dead code cleanup — removed 4 unused backend procedures (updateStripeKeys, getInvoicePrintSettings, updateInvoicePrintSettings, searchForMention) reducing codebase size"
+            },
+            {
+                "type": "fix",
+                "text": "Case-insensitive login — email addresses are now normalized to lowercase on login, preventing 'user not found' errors for mixed-case emails"
+            },
+            {
+                "type": "fix",
+                "text": "Double email on contact invite — prevented duplicate welcome + notification emails when adding a contact to an organization"
+            },
+            {
+                "type": "fix",
+                "text": "Inbound email sender detection — replies from client contacts now correctly identified as client replies using role-aware detection instead of treating all replies as staff"
+            },
+            {
+                "type": "fix",
+                "text": "TicketDrawer cache flickering — fixed stale data flashing by using gcTime instead of placeholderData for cache hydration"
+            },
+            {
+                "type": "fix",
+                "text": "Ticket edit button visibility — edit button now shows label + border instead of icon-only, positioned closer to description text"
+            },
+            {
+                "type": "fix",
+                "text": "Ticket description editing — upgraded from plain textarea to Rich Text Editor for consistent formatting"
+            },
+            {
+                "type": "fix",
+                "text": "InfoPopover nested button error — resolved DOM nesting violation by rendering as span when inside button contexts"
+            },
+            {
+                "type": "fix",
+                "text": "Pusher live updates on tickets — TicketDrawer now receives real-time updates via Pusher instead of requiring manual refresh"
+            },
+            {
+                "type": "fix",
+                "text": "PWA auto re-fetch on focus — app data now refreshes when returning to a backgrounded PWA tab or waking from screen lock"
+            },
+            {
+                "type": "fix",
+                "text": "MobileBottomNav useEffect — removed unnecessary window guard that could cause hydration mismatches"
+            },
+            {
+                "type": "fix",
+                "text": "Email delivery reliability — Emailit HTTP API routing with correct per-agency API keys and 10-second timeout for custom SMTP"
+            },
+            {
+                "type": "fix",
+                "text": "Webhook signature verification — corrected Svix-format HMAC verification for inbound email webhooks"
+            },
+            {
+                "type": "fix",
+                "text": "Connection pool stability — removed non-default pool option causing TypeScript errors, restored default non-pooled behavior"
+            },
+            {
+                "type": "fix",
+                "text": "Roles page sort order — roles now display sorted by power level (most powerful first) in both Agency and Organization sections"
+            },
+            {
+                "type": "fix",
+                "text": "Hidden internal markers — org:* internal permission markers no longer visible in the Roles & Permissions editor"
+            },
+            {
+                "type": "fix",
+                "text": "Resource usage counts — Plan page now counts resources directly instead of going through checkLimit, showing accurate current usage"
+            }
+        ]
+    },
+    {
         "version": "8.7.0",
         "date": "2026-04-15",
         "title": "AI Connector, Client Portal, PWA & Mobile Overhaul",
