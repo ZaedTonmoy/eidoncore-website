@@ -31,9 +31,17 @@ CATEGORIES = {
     'proposals': 'Core Features', 'tickets': 'Core Features',
     'team': 'Team & Workflow', 'automations': 'Team & Workflow',
     'reports': 'Team & Workflow', 'notifications': 'Team & Workflow',
+    'ai-connector': 'Configuration',
     'settings': 'Configuration', 'client-portal': 'Configuration', 'files': 'Configuration',
     'intake-forms': 'Configuration', 'security': 'Configuration',
     'keyboard-shortcuts': 'Configuration',
+}
+
+# Files inside subdirectories that should be extracted as standalone articles
+# instead of being merged into the parent directory article.
+# Format: { 'parent-dir': { 'filename.md': 'slug' } }
+STANDALONE_FILES = {
+    'settings': { 'ai-connector.md': 'ai-connector' },
 }
 
 # Human-readable titles for directory-based (merged) articles
@@ -49,11 +57,12 @@ ICONS = {
     'projects': 'folder', 'tasks': 'check-circle', 'clients': 'users',
     'invoicing': 'wallet', 'services': 'wrench', 'messaging': 'message-circle',
     'proposals': 'file-text',
-    'tickets': 'ticket',
+    'tickets': 'life-buoy',
     'team': 'user-plus', 'automations': 'zap', 'reports': 'bar-chart',
     'notifications': 'bell', 'settings': 'settings', 'client-portal': 'globe',
     'files': 'file', 'intake-forms': 'edit', 'security': 'lock',
     'keyboard-shortcuts': 'command',
+    'ai-connector': 'bot',
 }
 
 ORDER = {
@@ -62,9 +71,10 @@ ORDER = {
     'services': 8, 'messaging': 9, 'proposals': 10,
     'tickets': 11,
     'team': 12, 'automations': 13,
-    'reports': 14, 'notifications': 15, 'settings': 16,
-    'client-portal': 17, 'files': 18, 'intake-forms': 19, 'security': 20,
-    'keyboard-shortcuts': 21,
+    'reports': 14, 'notifications': 15, 'ai-connector': 16,
+    'settings': 17,
+    'client-portal': 18, 'files': 19, 'intake-forms': 20, 'security': 21,
+    'keyboard-shortcuts': 22,
 }
 
 # Documentation.ai JSX component tags to strip for website rendering
@@ -134,7 +144,27 @@ for entry in sorted(os.listdir(docs_src)):
         continue
 
     # Collect .md files, putting overview.md first then rest alphabetically
-    all_md = sorted(f for f in os.listdir(entry_path) if f.endswith('.md'))
+    # Exclude standalone files that will be processed separately
+    standalone_map = STANDALONE_FILES.get(slug, {})
+    all_md = sorted(f for f in os.listdir(entry_path) if f.endswith('.md') and f not in standalone_map)
+    
+    # Process standalone files as separate articles
+    for sa_file, sa_slug in standalone_map.items():
+        sa_path = os.path.join(entry_path, sa_file)
+        if os.path.exists(sa_path):
+            sa_title, sa_content = parse_md_file(sa_path)
+            if not sa_title:
+                sa_title = sa_slug.replace('-', ' ').title()
+            articles.append({
+                'slug': sa_slug,
+                'title': sa_title,
+                'category': CATEGORIES.get(sa_slug, CATEGORIES.get(slug, 'General')),
+                'icon': ICONS.get(sa_slug, 'book'),
+                'order': ORDER.get(sa_slug, 99),
+                'content': strip_jsx_tags(sa_content),
+            })
+            processed_slugs.add(sa_slug)
+    
     if not all_md:
         continue
     md_files = []
