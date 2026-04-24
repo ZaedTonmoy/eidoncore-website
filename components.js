@@ -62,6 +62,8 @@
         briefcase: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',
         star: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
         code: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+        sparkles: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 008.5 14.063l-6.135-1.582a.5.5 0 010-.962L8.5 9.936A2 2 0 009.937 8.5l1.582-6.135a.5.5 0 01.963 0L14.063 8.5A2 2 0 0015.5 9.937l6.135 1.581a.5.5 0 010 .964L15.5 14.063a2 2 0 00-1.437 1.437l-1.582 6.135a.5.5 0 01-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>',
+        ticket: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 010-6v0h20v0a3 3 0 110 6v0"/><path d="M2 15a3 3 0 100 6v0H22a3 3 0 100-6v0"/><path d="M2 9v6"/><path d="M22 9v6"/></svg>',
     };
 
     function injectIcons() {
@@ -132,6 +134,7 @@
               <a href="${prefix}portal/" role="menuitem">Client Portal</a>
               <a href="${prefix}notifications/" role="menuitem">Notifications</a>
               <a href="${prefix}reports/" role="menuitem">Reports</a>
+              <a href="${prefix}ai-workspace/" role="menuitem">AI Workspace <span style="background:linear-gradient(135deg,#A78BFA,#6C63FF);color:#fff;font-size:0.55rem;padding:1px 6px;border-radius:50px;margin-left:4px;font-weight:700">NEW</span></a>
             </div>
           </li>
           <li role="none"><a href="${prefix}pricing/" role="menuitem">Pricing</a></li>
@@ -204,6 +207,7 @@
             <a href="${prefix}portal/">Client Portal</a>
             <a href="${prefix}notifications/">Notifications</a>
             <a href="${prefix}reports/">Reports</a>
+            <a href="${prefix}ai-workspace/">AI Workspace</a>
             <a href="${prefix}digital-products/">Digital Products</a>
           </div>
           <div class="footer-col">

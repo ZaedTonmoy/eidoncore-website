@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" data-depth="1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workspace — Eidoncore | Connect AI Assistants to Your Agency</title>
+    <meta name="description"
+        content="Connect Claude, Cursor, Windsurf, or any MCP-compatible AI assistant to manage your agency. 19 modules, 111+ tools, OAuth 2.1 security, and role-based access.">
+    <meta property="og:title" content="AI Workspace — Eidoncore | AI-Powered Agency Management">
+    <meta property="og:description"
+        content="Connect any MCP-compatible AI assistant to manage projects, tasks, invoices, and clients. Enterprise-grade security with OAuth 2.1 and role-based access.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eidoncore.com/ai-workspace/">
+    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eidoncore.com/ai-workspace/">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a1a
+        }
+    </style>
+    <link rel="stylesheet" href="../style.min.css">
+    <link rel="stylesheet" href="../components.min.css">
+    <script src="../components.min.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@eidoncore">
+    <meta name="twitter:title" content="AI Workspace — Eidoncore | Connect AI Assistants to Your Agency">
+    <meta name="twitter:description"
+        content="Connect any MCP-compatible AI assistant to manage projects, tasks, invoices, and clients. 19 modules, 111+ tools, OAuth 2.1 security.">
+    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What AI assistants work with Eidoncore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any MCP-compatible AI assistant works with Eidoncore's AI Workspace. This includes Claude Desktop, Cursor, Windsurf, VS Code with Copilot, and any tool that supports the Model Context Protocol standard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the AI Workspace secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The AI Workspace uses OAuth 2.1 with PKCE (Proof Key for Code Exchange) for authorization, single-use refresh tokens with automatic rotation, complete tenant isolation, and every AI action is logged in the audit trail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which plans include the AI Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The AI Workspace is available on Pro and Enterprise plans. Pro plans include full access to all 19 modules. Enterprise plans add full write access to all modules and advanced security policies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can different team roles have different AI access levels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. AI access is role-aware — Owners get full access to all modules, Admins get project and financial management, and Project Managers get task and project-focused access. Each role sees only the AI tools their permissions allow."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body>
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
+                        class="current">AI Workspace</span></div>
+                <h1 class="page-title anim-blur">Your agency, <span class="gradient-text">AI-supercharged</span></h1>
+                <p class="page-subtitle anim-blur">Connect any MCP-compatible AI assistant to manage projects, tasks,
+                    invoices, and more — with enterprise-grade security and role-based access for every team member.</p>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" style="padding-top:20px">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">How It Works</span>
+                    <h2>Connected in 4 steps</h2>
+                    <p>Get your AI assistant managing your agency in minutes — no coding required.</p>
+                </div>
+                <div class="steps-grid stagger-children">
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0110 0v4"/>
+                            </svg></div>
+                        <div class="step-number">01</div>
+                        <h3>Authorize</h3>
+                        <p>Open your AI tool, connect to Eidoncore, and authorize via OAuth 2.1. Your credentials stay
+                            secure with PKCE verification.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            </svg></div>
+                        <div class="step-number">02</div>
+                        <h3>Select Modules</h3>
+                        <p>Choose which workspace modules your AI can access — projects, invoicing, CRM, tickets, and
+                            more. Enable or disable any time.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 8V4H8"/>
+                                <rect width="16" height="12" x="4" y="8" rx="2"/>
+                                <path d="M2 14h2"/>
+                                <path d="M20 14h2"/>
+                                <path d="M15 13v2"/>
+                                <path d="M9 13v2"/>
+                            </svg></div>
+                        <div class="step-number">03</div>
+                        <h3>Connect AI</h3>
+                        <p>Use Claude Desktop, Cursor, Windsurf, or any MCP-compatible tool. The AI instantly sees your
+                            workspace data based on your role.</p>
+                    </div>
+                    <div class="step-card animate-on-scroll">
+                        <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg></div>
+                        <div class="step-number">04</div>
+                        <h3>Start Working</h3>
+                        <p>Ask your AI to create tasks, draft invoices, check project health, assign team members, or
+                            pull analytics — all through natural language.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Categories -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">19 Modules</span>
+                    <h2>AI access to your entire workspace</h2>
+                    <p>Every module in Eidoncore is accessible through the AI Workspace — with over 111 tools.</p>
+                </div>
+                <div class="features-grid stagger-children" style="grid-template-columns:repeat(2,1fr)">
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#6C63FF"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            </svg></div>
+                        <h3>Work Management</h3>
+                        <p>Projects, Tasks, Automations, Templates — create projects, assign tasks, update statuses,
+                            track time, and manage automation workflows through AI.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#4ADE80"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                                <line x1="2" y1="10" x2="22" y2="10"/>
+                            </svg></div>
+                        <h3>Financial</h3>
+                        <p>Invoices, Recurring Billing, Proposals, Services — view and create invoices, record payments,
+                            manage proposals, and browse your service catalog via AI.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#FF6B9D"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 010 7.75"/>
+                            </svg></div>
+                        <h3>People & Communication</h3>
+                        <p>Clients, Team, Messaging, Tickets, Notifications — manage client records, send messages,
+                            create and resolve support tickets, all through natural language.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll glow-hover">
+                        <div class="feature-icon" style="--accent:#F59E0B"><svg width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" x2="18" y1="20" y2="10"/>
+                                <line x1="12" x2="12" y1="20" y2="4"/>
+                                <line x1="6" x2="6" y1="20" y2="14"/>
+                            </svg></div>
+                        <h3>Analytics & Utilities</h3>
+                        <p>Dashboard, Reports, Client Reports, Files, Search — view workspace stats, generate reports,
+                            search across all data, and manage files via your AI assistant.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Role-Based Access -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Role-Aware</span>
+                    <h2>Every role gets the right AI access</h2>
+                    <p>AI permissions match your team's roles — no configuration needed.</p>
+                </div>
+                <div class="anim-scale" style="overflow-x:auto">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Capability</th>
+                                <th>Owner</th>
+                                <th>Admin</th>
+                                <th>Project Manager</th>
+                                <th>Team Member</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Projects & Tasks</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Assigned Only</td>
+                            </tr>
+                            <tr>
+                                <td>Invoicing & Billing</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--text-muted)">View Only</td>
+                                <td style="color:var(--text-muted)">—</td>
+                            </tr>
+                            <tr>
+                                <td>CRM & Clients</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Assigned Clients</td>
+                                <td style="color:var(--text-muted)">—</td>
+                            </tr>
+                            <tr>
+                                <td>Reports & Analytics</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--accent-green)">Project Reports</td>
+                                <td style="color:var(--text-muted)">—</td>
+                            </tr>
+                            <tr>
+                                <td>Team Management</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--text-muted)">View Only</td>
+                                <td style="color:var(--text-muted)">—</td>
+                                <td style="color:var(--text-muted)">—</td>
+                            </tr>
+                            <tr>
+                                <td>Settings & Security</td>
+                                <td style="color:var(--accent-green)">Full Access</td>
+                                <td style="color:var(--text-muted)">—</td>
+                                <td style="color:var(--text-muted)">—</td>
+                                <td style="color:var(--text-muted)">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Security</span>
+                    <h2>Enterprise-grade AI security</h2>
+                    <p>Every AI interaction is authenticated, authorized, and audited.</p>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="lock"></div>
+                        <h4>OAuth 2.1 + PKCE</h4>
+                        <p>Industry-standard authorization with Proof Key for Code Exchange — no secrets stored on
+                            client devices</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="refresh"></div>
+                        <h4>Token Rotation</h4>
+                        <p>Refresh tokens are single-use. Old tokens are automatically revoked, preventing replay
+                            attacks</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="clipboard"></div>
+                        <h4>Audit Logging</h4>
+                        <p>Every AI tool call is logged with the user, action, timestamp, and affected resources — full
+                            traceability</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="shield"></div>
+                        <h4>Tenant Isolation</h4>
+                        <p>AI assistants can only access data within your workspace. Complete isolation between agencies
+                            at every layer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compatible Tools -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Compatible Tools</span>
+                    <h2>Works with your favorite AI</h2>
+                    <p>Any tool that supports the Model Context Protocol (MCP) standard can connect to your workspace.</p>
+                </div>
+                <div class="built-for-grid">
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="bot"></div>
+                        <h3>Claude Desktop</h3>
+                        <p>Anthropic's AI assistant with native MCP support.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="code"></div>
+                        <h3>Cursor</h3>
+                        <p>AI-powered code editor with built-in MCP integration.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="zap"></div>
+                        <h3>Windsurf</h3>
+                        <p>Codeium's AI IDE with full MCP protocol support.</p>
+                    </div>
+                    <div class="built-for-card">
+                        <div class="built-for-icon" data-icon="laptop"></div>
+                        <h3>VS Code + Copilot</h3>
+                        <p>GitHub Copilot with MCP server connections.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="page-stats anim-blur">
+                    <div class="stat">
+                        <span class="stat-number">19</span>
+                        <span class="stat-label">Modules</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">111</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">AI Tools</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">OAuth</span><span class="stat-suffix"></span>
+                        <span class="stat-label">2.1 + PKCE</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">99.9</span><span class="stat-suffix">%</span>
+                        <span class="stat-label">API Uptime</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What your AI can do</h2>
+                </div>
+                <div class="security-highlights stagger-children">
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="check-circle"></div>
+                        <h4>Task Management</h4>
+                        <p>"Create a task for Sarah to design the homepage mockup, due Friday, high priority"</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="wallet"></div>
+                        <h4>Invoice Generation</h4>
+                        <p>"Draft an invoice for Acme Corp with 10 hours of design work at $150/hr"</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="bar-chart"></div>
+                        <h4>Analytics & Reports</h4>
+                        <p>"Show me this month's revenue, overdue invoices, and top 5 clients by billing"</p>
+                    </div>
+                    <div class="sec-card animate-on-scroll">
+                        <div class="sec-icon" data-icon="users"></div>
+                        <h4>Client Management</h4>
+                        <p>"List all clients with overdue follow-ups and create tasks for each one"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">What Users Say</span>
+                    <h2>Agencies love AI Workspace</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"The AI Workspace is a game-changer. I can ask Claude to create tasks, check project
+                            budgets, and draft invoices — all without leaving my IDE. It's like having an
+                            extra team member who never sleeps."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#A78BFA,#6C63FF)">MK
+                            </div>
+                            <div><strong>Marcus Keller</strong><br><span>CTO, Nova Studio</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="stars">★★★★★</div>
+                        <p>"Role-based AI access means my project managers can use AI for tasks and timelines,
+                            but only I can access financial data. Exactly the security model we needed."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#4ADE80,#14B8A6)">RP
+                            </div>
+                            <div><strong>Rachel Park</strong><br><span>CEO, Clarity Co.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">FAQ</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-question">What AI assistants work with Eidoncore?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Any MCP-compatible AI assistant works with Eidoncore's AI Workspace. This includes
+                                Claude Desktop, Cursor, Windsurf, VS Code with Copilot, and any tool that supports the
+                                Model Context Protocol standard.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Is the AI Workspace secure?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. The AI Workspace uses OAuth 2.1 with PKCE for authorization, single-use refresh
+                                tokens with automatic rotation, complete tenant isolation, and every AI action is logged
+                                in the audit trail.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Which plans include the AI Workspace?<span
+                                class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>The AI Workspace is available on Pro and Enterprise plans. Pro plans include full access
+                                to all 19 modules. Enterprise plans add full write access and advanced security
+                                policies.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"><button class="faq-question">Can different team roles have different AI
+                            access levels?<span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Yes. AI access is role-aware — Owners get full access to all modules, Admins get
+                                project and financial management, and Project Managers get task and project-focused
+                                access. Each role sees only the AI tools their permissions allow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Features -->
+        <section class="feature-detail">
+            <div class="container">
+                <div class="section-header anim-blur">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related features</h2>
+                </div>
+                <div class="related-grid">
+                    <a href="../automations/" class="related-card">
+                        <div class="related-icon" data-icon="zap"></div>
+                        <h3>Automations</h3>
+                        <p>Automate workflows with triggers and actions.</p>
+                    </a>
+                    <a href="../integrations/" class="related-card">
+                        <div class="related-icon" data-icon="link"></div>
+                        <h3>Integrations</h3>
+                        <p>Stripe, Slack, SMTP, and API connections.</p>
+                    </a>
+                    <a href="../security/" class="related-card">
+                        <div class="related-icon" data-icon="shield"></div>
+                        <h3>Security</h3>
+                        <p>Enterprise-grade security and compliance.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box anim-blur">
+                    <h3>AI Workspace updates & tips</h3>
+                    <p>Get notified about new AI modules, MCP improvements, and best practices for AI-powered agency management.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="you@agency.com" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="newsletter-success" style="display:none;color:var(--accent-green);margin-top:12px">✓
+                        You're subscribed!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content anim-cinematic">
+                    <h2>Connect your AI assistant today</h2>
+                    <p>Start your 14-day free trial and let AI manage your agency workflow — no credit card required.</p>
+                    <div class="hero-ctas"><a href="https://register.eidoncore.com/"
+                            class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a><a
+                            href="../contact/" class="btn btn-outline btn-lg">Book a Demo</a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
