@@ -1,5 +1,157 @@
 [
     {
+        "version": "8.9.0",
+        "date": "2026-07-09",
+        "title": "Full Platform Localization, Observability Stack & Invoice Overhaul",
+        "summary": "6-language localization with next-intl across all modules, 4-tier observability stack with Sentry SDK v10 and structured logging, atomic invoice numbering with self-healing retry, consolidated InvoiceEditor, multi-contact CSV import, interactive dashboard donut charts, AI Connector expanded to 112 tools with role-aware consent, Emailit rate limiting with retry-on-429, and 16 bug fixes for cron reliability, MCP sessions, and Turnstile compatibility.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Full platform localization — 6 languages via next-intl with translated auth, cart, invoices, proposals, tickets, account, offerings, timer, PWA, onboarding, command palette, and email modules"
+            },
+            {
+                "type": "feature",
+                "text": "Observability stack — 4-tier structured logging (financial → communication → infrastructure → auxiliary) with Sentry SDK v10 migration, 18 formerly-silent catch blocks instrumented with logger.error"
+            },
+            {
+                "type": "feature",
+                "text": "Sentry Cron Monitors — all 15 cron jobs report heartbeat check-ins with maxRuntime synced to route maxDuration for automatic failure detection"
+            },
+            {
+                "type": "feature",
+                "text": "Atomic invoice numbering — centralized utility with self-healing retry (withInvoiceNumberRetry) across all 12 invoice creation paths, eliminating duplicate invoice numbers under concurrent load"
+            },
+            {
+                "type": "feature",
+                "text": "Multi-contact CSV import — import contacts in bulk with template download, validation preview, and contactsAdded tracking per organization"
+            },
+            {
+                "type": "feature",
+                "text": "Unified time & billing modals — consolidated time entry and billing interfaces with compact date pickers and contextual InfoPopovers"
+            },
+            {
+                "type": "feature",
+                "text": "Interactive dashboard donut charts — clickable chart segments with shared Tooltip component for revenue, project, and cash flow breakdowns"
+            },
+            {
+                "type": "feature",
+                "text": "AI Connector update_proposal — create and update proposals with structured blocks via MCP, expanding tool catalog to 112 across 19 modules"
+            },
+            {
+                "type": "feature",
+                "text": "AI Connector role-aware consent — consent page now filters scopes by user role with padlock icons on inaccessible modules in the Module Reference"
+            },
+            {
+                "type": "feature",
+                "text": "Resend Email action — resend previously sent invoices with one click from the invoice action bar"
+            },
+            {
+                "type": "feature",
+                "text": "Unified time entries view — cross-project time entry list with role-based access control and CSV export in Reports"
+            },
+            {
+                "type": "feature",
+                "text": "Premium invoice email template — standardized billing contact resolution across 9 invoice delivery paths with branded email layout"
+            },
+            {
+                "type": "feature",
+                "text": "CI security guards — automated vulnerability scanning and security guard checks in the CI pipeline"
+            },
+            {
+                "type": "feature",
+                "text": "Ticket reply visual differentiation — Organization and Team replies now have distinct colors derived from branding variables, with labeled badges and a redesigned original description section"
+            },
+            {
+                "type": "improvement",
+                "text": "InvoiceEditor consolidation — merged invoice create and edit flows into a single shared component, reducing code duplication"
+            },
+            {
+                "type": "improvement",
+                "text": "Dashboard cash flow — merged Outstanding into Upcoming segment for clearer financial forecasting"
+            },
+            {
+                "type": "improvement",
+                "text": "Emailit rate limiter — added retry-on-429 with inter-email throttling to prevent API rate limit exhaustion during bulk operations"
+            },
+            {
+                "type": "improvement",
+                "text": "Bank details on invoices — bank/wire transfer details now render on invoice print view, PDF export, and HTML email surfaces"
+            },
+            {
+                "type": "improvement",
+                "text": "MCP session display — sessions now show correct tool count (based on granted scope types) and session expiry date instead of access token expiry"
+            },
+            {
+                "type": "improvement",
+                "text": "MCP revoke endpoint — now accepts form-urlencoded request bodies per RFC 7009 for broader client compatibility"
+            },
+            {
+                "type": "improvement",
+                "text": "Startup environment validation — degraded security variables (ENCRYPTION_KEY_V2, Upstash, Turnstile, VirusTotal) now log warnings instead of blocking startup"
+            },
+            {
+                "type": "improvement",
+                "text": "Ticket drawer expanded — wider drawer (680px), extracted CSS to dedicated stylesheet, fixed missing translation key"
+            },
+            {
+                "type": "fix",
+                "text": "Cron timeout failures — added maxDuration export to all 15 cron routes and Sentry.flush() to cron monitor, resolving false-positive timeout check-in failures"
+            },
+            {
+                "type": "fix",
+                "text": "CSP nonce propagation — fixed blank page and hydration mismatch caused by missing nonce in Content-Security-Policy headers"
+            },
+            {
+                "type": "fix",
+                "text": "Invoice numbering collisions — wrapped all 4 proposal conversion mutations and convertMultiInvoice in withInvoiceNumberRetry to prevent duplicate numbers"
+            },
+            {
+                "type": "fix",
+                "text": "Ticket SLA cron — corrected stale field name (responseMinutes → firstResponseMinutes) that was silently skipping SLA deadline calculations"
+            },
+            {
+                "type": "fix",
+                "text": "Service Worker stale data — removed API response cache from SW to ensure mutations immediately reflect in the UI without manual refresh"
+            },
+            {
+                "type": "fix",
+                "text": "Turnstile on custom domains — bypassed Cloudflare Turnstile for custom domain workspaces (free tier hostname limit), updated security whitepaper to v2.2"
+            },
+            {
+                "type": "fix",
+                "text": "Proposals share page — exempted /proposals/share/* from middleware fast auth gate, fixing blank page for unauthenticated proposal recipients"
+            },
+            {
+                "type": "fix",
+                "text": "MCP scope alignment — fixed permission key mismatches between OAuth scopes and actual PERMISSIONS constants, preventing 403 errors on valid tools"
+            },
+            {
+                "type": "fix",
+                "text": "MCP update_proposal registration — registered update_proposal in tier-filter WRITE_TOOLS and MODULE_MAP for proper plan-gated access"
+            },
+            {
+                "type": "fix",
+                "text": "i18n Turbopack compatibility — switched message JSON imports to relative paths to resolve Turbopack module resolution failures"
+            },
+            {
+                "type": "fix",
+                "text": "i18n TypeScript errors — synced package-lock, fixed type errors in localized modules, and updated stale test expectations"
+            },
+            {
+                "type": "fix",
+                "text": "Reports type error — typed reduce accumulator as number in reports/page.tsx, resolving TS2365 build error"
+            },
+            {
+                "type": "fix",
+                "text": "Invoice collision log level — downgraded invoice number collision logs from error to warn since they self-heal via retry"
+            },
+            {
+                "type": "fix",
+                "text": "Database migrations — added missing migration files for MCP, inbound email, portal, and Sprint 2 tables with 6 remaining columns"
+            }
+        ]
+    },
+    {
         "version": "8.8.0",
         "date": "2026-04-23",
         "title": "Email Replies, Credit Notes, Ticketing Upgrades & Security Hardening",
