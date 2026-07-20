@@ -2,88 +2,21 @@
 <html lang="en" data-depth="1">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="theme-color" content="#0a0a1a">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eidoncore Docs — Help Center &amp; Getting Started</title>
-    <meta name="description"
-        content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
-    <meta property="og:title" content="Documentation — Eidoncore Help Center">
-    <meta property="og:description"
-        content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://eidoncore.com/docs/">
-    <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://eidoncore.com/docs/">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
-    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <style>
-        body {
-            background: #0a0a1a
-        }
-
-        /* Accordion TOC sub-links */
-        .docs-toc-list {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease;
-            padding-left: 0;
-        }
-        .docs-toc-list.open {
-            max-height: 600px;
-        }
-        .docs-toc-link {
-            display: block;
-            width: 100%;
-            padding: 5px 12px 5px 42px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.8rem;
-            text-align: left;
-            cursor: pointer;
-            transition: color 0.15s, background 0.15s;
-            border-radius: 6px;
-            line-height: 1.4;
-            font-family: inherit;
-        }
-        .docs-toc-link:hover {
-            color: rgba(255, 255, 255, 0.85);
-            background: rgba(255, 255, 255, 0.04);
-        }
-        .docs-toc-link.active {
-            color: #a78bfa;
-        }
-        .docs-nav-link .nav-chevron {
-            margin-left: auto;
-            transition: transform 0.25s ease;
-            opacity: 0.4;
-            flex-shrink: 0;
-        }
-        .docs-nav-link.active .nav-chevron {
-            transform: rotate(90deg);
-            opacity: 0.7;
-        }
-    </style>
-    <link rel="stylesheet" href="../style.min.css">
-    <link rel="stylesheet" href="../components.min.css">
-    <script src="../components.min.js"></script>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@eidoncore">
-    <meta name="twitter:title" content="Documentation — Eidoncore Help Center">
-    <meta name="twitter:description"
-        content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
-    <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
-    <script type="application/ld+json">
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#f6f8fb">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eidoncore Docs — Help Center & Getting Started</title>
+  <meta name="description" content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
+  <meta property="og:title" content="Eidoncore Docs — Help Center & Getting Started">
+  <meta property="og:description" content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://eidoncore.com/docs/">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../style.min.css">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -126,554 +59,69 @@
 </head>
 
 <body>
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <div class="breadcrumb anim-blur"><a href="../">Home</a><span class="separator">/</span><span
-                        class="current">Documentation</span></div>
-                <h1 class="page-title anim-blur">Help <span class="gradient-text">Center</span></h1>
-                <p class="page-subtitle anim-blur">Everything you need to get started and master every feature of
+  <main id="main-content">
+<section class="page-header">
+      <div class="container">
+        <div class="breadcrumb reveal"><a href="../">Home</a><span class="separator">/</span><span class="current">Documentation</span></div>
+        <h1 class="page-title reveal">Help <span class="accent">Center</span></h1>
+        <p class="page-subtitle reveal">Everything you need to get started and master every feature of
                     Eidoncore. Synced directly from our latest documentation.</p>
-            </div>
-        </section>
-
-        <!-- Documentation Browser -->
-        <section class="feature-detail" style="padding-top:20px">
-            <div class="container">
-                <div class="docs-sidebar-backdrop" id="sidebarBackdrop"></div>
-                <div class="docs-browser">
-                    <nav class="docs-sidebar" id="docsSidebar">
-                        <div class="docs-search">
-                            <div class="docs-search-wrap">
-                                <input type="text" id="docsSearch" class="docs-search-input"
-                                    placeholder="Search docs...">
-                            </div>
-                        </div>
-                        <div id="docsNav"></div>
-                    </nav>
-                    <div class="docs-article" id="docsArticle">
-                        <div class="docs-welcome">
-                            <div class="loading-skeleton"></div>
-                            <div class="loading-skeleton short"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="page-stats anim-blur">
-                    <div class="stat">
-                        <span class="stat-number">18</span><span class="stat-suffix">+</span>
-                        <span class="stat-label">Help Articles</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">5</span><span class="stat-suffix">min</span>
-                        <span class="stat-label">Setup Time</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">24</span><span class="stat-suffix">/7</span>
-                        <span class="stat-label">Knowledge Base</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">100</span><span class="stat-suffix">%</span>
-                        <span class="stat-label">Self-Service</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonial -->
-        <section class="testimonials">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">What Users Say</span>
-                    <h2>Loved by agencies</h2>
-                </div>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card animate-on-scroll">
-                        <div class="stars">★★★★★</div>
-                        <p>"The getting started guide had us fully operational in under 15 minutes. The API docs are
+      </div>
+    </section>
+<section>
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Documentation</span>
+          <h2>Guides to get the most out of Eidoncore</h2>
+          <p>Our full documentation library is being migrated. In the meantime, our team is one message away.</p>
+        </div>
+        <div class="mini-grid reveal-stagger"><div class="mini-card"><div class="mini-icon"></div><h3>Getting Started</h3><p>Set up your workspace and invite your team.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>Projects & Tasks</h3><p>Budgets, milestones, boards, and time tracking.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>Billing & Invoicing</h3><p>Recurring billing, payments, and credit notes.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>AI Workspace</h3><p>Connect MCP-compatible AI assistants securely.</p></div></div>
+      </div>
+    </section>
+<section><div class="container"><div class="stat-row reveal"><div class="stat"><span><span class="stat-number">18</span><span class="stat-suffix">+</span></span><span class="stat-label">Help Articles</span></div><div class="stat"><span><span class="stat-number">5</span><span class="stat-suffix">min</span></span><span class="stat-label">Setup Time</span></div><div class="stat"><span><span class="stat-number">24</span><span class="stat-suffix">/7</span></span><span class="stat-label">Knowledge Base</span></div><div class="stat"><span><span class="stat-number">100</span><span class="stat-suffix">%</span></span><span class="stat-label">Self-Service</span></div></div></div></section>
+<section class="section-alt">
+      <div class="container">
+        <div class="section-head reveal center">
+      <span class="eyebrow">What Users Say</span>
+      <h2>Loved by agencies</h2>
+      
+    </div>
+        <div class="quote-grid reveal-stagger"><div class="quote-card"><span class="quote-mark">"</span>
+          <p>"The getting started guide had us fully operational in under 15 minutes. The API docs are
                             clean and well-structured — rare to see."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">TS
-                            </div>
-                            <div><strong>Tomás Silva</strong><br><span>Lead Dev, CodeCraft Agency</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section class="feature-detail">
-            <div class="container">
-                <div class="section-header anim-blur">
-                    <span class="section-tag">FAQ</span>
-                    <h2>Frequently asked questions</h2>
-                </div>
-                <div class="faq-list">
-                    <div class="faq-item"><button class="faq-question">Is there a getting started guide?<span
-                                class="faq-icon">+</span></button>
-                        <div class="faq-answer">
-                            <p>Yes. The Getting Started section walks you through agency setup, inviting team members,
+          <div class="quote-author"><div class="author-avatar" style="background:#F59E0B">TS</div>
+          <div><strong>Tomás Silva</strong><span>Lead Dev, CodeCraft Agency</span></div></div></div></div>
+      </div>
+    </section>
+<section>
+      <div class="container"><div class="section-head reveal center">
+      <span class="eyebrow">FAQ</span>
+      <h2>Frequently asked questions</h2>
+      
+    </div>
+        <div class="faq-list reveal"><div class="faq-item"><button class="faq-question">Is there a getting started guide?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Yes. The Getting Started section walks you through agency setup, inviting team members,
                                 creating your first project, and sending your first invoice — typically under 15
-                                minutes.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item"><button class="faq-question">Does Eidoncore offer API documentation?<span
-                                class="faq-icon">+</span></button>
-                        <div class="faq-answer">
-                            <p>Yes. Full REST API documentation with endpoints, authentication guides, rate limits, and
-                                code examples is available for developers building custom integrations.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item"><button class="faq-question">How do I get help if I'm stuck?<span
-                                class="faq-icon">+</span></button>
-                        <div class="faq-answer">
-                            <p>Contact us through the in-app chat, email support, or browse the knowledge base. Pro and
-                                Enterprise customers get priority support with faster response times.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item"><button class="faq-question">Are there video tutorials?<span
-                                class="faq-icon">+</span></button>
-                        <div class="faq-answer">
-                            <p>Yes. The documentation includes video walkthroughs for key features like project setup,
-                                invoice creation, automation building, and client portal configuration.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content anim-cinematic">
-                    <h2>Still have questions?</h2>
-                    <p>Our team is here to help. Reach out anytime.</p>
-                    <div class="hero-ctas"><a href="../contact/" class="btn btn-primary btn-lg">Contact Support <span
-                                class="btn-arrow">→</span></a><a href="https://register.eidoncore.com/"
-                            class="btn btn-outline btn-lg">Start Free
+                                minutes.</p></div></div><div class="faq-item"><button class="faq-question">Does Eidoncore offer API documentation?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Yes. Full REST API documentation with endpoints, authentication guides, rate limits, and
+                                code examples is available for developers building custom integrations.</p></div></div><div class="faq-item"><button class="faq-question">How do I get help if I'm stuck?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Contact us through the in-app chat, email support, or browse the knowledge base. Pro and
+                                Enterprise customers get priority support with faster response times.</p></div></div><div class="faq-item"><button class="faq-question">Are there video tutorials?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Yes. The documentation includes video walkthroughs for key features like project setup,
+                                invoice creation, automation building, and client portal configuration.</p></div></div></div>
+      </div>
+    </section>
+<section class="cta-section">
+      <div class="container reveal">
+        <h2>Still have questions?</h2>
+        <p>Our team is here to help. Reach out anytime.</p>
+        <div class="cta-ctas"><a href="../contact/" class="btn btn-primary btn-lg">Contact Support <span class="btn-arrow">→</span></a>
+<a href="https://register.eidoncore.com/" class="btn btn-outline btn-lg">Start Free
                             Trial</a></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <button class="docs-sidebar-toggle" id="sidebarToggle">☰ Browse Documentation</button>
-
-    <script>
-        (function () {
-            /* ─── Lightweight Markdown → HTML ─── */
-            function md(src) {
-                let html = '';
-                const lines = src.split('\n');
-                let i = 0;
-                while (i < lines.length) {
-                    const line = lines[i];
-
-                    // Code block
-                    if (line.startsWith('```')) {
-                        let code = '';
-                        i++;
-                        while (i < lines.length && !lines[i].startsWith('```')) {
-                            code += esc(lines[i]) + '\n';
-                            i++;
-                        }
-                        i++;
-                        html += '<pre><code>' + code.trimEnd() + '</code></pre>\n';
-                        continue;
-                    }
-
-                    // Table
-                    if (line.includes('|') && line.trim().startsWith('|')) {
-                        let rows = [];
-                        while (i < lines.length && lines[i].includes('|') && lines[i].trim().startsWith('|')) {
-                            rows.push(lines[i]);
-                            i++;
-                        }
-                        html += parseTable(rows);
-                        continue;
-                    }
-
-                    // Headings
-                    const hm = line.match(/^(#{2,4})\s+(.+)/);
-                    if (hm) {
-                        const lvl = hm[1].length;
-                        const id = hm[2].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                        html += `<h${lvl} id="${id}">${inline(hm[2])}</h${lvl}>\n`;
-                        i++;
-                        continue;
-                    }
-
-                    // Horizontal rule
-                    if (/^---+$/.test(line.trim())) {
-                        html += '<hr>\n';
-                        i++;
-                        continue;
-                    }
-
-                    // Blockquote
-                    if (line.startsWith('>')) {
-                        let bq = '';
-                        while (i < lines.length && lines[i].startsWith('>')) {
-                            bq += lines[i].replace(/^>\s?/, '') + '\n';
-                            i++;
-                        }
-                        html += '<blockquote>' + md(bq.trim()) + '</blockquote>\n';
-                        continue;
-                    }
-
-                    // Ordered list
-                    if (/^\d+\.\s/.test(line)) {
-                        html += '<ol>\n';
-                        while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
-                            let li = lines[i].replace(/^\d+\.\s+/, '');
-                            i++;
-                            // Continuation lines (indented)
-                            while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^\d+\.\s/.test(lines[i].trim()) && !lines[i].trim().startsWith('- ')) {
-                                li += ' ' + lines[i].trim();
-                                i++;
-                            }
-                            html += '<li>' + inline(li) + '</li>\n';
-                        }
-                        html += '</ol>\n';
-                        continue;
-                    }
-
-                    // Unordered list
-                    if (/^[-*]\s/.test(line)) {
-                        html += '<ul>\n';
-                        while (i < lines.length && /^[-*]\s/.test(lines[i])) {
-                            let li = lines[i].replace(/^[-*]\s+/, '');
-                            i++;
-                            while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^[-*]\s/.test(lines[i].trim())) {
-                                li += ' ' + lines[i].trim();
-                                i++;
-                            }
-                            html += '<li>' + inline(li) + '</li>\n';
-                        }
-                        html += '</ul>\n';
-                        continue;
-                    }
-
-                    // Blank line
-                    if (!line.trim()) {
-                        i++;
-                        continue;
-                    }
-
-                    // Paragraph
-                    let para = line;
-                    i++;
-                    while (i < lines.length && lines[i].trim() && !lines[i].startsWith('#') && !lines[i].startsWith('>') && !lines[i].startsWith('```') && !lines[i].startsWith('- ') && !lines[i].startsWith('* ') && !/^\d+\.\s/.test(lines[i]) && !(lines[i].includes('|') && lines[i].trim().startsWith('|')) && !/^---+$/.test(lines[i].trim())) {
-                        para += ' ' + lines[i];
-                        i++;
-                    }
-                    html += '<p>' + inline(para) + '</p>\n';
-                }
-                return html;
-            }
-
-            function esc(s) {
-                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            }
-
-            function inline(s) {
-                return esc(s)
-                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-                    .replace(/`(.+?)`/g, '<code>$1</code>')
-                    .replace(/\[(.+?)\]\((.+?)\)/g, function (_, text, href) {
-                        // Convert internal doc links to hash links
-                        // Matches: ./slug, ./slug.md, ./slug#anchor, ./slug.md#anchor
-                        if (href.startsWith('./')) {
-                            var clean = href.replace('./', '').replace('.md', '');
-                            var slug = clean.split('#')[0];
-                            if (slug && allDocs.find(function(d) { return d.slug === slug; }) || slug.match(/^[a-z][-a-z]*$/)) {
-                                return '<a href="#' + slug + '" class="docs-internal-link">' + text + '</a>';
-                            }
-                        }
-                        return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
-                    });
-            }
-
-            function parseTable(rows) {
-                if (rows.length < 2) return '';
-                const parse = r => r.split('|').map(c => c.trim()).filter(c => c !== '');
-                const headers = parse(rows[0]);
-                // Skip separator row (row[1] is ------|-----)
-                const startIdx = (rows.length > 1 && /^[\s|:-]+$/.test(rows[1])) ? 2 : 1;
-                let t = '<table><thead><tr>';
-                headers.forEach(h => t += '<th>' + inline(h) + '</th>');
-                t += '</tr></thead><tbody>';
-                for (let r = startIdx; r < rows.length; r++) {
-                    const cells = parse(rows[r]);
-                    if (cells.length === 0) continue;
-                    t += '<tr>';
-                    cells.forEach(c => t += '<td>' + inline(c) + '</td>');
-                    t += '</tr>';
-                }
-                t += '</tbody></table>';
-                return t;
-            }
-
-            /* ─── Icon map (inline SVGs) ─── */
-            const _s = (d) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
-            const ICONS = {
-                'play-circle':    _s('<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>'),
-                'clipboard':      _s('<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>'),
-                'layout':         _s('<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/>'),
-                'folder':         _s('<path d="M20 20a2 2 0 002-2V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2z"/>'),
-                'check-circle':   _s('<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
-                'users':          _s('<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>'),
-                'wallet':         _s('<path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4z"/>'),
-                'wrench':         _s('<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>'),
-                'message-circle': _s('<path d="M7.9 20A9 9 0 104 16.1L2 22z"/>'),
-                'user-plus':      _s('<path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" x2="20" y1="8" y2="14"/><line x1="23" x2="17" y1="11" y2="11"/>'),
-                'zap':            _s('<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),
-                'bar-chart':      _s('<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>'),
-                'bell':           _s('<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 003.4 0"/>'),
-                'settings':       _s('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>'),
-                'globe':          _s('<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/>'),
-                'file':           _s('<path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/>'),
-                'edit':           _s('<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>'),
-                'lock':           _s('<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>'),
-                'book':           _s('<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>'),
-                'home':           _s('<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'),
-                'star':           _s('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'),
-                'rocket':         _s('<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>'),
-                'briefcase':      _s('<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>'),
-                'check-square':   _s('<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>'),
-                'box':            _s('<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" x2="12" y1="22.08" y2="12"/>'),
-                'file-text':      _s('<path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/>'),
-                'life-buoy':      _s('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" x2="9.17" y1="4.93" y2="9.17"/><line x1="14.83" x2="19.07" y1="14.83" y2="19.07"/><line x1="14.83" x2="19.07" y1="9.17" y2="4.93"/><line x1="4.93" x2="9.17" y1="19.07" y2="14.83"/>'),
-                'refresh-cw':     _s('<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>'),
-                'credit-card':    _s('<rect width="22" height="16" x="1" y="4" rx="2" ry="2"/><line x1="1" x2="23" y1="10" y2="10"/>'),
-                'building-2':     _s('<path d="M6 22V4a2 2 0 012-2h8a2 2 0 012 2v18Z"/><path d="M6 12H4a2 2 0 00-2 2v6a2 2 0 002 2h2"/><path d="M18 9h2a2 2 0 012 2v9a2 2 0 01-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>'),
-                'command':        _s('<path d="M18 3a3 3 0 00-3 3v12a3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3H6a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3V6a3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3h12a3 3 0 003-3 3 3 0 00-3-3z"/>'),
-                'hard-drive':     _s('<line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/>'),
-                'mail':           _s('<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/>'),
-                'list':           _s('<line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/>'),
-                'shield':         _s('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'),
-                'sliders-horizontal': _s('<line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/>'),
-                'user-round':     _s('<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 00-16 0"/>'),
-                'activity-square': _s('<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M17 12h-2l-2 5-2-10-2 5H7"/>'),
-                'bot':            _s('<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>'),
-                'ticket':         _s('<path d="M2 9a3 3 0 010-6v0h20v0a3 3 0 110 6v0"/><path d="M2 15a3 3 0 100 6v0H22a3 3 0 100-6v0"/><path d="M2 9v6"/><path d="M22 9v6"/>'),
-            };
-
-            /* ─── State ─── */
-            const nav = document.getElementById('docsNav');
-            const article = document.getElementById('docsArticle');
-            const search = document.getElementById('docsSearch');
-            const sidebar = document.getElementById('docsSidebar');
-            const backdrop = document.getElementById('sidebarBackdrop');
-            const toggle = document.getElementById('sidebarToggle');
-            let allDocs = [];
-            let activeSlug = null;
-
-            /* ─── Extract ## headings for TOC ─── */
-            function extractHeadings(content) {
-                const headings = [];
-                const lines = content.split('\n');
-                for (let i = 0; i < lines.length; i++) {
-                    const m = lines[i].match(/^##\s+(.+)/);
-                    if (m) {
-                        const text = m[1];
-                        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                        headings.push({ text, id });
-                    }
-                }
-                return headings;
-            }
-
-            const chevronSvg = `<svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
-
-            /* ─── Build sidebar ─── */
-            function buildNav(docs, query) {
-                const q = (query || '').toLowerCase().trim();
-                const groups = {};
-                const catOrder = ['Getting Started', 'Core Features', 'Team & Workflow', 'Configuration'];
-
-                docs.forEach(d => {
-                    if (!groups[d.category]) groups[d.category] = [];
-                    groups[d.category].push(d);
-                });
-
-                let html = '';
-                catOrder.forEach(cat => {
-                    const items = groups[cat];
-                    if (!items) return;
-
-                    const filtered = q ? items.filter(d =>
-                        d.title.toLowerCase().includes(q) ||
-                        d.content.toLowerCase().includes(q)
-                    ) : items;
-
-                    if (filtered.length === 0) return;
-
-                    html += '<div class="docs-nav-group">';
-                    html += '<div class="docs-nav-category">' + esc(cat) + '</div>';
-                    filtered.forEach(d => {
-                        const isActive = d.slug === activeSlug;
-                        const cls = isActive ? 'docs-nav-link active' : 'docs-nav-link';
-                        const icon = ICONS[d.icon] || '📖';
-                        const headings = extractHeadings(d.content);
-                        const hasHeadings = headings.length > 0;
-
-                        html += `<button class="${cls}" data-slug="${d.slug}">
-                            <span class="nav-icon">${icon}</span>
-                            ${esc(d.title)}
-                            ${hasHeadings ? chevronSvg : ''}
-                        </button>`;
-
-                        // TOC sub-links (only render if has headings)
-                        if (hasHeadings) {
-                            html += `<div class="docs-toc-list${isActive ? ' open' : ''}">`;
-                            headings.forEach(h => {
-                                html += `<button class="docs-toc-link" data-heading-id="${h.id}" data-slug="${d.slug}">${esc(h.text)}</button>`;
-                            });
-                            html += '</div>';
-                        }
-                    });
-                    html += '</div>';
-                });
-
-                if (!html) {
-                    html = '<p style="color:var(--text-muted);padding:20px;text-align:center;font-size:0.9rem">No matching articles found.</p>';
-                }
-
-                nav.innerHTML = html;
-
-                // Bind click events for main nav links
-                nav.querySelectorAll('.docs-nav-link').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const slug = btn.dataset.slug;
-                        showArticle(slug);
-                        window.location.hash = slug;
-                        closeSidebar();
-                    });
-                });
-
-                // Bind click events for TOC sub-links
-                nav.querySelectorAll('.docs-toc-link').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const slug = btn.dataset.slug;
-                        const headingId = btn.dataset.headingId;
-                        // If not already on this article, navigate to it first
-                        if (slug !== activeSlug) {
-                            showArticle(slug);
-                            window.location.hash = slug;
-                        }
-                        // Scroll to the heading
-                        setTimeout(() => {
-                            const el = document.getElementById(headingId);
-                            if (el) {
-                                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                // Highlight active TOC link
-                                nav.querySelectorAll('.docs-toc-link').forEach(l => l.classList.remove('active'));
-                                btn.classList.add('active');
-                            }
-                        }, slug !== activeSlug ? 100 : 0);
-                        closeSidebar();
-                    });
-                });
-            }
-
-            /* ─── Render article ─── */
-            function showArticle(slug) {
-                const doc = allDocs.find(d => d.slug === slug);
-                if (!doc) {
-                    article.innerHTML = `<div class="docs-welcome">
-                        <h2>Welcome to the docs</h2>
-                        <p>Pick an article from the sidebar to get started, or use the search to find what you need.</p>
-                    </div>`;
-                    activeSlug = null;
-                    buildNav(allDocs, search.value);
-                    return;
-                }
-
-                activeSlug = slug;
-                const rendered = md(doc.content);
-
-                article.innerHTML = `
-                    <div class="docs-article-header">
-                        <h2 class="docs-article-title">${esc(doc.title)}</h2>
-                        <div class="docs-article-meta">
-                            <span class="docs-article-category">${esc(doc.category)}</span>
-                        </div>
-                    </div>
-                    <div class="docs-article-body">${rendered}</div>
-                `;
-
-                // Handle internal doc links
-                article.querySelectorAll('.docs-internal-link').forEach(a => {
-                    a.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = a.getAttribute('href').replace('#', '');
-                        showArticle(target);
-                        window.location.hash = target;
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    });
-                });
-
-                buildNav(allDocs, search.value);
-
-                // Scroll article into view (fixes long→short article scroll position)
-                article.scrollIntoView({ behavior: 'instant', block: 'start' });
-
-                // Update page title
-                document.title = doc.title + ' — Eidoncore Docs';
-            }
-
-            /* ─── Mobile sidebar ─── */
-            function openSidebar() {
-                sidebar.classList.add('open');
-                backdrop.classList.add('open');
-            }
-            function closeSidebar() {
-                sidebar.classList.remove('open');
-                backdrop.classList.remove('open');
-            }
-            toggle.addEventListener('click', openSidebar);
-            backdrop.addEventListener('click', closeSidebar);
-
-            /* ─── Search ─── */
-            search.addEventListener('input', () => {
-                buildNav(allDocs, search.value);
-            });
-
-            /* ─── Load data ─── */
-            fetch('docs.json')
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-                .then(data => {
-                    allDocs = data;
-                    const hash = window.location.hash.replace('#', '');
-                    if (hash && allDocs.find(d => d.slug === hash)) {
-                        showArticle(hash);
-                    } else {
-                        // Default to first article
-                        showArticle(allDocs[0]?.slug || '');
-                    }
-                })
-                .catch(() => {
-                    article.innerHTML = '<div class="docs-welcome"><h2>Unable to load documentation</h2><p>Please try again later.</p></div>';
-                    nav.innerHTML = '';
-                });
-
-            /* ─── Hash change ─── */
-            window.addEventListener('hashchange', () => {
-                const hash = window.location.hash.replace('#', '');
-                if (hash && hash !== activeSlug) {
-                    showArticle(hash);
-                }
-            });
-        })();
-    </script>
+      </div>
+    </section>
+  </main>
+  <script src="../components.min.js"></script>
+  
 </body>
-
 </html>

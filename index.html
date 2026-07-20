@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-depth="0">
 
 <head>
   <meta charset="UTF-8">
@@ -17,61 +17,12 @@
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.min.css">
 </head>
 
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- NAV -->
-  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-container">
-      <a href="./" class="nav-logo" aria-label="Eidoncore home">
-        <img src="images/logo.png" alt="" class="logo-icon" style="height:24px;width:24px;"> Eidoncore
-      </a>
-      <ul class="nav-links" id="navLinks" role="menubar">
-        <li class="nav-dropdown" role="none">
-          <a href="features/" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Features <span class="dropdown-arrow">▾</span></a>
-          <div class="dropdown-menu" role="menu">
-            <a href="projects/" role="menuitem">Projects</a>
-            <a href="tasks/" role="menuitem">Tasks</a>
-            <a href="crm/" role="menuitem">CRM &amp; Clients</a>
-            <a href="invoicing/" role="menuitem">Invoicing</a>
-            <a href="services/" role="menuitem">Offerings</a>
-            <a href="proposals/" role="menuitem">Proposals</a>
-            <a href="messaging/" role="menuitem">Messaging</a>
-            <a href="automations/" role="menuitem">Automations</a>
-            <a href="portal/" role="menuitem">Client Portal</a>
-            <a href="notifications/" role="menuitem">Notifications</a>
-            <a href="reports/" role="menuitem">Reports</a>
-            <a href="ai-workspace/" role="menuitem">AI Workspace</a>
-          </div>
-        </li>
-        <li role="none"><a href="pricing/" role="menuitem">Pricing</a></li>
-        <li class="nav-dropdown" role="none">
-          <a href="use-cases/" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Use Cases <span class="dropdown-arrow">▾</span></a>
-          <div class="dropdown-menu" role="menu">
-            <a href="use-cases/marketing-agencies/" role="menuitem">Marketing Agencies</a>
-            <a href="use-cases/design-studios/" role="menuitem">Design Studios</a>
-            <a href="use-cases/development-agencies/" role="menuitem">Development Agencies</a>
-            <a href="use-cases/consulting-firms/" role="menuitem">Consulting Firms</a>
-            <a href="use-cases/freelancers/" role="menuitem">Freelancers</a>
-          </div>
-        </li>
-        <li role="none"><a href="about/" role="menuitem">About</a></li>
-        <li role="none"><a href="contact/" role="menuitem">Contact</a></li>
-        <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/login" class="btn btn-ghost btn-block" role="menuitem">Log In</a></li>
-        <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-block" role="menuitem">Start Free Trial</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="https://register.eidoncore.com/login" class="btn btn-ghost">Log In</a>
-        <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial</a>
-      </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
 
   <main id="main-content">
 
@@ -80,7 +31,7 @@
       <div class="hero-glow"><span class="g1"></span><span class="g2"></span></div>
       <div class="container hero-grid">
         <div>
-          <div class="hero-badge"><span class="dot"></span>AI-Powered Agency Platform</div>
+          <div class="hero-badge"><span class="sparkle" aria-hidden="true"></span><span>AI-Powered Agency Platform</span></div>
           <h1 class="hero-title">Run your AI-powered agency<br><span class="accent">from one platform</span></h1>
           <p class="hero-subtitle">Projects, proposals, invoicing, CRM, messaging, automations, client portal, and a
             built-in AI workspace with 111+ tools — beautifully unified in a single platform that your clients will
@@ -117,10 +68,10 @@
           <span>Pixel Forge</span><span>Mosaic Digital</span><span>Vanguard Creative</span><span>Nova Studio</span><span>Apex Agency</span><span>Clarity Co.</span>
         </div>
         <div class="trust-badges">
-          <div class="trust-badge">🔒 256-bit Encryption</div>
-          <div class="trust-badge">⏱ 99.9% Uptime SLA</div>
-          <div class="trust-badge">🛡 SOC 2 Ready</div>
-          <div class="trust-badge">🌍 GDPR Compliant</div>
+          <div class="trust-badge"><span class="status-icon" data-icon="lock"></span>256-bit Encryption</div>
+          <div class="trust-badge"><span class="status-icon" data-icon="clock"></span>99.9% Uptime SLA</div>
+          <div class="trust-badge"><span class="status-icon" data-icon="shieldCheck"></span>SOC 2 Ready</div>
+          <div class="trust-badge"><span class="status-icon" data-icon="globe"></span>GDPR Compliant</div>
         </div>
       </div>
     </section>
@@ -134,23 +85,27 @@
           <p>From lead to invoice, from task to report — Eidoncore covers the complete agency workflow, supercharged
             by AI.</p>
         </div>
-        <div class="bento reveal-stagger">
-          <a href="projects/" class="bento-card wide" style="--icon-c:#6C63FF;--icon-bg:#EEEDFF">
+        <div class="bento feature-bento reveal-stagger">
+          <a href="projects/" class="bento-card wide main" style="--icon-c:#6C63FF;--icon-bg:#EEEDFF">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
             <h3>Projects</h3>
             <p>Organize work with budgets, milestones, team assignments, time tracking, and automatic health scoring.</p>
           </a>
-          <a href="tasks/" class="bento-card" style="--icon-c:#00868c;--icon-bg:#e2f7f8">
+          <a href="tasks/" class="bento-card main" style="--icon-c:#00868c;--icon-bg:#e2f7f8">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
             <h3>Tasks</h3>
             <p>Kanban boards, list views, subtasks, dependencies, labels, live timers, and threaded comments.</p>
           </a>
-          <a href="crm/" class="bento-card" style="--icon-c:#c2437a;--icon-bg:#fdebf2">
+          <a href="crm/" class="bento-card main" style="--icon-c:#c2437a;--icon-bg:#fdebf2">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
             <h3>CRM &amp; Clients</h3>
             <p>Full client lifecycle — pipeline, contacts, follow-ups, health scoring, contract tracking.</p>
           </a>
-          <a href="invoicing/" class="bento-card" style="--icon-c:#1e9e6b;--icon-bg:#e5f7ef">
+          <a href="invoicing/" class="bento-card main" style="--icon-c:#1e9e6b;--icon-bg:#e5f7ef">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
             <h3>Invoicing &amp; Billing</h3>
             <p>Professional invoices, recurring billing, payment tracking, credit notes, refunds.</p>
@@ -160,7 +115,8 @@
             <h3>Offerings</h3>
             <p>Services &amp; digital products with 5 pricing models, cart, checkout, Stripe payments.</p>
           </a>
-          <a href="automations/" class="bento-card" style="--icon-c:#6d4fc7;--icon-bg:#efeafd">
+          <a href="automations/" class="bento-card wide main" style="--icon-c:#6d4fc7;--icon-bg:#efeafd">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <h3>Automations</h3>
             <p>Trigger → Condition → Action. Automate assignments, updates, emails — no code.</p>
@@ -170,7 +126,8 @@
             <h3>Proposals</h3>
             <p>Block-based builder, line item pricing, e-signatures, auto-conversion to projects.</p>
           </a>
-          <a href="messaging/" class="bento-card" style="--icon-c:#00868c;--icon-bg:#e2f7f8">
+          <a href="messaging/" class="bento-card wide main" style="--icon-c:#00868c;--icon-bg:#e2f7f8">
+            <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 104 16.1L2 22z"/></svg></div>
             <h3>Messaging</h3>
             <p>Real-time project channels, DMs, link previews, pinned messages, mentions.</p>
@@ -205,7 +162,8 @@
             <h3>White-Label</h3>
             <p>Custom domains, branded portals, email templates, invoice styling.</p>
           </a>
-          <a href="ai-workspace/" class="bento-card wide" style="--icon-c:#3f72af;--icon-bg:#e8eff8">
+          <a href="ai-workspace/" class="bento-card wide main" style="--icon-c:#3f72af;--icon-bg:#e8eff8">
+            <span class="bento-flag">Main</span>
             <span class="bento-badge">NEW</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
             <h3>AI Workspace</h3>
@@ -259,27 +217,40 @@
       </div>
     </section>
 
-    <!-- WORKFLOW PIPELINE — marquee strip -->
-    <div class="pipeline-strip" aria-hidden="true">
-      <div class="pipeline-track">
-        <span class="pipe-item hi"><span class="dot"></span>Lead</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Client</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Proposal</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Project</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Task</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Support</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Invoice</span><span class="pipe-sep">→</span>
-        <span class="pipe-item hi"><span class="dot"></span>Report</span><span class="pipe-sep">→</span>
-        <span class="pipe-item hi"><span class="dot"></span>Lead</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Client</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Proposal</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Project</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Task</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Support</span><span class="pipe-sep">→</span>
-        <span class="pipe-item"><span class="dot"></span>Invoice</span><span class="pipe-sep">→</span>
-        <span class="pipe-item hi"><span class="dot"></span>Report</span><span class="pipe-sep">→</span>
+    <!-- WORKFLOW LOOP -->
+    <section class="section-alt" id="workflow-loop">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">End-to-End</span>
+          <h2>One platform, every stage — on repeat</h2>
+          <p>Eidoncore isn't a straight line, it's a loop. Every closed invoice feeds your reports, and every report
+            points to the next lead. Here's the cycle running underneath your agency.</p>
+        </div>
+        <div class="loop-diagram reveal">
+          <div class="loop-row">
+            <div class="loop-node"><span class="loop-n">01</span><span>Lead</span></div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-node"><span class="loop-n">02</span><span>Client</span></div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-node"><span class="loop-n">03</span><span>Proposal</span></div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-node"><span class="loop-n">04</span><span>Project</span></div>
+          </div>
+          <div class="loop-side loop-side-right" aria-hidden="true"></div>
+          <div class="loop-row reverse">
+            <div class="loop-node"><span class="loop-n">08</span><span>Report</span></div>
+            <span class="loop-arrow">←</span>
+            <div class="loop-node"><span class="loop-n">07</span><span>Invoice</span></div>
+            <span class="loop-arrow">←</span>
+            <div class="loop-node"><span class="loop-n">06</span><span>Support</span></div>
+            <span class="loop-arrow">←</span>
+            <div class="loop-node"><span class="loop-n">05</span><span>Task</span></div>
+          </div>
+          <div class="loop-side loop-side-left" aria-hidden="true"></div>
+          <div class="loop-restart">↻ Report insight becomes next quarter's lead</div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- DASHBOARD PREVIEW -->
     <section class="section-alt" id="dashboard-preview">
@@ -304,30 +275,30 @@
           <h2>What makes us different</h2>
           <p>Other tools solve one problem. Eidoncore solves all of them — without compromise.</p>
         </div>
-        <div class="diff-list reveal">
-          <div class="diff-row">
-            <span class="diff-num">01</span>
-            <div><h3>All-in-One Platform</h3>
-              <p>Projects, tasks, CRM, invoicing, services, automations, reporting, and a client portal — all in a
-                single app. No more switching between 5 different tools and losing context.</p></div>
+        <div class="stack-wrap">
+          <div class="stack-card" style="--i:0;--accent:#6C63FF">
+            <span class="diff-num">01 / 04</span>
+            <h3>All-in-One Platform</h3>
+            <p>Projects, tasks, CRM, invoicing, services, automations, reporting, and a client portal — all in a
+              single app. No more switching between 5 different tools and losing context.</p>
           </div>
-          <div class="diff-row">
-            <span class="diff-num">02</span>
-            <div><h3>Full White-Label</h3>
-              <p>Custom logo, colors, fonts, email templates, and even your own domain. Enterprise plans remove all
-                Eidoncore branding — your clients see only your brand.</p></div>
+          <div class="stack-card" style="--i:1;--accent:#00adb5">
+            <span class="diff-num">02 / 04</span>
+            <h3>Full White-Label</h3>
+            <p>Custom logo, colors, fonts, email templates, and even your own domain. Enterprise plans remove all
+              Eidoncore branding — your clients see only your brand.</p>
           </div>
-          <div class="diff-row">
-            <span class="diff-num">03</span>
-            <div><h3>Multi-Tenant by Design</h3>
-              <p>Built from day one for agencies managing multiple clients, projects, and teams. Complete data
-                isolation, per-agency settings, and role-based access at every level.</p></div>
+          <div class="stack-card" style="--i:2;--accent:#b5790f">
+            <span class="diff-num">03 / 04</span>
+            <h3>Multi-Tenant by Design</h3>
+            <p>Built from day one for agencies managing multiple clients, projects, and teams. Complete data
+              isolation, per-agency settings, and role-based access at every level.</p>
           </div>
-          <div class="diff-row">
-            <span class="diff-num">04</span>
-            <div><h3>AI-Native Workspace</h3>
-              <p>Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace. Role-based
-                access, OAuth 2.1 security, and 111+ tools across 19 modules.</p></div>
+          <div class="stack-card" style="--i:3;--accent:#3f72af">
+            <span class="diff-num">04 / 04</span>
+            <h3>AI-Native Workspace</h3>
+            <p>Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace. Role-based
+              access, OAuth 2.1 security, and 111+ tools across 19 modules.</p>
           </div>
         </div>
       </div>
@@ -502,7 +473,7 @@
           </div>
           <div>
             <form class="newsletter-form"><input type="email" placeholder="Enter your email" required><button type="submit">Subscribe</button></form>
-            <div class="newsletter-success">🎉 You're subscribed! Welcome aboard.</div>
+            <div class="newsletter-success"><span class="status-icon yes" data-icon="badgeCheck"></span>You're subscribed! Welcome aboard.</div>
           </div>
         </div>
       </div>
@@ -524,59 +495,9 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="./" class="nav-logo"><img src="images/logo.png" alt="" class="logo-icon" style="height:24px;width:24px;"> Eidoncore</a>
-          <p>The all-in-one agency management platform.</p>
-          <div class="footer-newsletter">
-            <p>Subscribe to our newsletter</p>
-            <form class="footer-newsletter-form"><input type="email" placeholder="you@agency.com" required><button type="submit">Subscribe</button></form>
-          </div>
-        </div>
-        <div class="footer-link-columns">
-          <div class="footer-col">
-            <h4>Product</h4>
-            <a href="features/">Features</a><a href="pricing/">Pricing</a><a href="integrations/">Integrations</a>
-            <a href="changelog/">Changelog</a><a href="about/">About</a><a href="contact/">Contact</a>
-          </div>
-          <div class="footer-col">
-            <h4>Features</h4>
-            <a href="projects/">Projects</a><a href="tasks/">Tasks</a><a href="invoicing/">Invoicing</a>
-            <a href="crm/">CRM</a><a href="proposals/">Proposals</a><a href="messaging/">Messaging</a>
-            <a href="automations/">Automations</a><a href="services/">Offerings</a><a href="portal/">Client Portal</a>
-            <a href="notifications/">Notifications</a><a href="reports/">Reports</a><a href="ai-workspace/">AI Workspace</a>
-          </div>
-          <div class="footer-col">
-            <h4>Use Cases</h4>
-            <a href="use-cases/marketing-agencies/">Marketing Agencies</a>
-            <a href="use-cases/design-studios/">Design Studios</a>
-            <a href="use-cases/development-agencies/">Dev Agencies</a>
-            <a href="use-cases/consulting-firms/">Consulting Firms</a>
-            <a href="use-cases/freelancers/">Freelancers</a><a href="customers/">Customer Stories</a>
-          </div>
-          <div class="footer-col">
-            <h4>Resources</h4>
-            <a href="docs/">Documentation</a><a href="blog/">Blog</a><a href="faq/">FAQ</a>
-            <a href="compare/">Compare</a><a href="demo/">Product Tour</a><a href="developers/">Developers</a>
-            <a href="partners/">Partners</a><a href="security/">Security</a><a href="privacy/">Privacy Policy</a>
-            <a href="terms/">Terms of Service</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-social">
-          <a href="https://github.com/ZaedTonmoy" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
-          <a href="https://twitter.com/eidoncore" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="https://linkedin.com/company/eidoncore" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        </div>
-        <p>&copy; 2026 Eidoncore. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
 
-  <script src="components.js"></script>
+  <script src="components.min.js"></script>
+  
 </body>
 
 </html>
