@@ -314,6 +314,17 @@ section{padding:96px 0;}
 .bento-badge{position:absolute;top:20px;right:20px;background:var(--secondary);color:#fff;font-size:0.62rem;font-weight:700;padding:2px 9px;border-radius:100px;letter-spacing:0.03em;}
 .bento-flag{position:absolute;top:20px;left:20px;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--primary-dark);background:var(--primary-tint);padding:3px 9px;border-radius:100px;font-weight:600;}
 .bento-card.main{padding-top:52px;}
+.bento.uniform{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:20px;}
+.bento.uniform .bento-card,
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card,
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card.wide,
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card:nth-child(1),
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card:nth-child(4),
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card:nth-child(8),
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card:nth-child(13),
+.bento.uniform:has(.bento-card:nth-child(7)) .bento-card:nth-child(15){grid-column:span 1 !important;min-height:180px;}
+@media (max-width:900px){.bento.uniform{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}}
+@media (max-width:580px){.bento.uniform{grid-template-columns:1fr !important;}}
 
 /* ============================================================
    HOW IT WORKS — timeline
