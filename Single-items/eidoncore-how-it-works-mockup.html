@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eidoncore — How It Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10121a;
+    --surface: #171a24;
+    --surface-2: #1c202c;
+    --line: rgba(237,239,244,0.09);
+    --line-strong: rgba(237,239,244,0.16);
+    --text: #edeff4;
+    --muted: #8d92a8;
+    --accent: #ffb454;
+    --accent-dim: rgba(255,180,84,0.14);
+    --accent-line: rgba(255,180,84,0.4);
+
+    --panel-bg: #fbfaf8;
+    --panel-line: #e7e4de;
+    --panel-text: #23262f;
+    --panel-muted: #8a8a92;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .section{
+    padding: clamp(56px, 8vw, 108px) clamp(24px, 6vw, 80px);
+    background:
+      radial-gradient(ellipse 800px 420px at 85% -8%, rgba(255,180,84,0.06), transparent 60%),
+      var(--bg);
+  }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    padding: 6px 12px 6px 10px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+
+  h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 17ch;
+  }
+
+  .lede{
+    font-size: 16px; line-height: 1.6; color: var(--muted);
+    max-width: 46ch; margin: 0 0 48px;
+  }
+
+  .stage{
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs{ display:flex; flex-direction:column; gap: 4px; }
+
+  .tab{
+    position: relative;
+    padding: 16px 16px 16px 18px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background: transparent;
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .tab:hover{ background: var(--surface); }
+  .tab.active{ background: var(--surface); border-color: var(--line-strong); }
+
+  .tab-top{ display:flex; align-items:baseline; gap: 10px; margin-bottom: 5px; }
+  .tab-num{ font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); transition: color .25s ease; }
+  .tab.active .tab-num{ color: var(--accent); }
+
+  .tab-title{ font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; color: var(--text); }
+
+  .tab-desc{
+    font-size: 13px; line-height: 1.5; color: var(--muted); max-width: 38ch;
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease;
+  }
+  .tab-desc span{ overflow:hidden; }
+  .tab.active .tab-desc{ grid-template-rows: 1fr; margin-top: 4px; }
+
+  .tab-progress{
+    margin-top: 12px; height: 2px; background: var(--line-strong);
+    border-radius: 2px; overflow: hidden; opacity: 0; transition: opacity .25s ease;
+  }
+  .tab.active .tab-progress{ opacity: 1; }
+  .tab-progress-fill{ height: 100%; width: 0%; background: var(--accent); }
+  .tab-progress-fill.run{ animation: fillbar 5.2s linear forwards; }
+  .tab-progress-fill.paused{ animation-play-state: paused; }
+  @keyframes fillbar{ from{ width:0% } to{ width:100% } }
+
+  /* ---------- Device / mockup ---------- */
+  .device{
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .device-bar{
+    display:flex; align-items:center; gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .device-dot{ width:8px; height:8px; border-radius:50%; background: var(--line-strong); }
+  .device-url{
+    margin-left: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex: 1;
+    max-width: 280px;
+  }
+
+  .device-screen{
+    position: relative;
+    background: var(--panel-bg);
+    min-height: 300px;
+  }
+
+  .panel{
+    position: absolute;
+    inset: 0;
+    padding: 28px 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .panel.active{ opacity: 1; pointer-events: auto; position: relative; }
+
+  .panel > *{
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .45s ease, transform .45s ease;
+    transition-delay: calc(var(--d, 0) * 90ms);
+  }
+  .panel.active > *{ opacity: 1; transform: none; }
+
+  .p-label{ font-size: 12px; color: var(--panel-muted); margin: 0 0 6px; font-weight: 500; }
+  .p-input{
+    background: #fff; border: 1px solid var(--panel-line); border-radius: 9px;
+    padding: 11px 14px; font-size: 14px; color: var(--panel-text); margin-bottom: 16px;
+  }
+  .p-input.url span{ color: var(--panel-muted); }
+  .p-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--accent); color: #241a08; font-weight: 600; font-size: 13.5px;
+    padding: 11px 18px; border-radius: 9px; margin-top: 4px;
+  }
+  .p-check{
+    margin-top: 16px; font-size: 12.5px; color: #3f9e6d; font-weight: 500;
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* brand step */
+  .p-row{ display:flex; align-items:center; gap: 14px; margin-bottom: 20px; }
+  .p-logo{
+    width: 44px; height: 44px; border-radius: 10px;
+    border: 1.5px dashed var(--panel-line);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--panel-muted); font-size: 18px;
+  }
+  .swatches{ display:flex; gap: 10px; margin: 0 0 18px; }
+  .swatch{ width: 26px; height:26px; border-radius:50%; border: 2px solid transparent; }
+  .swatch.sel{ border-color: var(--panel-text); box-shadow: 0 0 0 2px var(--panel-bg), 0 0 0 3px var(--panel-text); }
+  .p-toggle-row{ display:flex; align-items:center; justify-content:space-between; max-width: 220px; font-size: 13.5px; color: var(--panel-text); margin-bottom: 4px; }
+  .p-toggle{ width: 34px; height: 19px; border-radius: 999px; background: var(--accent); position: relative; }
+  .p-toggle::after{ content:""; position:absolute; top:2px; right:2px; width:15px; height:15px; border-radius:50%; background:#fff; }
+
+  /* team step */
+  .team-row{
+    display:flex; align-items:center; gap: 12px;
+    padding: 10px 12px; border: 1px solid var(--panel-line); border-radius: 10px; margin-bottom: 10px;
+    background:#fff;
+  }
+  .avatar{
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent-dim); color: #8a5a12; border: 1px solid var(--accent-line);
+    display:flex; align-items:center; justify-content:center; font-size: 12px; font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .who{ display:flex; flex-direction:column; flex:1; }
+  .who b{ font-size: 13.5px; color: var(--panel-text); }
+  .who span{ font-size: 11.5px; color: var(--panel-muted); }
+  .badge{
+    font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+    color: #3f9e6d; background: rgba(63,158,109,0.12);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .team-add{
+    display:flex; align-items:center; justify-content:center;
+    border: 1.5px dashed var(--panel-line); border-radius: 10px;
+    padding: 11px; font-size: 13px; color: var(--panel-muted);
+  }
+
+  /* dashboard step */
+  .stat-row{ display:flex; gap: 12px; margin-bottom: 18px; }
+  .stat{
+    flex:1; background:#fff; border: 1px solid var(--panel-line); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat .num{ display:block; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size: 20px; color: var(--panel-text); }
+  .stat .lbl{ font-size: 11.5px; color: var(--panel-muted); }
+  .portal-chip{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border: 1px solid var(--panel-line); border-radius: 10px;
+    padding: 12px 14px; font-family:'JetBrains Mono', monospace; font-size: 12.5px; color: var(--panel-text);
+  }
+  .portal-chip span{ font-size: 11px; color: var(--accent); font-family:'Inter',sans-serif; font-weight:600; }
+
+  @media (max-width: 860px){
+    .stage{ grid-template-columns: 1fr; }
+    .device-screen{ min-height: 280px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tab-progress-fill.run{ animation-duration: .01s; }
+    .panel > *{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>HOW IT WORKS</span>
+    <h2>Up and running in minutes</h2>
+    <p class="lede">No onboarding call, no ticket queue. Here's what each step actually looks like inside the product.</p>
+
+    <div class="stage">
+      <div class="tabs" id="tabs">
+        <div class="tab" data-i="0">
+          <div class="tab-top"><span class="tab-num">01</span><span class="tab-title">Create your workspace</span></div>
+          <div class="tab-desc"><span>Pick your agency name and get a live URL in under a minute.</span></div>
+          <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+        </div>
+        <div class="tab" data-i="1">
+          <div class="tab-top"><span class="tab-num">02</span><span class="tab-title">Customize &amp; brand</span></div>
+          <div class="tab-desc"><span>Logo, colors, email, and payments — or go full white-label.</span></div>
+          <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+        </div>
+        <div class="tab" data-i="2">
+          <div class="tab-top"><span class="tab-num">03</span><span class="tab-title">Invite your team</span></div>
+          <div class="tab-desc"><span>Owners, admins, project managers — role-based, from day one.</span></div>
+          <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+        </div>
+        <div class="tab" data-i="3">
+          <div class="tab-top"><span class="tab-num">04</span><span class="tab-title">Start delivering</span></div>
+          <div class="tab-desc"><span>Add a client, spin up a project, send the first invoice.</span></div>
+          <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="device">
+        <div class="device-bar">
+          <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
+          <span class="device-url" id="deviceUrl">studio-nine.eidoncore.com</span>
+        </div>
+        <div class="device-screen" id="screen">
+
+          <div class="panel" data-i="0">
+            <p class="p-label" style="--d:0">Agency name</p>
+            <div class="p-input" style="--d:1">Studio Nine</div>
+            <p class="p-label" style="--d:2">Workspace URL</p>
+            <div class="p-input url" style="--d:3">studio-nine<span>.eidoncore.com</span></div>
+            <div class="p-btn" style="--d:4">Start 14-day free trial →</div>
+            <div class="p-check" style="--d:5">✔ Workspace created</div>
+          </div>
+
+          <div class="panel" data-i="1">
+            <div class="p-row" style="--d:0">
+              <div class="p-logo">SN</div>
+              <p class="p-label" style="margin:0">Upload logo</p>
+            </div>
+            <p class="p-label" style="--d:1">Brand color</p>
+            <div class="swatches" style="--d:2">
+              <span class="swatch sel" style="background:#ffb454"></span>
+              <span class="swatch" style="background:#7c86ff"></span>
+              <span class="swatch" style="background:#6bcf9a"></span>
+              <span class="swatch" style="background:#ff6b6b"></span>
+              <span class="swatch" style="background:#2b2f3a"></span>
+            </div>
+            <div class="p-toggle-row" style="--d:3"><span>White-label domain</span><div class="p-toggle"></div></div>
+            <div class="p-check" style="--d:4">✔ Brand applied</div>
+          </div>
+
+          <div class="panel" data-i="2">
+            <div class="team-row" style="--d:0">
+              <div class="avatar">S</div>
+              <div class="who"><b>Sara K.</b><span>Admin</span></div>
+              <span class="badge">Invited</span>
+            </div>
+            <div class="team-row" style="--d:1">
+              <div class="avatar">O</div>
+              <div class="who"><b>Owen R.</b><span>Project Manager</span></div>
+              <span class="badge">Invited</span>
+            </div>
+            <div class="team-add" style="--d:2">+ Invite teammate</div>
+          </div>
+
+          <div class="panel" data-i="3">
+            <div class="stat-row" style="--d:0">
+              <div class="stat"><span class="num">6</span><span class="lbl">Clients</span></div>
+              <div class="stat"><span class="num">11</span><span class="lbl">Active projects</span></div>
+              <div class="stat"><span class="num">$18.4k</span><span class="lbl">Invoiced</span></div>
+            </div>
+            <div class="portal-chip" style="--d:1">nimbus.studio-nine.com <span>COPY LINK</span></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const URLS = [
+    "studio-nine.eidoncore.com",
+    "studio-nine.eidoncore.com/brand",
+    "studio-nine.eidoncore.com/team",
+    "nimbus.studio-nine.com"
+  ];
+
+  const tabsEl = document.getElementById('tabs');
+  const panels = [...document.querySelectorAll('.panel')];
+  const urlEl = document.getElementById('deviceUrl');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  [...tabsEl.children].forEach((tab) => {
+    tab.addEventListener('click', () => activate(Number(tab.dataset.i)));
+  });
+
+  let active = 0;
+  let advanceTimer = null;
+
+  function setTabsUI(i){
+    [...tabsEl.children].forEach((t) => {
+      const idx = Number(t.dataset.i);
+      t.classList.toggle('active', idx === i);
+      const fill = t.querySelector('.tab-progress-fill');
+      fill.classList.remove('run');
+      void fill.offsetWidth;
+      if (idx === i && !reduce) fill.classList.add('run');
+    });
+  }
+
+  function showPanel(i){
+    panels.forEach(p => {
+      const idx = Number(p.dataset.i);
+      p.classList.remove('active');
+    });
+    void document.getElementById('screen').offsetWidth; // reflow
+    const target = panels.find(p => Number(p.dataset.i) === i);
+    target.classList.add('active');
+    urlEl.textContent = URLS[i];
+  }
+
+  function activate(i){
+    active = i;
+    setTabsUI(i);
+    showPanel(i);
+    clearTimeout(advanceTimer);
+    if (!reduce){
+      advanceTimer = setTimeout(() => activate((i + 1) % panels.length), 5200);
+    }
+  }
+
+  const stage = document.querySelector('.stage');
+  stage.addEventListener('mouseenter', () => {
+    clearTimeout(advanceTimer);
+    tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.add('paused'));
+  });
+  stage.addEventListener('mouseleave', () => {
+    tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.remove('paused'));
+    if (!reduce) advanceTimer = setTimeout(() => activate((active + 1) % panels.length), 5200);
+  });
+
+  activate(0);
+</script>
+
+</body>
+</html>

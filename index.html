@@ -106,7 +106,7 @@
           </a>
           <a href="crm/" class="bento-card main" style="--icon-c:#c2437a;--icon-bg:#fdebf2">
             <span class="bento-flag">Main</span>
-            <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
             <h3>CRM &amp; Clients</h3>
             <p>Full client lifecycle — pipeline, contacts, follow-ups, health scoring, contract tracking.</p>
           </a>
@@ -141,84 +141,696 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS — timeline -->
-    <section id="how-it-works">
+    <!-- HOW IT WORKS — Interactive Light Mockup -->
+    <section id="how-it-works" class="section-alt">
+      <style>
+        #how-it-works {
+          padding: 96px 0;
+          background: var(--surface);
+          border-top: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+        }
+
+        #how-it-works .hw-stage {
+          display: grid;
+          grid-template-columns: minmax(280px, 380px) 1fr;
+          gap: clamp(32px, 5vw, 64px);
+          align-items: start;
+        }
+
+        /* Tabs */
+        #how-it-works .hw-tabs { display: flex; flex-direction: column; gap: 6px; }
+
+        #how-it-works .hw-tab {
+          position: relative;
+          padding: 18px 20px;
+          border-radius: 14px;
+          border: 1px solid transparent;
+          cursor: pointer;
+          background: transparent;
+          transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+        }
+        #how-it-works .hw-tab:hover { background: var(--paper); }
+        #how-it-works .hw-tab.active {
+          background: var(--paper);
+          border-color: var(--line-strong);
+          box-shadow: var(--shadow-sm);
+        }
+
+        #how-it-works .tab-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+        #how-it-works .tab-num {
+          font-family: var(--mono);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--text-mute);
+          transition: color .25s ease;
+        }
+        #how-it-works .hw-tab.active .tab-num { color: var(--primary); }
+
+        #how-it-works .tab-title {
+          font-family: var(--display);
+          font-weight: 700;
+          font-size: 1.05rem;
+          color: var(--text);
+        }
+
+        #how-it-works .tab-desc {
+          font-size: 0.88rem;
+          line-height: 1.5;
+          color: var(--text-soft);
+          max-width: 38ch;
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows .3s ease;
+        }
+        #how-it-works .tab-desc span { overflow: hidden; }
+        #how-it-works .hw-tab.active .tab-desc { grid-template-rows: 1fr; margin-top: 4px; }
+
+        #how-it-works .tab-progress {
+          margin-top: 14px;
+          height: 3px;
+          background: var(--line);
+          border-radius: 99px;
+          overflow: hidden;
+          opacity: 0;
+          transition: opacity .25s ease;
+        }
+        #how-it-works .hw-tab.active .tab-progress { opacity: 1; }
+        #how-it-works .tab-progress-fill { height: 100%; width: 0%; background: var(--primary); border-radius: 99px; }
+        #how-it-works .tab-progress-fill.run { animation: hw-fillbar 5.2s linear forwards; }
+        #how-it-works .tab-progress-fill.paused { animation-play-state: paused; }
+        @keyframes hw-fillbar { from { width: 0% } to { width: 100% } }
+
+        /* Device / mockup (Light Theme) */
+        #how-it-works .hw-device {
+          background: var(--paper);
+          border: 1px solid var(--line-strong);
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: var(--shadow-md);
+        }
+        #how-it-works .device-bar {
+          display: flex; align-items: center; gap: 8px;
+          padding: 12px 16px;
+          background: var(--surface);
+          border-bottom: 1px solid var(--line);
+        }
+        #how-it-works .device-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+        #how-it-works .device-url {
+          margin-left: 8px;
+          font-family: var(--mono);
+          font-size: 11.5px;
+          color: var(--text-mute);
+          background: var(--paper);
+          border: 1px solid var(--line);
+          border-radius: 6px;
+          padding: 5px 12px;
+          flex: 1;
+          max-width: 300px;
+        }
+
+        #how-it-works .device-screen {
+          position: relative;
+          background: #ffffff;
+          min-height: 320px;
+        }
+
+        #how-it-works .hw-panel {
+          position: absolute;
+          inset: 0;
+          padding: 32px 36px;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity .3s ease;
+        }
+        #how-it-works .hw-panel.active { opacity: 1; pointer-events: auto; position: relative; }
+
+        #how-it-works .hw-panel > * {
+          opacity: 0;
+          transform: translateY(8px);
+          transition: opacity .45s ease, transform .45s ease;
+          transition-delay: calc(var(--d, 0) * 90ms);
+        }
+        #how-it-works .hw-panel.active > * { opacity: 1; transform: none; }
+
+        #how-it-works .p-label { font-size: 12px; color: var(--text-soft); margin: 0 0 6px; font-weight: 600; }
+        #how-it-works .p-input {
+          background: var(--paper); border: 1px solid var(--line-strong); border-radius: 10px;
+          padding: 11px 14px; font-size: 14px; color: var(--text); margin-bottom: 16px; font-weight: 500;
+        }
+        #how-it-works .p-input.url span { color: var(--text-mute); }
+        #how-it-works .p-btn {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: var(--primary); color: #ffffff; font-weight: 600; font-size: 13.5px;
+          padding: 11px 20px; border-radius: 10px; margin-top: 4px; box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        #how-it-works .p-check {
+          margin-top: 16px; font-size: 13px; color: #059669; font-weight: 600;
+          display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Brand step */
+        #how-it-works .p-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+        #how-it-works .p-logo {
+          width: 46px; height: 46px; border-radius: 12px;
+          border: 2px dashed var(--line-strong); background: var(--paper);
+          display: flex; align-items: center; justify-content: center;
+          color: var(--primary); font-weight: 700; font-size: 18px; font-family: var(--mono);
+        }
+        #how-it-works .swatches { display: flex; gap: 10px; margin: 0 0 18px; }
+        #how-it-works .swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+        #how-it-works .swatch.sel { border-color: var(--text); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--text); }
+        #how-it-works .p-toggle-row { display: flex; align-items: center; justify-content: space-between; max-width: 220px; font-size: 13.5px; color: var(--text); margin-bottom: 4px; font-weight: 500; }
+        #how-it-works .p-toggle { width: 36px; height: 20px; border-radius: 999px; background: var(--primary); position: relative; }
+        #how-it-works .p-toggle::after { content: ""; position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+
+        /* Team step */
+        #how-it-works .team-row {
+          display: flex; align-items: center; gap: 12px;
+          padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px;
+          background: var(--paper);
+        }
+        #how-it-works .hw-avatar {
+          width: 32px; height: 32px; border-radius: 50%;
+          background: var(--primary-tint); color: var(--primary-dark); border: 1px solid var(--line-strong);
+          display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+          font-family: var(--mono);
+        }
+        #how-it-works .who { display: flex; flex-direction: column; flex: 1; }
+        #how-it-works .who b { font-size: 13.5px; color: var(--text); font-weight: 600; }
+        #how-it-works .who span { font-size: 11.5px; color: var(--text-soft); }
+        #how-it-works .hw-badge {
+          font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+          color: #059669; background: #ecfdf5; border: 1px solid rgba(5,150,105,0.2);
+          padding: 4px 10px; border-radius: 999px;
+        }
+        #how-it-works .team-add {
+          display: flex; align-items: center; justify-content: center;
+          border: 1.5px dashed var(--line-strong); border-radius: 12px;
+          padding: 12px; font-size: 13px; color: var(--text-soft); font-weight: 500; background: var(--paper);
+        }
+
+        /* Dashboard step */
+        #how-it-works .hw-stat-row { display: flex; gap: 12px; margin-bottom: 18px; }
+        #how-it-works .hw-stat {
+          flex: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+          padding: 14px 16px;
+        }
+        #how-it-works .hw-stat .num { display: block; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--text); }
+        #how-it-works .hw-stat .lbl { font-size: 11.5px; color: var(--text-soft); }
+        #how-it-works .portal-chip {
+          display: flex; align-items: center; justify-content: space-between;
+          background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+          padding: 12px 14px; font-family: var(--mono); font-size: 12.5px; color: var(--text);
+        }
+        #how-it-works .portal-chip span { font-size: 11px; color: var(--primary); font-family: var(--body); font-weight: 600; cursor: pointer; }
+
+        @media (max-width: 860px) {
+          #how-it-works .hw-stage { grid-template-columns: 1fr; }
+          #how-it-works .device-screen { min-height: 280px; }
+          #how-it-works { padding: 64px 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          #how-it-works .tab-progress-fill.run { animation-duration: .01s; }
+          #how-it-works .hw-panel > * { transition: none; }
+        }
+      </style>
+
       <div class="container">
         <div class="section-head reveal">
           <span class="eyebrow">How It Works</span>
           <h2>Up and running in minutes</h2>
           <p>Get your agency workspace live in four simple steps.</p>
         </div>
-        <div class="timeline reveal-stagger">
-          <div class="tl-step">
-            <div class="tl-num"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg></div>
-            <span class="tl-tag">Step 01</span>
-            <h3>Create Your Workspace</h3>
-            <p>Register at <strong>register.eidoncore.com</strong> — pick your agency name, choose a URL, and start
-              your 14-day free PRO trial.</p>
+
+        <div class="hw-stage">
+          <div class="hw-tabs" id="hw-tabs">
+            <div class="hw-tab" data-i="0">
+              <div class="tab-top"><span class="tab-num">01</span><span class="tab-title">Create your workspace</span></div>
+              <div class="tab-desc"><span>Pick your agency name and get a live URL in under a minute.</span></div>
+              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+            </div>
+            <div class="hw-tab" data-i="1">
+              <div class="tab-top"><span class="tab-num">02</span><span class="tab-title">Customize &amp; brand</span></div>
+              <div class="tab-desc"><span>Logo, colors, email, and payments — or go full white-label.</span></div>
+              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+            </div>
+            <div class="hw-tab" data-i="2">
+              <div class="tab-top"><span class="tab-num">03</span><span class="tab-title">Invite your team</span></div>
+              <div class="tab-desc"><span>Owners, admins, project managers — role-based, from day one.</span></div>
+              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+            </div>
+            <div class="hw-tab" data-i="3">
+              <div class="tab-top"><span class="tab-num">04</span><span class="tab-title">Start delivering</span></div>
+              <div class="tab-desc"><span>Add a client, spin up a project, send the first invoice.</span></div>
+              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+            </div>
           </div>
-          <div class="tl-step">
-            <div class="tl-num"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></div>
-            <span class="tl-tag">Step 02</span>
-            <h3>Customize &amp; Brand</h3>
-            <p>Add your logo, colors, fonts, configure email, connect Stripe, and make it yours — or go full
-              white-label.</p>
-          </div>
-          <div class="tl-step">
-            <div class="tl-num"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-            <span class="tl-tag">Step 03</span>
-            <h3>Invite Your Team</h3>
-            <p>Bring your team on board with role-based access. Owners, admins, project managers, accountants, or
-              custom roles.</p>
-          </div>
-          <div class="tl-step">
-            <div class="tl-num"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-            <span class="tl-tag">Step 04</span>
-            <h3>Start Delivering</h3>
-            <p>Add clients, create projects, assign tasks, send invoices, and let clients self-serve through their
-              branded portal.</p>
+
+          <div class="hw-device">
+            <div class="device-bar">
+              <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
+              <span class="device-url" id="hw-deviceUrl">studio-nine.eidoncore.com</span>
+            </div>
+            <div class="device-screen" id="hw-screen">
+
+              <div class="hw-panel" data-i="0">
+                <p class="p-label" style="--d:0">Agency name</p>
+                <div class="p-input" style="--d:1">Studio Nine</div>
+                <p class="p-label" style="--d:2">Workspace URL</p>
+                <div class="p-input url" style="--d:3">studio-nine<span>.eidoncore.com</span></div>
+                <div class="p-btn" style="--d:4">Start 14-day free trial →</div>
+                <div class="p-check" style="--d:5">✔ Workspace created</div>
+              </div>
+
+              <div class="hw-panel" data-i="1">
+                <div class="p-row" style="--d:0">
+                  <div class="p-logo">SN</div>
+                  <p class="p-label" style="margin:0">Upload logo</p>
+                </div>
+                <p class="p-label" style="--d:1">Brand color</p>
+                <div class="swatches" style="--d:2">
+                  <span class="swatch sel" style="background:#3f72af"></span>
+                  <span class="swatch" style="background:#7c86ff"></span>
+                  <span class="swatch" style="background:#6bcf9a"></span>
+                  <span class="swatch" style="background:#ff6b6b"></span>
+                  <span class="swatch" style="background:#2b2f3a"></span>
+                </div>
+                <div class="p-toggle-row" style="--d:3"><span>White-label domain</span><div class="p-toggle"></div></div>
+                <div class="p-check" style="--d:4">✔ Brand applied</div>
+              </div>
+
+              <div class="hw-panel" data-i="2">
+                <div class="team-row" style="--d:0">
+                  <div class="hw-avatar">S</div>
+                  <div class="who"><b>Sara K.</b><span>Admin</span></div>
+                  <span class="hw-badge">Invited</span>
+                </div>
+                <div class="team-row" style="--d:1">
+                  <div class="hw-avatar">O</div>
+                  <div class="who"><b>Owen R.</b><span>Project Manager</span></div>
+                  <span class="hw-badge">Invited</span>
+                </div>
+                <div class="team-add" style="--d:2">+ Invite teammate</div>
+              </div>
+
+              <div class="hw-panel" data-i="3">
+                <div class="hw-stat-row" style="--d:0">
+                  <div class="hw-stat"><span class="num">6</span><span class="lbl">Clients</span></div>
+                  <div class="hw-stat"><span class="num">11</span><span class="lbl">Active projects</span></div>
+                  <div class="hw-stat"><span class="num">$18.4k</span><span class="lbl">Invoiced</span></div>
+                </div>
+                <div class="portal-chip" style="--d:1">nimbus.studio-nine.com <span>COPY LINK</span></div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <script>
+      (function() {
+        const URLS = [
+          "studio-nine.eidoncore.com",
+          "studio-nine.eidoncore.com/brand",
+          "studio-nine.eidoncore.com/team",
+          "nimbus.studio-nine.com"
+        ];
+
+        function initHowItWorks() {
+          const section = document.getElementById('how-it-works');
+          if (!section) return;
+
+          const tabsEl = section.querySelector('#hw-tabs');
+          const panels = [...section.querySelectorAll('.hw-panel')];
+          const urlEl = section.querySelector('#hw-deviceUrl');
+          const screenEl = section.querySelector('#hw-screen');
+          const stage = section.querySelector('.hw-stage');
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          if (!tabsEl || !screenEl) return;
+
+          let active = 0;
+          let advanceTimer = null;
+
+          [...tabsEl.children].forEach((tab) => {
+            tab.addEventListener('click', () => activate(Number(tab.dataset.i)));
+          });
+
+          function setTabsUI(i){
+            [...tabsEl.children].forEach((t) => {
+              const idx = Number(t.dataset.i);
+              t.classList.toggle('active', idx === i);
+              const fill = t.querySelector('.tab-progress-fill');
+              if (fill) {
+                fill.classList.remove('run');
+                void fill.offsetWidth;
+                if (idx === i && !reduce) fill.classList.add('run');
+              }
+            });
+          }
+
+          function showPanel(i){
+            panels.forEach(p => {
+              p.classList.remove('active');
+            });
+            void screenEl.offsetWidth;
+            const target = panels.find(p => Number(p.dataset.i) === i);
+            if (target) {
+              target.classList.add('active');
+            }
+            if (urlEl && URLS[i]) {
+              urlEl.textContent = URLS[i];
+            }
+          }
+
+          function activate(i){
+            active = i;
+            setTabsUI(i);
+            showPanel(i);
+            clearTimeout(advanceTimer);
+            if (!reduce){
+              advanceTimer = setTimeout(() => activate((i + 1) % panels.length), 5200);
+            }
+          }
+
+          if (stage) {
+            stage.addEventListener('mouseenter', () => {
+              clearTimeout(advanceTimer);
+              tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.add('paused'));
+            });
+            stage.addEventListener('mouseleave', () => {
+              tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.remove('paused'));
+              if (!reduce) advanceTimer = setTimeout(() => activate((active + 1) % panels.length), 5200);
+            });
+          }
+
+          activate(0);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initHowItWorks);
+        } else {
+          initHowItWorks();
+        }
+      })();
+    </script>
 
     <!-- WORKFLOW LOOP -->
-    <section class="section-alt" id="workflow-loop">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">End-to-End</span>
-          <h2>One platform, every stage — on repeat</h2>
-          <p>Eidoncore isn't a straight line, it's a loop. Every closed invoice feeds your reports, and every report
-            points to the next lead. Here's the cycle running underneath your agency.</p>
-        </div>
-        <div class="loop-diagram reveal">
-          <div class="loop-row">
-            <div class="loop-node"><span class="loop-n">01</span><span>Lead</span></div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-node"><span class="loop-n">02</span><span>Client</span></div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-node"><span class="loop-n">03</span><span>Proposal</span></div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-node"><span class="loop-n">04</span><span>Project</span></div>
+    <section id="workflow-loop" style="
+      --loop-bg:#10121a;
+      --loop-surface:#171a24;
+      --loop-surface-2:#1e2230;
+      --loop-line:rgba(237,239,244,0.09);
+      --loop-line-strong:rgba(237,239,244,0.16);
+      --loop-text:#edeff4;
+      --loop-muted:#8d92a8;
+      --loop-accent:#ffb454;
+      --loop-accent-dim:rgba(255,180,84,0.16);
+      --loop-accent-line:rgba(255,180,84,0.35);
+      --D:clamp(320px,38vw,540px);
+      --radius-node:calc(var(--D)*0.42);
+      padding:0;
+    ">
+      <style>
+        #workflow-loop{
+          background:
+            radial-gradient(ellipse 900px 500px at 12% -10%, rgba(255,180,84,0.08), transparent 60%),
+            var(--loop-bg);
+          color: var(--loop-text);
+        }
+        #workflow-loop .loop-layout{
+          max-width:1180px;
+          margin:0 auto;
+          padding:96px 24px;
+          display:grid;
+          grid-template-columns:minmax(280px,420px) 1fr;
+          gap:clamp(40px,6vw,100px);
+          align-items:center;
+        }
+        #workflow-loop .loop-eyebrow{
+          display:inline-flex;align-items:center;gap:8px;
+          font-family:'JetBrains Mono',monospace;
+          font-size:12px;letter-spacing:0.14em;
+          color:var(--loop-accent);background:var(--loop-accent-dim);
+          border:1px solid var(--loop-accent-line);
+          padding:6px 12px 6px 10px;border-radius:999px;margin-bottom:22px;
+        }
+        #workflow-loop .loop-eyebrow .ping-dot{
+          width:6px;height:6px;border-radius:50%;
+          background:var(--loop-accent);
+          box-shadow:0 0 0 0 rgba(255,180,84,0.6);
+          animation:loop-ping 2.4s ease-out infinite;
+        }
+        @keyframes loop-ping{
+          0%  {box-shadow:0 0 0 0 rgba(255,180,84,0.55);}
+          70% {box-shadow:0 0 0 7px rgba(255,180,84,0);}
+          100%{box-shadow:0 0 0 0 rgba(255,180,84,0);}
+        }
+        #workflow-loop h2{
+          font-size:clamp(34px,3.6vw,50px);
+          line-height:1.08;letter-spacing:-0.01em;
+          margin:0 0 18px;
+          color:var(--loop-text);
+        }
+        #workflow-loop .loop-lede{
+          font-size:16px;line-height:1.65;
+          color:var(--loop-muted);max-width:44ch;margin:0 0 28px;
+        }
+        #workflow-loop .loop-lede b{color:var(--loop-text);font-weight:600;}
+        #workflow-loop .loop-note{
+          display:flex;align-items:flex-start;gap:10px;
+          padding-top:22px;border-top:1px solid var(--loop-line);
+        }
+        #workflow-loop .loop-note svg{flex:none;margin-top:2px;}
+        #workflow-loop .loop-note p{
+          margin:0;font-family:'JetBrains Mono',monospace;
+          font-size:12.5px;line-height:1.6;color:var(--loop-muted);
+        }
+        #workflow-loop .loop-note span{color:var(--loop-accent);}
+        /* Orbit */
+        #workflow-loop .orbit-wrap{display:flex;justify-content:center;}
+        #workflow-loop .orbit{position:relative;width:var(--D);height:var(--D);}
+        #workflow-loop .track{
+          position:absolute;top:50%;left:50%;
+          width:calc(var(--radius-node)*2);height:calc(var(--radius-node)*2);
+          transform:translate(-50%,-50%);
+          border-radius:50%;border:1px dashed var(--loop-line-strong);
+        }
+        #workflow-loop .hub{
+          position:absolute;top:50%;left:50%;
+          width:clamp(84px,11vw,128px);height:clamp(84px,11vw,128px);
+          transform:translate(-50%,-50%);
+          border-radius:50%;background:var(--loop-surface);
+          border:1px solid var(--loop-line-strong);
+          display:flex;align-items:center;justify-content:center;
+          text-align:center;z-index:3;
+        }
+        #workflow-loop .hub::before,#workflow-loop .hub::after{
+          content:"";position:absolute;inset:0;border-radius:50%;
+          border:1px solid var(--loop-accent-line);
+          animation:hub-pulse 3.2s ease-out infinite;opacity:0;
+        }
+        #workflow-loop .hub::after{animation-delay:1.6s;}
+        @keyframes hub-pulse{
+          0%  {transform:scale(1);opacity:0.55;}
+          100%{transform:scale(1.9);opacity:0;}
+        }
+        #workflow-loop .hub-label{
+          font-family:'JetBrains Mono',monospace;font-size:11px;
+          letter-spacing:0.12em;color:var(--loop-muted);line-height:1.4;
+          position:relative;z-index:1;
+        }
+        #workflow-loop .hub-label b{
+          display:block;color:var(--loop-text);font-size:13px;letter-spacing:0.06em;
+        }
+        #workflow-loop .pulse-dot{
+          position:absolute;top:-5px;left:-5px;
+          width:10px;height:10px;border-radius:50%;
+          background:var(--loop-accent);
+          box-shadow:0 0 12px 2px rgba(255,180,84,0.7);
+          offset-path:circle(var(--radius-node) at 50% 50%);
+          animation:travel 16s linear infinite;z-index:2;
+        }
+        @keyframes travel{from{offset-distance:0%;}to{offset-distance:100%;}}
+        #workflow-loop .node{
+          --i:0;position:absolute;top:50%;left:50%;
+          transform:rotate(calc(45deg*var(--i))) translate(var(--radius-node)) rotate(calc(-45deg*var(--i)));
+        }
+        #workflow-loop .node-btn{
+          display:flex;align-items:center;gap:9px;
+          transform:translate(-50%,-50%);
+          background:var(--loop-surface);border:1px solid var(--loop-line-strong);
+          border-radius:999px;padding:9px 16px 9px 12px;
+          cursor:default;white-space:nowrap;position:relative;
+          transition:border-color .25s ease,background .25s ease,transform .25s ease;
+          animation:node-flash 16s linear infinite;
+          animation-delay:calc(-16s + 2s * var(--i));
+        }
+        #workflow-loop .node-btn:hover,#workflow-loop .node-btn:focus-visible{
+          border-color:var(--loop-accent-line);background:var(--loop-surface-2);
+          transform:translate(-50%,-50%) scale(1.06);outline:none;
+        }
+        @keyframes node-flash{
+          0%  {border-color:var(--loop-accent);background:var(--loop-surface-2);box-shadow:0 0 0 4px var(--loop-accent-dim);}
+          4%  {border-color:var(--loop-line-strong);background:var(--loop-surface);box-shadow:none;}
+          100%{border-color:var(--loop-line-strong);background:var(--loop-surface);box-shadow:none;}
+        }
+        #workflow-loop .node-num{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--loop-accent);}
+        #workflow-loop .node-name{font-weight:600;font-size:14px;color:var(--loop-text);}
+        #workflow-loop .node-tip{
+          position:absolute;bottom:calc(100% + 10px);left:50%;
+          transform:translateX(-50%) translateY(4px);
+          width:190px;background:var(--loop-surface-2);
+          border:1px solid var(--loop-line-strong);
+          border-radius:10px;padding:10px 12px;
+          font-size:12.5px;line-height:1.5;color:var(--loop-muted);
+          opacity:0;pointer-events:none;
+          transition:opacity .2s ease,transform .2s ease;z-index:5;
+        }
+        #workflow-loop .node-btn:hover .node-tip,
+        #workflow-loop .node-btn:focus-visible .node-tip{
+          opacity:1;transform:translateX(-50%) translateY(0);
+        }
+        /* Mobile timeline */
+        #workflow-loop .loop-timeline{
+          display:none;position:relative;margin-top:8px;padding-left:30px;
+        }
+        #workflow-loop .loop-timeline::before{
+          content:"";position:absolute;left:9px;top:8px;bottom:44px;
+          width:1px;
+          background:repeating-linear-gradient(to bottom,var(--loop-line-strong) 0 4px,transparent 4px 9px);
+        }
+        #workflow-loop .t-row{position:relative;padding-bottom:22px;}
+        #workflow-loop .t-row::before{
+          content:"";position:absolute;left:-30px;top:3px;
+          width:9px;height:9px;border-radius:50%;
+          background:var(--loop-bg);border:2px solid var(--loop-accent);
+        }
+        #workflow-loop .t-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+        #workflow-loop .t-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--loop-accent);}
+        #workflow-loop .t-name{font-weight:600;font-size:15px;color:var(--loop-text);}
+        #workflow-loop .t-desc{margin:0;font-size:13px;line-height:1.55;color:var(--loop-muted);}
+        #workflow-loop .t-loop{
+          display:flex;align-items:center;gap:10px;
+          font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--loop-muted);
+        }
+        #workflow-loop .t-loop svg{flex:none;}
+        #workflow-loop .t-loop span{color:var(--loop-accent);}
+        @media(max-width:860px){
+          #workflow-loop .loop-layout{grid-template-columns:1fr;}
+          #workflow-loop .orbit-wrap,#workflow-loop .loop-note{display:none;}
+          #workflow-loop .loop-timeline{display:block;}
+        }
+        @media(prefers-reduced-motion:reduce){
+          #workflow-loop .pulse-dot,#workflow-loop .node-btn,
+          #workflow-loop .hub::before,#workflow-loop .hub::after,
+          #workflow-loop .ping-dot{animation:none!important;}
+        }
+      </style>
+
+      <div class="loop-layout">
+
+        <!-- Left: copy -->
+        <div>
+          <span class="loop-eyebrow"><span class="ping-dot"></span>LIVE LOOP</span>
+          <h2>Built as a loop, not a funnel</h2>
+          <p class="loop-lede">
+            Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> — every closed job feeds
+            your reports, and every report surfaces the next lead. This is the cycle running
+            underneath your agency, stage by stage, on repeat.
+          </p>
+          <div class="loop-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#ffb454" stroke-width="2" stroke-linecap="round"/>
+              <path d="M16 4v4h-4M8 20v-4h4" stroke="#ffb454" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>Hover any stage to see what happens there. Watch the pulse — it never stops at <span>Report</span>, it turns back into <span>Lead</span>.</p>
           </div>
-          <div class="loop-side loop-side-right" aria-hidden="true"></div>
-          <div class="loop-row reverse">
-            <div class="loop-node"><span class="loop-n">08</span><span>Report</span></div>
-            <span class="loop-arrow">←</span>
-            <div class="loop-node"><span class="loop-n">07</span><span>Invoice</span></div>
-            <span class="loop-arrow">←</span>
-            <div class="loop-node"><span class="loop-n">06</span><span>Support</span></div>
-            <span class="loop-arrow">←</span>
-            <div class="loop-node"><span class="loop-n">05</span><span>Task</span></div>
-          </div>
-          <div class="loop-side loop-side-left" aria-hidden="true"></div>
-          <div class="loop-restart">↻ Report insight becomes next quarter's lead</div>
         </div>
+
+        <!-- Right: orbit (desktop) -->
+        <div class="orbit-wrap">
+          <div class="orbit">
+            <div class="track"></div>
+            <div class="pulse-dot"></div>
+            <div class="hub">
+              <div class="hub-label">STAGES<b>8</b>LOOPED</div>
+            </div>
+            <div class="node" style="--i:0">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">01</span><span class="node-name">Lead</span>
+                <div class="node-tip">Inbound interest lands here first — before it's anyone's account.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:1">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">02</span><span class="node-name">Client</span>
+                <div class="node-tip">The lead becomes a live account, with its own history and contacts.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:2">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">03</span><span class="node-name">Proposal</span>
+                <div class="node-tip">Scope and pricing go out for signature — tracked until it's signed.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:3">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">04</span><span class="node-name">Project</span>
+                <div class="node-tip">Work kicks off on a timeline, scoped straight from the proposal.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:4">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">05</span><span class="node-name">Task</span>
+                <div class="node-tip">Day-to-day execution, assigned and tracked through to done.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:5">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">06</span><span class="node-name">Support</span>
+                <div class="node-tip">Client questions and requests land here, without derailing the project.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:6">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">07</span><span class="node-name">Invoice</span>
+                <div class="node-tip">Billed the moment the work closes — no separate step to remember.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:7">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">08</span><span class="node-name">Report</span>
+                <div class="node-tip">Margins and outcomes roll up — and point straight at the next lead.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile: vertical timeline -->
+        <div class="loop-timeline">
+          <div class="t-row"><div class="t-head"><span class="t-num">01</span><span class="t-name">Lead</span></div><p class="t-desc">Inbound interest lands here first.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">02</span><span class="t-name">Client</span></div><p class="t-desc">The lead becomes a live account.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">03</span><span class="t-name">Proposal</span></div><p class="t-desc">Scope and pricing sent for signature.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">04</span><span class="t-name">Project</span></div><p class="t-desc">The work kicks off on a timeline.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">05</span><span class="t-name">Task</span></div><p class="t-desc">Execution, assigned and tracked to done.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">06</span><span class="t-name">Support</span></div><p class="t-desc">Client requests, handled without derailing the project.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">07</span><span class="t-name">Invoice</span></div><p class="t-desc">Billed the moment the work closes.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">08</span><span class="t-name">Report</span></div><p class="t-desc">Margins and outcomes roll up.</p></div>
+          <div class="t-loop">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#ffb454" stroke-width="2" stroke-linecap="round"/><path d="M16 4v4h-4M8 20v-4h4" stroke="#ffb454" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Report insight becomes <span>next quarter's lead</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
+
     <!-- DASHBOARD PREVIEW -->
-    <section class="section-alt" id="dashboard-preview">
+    <section id="dashboard-preview">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">Dashboard</span>
@@ -365,118 +977,68 @@
           <p>Here is how Eidoncore is transforming real agencies every single day.</p>
         </div>
         <div class="testimonial-carousel-wrap reveal">
-          <div class="testimonial-carousel" id="testimonialCarousel" role="region" aria-label="Testimonials carousel" tabindex="0">
+          <div class="testimonial-hero-card" id="testimonialCarousel" role="region" aria-label="Customer testimonials" tabindex="0">
+            <div class="quote-mark-bg">“</div>
             <div class="testimonial-track" id="testimonialTrack">
               <div class="testimonial-slide active">
                 <div class="testimonial-card">
-                  <div class="testimonial-header">
-                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                    <span class="testimonial-badge">Saved 15+ hrs/wk</span>
-                  </div>
-                  <blockquote class="testimonial-quote">
-                    "We replaced Trello, HubSpot, and QuickBooks with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform saved us 15+ hours every week and eliminated all context switching."
-                  </blockquote>
-                  <div class="testimonial-author">
-                    <div class="author-avatar" style="background: linear-gradient(135deg, #6C63FF, #4834d4);">SK</div>
-                    <div class="author-info">
-                      <strong>Sarah Kim</strong>
-                      <span>Operations Lead, Spectra Digital</span>
-                    </div>
-                    <span class="verified-tag">✓ Verified Client</span>
+                  <p class="testimonial-hero-quote">
+                    We replaced Trello, HubSpot, and QuickBooks with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform <span class="quote-highlight">saved us 15+ hours every week</span> and <span class="quote-highlight">eliminated all context switching</span>.
+                  </p>
+                  <div class="testimonial-hero-author">
+                    <strong>Sarah Kim</strong> <span>— Operations Lead, Spectra Digital</span>
                   </div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <div class="testimonial-header">
-                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                    <span class="testimonial-badge">Replaced 4 Subscriptions</span>
-                  </div>
-                  <blockquote class="testimonial-quote">
-                    "The client portal alone transformed our client relationships. Our clients love having a single branded destination for task tracking, invoice payments, and file sharing. It looks 100% custom-built for us."
-                  </blockquote>
-                  <div class="testimonial-author">
-                    <div class="author-avatar" style="background: linear-gradient(135deg, #10B981, #059669);">MP</div>
-                    <div class="author-info">
-                      <strong>Marcus Patel</strong>
-                      <span>Founder, NovaBrand Agency</span>
-                    </div>
-                    <span class="verified-tag">✓ Verified Client</span>
+                  <p class="testimonial-hero-quote">
+                    The client portal alone <span class="quote-highlight">transformed our client relationships</span>. Our clients love having a single branded destination for task tracking, invoice payments, and file sharing. It looks <span class="quote-highlight">100% custom-built for us</span>.
+                  </p>
+                  <div class="testimonial-hero-author">
+                    <strong>Marcus Patel</strong> <span>— Founder, NovaBrand Agency</span>
                   </div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <div class="testimonial-header">
-                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                    <span class="testimonial-badge">+45% Team Efficiency</span>
-                  </div>
-                  <blockquote class="testimonial-quote">
-                    "Eidoncore's built-in AI workspace and automated triggers streamlined our entire campaign workflow. Tasks get assigned, clients get notified, and invoices generate automatically without dropping the ball."
-                  </blockquote>
-                  <div class="testimonial-author">
-                    <div class="author-avatar" style="background: linear-gradient(135deg, #EC4899, #be185d);">ER</div>
-                    <div class="author-info">
-                      <strong>Elena Rostova</strong>
-                      <span>Head of Client Success, Apex Creative Studio</span>
-                    </div>
-                    <span class="verified-tag">✓ Verified Client</span>
+                  <p class="testimonial-hero-quote">
+                    Eidoncore's built-in AI workspace and automated triggers <span class="quote-highlight">streamlined our entire campaign workflow</span>. Tasks get assigned, clients get notified, and invoices generate automatically <span class="quote-highlight">without dropping the ball</span>.
+                  </p>
+                  <div class="testimonial-hero-author">
+                    <strong>Elena Rostova</strong> <span>— Head of Client Success, Apex Creative Studio</span>
                   </div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <div class="testimonial-header">
-                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                    <span class="testimonial-badge">99.8% Client Satisfaction</span>
-                  </div>
-                  <blockquote class="testimonial-quote">
-                    "Moving our 40-person agency to Eidoncore was the best operational decision we made this year. Onboarding took less than a day, and our client satisfaction ratings hit an all-time high."
-                  </blockquote>
-                  <div class="testimonial-author">
-                    <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #d97706);">DC</div>
-                    <div class="author-info">
-                      <strong>David Chen</strong>
-                      <span>Managing Director, Clarity Tech Solutions</span>
-                    </div>
-                    <span class="verified-tag">✓ Verified Client</span>
+                  <p class="testimonial-hero-quote">
+                    Moving our 40-person agency to Eidoncore was the <span class="quote-highlight">best operational decision</span> we made this year. Onboarding took less than a day, and our client satisfaction ratings <span class="quote-highlight">hit an all-time high</span>.
+                  </p>
+                  <div class="testimonial-hero-author">
+                    <strong>David Chen</strong> <span>— Managing Director, Clarity Tech Solutions</span>
                   </div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <div class="testimonial-header">
-                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                    <span class="testimonial-badge">White-Label Enterprise</span>
-                  </div>
-                  <blockquote class="testimonial-quote">
-                    "The white-label capability and custom domain integration gave our agency an enterprise-grade polish. Clients are constantly impressed by how seamless the portal experience feels."
-                  </blockquote>
-                  <div class="testimonial-author">
-                    <div class="author-avatar" style="background: linear-gradient(135deg, #8B5CF6, #6d28d9);">AV</div>
-                    <div class="author-info">
-                      <strong>Amanda Vance</strong>
-                      <span>Creative Director, Vanguard Media</span>
-                    </div>
-                    <span class="verified-tag">✓ Verified Client</span>
+                  <p class="testimonial-hero-quote">
+                    The white-label capability and custom domain integration gave our agency an <span class="quote-highlight">enterprise-grade polish</span>. Clients are constantly impressed by how <span class="quote-highlight">seamless the portal experience feels</span>.
+                  </p>
+                  <div class="testimonial-hero-author">
+                    <strong>Amanda Vance</strong> <span>— Creative Director, Vanguard Media</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="Previous testimonial">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-              </button>
-              <div class="carousel-dots" id="carouselDots">
-                <button class="dot active" data-slide="0" aria-label="Go to testimonial 1"></button>
-                <button class="dot" data-slide="1" aria-label="Go to testimonial 2"></button>
-                <button class="dot" data-slide="2" aria-label="Go to testimonial 3"></button>
-                <button class="dot" data-slide="3" aria-label="Go to testimonial 4"></button>
-                <button class="dot" data-slide="4" aria-label="Go to testimonial 5"></button>
-              </div>
-              <button class="carousel-btn next-btn" id="carouselNext" aria-label="Next testimonial">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </button>
+
+            <!-- Avatar Navigation Bar -->
+            <div class="testimonial-avatar-nav" id="testimonialAvatarNav">
+              <button class="avatar-nav-item active" data-slide="0" aria-label="Sarah Kim testimonial">SK</button>
+              <button class="avatar-nav-item" data-slide="1" aria-label="Marcus Patel testimonial">MP</button>
+              <button class="avatar-nav-item" data-slide="2" aria-label="Elena Rostova testimonial">ER</button>
+              <button class="avatar-nav-item" data-slide="3" aria-label="David Chen testimonial">DC</button>
+              <button class="avatar-nav-item" data-slide="4" aria-label="Amanda Vance testimonial">AV</button>
             </div>
           </div>
         </div>

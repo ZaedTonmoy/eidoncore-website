@@ -501,6 +501,8 @@
     const carousel = document.getElementById('testimonialCarousel');
     if (carousel) {
       const slides = carousel.querySelectorAll('.testimonial-slide');
+      const avatarNav = carousel.querySelector('#testimonialAvatarNav');
+      const avatarBtns = carousel.querySelectorAll('.avatar-nav-item');
       const dots = carousel.querySelectorAll('.carousel-dots .dot');
       const prevBtn = carousel.querySelector('#carouselPrev');
       const nextBtn = carousel.querySelector('#carouselNext');
@@ -518,6 +520,9 @@
           dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === currentIndex);
           });
+          avatarBtns.forEach((btn, i) => {
+            btn.classList.toggle('active', i === currentIndex);
+          });
         }
 
         function nextSlide() { showSlide(currentIndex + 1); }
@@ -525,6 +530,19 @@
 
         if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
         if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+
+        /* Handle avatar button clicks via event delegation */
+        if (avatarNav) {
+          avatarNav.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-slide]');
+            if (btn) {
+              e.preventDefault();
+              const idx = parseInt(btn.getAttribute('data-slide') || '0', 10);
+              showSlide(idx);
+              resetAutoplay();
+            }
+          });
+        }
 
         dots.forEach(dot => {
           dot.addEventListener('click', () => {
