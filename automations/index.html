@@ -211,35 +211,29 @@
         <div class="mini-grid reveal-stagger"><a href="../notifications/" class="mini-card"><div class="mini-icon"></div><h3>Notifications</h3><p>Real-time alerts triggered by automations.</p></a><a href="../tasks/" class="mini-card"><div class="mini-icon"></div><h3>Task Management</h3><p>Auto-assign and update tasks with workflows.</p></a><a href="../integrations/" class="mini-card"><div class="mini-icon"></div><h3>Integrations</h3><p>Connect automations to Slack, email, and webhooks.</p></a></div>
       </div>
     </section>
-<!-- HOW IT WORKS — Interactive Light Mockup -->
+    <!-- HOW IT WORKS — Interactive Light Mockup -->
     <section id="how-it-works">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head reveal center">
           <span class="eyebrow">How It Works</span>
-          <h2>Up And Running in Minutes</h2>
-          <p>Get your agency workspace live in four simple steps.</p>
+          <h2>Automate Anything in 3 Steps</h2>
         </div>
 
         <div class="hw-stage">
-          <div class="hw-tabs" id="hw-tabs">
-            <div class="hw-tab" data-i="0">
-              <div class="tab-top"><span class="tab-num">01</span><span class="tab-title">Create your workspace</span></div>
-              <div class="tab-desc"><span>Pick your agency name and get a live URL in under a minute.</span></div>
-              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
+          <div class="hw-tabs">
+            <div class="hw-tab active" data-i="0">
+              <div class="tab-top"><span class="tab-num">01</span><span class="tab-title">Pick A Trigger</span></div>
+              <div class="tab-desc"><span>Choose from 10+ event types — task created, invoice overdue, client added, status changed, and more. Every important event can kick off an automation.</span></div>
+              <div class="tab-progress"><div class="tab-progress-fill run"></div></div>
             </div>
             <div class="hw-tab" data-i="1">
-              <div class="tab-top"><span class="tab-num">02</span><span class="tab-title">Customize &amp; brand</span></div>
-              <div class="tab-desc"><span>Logo, colors, email, and payments — or go full white-label.</span></div>
+              <div class="tab-top"><span class="tab-num">02</span><span class="tab-title">Set Conditions</span></div>
+              <div class="tab-desc"><span>Add optional filters with AND/OR logic. Only fire when the project budget exceeds $10K, or when a task is assigned to a specific team — you control the rules.</span></div>
               <div class="tab-progress"><div class="tab-progress-fill"></div></div>
             </div>
             <div class="hw-tab" data-i="2">
-              <div class="tab-top"><span class="tab-num">03</span><span class="tab-title">Invite your team</span></div>
-              <div class="tab-desc"><span>Owners, admins, project managers — role-based, from day one.</span></div>
-              <div class="tab-progress"><div class="tab-progress-fill"></div></div>
-            </div>
-            <div class="hw-tab" data-i="3">
-              <div class="tab-top"><span class="tab-num">04</span><span class="tab-title">Start delivering</span></div>
-              <div class="tab-desc"><span>Add a client, spin up a project, send the first invoice.</span></div>
+              <div class="tab-top"><span class="tab-num">03</span><span class="tab-title">Choose Actions</span></div>
+              <div class="tab-desc"><span>Assign tasks, send branded emails, update statuses, create notifications, or trigger webhooks. Chain multiple actions in a single automation for complex workflows.</span></div>
               <div class="tab-progress"><div class="tab-progress-fill"></div></div>
             </div>
           </div>
@@ -247,65 +241,29 @@
           <div class="hw-device">
             <div class="device-bar">
               <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
-              <span class="device-url" id="hw-deviceUrl">studio-nine.eidoncore.com</span>
+              <span class="device-url">automations.eidoncore.com/workflows</span>
             </div>
-            <div class="device-screen" id="hw-screen">
-
-              <div class="hw-panel" data-i="0">
-                <p class="p-label" style="--d:0">Agency name</p>
-                <div class="p-input" style="--d:1">Studio Nine</div>
-                <p class="p-label" style="--d:2">Workspace URL</p>
-                <div class="p-input url" style="--d:3">studio-nine<span>.eidoncore.com</span></div>
-                <div class="p-btn" style="--d:4">Start 14-day free trial →</div>
-                <div class="p-check" style="--d:5">✔ Workspace created</div>
+            <div class="device-screen">
+              <div class="hw-panel active" data-i="0">
+<p class="p-label" style="--d:0">Select Trigger Event</p>
+<div class="p-input" style="--d:1">Task Moved to "Done"</div>
+<div class="p-check" style="--d:2">✔ Trigger Configured</div>
               </div>
-
               <div class="hw-panel" data-i="1">
-                <div class="p-row" style="--d:0">
-                  <div class="p-logo">SN</div>
-                  <p class="p-label" style="margin:0">Upload logo</p>
-                </div>
-                <p class="p-label" style="--d:1">Brand color</p>
-                <div class="swatches" style="--d:2">
-                  <span class="swatch sel" style="background:#3f72af"></span>
-                  <span class="swatch" style="background:#7c86ff"></span>
-                  <span class="swatch" style="background:#6bcf9a"></span>
-                  <span class="swatch" style="background:#ff6b6b"></span>
-                  <span class="swatch" style="background:#2b2f3a"></span>
-                </div>
-                <div class="p-toggle-row" style="--d:3"><span>White-label domain</span><div class="p-toggle"></div></div>
-                <div class="p-check" style="--d:4">✔ Brand applied</div>
+<p class="p-label" style="--d:0">Filter Rules (AND/OR)</p>
+<div class="p-input" style="--d:1">IF Project Budget &gt; $10,000 AND Client Tier == VIP</div>
+<div class="p-check" style="--d:2">✔ Condition Verified</div>
               </div>
-
               <div class="hw-panel" data-i="2">
-                <div class="team-row" style="--d:0">
-                  <div class="hw-avatar">S</div>
-                  <div class="who"><b>Sara K.</b><span>Admin</span></div>
-                  <span class="hw-badge">Invited</span>
-                </div>
-                <div class="team-row" style="--d:1">
-                  <div class="hw-avatar">O</div>
-                  <div class="who"><b>Owen R.</b><span>Project Manager</span></div>
-                  <span class="hw-badge">Invited</span>
-                </div>
-                <div class="team-add" style="--d:2">+ Invite teammate</div>
+<div class="p-btn" style="--d:0">1. Send Slack Alert →</div>
+<div class="p-btn" style="--d:1;margin-top:8px;">2. Generate Draft Invoice →</div>
+<div class="p-check" style="--d:2">✔ Workflow Live &amp; Monitoring</div>
               </div>
-
-              <div class="hw-panel" data-i="3">
-                <div class="hw-stat-row" style="--d:0">
-                  <div class="hw-stat"><span class="num">6</span><span class="lbl">Clients</span></div>
-                  <div class="hw-stat"><span class="num">11</span><span class="lbl">Active projects</span></div>
-                  <div class="hw-stat"><span class="num">$18.4k</span><span class="lbl">Invoiced</span></div>
-                </div>
-                <div class="portal-chip" style="--d:1">nimbus.studio-nine.com <span>COPY LINK</span></div>
-              </div>
-
             </div>
           </div>
         </div>
       </div>
     </section>
-
 <section>
       <div class="container">
         <div class="newsletter-box reveal">
