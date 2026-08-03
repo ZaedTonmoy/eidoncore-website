@@ -573,81 +573,81 @@
 
     /* How It Works interactive mockup */
     (function initHowItWorks() {
-      const section = document.getElementById('how-it-works');
-      if (!section) return;
+      const sections = document.querySelectorAll('#how-it-works');
+      sections.forEach((section) => {
+        const tabsEl = section.querySelector('.hw-tabs');
+        const panels = [...section.querySelectorAll('.hw-panel')];
+        const urlEl = section.querySelector('.device-url');
+        const screenEl = section.querySelector('.device-screen');
+        const stage = section.querySelector('.hw-stage');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const tabsEl = section.querySelector('#hw-tabs');
-      const panels = [...section.querySelectorAll('.hw-panel')];
-      const urlEl = section.querySelector('#hw-deviceUrl');
-      const screenEl = section.querySelector('#hw-screen');
-      const stage = section.querySelector('.hw-stage');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!tabsEl || !screenEl) return;
 
-      if (!tabsEl || !screenEl) return;
+        const URLS = [
+          "studio-nine.eidoncore.com",
+          "studio-nine.eidoncore.com/brand",
+          "studio-nine.eidoncore.com/team",
+          "nimbus.studio-nine.com"
+        ];
 
-      const URLS = [
-        "studio-nine.eidoncore.com",
-        "studio-nine.eidoncore.com/brand",
-        "studio-nine.eidoncore.com/team",
-        "nimbus.studio-nine.com"
-      ];
+        let active = 0;
+        let advanceTimer = null;
 
-      let active = 0;
-      let advanceTimer = null;
+        [...tabsEl.children].forEach((tab) => {
+          tab.addEventListener('click', () => activate(Number(tab.dataset.i)));
+        });
 
-      [...tabsEl.children].forEach((tab) => {
-        tab.addEventListener('click', () => activate(Number(tab.dataset.i)));
-      });
+        function setTabsUI(i){
+          [...tabsEl.children].forEach((t) => {
+            const idx = Number(t.dataset.i);
+            t.classList.toggle('active', idx === i);
+            const fill = t.querySelector('.tab-progress-fill');
+            if (fill) {
+              fill.classList.remove('run');
+              void fill.offsetWidth;
+              if (idx === i && !reduce) fill.classList.add('run');
+            }
+          });
+        }
 
-      function setTabsUI(i){
-        [...tabsEl.children].forEach((t) => {
-          const idx = Number(t.dataset.i);
-          t.classList.toggle('active', idx === i);
-          const fill = t.querySelector('.tab-progress-fill');
-          if (fill) {
-            fill.classList.remove('run');
-            void fill.offsetWidth;
-            if (idx === i && !reduce) fill.classList.add('run');
+        function showPanel(i){
+          panels.forEach(p => {
+            p.classList.remove('active');
+          });
+          void screenEl.offsetWidth;
+          const target = panels.find(p => Number(p.dataset.i) === i);
+          if (target) {
+            target.classList.add('active');
           }
-        });
-      }
-
-      function showPanel(i){
-        panels.forEach(p => {
-          p.classList.remove('active');
-        });
-        void screenEl.offsetWidth;
-        const target = panels.find(p => Number(p.dataset.i) === i);
-        if (target) {
-          target.classList.add('active');
+          if (urlEl && URLS[i]) {
+            urlEl.textContent = URLS[i];
+          }
         }
-        if (urlEl && URLS[i]) {
-          urlEl.textContent = URLS[i];
-        }
-      }
 
-      function activate(i){
-        active = i;
-        setTabsUI(i);
-        showPanel(i);
-        clearTimeout(advanceTimer);
-        if (!reduce){
-          advanceTimer = setTimeout(() => activate((i + 1) % panels.length), 5200);
-        }
-      }
-
-      if (stage) {
-        stage.addEventListener('mouseenter', () => {
+        function activate(i){
+          active = i;
+          setTabsUI(i);
+          showPanel(i);
           clearTimeout(advanceTimer);
-          tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.add('paused'));
-        });
-        stage.addEventListener('mouseleave', () => {
-          tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.remove('paused'));
-          if (!reduce) advanceTimer = setTimeout(() => activate((active + 1) % panels.length), 5200);
-        });
-      }
+          if (!reduce){
+            advanceTimer = setTimeout(() => activate((i + 1) % panels.length), 5200);
+          }
+        }
 
-      activate(0);
+        if (stage) {
+          stage.addEventListener('mouseenter', () => {
+            clearTimeout(advanceTimer);
+            tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.add('paused'));
+          });
+          stage.addEventListener('mouseleave', () => {
+            tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.remove('paused'));
+            if (!reduce) advanceTimer = setTimeout(() => activate((active + 1) % panels.length), 5200);
+          });
+        }
+
+        activate(0);
+      });
     })();
   }
 
