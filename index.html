@@ -107,13 +107,13 @@
           <a href="crm/" class="bento-card main" style="--icon-c:#c2437a;--icon-bg:#fdebf2">
             <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <h3>CRM &amp; Clients</h3>
+            <h3>CRM&amp;Clients</h3>
             <p>Full client lifecycle — pipeline, contacts, follow-ups, health scoring, contract tracking.</p>
           </a>
           <a href="invoicing/" class="bento-card main" style="--icon-c:#1e9e6b;--icon-bg:#e5f7ef">
             <span class="bento-flag">Main</span>
             <div class="bento-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-            <h3>Invoicing &amp; Billing</h3>
+            <h3>Invoicing&amp;Billing</h3>
             <p>Professional invoices, recurring billing, payment tracking, credit notes, refunds.</p>
           </a>
           <a href="portal/" class="bento-card main" style="--icon-c:#3f72af;--icon-bg:#e8eff8">
@@ -143,223 +143,10 @@
 
     <!-- HOW IT WORKS — Interactive Light Mockup -->
     <section id="how-it-works">
-      <style>
-        #how-it-works {
-          padding: 96px 0;
-          background: var(--paper);
-          border-top: 1px solid var(--line);
-          border-bottom: 1px solid var(--line);
-        }
-
-        #how-it-works .hw-stage {
-          display: grid;
-          grid-template-columns: minmax(280px, 380px) 1fr;
-          gap: clamp(32px, 5vw, 64px);
-          align-items: start;
-        }
-
-        /* Tabs */
-        #how-it-works .hw-tabs { display: flex; flex-direction: column; gap: 6px; }
-
-        #how-it-works .hw-tab {
-          position: relative;
-          padding: 18px 20px;
-          border-radius: 14px;
-          border: 1px solid transparent;
-          cursor: pointer;
-          background: transparent;
-          transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
-        }
-        #how-it-works .hw-tab:hover { background: var(--surface); }
-        #how-it-works .hw-tab.active {
-          background: var(--surface);
-          border-color: var(--line-strong);
-          box-shadow: var(--shadow-sm);
-        }
-
-        #how-it-works .tab-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
-        #how-it-works .tab-num {
-          font-family: var(--mono);
-          font-size: 11px;
-          font-weight: 700;
-          color: var(--text-mute);
-          transition: color .25s ease;
-        }
-        #how-it-works .hw-tab.active .tab-num { color: var(--primary); }
-
-        #how-it-works .tab-title {
-          font-family: var(--display);
-          font-weight: 700;
-          font-size: 1.05rem;
-          color: var(--text);
-        }
-
-        #how-it-works .tab-desc {
-          font-size: 0.88rem;
-          line-height: 1.5;
-          color: var(--text-soft);
-          max-width: 38ch;
-          display: grid;
-          grid-template-rows: 0fr;
-          transition: grid-template-rows .3s ease;
-        }
-        #how-it-works .tab-desc span { overflow: hidden; }
-        #how-it-works .hw-tab.active .tab-desc { grid-template-rows: 1fr; margin-top: 4px; }
-
-        #how-it-works .tab-progress {
-          margin-top: 14px;
-          height: 3px;
-          background: var(--line);
-          border-radius: 99px;
-          overflow: hidden;
-          opacity: 0;
-          transition: opacity .25s ease;
-        }
-        #how-it-works .hw-tab.active .tab-progress { opacity: 1; }
-        #how-it-works .tab-progress-fill { height: 100%; width: 0%; background: var(--primary); border-radius: 99px; }
-        #how-it-works .tab-progress-fill.run { animation: hw-fillbar 5.2s linear forwards; }
-        #how-it-works .tab-progress-fill.paused { animation-play-state: paused; }
-        @keyframes hw-fillbar { from { width: 0% } to { width: 100% } }
-
-        /* Device / mockup (Light Theme) */
-        #how-it-works .hw-device {
-          background: var(--surface);
-          border: 1px solid var(--line-strong);
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: var(--shadow-md);
-        }
-        #how-it-works .device-bar {
-          display: flex; align-items: center; gap: 8px;
-          padding: 12px 16px;
-          background: var(--paper);
-          border-bottom: 1px solid var(--line);
-        }
-        #how-it-works .device-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
-        #how-it-works .device-url {
-          margin-left: 8px;
-          font-family: var(--mono);
-          font-size: 11.5px;
-          color: var(--text-mute);
-          background: var(--surface);
-          border: 1px solid var(--line);
-          border-radius: 6px;
-          padding: 5px 12px;
-          flex: 1;
-          max-width: 300px;
-        }
-
-        #how-it-works .device-screen {
-          position: relative;
-          background: #ffffff;
-          min-height: 320px;
-        }
-
-        #how-it-works .hw-panel {
-          position: absolute;
-          inset: 0;
-          padding: 32px 36px;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity .3s ease;
-        }
-        #how-it-works .hw-panel.active { opacity: 1; pointer-events: auto; position: relative; }
-
-        #how-it-works .hw-panel > * {
-          opacity: 0;
-          transform: translateY(8px);
-          transition: opacity .45s ease, transform .45s ease;
-          transition-delay: calc(var(--d, 0) * 90ms);
-        }
-        #how-it-works .hw-panel.active > * { opacity: 1; transform: none; }
-
-        #how-it-works .p-label { font-size: 12px; color: var(--text-soft); margin: 0 0 6px; font-weight: 600; }
-        #how-it-works .p-input {
-          background: var(--paper); border: 1px solid var(--line-strong); border-radius: 10px;
-          padding: 11px 14px; font-size: 14px; color: var(--text); margin-bottom: 16px; font-weight: 500;
-        }
-        #how-it-works .p-input.url span { color: var(--text-mute); }
-        #how-it-works .p-btn {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: var(--primary); color: #ffffff; font-weight: 600; font-size: 13.5px;
-          padding: 11px 20px; border-radius: 10px; margin-top: 4px; box-shadow: 0 4px 12px var(--primary-glow);
-        }
-        #how-it-works .p-check {
-          margin-top: 16px; font-size: 13px; color: #059669; font-weight: 600;
-          display: flex; align-items: center; gap: 6px;
-        }
-
-        /* Brand step */
-        #how-it-works .p-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-        #how-it-works .p-logo {
-          width: 46px; height: 46px; border-radius: 12px;
-          border: 2px dashed var(--line-strong); background: var(--paper);
-          display: flex; align-items: center; justify-content: center;
-          color: var(--primary); font-weight: 700; font-size: 18px; font-family: var(--mono);
-        }
-        #how-it-works .swatches { display: flex; gap: 10px; margin: 0 0 18px; }
-        #how-it-works .swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
-        #how-it-works .swatch.sel { border-color: var(--text); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--text); }
-        #how-it-works .p-toggle-row { display: flex; align-items: center; justify-content: space-between; max-width: 220px; font-size: 13.5px; color: var(--text); margin-bottom: 4px; font-weight: 500; }
-        #how-it-works .p-toggle { width: 36px; height: 20px; border-radius: 999px; background: var(--primary); position: relative; }
-        #how-it-works .p-toggle::after { content: ""; position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
-
-        /* Team step */
-        #how-it-works .team-row {
-          display: flex; align-items: center; gap: 12px;
-          padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px;
-          background: var(--paper);
-        }
-        #how-it-works .hw-avatar {
-          width: 32px; height: 32px; border-radius: 50%;
-          background: var(--primary-tint); color: var(--primary-dark); border: 1px solid var(--line-strong);
-          display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
-          font-family: var(--mono);
-        }
-        #how-it-works .who { display: flex; flex-direction: column; flex: 1; }
-        #how-it-works .who b { font-size: 13.5px; color: var(--text); font-weight: 600; }
-        #how-it-works .who span { font-size: 11.5px; color: var(--text-soft); }
-        #how-it-works .hw-badge {
-          font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
-          color: #059669; background: #ecfdf5; border: 1px solid rgba(5,150,105,0.2);
-          padding: 4px 10px; border-radius: 999px;
-        }
-        #how-it-works .team-add {
-          display: flex; align-items: center; justify-content: center;
-          border: 1.5px dashed var(--line-strong); border-radius: 12px;
-          padding: 12px; font-size: 13px; color: var(--text-soft); font-weight: 500; background: var(--paper);
-        }
-
-        /* Dashboard step */
-        #how-it-works .hw-stat-row { display: flex; gap: 12px; margin-bottom: 18px; }
-        #how-it-works .hw-stat {
-          flex: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
-          padding: 14px 16px;
-        }
-        #how-it-works .hw-stat .num { display: block; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--text); }
-        #how-it-works .hw-stat .lbl { font-size: 11.5px; color: var(--text-soft); }
-        #how-it-works .portal-chip {
-          display: flex; align-items: center; justify-content: space-between;
-          background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
-          padding: 12px 14px; font-family: var(--mono); font-size: 12.5px; color: var(--text);
-        }
-        #how-it-works .portal-chip span { font-size: 11px; color: var(--primary); font-family: var(--body); font-weight: 600; cursor: pointer; }
-
-        @media (max-width: 860px) {
-          #how-it-works .hw-stage { grid-template-columns: 1fr; }
-          #how-it-works .device-screen { min-height: 280px; }
-          #how-it-works { padding: 64px 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          #how-it-works .tab-progress-fill.run { animation-duration: .01s; }
-          #how-it-works .hw-panel > * { transition: none; }
-        }
-      </style>
-
       <div class="container">
         <div class="section-head reveal">
           <span class="eyebrow">How It Works</span>
-          <h2>Up And Running In Minutes</h2>
+          <h2>Up And Running in Minutes</h2>
           <p>Get your agency workspace live in four simple steps.</p>
         </div>
 
@@ -448,94 +235,6 @@
         </div>
       </div>
     </section>
-
-    <script>
-      (function() {
-        const URLS = [
-          "studio-nine.eidoncore.com",
-          "studio-nine.eidoncore.com/brand",
-          "studio-nine.eidoncore.com/team",
-          "nimbus.studio-nine.com"
-        ];
-
-        function initHowItWorks() {
-          const section = document.getElementById('how-it-works');
-          if (!section) return;
-
-          const tabsEl = section.querySelector('#hw-tabs');
-          const panels = [...section.querySelectorAll('.hw-panel')];
-          const urlEl = section.querySelector('#hw-deviceUrl');
-          const screenEl = section.querySelector('#hw-screen');
-          const stage = section.querySelector('.hw-stage');
-          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-          if (!tabsEl || !screenEl) return;
-
-          let active = 0;
-          let advanceTimer = null;
-
-          [...tabsEl.children].forEach((tab) => {
-            tab.addEventListener('click', () => activate(Number(tab.dataset.i)));
-          });
-
-          function setTabsUI(i){
-            [...tabsEl.children].forEach((t) => {
-              const idx = Number(t.dataset.i);
-              t.classList.toggle('active', idx === i);
-              const fill = t.querySelector('.tab-progress-fill');
-              if (fill) {
-                fill.classList.remove('run');
-                void fill.offsetWidth;
-                if (idx === i && !reduce) fill.classList.add('run');
-              }
-            });
-          }
-
-          function showPanel(i){
-            panels.forEach(p => {
-              p.classList.remove('active');
-            });
-            void screenEl.offsetWidth;
-            const target = panels.find(p => Number(p.dataset.i) === i);
-            if (target) {
-              target.classList.add('active');
-            }
-            if (urlEl && URLS[i]) {
-              urlEl.textContent = URLS[i];
-            }
-          }
-
-          function activate(i){
-            active = i;
-            setTabsUI(i);
-            showPanel(i);
-            clearTimeout(advanceTimer);
-            if (!reduce){
-              advanceTimer = setTimeout(() => activate((i + 1) % panels.length), 5200);
-            }
-          }
-
-          if (stage) {
-            stage.addEventListener('mouseenter', () => {
-              clearTimeout(advanceTimer);
-              tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.add('paused'));
-            });
-            stage.addEventListener('mouseleave', () => {
-              tabsEl.querySelectorAll('.tab-progress-fill.run').forEach(f => f.classList.remove('paused'));
-              if (!reduce) advanceTimer = setTimeout(() => activate((active + 1) % panels.length), 5200);
-            });
-          }
-
-          activate(0);
-        }
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initHowItWorks);
-        } else {
-          initHowItWorks();
-        }
-      })();
-    </script>
 
     <!-- WORKFLOW LOOP -->
     <section id="workflow-loop" style="
@@ -735,7 +434,7 @@
         <!-- Left: copy -->
         <div>
           <span class="loop-eyebrow"><span class="ping-dot"></span>LIVE LOOP</span>
-          <h2>Built As A Loop, Not A Funnel</h2>
+          <h2>Built as a Loop, Not a Funnel</h2>
           <p class="loop-lede">
             Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> — every closed job feeds
             your reports, and every report surfaces the next lead. This is the cycle running
@@ -867,7 +566,7 @@
           </div>
           <div class="stack-card" style="--i:2;--accent:#b5790f">
             <span class="diff-num">03 / 04</span>
-            <h3>Multi-Tenant By Design</h3>
+            <h3>Multi-Tenant by Design</h3>
             <p>Built from day one for agencies managing multiple clients, projects, and teams. Complete data
               isolation, per-agency settings, and role-based access at every level.</p>
           </div>
@@ -973,7 +672,7 @@
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">What Agencies Say</span>
-          <h2>Loved By 500+ Agencies Worldwide</h2>
+          <h2>Loved by 500+ Agencies Worldwide</h2>
           <p>Here is how Eidoncore is transforming real agencies every single day.</p>
         </div>
         <div class="testimonial-carousel-wrap reveal">
@@ -1083,7 +782,7 @@
       <div class="container">
         <div class="newsletter-box reveal">
           <div>
-            <h3>Stay In The Loop</h3>
+            <h3>Stay in the Loop</h3>
             <p>Get product updates, agency tips, and early access to new features.</p>
           </div>
           <div>
@@ -1097,7 +796,7 @@
     <!-- CTA -->
     <section class="cta-section" id="cta">
       <div class="container reveal">
-        <h2>Ready To Streamline Your Agency?</h2>
+        <h2>Ready to Streamline Your Agency?</h2>
         <p>Join thousands of agencies managing their entire workflow from a single platform. Start your 14-day free
           PRO trial — no credit card required.</p>
         <div class="cta-ctas">
