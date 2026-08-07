@@ -225,3 +225,15 @@ with open(out_path, 'w', encoding='utf-8') as f:
 
 print(f"✓ Generated {out_path} with {len(articles)} articles")
 PYEOF
+
+# Also regenerate _docs_data.js so docs/index.html works on file:// without a web server
+DATA_JS="${SCRIPT_DIR}/docs/_docs_data.js"
+python3 - "$OUT" "$DATA_JS" <<'PYEOF2'
+import sys, json
+inp, out = sys.argv[1], sys.argv[2]
+with open(inp) as f:
+    raw = f.read().replace('</script>', '<\\/script>')
+with open(out, 'w') as f:
+    f.write(f'window.__DOCS__ = {raw};')
+print(f"✓ Generated {out}")
+PYEOF2

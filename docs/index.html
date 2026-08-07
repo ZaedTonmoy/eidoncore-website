@@ -5,17 +5,27 @@
   <meta charset="UTF-8">
   <meta name="theme-color" content="#f6f8fb">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eidoncore Docs — Help Center & Getting Started</title>
+  <title>Eidoncore Docs — Help Center &amp; Getting Started</title>
   <meta name="description" content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
-  <meta property="og:title" content="Eidoncore Docs — Help Center & Getting Started">
-  <meta property="og:description" content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
+  <meta property="og:title" content="Documentation — Eidoncore Help Center">
+  <meta property="og:description" content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eidoncore.com/docs/">
+  <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://eidoncore.com/docs/">
   <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../style.min.css">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@eidoncore">
+  <meta name="twitter:title" content="Documentation — Eidoncore Help Center">
+  <meta name="twitter:description" content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
+  <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,135 +65,1014 @@
     }
   ]
 }
-    </script>
+  </script>
+  <style>
+    /* ── Docs-specific styles (matches site design system) ── */
+
+    /* ── Layout ── */
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      align-items: start;
+      min-height: 70vh;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      /* NO overflow — overflow:hidden/clip breaks position:sticky on children.
+         Instead, each child clips its own background via border-radius. */
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ── Sidebar ── */
+    .docs-sidebar {
+      background: var(--paper);
+      border-right: 1px solid var(--line);
+      /* Rounded left corners by default; removed when sidebar becomes sticky */
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      transition: border-radius 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 75px);
+      overflow: hidden;
+    }
+    /* Applied by JS via IntersectionObserver when sidebar is pinned */
+    .docs-sidebar.is-stuck {
+      border-radius: 0;
+    }
+
+    .docs-search-wrap {
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .docs-search-input {
+      width: 100%;
+      padding: 9px 14px 9px 36px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      background: var(--surface);
+      font: inherit;
+      font-size: 0.875rem;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background-image: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%237c8797' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 12px center;
+      background-size: 15px;
+    }
+    .docs-search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(63,114,175,0.12);
+    }
+    .docs-search-input::placeholder { color: var(--text-mute); }
+
+    .docs-nav-scroll {
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px 8px 24px;
+    }
+    .docs-nav-scroll::-webkit-scrollbar { width: 4px; }
+    .docs-nav-scroll::-webkit-scrollbar-track { background: transparent; }
+    .docs-nav-scroll::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 4px; }
+
+    .docs-nav-group { margin-bottom: 4px; }
+
+    .docs-nav-category {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      /* Left padding = item padding (8px) + a touch to optically align with item text */
+      padding: 16px 8px 5px 10px;
+    }
+
+    .docs-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 7px 8px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.18s, color 0.18s;
+    }
+    .docs-nav-link:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .docs-nav-link.active {
+      background: var(--primary-tint);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-mute);
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .docs-nav-link.active .nav-icon {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .nav-chevron {
+      margin-left: auto;
+      flex-shrink: 0;
+      opacity: 0.35;
+      transition: transform 0.25s ease, opacity 0.2s;
+    }
+    .docs-nav-link.active .nav-chevron {
+      transform: rotate(90deg);
+      opacity: 0.6;
+    }
+
+    /* TOC sub-links */
+    .docs-toc-list {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
+      padding-left: 0;
+    }
+    .docs-toc-list.open { max-height: 500px; }
+
+    .docs-toc-link {
+      display: block;
+      width: 100%;
+      /* 8px (item outer pad) + 26px (icon) + 8px (gap) + 2px optical = 44px */
+      padding: 4px 8px 4px 44px;
+      background: none;
+      border: none;
+      font: inherit;
+      font-size: 0.8rem;
+      color: var(--text-mute);
+      text-align: left;
+      cursor: pointer;
+      border-radius: 8px;
+      line-height: 1.45;
+      transition: color 0.15s, background 0.15s;
+    }
+    .docs-toc-link:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+    .docs-toc-link.active { color: var(--primary-dark); font-weight: 600; }
+
+    /* ── Article pane ── */
+    .docs-article {
+      padding: 36px 44px 64px;
+      min-width: 0;
+      min-height: 600px;
+      /* Clip article background to the card's top-right / bottom-right corners */
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      background: var(--surface);
+    }
+
+    /* Loading skeleton */
+    .docs-welcome { padding: 20px 0; }
+    .loading-skeleton {
+      height: 18px;
+      background: linear-gradient(90deg, var(--line) 25%, var(--line-strong) 50%, var(--line) 75%);
+      background-size: 200% 100%;
+      border-radius: 100px;
+      animation: skeleton-shimmer 1.5s infinite;
+      margin-bottom: 14px;
+    }
+    .loading-skeleton.short { width: 55%; }
+    @keyframes skeleton-shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Article header */
+    .docs-article-header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .docs-article-title {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 10px;
+    }
+    .docs-article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .docs-article-category {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      background: var(--primary-tint);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* Article body typography */
+    .docs-article-body {
+      color: var(--text-soft);
+      font-size: 0.965rem;
+      line-height: 1.75;
+    }
+    .docs-article-body h2 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 32px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .docs-article-body h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 24px 0 8px;
+    }
+    .docs-article-body h4 {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 20px 0 6px;
+    }
+    .docs-article-body p { margin: 0 0 14px; }
+    .docs-article-body ul, .docs-article-body ol {
+      padding-left: 0;
+      margin: 0 0 14px;
+      display: grid;
+      gap: 6px;
+      list-style: none;
+    }
+    .docs-article-body ul li {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      color: var(--text-soft);
+    }
+    .docs-article-body ul li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .docs-article-body ol { counter-reset: ol-count; }
+    .docs-article-body ol li {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      counter-increment: ol-count;
+    }
+    .docs-article-body ol li::before {
+      content: counter(ol-count);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-tint);
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .docs-article-body strong { color: var(--text); font-weight: 600; }
+    .docs-article-body em { color: var(--text-soft); }
+    .docs-article-body code {
+      font-family: var(--mono);
+      font-size: 0.855rem;
+      background: var(--primary-tint);
+      color: var(--primary-dark);
+      padding: 2px 7px;
+      border-radius: 6px;
+      border: 1px solid rgba(63,114,175,0.15);
+    }
+    .docs-article-body pre {
+      background: var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+    }
+    .docs-article-body pre code {
+      background: none;
+      color: #c9d4e4;
+      border: none;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+    .docs-article-body blockquote {
+      border-left: 3px solid var(--primary);
+      padding: 14px 18px;
+      background: var(--primary-tint);
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      margin: 0 0 16px;
+    }
+    .docs-article-body blockquote p { color: var(--primary-dark); margin: 0; }
+    .docs-article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 28px 0;
+    }
+    .docs-article-body a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .docs-article-body a:hover { color: var(--primary-dark); }
+    .docs-article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 0 0 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .docs-article-body th {
+      background: var(--paper);
+      padding: 10px 16px;
+      font-family: var(--display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+    }
+    .docs-article-body td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--text-soft);
+    }
+    .docs-article-body tr:last-child td { border-bottom: none; }
+
+    /* Welcome / empty state */
+    .docs-welcome-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      min-height: 400px;
+    }
+    .docs-welcome-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--primary-tint);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .docs-welcome-state h2 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 8px;
+    }
+    .docs-welcome-state p { color: var(--text-soft); font-size: 0.95rem; max-width: 34ch; margin: 0 auto; }
+
+    /* ── No results ── */
+    .docs-no-results {
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-mute);
+    }
+
+    /* ── Mobile toggle button ── */
+    .docs-mobile-toggle {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      background: var(--surface);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .docs-mobile-toggle:hover { border-color: var(--primary); color: var(--primary-dark); }
+
+    /* ── Backdrop ── */
+    .docs-sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11,26,43,0.45);
+      z-index: 149;
+      backdrop-filter: blur(2px);
+    }
+    .docs-sidebar-backdrop.open { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .docs-layout {
+        grid-template-columns: 1fr;
+        border-radius: var(--radius-md);
+      }
+      .docs-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 300px;
+        max-height: 100vh;
+        z-index: 150;
+        border-right: 1px solid var(--line);
+        box-shadow: var(--shadow-lg);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16,0.8,0.24,1);
+        border-radius: 0;
+      }
+      .docs-sidebar.open { transform: translateX(0); }
+      .docs-mobile-toggle { display: flex; }
+      .docs-article { padding: 24px 20px 48px; }
+    }
+    @media (max-width: 560px) {
+      .docs-article { padding: 20px 16px 40px; }
+    }
+  </style>
 </head>
 
 <body>
   <main id="main-content">
-<section class="page-header">
+
+    <!-- Page Header -->
+    <section class="page-header">
       <div class="container">
         <div class="breadcrumb reveal"><a href="../">Home</a><span class="separator">/</span><span class="current">Documentation</span></div>
-        <h1 class="page-title reveal">Help<span class="accent">Center</span></h1>
-        <p class="page-subtitle reveal">Everything you need to get started and master every feature of
-                    Eidoncore. Synced directly from our latest documentation.</p>
+        <h1 class="page-title reveal">Help <span class="accent">Center</span></h1>
+        <p class="page-subtitle reveal">Everything you need to get started and master every feature of Eidoncore. Synced directly from our latest documentation.</p>
       </div>
     </section>
-<section>
+
+    <!-- Stats Row -->
+    <section style="padding-top:0;padding-bottom:32px;">
       <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow">Documentation</span>
-          <h2>Guides to Get the Most Out of Eidoncore</h2>
-          <p>Our full documentation library is being migrated. In the meantime, our team is one message away.</p>
+        <div class="stat-row reveal">
+          <div class="stat">
+            <span><span class="stat-number">22</span><span class="stat-suffix">+</span></span>
+            <span class="stat-label">Help Articles</span>
+          </div>
+          <div class="stat">
+            <span><span class="stat-number">5</span><span class="stat-suffix">min</span></span>
+            <span class="stat-label">Setup Time</span>
+          </div>
+          <div class="stat">
+            <span><span class="stat-number">24</span><span class="stat-suffix">/7</span></span>
+            <span class="stat-label">Knowledge Base</span>
+          </div>
+          <div class="stat">
+            <span><span class="stat-number">100</span><span class="stat-suffix">%</span></span>
+            <span class="stat-label">Self-Service</span>
+          </div>
         </div>
-        <div class="mini-grid reveal-stagger"><div class="mini-card"><div class="mini-icon"></div><h3>Getting Started</h3><p>Set up your workspace and invite your team.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>Projects & Tasks</h3><p>Budgets, milestones, boards, and time tracking.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>Billing & Invoicing</h3><p>Recurring billing, payments, and credit notes.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>AI Workspace</h3><p>Connect MCP-compatible AI assistants securely.</p></div></div>
       </div>
     </section>
-<section><div class="container"><div class="stat-row reveal"><div class="stat"><span><span class="stat-number">18</span><span class="stat-suffix">+</span></span><span class="stat-label">Help Articles</span></div><div class="stat"><span><span class="stat-number">5</span><span class="stat-suffix">min</span></span><span class="stat-label">Setup Time</span></div><div class="stat"><span><span class="stat-number">24</span><span class="stat-suffix">/7</span></span><span class="stat-label">Knowledge Base</span></div><div class="stat"><span><span class="stat-number">100</span><span class="stat-suffix">%</span></span><span class="stat-label">Self-Service</span></div></div></div></section>
-    <!-- TESTIMONIALS -->
-    <section class="section-alt" id="testimonials">
+
+    <!-- Docs Browser -->
+    <section class="section-alt" style="padding-top:40px;padding-bottom:80px;">
+      <div class="container">
+
+        <!-- Mobile toggle -->
+        <button class="docs-mobile-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="docsSidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
+          Browse Docs
+        </button>
+
+        <div class="docs-sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <!-- Sentinel: exits viewport when sidebar starts sticking -->
+        <div id="sidebarSentinel" style="height:1px;margin-bottom:-1px;"></div>
+
+        <div class="docs-layout reveal">
+          <!-- Sidebar -->
+          <nav class="docs-sidebar" id="docsSidebar" aria-label="Documentation navigation">
+            <div class="docs-search-wrap">
+              <input type="text" id="docsSearch" class="docs-search-input" placeholder="Search documentation…" aria-label="Search documentation">
+            </div>
+            <div class="docs-nav-scroll" id="docsNav"></div>
+          </nav>
+
+          <!-- Article -->
+          <article class="docs-article" id="docsArticle" aria-live="polite">
+            <div class="docs-welcome">
+              <div class="loading-skeleton" style="width:40%;height:22px;"></div>
+              <div class="loading-skeleton" style="width:75%;margin-top:16px;"></div>
+              <div class="loading-skeleton"></div>
+              <div class="loading-skeleton short"></div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
       <div class="container">
         <div class="section-head center reveal">
-          <span class="eyebrow">What Agencies Say</span>
-          <h2>Loved by 500+ Agencies Worldwide</h2>
-          <p>Here is how Eidoncore is transforming real agencies every single day.</p>
+          <span class="eyebrow">What Users Say</span>
+          <h2>Loved by agencies worldwide</h2>
+          <p>Here's what Eidoncore users say about getting up and running fast.</p>
         </div>
         <div class="testimonial-carousel-wrap reveal">
-          <div class="testimonial-hero-card" id="testimonialCarousel" role="region" aria-label="Customer testimonials" tabindex="0">
-            <div class="quote-mark-bg">“</div>
+          <div class="testimonial-hero-card" role="region" aria-label="Customer testimonials">
+            <div class="quote-mark-bg">"</div>
             <div class="testimonial-track" id="testimonialTrack">
               <div class="testimonial-slide active">
                 <div class="testimonial-card">
-                  <p class="testimonial-hero-quote">
-                    We replaced Trello, HubSpot, and QuickBooks with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform <span class="quote-highlight">saved us 15+ hours every week</span> and <span class="quote-highlight">eliminated all context switching</span>.
-                  </p>
-                  <div class="testimonial-hero-author">
-                    <strong>Sarah Kim</strong> <span>— Operations Lead, Spectra Digital</span>
-                  </div>
+                  <p class="testimonial-hero-quote">The getting started guide had us <span class="quote-highlight">fully operational in under 15 minutes</span>. The docs are clean, organized, and actually answer the questions you have — rare to see this quality.</p>
+                  <div class="testimonial-hero-author"><strong>Tomás Silva</strong> <span>— Lead Developer, CodeCraft Agency</span></div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <p class="testimonial-hero-quote">
-                    The client portal alone <span class="quote-highlight">transformed our client relationships</span>. Our clients love having a single branded destination for task tracking, invoice payments, and file sharing. It looks <span class="quote-highlight">100% custom-built for us</span>.
-                  </p>
-                  <div class="testimonial-hero-author">
-                    <strong>Marcus Patel</strong> <span>— Founder, NovaBrand Agency</span>
-                  </div>
+                  <p class="testimonial-hero-quote">The Automations documentation alone <span class="quote-highlight">saved us hours of trial and error</span>. Every feature is explained with real examples. Our whole team onboarded themselves <span class="quote-highlight">without a single support ticket</span>.</p>
+                  <div class="testimonial-hero-author"><strong>Priya Mehra</strong> <span>— Operations Director, Luminary Studio</span></div>
                 </div>
               </div>
               <div class="testimonial-slide">
                 <div class="testimonial-card">
-                  <p class="testimonial-hero-quote">
-                    Eidoncore's built-in AI workspace and automated triggers <span class="quote-highlight">streamlined our entire campaign workflow</span>. Tasks get assigned, clients get notified, and invoices generate automatically <span class="quote-highlight">without dropping the ball</span>.
-                  </p>
-                  <div class="testimonial-hero-author">
-                    <strong>Elena Rostova</strong> <span>— Head of Client Success, Apex Creative Studio</span>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-slide">
-                <div class="testimonial-card">
-                  <p class="testimonial-hero-quote">
-                    Moving our 40-person agency to Eidoncore was the <span class="quote-highlight">best operational decision</span> we made this year. Onboarding took less than a day, and our client satisfaction ratings <span class="quote-highlight">hit an all-time high</span>.
-                  </p>
-                  <div class="testimonial-hero-author">
-                    <strong>David Chen</strong> <span>— Managing Director, Clarity Tech Solutions</span>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-slide">
-                <div class="testimonial-card">
-                  <p class="testimonial-hero-quote">
-                    The white-label capability and custom domain integration gave our agency an <span class="quote-highlight">enterprise-grade polish</span>. Clients are constantly impressed by how <span class="quote-highlight">seamless the portal experience feels</span>.
-                  </p>
-                  <div class="testimonial-hero-author">
-                    <strong>Amanda Vance</strong> <span>— Creative Director, Vanguard Media</span>
-                  </div>
+                  <p class="testimonial-hero-quote">I was skeptical we could migrate our 40-person agency with just docs. We did it in <span class="quote-highlight">two days</span>. The step-by-step guides are genuinely some of the <span class="quote-highlight">best documentation I've ever used</span>.</p>
+                  <div class="testimonial-hero-author"><strong>David Chen</strong> <span>— Managing Director, Clarity Tech Solutions</span></div>
                 </div>
               </div>
             </div>
-
-            <!-- Avatar Navigation Bar -->
             <div class="testimonial-avatar-nav" id="testimonialAvatarNav">
-              <button class="avatar-nav-item active" data-slide="0" aria-label="Sarah Kim testimonial">SK</button>
-              <button class="avatar-nav-item" data-slide="1" aria-label="Marcus Patel testimonial">MP</button>
-              <button class="avatar-nav-item" data-slide="2" aria-label="Elena Rostova testimonial">ER</button>
-              <button class="avatar-nav-item" data-slide="3" aria-label="David Chen testimonial">DC</button>
-              <button class="avatar-nav-item" data-slide="4" aria-label="Amanda Vance testimonial">AV</button>
+              <button class="avatar-nav-item active" data-slide="0" aria-label="Tomás Silva testimonial">TS</button>
+              <button class="avatar-nav-item" data-slide="1" aria-label="Priya Mehra testimonial">PM</button>
+              <button class="avatar-nav-item" data-slide="2" aria-label="David Chen testimonial">DC</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-<section>
-      <div class="container"><div class="section-head reveal center">
-      <span class="eyebrow">FAQ</span>
-      <h2>Frequently Asked Questions</h2>
-      
-    </div>
-        <div class="faq-list reveal"><div class="faq-item"><button class="faq-question">Is there a getting started guide?<span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Yes. The Getting Started section walks you through agency setup, inviting team members,
-                                creating your first project, and sending your first invoice — typically under 15
-                                minutes.</p></div></div><div class="faq-item"><button class="faq-question">Does Eidoncore offer API documentation?<span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Yes. Full REST API documentation with endpoints, authentication guides, rate limits, and
-                                code examples is available for developers building custom integrations.</p></div></div><div class="faq-item"><button class="faq-question">How do I get help if I'm stuck?<span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Contact us through the in-app chat, email support, or browse the knowledge base. Pro and
-                                Enterprise customers get priority support with faster response times.</p></div></div><div class="faq-item"><button class="faq-question">Are there video tutorials?<span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Yes. The documentation includes video walkthroughs for key features like project setup,
-                                invoice creation, automation building, and client portal configuration.</p></div></div></div>
+
+    <!-- FAQ -->
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-question">Is there a getting started guide?<span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice — typically under 15 minutes.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Does Eidoncore offer API documentation?<span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Yes. Full REST API documentation with endpoints, authentication guides, rate limits, and code examples is available for developers building custom integrations.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How do I get help if I'm stuck?<span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Contact us through the in-app chat, email support, or browse the knowledge base. Pro and Enterprise customers get priority support with faster response times.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Are there video tutorials?<span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Yes. The documentation includes video walkthroughs for key features like project setup, invoice creation, automation building, and client portal configuration.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How often is documentation updated?<span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Documentation is automatically synced from our internal knowledge base on every release. You'll always be reading the latest guides that reflect the current version of Eidoncore.</p></div>
+          </div>
+        </div>
       </div>
     </section>
-<section class="cta-section">
+
+    <!-- CTA -->
+    <section class="cta-section">
       <div class="container reveal">
-        <h2>Still Have Questions?</h2>
-        <p>Our team is here to help. Reach out anytime.</p>
-        <div class="cta-ctas"><a href="../contact/" class="btn btn-primary btn-lg">Contact Support <span class="btn-arrow">→</span></a>
-<a href="https://register.eidoncore.com/" class="btn btn-outline btn-lg">Start Free
-                            Trial</a></div>
+        <h2>Still have questions?</h2>
+        <p>Our team is here to help. Reach out anytime and we'll get back to you quickly.</p>
+        <div class="cta-ctas">
+          <a href="../contact/" class="btn btn-primary btn-lg">Contact Support <span class="btn-arrow">→</span></a>
+          <a href="https://register.eidoncore.com/" class="btn btn-outline btn-lg">Start Free Trial</a>
+        </div>
       </div>
     </section>
+
   </main>
+
+  <!-- Inline docs data — works on file:// and HTTP servers alike -->
+  <script src="_docs_data.js"></script>
   <script src="../components.min.js"></script>
-  
+
+  <script>
+    (function () {
+      /* ── Lightweight Markdown → HTML ── */
+      function esc(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function inline(s) {
+        return esc(s)
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+          .replace(/`(.+?)`/g, '<code>$1</code>')
+          .replace(/\[(.+?)\]\((.+?)\)/g, function (_, text, href) {
+            if (href.startsWith('./')) {
+              var clean = href.replace('./', '').replace('.md', '');
+              var slug = clean.split('#')[0];
+              if (slug && allDocs.find(function(d) { return d.slug === slug; })) {
+                return '<a href="#' + slug + '" class="docs-internal-link">' + text + '</a>';
+              }
+            }
+            return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+          });
+      }
+
+      function parseTable(rows) {
+        if (rows.length < 2) return '';
+        const parse = r => r.split('|').map(c => c.trim()).filter(c => c !== '');
+        const headers = parse(rows[0]);
+        const startIdx = (rows.length > 1 && /^[\s|:-]+$/.test(rows[1])) ? 2 : 1;
+        let t = '<table><thead><tr>';
+        headers.forEach(h => t += '<th>' + inline(h) + '</th>');
+        t += '</tr></thead><tbody>';
+        for (let r = startIdx; r < rows.length; r++) {
+          const cells = parse(rows[r]);
+          if (cells.length === 0) continue;
+          t += '<tr>';
+          cells.forEach(c => t += '<td>' + inline(c) + '</td>');
+          t += '</tr>';
+        }
+        t += '</tbody></table>';
+        return t;
+      }
+
+      function md(src) {
+        let html = '';
+        const lines = src.split('\n');
+        let i = 0;
+        while (i < lines.length) {
+          const line = lines[i];
+
+          // Code block
+          if (line.startsWith('```')) {
+            let code = '';
+            i++;
+            while (i < lines.length && !lines[i].startsWith('```')) { code += esc(lines[i]) + '\n'; i++; }
+            i++;
+            html += '<pre><code>' + code.trimEnd() + '</code></pre>\n';
+            continue;
+          }
+
+          // Table
+          if (line.includes('|') && line.trim().startsWith('|')) {
+            let rows = [];
+            while (i < lines.length && lines[i].includes('|') && lines[i].trim().startsWith('|')) { rows.push(lines[i]); i++; }
+            html += parseTable(rows);
+            continue;
+          }
+
+          // Headings
+          const hm = line.match(/^(#{2,4})\s+(.+)/);
+          if (hm) {
+            const lvl = hm[1].length;
+            const id = hm[2].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            html += `<h${lvl} id="${id}">${inline(hm[2])}</h${lvl}>\n`;
+            i++;
+            continue;
+          }
+
+          // Horizontal rule
+          if (/^---+$/.test(line.trim())) { html += '<hr>\n'; i++; continue; }
+
+          // Blockquote
+          if (line.startsWith('>')) {
+            let bq = '';
+            while (i < lines.length && lines[i].startsWith('>')) { bq += lines[i].replace(/^>\s?/, '') + '\n'; i++; }
+            html += '<blockquote>' + md(bq.trim()) + '</blockquote>\n';
+            continue;
+          }
+
+          // Ordered list
+          if (/^\d+\.\s/.test(line)) {
+            html += '<ol>\n';
+            while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+              let li = lines[i].replace(/^\d+\.\s+/, '');
+              i++;
+              while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^\d+\.\s/.test(lines[i].trim()) && !lines[i].trim().startsWith('- ')) { li += ' ' + lines[i].trim(); i++; }
+              html += '<li>' + inline(li) + '</li>\n';
+            }
+            html += '</ol>\n';
+            continue;
+          }
+
+          // Unordered list
+          if (/^[-*]\s/.test(line)) {
+            html += '<ul>\n';
+            while (i < lines.length && /^[-*]\s/.test(lines[i])) {
+              let li = lines[i].replace(/^[-*]\s+/, '');
+              i++;
+              while (i < lines.length && /^\s{2,}/.test(lines[i]) && !/^[-*]\s/.test(lines[i].trim())) { li += ' ' + lines[i].trim(); i++; }
+              html += '<li>' + inline(li) + '</li>\n';
+            }
+            html += '</ul>\n';
+            continue;
+          }
+
+          // Blank line
+          if (!line.trim()) { i++; continue; }
+
+          // Paragraph
+          let para = line;
+          i++;
+          while (i < lines.length && lines[i].trim() && !lines[i].startsWith('#') && !lines[i].startsWith('>') && !lines[i].startsWith('```') && !lines[i].startsWith('- ') && !lines[i].startsWith('* ') && !/^\d+\.\s/.test(lines[i]) && !(lines[i].includes('|') && lines[i].trim().startsWith('|')) && !/^---+$/.test(lines[i].trim())) {
+            para += ' ' + lines[i];
+            i++;
+          }
+          html += '<p>' + inline(para) + '</p>\n';
+        }
+        return html;
+      }
+
+      /* ── Inline SVG icon map ── */
+      const _s = (d) => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+      const ICONS = {
+        'play-circle':    _s('<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>'),
+        'clipboard':      _s('<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>'),
+        'layout':         _s('<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/>'),
+        'folder':         _s('<path d="M20 20a2 2 0 002-2V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2z"/>'),
+        'check-circle':   _s('<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
+        'users':          _s('<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>'),
+        'wallet':         _s('<path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4z"/>'),
+        'wrench':         _s('<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>'),
+        'message-circle': _s('<path d="M7.9 20A9 9 0 104 16.1L2 22z"/>'),
+        'file-text':      _s('<path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/>'),
+        'life-buoy':      _s('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" x2="9.17" y1="4.93" y2="9.17"/><line x1="14.83" x2="19.07" y1="14.83" y2="19.07"/><line x1="14.83" x2="19.07" y1="9.17" y2="4.93"/><line x1="4.93" x2="9.17" y1="19.07" y2="14.83"/>'),
+        'user-plus':      _s('<path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" x2="20" y1="8" y2="14"/><line x1="23" x2="17" y1="11" y2="11"/>'),
+        'zap':            _s('<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),
+        'bar-chart':      _s('<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>'),
+        'bell':           _s('<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 003.4 0"/>'),
+        'bot':            _s('<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>'),
+        'settings':       _s('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>'),
+        'globe':          _s('<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/>'),
+        'file':           _s('<path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"/><polyline points="14 2 14 8 20 8"/>'),
+        'edit':           _s('<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>'),
+        'lock':           _s('<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>'),
+        'command':        _s('<path d="M18 3a3 3 0 00-3 3v12a3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3H6a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3V6a3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3h12a3 3 0 003-3 3 3 0 00-3-3z"/>'),
+        'book':           _s('<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>'),
+      };
+
+      /* ── State ── */
+      const navEl      = document.getElementById('docsNav');
+      const articleEl  = document.getElementById('docsArticle');
+      const searchEl   = document.getElementById('docsSearch');
+      const sidebarEl  = document.getElementById('docsSidebar');
+      const backdropEl = document.getElementById('sidebarBackdrop');
+      const toggleEl   = document.getElementById('sidebarToggle');
+      let allDocs = [];
+      let activeSlug = null;
+
+      /* ── Sticky detection via IntersectionObserver ── */
+      const sentinel = document.getElementById('sidebarSentinel');
+      if (sentinel && 'IntersectionObserver' in window) {
+        new IntersectionObserver(
+          ([entry]) => sidebarEl.classList.toggle('is-stuck', !entry.isIntersecting),
+          { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+        ).observe(sentinel);
+      }
+
+      /* ── Extract ## headings ── */
+      function extractHeadings(content) {
+        return content.split('\n')
+          .filter(l => /^##\s+/.test(l))
+          .map(l => {
+            const text = l.replace(/^##\s+/, '');
+            const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            return { text, id };
+          });
+      }
+
+      const chevronSvg = `<svg class="nav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+      /* ── Build sidebar nav ── */
+      function buildNav(docs, query) {
+        const q = (query || '').toLowerCase().trim();
+        const catOrder = ['Getting Started', 'Core Features', 'Team & Workflow', 'Configuration'];
+        const groups = {};
+        docs.forEach(d => {
+          if (!groups[d.category]) groups[d.category] = [];
+          groups[d.category].push(d);
+        });
+
+        let html = '';
+        catOrder.forEach(cat => {
+          const items = groups[cat];
+          if (!items) return;
+          const filtered = q
+            ? items.filter(d => d.title.toLowerCase().includes(q) || d.content.toLowerCase().includes(q))
+            : items;
+          if (filtered.length === 0) return;
+
+          html += `<div class="docs-nav-group"><div class="docs-nav-category">${esc(cat)}</div>`;
+          filtered.forEach(d => {
+            const isActive = d.slug === activeSlug;
+            const cls = isActive ? 'docs-nav-link active' : 'docs-nav-link';
+            const icon = ICONS[d.icon] || ICONS['book'];
+            const headings = extractHeadings(d.content);
+            const hasHeadings = headings.length > 0;
+
+            html += `<button class="${cls}" data-slug="${d.slug}">
+              <span class="nav-icon">${icon}</span>
+              <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(d.title)}</span>
+              ${hasHeadings ? chevronSvg : ''}
+            </button>`;
+
+            if (hasHeadings) {
+              html += `<div class="docs-toc-list${isActive ? ' open' : ''}">`;
+              headings.forEach(h => {
+                html += `<button class="docs-toc-link" data-heading-id="${h.id}" data-slug="${d.slug}">${esc(h.text)}</button>`;
+              });
+              html += '</div>';
+            }
+          });
+          html += '</div>';
+        });
+
+        if (!html) {
+          html = '<div class="docs-no-results">No matching articles found.</div>';
+        }
+
+        navEl.innerHTML = html;
+
+        navEl.querySelectorAll('.docs-nav-link').forEach(btn => {
+          btn.addEventListener('click', () => {
+            showArticle(btn.dataset.slug);
+            window.location.hash = btn.dataset.slug;
+            closeSidebar();
+          });
+        });
+
+        navEl.querySelectorAll('.docs-toc-link').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const slug = btn.dataset.slug;
+            const headingId = btn.dataset.headingId;
+            if (slug !== activeSlug) {
+              showArticle(slug);
+              window.location.hash = slug;
+            }
+            setTimeout(() => {
+              const el = document.getElementById(headingId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                navEl.querySelectorAll('.docs-toc-link').forEach(l => l.classList.remove('active'));
+                btn.classList.add('active');
+              }
+            }, slug !== activeSlug ? 120 : 0);
+            closeSidebar();
+          });
+        });
+      }
+
+      /* ── Render article ── */
+      function showArticle(slug) {
+        const doc = allDocs.find(d => d.slug === slug);
+        if (!doc) {
+          articleEl.innerHTML = `<div class="docs-welcome-state">
+            <div class="docs-welcome-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <h2>Welcome to the docs</h2>
+            <p>Pick an article from the sidebar to get started, or use search to find what you need.</p>
+          </div>`;
+          activeSlug = null;
+          buildNav(allDocs, searchEl.value);
+          return;
+        }
+
+        activeSlug = slug;
+        const rendered = md(doc.content);
+
+        articleEl.innerHTML = `
+          <div class="docs-article-header">
+            <h2 class="docs-article-title">${esc(doc.title)}</h2>
+            <div class="docs-article-meta">
+              <span class="docs-article-category">${esc(doc.category)}</span>
+            </div>
+          </div>
+          <div class="docs-article-body">${rendered}</div>
+        `;
+
+        articleEl.querySelectorAll('.docs-internal-link').forEach(a => {
+          a.addEventListener('click', e => {
+            e.preventDefault();
+            const target = a.getAttribute('href').replace('#', '');
+            showArticle(target);
+            window.location.hash = target;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        });
+
+        buildNav(allDocs, searchEl.value);
+        articleEl.scrollIntoView({ behavior: 'instant', block: 'start' });
+        document.title = doc.title + ' — Eidoncore Docs';
+      }
+
+      /* ── Sidebar mobile ── */
+      function openSidebar() {
+        sidebarEl.classList.add('open');
+        backdropEl.classList.add('open');
+        toggleEl.setAttribute('aria-expanded', 'true');
+      }
+      function closeSidebar() {
+        sidebarEl.classList.remove('open');
+        backdropEl.classList.remove('open');
+        toggleEl.setAttribute('aria-expanded', 'false');
+      }
+      toggleEl.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar());
+      backdropEl.addEventListener('click', closeSidebar);
+
+      /* ── Search ── */
+      searchEl.addEventListener('input', () => buildNav(allDocs, searchEl.value));
+
+      /* ── Load docs data ── */
+      // Prefer inlined window.__DOCS__ (works on file:// with no server).
+      // Falls back to fetch() when served over HTTP.
+      function initDocs(data) {
+        allDocs = data;
+        const hash = window.location.hash.replace('#', '');
+        showArticle(hash && allDocs.find(d => d.slug === hash) ? hash : (allDocs[0]?.slug || ''));
+      }
+
+      function showLoadError() {
+        articleEl.innerHTML = `<div class="docs-welcome-state">
+          <div class="docs-welcome-icon" style="background:var(--secondary-tint);color:var(--secondary-dark);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          </div>
+          <h2>Unable to load documentation</h2>
+          <p>Please try again later or contact support for help.</p>
+        </div>`;
+        navEl.innerHTML = '';
+      }
+
+      if (window.__DOCS__ && Array.isArray(window.__DOCS__) && window.__DOCS__.length > 0) {
+        // Inline data available — use immediately (works on file://)
+        initDocs(window.__DOCS__);
+      } else {
+        // Try fetching from server (HTTP deployments)
+        fetch('docs.json')
+          .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(initDocs)
+          .catch(showLoadError);
+      }
+
+      /* ── Hash navigation ── */
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && hash !== activeSlug) showArticle(hash);
+      });
+
+    })();
+  </script>
 </body>
 </html>
