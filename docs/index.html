@@ -504,11 +504,13 @@
       display: none;
       position: fixed;
       inset: 0;
-      /* Plain dim — no blur so it doesn't make the whole screen look blurry */
       background: rgba(11,26,43,0.5);
       z-index: 149;
     }
     .docs-sidebar-backdrop.open { display: block; }
+
+    /* Lock body scroll when drawer is open on mobile */
+    body.sidebar-open { overflow: hidden; }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -540,26 +542,29 @@
         transform: translateX(0);
       }
 
-      /* "Browse Docs" becomes a sticky full-width bar pinned to the top */
+      /* "Browse Docs" = fixed full-width bar at the very top on mobile.
+         position:sticky is broken here because html{overflow-x:clip} on the
+         global stylesheet creates a containing block that kills sticky. */
       .docs-mobile-toggle {
         display: flex;
-        position: sticky;
+        position: fixed;
         top: 0;
-        z-index: 90;               /* stays below the site navbar (z~1000) */
-        /* Bleed out of .container padding (24px each side) to go edge-to-edge */
-        width: calc(100% + 48px);
-        margin-left: -24px;
-        margin-right: -24px;
-        margin-bottom: 20px;
-        padding: 12px 24px;
+        left: 0;
+        right: 0;
+        z-index: 130;              /* above content, below site navbar (z~1000) */
+        width: 100%;
+        margin: 0;
+        padding: 12px 20px;
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--line);
         background: var(--paper);
         justify-content: flex-start;
         gap: 10px;
-        box-shadow: 0 2px 12px rgba(11,26,43,0.07);
-        transition: box-shadow 0.2s;
+        box-shadow: 0 2px 12px rgba(11,26,43,0.08);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
       }
 
       /* Article area full width, reduced padding */
@@ -600,13 +605,7 @@
     }
 
     @media (max-width: 700px) {
-      /* Match the smaller container padding at this breakpoint */
-      .docs-mobile-toggle {
-        width: calc(100% + 36px);
-        margin-left: -18px;
-        margin-right: -18px;
-        padding: 11px 18px;
-      }
+      .docs-mobile-toggle { padding: 11px 18px; }
     }
 
     @media (max-width: 560px) {
@@ -630,9 +629,6 @@
 
       /* Match 16px container padding on very small phones */
       .docs-mobile-toggle {
-        width: calc(100% + 32px);
-        margin-left: -16px;
-        margin-right: -16px;
         padding: 10px 16px;
         font-size: 0.88rem;
       }
@@ -680,11 +676,13 @@
     <section class="section-alt" style="padding-top:40px;padding-bottom:80px;">
       <div class="container">
 
-        <!-- Mobile toggle -->
+        <!-- Mobile toggle (fixed bar on mobile, hidden on desktop) -->
         <button class="docs-mobile-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="docsSidebar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
           Browse Docs
         </button>
+        <!-- Spacer pushed down by JS to reserve space for the fixed button -->
+        <div id="docsToggleSpacer"></div>
 
         <div class="docs-sidebar-backdrop" id="sidebarBackdrop"></div>
 
@@ -1119,14 +1117,31 @@
       }
 
       /* ── Sidebar mobile ── */
+      const spacerEl = document.getElementById('docsToggleSpacer');
+
+      function setSpacerHeight() {
+        // Only active on mobile (button is fixed-positioned)
+        if (window.innerWidth <= 900 && toggleEl) {
+          spacerEl.style.height = toggleEl.offsetHeight + 'px';
+          spacerEl.style.display = 'block';
+        } else {
+          spacerEl.style.height = '0';
+          spacerEl.style.display = 'none';
+        }
+      }
+      setSpacerHeight();
+      window.addEventListener('resize', setSpacerHeight);
+
       function openSidebar() {
         sidebarEl.classList.add('open');
         backdropEl.classList.add('open');
+        document.body.classList.add('sidebar-open');
         toggleEl.setAttribute('aria-expanded', 'true');
       }
       function closeSidebar() {
         sidebarEl.classList.remove('open');
         backdropEl.classList.remove('open');
+        document.body.classList.remove('sidebar-open');
         toggleEl.setAttribute('aria-expanded', 'false');
       }
       toggleEl.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar());
