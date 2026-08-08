@@ -504,9 +504,9 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(11,26,43,0.45);
+      /* Plain dim — no blur so it doesn't make the whole screen look blurry */
+      background: rgba(11,26,43,0.5);
       z-index: 149;
-      backdrop-filter: blur(2px);
     }
     .docs-sidebar-backdrop.open { display: block; }
 
@@ -540,12 +540,26 @@
         transform: translateX(0);
       }
 
-      /* Show the toggle button */
+      /* "Browse Docs" becomes a sticky full-width bar pinned to the top */
       .docs-mobile-toggle {
         display: flex;
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 90;               /* stays below the site navbar (z~1000) */
+        /* Bleed out of .container padding (24px each side) to go edge-to-edge */
+        width: calc(100% + 48px);
+        margin-left: -24px;
+        margin-right: -24px;
+        margin-bottom: 20px;
+        padding: 12px 24px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+        justify-content: flex-start;
+        gap: 10px;
+        box-shadow: 0 2px 12px rgba(11,26,43,0.07);
+        transition: box-shadow 0.2s;
       }
 
       /* Article area full width, reduced padding */
@@ -585,6 +599,16 @@
       .docs-search-wrap { padding: 14px 12px 10px; }
     }
 
+    @media (max-width: 700px) {
+      /* Match the smaller container padding at this breakpoint */
+      .docs-mobile-toggle {
+        width: calc(100% + 36px);
+        margin-left: -18px;
+        margin-right: -18px;
+        padding: 11px 18px;
+      }
+    }
+
     @media (max-width: 560px) {
       /* Sidebar takes up more of narrow screens */
       .docs-sidebar { width: min(280px, 90vw); }
@@ -604,10 +628,13 @@
       /* Stat row 2 columns on phones */
       .stat-row { grid-template-columns: repeat(2, 1fr) !important; }
 
-      /* Mobile toggle pill becomes compact */
+      /* Match 16px container padding on very small phones */
       .docs-mobile-toggle {
-        padding: 9px 16px;
-        font-size: 0.85rem;
+        width: calc(100% + 32px);
+        margin-left: -16px;
+        margin-right: -16px;
+        padding: 10px 16px;
+        font-size: 0.88rem;
       }
     }
   </style>
