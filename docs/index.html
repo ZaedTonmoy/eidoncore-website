@@ -483,29 +483,20 @@
     /* ── Mobile toggle button ── */
     .docs-mobile-toggle {
       display: none;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border: 1px solid var(--line-strong);
-      border-radius: 100px;
-      background: var(--surface);
-      font: inherit;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: border-color 0.2s, background 0.2s;
     }
-    .docs-mobile-toggle:hover { border-color: var(--primary); color: var(--primary-dark); }
+
+    /* ── Drawer Mobile Header ── */
+    .docs-sidebar-mobile-header {
+      display: none;
+    }
 
     /* ── Backdrop ── */
     .docs-sidebar-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(11,26,43,0.5);
-      z-index: 149;
+      background: rgba(11,26,43,0.55);
+      z-index: 10000;
     }
     .docs-sidebar-backdrop.open { display: block; }
 
@@ -514,11 +505,52 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      /* Layout collapses to single column */
-      .docs-layout {
+      /* Prevent transform containing-block trapping position:fixed children */
+      .docs-layout,
+      .docs-layout.reveal,
+      .docs-layout.reveal.in {
         grid-template-columns: 1fr;
         border-radius: var(--radius-md);
         min-height: unset;
+        transform: none !important;
+        filter: none !important;
+        perspective: none !important;
+        will-change: auto !important;
+      }
+
+      /* Sidebar mobile drawer header */
+      .docs-sidebar-mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+        flex-shrink: 0;
+      }
+      .mobile-header-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .docs-sidebar-close {
+        background: none;
+        border: none;
+        color: var(--text-mute);
+        padding: 6px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.18s, background 0.18s;
+      }
+      .docs-sidebar-close:hover {
+        color: var(--text);
+        background: var(--line);
       }
 
       /* Sidebar becomes a fixed off-canvas drawer */
@@ -527,44 +559,52 @@
         left: 0;
         top: 0;
         bottom: 0;
-        width: min(300px, 85vw);
-        max-height: 100dvh;          /* dynamic viewport height — handles mobile chrome bars */
-        z-index: 150;
+        width: min(310px, 85vw);
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
+        z-index: 10001;
         border-right: 1px solid var(--line);
         border-radius: 0;
-        box-shadow: var(--shadow-lg);
-        transform: translateX(-110%);
-        transition: transform 0.3s cubic-bezier(0.16,0.8,0.24,1);
-        /* Account for notches / home bar */
+        box-shadow: 4px 0 24px rgba(11,26,43,0.18);
+        transform: translateX(-105%);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        background: var(--paper);
       }
       .docs-sidebar.open {
         transform: translateX(0);
       }
 
-      /* "Browse Docs" = fixed full-width bar at the very top on mobile.
-         position:sticky is broken here because html{overflow-x:clip} on the
-         global stylesheet creates a containing block that kills sticky. */
+      /* "Browse Docs" inline button inside article pane */
       .docs-mobile-toggle {
         display: flex;
-        position: fixed;
-        top: 64px;                 /* sit just below the site navbar (64px tall) */
-        left: 0;
-        right: 0;
-        z-index: 130;              /* above content, below site navbar (z~1000) */
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        margin: 0;
-        padding: 12px 20px;
-        border-radius: 0;
-        border: none;
-        border-bottom: 1px solid var(--line);
-        background: var(--paper);
-        justify-content: flex-start;
-        gap: 10px;
-        box-shadow: 0 2px 12px rgba(11,26,43,0.08);
+        padding: 12px 16px;
+        background: var(--surface);
+        border: 1px solid var(--line-strong);
+        border-radius: 12px;
+        font-family: inherit;
         font-size: 0.9rem;
         font-weight: 600;
         color: var(--text);
+        cursor: pointer;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+      }
+      .docs-mobile-toggle:hover,
+      .docs-mobile-toggle:active {
+        background: var(--paper);
+        border-color: var(--primary);
+        color: var(--primary-dark);
+      }
+      .mobile-toggle-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       /* Article area full width, reduced padding */
@@ -604,13 +644,8 @@
       .docs-search-wrap { padding: 14px 12px 10px; }
     }
 
-    @media (max-width: 700px) {
-      .docs-mobile-toggle { padding: 11px 18px; }
-    }
-
     @media (max-width: 560px) {
-      /* Sidebar takes up more of narrow screens */
-      .docs-sidebar { width: min(280px, 90vw); }
+      .docs-sidebar { width: min(290px, 88vw); }
 
       .docs-article {
         padding: 18px 14px 48px;
@@ -626,12 +661,6 @@
 
       /* Stat row 2 columns on phones */
       .stat-row { grid-template-columns: repeat(2, 1fr) !important; }
-
-      /* Match 16px container padding on very small phones */
-      .docs-mobile-toggle {
-        padding: 10px 16px;
-        font-size: 0.88rem;
-      }
     }
   </style>
 </head>
@@ -676,14 +705,6 @@
     <section class="section-alt" style="padding-top:40px;padding-bottom:80px;">
       <div class="container">
 
-        <!-- Mobile toggle (fixed bar on mobile, hidden on desktop) -->
-        <button class="docs-mobile-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="docsSidebar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
-          Browse Docs
-        </button>
-        <!-- Spacer pushed down by JS to reserve space for the fixed button -->
-        <div id="docsToggleSpacer"></div>
-
         <div class="docs-sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <!-- Sentinel: exits viewport when sidebar starts sticking -->
@@ -692,6 +713,15 @@
         <div class="docs-layout reveal">
           <!-- Sidebar -->
           <nav class="docs-sidebar" id="docsSidebar" aria-label="Documentation navigation">
+            <div class="docs-sidebar-mobile-header">
+              <div class="mobile-header-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                <span>Documentation</span>
+              </div>
+              <button id="sidebarCloseBtn" class="docs-sidebar-close" aria-label="Close documentation menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
             <div class="docs-search-wrap">
               <input type="text" id="docsSearch" class="docs-search-input" placeholder="Search documentation…" aria-label="Search documentation">
             </div>
@@ -700,6 +730,15 @@
 
           <!-- Article -->
           <article class="docs-article" id="docsArticle" aria-live="polite">
+            <!-- Mobile Toggle Button inside article container -->
+            <button class="docs-mobile-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="docsSidebar">
+              <div class="mobile-toggle-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
+                <span>Browse Topics</span>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+
             <div class="docs-welcome">
               <div class="loading-skeleton" style="width:40%;height:22px;"></div>
               <div class="loading-skeleton" style="width:75%;margin-top:16px;"></div>
@@ -1117,35 +1156,24 @@
       }
 
       /* ── Sidebar mobile ── */
-      const spacerEl = document.getElementById('docsToggleSpacer');
-
-      function setSpacerHeight() {
-        // Only active on mobile (button is fixed-positioned)
-        if (window.innerWidth <= 900 && toggleEl) {
-          spacerEl.style.height = toggleEl.offsetHeight + 'px';
-          spacerEl.style.display = 'block';
-        } else {
-          spacerEl.style.height = '0';
-          spacerEl.style.display = 'none';
-        }
-      }
-      setSpacerHeight();
-      window.addEventListener('resize', setSpacerHeight);
+      const closeBtnEl = document.getElementById('sidebarCloseBtn');
 
       function openSidebar() {
         sidebarEl.classList.add('open');
         backdropEl.classList.add('open');
         document.body.classList.add('sidebar-open');
-        toggleEl.setAttribute('aria-expanded', 'true');
+        if (toggleEl) toggleEl.setAttribute('aria-expanded', 'true');
       }
       function closeSidebar() {
         sidebarEl.classList.remove('open');
         backdropEl.classList.remove('open');
         document.body.classList.remove('sidebar-open');
-        toggleEl.setAttribute('aria-expanded', 'false');
+        if (toggleEl) toggleEl.setAttribute('aria-expanded', 'false');
       }
-      toggleEl.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar());
-      backdropEl.addEventListener('click', closeSidebar);
+
+      if (toggleEl) toggleEl.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar());
+      if (backdropEl) backdropEl.addEventListener('click', closeSidebar);
+      if (closeBtnEl) closeBtnEl.addEventListener('click', closeSidebar);
 
       /* ── Search ── */
       searchEl.addEventListener('input', () => buildNav(allDocs, searchEl.value));
