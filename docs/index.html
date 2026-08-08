@@ -576,14 +576,16 @@
         transform: translateX(0);
       }
 
-      /* "Browse Docs" inline button inside article pane */
+      /* "Browse Docs" button — sticky on mobile at top: 60px */
       .docs-mobile-toggle {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         padding: 12px 16px;
-        background: var(--surface);
+        background: rgba(246, 248, 251, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border: 1px solid var(--line-strong);
         border-radius: 12px;
         font-family: inherit;
@@ -594,6 +596,9 @@
         margin-bottom: 24px;
         box-shadow: var(--shadow-sm);
         transition: background 0.2s, border-color 0.2s, color 0.2s;
+        position: sticky;
+        top: 60px;
+        z-index: 100;
       }
       .docs-mobile-toggle:hover,
       .docs-mobile-toggle:active {
