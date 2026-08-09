@@ -666,9 +666,9 @@ section{padding:72px 0;}
    ============================================================ */
 
 /* Simple page header (breadcrumb + title + subtitle) */
-.page-header{padding:48px 0 16px;}
+.page-header{padding:64px 0 48px;}
 .page-header + section,
-.page-header + .section-alt{padding-top:40px;}
+.page-header + .section-alt{padding-top:56px;}
 .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-mute);margin-bottom:20px;font-family:var(--mono);}
 .breadcrumb a{color:var(--text-mute);transition:color .2s;}
 .breadcrumb a:hover{color:var(--primary);}
