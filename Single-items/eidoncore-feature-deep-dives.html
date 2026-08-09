@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eidoncore — Feature Deep Dives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #eef1f6;
+    --line: #dfe3ec;
+    --navy: #1c2635;
+    --muted: #667082;
+    --muted-2: #98a0b0;
+    --accent: #3f5f8f;
+    --accent-tint: #e7edf7;
+    --teal: #0f9488;
+    --teal-tint: #dff3f0;
+    --ok: #1f9e6d;
+    --warn: #d98c1f;
+    --danger: #d9534f;
+
+    --panel-bg: #0c111c;
+    --panel-line: rgba(255,255,255,0.08);
+    --panel-text: #e7eaf1;
+    --panel-muted: #7d8699;
+  }
+
+  *{ box-sizing: border-box; }
+  body{ margin:0; background: var(--bg); font-family: 'Inter', sans-serif; }
+
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 40px clamp(20px,4vw,40px) 20px; }
+
+  .feature-row{
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    padding: 52px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .feature-row.reverse{ flex-direction: row-reverse; }
+  .feature-row:last-child{ border-bottom: none; }
+
+  .idx{
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+  }
+  .idx span{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted-2);
+  }
+  .idx i{
+    display:block;
+    width: 1px;
+    height: 64px;
+    background: linear-gradient(var(--c), transparent);
+    opacity: 0.5;
+  }
+
+  .feature-text{ flex: 1; min-width: 280px; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--c);
+    background: var(--c-tint);
+    padding: 6px 12px 6px 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .eyebrow svg{ width: 12px; height: 12px; }
+
+  .feature-text h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(21px, 2.2vw, 25px);
+    color: var(--navy);
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .checklist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: 12px; }
+  .checklist li{ display:flex; align-items:flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+  .check{
+    flex: none; width: 17px; height: 17px; border-radius: 50%;
+    background: var(--c-tint); color: var(--c);
+    display:flex; align-items:center; justify-content:center;
+    margin-top: 1px;
+  }
+  .check svg{ width: 9px; height: 9px; }
+
+  /* ---------- Panel shell ---------- */
+  .feature-panel{ flex: 1; min-width: 300px; }
+  .device{
+    background: var(--panel-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 30px 60px -34px rgba(15,20,35,0.5);
+  }
+  .device-bar{ display:flex; gap:6px; padding: 12px 16px; border-bottom: 1px solid var(--panel-line); }
+  .device-dot{ width:7px; height:7px; border-radius:50%; background: rgba(255,255,255,0.14); }
+  .device-body{ padding: 20px 22px 22px; }
+
+  /* Roles panel */
+  .role-row{ display:flex; align-items:center; gap: 12px; padding: 11px 0; }
+  .role-icon{
+    width: 30px; height:30px; border-radius:8px; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(255,255,255,0.06); color: var(--panel-text);
+  }
+  .role-icon svg{ width:15px; height:15px; }
+  .role-name{ flex:1; font-family:'JetBrains Mono',monospace; font-size:13px; color: var(--panel-text); }
+  .role-badge{
+    font-family:'JetBrains Mono',monospace; font-size: 10.5px; font-weight:600;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .role-badge.full{ background: rgba(47,211,194,0.16); color: #2fd3c2; }
+  .role-badge.edit{ background: rgba(63,143,211,0.18); color: #6fa8dc; }
+  .role-badge.view{ background: rgba(255,255,255,0.08); color: var(--panel-muted); }
+
+  /* Workload panel */
+  .load-row{ padding: 12px 0; }
+  .load-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 7px; }
+  .load-name{ font-family:'JetBrains Mono',monospace; font-size: 12.5px; color: var(--panel-text); }
+  .load-pct{ font-family:'JetBrains Mono',monospace; font-size: 12px; font-weight:600; }
+  .load-pct.ok{ color:#2fd3c2; }
+  .load-pct.warn{ color:#ffb454; }
+  .load-pct.danger{ color:#ff8a80; }
+  .load-track{ height: 5px; border-radius: 4px; background: rgba(255,255,255,0.07); overflow:hidden; }
+  .load-fill{ height:100%; border-radius: 4px; }
+  .load-fill.ok{ background:#2fd3c2; }
+  .load-fill.warn{ background:#ffb454; }
+  .load-fill.danger{ background:#ff8a80; }
+
+  /* Files panel */
+  .file-row{ display:flex; align-items:center; gap: 12px; padding: 11px 0; }
+  .file-icon{
+    width: 30px; height:30px; border-radius:7px; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size: 9px; font-weight:700; color:#0c111c;
+  }
+  .file-name{ flex:1; font-family:'JetBrains Mono',monospace; font-size: 12.5px; color: var(--panel-text); }
+  .file-size{ font-family:'JetBrains Mono',monospace; font-size: 11px; color: var(--panel-muted); }
+
+  /* Preview panel */
+  .thumb-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .thumb{
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .thumb svg{ width: 22px; height:22px; color: var(--panel-muted); }
+  .thumb span{ font-family:'JetBrains Mono',monospace; font-size: 10px; color: var(--panel-muted); }
+  .thumb-overlay{
+    position:absolute; inset:0; background: rgba(15,20,35,0.75);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size: 10.5px; color:#2fd3c2; font-weight:600;
+    opacity:0; transition: opacity .2s ease;
+  }
+  .thumb:hover .thumb-overlay{ opacity:1; }
+
+  @media (max-width: 800px){
+    .feature-row, .feature-row.reverse{ flex-direction: column; align-items: flex-start; gap: 24px; }
+    .idx{ flex-direction: row; }
+    .idx i{ width: 48px; height: 1px; background: linear-gradient(90deg, var(--c), transparent); }
+    .feature-panel{ width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- 1. Roles & Permissions -->
+  <div class="feature-row" style="--c:var(--accent); --c-tint:var(--accent-tint)">
+    <div class="idx"><span>01</span><i></i></div>
+    <div class="feature-text">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6z"/></svg>ACCESS &amp; SECURITY</span>
+      <h3>Granular Roles &amp; Permissions</h3>
+      <ul class="checklist">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Agency Owner, Admin, and Member roles with distinct access levels</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Set per-project visibility — control who sees what</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Invite team members with one-click email invitations</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Enforce mandatory 2FA for the entire team on Enterprise plans</li>
+      </ul>
+    </div>
+    <div class="feature-panel">
+      <div class="device">
+        <div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+        <div class="device-body">
+          <div class="role-row">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M4 18l1.5-8 4 3L12 6l2.5 7 4-3L20 18"/></svg></div>
+            <span class="role-name">Agency Owner</span>
+            <span class="role-badge full">FULL ACCESS</span>
+          </div>
+          <div class="role-row">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.4-2-3.4-2.3.9a7.5 7.5 0 0 0-2.6-1.5L14 2h-4l-.5 2.6a7.5 7.5 0 0 0-2.6 1.5l-2.3-.9-2 3.4 2 1.4a7.7 7.7 0 0 0 0 3l-2 1.4 2 3.4 2.3-.9c.8.7 1.7 1.2 2.6 1.5L10 22h4l.5-2.6c.9-.3 1.8-.8 2.6-1.5l2.3.9 2-3.4z"/></svg></div>
+            <span class="role-name">Admin</span>
+            <span class="role-badge edit">MANAGE &amp; EDIT</span>
+          </div>
+          <div class="role-row">
+            <div class="role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg></div>
+            <span class="role-name">Member</span>
+            <span class="role-badge view">VIEW &amp; EXECUTE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Workload -->
+  <div class="feature-row reverse" style="--c:var(--teal); --c-tint:var(--teal-tint)">
+    <div class="idx"><span>02</span><i></i></div>
+    <div class="feature-text">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>PERFORMANCE</span>
+      <h3>Workload Monitoring &amp; Capacity</h3>
+      <ul class="checklist">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>See each member's active task count and utilization rate</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Spot overloaded or underutilized team members instantly</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Activity tracking shows who did what and when</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Time tracking per task feeds into billing and reporting</li>
+      </ul>
+    </div>
+    <div class="feature-panel">
+      <div class="device">
+        <div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+        <div class="device-body">
+          <div class="load-row">
+            <div class="load-top"><span class="load-name">Sarah K.</span><span class="load-pct warn">82%</span></div>
+            <div class="load-track"><div class="load-fill warn" style="width:82%"></div></div>
+          </div>
+          <div class="load-row">
+            <div class="load-top"><span class="load-name">James R.</span><span class="load-pct ok">45%</span></div>
+            <div class="load-track"><div class="load-fill ok" style="width:45%"></div></div>
+          </div>
+          <div class="load-row">
+            <div class="load-top"><span class="load-name">Elena M.</span><span class="load-pct danger">96%</span></div>
+            <div class="load-track"><div class="load-fill danger" style="width:96%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Files -->
+  <div class="feature-row" style="--c:var(--accent); --c-tint:var(--accent-tint)">
+    <div class="idx"><span>03</span><i></i></div>
+    <div class="feature-text">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>FILES</span>
+      <h3>Project-Level File Organization</h3>
+      <ul class="checklist">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Upload files to any project, task, or message thread</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Automatic grouping by project and client organization</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Drag-and-drop uploads with progress indicators</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Clients can upload deliverables through the portal</li>
+      </ul>
+    </div>
+    <div class="feature-panel">
+      <div class="device">
+        <div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+        <div class="device-body">
+          <div class="file-row">
+            <div class="file-icon" style="background:#ff8a80">PDF</div>
+            <span class="file-name">Brand_Guidelines.pdf</span>
+            <span class="file-size">2.4 MB</span>
+          </div>
+          <div class="file-row">
+            <div class="file-icon" style="background:#c58aff">FIG</div>
+            <span class="file-name">Homepage_v3.fig</span>
+            <span class="file-size">8.1 MB</span>
+          </div>
+          <div class="file-row">
+            <div class="file-icon" style="background:#2fd3c2">PDF</div>
+            <span class="file-name">Invoice_March.pdf</span>
+            <span class="file-size">310 KB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Preview & Sharing -->
+  <div class="feature-row reverse" style="--c:var(--teal); --c-tint:var(--teal-tint)">
+    <div class="idx"><span>04</span><i></i></div>
+    <div class="feature-text">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>PREVIEW &amp; SHARING</span>
+      <h3>Preview &amp; Sharing</h3>
+      <ul class="checklist">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>In-browser preview for images, PDFs, and video files</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Share files directly in messaging and task comments</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Version history keeps every previous upload</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Set expiring links for sharing outside the team</li>
+      </ul>
+    </div>
+    <div class="feature-panel">
+      <div class="device">
+        <div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+        <div class="device-body">
+          <div class="thumb-grid">
+            <div class="thumb">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-4 4-3-3-6 6"/></svg>
+              <span>Images</span>
+              <div class="thumb-overlay">PREVIEW</div>
+            </div>
+            <div class="thumb">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/></svg>
+              <span>PDFs</span>
+              <div class="thumb-overlay">PREVIEW</div>
+            </div>
+            <div class="thumb">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>
+              <span>Videos</span>
+              <div class="thumb-overlay">PREVIEW</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
