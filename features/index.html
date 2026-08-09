@@ -312,16 +312,294 @@
         </div>
       </div>
     </section>
-    <section>
-      <div class="container">
-        <div class="section-head reveal center">
-          <span class="eyebrow">Workflow</span>
-          <h2>How It All Connects</h2>
-          <p>From first lead to final report — every module flows seamlessly into the next.</p>
+    <!-- LIVE LOOP Section -->
+    <section id="workflow-loop" style="
+      --loop-bg:#0b1a2b;
+      --loop-surface:#122542;
+      --loop-surface-2:#182d4d;
+      --loop-line:rgba(226,237,248,0.08);
+      --loop-line-strong:rgba(226,237,248,0.16);
+      --loop-text:#edeff4;
+      --loop-muted:#8d92a8;
+      --loop-accent:#00adb5;
+      --loop-accent-dim:rgba(0,173,181,0.16);
+      --loop-accent-line:rgba(0,173,181,0.35);
+      --D:clamp(320px,38vw,540px);
+      --radius-node:calc(var(--D)*0.42);
+      padding:0;
+    ">
+      <style>
+        #workflow-loop{
+          background:
+            radial-gradient(ellipse 900px 500px at 12% -10%, rgba(0,173,181,0.14), rgba(63,114,175,0.12) 50%, transparent 80%),
+            var(--loop-bg);
+          color: var(--loop-text);
+        }
+        #workflow-loop .loop-layout{
+          max-width:1180px;
+          margin:0 auto;
+          padding:96px 24px;
+          display:grid;
+          grid-template-columns:minmax(280px,420px) 1fr;
+          gap:clamp(40px,6vw,100px);
+          align-items:center;
+        }
+        #workflow-loop .loop-eyebrow{
+          display:inline-flex;align-items:center;gap:8px;
+          font-family:'JetBrains Mono',monospace;
+          font-size:12px;letter-spacing:0.14em;
+          color:var(--loop-accent);background:var(--loop-accent-dim);
+          border:1px solid var(--loop-accent-line);
+          padding:6px 12px 6px 10px;border-radius:999px;margin-bottom:22px;
+        }
+        #workflow-loop .loop-eyebrow .ping-dot{
+          width:6px;height:6px;border-radius:50%;
+          background:var(--loop-accent);
+          box-shadow:0 0 0 0 rgba(0,173,181,0.6);
+          animation:loop-ping 2.4s ease-out infinite;
+        }
+        @keyframes loop-ping{
+          0%  {box-shadow:0 0 0 0 rgba(0,173,181,0.55);}
+          70% {box-shadow:0 0 0 7px rgba(0,173,181,0);}
+          100%{box-shadow:0 0 0 0 rgba(0,173,181,0);}
+        }
+        #workflow-loop h2{
+          font-size:clamp(34px,3.6vw,50px);
+          line-height:1.08;letter-spacing:-0.01em;
+          margin:0 0 18px;
+          color:var(--loop-text);
+        }
+        #workflow-loop .loop-lede{
+          font-size:16px;line-height:1.65;
+          color:var(--loop-muted);max-width:44ch;margin:0 0 28px;
+        }
+        #workflow-loop .loop-lede b{color:var(--loop-text);font-weight:600;}
+        #workflow-loop .loop-note{
+          display:flex;align-items:flex-start;gap:10px;
+          padding-top:22px;border-top:1px solid var(--loop-line);
+        }
+        #workflow-loop .loop-note svg{flex:none;margin-top:2px;}
+        #workflow-loop .loop-note p{
+          margin:0;font-family:'JetBrains Mono',monospace;
+          font-size:12.5px;line-height:1.6;color:var(--loop-muted);
+        }
+        #workflow-loop .loop-note span{color:var(--loop-accent);}
+        /* Orbit */
+        #workflow-loop .orbit-wrap{display:flex;justify-content:center;}
+        #workflow-loop .orbit{position:relative;width:var(--D);height:var(--D);}
+        #workflow-loop .track{
+          position:absolute;top:50%;left:50%;
+          width:calc(var(--radius-node)*2);height:calc(var(--radius-node)*2);
+          transform:translate(-50%,-50%);
+          border-radius:50%;border:1px dashed var(--loop-line-strong);
+        }
+        #workflow-loop .hub{
+          position:absolute;top:50%;left:50%;
+          width:clamp(84px,11vw,128px);height:clamp(84px,11vw,128px);
+          transform:translate(-50%,-50%);
+          border-radius:50%;background:var(--loop-surface);
+          border:1px solid var(--loop-line-strong);
+          display:flex;align-items:center;justify-content:center;
+          text-align:center;z-index:3;
+        }
+        #workflow-loop .hub::before,#workflow-loop .hub::after{
+          content:"";position:absolute;inset:0;border-radius:50%;
+          border:1px solid var(--loop-accent-line);
+          animation:hub-pulse 3.2s ease-out infinite;opacity:0;
+        }
+        #workflow-loop .hub::after{animation-delay:1.6s;}
+        @keyframes hub-pulse{
+          0%  {transform:scale(1);opacity:0.55;}
+          100%{transform:scale(1.9);opacity:0;}
+        }
+        #workflow-loop .hub-label{
+          font-family:'JetBrains Mono',monospace;font-size:11px;
+          letter-spacing:0.12em;color:var(--loop-muted);line-height:1.4;
+          position:relative;z-index:1;
+        }
+        #workflow-loop .hub-label b{
+          display:block;color:var(--loop-text);font-size:13px;letter-spacing:0.06em;
+        }
+        #workflow-loop .pulse-dot{
+          position:absolute;top:-5px;left:-5px;
+          width:10px;height:10px;border-radius:50%;
+          background:var(--loop-accent);
+          box-shadow:0 0 12px 2px rgba(0,173,181,0.7);
+          offset-path:circle(var(--radius-node) at 50% 50%);
+          animation:travel 16s linear infinite;z-index:2;
+        }
+        @keyframes travel{from{offset-distance:0%;}to{offset-distance:100%;}}
+        #workflow-loop .node{
+          --i:0;position:absolute;top:50%;left:50%;
+          transform:rotate(calc(45deg*var(--i))) translate(var(--radius-node)) rotate(calc(-45deg*var(--i)));
+        }
+        #workflow-loop .node-btn{
+          display:flex;align-items:center;gap:9px;
+          transform:translate(-50%,-50%);
+          background:var(--loop-surface);border:1px solid var(--loop-line-strong);
+          border-radius:999px;padding:9px 16px 9px 12px;
+          cursor:default;white-space:nowrap;position:relative;
+          transition:border-color .25s ease,background .25s ease,transform .25s ease;
+          animation:node-flash 16s linear infinite;
+          animation-delay:calc(-16s + 2s * var(--i));
+        }
+        #workflow-loop .node-btn:hover,#workflow-loop .node-btn:focus-visible{
+          border-color:var(--loop-accent-line);background:var(--loop-surface-2);
+          transform:translate(-50%,-50%) scale(1.06);outline:none;
+        }
+        @keyframes node-flash{
+          0%  {border-color:var(--loop-accent);background:var(--loop-surface-2);box-shadow:0 0 0 4px var(--loop-accent-dim);}
+          4%  {border-color:var(--loop-line-strong);background:var(--loop-surface);box-shadow:none;}
+          100%{border-color:var(--loop-line-strong);background:var(--loop-surface);box-shadow:none;}
+        }
+        #workflow-loop .node-num{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--loop-accent);}
+        #workflow-loop .node-name{font-weight:600;font-size:14px;color:var(--loop-text);}
+        #workflow-loop .node-tip{
+          position:absolute;bottom:calc(100% + 10px);left:50%;
+          transform:translateX(-50%) translateY(4px);
+          width:190px;background:var(--loop-surface-2);
+          border:1px solid var(--loop-line-strong);
+          border-radius:10px;padding:10px 12px;
+          font-size:12.5px;line-height:1.5;color:var(--loop-muted);
+          opacity:0;pointer-events:none;
+          transition:opacity .2s ease,transform .2s ease;z-index:5;
+        }
+        #workflow-loop .node-btn:hover .node-tip,
+        #workflow-loop .node-btn:focus-visible .node-tip{
+          opacity:1;transform:translateX(-50%) translateY(0);
+        }
+        /* Mobile timeline */
+        #workflow-loop .loop-timeline{
+          display:none;position:relative;margin-top:8px;padding-left:30px;
+        }
+        #workflow-loop .loop-timeline::before{
+          content:"";position:absolute;left:9px;top:8px;bottom:44px;
+          width:1px;
+          background:repeating-linear-gradient(to bottom,var(--loop-line-strong) 0 4px,transparent 4px 9px);
+        }
+        #workflow-loop .t-row{position:relative;padding-bottom:22px;}
+        #workflow-loop .t-row::before{
+          content:"";position:absolute;left:-30px;top:3px;
+          width:9px;height:9px;border-radius:50%;
+          background:var(--loop-bg);border:2px solid var(--loop-accent);
+        }
+        #workflow-loop .t-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+        #workflow-loop .t-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--loop-accent);}
+        #workflow-loop .t-name{font-weight:600;font-size:15px;color:var(--loop-text);}
+        #workflow-loop .t-desc{margin:0;font-size:13px;line-height:1.55;color:var(--loop-muted);}
+        #workflow-loop .t-loop{
+          display:flex;align-items:center;gap:10px;
+          font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--loop-muted);
+        }
+        #workflow-loop .t-loop svg{flex:none;}
+        #workflow-loop .t-loop span{color:var(--loop-accent);}
+        @media(max-width:860px){
+          #workflow-loop .loop-layout{grid-template-columns:1fr;}
+          #workflow-loop .orbit-wrap,#workflow-loop .loop-note{display:none;}
+          #workflow-loop .loop-timeline{display:block;}
+        }
+        @media(prefers-reduced-motion:reduce){
+          #workflow-loop .pulse-dot,#workflow-loop .node-btn,
+          #workflow-loop .hub::before,#workflow-loop .hub::after,
+          #workflow-loop .ping-dot{animation:none!important;}
+        }
+      </style>
+
+      <div class="loop-layout">
+
+        <!-- Left: copy -->
+        <div>
+          <span class="loop-eyebrow"><span class="ping-dot"></span>LIVE LOOP</span>
+          <h2>Built as a Loop, Not a Funnel</h2>
+          <p class="loop-lede">
+            Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> — every closed job feeds
+            your reports, and every report surfaces the next lead. This is the cycle running
+            underneath your agency, stage by stage, on repeat.
+          </p>
+          <div class="loop-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#00adb5" stroke-width="2" stroke-linecap="round"/>
+              <path d="M16 4v4h-4M8 20v-4h4" stroke="#00adb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>Hover any stage to see what happens there. Watch the pulse — it never stops at <span>Report</span>, it turns back into <span>Lead</span>.</p>
+          </div>
         </div>
-        <div class="loop-diagram reveal" style="padding:32px 34px">
-          <div class="loop-row"><div class="loop-node"><span class="loop-n">01</span><span>Lead</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">02</span><span>Client</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">03</span><span>Project</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">04</span><span>Tasks</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">05</span><span>Invoice</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">06</span><span>Portal</span></div><span class="loop-arrow">→</span><div class="loop-node"><span class="loop-n">07</span><span>Report</span></div></div>
+
+        <!-- Right: orbit (desktop) -->
+        <div class="orbit-wrap">
+          <div class="orbit">
+            <div class="track"></div>
+            <div class="pulse-dot"></div>
+            <div class="hub">
+              <div class="hub-label">STAGES<b>8</b>LOOPED</div>
+            </div>
+            <div class="node" style="--i:0">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">01</span><span class="node-name">Lead</span>
+                <div class="node-tip">Inbound interest lands here first — before it's anyone's account.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:1">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">02</span><span class="node-name">Client</span>
+                <div class="node-tip">The lead becomes a live account, with its own history and contacts.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:2">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">03</span><span class="node-name">Proposal</span>
+                <div class="node-tip">Scope and pricing go out for signature — tracked until it's signed.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:3">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">04</span><span class="node-name">Project</span>
+                <div class="node-tip">Work kicks off on a timeline, scoped straight from the proposal.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:4">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">05</span><span class="node-name">Task</span>
+                <div class="node-tip">Day-to-day execution, assigned and tracked through to done.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:5">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">06</span><span class="node-name">Support</span>
+                <div class="node-tip">Client questions and requests land here, without derailing the project.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:6">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">07</span><span class="node-name">Invoice</span>
+                <div class="node-tip">Billed the moment the work closes — no separate step to remember.</div>
+              </div>
+            </div>
+            <div class="node" style="--i:7">
+              <div class="node-btn" tabindex="0">
+                <span class="node-num">08</span><span class="node-name">Report</span>
+                <div class="node-tip">Margins and outcomes roll up — and point straight at the next lead.</div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Mobile: vertical timeline -->
+        <div class="loop-timeline">
+          <div class="t-row"><div class="t-head"><span class="t-num">01</span><span class="t-name">Lead</span></div><p class="t-desc">Inbound interest lands here first.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">02</span><span class="t-name">Client</span></div><p class="t-desc">The lead becomes a live account.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">03</span><span class="t-name">Proposal</span></div><p class="t-desc">Scope and pricing sent for signature.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">04</span><span class="t-name">Project</span></div><p class="t-desc">The work kicks off on a timeline.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">05</span><span class="t-name">Task</span></div><p class="t-desc">Execution, assigned and tracked to done.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">06</span><span class="t-name">Support</span></div><p class="t-desc">Client requests, handled without derailing the project.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">07</span><span class="t-name">Invoice</span></div><p class="t-desc">Billed the moment the work closes.</p></div>
+          <div class="t-row"><div class="t-head"><span class="t-num">08</span><span class="t-name">Report</span></div><p class="t-desc">Margins and outcomes roll up.</p></div>
+          <div class="t-loop">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#00adb5" stroke-width="2" stroke-linecap="round"/><path d="M16 4v4h-4M8 20v-4h4" stroke="#00adb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Report insight becomes <span>next quarter's lead</span>
+          </div>
+        </div>
+
       </div>
     </section>
     <section class="section-alt">
