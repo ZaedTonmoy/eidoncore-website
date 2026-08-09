@@ -815,7 +815,7 @@ section{padding:72px 0;}
 .detail-row {
   display: flex;
   align-items: center;
-  gap: 56px;
+  gap: 40px;
   padding: 52px 0;
   border-bottom: 1px solid var(--line);
 }
@@ -826,7 +826,7 @@ section{padding:72px 0;}
 
 .feature-row .idx,
 .detail-row .idx {
-  order: 0;
+  order: 1;
   flex: none;
   display: flex;
   flex-direction: column;
@@ -851,16 +851,20 @@ section{padding:72px 0;}
 }
 
 .feature-row .feature-text,
-.detail-row .detail-copy { order: 1; flex: 1; min-width: 280px; }
+.detail-row .detail-copy { order: 2; flex: 1; min-width: 280px; }
 
 .feature-row .feature-panel,
-.detail-row .detail-media { order: 2; flex: 1; min-width: 300px; width: 100%; border: none; box-shadow: none; border-radius: 0; overflow: visible; background: transparent; }
+.detail-row .detail-media { order: 3; flex: 1; min-width: 300px; width: 100%; border: none; box-shadow: none; border-radius: 0; overflow: visible; background: transparent; }
 
-.feature-row.reverse .feature-text,
-.detail-row.reverse .detail-copy { order: 2; }
-
+/* Reverse row: Mockup (order 1) -> Index (order 2) -> Text (order 3) */
 .feature-row.reverse .feature-panel,
 .detail-row.reverse .detail-media { order: 1; }
+
+.feature-row.reverse .idx,
+.detail-row.reverse .idx { order: 2; }
+
+.feature-row.reverse .feature-text,
+.detail-row.reverse .detail-copy { order: 3; }
 
 .feature-row .eyebrow,
 .detail-row .eyebrow {
@@ -1017,9 +1021,10 @@ section{padding:72px 0;}
 @media (max-width: 800px) {
   .feature-row, .feature-row.reverse,
   .detail-row, .detail-row.reverse { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .feature-row .idx, .detail-row .idx { flex-direction: row; }
+  .feature-row .idx, .detail-row .idx { order: 1 !important; flex-direction: row; }
   .feature-row .idx i, .detail-row .idx i { width: 48px; height: 1px; background: linear-gradient(90deg, var(--c, var(--primary)), transparent); }
-  .feature-row .feature-panel, .detail-row .detail-media { width: 100%; }
+  .feature-row .feature-text, .detail-row .detail-copy { order: 2 !important; }
+  .feature-row .feature-panel, .detail-row .detail-media { order: 3 !important; width: 100%; }
 }
 
 /* Stat row (page-level stats) */
