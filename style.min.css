@@ -100,7 +100,7 @@ p{margin:0;}
 .section-head p{color:var(--text-soft);font-size:1.05rem;}
 .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
 
-section{padding:96px 0;}
+section{padding:72px 0;}
 .section-alt{background:var(--surface);}
 .section-alt + .section-alt{border-top:1px solid var(--line);}
 .section-dark{background:var(--ink);color:#e7ecf5;}
@@ -666,7 +666,9 @@ section{padding:96px 0;}
    ============================================================ */
 
 /* Simple page header (breadcrumb + title + subtitle) */
-.page-header{padding:56px 0 24px;}
+.page-header{padding:48px 0 16px;}
+.page-header + section,
+.page-header + .section-alt{padding-top:40px;}
 .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-mute);margin-bottom:20px;font-family:var(--mono);}
 .breadcrumb a{color:var(--text-mute);transition:color .2s;}
 .breadcrumb a:hover{color:var(--primary);}
@@ -677,11 +679,17 @@ section{padding:96px 0;}
 .page-subtitle{margin-top:18px;font-size:1.08rem;color:var(--text-soft);max-width:56ch;}
 
 /* Alternating detail rows (feature deep-dives) */
-.detail-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:56px 0;border-bottom:1px solid var(--line);}
-.detail-row:last-child{border-bottom:none;}
+.detail-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:44px 0;border-bottom:1px solid var(--line);}
+.detail-row:first-child{padding-top:0;}
+.detail-row:last-child{padding-bottom:0;border-bottom:none;}
 .detail-row.reverse{direction:rtl;}
 .detail-row.reverse > *{direction:ltr;}
-@media (max-width:860px){.detail-row{grid-template-columns:1fr;gap:28px;padding:36px 0;}.detail-row.reverse{direction:ltr;}}
+@media (max-width:860px){
+  .detail-row{grid-template-columns:1fr;gap:28px;padding:32px 0;}
+  .detail-row:first-child{padding-top:0;}
+  .detail-row:last-child{padding-bottom:0;}
+  .detail-row.reverse{direction:ltr;}
+}
 .detail-copy ul{display:grid;gap:10px;margin:18px 0 24px;}
 .detail-copy ul li{display:flex;gap:9px;font-size:0.94rem;color:var(--text-soft);}
 .detail-copy ul li::before{content:'✓';color:var(--secondary-dark);font-weight:700;flex-shrink:0;}
