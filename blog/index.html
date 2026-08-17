@@ -23,11 +23,17 @@
 
 <body>
   <main id="main-content">
-<section class="page-header">
-      <div class="container">
-        <div class="breadcrumb reveal"><a href="../">Home</a><span class="separator">/</span><span class="current">Blog</span></div>
-        <h1 class="page-title reveal">Agency <span class="accent">Insights</span></h1>
-        <p class="page-subtitle reveal">Tips, guides, and best practices for running a more productive and
+    <section class="inner-hero page-header" id="innerHero">
+      <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      <canvas class="bg-grid"></canvas>
+
+      <div class="hero-content">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span class="current">Blog</span></div>
+        <h1>Agency <span class="accent">Insights</span></h1>
+        <p class="sub">Tips, guides, and best practices for running a more productive and
                     profitable agency.</p>
       </div>
     </section>
@@ -78,12 +84,48 @@
           <ul style="font-size:0.85rem;color:var(--text-soft);padding-left:18px;display:grid;gap:4px"><li>Auto-assign tasks when a project status changes</li><li>Send email notifications when invoices become overdue</li><li>Update project status when all tasks are completed</li><li>Trigger Slack alerts for budget threshold warnings</li></ul>
           <a href="../automations/" style="font-size:0.85rem;font-weight:600;color:var(--primary-dark)">Explore automations →</a>
         </div></div></div></section>
-<section class="cta-section">
-      <div class="container reveal">
-        <h2>Ready to Transform Your Agency?</h2>
-        <p>Start your 14-day free trial and put these best practices into action.</p>
-        <div class="cta-ctas"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a>
-<a href="../contact/" class="btn btn-outline btn-lg">Get in Touch</a></div>
+    <section class="pre-footer-wrap">
+      <div class="wrap">
+        <div class="newsletter">
+          <div class="nl-glow"></div>
+          <div class="nl-glow two"></div>
+          <div class="nl-left">
+            <div class="nl-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                <path d="M3.5 6.5l8.5 6 8.5-6" />
+              </svg>
+            </div>
+            <h2>Stay in the loop</h2>
+            <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+          </div>
+          <div class="nl-right">
+            <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'color:var(--teal);font-weight:600;\'>✓ Subscribed! Welcome aboard.</div>';">
+              <input class="nl-input" type="email" placeholder="Enter your email" required>
+              <button type="submit" class="btn-pill btn-primary">Subscribe</button>
+            </form>
+            <p class="nl-note">No spam — unsubscribe anytime.</p>
+          </div>
+        </div>
+
+        <div class="cta">
+          <div class="cta-blob a"></div>
+          <div class="cta-blob b"></div>
+          <div class="cta-dots"></div>
+
+          <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+          <h2>Ready to Transform Your Agency?</h2>
+          <p class="cta-sub">Start your 14-day free trial and put these best practices into action.</p>
+          <div class="cta-btn-row">
+            <a href="https://register.eidoncore.com/" class="btn-pill btn-primary">Start Free Trial →</a>
+            <a href="../contact/" class="btn-pill btn-outline">Book a Demo</a>
+          </div>
+          <div class="trust-row">
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>No credit card required</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>Cancel anytime</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>SOC2-ready security</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>

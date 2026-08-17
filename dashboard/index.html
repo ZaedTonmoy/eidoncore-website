@@ -52,11 +52,17 @@
 
 <body>
   <main id="main-content">
-<section class="page-header">
-      <div class="container">
-        <div class="breadcrumb reveal"><a href="../">Home</a><span class="separator">/</span><a href="../features/">Features</a><span class="separator">/</span><span class="current">Dashboard</span></div>
-        <h1 class="page-title reveal">Your Agency at A <span class="accent">Single Glance</span></h1>
-        <p class="page-subtitle reveal">Executive KPIs, project health scores, team workload heatmaps,
+    <section class="inner-hero page-header" id="innerHero">
+      <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      <canvas class="bg-grid"></canvas>
+
+      <div class="hero-content">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><a href="../features/">Features</a><span>/</span><span class="current">Dashboard</span></div>
+        <h1>Your Agency at A <span class="accent">Single Glance</span></h1>
+        <p class="sub">Executive KPIs, project health scores, team workload heatmaps,
                     and real-time alerts — tailored to every role in your agency.</p>
       </div>
     </section>
@@ -72,7 +78,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Total revenue with period-over-period comparison</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Monthly Recurring Revenue (MRR) and ARR</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Outstanding and overdue invoice totals</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>6-month revenue trend chart</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Filter by: This Month, Last Month, Quarter, Year</li></ul>
         <a href="https://register.eidoncore.com/" class="btn btn-primary">Start Free Trial <span class="btn-arrow">→</span></a>
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Executive dashboard showing revenue KPIs, MRR, ARR, and trend charts" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow blue"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/dashboard-charts.webp" alt="Executive dashboard showing revenue KPIs, MRR, ARR, and trend charts" loading="lazy">
+          </div>
+        </div>
+      </div>
     
       </div><div class="feature-row reveal reverse" style="--c:var(--c-teal); --c-tint:var(--c-teal-tint)">
         <div class="idx"><span>02</span><i></i></div>
@@ -85,7 +99,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>On Track: ≥50% tasks done, no overdue milestones</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>At Risk: <50% done, some overdue, or due within 7 days</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Off Track: <25% done and past due, or >50% milestones overdue</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Color-coded health indicators across all projects</li></ul>
         
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Project health scoring with green, yellow, and red status indicators" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow teal"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/projects-content.webp" alt="Project health scoring with green, yellow, and red status indicators" loading="lazy">
+          </div>
+        </div>
+      </div>
     
       </div><div class="feature-row reveal" style="--c:var(--c-accent); --c-tint:var(--c-accent-tint)">
         <div class="idx"><span>03</span><i></i></div>
@@ -98,7 +120,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Tasks by status: To Do, In Progress, In Review</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Per-member task load with overload flagging (10+ active = flagged)</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Top 5 overdue tasks sorted by urgency</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Completion rate percentages per team member</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Estimated vs. logged hours comparison</li></ul>
         
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Team workload heatmap showing task distribution and overload flags" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow blue"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/tasks-board-content.webp" alt="Team workload heatmap showing task distribution and overload flags" loading="lazy">
+          </div>
+        </div>
+      </div>
     
       </div><div class="feature-row reveal reverse" style="--c:var(--c-teal); --c-tint:var(--c-teal-tint)">
         <div class="idx"><span>04</span><i></i></div>
@@ -111,7 +141,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Critical: Overdue invoices, off-track projects, failed automations</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Warning: Stale tasks (3+ days), expiring contracts (30 days)</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Info: Inactive clients, unassigned tasks, pending draft invoices</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Click any alert to jump directly to the issue</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Dismiss alerts — they reappear if the condition persists</li></ul>
         
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Real-time dashboard alerts showing critical, warning, and info banners" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow teal"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/notifications.webp" alt="Real-time dashboard alerts showing critical, warning, and info banners" loading="lazy">
+          </div>
+        </div>
+      </div>
     
       </div><div class="feature-row reveal" style="--c:var(--c-accent); --c-tint:var(--c-accent-tint)">
         <div class="idx"><span>05</span><i></i></div>
@@ -124,7 +162,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Executive: Full agency overview — revenue, projects, team, alerts</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Team Member: My tasks, upcoming deadlines, recent notifications</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Client: Org-scoped projects, task stats, invoices, active services</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Time-aware greeting that changes by time of day</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Daily motivational quote from 345 curated quotes</li></ul>
         
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Three different dashboard views for executives, team members, and clients" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow blue"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/dashboard.webp" alt="Three different dashboard views for executives, team members, and clients" loading="lazy">
+          </div>
+        </div>
+      </div>
     
       </div><div class="feature-row reveal reverse" style="--c:var(--c-teal); --c-tint:var(--c-teal-tint)">
         <div class="idx"><span>06</span><i></i></div>
@@ -137,7 +183,15 @@
         <ul class="checklist"><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Role-specific steps (Owner, Admin, PM, Accountant, Team Member, Client)</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Auto-detects when steps are completed</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Progress ring with completion percentage</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Confetti animation on full completion</li><li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Skip anytime — re-show from profile settings</li></ul>
         
       </div>
-      <div class="feature-panel"><div class="device"><div class="device-bar"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div><div class="device-body"><img src="../images/automations-content.webp" alt="Onboarding checklist with progress ring and confetti celebration" loading="lazy"></div></div></div>
+      <div class="feature-panel">
+        <div class="media-glow teal"></div>
+        <div class="device">
+          <div class="screen">
+            <div class="screen-bar"><span></span><span></span><span></span></div>
+            <img src="../images/dashboard-content.webp" alt="Onboarding checklist with progress ring and confetti celebration" loading="lazy">
+          </div>
+        </div>
+      </div>
     </div>
       </div></section>
 <section><div class="container"><div class="stat-row reveal"><div class="stat"><span><span class="stat-number">6</span><span class="stat-suffix"></span></span><span class="stat-label">Revenue KPIs</span></div><div class="stat"><span><span class="stat-number">3</span><span class="stat-suffix"></span></span><span class="stat-label">Alert Levels</span></div><div class="stat"><span><span class="stat-number">3</span><span class="stat-suffix"></span></span><span class="stat-label">Dashboard Types</span></div><div class="stat"><span><span class="stat-number">345</span><span class="stat-suffix"></span></span><span class="stat-label">Daily Quotes</span></div></div></div></section>
@@ -249,23 +303,48 @@
         <div class="mini-grid reveal-stagger"><a href="../reports/" class="mini-card"><div class="mini-icon"></div><h3>Reports</h3><p>In-depth analytics and exportable data.</p></a><a href="../notifications/" class="mini-card"><div class="mini-icon"></div><h3>Notifications</h3><p>Real-time alerts across the platform.</p></a><a href="../tasks/" class="mini-card"><div class="mini-icon"></div><h3>Tasks</h3><p>Task management with boards and lists.</p></a></div>
       </div>
     </section>
-<section>
-      <div class="container">
-        <div class="newsletter-box reveal">
-          <div><h3>Agency Management Tips & Product Updates</h3><p>Join agency leaders who receive strategies for running data-driven agencies and Eidoncore updates.</p></div>
-          <div>
-            <form class="newsletter-form"><input type="email" placeholder="Enter your email" required><button type="submit">Subscribe</button></form>
-            <div class="newsletter-success"><span class="status-icon yes" data-icon="badgeCheck"></span>You're subscribed! Welcome aboard.</div>
+    <section class="pre-footer-wrap">
+      <div class="wrap">
+        <div class="newsletter">
+          <div class="nl-glow"></div>
+          <div class="nl-glow two"></div>
+          <div class="nl-left">
+            <div class="nl-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                <path d="M3.5 6.5l8.5 6 8.5-6" />
+              </svg>
+            </div>
+            <h2>Stay in the loop</h2>
+            <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+          </div>
+          <div class="nl-right">
+            <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'color:var(--teal);font-weight:600;\'>✓ Subscribed! Welcome aboard.</div>';">
+              <input class="nl-input" type="email" placeholder="Enter your email" required>
+              <button type="submit" class="btn-pill btn-primary">Subscribe</button>
+            </form>
+            <p class="nl-note">No spam — unsubscribe anytime.</p>
           </div>
         </div>
-      </div>
-    </section>
-<section class="cta-section">
-      <div class="container reveal">
-        <h2>See Your Agency Clearly for the First Time</h2>
-        <p>Revenue, projects, team, clients — all in one dashboard. 14-day free trial.</p>
-        <div class="cta-ctas"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a>
-<a href="../reports/" class="btn btn-outline btn-lg">Explore Reports</a></div>
+
+        <div class="cta">
+          <div class="cta-blob a"></div>
+          <div class="cta-blob b"></div>
+          <div class="cta-dots"></div>
+
+          <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+          <h2>See Your Agency Clearly for the First Time</h2>
+          <p class="cta-sub">Revenue, projects, team, clients — all in one dashboard. 14-day free trial.</p>
+          <div class="cta-btn-row">
+            <a href="https://register.eidoncore.com/" class="btn-pill btn-primary">Start Free Trial →</a>
+            <a href="../contact/" class="btn-pill btn-outline">Book a Demo</a>
+          </div>
+          <div class="trust-row">
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>No credit card required</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>Cancel anytime</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>SOC2-ready security</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>

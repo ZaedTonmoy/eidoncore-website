@@ -1,6 +1,10 @@
 (function () {
   const depth = parseInt(document.documentElement.getAttribute('data-depth') || '0', 10);
+  const isFile = window.location.protocol === 'file:';
   const prefix = depth === 0 ? './' : '../'.repeat(depth);
+  const pageSuffix = isFile ? 'index.html' : '';
+  const homeUrl = isFile ? `${prefix}index.html` : prefix;
+  const link = (path) => `${prefix}${path}${pageSuffix}`;
 
   function createNav() {
     if (document.getElementById('navbar')) return;
@@ -20,40 +24,40 @@
     nav.setAttribute('aria-label', 'Main navigation');
     nav.innerHTML = `
       <div class="nav-container">
-        <a href="${prefix}" class="nav-logo" aria-label="Eidoncore home">
+        <a href="${homeUrl}" class="nav-logo" aria-label="Eidoncore home">
           <img src="${prefix}images/logo.png" alt="" class="logo-icon" style="height:24px;width:24px;"> Eidoncore
         </a>
         <ul class="nav-links" id="navLinks" role="menubar">
           <li class="nav-dropdown" role="none">
-            <a href="${prefix}features/" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Features <span class="dropdown-arrow">▾</span></a>
+            <a href="${link('features/')}" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Features <span class="dropdown-arrow">▾</span></a>
             <div class="dropdown-menu" role="menu">
-              <a href="${prefix}projects/" role="menuitem">Projects</a>
-              <a href="${prefix}tasks/" role="menuitem">Tasks</a>
-              <a href="${prefix}crm/" role="menuitem">CRM &amp; Clients</a>
-              <a href="${prefix}invoicing/" role="menuitem">Invoicing</a>
-              <a href="${prefix}services/" role="menuitem">Offerings</a>
-              <a href="${prefix}proposals/" role="menuitem">Proposals</a>
-              <a href="${prefix}messaging/" role="menuitem">Messaging</a>
-              <a href="${prefix}automations/" role="menuitem">Automations</a>
-              <a href="${prefix}portal/" role="menuitem">Client Portal</a>
-              <a href="${prefix}notifications/" role="menuitem">Notifications</a>
-              <a href="${prefix}reports/" role="menuitem">Reports</a>
-              <a href="${prefix}ai-workspace/" role="menuitem">AI Workspace</a>
+              <a href="${link('projects/')}" role="menuitem">Projects</a>
+              <a href="${link('tasks/')}" role="menuitem">Tasks</a>
+              <a href="${link('crm/')}" role="menuitem">CRM &amp; Clients</a>
+              <a href="${link('invoicing/')}" role="menuitem">Invoicing</a>
+              <a href="${link('services/')}" role="menuitem">Offerings</a>
+              <a href="${link('proposals/')}" role="menuitem">Proposals</a>
+              <a href="${link('messaging/')}" role="menuitem">Messaging</a>
+              <a href="${link('automations/')}" role="menuitem">Automations</a>
+              <a href="${link('portal/')}" role="menuitem">Client Portal</a>
+              <a href="${link('notifications/')}" role="menuitem">Notifications</a>
+              <a href="${link('reports/')}" role="menuitem">Reports</a>
+              <a href="${link('ai-workspace/')}" role="menuitem">AI Workspace</a>
             </div>
           </li>
-          <li role="none"><a href="${prefix}pricing/" role="menuitem">Pricing</a></li>
+          <li role="none"><a href="${link('pricing/')}" role="menuitem">Pricing</a></li>
           <li class="nav-dropdown" role="none">
-            <a href="${prefix}use-cases/" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Use Cases <span class="dropdown-arrow">▾</span></a>
+            <a href="${link('use-cases/')}" class="dropdown-trigger" role="menuitem" aria-haspopup="true">Use Cases <span class="dropdown-arrow">▾</span></a>
             <div class="dropdown-menu" role="menu">
-              <a href="${prefix}use-cases/marketing-agencies/" role="menuitem">Marketing Agencies</a>
-              <a href="${prefix}use-cases/design-studios/" role="menuitem">Design Studios</a>
-              <a href="${prefix}use-cases/development-agencies/" role="menuitem">Development Agencies</a>
-              <a href="${prefix}use-cases/consulting-firms/" role="menuitem">Consulting Firms</a>
-              <a href="${prefix}use-cases/freelancers/" role="menuitem">Freelancers</a>
+              <a href="${link('use-cases/marketing-agencies/')}" role="menuitem">Marketing Agencies</a>
+              <a href="${link('use-cases/design-studios/')}" role="menuitem">Design Studios</a>
+              <a href="${link('use-cases/development-agencies/')}" role="menuitem">Development Agencies</a>
+              <a href="${link('use-cases/consulting-firms/')}" role="menuitem">Consulting Firms</a>
+              <a href="${link('use-cases/freelancers/')}" role="menuitem">Freelancers</a>
             </div>
           </li>
-          <li role="none"><a href="${prefix}about/" role="menuitem">About</a></li>
-          <li role="none"><a href="${prefix}contact/" role="menuitem">Contact</a></li>
+          <li role="none"><a href="${link('about/')}" role="menuitem">About</a></li>
+          <li role="none"><a href="${link('contact/')}" role="menuitem">Contact</a></li>
           <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/login" class="btn btn-ghost btn-block" role="menuitem">Log In</a></li>
           <li class="mobile-cta-item" role="none"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-block" role="menuitem">Start Free Trial</a></li>
         </ul>
@@ -78,7 +82,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="${prefix}" class="nav-logo"><img src="${prefix}images/logo.png" alt="" class="logo-icon" style="height:24px;width:24px;"> Eidoncore</a>
+            <a href="${homeUrl}" class="nav-logo"><img src="${prefix}images/logo.png" alt="" class="logo-icon" style="height:24px;width:24px;"> Eidoncore</a>
             <p>The all-in-one agency management platform.</p>
             <div class="footer-newsletter">
               <p>Subscribe to our newsletter</p>
@@ -91,50 +95,50 @@
           <div class="footer-link-columns">
             <div class="footer-col">
               <h4>Product</h4>
-              <a href="${prefix}features/">Features</a>
-              <a href="${prefix}pricing/">Pricing</a>
-              <a href="${prefix}integrations/">Integrations</a>
-              <a href="${prefix}changelog/">Changelog</a>
-              <a href="${prefix}about/">About</a>
-              <a href="${prefix}contact/">Contact</a>
+              <a href="${link('features/')}">Features</a>
+              <a href="${link('pricing/')}">Pricing</a>
+              <a href="${link('integrations/')}">Integrations</a>
+              <a href="${link('changelog/')}">Changelog</a>
+              <a href="${link('about/')}">About</a>
+              <a href="${link('contact/')}">Contact</a>
             </div>
             <div class="footer-col">
               <h4>Features</h4>
-              <a href="${prefix}projects/">Projects</a>
-              <a href="${prefix}tasks/">Tasks</a>
-              <a href="${prefix}invoicing/">Invoicing</a>
-              <a href="${prefix}crm/">CRM</a>
-              <a href="${prefix}proposals/">Proposals</a>
-              <a href="${prefix}messaging/">Messaging</a>
-              <a href="${prefix}automations/">Automations</a>
-              <a href="${prefix}services/">Offerings</a>
-              <a href="${prefix}portal/">Client Portal</a>
-              <a href="${prefix}notifications/">Notifications</a>
-              <a href="${prefix}reports/">Reports</a>
-              <a href="${prefix}ai-workspace/">AI Workspace</a>
-              <a href="${prefix}digital-products/">Digital Products</a>
+              <a href="${link('projects/')}">Projects</a>
+              <a href="${link('tasks/')}">Tasks</a>
+              <a href="${link('invoicing/')}">Invoicing</a>
+              <a href="${link('crm/')}">CRM</a>
+              <a href="${link('proposals/')}">Proposals</a>
+              <a href="${link('messaging/')}">Messaging</a>
+              <a href="${link('automations/')}">Automations</a>
+              <a href="${link('services/')}">Offerings</a>
+              <a href="${link('portal/')}">Client Portal</a>
+              <a href="${link('notifications/')}">Notifications</a>
+              <a href="${link('reports/')}">Reports</a>
+              <a href="${link('ai-workspace/')}">AI Workspace</a>
+              <a href="${link('digital-products/')}">Digital Products</a>
             </div>
             <div class="footer-col">
               <h4>Use Cases</h4>
-              <a href="${prefix}use-cases/marketing-agencies/">Marketing Agencies</a>
-              <a href="${prefix}use-cases/design-studios/">Design Studios</a>
-              <a href="${prefix}use-cases/development-agencies/">Dev Agencies</a>
-              <a href="${prefix}use-cases/consulting-firms/">Consulting Firms</a>
-              <a href="${prefix}use-cases/freelancers/">Freelancers</a>
-              <a href="${prefix}customers/">Customer Stories</a>
+              <a href="${link('use-cases/marketing-agencies/')}">Marketing Agencies</a>
+              <a href="${link('use-cases/design-studios/')}">Design Studios</a>
+              <a href="${link('use-cases/development-agencies/')}">Dev Agencies</a>
+              <a href="${link('use-cases/consulting-firms/')}">Consulting Firms</a>
+              <a href="${link('use-cases/freelancers/')}">Freelancers</a>
+              <a href="${link('customers/')}">Customer Stories</a>
             </div>
             <div class="footer-col">
               <h4>Resources</h4>
-              <a href="${prefix}docs/">Documentation</a>
-              <a href="${prefix}blog/">Blog</a>
-              <a href="${prefix}faq/">FAQ</a>
-              <a href="${prefix}compare/">Compare</a>
-              <a href="${prefix}demo/">Product Tour</a>
-              <a href="${prefix}developers/">Developers</a>
-              <a href="${prefix}partners/">Partners</a>
-              <a href="${prefix}security/">Security</a>
-              <a href="${prefix}privacy/">Privacy Policy</a>
-              <a href="${prefix}terms/">Terms of Service</a>
+              <a href="${link('docs/')}">Documentation</a>
+              <a href="${link('blog/')}">Blog</a>
+              <a href="${link('faq/')}">FAQ</a>
+              <a href="${link('compare/')}">Compare</a>
+              <a href="${link('demo/')}">Product Tour</a>
+              <a href="${link('developers/')}">Developers</a>
+              <a href="${link('partners/')}">Partners</a>
+              <a href="${link('security/')}">Security</a>
+              <a href="${link('privacy/')}">Privacy Policy</a>
+              <a href="${link('terms/')}">Terms of Service</a>
             </div>
           </div>
         </div>
@@ -150,9 +154,43 @@
     document.body.appendChild(footer);
   }
 
+  function fixFileLinks() {
+    if (!isFile) return;
+    document.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http://') || href.startsWith('https://') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+        return;
+      }
+      if (href.endsWith('/')) {
+        a.setAttribute('href', href + 'index.html');
+      } else if (href === '.' || href === '..') {
+        a.setAttribute('href', href + '/index.html');
+      }
+    });
+  }
+
+  if (isFile) {
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http://') || href.startsWith('https://') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+        return;
+      }
+      if (href.endsWith('/')) {
+        e.preventDefault();
+        window.location.href = href + 'index.html';
+      } else if (href === '.' || href === '..') {
+        e.preventDefault();
+        window.location.href = href + '/index.html';
+      }
+    }, true);
+  }
+
   function init() {
     createNav();
     createFooter();
+    fixFileLinks();
 
     const iconShapes = {
       activity: '<path d="M22 12h-4l-3 8-6-16-3 8H2"/>',
@@ -342,19 +380,50 @@
     }
 
     /* Scroll reveal */
-    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
+    function initScrollReveal() {
+      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+      if (!revealEls.length) return;
+
+      function checkReveal() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        revealEls.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= vh + 600 && rect.bottom >= -600) {
+            el.classList.add('in');
+          }
         });
-      }, { threshold: 0.15 });
-      revealEls.forEach(el => io.observe(el));
-    } else {
-      revealEls.forEach(el => el.classList.add('in'));
+      }
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0, rootMargin: '300px 0px 300px 0px' });
+
+        revealEls.forEach(el => io.observe(el));
+      }
+
+      checkReveal();
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      window.addEventListener('resize', checkReveal, { passive: true });
+
+      // Fail-safe: ensure all page elements are visible after initial load
+      setTimeout(() => {
+        revealEls.forEach(el => el.classList.add('in'));
+      }, 600);
     }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollReveal);
+    } else {
+      initScrollReveal();
+    }
+    window.addEventListener('load', initScrollReveal);
+    setTimeout(initScrollReveal, 200);
 
     /* Adaptive shared layouts */
     document.querySelectorAll('.timeline').forEach(timeline => {
@@ -363,6 +432,94 @@
       timeline.style.setProperty('--timeline-count', count);
       timeline.style.setProperty('--timeline-line-right', `calc((100% - ${24 * (count - 1)}px) / ${count} - 26px)`);
     });
+
+    /* Interactive Dot Grid on Heroes */
+    function initDotGrid() {
+      const canvases = document.querySelectorAll('canvas#dotgrid, canvas.bg-grid');
+      if (!canvases.length) return;
+      canvases.forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const hero = canvas.closest('.hero, .inner-hero') || canvas.parentElement;
+        if (!hero) return;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const spacing = 15;
+        const baseRadius = 1.1;
+        const maxRadius = baseRadius * 1.2;
+        const influence = 120;
+        let dots = [];
+        const mouse = { x: -9999, y: -9999, active: false };
+        let W = 0, H = 0;
+        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+        function resize() {
+          W = hero.offsetWidth;
+          H = hero.offsetHeight;
+          canvas.width = W * DPR;
+          canvas.height = H * DPR;
+          canvas.style.width = W + 'px';
+          canvas.style.height = H + 'px';
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+          buildGrid();
+        }
+
+        function buildGrid() {
+          dots = [];
+          const cols = Math.ceil(W / spacing) + 1;
+          const rows = Math.ceil(H / spacing) + 1;
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              dots.push({ x: c * spacing, y: r * spacing, cr: baseRadius });
+            }
+          }
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          for (let i = 0; i < dots.length; i++) {
+            const d = dots[i];
+            let target = baseRadius;
+            let color = 'rgba(174,185,204,0.4)';
+            if (mouse.active) {
+              const dx = d.x - mouse.x;
+              const dy = d.y - mouse.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < influence) {
+                const t = 1 - dist / influence;
+                target = baseRadius + (maxRadius - baseRadius) * t;
+                const mix = Math.min(1, t * 1.3);
+                color = 'rgba(' +
+                  Math.round(174 + (76 - 174) * mix) + ',' +
+                  Math.round(185 + (111 - 185) * mix) + ',' +
+                  Math.round(204 + (165 - 204) * mix) + ',' +
+                  (0.4 + 0.6 * mix) + ')';
+              }
+            }
+            d.cr += (target - d.cr) * (reduceMotion ? 1 : 0.18);
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.arc(d.x, d.y, d.cr, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+
+        hero.addEventListener('mousemove', (e) => {
+          const rect = hero.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+          mouse.active = true;
+        });
+        hero.addEventListener('mouseleave', () => {
+          mouse.active = false;
+        });
+
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+      });
+    }
+    initDotGrid();
 
     document.querySelectorAll('.stack-wrap').forEach(stack => {
       const cards = stack.querySelectorAll('.stack-card');
@@ -647,6 +804,102 @@
         }
 
         activate(0);
+      });
+    })();
+
+    /* Dynamic 3D Perspective Showcase */
+    (function initPerspectiveShowcases() {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function getBaseAngles(wrap) {
+        if (wrap && wrap.classList.contains('device-outer')) {
+          if (window.innerWidth <= 768) return { rx: 0, ry: 0, rz: 0 };
+          if (window.innerWidth <= 992) return { rx: 5, ry: -7, rz: 0 };
+          return { rx: 9, ry: -13, rz: 0 };
+        }
+        if (window.innerWidth <= 768) return { rx: 8, ry: -4, rz: 1 };
+        if (window.innerWidth <= 992) return { rx: 12, ry: -8, rz: 2.5 };
+        return { rx: 14, ry: -11, rz: 3 };
+      }
+
+      // Initialize all 3D stages
+      const stages = document.querySelectorAll('.showcase-stage, .showcase-squared-stage, .feat-3d-stage');
+      stages.forEach((stage) => {
+        const wrap = stage.querySelector('.showcase-perspective-wrap, .device-outer, .showcase-squared-wrap, .feat-deck-wrap, .feat-neon-wrap, .feat-fusion-wrap, .feat-glass-rim-wrap, .feat-dual-work-wrap, .feat-extruded-wrap');
+        if (!wrap) return;
+
+        let base = getBaseAngles(wrap);
+        let targetRx = base.rx;
+        let targetRy = base.ry;
+        let targetRz = base.rz;
+        let currentRx = base.rx;
+        let currentRy = base.ry;
+        let currentRz = base.rz;
+        let rafId = null;
+        let isHovered = false;
+
+        function lerp(start, end, factor) {
+          return start + (end - start) * factor;
+        }
+
+        function update() {
+          currentRx = lerp(currentRx, targetRx, 0.08);
+          currentRy = lerp(currentRy, targetRy, 0.08);
+          currentRz = lerp(currentRz, targetRz, 0.08);
+
+          wrap.style.transform = `rotateX(${currentRx.toFixed(2)}deg) rotateY(${currentRy.toFixed(2)}deg) rotateZ(${currentRz.toFixed(2)}deg)`;
+
+          if (isHovered || Math.abs(currentRx - targetRx) > 0.02 || Math.abs(currentRy - targetRy) > 0.02) {
+            rafId = requestAnimationFrame(update);
+          } else {
+            rafId = null;
+          }
+        }
+
+        if (!reduce) {
+          stage.addEventListener('mousemove', (e) => {
+            const rect = stage.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            isHovered = true;
+            targetRx = base.rx - y * 10;
+            targetRy = base.ry + x * 14;
+            targetRz = base.rz + x * 2;
+
+            if (!rafId) rafId = requestAnimationFrame(update);
+          });
+
+          stage.addEventListener('mouseleave', () => {
+            isHovered = false;
+            targetRx = base.rx;
+            targetRy = base.ry;
+            targetRz = base.rz;
+            if (!rafId) rafId = requestAnimationFrame(update);
+          });
+        }
+      });
+
+      // Scoped View Tab Switching
+      const tabContainers = document.querySelectorAll('.showcase-tabs-wrap');
+      tabContainers.forEach((wrap) => {
+        const section = wrap.closest('section') || document;
+        const tabs = wrap.querySelectorAll('.showcase-tab');
+        const images = section.querySelectorAll('.showcase-img');
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const view = tab.getAttribute('data-view');
+            tabs.forEach(t => {
+              t.classList.toggle('active', t === tab);
+              t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+            });
+
+            images.forEach((img) => {
+              img.classList.toggle('active', img.getAttribute('data-view') === view);
+            });
+          });
+        });
       });
     })();
   }

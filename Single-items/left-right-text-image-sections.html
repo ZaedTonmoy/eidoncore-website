@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eidoncore — Feature showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #10182B;
+            --text-secondary: #5B6472;
+            --text-muted: #8B93A1;
+            --accent: #4C6FA5;
+            --accent-soft: #EDF1F8;
+            --accent-soft-border: #D7E1F0;
+            --teal: #2F9E96;
+            --teal-soft: #E4F5F2;
+            --bg: #FBFCFE;
+            --border: #E3E7EE;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        .section {
+            position: relative;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 90px 48px 40px;
+        }
+
+        /* faint ambient backdrop, consistent with rest of site */
+        .bg-blob {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+            opacity: 0.06;
+            filter: blur(90px);
+            top: 10%;
+            left: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .rows {
+            position: relative;
+        }
+
+        /* Connecting spine */
+        .spine {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            bottom: 40px;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
+            display: none;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            padding: 56px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .row.reverse .media {
+            order: 2;
+        }
+
+        .row.reverse .copy {
+            order: 1;
+        }
+
+        /* Device mockup */
+        .media {
+            position: relative;
+        }
+
+        .device {
+            position: relative;
+            background: linear-gradient(160deg, #2A3B5C, #131C30);
+            border-radius: 18px;
+            padding: 8px;
+            box-shadow: 0 40px 70px -32px rgba(30, 58, 110, 0.28);
+        }
+
+        .device::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 90% at 18% 0%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 55%);
+            border-radius: 18px;
+            pointer-events: none;
+        }
+
+        .screen {
+            background: #fff;
+            border-radius: 11px;
+            overflow: hidden;
+            border: 1px solid #0A1220;
+        }
+
+        .screen-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: #FAFAFB;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .screen-bar span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #E4E4E7;
+        }
+
+        .screen-body {
+            padding: 18px 20px 22px;
+        }
+
+        .stat-mini-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat-mini {
+            background: #F6F7F9;
+            border-radius: 9px;
+            padding: 10px;
+        }
+
+        .stat-mini .k {
+            font-family: "Geist Mono", monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .stat-mini .v {
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .list-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid #F1F3F7;
+            font-size: 12.5px;
+            color: var(--text-secondary);
+        }
+
+        .list-row:last-child {
+            border-bottom: none;
+        }
+
+        .pill-mini {
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 100px;
+        }
+
+        .pill-mini.green {
+            background: var(--teal-soft);
+            color: var(--teal);
+        }
+
+        .pill-mini.blue {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .media-glow {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.18;
+            z-index: -1;
+        }
+
+        .media-glow.blue {
+            background: var(--accent);
+            top: -10%;
+            right: -8%;
+        }
+
+        .media-glow.teal {
+            background: var(--teal);
+            bottom: -10%;
+            left: -8%;
+        }
+
+        /* Copy side */
+        .copy {
+            position: relative;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Geist Mono", monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-soft-border);
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+
+        .eyebrow .num-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--teal);
+        }
+
+        .copy h2 {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--ink);
+            padding: 9px 0;
+        }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--teal-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .check svg {
+            width: 11px;
+            height: 11px;
+            stroke: var(--teal);
+        }
+
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 22px;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .learn-more svg {
+            width: 15px;
+            height: 15px;
+            transition: transform 0.15s ease;
+        }
+
+        .learn-more:hover svg {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 860px) {
+            .row {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .row.reverse .media {
+                order: 1;
+            }
+
+            .row.reverse .copy {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="section">
+        <div class="bg-blob"></div>
+        <div class="rows">
+
+            <!-- Row 1 -->
+            <div class="row">
+                <div class="media">
+                    <div class="media-glow blue"></div>
+                    <div class="device">
+                        <div class="screen">
+                            <div class="screen-bar"><span></span><span></span><span></span></div>
+                            <div class="screen-body">
+                                <div class="stat-mini-row">
+                                    <div class="stat-mini">
+                                        <div class="k">SPRINTS</div>
+                                        <div class="v">3 active</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">CAPACITY</div>
+                                        <div class="v">86%</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">OVERDUE</div>
+                                        <div class="v">1</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">TEAM</div>
+                                        <div class="v">6</div>
+                                    </div>
+                                </div>
+                                <div class="list-row"><span>Sarah — Alpha redesign</span><span class="pill-mini blue">On
+                                        track</span></div>
+                                <div class="list-row"><span>Marcus — Invoice sync</span><span
+                                        class="pill-mini green">Ahead</span></div>
+                                <div class="list-row"><span>Priya — Client onboarding</span><span
+                                        class="pill-mini blue">On track</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copy">
+                    <div class="eyebrow"><span class="num-dot"></span>Module 02</div>
+                    <h2>Workload monitoring &amp; sprint kanban</h2>
+                    <ul class="feature-list">
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Sprint kanban boards, live timers, and task dependencies</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Spot overloaded or underutilized team members instantly</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Real-time activity tracking shows assignments and status</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Time tracking feeds directly into client invoicing</li>
+                    </ul>
+                    <a class="learn-more" href="../tasks/index.html">Explore this module<svg viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg></a>
+                </div>
+            </div>
+
+            <!-- Row 2 (reversed) -->
+            <div class="row reverse">
+                <div class="media">
+                    <div class="media-glow teal"></div>
+                    <div class="device">
+                        <div class="screen">
+                            <div class="screen-bar"><span></span><span></span><span></span></div>
+                            <div class="screen-body">
+                                <div class="stat-mini-row">
+                                    <div class="stat-mini">
+                                        <div class="k">CLIENTS</div>
+                                        <div class="v">42</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">AT RISK</div>
+                                        <div class="v">2</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">HEALTHY</div>
+                                        <div class="v">91%</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">PIPELINE</div>
+                                        <div class="v">$28k</div>
+                                    </div>
+                                </div>
+                                <div class="list-row"><span>Nova Studio</span><span
+                                        class="pill-mini green">Healthy</span></div>
+                                <div class="list-row"><span>Beta Inc</span><span class="pill-mini blue">Active</span>
+                                </div>
+                                <div class="list-row"><span>Alpha Corp</span><span
+                                        class="pill-mini green">Renewing</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copy">
+                    <div class="eyebrow"><span class="num-dot"></span>Module 03</div>
+                    <h2>Full client CRM &amp; health scoring</h2>
+                    <ul class="feature-list">
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Manage client pipelines, contacts, and contract stages</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Automated health scores highlight accounts needing attention</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>One-click client portal access and document vault</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Complete client history — proposals, invoices, and chats</li>
+                    </ul>
+                    <a class="learn-more" href="../crm/index.html">Explore this module<svg viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg></a>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="row">
+                <div class="media">
+                    <div class="media-glow blue"></div>
+                    <div class="device">
+                        <div class="screen">
+                            <div class="screen-bar"><span></span><span></span><span></span></div>
+                            <div class="screen-body">
+                                <div class="stat-mini-row">
+                                    <div class="stat-mini">
+                                        <div class="k">AUTOMATIONS</div>
+                                        <div class="v">1</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">ACTIVE</div>
+                                        <div class="v">1</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">RUNS TODAY</div>
+                                        <div class="v">14</div>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <div class="k">FAILED</div>
+                                        <div class="v">0</div>
+                                    </div>
+                                </div>
+                                <div class="list-row"><span>Auto-notify on task completion</span><span
+                                        class="pill-mini green">Enabled</span></div>
+                                <div class="list-row"><span>Invoice reminder — 3 days</span><span
+                                        class="pill-mini green">Enabled</span></div>
+                                <div class="list-row"><span>Assign new leads round-robin</span><span
+                                        class="pill-mini blue">Draft</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copy">
+                    <div class="eyebrow"><span class="num-dot"></span>Module 04</div>
+                    <h2>No-code automation builder</h2>
+                    <ul class="feature-list">
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Visual trigger → condition → action workflow builder</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Auto-assign tasks, dispatch client emails, and trigger invoices</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>Live execution logs with debug traces and retry queues</li>
+                        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                                    <path d="M4 12l4 4 12-12" />
+                                </svg></span>20+ pre-built agency automation recipe templates</li>
+                    </ul>
+                    <a class="learn-more" href="../automations/index.html">Explore this module<svg viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

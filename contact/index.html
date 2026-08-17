@@ -23,11 +23,17 @@
 
 <body>
   <main id="main-content">
-<section class="page-header">
-      <div class="container">
-        <div class="breadcrumb reveal"><a href="../">Home</a><span class="separator">/</span><span class="current">Contact</span></div>
-        <h1 class="page-title reveal">Let's <span class="accent">Talk</span></h1>
-        <p class="page-subtitle reveal">Have a question, want a demo, or need help choosing a plan? We'd love
+    <section class="inner-hero page-header" id="innerHero">
+      <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      <canvas class="bg-grid"></canvas>
+
+      <div class="hero-content">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span class="current">Contact</span></div>
+        <h1>Let's <span class="accent">Talk</span></h1>
+        <p class="sub">Have a question, want a demo, or need help choosing a plan? We'd love
                     to hear from you.</p>
       </div>
     </section>
@@ -236,21 +242,71 @@
         <div class="mini-grid reveal-stagger"><div class="mini-card"><div class="mini-icon"></div><h3>AES-256 Encryption</h3><p>All data encrypted at rest and in transit.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>SOC 2 Infrastructure</h3><p>Hosted on compliant infrastructure with automated backups.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>2FA Authentication</h3><p>Two-factor authentication for all users.</p></div><div class="mini-card"><div class="mini-icon"></div><h3>GDPR Compliant</h3><p>Full data privacy compliance.</p></div></div>
       </div>
     </section>
-<section class="cta-section">
-      <div class="container reveal">
-        <h2>Ready to Streamline Your Agency?</h2>
-        <p>Start your 14-day free trial — no credit card required. Full access to all Pro features.</p>
-        <div class="cta-ctas"><a href="https://register.eidoncore.com/" class="btn btn-primary btn-lg">Start Free Trial <span class="btn-arrow">→</span></a>
-<a href="../docs/" class="btn btn-outline btn-lg">View Documentation</a></div>
+    <section class="pre-footer-wrap">
+      <div class="wrap">
+        <div class="newsletter">
+          <div class="nl-glow"></div>
+          <div class="nl-glow two"></div>
+          <div class="nl-left">
+            <div class="nl-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                <path d="M3.5 6.5l8.5 6 8.5-6" />
+              </svg>
+            </div>
+            <h2>Stay in the loop</h2>
+            <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+          </div>
+          <div class="nl-right">
+            <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'color:var(--teal);font-weight:600;\'>✓ Subscribed! Welcome aboard.</div>';">
+              <input class="nl-input" type="email" placeholder="Enter your email" required>
+              <button type="submit" class="btn-pill btn-primary">Subscribe</button>
+            </form>
+            <p class="nl-note">No spam — unsubscribe anytime.</p>
+          </div>
+        </div>
+
+        <div class="cta">
+          <div class="cta-blob a"></div>
+          <div class="cta-blob b"></div>
+          <div class="cta-dots"></div>
+
+          <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+          <h2>Ready to Streamline Your Agency?</h2>
+          <p class="cta-sub">Start your 14-day free trial — no credit card required. Full access to all Pro features.</p>
+          <div class="cta-btn-row">
+            <a href="https://register.eidoncore.com/" class="btn-pill btn-primary">Start Free Trial →</a>
+            <a href="../contact/" class="btn-pill btn-outline">Book a Demo</a>
+          </div>
+          <div class="trust-row">
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>No credit card required</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>Cancel anytime</div>
+            <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l4 4 12-12" /></svg>SOC2-ready security</div>
+          </div>
+        </div>
       </div>
     </section>
-<section>
-      <div class="container">
-        <div class="newsletter-box reveal">
-          <div><h3>Subscribe to Our Newsletter</h3><p>Product updates, agency tips, and early access to new features. No spam, unsubscribe anytime.</p></div>
-          <div>
-            <form class="newsletter-form"><input type="email" placeholder="Enter your email" required><button type="submit">Subscribe</button></form>
-            <div class="newsletter-success"><span class="status-icon yes" data-icon="badgeCheck"></span>You're subscribed! Welcome aboard.</div>
+    <section class="pre-footer-wrap">
+      <div class="wrap">
+        <div class="newsletter">
+          <div class="nl-glow"></div>
+          <div class="nl-glow two"></div>
+          <div class="nl-left">
+            <div class="nl-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                <path d="M3.5 6.5l8.5 6 8.5-6" />
+              </svg>
+            </div>
+            <h2>Stay in the loop</h2>
+            <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+          </div>
+          <div class="nl-right">
+            <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'color:var(--teal);font-weight:600;\'>✓ Subscribed! Welcome aboard.</div>';">
+              <input class="nl-input" type="email" placeholder="Enter your email" required>
+              <button type="submit" class="btn-pill btn-primary">Subscribe</button>
+            </form>
+            <p class="nl-note">No spam — unsubscribe anytime.</p>
           </div>
         </div>
       </div>

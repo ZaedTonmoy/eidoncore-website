@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eidoncore — Newsletter + CTA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #10182B;
+            --text-secondary: #5B6472;
+            --text-muted: #8B93A1;
+            --accent: #4C6FA5;
+            --accent-deep: #3A5A8C;
+            --accent-soft: #EDF1F8;
+            --accent-soft-border: #D7E1F0;
+            --teal: #2F9E96;
+            --bg: #F7F9FC;
+            --border: #E3E7EE;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 90px 48px;
+        }
+
+        /* ---------- Newsletter card ---------- */
+        .newsletter {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 44px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .nl-glow {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            top: -180px;
+            left: -80px;
+            background: radial-gradient(circle, var(--accent), transparent 68%);
+            opacity: 0.12;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .nl-glow.two {
+            left: auto;
+            right: -120px;
+            top: auto;
+            bottom: -200px;
+            background: radial-gradient(circle, var(--teal), transparent 68%);
+            opacity: 0.1;
+        }
+
+        .nl-left {
+            position: relative;
+            z-index: 1;
+            max-width: 420px;
+        }
+
+        .nl-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .nl-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+        }
+
+        .newsletter h2 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        .newsletter .nl-sub {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        .nl-right {
+            margin-top: 60px;
+            flex-shrink: 0;
+        }
+
+        .nl-form {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nl-input {
+            width: 260px;
+            padding: 13px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            font-family: inherit;
+            font-size: 14.5px;
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .nl-input:focus {
+            border-color: var(--accent);
+        }
+
+        .nl-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-pill {
+            padding: 13px 24px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14.5px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -10px rgba(76, 111, 165, 0.5);
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid var(--border);
+        }
+
+        .nl-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 760px) {
+            .newsletter {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nl-right {
+                margin-top: 24px;
+                width: 100%;
+            }
+
+            .nl-form {
+                width: 100%;
+            }
+
+            .nl-input {
+                flex: 1;
+                width: auto;
+            }
+        }
+
+        /* ---------- Final CTA panel ---------- */
+        .cta {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            margin-top: 20px;
+            background: linear-gradient(160deg, #10182B, #1C2A46);
+            border-radius: 22px;
+            padding: 74px 48px;
+            text-align: center;
+        }
+
+        .cta-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .cta-blob.a {
+            width: 420px;
+            height: 420px;
+            top: -160px;
+            left: 6%;
+            background: radial-gradient(circle, var(--accent), transparent 68%);
+            opacity: 0.35;
+        }
+
+        .cta-blob.b {
+            width: 380px;
+            height: 380px;
+            bottom: -180px;
+            right: 8%;
+            background: radial-gradient(circle, var(--teal), transparent 68%);
+            opacity: 0.3;
+        }
+
+        .cta-dots {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+            background-size: 22px 22px;
+            -webkit-mask-image: radial-gradient(ellipse 70% 100% at 50% 40%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+            mask-image: radial-gradient(ellipse 70% 100% at 50% 40%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .cta-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            font-family: "Geist Mono", monospace;
+            font-size: 12px;
+            color: #B6C2D9;
+            margin-bottom: 22px;
+        }
+
+        .cta-eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.15;
+        }
+
+        .cta .cta-sub {
+            margin-top: 18px;
+            font-size: 16.5px;
+            color: #AEBBD4;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-btn-row {
+            margin-top: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .cta .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .cta .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .trust-row {
+            margin-top: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: #93A2BE;
+            font-weight: 500;
+        }
+
+        .trust-item svg {
+            width: 15px;
+            height: 15px;
+            stroke: var(--teal);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <div class="newsletter">
+            <div class="nl-glow"></div>
+            <div class="nl-glow two"></div>
+            <div class="nl-left">
+                <div class="nl-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                        <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                        <path d="M3.5 6.5l8.5 6 8.5-6" />
+                    </svg>
+                </div>
+                <h2>Stay in the loop</h2>
+                <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+            </div>
+            <div class="nl-right">
+                <div class="nl-form">
+                    <input class="nl-input" type="email" placeholder="Enter your email">
+                    <button class="btn-pill btn-primary">Subscribe</button>
+                </div>
+                <p class="nl-note">No spam — unsubscribe anytime.</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <div class="cta-blob a"></div>
+            <div class="cta-blob b"></div>
+            <div class="cta-dots"></div>
+
+            <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+            <h2>Ready to streamline your agency?</h2>
+            <p class="cta-sub">Join thousands of agencies managing their entire workflow from a single platform. No
+                credit card required.</p>
+            <div class="cta-btn-row">
+                <button class="btn-pill btn-primary">Start Free Trial →</button>
+                <button class="btn-pill btn-outline">Book a Demo</button>
+            </div>
+            <div class="trust-row">
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M4 12l4 4 12-12" />
+                    </svg>No credit card required</div>
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M4 12l4 4 12-12" />
+                    </svg>Cancel anytime</div>
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M4 12l4 4 12-12" />
+                    </svg>SOC2-ready security</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

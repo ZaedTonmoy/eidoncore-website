@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eidoncore — Inner page hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #10182B;
+            --text-secondary: #5B6472;
+            --text-muted: #8B93A1;
+            --accent: #4C6FA5;
+            --accent-soft: #EDF1F8;
+            --teal: #2F9E96;
+            --bg: #F7F9FC;
+            --border: #E3E7EE;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fff;
+            color: var(--ink);
+        }
+
+        .inner-hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: linear-gradient(180deg, #F4F6FB, #FBFCFE 85%);
+            padding: 26px 48px 64px;
+        }
+
+        .bg-blobs {
+            position: absolute;
+            inset: -20% -10%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.3;
+        }
+
+        .blob-1 {
+            width: 420px;
+            height: 420px;
+            top: -120px;
+            left: 8%;
+            background: radial-gradient(circle, var(--accent), transparent 68%);
+            animation: drift1 16s ease-in-out infinite alternate;
+        }
+
+        .blob-2 {
+            width: 360px;
+            height: 360px;
+            top: -60px;
+            right: 6%;
+            background: radial-gradient(circle, var(--teal), transparent 68%);
+            opacity: 0.22;
+            animation: drift2 19s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift1 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(70px, 40px) scale(1.12);
+            }
+        }
+
+        @keyframes drift2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-60px, 50px) scale(1.15);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blob {
+                animation: none;
+            }
+        }
+
+        canvas.bg-grid {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            -webkit-mask-image: radial-gradient(ellipse 85% 140% at 50% 0%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0.15) 100%);
+            mask-image: radial-gradient(ellipse 85% 140% at 50% 0%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0.15) 100%);
+        }
+
+        /* Content */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--teal));
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+
+        .btn-pill {
+            padding: 11px 22px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14.5px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            margin: 46px auto 0;
+            text-align: center;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: "Geist Mono", monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 26px;
+        }
+
+        .breadcrumb .current {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h1 .accent {
+            color: var(--accent);
+        }
+
+        .sub {
+            margin-top: 20px;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="inner-hero" id="innerHero">
+        <div class="bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+        <canvas class="bg-grid" id="dotgrid"></canvas>
+
+        <nav>
+            <div class="logo">
+                <div class="logo-mark"></div>Eidoncore
+            </div>
+            <div class="nav-links">
+                <span>Features</span><span>Pricing</span><span>Use Cases</span><span>About</span><span>Contact</span>
+            </div>
+            <div class="nav-right">
+                <span>Log In</span>
+                <button class="btn-pill btn-primary">Start Free Trial</button>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="breadcrumb"><a href="../index.html">Home</a><span>/</span><span class="current">Features</span>
+            </div>
+            <h1>Every tool your <span class="accent">agency needs</span></h1>
+            <p class="sub">17 integrated modules designed to replace your entire software stack. From project inception
+                to final invoice — every step covered.</p>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            var canvas = document.getElementById('dotgrid');
+            var ctx = canvas.getContext('2d');
+            var hero = document.getElementById('innerHero');
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var spacing = 15;
+            var baseRadius = 1.1;
+            var maxRadius = baseRadius * 1.2;
+            var influence = 120;
+            var dots = [];
+            var mouse = { x: -9999, y: -9999, active: false };
+            var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+            function resize() {
+                W = hero.offsetWidth; H = hero.offsetHeight;
+                canvas.width = W * DPR; canvas.height = H * DPR;
+                canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+                buildGrid();
+            }
+            function buildGrid() {
+                dots = [];
+                var cols = Math.ceil(W / spacing) + 1;
+                var rows = Math.ceil(H / spacing) + 1;
+                for (var r = 0; r < rows; r++) {
+                    for (var c = 0; c < cols; c++) {
+                        dots.push({ x: c * spacing, y: r * spacing, cr: baseRadius });
+                    }
+                }
+            }
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                for (var i = 0; i < dots.length; i++) {
+                    var d = dots[i];
+                    var target = baseRadius;
+                    var color = 'rgba(174,185,204,0.4)';
+                    if (mouse.active) {
+                        var dx = d.x - mouse.x, dy = d.y - mouse.y;
+                        var dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < influence) {
+                            var t = 1 - dist / influence;
+                            target = baseRadius + (maxRadius - baseRadius) * t;
+                            var mix = Math.min(1, t * 1.3);
+                            color = 'rgba(' + Math.round(174 + (76 - 174) * mix) + ',' + Math.round(185 + (111 - 185) * mix) + ',' + Math.round(204 + (165 - 204) * mix) + ',' + (0.4 + 0.6 * mix) + ')';
+                        }
+                    }
+                    d.cr += (target - d.cr) * (reduceMotion ? 1 : 0.18);
+                    ctx.beginPath(); ctx.fillStyle = color; ctx.arc(d.x, d.y, d.cr, 0, Math.PI * 2); ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+            hero.addEventListener('mousemove', function (e) {
+                var rect = hero.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
+            });
+            hero.addEventListener('mouseleave', function () { mouse.active = false; });
+            window.addEventListener('resize', resize);
+            resize(); draw();
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agency Command Center — Light Mode Hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --surface: #F4F4F5;
+            --border: #E4E4E7;
+            --border-soft: #ECECEE;
+            --text-primary: #0B0F19;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --accent: #2563EB;
+            --accent-soft: #EFF4FF;
+            --accent-soft-border: #DCE7FD;
+            --pill: 100px;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            padding: 80px 24px 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eyebrow-wrap {
+            text-align: center;
+            max-width: 760px;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .sub {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Tab pill selector */
+        .tabs {
+            margin-top: 48px;
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--pill);
+            padding: 6px;
+            gap: 4px;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: var(--pill);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+        .tab svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: #FFFFFF;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        .tab.active svg {
+            opacity: 1;
+        }
+
+        /* Device stage */
+        .stage {
+            margin-top: 72px;
+            width: min(1100px, 92vw);
+        }
+
+        .device {
+            position: relative;
+            background: linear-gradient(160deg, #2A3B5C, #131C30);
+            border-radius: 22px;
+            padding: 10px;
+            box-shadow: 0 40px 80px -30px rgba(30, 58, 110, 0.35), 0 16px 32px -16px rgba(15, 23, 42, 0.35);
+            overflow: hidden;
+        }
+
+        .device::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 90% at 18% 0%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 55%);
+            pointer-events: none;
+        }
+
+        .camera {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #060A12;
+            border: 1px solid #3E4E70;
+            z-index: 2;
+        }
+
+        .screen {
+            position: relative;
+            background: #FFFFFF;
+            border-radius: 13px;
+            overflow: hidden;
+            border: 1px solid #0A1220;
+        }
+
+        .browser-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-soft);
+            background: #FAFAFB;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #E4E4E7;
+        }
+
+        /* Image placeholder replacing the app content */
+        .placeholder {
+            aspect-ratio: 16 / 9.2;
+            background:
+                repeating-linear-gradient(135deg, #FAFAFB 0px, #FAFAFB 12px, #F4F4F5 12px, #F4F4F5 24px);
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .placeholder-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--text-muted);
+        }
+
+        .placeholder-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .placeholder-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 320px;
+        }
+
+        .placeholder-tag {
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-soft-border);
+            padding: 4px 12px;
+            border-radius: var(--pill);
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .footnote code {
+            font-family: "Geist Mono", monospace;
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="eyebrow-wrap">
+        <h1>Your agency command center</h1>
+        <p class="sub">Real-time KPIs, revenue curves, project health, and smart AI automations — all unified in one
+            high-velocity interface.</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="0" role="tab" aria-selected="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18" />
+                <path d="M7 15l4-6 3 3 5-7" />
+            </svg>
+            Performance &amp; KPIs
+        </button>
+        <button class="tab" data-tab="1" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12h4l2 6 4-12 2 6h6" />
+            </svg>
+            Operations &amp; Tasks
+        </button>
+        <button class="tab" data-tab="2" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+            Executive Command
+        </button>
+    </div>
+
+    <div class="stage">
+        <div class="device">
+            <div class="camera"></div>
+            <div class="screen">
+                <div class="browser-bar">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="placeholder" id="placeholder">
+                    <div class="placeholder-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="9" cy="9" r="1.5" />
+                            <path d="M21 15l-5-5-9 9" />
+                        </svg>
+                    </div>
+                    <div class="placeholder-title" id="placeholder-title">Drop the Performance &amp; KPIs screenshot
+                        here</div>
+                    <div class="placeholder-sub">Recommended 2400×1380px, PNG or WebP, light UI to match the frame.
+                    </div>
+                    <div class="placeholder-tag" id="placeholder-tag">Tab 1 of 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="footnote">Swap the <code>.placeholder</code> div for an <code>&lt;img src="your-screenshot.png"&gt;</code>
+        once you have each tab's capture.</p>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const titleEl = document.getElementById('placeholder-title');
+        const tagEl = document.getElementById('placeholder-tag');
+        const labels = [
+            'Drop the Performance & KPIs screenshot here',
+            'Drop the Operations & Tasks screenshot here',
+            'Drop the Executive Command screenshot here'
+        ];
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                const i = Number(tab.dataset.tab);
+                titleEl.textContent = labels[i];
+                tagEl.textContent = 'Tab ' + (i + 1) + ' of 3';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -18,25 +18,29 @@
 
 <body>
     <main>
-        <section class="page-header" style="min-height:60vh;display:flex;align-items:center">
-            <div class="container" style="text-align:center">
-                <div class="error-code anim-blur">404</div>
-                <h1 class="page-title anim-blur">Page Not<span class="gradient-text">Found</span></h1>
-                <p class="page-subtitle anim-blur">The page you're looking for doesn't exist or has been moved. Let's
-                    get you back on track.</p>
-                <div class="hero-ctas anim-blur" style="justify-content:center;margin-top:40px">
-                    <a href="./" class="btn btn-primary btn-lg">Back to Home <span class="btn-arrow">→</span></a>
-                    <a href="features/" class="btn btn-outline btn-lg">Explore Features</a>
+        <section class="inner-hero page-header" style="min-height:70vh;display:flex;align-items:center;justify-content:center;">
+            <div class="bg-blobs">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+            </div>
+            <canvas class="bg-grid"></canvas>
+            <div class="hero-content" style="text-align:center">
+                <div class="error-code anim-blur" style="font-size:72px;font-weight:800;color:var(--primary,#4C6FA5);margin-bottom:8px;">404</div>
+                <h1 class="page-title anim-blur">Page Not <span class="accent">Found</span></h1>
+                <p class="sub anim-blur">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+                <div class="cta-btn-row anim-blur" style="margin-top:30px">
+                    <a href="./" class="btn-pill btn-primary">Back to Home →</a>
+                    <a href="features/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);">Explore Features</a>
                 </div>
-                <div class="error-links anim-blur">
-                    <p style="margin-top:40px;color:rgba(255,255,255,0.5)">Popular pages:</p>
-                    <div class="error-link-grid">
-                        <a href="pricing/">Pricing</a>
-                        <a href="about/">About</a>
-                        <a href="contact/">Contact</a>
-                        <a href="blog/">Blog</a>
-                        <a href="docs/">Documentation</a>
-                        <a href="changelog/">Changelog</a>
+                <div class="error-links anim-blur" style="margin-top:40px;">
+                    <p style="color:var(--text-mute);font-size:14px;margin-bottom:12px;">Popular pages:</p>
+                    <div class="error-link-grid" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                        <a href="pricing/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">Pricing</a>
+                        <a href="about/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">About</a>
+                        <a href="contact/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">Contact</a>
+                        <a href="blog/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">Blog</a>
+                        <a href="docs/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">Documentation</a>
+                        <a href="changelog/" class="btn-pill btn-outline" style="color:var(--ink);border-color:var(--border);font-size:13px;padding:8px 16px;">Changelog</a>
                     </div>
                 </div>
             </div>
