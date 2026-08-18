@@ -3162,8 +3162,6 @@ body.nav-open .navbar {
   position: absolute;
   inset: 0;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 62%);
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 62%);
 }
 @media (prefers-reduced-motion: reduce) {
   .blob { animation: none; }
@@ -3175,7 +3173,7 @@ body.nav-open .navbar {
   grid-template-columns: 1.05fr 0.95fr;
   gap: 56px;
   align-items: center;
-  max-width: 1280px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 24px;
 }
