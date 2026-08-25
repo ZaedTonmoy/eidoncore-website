@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eidoncore — Testimonial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --ink: #0e1420;
+            --muted: #68707e;
+            --line: #e7e9f1;
+            --accent: #3654ff;
+            --accent-ink: #22307a;
+            --accent-soft: #eef1ff;
+            --accent-soft-2: #e2e7ff;
+            --strike: #c7cbd6;
+            --radius-lg: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 96px 24px 110px;
+        }
+
+        /* ---------- Header ---------- */
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto 28px;
+            width: max-content;
+            padding: 7px 16px 7px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: #fbfbfe;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11.5px;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            color: var(--accent-ink);
+            text-transform: uppercase;
+        }
+
+        .eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 3px #22c55e22;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(32px, 5vw, 50px);
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin: 0 0 18px;
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--muted);
+            font-size: 16px;
+            margin: 0 auto 56px;
+            max-width: 460px;
+        }
+
+        /* ---------- Card ---------- */
+        .card {
+            position: relative;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(14, 20, 32, 0.03), 0 24px 48px -24px rgba(14, 20, 32, 0.14);
+            padding: 56px 56px 32px;
+            overflow: hidden;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 22px;
+            left: 40px;
+            font-family: 'Space Grotesk', serif;
+            font-size: 110px;
+            font-weight: 700;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--accent-soft-2);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* ---------- Stack line (signature element) ---------- */
+        .stack-line {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .stack-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-right: 2px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 11px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            font-weight: 500;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            background: #fbfbfd;
+            white-space: nowrap;
+        }
+
+        .chip.out {
+            text-decoration: line-through;
+            text-decoration-color: var(--strike);
+            text-decoration-thickness: 1.5px;
+            color: #a7acb8;
+        }
+
+        .arrow {
+            color: var(--strike);
+            font-size: 13px;
+            padding: 0 2px;
+        }
+
+        .chip.in {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* ---------- Quote ---------- */
+        .quote {
+            position: relative;
+            z-index: 1;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: clamp(19px, 2.6vw, 25px);
+            line-height: 1.5;
+            letter-spacing: -0.005em;
+            color: var(--ink);
+            margin: 0 0 40px;
+        }
+
+        mark {
+            background: none;
+            color: var(--accent-ink);
+            font-weight: 600;
+            padding: 0 2px;
+            background-image: linear-gradient(var(--accent-soft), var(--accent-soft));
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            border-radius: 3px;
+        }
+
+        /* ---------- Attribution ---------- */
+        .attribution {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-top: 26px;
+            border-top: 1px solid var(--line);
+            flex-wrap: wrap;
+        }
+
+        .who {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid var(--accent-soft-2);
+            box-shadow: 0 2px 8px rgba(14, 20, 32, 0.08);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .who-text .name {
+            font-weight: 600;
+            font-size: 14.5px;
+            color: var(--ink);
+        }
+
+        .who-text .role {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 1px;
+        }
+
+        .metric {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+        }
+
+        .metric .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--accent-ink);
+        }
+
+        .metric .label {
+            font-size: 11.5px;
+            color: var(--accent-ink);
+            opacity: 0.75;
+        }
+
+        /* ---------- Switcher ---------- */
+        .switcher {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            appearance: none;
+            border: 2px solid var(--line);
+            background: #fff;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, filter .2s ease, opacity .2s ease;
+            opacity: 0.6;
+            filter: grayscale(100%);
+        }
+
+        .tab img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+            filter: grayscale(0%);
+            border-color: var(--accent);
+        }
+
+        .tab:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .tab.active {
+            border-color: var(--accent);
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.08);
+            box-shadow: 0 0 0 3px var(--accent-soft), 0 4px 12px rgba(54, 84, 255, 0.25);
+        }
+
+        @media (max-width:640px) {
+            .wrap {
+                padding: 64px 16px 80px;
+            }
+
+            .card {
+                padding: 40px 22px 26px;
+            }
+
+            .quote-mark {
+                font-size: 80px;
+                top: 14px;
+                left: 20px;
+            }
+
+            .attribution {
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <div class="eyebrow"><span class="dot"></span>What agencies say</div>
+        <h1>Loved by 500+ agencies<br>worldwide</h1>
+        <p class="sub">Here's how Eidoncore replaces the tool stack for real agencies, every single day.</p>
+
+        <div class="card">
+            <div class="quote-mark">“</div>
+
+            <div class="stack-line" id="stackLine"></div>
+
+            <p class="quote" id="quoteText"></p>
+
+            <div class="attribution">
+                <div class="who">
+                    <div class="avatar" id="avatar"></div>
+                    <div class="who-text">
+                        <div class="name" id="name"></div>
+                        <div class="role" id="role"></div>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="num" id="metricNum"></span>
+                    <span class="label" id="metricLabel"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="switcher" id="switcher"></div>
+
+    </div>
+
+    <script>
+        const testimonials = [
+            {
+                initials: "SK",
+                image: "../images/testimonials/sarah-kim.jpg",
+                color: "#3654ff",
+                name: "Sarah Kim",
+                role: "Operations Lead, Spectra Digital",
+                replaced: ["Trello", "HubSpot", "QuickBooks"],
+                quote: (h) => `We replaced ${h} with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform <mark>saved us 15+ hours every week</mark> and <mark>eliminated all context switching</mark>.`,
+                metricNum: "15+",
+                metricLabel: "hrs saved / wk"
+            },
+            {
+                initials: "MP",
+                image: "../images/testimonials/marcus-patel.jpg",
+                color: "#0e1420",
+                name: "Marcus Patel",
+                role: "Founder, Northline Studio",
+                replaced: ["Asana", "Mailchimp", "Harvest"],
+                quote: (h) => `Switching from ${h} felt risky, but Eidoncore paid for itself in a month. Client reporting is now <mark>fully automated</mark> and our billing errors <mark>dropped to zero</mark>.`,
+                metricNum: "$4.2k",
+                metricLabel: "saved / mo"
+            },
+            {
+                initials: "ER",
+                image: "../images/testimonials/elena-ruiz.jpg",
+                color: "#3654ff",
+                name: "Elena Ruiz",
+                role: "Managing Director, Fieldworks",
+                replaced: ["Monday", "Zendesk", "Xero"],
+                quote: (h) => `We were paying for ${h} separately and none of it talked to each other. Now every ticket, task, and invoice lives in one place — <mark>onboarding new hires takes a day, not a week</mark>.`,
+                metricNum: "5x",
+                metricLabel: "faster onboarding"
+            },
+            {
+                initials: "DC",
+                image: "../images/testimonials/david-chen.jpg",
+                color: "#0e1420",
+                name: "David Chen",
+                role: "COO, Halyard Agency",
+                replaced: ["ClickUp", "Pipedrive", "FreshBooks"],
+                quote: (h) => `Our team stopped fighting ${h} entirely. Eidoncore gave every project a live budget, so scope creep gets caught <mark>before it costs us money</mark>, not after.`,
+                metricNum: "22%",
+                metricLabel: "margin recovered"
+            },
+            {
+                initials: "AV",
+                image: "../images/testimonials/amara-voss.jpg",
+                color: "#3654ff",
+                name: "Amara Voss",
+                role: "Head of Delivery, Loop &amp; Co.",
+                replaced: ["Notion", "Close", "Wave"],
+                quote: (h) => `${h} were three logins we opened every morning. Now it's one dashboard, and clients get <mark>real-time visibility</mark> into their own projects without asking us for updates.`,
+                metricNum: "9",
+                metricLabel: "tools retired"
+            }
+        ];
+
+        const stackLine = document.getElementById('stackLine');
+        const quoteText = document.getElementById('quoteText');
+        const avatar = document.getElementById('avatar');
+        const nameEl = document.getElementById('name');
+        const roleEl = document.getElementById('role');
+        const metricNum = document.getElementById('metricNum');
+        const metricLabel = document.getElementById('metricLabel');
+        const switcher = document.getElementById('switcher');
+
+        function render(i) {
+            const t = testimonials[i];
+
+            stackLine.innerHTML = `<span class="stack-label">Replaced</span>` +
+                t.replaced.map(tool => `<span class="chip out">${tool}</span>`).join('<span class="arrow">＋</span>') +
+                `<span class="arrow">→</span><span class="chip in">Eidoncore</span>`;
+
+            const toolList = t.replaced.join(', ');
+            quoteText.innerHTML = t.quote(toolList);
+
+            avatar.innerHTML = `<img src="${t.image}" alt="${t.name}">`;
+            nameEl.textContent = t.name;
+            roleEl.innerHTML = t.role;
+            metricNum.textContent = t.metricNum;
+            metricLabel.textContent = t.metricLabel;
+
+            [...switcher.children].forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === i);
+            });
+        }
+
+        testimonials.forEach((t, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'tab';
+            btn.innerHTML = `<img src="${t.image}" alt="${t.name}">`;
+            btn.setAttribute('aria-label', `Show testimonial from ${t.name}`);
+            btn.addEventListener('click', () => render(i));
+            switcher.appendChild(btn);
+        });
+
+        render(0);
+    </script>
+
+</body>
+
+</html>

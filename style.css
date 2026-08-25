@@ -85,7 +85,7 @@ p{margin:0;}
   gap: 8px;
   font-family: var(--mono, "Geist Mono", monospace);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--accent, #4C6FA5);
   background: var(--accent-soft, #EDF1F8);
   border: 1px solid var(--accent-soft-border, #D7E1F0);
@@ -1428,9 +1428,9 @@ body.nav-open .navbar {
   border-radius:var(--radius-lg);
   background:var(--paper);
   border:1px solid var(--line);
-  box-shadow:0 12px 36px -12px rgba(16,26,43,0.06);
-  padding:52px 48px 36px;
-  text-align:center;
+  box-shadow:0 1px 2px rgba(14,20,32,0.03), 0 24px 48px -24px rgba(14,20,32,0.12);
+  padding:56px 56px 36px;
+  text-align:left;
   transition:border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .testimonial-hero-card:hover{
@@ -1438,12 +1438,12 @@ body.nav-open .navbar {
   box-shadow:var(--shadow-md);
 }
 .quote-mark-bg{
-  position:absolute;top:16px;left:40px;
-  font-family:var(--display);font-size:5.5rem;line-height:1;
+  position:absolute;top:20px;left:36px;
+  font-family:var(--display);font-size:6.5rem;line-height:1;
   color:var(--primary);opacity:0.08;
   pointer-events:none;user-select:none;
 }
-.testimonial-track{position:relative;width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;}
+.testimonial-track{position:relative;width:100%;min-height:220px;display:flex;align-items:flex-start;justify-content:flex-start;}
 .testimonial-slide{
   position:absolute;top:0;left:0;width:100%;
   opacity:0;visibility:hidden;transform:translateY(12px) scale(0.98);
@@ -1453,57 +1453,119 @@ body.nav-open .navbar {
 .testimonial-slide.active{
   position:relative;opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto;
 }
-.testimonial-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.testimonial-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;width:100%;}
+
+/* Stack line */
+.stack-line{
+  position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:22px;
+}
+.stack-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-mute);margin-right:2px;font-weight:600;
+}
+.chip{
+  display:inline-flex;align-items:center;padding:5px 11px;border-radius:8px;font-family:var(--mono);font-size:12.5px;font-weight:500;border:1px solid var(--line);color:var(--text-soft);background:var(--surface);white-space:nowrap;
+}
+.chip.out{
+  text-decoration:line-through;text-decoration-color:var(--text-mute);text-decoration-thickness:1.5px;color:var(--text-mute);
+}
+.arrow{
+  color:var(--text-mute);font-size:13px;padding:0 2px;
+}
+.chip.in{
+  background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600;
+}
+
+/* Quote */
 .testimonial-hero-quote{
+  position:relative;z-index:1;
   font-family:var(--display);
   font-size:clamp(1.15rem, 2.2vw, 1.45rem);
-  line-height:1.58;
+  line-height:1.55;
   color:var(--text);
-  font-weight:400;
-  max-width:740px;
-  margin:0 auto 24px;
-  letter-spacing:-0.015em;
+  font-weight:500;
+  margin:0 0 36px;
+  letter-spacing:-0.008em;
 }
-.quote-highlight{
-  color:var(--primary);
+.quote-highlight, .testimonial-hero-quote mark{
+  background:none;
+  color:var(--primary-dark);
   font-weight:600;
+  padding:0 2px;
+  background-image:linear-gradient(var(--primary-tint), var(--primary-tint));
+  background-repeat:no-repeat;
+  background-size:100% 45%;
+  background-position:0 88%;
+  border-radius:3px;
 }
-.testimonial-hero-author{
-  font-size:0.92rem;
-  color:var(--text-soft);
-  display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
-}
-.testimonial-hero-author strong{color:var(--text);font-weight:700;}
-.testimonial-hero-author span{color:var(--text-mute);font-weight:400;}
 
+/* Attribution row */
+.testimonial-hero-attribution{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding-top:24px;border-top:1px solid var(--line);
+  flex-wrap:wrap;width:100%;
+}
+.testimonial-hero-attribution .who{
+  display:flex;align-items:center;gap:14px;
+}
+.testimonial-avatar{
+  width:46px;height:46px;border-radius:50%;
+  overflow:hidden;flex-shrink:0;
+  border:2px solid var(--primary-tint);
+  box-shadow:0 2px 8px rgba(14,20,32,0.08);
+}
+.testimonial-avatar img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;
+}
+.who-text .name{
+  font-weight:700;font-size:15px;color:var(--text);line-height:1.3;
+}
+.who-text .role{
+  font-size:13px;color:var(--text-mute);margin-top:2px;
+}
+.testimonial-metric{
+  display:flex;align-items:baseline;gap:6px;padding:8px 14px;border-radius:12px;background:var(--primary-tint);border:1px solid rgba(54,84,255,0.12);
+}
+.testimonial-metric .metric-num{
+  font-family:var(--display);font-weight:700;font-size:17px;color:var(--primary-dark);
+}
+.testimonial-metric .metric-label{
+  font-size:11.5px;color:var(--primary-dark);opacity:0.85;font-weight:500;
+}
+
+/* Avatar Nav / Switcher */
 .testimonial-avatar-nav{
   display:flex;align-items:center;justify-content:center;gap:12px;
-  margin-top:32px;padding-top:24px;border-top:1px dashed var(--line-strong);
-  position:relative;z-index:10;pointer-events:auto;
+  margin-top:28px;
+  position:relative;z-index:10;pointer-events:auto;flex-wrap:wrap;
 }
 .avatar-nav-item{
-  width:44px;height:44px;border-radius:14px;
-  background:var(--surface);border:1px solid var(--line-strong);
-  color:var(--text-mute);font-family:var(--mono);font-weight:700;font-size:0.85rem;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--line);
   cursor:pointer;transition:all 0.25s var(--ease);
-  opacity:0.5;transform:scale(0.92);filter:grayscale(100%);
+  opacity:0.55;transform:scale(0.92);filter:grayscale(100%);
   display:flex;align-items:center;justify-content:center;
-  position:relative;z-index:10;pointer-events:auto;user-select:none;
+  overflow:hidden;padding:0;user-select:none;
+}
+.avatar-nav-item img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;
 }
 .avatar-nav-item:hover{
-  opacity:0.85;transform:scale(1);filter:grayscale(0%);
-  border-color:var(--primary);color:var(--primary);
+  opacity:0.9;transform:scale(1);filter:grayscale(0%);
+  border-color:var(--primary);
 }
 .avatar-nav-item.active{
-  opacity:1;transform:scale(1.1);filter:grayscale(0%);
+  opacity:1;transform:scale(1.08);filter:grayscale(0%);
   border-color:var(--primary);background:var(--primary-tint);
-  color:var(--primary-dark);box-shadow:0 4px 14px var(--primary-glow);
+  box-shadow:0 0 0 3px var(--primary-tint), 0 4px 14px var(--primary-glow);
 }
 @media (max-width:640px){
-  .testimonial-hero-card{padding:36px 22px 26px;}
-  .quote-mark-bg{left:16px;top:10px;font-size:4rem;}
-  .testimonial-hero-quote{font-size:1.05rem;}
-  .avatar-nav-item{width:38px;height:38px;font-size:0.78rem;}
+  .testimonial-hero-card{padding:40px 22px 26px;}
+  .quote-mark-bg{left:16px;top:12px;font-size:4.5rem;}
+  .testimonial-hero-quote{font-size:1.05rem;margin-bottom:24px;}
+  .avatar-nav-item{width:40px;height:40px;}
+  .testimonial-avatar{width:40px;height:40px;}
+  .testimonial-hero-attribution{align-items:flex-start;}
 }
 
 /* ============================================================
@@ -1694,7 +1756,7 @@ body.nav-open .navbar {
   gap: 8px;
   font-family: var(--mono, "Geist Mono", monospace);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--accent, #4C6FA5);
   background: var(--accent-soft, #EDF1F8);
   border: 1px solid var(--accent-soft-border, #D7E1F0);
@@ -4180,5 +4242,483 @@ body.nav-open .navbar {
     flex-direction: column;
   }
 }
+
+/* ==========================================================================
+   EIDONCORE CLEAN 2-TONE DESIGN SYSTEM:
+   Alternating Pure White & Refined Shade of White + Micro-Animations
+   ========================================================================== */
+
+/* --- Micro-Animation Keyframes --- */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-120%) rotate(25deg); opacity: 0; }
+  20% { opacity: 0.75; }
+  80% { opacity: 0.75; }
+  100% { transform: translateX(380%) rotate(25deg); opacity: 0; }
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(0.85); opacity: 0.9; box-shadow: 0 0 0 0 rgba(47, 158, 150, 0.6); }
+  70% { transform: scale(1.15); opacity: 0.15; box-shadow: 0 0 0 10px rgba(47, 158, 150, 0); }
+  100% { transform: scale(0.85); opacity: 0; box-shadow: 0 0 0 0 rgba(47, 158, 150, 0); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+/* --- Global Interactive Elements & Buttons --- */
+.btn-primary, .btn-pill.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3f72af 0%, #2c568b 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(63, 114, 175, 0.35), 0 1px 2px rgba(0,0,0,0.06);
+  transition: transform 0.22s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.22s cubic-bezier(0.16, 0.8, 0.24, 1), background 0.2s ease;
+}
+
+.btn-primary::after, .btn-pill.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: rotate(25deg);
+  transition: transform 0.65s cubic-bezier(0.16, 0.8, 0.24, 1);
+  pointer-events: none;
+}
+
+.btn-primary:hover::after, .btn-pill.btn-primary:hover::after {
+  transform: translateX(380%) rotate(25deg);
+}
+
+.btn-primary:hover, .btn-pill.btn-primary:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 8px 22px -4px rgba(63, 114, 175, 0.5);
+}
+
+.btn-outline, .btn-pill.btn-outline {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #dbe2ea;
+  color: #10182b;
+  transition: transform 0.22s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.2s ease, box-shadow 0.22s ease, background 0.2s ease;
+}
+
+.btn-outline:hover, .btn-pill.btn-outline:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #3f72af;
+  color: #2c568b;
+  box-shadow: 0 4px 14px rgba(63, 114, 175, 0.15);
+}
+
+/* Eyebrow Unified Brand Styling (Regular Weight Tablet/Pill) */
+.eyebrow, .cta-eyebrow, .loop-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 12px;
+  font-weight: 400 !important;
+  color: #3f72af !important;
+  background: #edf2f9 !important;
+  border: 1px solid #d7e1f0 !important;
+  padding: 5px 13px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 3px rgba(16, 26, 43, 0.04);
+  transition: transform 0.2s ease;
+}
+.eyebrow::before, .cta-eyebrow::before, .loop-eyebrow::before {
+  content: '' !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #00adb5 !important;
+  display: inline-block !important;
+}
+.eyebrow:hover, .cta-eyebrow:hover, .loop-eyebrow:hover {
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   2-TONE SECTION CADENCE
+   ========================================================================== */
+
+/* 1. HERO SECTION — Tone B: Shade of White (#f5f7fb) */
+.hero {
+  background: #f5f7fb !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08);
+}
+.hero .panel {
+  background: #0d1a2b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px -15px rgba(13, 26, 43, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero .panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 70px -15px rgba(13, 26, 43, 0.55);
+}
+.hero .live-dot {
+  position: relative;
+}
+.hero .live-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: inherit;
+  animation: radarPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* 2. TRUST BENTO GRID — Tone A: Pure White (#ffffff) */
+.trust-bento {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.trust-bento .kicker {
+  color: #7c8797;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.trust-bento .card {
+  background: #f8fafc !important;
+  border: 1px solid rgba(16, 26, 43, 0.09) !important;
+  box-shadow: 0 2px 8px rgba(16, 26, 43, 0.03) !important;
+  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+}
+.trust-bento .card:hover {
+  transform: translateY(-3px) !important;
+  background: #ffffff !important;
+  border-color: rgba(63, 114, 175, 0.35) !important;
+  box-shadow: 0 12px 28px -8px rgba(16, 26, 43, 0.1) !important;
+}
+.trust-bento .tile-main {
+  background: #f8fafc !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+}
+.trust-bento .tm-logos span {
+  background: #ffffff;
+  border: 1px solid rgba(16, 26, 43, 0.1);
+  padding: 6px 14px;
+  border-radius: 100px;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.trust-bento .tm-logos span:hover {
+  transform: translateY(-2px);
+  border-color: #3f72af;
+  color: #101a2c;
+}
+
+/* 3. FEATURES & MODULES GRID — Tone B: Shade of White (#f5f7fb) */
+.features-grid-section {
+  background: #f5f7fb !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08);
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08);
+}
+.module-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.09) !important;
+  box-shadow: 0 2px 10px rgba(16, 26, 43, 0.04);
+  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+}
+.module-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(63, 114, 175, 0.35) !important;
+  box-shadow: 0 16px 36px -12px rgba(16, 26, 43, 0.12) !important;
+}
+.module-card .module-icon-tile {
+  transition: transform 0.22s ease;
+}
+.module-card:hover .module-icon-tile {
+  transform: scale(1.08);
+}
+.module-card.more {
+  background: #0d1a2b !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.module-card.more:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 40px -15px rgba(13, 26, 43, 0.4) !important;
+}
+
+/* 4. HOW IT WORKS — Tone A: Pure White (#ffffff) */
+#how-it-works {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+#how-it-works .hw-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.22s ease;
+}
+#how-it-works .hw-tab:hover {
+  background: #f5f7fb;
+}
+#how-it-works .hw-tab.active {
+  background: #f5f7fb !important;
+  border-color: rgba(16, 26, 43, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(16, 26, 43, 0.05) !important;
+}
+#how-it-works .hw-device {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.12) !important;
+  box-shadow: 0 16px 40px -15px rgba(16, 26, 43, 0.1) !important;
+}
+
+/* 5. WORKFLOW LOOP — Cohesive Dark Accent Canvas (#0b1a2b) */
+#workflow-loop {
+  background: #0b1a2b !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+#workflow-loop .node-btn {
+  background: #122542;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+}
+#workflow-loop .node-btn:hover {
+  border-color: #00adb5 !important;
+  background: #182d4d !important;
+}
+
+/* 6. DASHBOARD PREVIEW — Tone A: Pure White (#ffffff) */
+.home-tabs-section {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+  color: #101a2c !important;
+}
+.home-tabs-section h2 {
+  color: #101a2c !important;
+}
+.home-tabs-section .sub {
+  color: #5b6472 !important;
+}
+.home-tabs-section .tabs {
+  background: #f5f7fb !important;
+  border: 1px solid rgba(16, 26, 43, 0.09) !important;
+}
+.home-tabs-section .tab {
+  color: #5b6472 !important;
+  transition: all 0.2s ease !important;
+}
+.home-tabs-section .tab:hover:not(.active) {
+  color: #101a2c !important;
+}
+.home-tabs-section .tab.active {
+  background: #ffffff !important;
+  color: #3f72af !important;
+  border-color: rgba(16, 26, 43, 0.09) !important;
+  box-shadow: 0 2px 8px rgba(16, 26, 43, 0.06) !important;
+}
+.home-tabs-section .device {
+  background: #0d1a2b !important;
+  border: 1px solid rgba(16, 26, 43, 0.14) !important;
+  box-shadow: 0 28px 64px -20px rgba(16, 26, 43, 0.2) !important;
+}
+
+/* 7. WHY EIDONCORE — Tone B: Shade of White (#f5f7fb) */
+.why-eidoncore-section {
+  background: #f5f7fb !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.stack-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  border-top: 3px solid var(--accent, #3f72af) !important;
+  box-shadow: 0 -3px 12px rgba(16, 26, 43, 0.03), 0 8px 24px -8px rgba(16, 26, 43, 0.07) !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+.stack-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 -4px 16px rgba(16, 26, 43, 0.05), 0 16px 36px -10px rgba(16, 26, 43, 0.1) !important;
+}
+.stack-card .diff-num {
+  color: var(--accent, #3f72af) !important;
+  font-family: var(--mono, "JetBrains Mono", monospace) !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+}
+
+/* 8. REPLACE YOUR STACK — Tone A: Pure White (#ffffff) */
+.compare-section {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.compare-wrap {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  box-shadow: 0 8px 28px -10px rgba(16, 26, 43, 0.06) !important;
+}
+.compare-table th {
+  background: #f5f7fb !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.09) !important;
+}
+.compare-table tr:hover td {
+  background: #f8fafc;
+}
+.compare-table td.win {
+  color: #1e9e6b !important;
+  font-weight: 600;
+}
+.compare-table td.win span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e2f7ed;
+  color: #1e9e6b;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+/* 9. PRICING SECTION — Tone B: Shade of White (#f5f7fb) */
+.pricing-section, #pricing {
+  background: #f5f7fb !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.price-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  box-shadow: 0 4px 16px -6px rgba(16, 26, 43, 0.05);
+  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+}
+.price-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(63, 114, 175, 0.35) !important;
+  box-shadow: 0 16px 36px -12px rgba(16, 26, 43, 0.12) !important;
+}
+.price-card.featured {
+  border: 2px solid #3f72af !important;
+  box-shadow: 0 14px 36px -10px rgba(63, 114, 175, 0.22) !important;
+}
+.price-card.featured:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 48px -12px rgba(63, 114, 175, 0.3) !important;
+}
+.popular-badge {
+  background: #3f72af !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(63, 114, 175, 0.3) !important;
+}
+
+/* 10. TESTIMONIALS CAROUSEL — Tone A: Pure White (#ffffff) */
+.testimonials-section, #testimonials {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.testimonial-hero-card {
+  background: #f8fafc !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  box-shadow: 0 10px 30px -12px rgba(16, 26, 43, 0.06) !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+.testimonial-hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -12px rgba(16, 26, 43, 0.1) !important;
+}
+.quote-mark-bg {
+  color: #3f72af !important;
+  opacity: 0.08 !important;
+}
+.testimonial-hero-quote .quote-highlight {
+  color: #3f72af;
+  font-weight: 600;
+}
+.avatar-nav-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.12) !important;
+  transition: all 0.22s ease !important;
+}
+.avatar-nav-item.active {
+  background: #edf2f9 !important;
+  border-color: #3f72af !important;
+  color: #2c568b !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(63, 114, 175, 0.2) !important;
+}
+
+/* 11. FAQ ACCORDIONS — Tone B: Shade of White (#f5f7fb) */
+.faq-section, #faq {
+  background: #f5f7fb !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.faq-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 26, 43, 0.09) !important;
+  box-shadow: 0 1px 4px rgba(16, 26, 43, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+.faq-item:hover {
+  border-color: rgba(63, 114, 175, 0.3) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -4px rgba(16, 26, 43, 0.06) !important;
+}
+.faq-item.open {
+  border-color: rgba(63, 114, 175, 0.35) !important;
+  box-shadow: 0 8px 20px -6px rgba(16, 26, 43, 0.08) !important;
+}
+.faq-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #edf2f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3f72af !important;
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease !important;
+}
+.faq-item.open .faq-icon {
+  background: #3f72af;
+  color: #ffffff !important;
+  transform: rotate(45deg);
+}
+
+/* 12. PRE-FOOTER — Tone A: Pure White (#ffffff) with Dark Navy CTA Banner */
+.pre-footer-wrap {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.newsletter {
+  background: #f8fafc !important;
+  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  box-shadow: 0 8px 28px -10px rgba(16, 26, 43, 0.05) !important;
+}
+.nl-input {
+  background: #ffffff !important;
+  border: 1px solid #dbe2ea !important;
+}
+.nl-input:focus {
+  border-color: #3f72af !important;
+  box-shadow: 0 0 0 3px rgba(63, 114, 175, 0.15) !important;
+}
+.cta {
+  background: #0b1a2b !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px -15px rgba(11, 26, 43, 0.5) !important;
+}
+
+
 
 
