@@ -6,7 +6,7 @@ slug: "messaging"
 
 # Messaging
 
-Real-time chat for your agency team and client contacts. Communicate within project channels, organization-wide channels, and direct messages — all built into your workspace.
+Real-time chat for your agency team and client contacts. Communicate within project channels, organization-wide channels, and direct messages - all built into your workspace.
 
 ---
 
@@ -20,7 +20,7 @@ Messaging is organized into three types of channels:
 | **Organization Channel** | Automatically created for each client organization | All organization members |
 | **Direct Message (DM)** | Started by any user | Only the two participants |
 
-Project and organization channels keep their membership in sync — when a member is added or removed from a project, the channel updates automatically.
+Project and organization channels keep their membership in sync - when a member is added or removed from a project, the channel updates automatically.
 
 ---
 
@@ -30,12 +30,12 @@ Project and organization channels keep their membership in sync — when a membe
 
 Type your message in the input area at the bottom of the chat view. Messages support:
 
-- **Rich text** — formatting for emphasis
-- **File attachments** — drag and drop or click to attach files
-- **@Mentions** — type `@` followed by a team member's name to mention them
-- **Replies** — click the reply button on any message to start a thread
+- **Rich text** - formatting for emphasis
+- **File attachments** - drag and drop or click to attach files
+- **@Mentions** - type `@` followed by a team member's name to mention them
+- **Replies** - click the reply button on any message to start a thread
 
-Messages appear **instantly** in the chat (optimistic send) — the message is shown immediately while it saves in the background.
+Messages appear **instantly** in the chat (optimistic send) - the message is shown immediately while it saves in the background.
 
 Messaging is rate-limited to **10 messages per minute** per user to prevent spam.
 
@@ -48,7 +48,7 @@ You can edit your own messages within a **5-minute window** after sending. After
 - You can delete your own messages at any time
 - Admins and Owners can delete any message
 
-Deleted messages are soft-deleted — they disappear from the chat but are retained briefly for audit purposes.
+Deleted messages are soft-deleted - they disappear from the chat but are retained briefly for audit purposes.
 
 ---
 
@@ -56,7 +56,7 @@ Deleted messages are soft-deleted — they disappear from the chat but are retai
 
 React to any message with an emoji. Click the button that appears when you hover over a message to open the emoji picker.
 
-- **One reaction per person per message** — selecting a new emoji replaces your previous reaction
+- **One reaction per person per message** - selecting a new emoji replaces your previous reaction
 - Click your existing reaction again to remove it
 - The message author is notified when someone reacts to their message
 
@@ -70,7 +70,7 @@ When someone is composing a message in the same channel, you'll see a **"{Name} 
 
 ## Read Receipts
 
-Sent messages show **read receipts** — small avatar circles at the bottom-right corner of your messages, similar to Facebook Messenger. These show which channel members have read up to that message.
+Sent messages show **read receipts** - small avatar circles at the bottom-right corner of your messages, similar to Facebook Messenger. These show which channel members have read up to that message.
 
 Hover over the avatars to see "Seen by {Name}".
 
@@ -94,7 +94,7 @@ All indicators update automatically in the background.
 
 In project and organization channels, you can mark messages as **internal**:
 
-- Internal messages are visible **only to agency staff** — client contacts in the channel won't see them
+- Internal messages are visible **only to agency staff** - client contacts in the channel won't see them
 - This lets you discuss work privately within a shared channel
 - Internal messages are not available in Direct Messages
 
@@ -110,7 +110,7 @@ Start a private conversation with any workspace member:
 
 DMs are always between exactly two people. Existing DM channels appear in your channel list for quick access.
 
-> **Note:** Client contacts cannot DM other client contacts — DMs are only between agency staff, or between agency staff and client contacts.
+> **Note:** Client contacts cannot DM other client contacts - DMs are only between agency staff, or between agency staff and client contacts.
 
 ---
 
@@ -143,9 +143,9 @@ Mute channels to pause notifications without leaving the conversation:
 - Click the **mute** icon on any channel in the sidebar
 - Choose a mute duration (1 hour, 8 hours, 24 hours, 1 week, or until you unmute)
 - Muted channels won't send you email notifications
-- You can still read messages — you just won't be notified
+- You can still read messages - you just won't be notified
 
-If you send a message in a channel you've muted, the mute is **automatically removed** — since you're actively participating, you'll resume receiving notifications.
+If you send a message in a channel you've muted, the mute is **automatically removed** - since you're actively participating, you'll resume receiving notifications.
 
 > **Note:** Critical notifications (@mentions) may still bypass mute in certain cases.
 
@@ -181,7 +181,7 @@ Click **"⋮ More"** on any message, then select **"Forward"**
 
 Search or browse your channels to select where to send the message
 
-Click the target channel to forward — the message appears with the original sender's attribution
+Click the target channel to forward - the message appears with the original sender's attribution
 
 Forwarded messages show the **original sender's name and timestamp**, so recipients always know where the message came from. If the original message was marked internal, the forwarded message is also sent as internal.
 
@@ -214,7 +214,7 @@ Link previews appear for the first URL in each message. They are fetched from th
 
 ---
 
-## Slash Commands — Entity Mentions
+## Slash Commands - Entity Mentions
 
 Type `/` in the message editor to **search and mention** platform entities directly in your messages:
 
@@ -227,17 +227,17 @@ Type `/` in the message editor to **search and mention** platform entities direc
 
 Entity mentions appear as **color-coded clickable chips** in the message, making it easy to reference and jump to related work items during conversations.
 
-Entity mentions respect your role permissions — you'll only see entities you have access to in the search results.
+Entity mentions respect your role permissions - you'll only see entities you have access to in the search results.
 
 ---
 
 ## Channel Info Drawer
 
-Click the **ⓘ** button in the chat header to open the Channel Info Drawer — a side panel with channel details and tools:
+Click the **ⓘ** button in the chat header to open the Channel Info Drawer - a side panel with channel details and tools:
 
 | Section | What It Contains |
 |---------|-----------------|
-| **Search** | Search messages within the channel — click a result to jump to it with a highlight animation |
+| **Search** | Search messages within the channel - click a result to jump to it with a highlight animation |
 | **Pinned Messages** | All pinned messages with click-to-scroll |
 | **Members** | Collapsible list of all channel members |
 | **Personal Notes** | Private notes visible only to you (see below) |
@@ -254,7 +254,7 @@ Keep private, per-channel notes that only you can see. Perfect for tracking cont
 - Notes **auto-save** as you type (800ms debounce)
 - Click **"Clear"** to delete your notes (with confirmation)
 
-Personal notes are stored per-channel and per-user — no one else can see them.
+Personal notes are stored per-channel and per-user - no one else can see them.
 
 ---
 

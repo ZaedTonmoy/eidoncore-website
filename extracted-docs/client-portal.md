@@ -6,7 +6,7 @@ slug: "client-portal"
 
 # Client Portal
 
-The client portal gives your clients a dedicated space to view their projects, tasks, invoices, services, and files — all branded with your agency's identity.
+The client portal gives your clients a dedicated space to view their projects, tasks, invoices, services, and files - all branded with your agency's identity.
 
 ---
 
@@ -36,10 +36,10 @@ Clients access the portal via your workspace URL (`yourslug.eidoncore.com`) or y
 
 After logging in, clients see a dedicated dashboard showing:
 
-- **Project progress bars** — Visual completion status of each project
-- **Task breakdown** — Tasks grouped by status (To Do, In Progress, Done, etc.)
-- **Recent invoices** — Latest invoices and their payment status
-- **Active services** — Services assigned to their organization
+- **Project progress bars** - Visual completion status of each project
+- **Task breakdown** - Tasks grouped by status (To Do, In Progress, Done, etc.)
+- **Recent invoices** - Latest invoices and their payment status
+- **Active services** - Services assigned to their organization
 
 If you've configured a **welcome message** in portal branding, it appears as a banner at the top.
 
@@ -79,17 +79,17 @@ Clients can view all projects assigned to their organization:
 - Uploaded files and documents
 - Comments and discussions
 
-Organization Owners can **add comments** on projects — these are always visible to the agency team (never internal-only).
+Organization Owners can **add comments** on projects - these are always visible to the agency team (never internal-only).
 
 ### Messages
 
 Clients can participate in real-time messaging:
 
-- **Organization channel** — A shared channel for all organization members to communicate with the agency
-- **Project channels** — Chat within each project they're a member of
-- **Direct Messages** — Private conversations with agency staff members
+- **Organization channel** - A shared channel for all organization members to communicate with the agency
+- **Project channels** - Chat within each project they're a member of
+- **Direct Messages** - Private conversations with agency staff members
 
-Clients can see standard messages but **not internal messages** — agency staff can discuss work privately within shared channels.
+Clients can see standard messages but **not internal messages** - agency staff can discuss work privately within shared channels.
 
 Internal messages are never visible to client contacts. Use them for private team discussions within shared project channels.
 
@@ -165,8 +165,8 @@ Clients can browse your service catalog and make purchases directly:
 
 At `/catalog/services`, clients see:
 
-- **My Active Services** — Services they already have, with remaining hours/credits and a link to the project
-- **Available Services** — All published services, organized by category
+- **My Active Services** - Services they already have, with remaining hours/credits and a link to the project
+- **Available Services** - All published services, organized by category
 - **Search and filter** by text, category, or pricing type
 
 ### Making a Purchase
@@ -203,7 +203,7 @@ Your service catalog is also accessible to **visitors who don't have an account*
 5. An account, project, and service assignment are **automatically created after payment**
 6. Visitor can log in immediately to access their new project
 
-Guest checkout creates the full client setup in one step — no pre-registration needed.
+Guest checkout creates the full client setup in one step - no pre-registration needed.
 
 ```mermaid
 graph LR
@@ -241,14 +241,14 @@ If clients have active service subscriptions, they can:
 
 - View their active subscriptions
 - See billing period and renewal dates
-- **Cancel subscriptions** (with a cancellation reason — the agency is notified)
+- **Cancel subscriptions** (with a cancellation reason - the agency is notified)
 
 ### Billing Information
 
 Clients can view their saved payment methods and billing details:
 
-- **Saved cards** — Card brand, last 4 digits, and expiry date
-- **Organization billing fields** — Read-only view of billing email, address, and tax ID
+- **Saved cards** - Card brand, last 4 digits, and expiry date
+- **Organization billing fields** - Read-only view of billing email, address, and tax ID
 - Cards are saved automatically when completing a purchase with the "Save card" option enabled
 
 ---
@@ -276,7 +276,7 @@ Clients receive notifications for events relevant to their organization:
 | Service activated | ✓ | ✓ |
 
 Default notification delivery:
-- **Organization Owner** — Instant delivery
-- **Organization Member** — Daily digest
+- **Organization Owner** - Instant delivery
+- **Organization Member** - Daily digest
 
 > **See also:** [Notifications](../notifications/overview) for full notification details · [Settings](../settings/overview#notification-preferences) for preference management

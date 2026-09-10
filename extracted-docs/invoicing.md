@@ -23,7 +23,7 @@ Navigate to **Invoices** in the sidebar and click **"New Invoice"**.
 | **Project** | Optionally link to a project |
 | **Issue Date** | Date the invoice is created (defaults to today) |
 | **Due Date** | Payment deadline |
-| **Payment Terms** | Terms text (e.g., "Net 30") — selecting terms auto-calculates the due date |
+| **Payment Terms** | Terms text (e.g., "Net 30") - selecting terms auto-calculates the due date |
 | **Currency** | Invoice currency (defaults to your agency's default) |
 | **Notes** | Client-facing notes |
 | **Internal Notes** | Agency-only notes (not visible to clients) |
@@ -61,13 +61,13 @@ Line items support **drag-and-drop reorder** to arrange them in your preferred o
 
 ### Live Preview
 
-As you fill in the invoice form, a **real-time preview** panel shows exactly what the final invoice will look like. The preview uses an **A4 aspect ratio** and updates instantly as you type — including line items, totals, discounts, tax, and your agency branding (logo, accent color, footer).
+As you fill in the invoice form, a **real-time preview** panel shows exactly what the final invoice will look like. The preview uses an **A4 aspect ratio** and updates instantly as you type - including line items, totals, discounts, tax, and your agency branding (logo, accent color, footer).
 
 The same split-panel layout is used for both creating and editing invoices.
 
 ### Frozen Billing Snapshot
 
-When an invoice is sent, the client's billing details (name, email, company, address) are **frozen** onto the invoice. This ensures the invoice always reflects the correct billing info at the time it was issued — even if the client's details are updated later.
+When an invoice is sent, the client's billing details (name, email, company, address) are **frozen** onto the invoice. This ensures the invoice always reflects the correct billing info at the time it was issued - even if the client's details are updated later.
 
 ---
 
@@ -94,7 +94,7 @@ stateDiagram-v2
 
 | Status | Meaning |
 |--------|---------|
-| **Draft** | Still being prepared — only drafts can be deleted |
+| **Draft** | Still being prepared - only drafts can be deleted |
 | **Scheduled** | Set to send automatically on a future date |
 | **Sent** | Delivered to the client |
 | **Viewed** | The client has opened the invoice (auto-detected) |
@@ -105,11 +105,11 @@ stateDiagram-v2
 | **Void** | Cancelled / invalidated |
 | **Refunded** | Payment has been fully refunded |
 
-When a client portal user views an invoice, the status automatically transitions from **Sent** to **Viewed** — the invoice creator and agency owners are notified.
+When a client portal user views an invoice, the status automatically transitions from **Sent** to **Viewed** - the invoice creator and agency owners are notified.
 
 ### Role-Aware Status Labels
 
-Client portal users see "**Received**" instead of "Sent" for invoices — making the label contextual to their perspective. All other statuses display the same label for both sides.
+Client portal users see "**Received**" instead of "Sent" for invoices - making the label contextual to their perspective. All other statuses display the same label for both sides.
 
 ---
 
@@ -118,7 +118,7 @@ Client portal users see "**Received**" instead of "Sent" for invoices — making
 Once an invoice is ready, click **"Send"** to deliver it to the client's contacts. You can also:
 
 - **Schedule** an invoice for future delivery
-- **Share via public link** — generate a shareable URL for clients to view and pay the invoice without logging in
+- **Share via public link** - generate a shareable URL for clients to view and pay the invoice without logging in
 
 When an invoice is sent:
 - All contacts linked to the client organization receive a notification
@@ -127,7 +127,7 @@ When an invoice is sent:
 
 ### Public Payment Link
 
-Each invoice gets a unique public link that clients can use to view the invoice and pay via Stripe — without needing a portal login. The public page displays:
+Each invoice gets a unique public link that clients can use to view the invoice and pay via Stripe - without needing a portal login. The public page displays:
 
 - Full invoice details with line items and totals
 - Your agency logo and branding
@@ -146,7 +146,7 @@ Allow clients to pay a portion of an invoice via Stripe:
 4. Each partial payment transitions the invoice to **Partially Paid**
 5. Recurring invoice templates inherit these settings automatically
 
-Agency-side "Record Payment" allows any positive amount regardless of the partial payment toggle — the minimum percentage only applies to client-side Stripe payments.
+Agency-side "Record Payment" allows any positive amount regardless of the partial payment toggle - the minimum percentage only applies to client-side Stripe payments.
 
 ---
 
@@ -170,16 +170,16 @@ Linked time entries are automatically displayed on the invoice detail page. Dele
 
 ## Edit Lock
 
-Once an invoice is **fully paid**, it becomes read-only — you cannot edit invoice details or line items. Internal notes can still be updated. To modify a paid invoice, issue a credit note or refund instead.
+Once an invoice is **fully paid**, it becomes read-only - you cannot edit invoice details or line items. Internal notes can still be updated. To modify a paid invoice, issue a credit note or refund instead.
 
 ---
 
 ## Duplicate & Delete
 
 - **Duplicate** any invoice to create a copy with a new invoice number
-- **Delete** is only available for Draft invoices — once sent, invoices must be voided instead
-- **Void** requires a reason (e.g., "Duplicate", "Issued in error") — tracked in the invoice history
-- **Bad Debt** also requires a reason — marks the invoice as uncollectable for reporting purposes
+- **Delete** is only available for Draft invoices - once sent, invoices must be voided instead
+- **Void** requires a reason (e.g., "Duplicate", "Issued in error") - tracked in the invoice history
+- **Bad Debt** also requires a reason - marks the invoice as uncollectable for reporting purposes
 
 ---
 
@@ -215,13 +215,13 @@ Track financial metrics and customize invoice appearance.
 
 Invoices are automatically branded with your agency's settings:
 
-- **Invoice logo** — Custom logo or your main logo
-- **Accent color** — Applied to the "INVOICE" label and total amount
-- **Footer note** — Legal footer text
-- **Bank details** — Bank transfer payment details
-- **Payment instructions** — How to pay
-- **Signature** — Optional signature image
-- **Business registration** — Registration or tax ID display
+- **Invoice logo** - Custom logo or your main logo
+- **Accent color** - Applied to the "INVOICE" label and total amount
+- **Footer note** - Legal footer text
+- **Bank details** - Bank transfer payment details
+- **Payment instructions** - How to pay
+- **Signature** - Optional signature image
+- **Business registration** - Registration or tax ID display
 
 ### Print Settings
 
@@ -261,8 +261,8 @@ Control which team members can see specific invoices. By default, invoices are v
 
 Leave comments on invoices for team discussion:
 
-- **Internal comments** — only visible to agency staff, useful for discussing pricing or payment issues
-- **Standard comments** — visible to anyone with access to the invoice
+- **Internal comments** - only visible to agency staff, useful for discussing pricing or payment issues
+- **Standard comments** - visible to anyone with access to the invoice
 - Supports threaded replies, @mentions, and emoji reactions
 - Comments appear in the invoice detail view
 
@@ -302,7 +302,7 @@ The full analytics dashboard is only visible to agency staff with financial acce
 
 An **unpaid invoice count badge** appears on the Invoices sidebar link for client portal users, showing the number of outstanding invoices (Sent, Viewed, Partially Paid, or Overdue).
 
-Use the aging buckets to proactively follow up on overdue invoices before they hit the 90+ day mark — where collection rates drop significantly.
+Use the aging buckets to proactively follow up on overdue invoices before they hit the 90+ day mark - where collection rates drop significantly.
 
 ---
 
@@ -359,7 +359,7 @@ Issue credit notes against invoices when refunds or adjustments are needed:
 
 - Credit notes are numbered automatically (e.g., CN-00001)
 - Each credit note tracks a **remaining balance**
-- Apply credit notes as payment to any invoice — the credit's balance is reduced and the invoice's paid amount is increased
+- Apply credit notes as payment to any invoice - the credit's balance is reduced and the invoice's paid amount is increased
 - Credits can be applied in full or partially
 
 ### Issuing a Credit Note
@@ -406,7 +406,7 @@ The invoice detail page shows action buttons based on your role and the invoice'
 | **Void** | Non-terminal, not paid | Void Invoices |
 | **Delete** | Draft only | Delete Invoices |
 
-Buttons that you don't have permission for are hidden — you'll never see a button that would fail when clicked.
+Buttons that you don't have permission for are hidden - you'll never see a button that would fail when clicked.
 
 ---
 
@@ -454,7 +454,7 @@ Each recurring template has a detail page showing:
 
 Recurring templates can be activated, paused, or deleted at any time. Force-generate an invoice from any template at any time.
 
-The Recurring tab is only visible to agency staff — client portal users do not see it.
+The Recurring tab is only visible to agency staff - client portal users do not see it.
 
 ---
 
@@ -486,6 +486,6 @@ For invoices linked to hourly or usage-based services, the invoice detail page s
 | **Regular Rate** | The regular hourly rate at the time of logging |
 | **Overtime Rate** | The overtime rate at the time of logging |
 
-Rates are **snapshotted** when time is logged — the invoice reflects the exact rate that applied at that moment, not the current service rate. Written-off entries (agency comp) are excluded from the breakdown.
+Rates are **snapshotted** when time is logged - the invoice reflects the exact rate that applied at that moment, not the current service rate. Written-off entries (agency comp) are excluded from the breakdown.
 
 ---

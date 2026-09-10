@@ -18,9 +18,9 @@ Navigate to **Team** in the sidebar and click **"Invite Member"**.
 
 Enter the team member's **email address** and **name**
 
-Choose a **role** (Owner, Admin, Project Manager, Accountant, or Team Member — or a custom role)
+Choose a **role** (Owner, Admin, Project Manager, Accountant, or Team Member - or a custom role)
 
-Click **Send Invite** — the invited user receives a branded email with a link to set their password and join your workspace
+Click **Send Invite** - the invited user receives a branded email with a link to set their password and join your workspace
 
 > If the invited user already has an account with another workspace, they can log in with their existing password.
 
@@ -49,7 +49,7 @@ These are displayed on member profiles and can be used for filtering on the team
 | Role | Best For | Access Level |
 |------|----------|-------------|
 | **Owner** | Agency founder / principal | Full access to everything including billing, plans, and team management |
-| **Admin** | Operations managers | Full operational access — settings, branding, team, projects, invoices |
+| **Admin** | Operations managers | Full operational access - settings, branding, team, projects, invoices |
 | **Project Manager** | Client-facing project leads | Manages projects, tasks, team assignments, client organizations |
 | **Accountant** | Finance team | Manages invoices, payments, billing, financial reports |
 | **Team Member** | Individual contributors | Works on assigned tasks, logs time, manages their own work |
@@ -131,7 +131,7 @@ Administrators can change a member's role at any time. The affected user receive
 Remove team members who no longer need access:
 
 - The removed member and all agency owners are notified
-- Agency owners cannot be removed — they must transfer ownership first
+- Agency owners cannot be removed - they must transfer ownership first
 
 ### Account Deletion
 
@@ -153,7 +153,7 @@ The workload view gives managers visibility into how tasks are distributed:
 |---------|-----------|
 | **Normal** | Manageable task load |
 | **High** | Approaching capacity |
-| **Overloaded** | 10 or more active tasks — flagged with a visual indicator |
+| **Overloaded** | 10 or more active tasks - flagged with a visual indicator |
 
 - View completion rate percentages per team member
 - Track overdue tasks per member
@@ -167,13 +167,13 @@ Click on any team member to see their detailed profile:
 | Section | What It Shows |
 |---------|--------------|
 | **Identity** | Name, email, avatar, role, department, employment type |
-| **Status** | Active, Invited, or Suspended — with join date and last active |
+| **Status** | Active, Invited, or Suspended - with join date and last active |
 | **Work Metrics** | Total tasks assigned, completed, overdue, and completion rate |
 | **Billable Hours** | Total time logged across all projects |
 | **Active Projects** | Projects where the member is currently assigned |
 | **Recent Activity** | Last 20 actions taken by this member |
 
-If a user belongs to multiple workspaces, they can set a different display name and avatar for each. This ensures data isolation between workspaces — e.g., a freelancer working with two agencies sees a separate identity in each.
+If a user belongs to multiple workspaces, they can set a different display name and avatar for each. This ensures data isolation between workspaces - e.g., a freelancer working with two agencies sees a separate identity in each.
 
 ### Member Status Lifecycle
 
@@ -181,7 +181,7 @@ If a user belongs to multiple workspaces, they can set a different display name 
 |--------|---------|
 | **Invited** | Invite sent, waiting for the member to log in |
 | **Active** | Member has logged in and is actively working |
-| **Suspended** | Temporarily deactivated — can be re-activated |
+| **Suspended** | Temporarily deactivated - can be re-activated |
 
 > Suspended members cannot log in but their data (tasks, time entries, etc.) is preserved.
 

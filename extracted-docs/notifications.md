@@ -14,10 +14,10 @@ Stay informed about what's happening in your workspace through bell notification
 
 The bell icon () in the top-right of every page shows your notification count. Click it to open the notification panel.
 
-- **Unread badge** — Shows the number of unread notifications
-- **Mark as read** — Click a notification to mark it as read
-- **Mark all read** — Clear all unread items at once
-- **Navigate** — Click a notification to jump directly to the relevant task, invoice, project, or other item
+- **Unread badge** - Shows the number of unread notifications
+- **Mark as read** - Click a notification to mark it as read
+- **Mark all read** - Clear all unread items at once
+- **Navigate** - Click a notification to jump directly to the relevant task, invoice, project, or other item
 
 ---
 
@@ -63,8 +63,8 @@ Notifications are categorized by priority to help you focus on what matters:
 
 | Priority | Meaning | Behavior |
 |----------|---------|----------|
-| ● **Critical (P1)** | Financial loss, system failure, operational breakdown | Always instant — bypasses digest and quiet hours |
-| ● **Risk (P2)** | Trending toward a problem — needs attention soon | Instant for agency staff, respects quiet hours for clients |
+| ● **Critical (P1)** | Financial loss, system failure, operational breakdown | Always instant - bypasses digest and quiet hours |
+| ● **Risk (P2)** | Trending toward a problem - needs attention soon | Instant for agency staff, respects quiet hours for clients |
 | ● **Action Required (P3)** | You need to do something specific | Normal delivery, respects digest settings |
 | ○ **Informational (P4)** | Lifecycle updates and context | Collapsible, digestable, low visual weight |
 
@@ -128,7 +128,7 @@ Notifications are grouped into categories that you can manage individually:
 | **Plan Updates** | Subscription plan changes (trial ending, payment issues) |
 | **Chat & Messaging** | @mentions in chat, replies to your messages, reactions to your messages |
 
-Not every role sees every category — only relevant categories appear in your settings.
+Not every role sees every category - only relevant categories appear in your settings.
 
 ---
 
@@ -152,7 +152,7 @@ Set a quiet period when non-critical notifications won't be delivered via email:
 
 - Configure **start time** and **end time** in your notification settings
 - Critical events (P1) **always** bypass quiet hours
-- Bell notifications are still stored — you'll see them when you log in
+- Bell notifications are still stored - you'll see them when you log in
 
 ---
 
@@ -202,7 +202,7 @@ graph LR
 
 ## Slack Integration
 
-Send notifications to Slack channels via incoming webhooks. Slack notifications are delivered in addition to bell and email notifications — keeping your team informed without leaving Slack.
+Send notifications to Slack channels via incoming webhooks. Slack notifications are delivered in addition to bell and email notifications - keeping your team informed without leaving Slack.
 
 ### Basic Setup
 
@@ -218,9 +218,9 @@ Click **"Send Test"** to verify your webhook is working
 
 Slack notifications use **Block Kit** formatting with:
 
-- **Priority-colored sidebar** — Red (critical), Orange (important), Blue (standard), Grey (info)
-- **Emoji prefix** — 🚨 Critical, ⚠️ Important, 🔔 Standard, 📋 Info
-- **Deep link button** — "View in EidonCore" links directly to the relevant page
+- **Priority-colored sidebar** - Red (critical), Orange (important), Blue (standard), Grey (info)
+- **Emoji prefix** - 🚨 Critical, ⚠️ Important, 🔔 Standard, 📋 Info
+- **Deep link button** - "View in EidonCore" links directly to the relevant page
 
 ### Multi-Channel Routing (Pro+)
 
@@ -257,7 +257,7 @@ Configure digests in **Settings → Agency → Integrations → Slack** under th
 
 ### Automation Action
 
-The automation engine supports **Send Slack Message** as an action type. When an automation trigger fires, it can send a custom Slack message to your configured channel — with support for variable substitution in the title and message body.
+The automation engine supports **Send Slack Message** as an action type. When an automation trigger fires, it can send a custom Slack message to your configured channel - with support for variable substitution in the title and message body.
 
 **Plan availability:** Basic Slack webhook integration is available on all plans. Multi-channel routing and executive digests require a **Pro** plan or higher.
 
@@ -267,7 +267,7 @@ The automation engine supports **Send Slack Message** as an action type. When an
 
 ## Changelog Notifications
 
-When a new platform version is released, you'll see a changelog notification in your bell. These are informational and can be dismissed — they won't reappear after 7 days.
+When a new platform version is released, you'll see a changelog notification in your bell. These are informational and can be dismissed - they won't reappear after 7 days.
 
 ---
 
@@ -297,14 +297,14 @@ Enable browser push notifications to receive real-time alerts even when the plat
 2. Allow browser push notification permissions when prompted
 3. Push notifications will appear as native system notifications
 
-Push notifications work alongside in-app bell notifications — they're not a replacement. Both can be enabled simultaneously.
+Push notifications work alongside in-app bell notifications - they're not a replacement. Both can be enabled simultaneously.
 
 ### PWA Install
 
 The platform can be installed as a **Progressive Web App (PWA)** on desktop and mobile for a native app experience:
 
-- **Desktop** — Use your browser's "Install App" option (appears in the address bar)
-- **Mobile** — Use "Add to Home Screen" from your browser's menu
+- **Desktop** - Use your browser's "Install App" option (appears in the address bar)
+- **Mobile** - Use "Add to Home Screen" from your browser's menu
 
 The installed PWA supports:
 - Offline caching for recently viewed pages

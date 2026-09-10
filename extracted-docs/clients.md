@@ -28,7 +28,7 @@ Your preferred view is saved automatically and persists across sessions.
 
 ### Stats Bar
 
-The top of the page displays key metrics — click any stat to pre-filter the list to that subset:
+The top of the page displays key metrics - click any stat to pre-filter the list to that subset:
 
 | Stat | What It Shows |
 |------|--------------|
@@ -92,8 +92,8 @@ Press `Escape` to clear your selection.
 
 ### CSV Import & Export
 
-- **Export** — Download your filtered client list as a CSV file
-- **Import** — Upload a CSV file to bulk-create clients with a 4-step wizard: upload → auto-mapping → preview → create. Supports automatic duplicate detection (skip or overwrite)
+- **Export** - Download your filtered client list as a CSV file
+- **Import** - Upload a CSV file to bulk-create clients with a 4-step wizard: upload → auto-mapping → preview → create. Supports automatic duplicate detection (skip or overwrite)
 
 ### Duplicate Detection
 
@@ -104,7 +104,7 @@ When creating a new client, the system automatically checks for similar company 
 Click the **"🏷 Tags"** button to manage your client tags:
 
 - Create tags with a name and color (13 preset colors + custom hex)
-- Rename or delete tags — deleting a tag removes it from all clients
+- Rename or delete tags - deleting a tag removes it from all clients
 - Tags are workspace-scoped (shared across your team)
 
 ### Keyboard Shortcuts
@@ -185,7 +185,7 @@ When a client purchases a service through the catalog, their status is automatic
 
 ## Contacts
 
-Each client organization can have multiple **contacts** — the people you work with at the client company.
+Each client organization can have multiple **contacts** - the people you work with at the client company.
 
 ### Contact Details
 
@@ -220,7 +220,7 @@ Portal users are assigned one of three roles:
 | **Organization Admin** | View projects, tasks, invoices. Can comment, create and edit tasks, manage documents. Cannot manage portal members |
 | **Organization Member** | Project work access. Can create, edit, and assign tasks. Can add comments. Cannot view invoices or reports |
 
-Organization Owners can invite additional portal members from the `/members` page within the portal — new invitees can be assigned the Admin or Member role.
+Organization Owners can invite additional portal members from the `/members` page within the portal - new invitees can be assigned the Admin or Member role.
 
 > **See also:** [Client Portal](../client-portal/overview) for a detailed guide on what clients see and can do
 
@@ -234,7 +234,7 @@ Each client's detail page uses a **collapsible sidebar** for navigation. The sid
 
 | Section | Tab | What It Contains |
 |---------|-----|-----------------| 
-| — | **Overview** | Company details, financial profile, health score, lead pipeline, contract tracking, upsell fields, custom fields — supports inline editing |
+| - | **Overview** | Company details, financial profile, health score, lead pipeline, contract tracking, upsell fields, custom fields - supports inline editing |
 | **Relationships** | **Contacts** | Contact list, portal access management, send invite, relationship map |
 | | **Projects** | Projects assigned to this client |
 | **Financial** | **Invoices** | Invoices billed to this client |
@@ -244,7 +244,7 @@ Each client's detail page uses a **collapsible sidebar** for navigation. The sid
 | | **Documents** | Uploaded files (contracts, NDAs, SOWs, proposals, brand assets) |
 | | **Time & Billing** | Aggregated time entries across all projects, with invoice generation |
 | | **Reports** | Client summary reports |
-| **Admin** | **Activity** | 360° activity timeline — unified feed from all data sources |
+| **Admin** | **Activity** | 360° activity timeline - unified feed from all data sources |
 | | **Settings** | Per-org portal settings and announcements |
 
 ### Organization Switcher
@@ -323,8 +323,8 @@ Four metrics displayed at the top of the tab:
 
 ### Filters
 
-- **Billable Status** — All Entries, Billable Only, or Non-Billable
-- **Project/Ticket** — Filter by specific project or ticket
+- **Billable Status** - All Entries, Billable Only, or Non-Billable
+- **Project/Ticket** - Filter by specific project or ticket
 
 ### Time Entry Table
 
@@ -351,7 +351,7 @@ Select how to organize line items on the invoice.
 
 Enter the hourly rate to apply to all entries.
 
-See a live preview showing entry count, line items, total hours, and estimated total — updates dynamically as you change settings.
+See a live preview showing entry count, line items, total hours, and estimated total - updates dynamically as you change settings.
 
 Click "Generate Draft" to create the invoice and redirect to the invoice detail page.
 
@@ -409,7 +409,7 @@ Each log includes details, outcome, duration, and which contact was involved.
 
 #### Email Logging
 
-Use the dedicated **"📧 Log Email"** button to record email interactions with structured fields — subject, from contact, to contacts (with auto-suggestions), and outcome (Positive, Neutral, or Negative).
+Use the dedicated **"📧 Log Email"** button to record email interactions with structured fields - subject, from contact, to contacts (with auto-suggestions), and outcome (Positive, Neutral, or Negative).
 
 #### Inline Editing
 
@@ -422,15 +422,15 @@ Add internal notes about a client:
 - Types: General, Call, Meeting, Warning, Opportunity
 - Rich text formatting with @mentions and inline styling
 - Pin important notes to keep them at the top (highlighted background)
-- Fully internal — not visible to client portal users
+- Fully internal - not visible to client portal users
 - Searchable by content, type, and author
 
 ### Comments
 
 Leave comments directly on a client organization for team discussion:
 
-- **Internal comments** — only visible to agency staff
-- **Standard comments** — visible to anyone with access to the client
+- **Internal comments** - only visible to agency staff
+- **Standard comments** - visible to anyone with access to the client
 - Supports threaded replies, @mentions, and emoji reactions
 - Great for quick team discussions about the account without creating a formal note
 
@@ -464,7 +464,7 @@ Client health is automatically calculated based on:
 |-------------|---------| 
 | ● **Healthy** | Active engagement, payments on time |
 | ● **At Risk** | Some warning signs (late payments, inactivity) |
-| ● **Churn Risk** | Significant issues — requires immediate attention |
+| ● **Churn Risk** | Significant issues - requires immediate attention |
 
 An info tooltip on the client Overview tab explains the composite health formula and rating thresholds.
 

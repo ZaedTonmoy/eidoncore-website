@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="theme-color" content="#f6f8fb">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eidoncore Docs — Help Center &amp; Getting Started</title>
+  <title>Eidoncore Docs - Help Center &amp; Getting Started</title>
   <meta name="description" content="Learn how to use Eidoncore with comprehensive documentation. Getting started guides, feature tutorials, API references, and best practices for agencies.">
-  <meta property="og:title" content="Documentation — Eidoncore Help Center">
-  <meta property="og:description" content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
+  <meta property="og:title" content="Documentation - Eidoncore Help Center">
+  <meta property="og:description" content="Comprehensive guides for every Eidoncore feature - from setup to advanced automations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://eidoncore.com/docs/">
   <meta property="og:image" content="https://eidoncore.com/images/og-image.png">
@@ -23,8 +23,8 @@
   <link rel="stylesheet" href="../style.min.css">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@eidoncore">
-  <meta name="twitter:title" content="Documentation — Eidoncore Help Center">
-  <meta name="twitter:description" content="Comprehensive guides for every Eidoncore feature — from setup to advanced automations.">
+  <meta name="twitter:title" content="Documentation - Eidoncore Help Center">
+  <meta name="twitter:description" content="Comprehensive guides for every Eidoncore feature - from setup to advanced automations.">
   <meta name="twitter:image" content="https://eidoncore.com/images/og-image.png">
   <script type="application/ld+json">
 {
@@ -36,7 +36,7 @@
       "name": "Is there a getting started guide?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice — typically under 15 minutes."
+        "text": "Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice - typically under 15 minutes."
       }
     },
     {
@@ -79,7 +79,7 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      /* NO overflow — overflow:hidden/clip breaks position:sticky on children.
+      /* NO overflow - overflow:hidden/clip breaks position:sticky on children.
          Instead, each child clips its own background via border-radius. */
       box-shadow: var(--shadow-md);
     }
@@ -576,7 +576,7 @@
         transform: translateX(0);
       }
 
-      /* "Browse Docs" button — sticky on mobile at top: 60px */
+      /* "Browse Docs" button - sticky on mobile at top: 60px */
       .docs-mobile-toggle {
         display: flex;
         align-items: center;
@@ -641,7 +641,7 @@
         word-break: break-word;
       }
 
-      /* Nav touch targets — taller hit area */
+      /* Nav touch targets - taller hit area */
       .docs-nav-link { padding: 10px 8px; }
       .docs-toc-link { padding: 7px 8px 7px 44px; }
 
@@ -821,7 +821,7 @@
                 <div class="testimonial-card">
                   <div class="stack-line"><span class="stack-label">Replaced</span><span class="chip out">Monday</span><span class="arrow">+</span><span class="chip out">Zendesk</span><span class="arrow">+</span><span class="chip out">Xero</span><span class="arrow">&rarr;</span><span class="chip in">Eidoncore</span></div>
                   <p class="testimonial-hero-quote">
-                    We were paying for Monday, Zendesk, and Xero separately and none of it talked to each other. Now every ticket, task, and invoice lives in one place &mdash; <mark>onboarding new hires takes a day, not a week</mark>.
+                    We were paying for Monday, Zendesk, and Xero separately and none of it talked to each other. Now every ticket, task, and invoice lives in one place - <mark>onboarding new hires takes a day, not a week</mark>.
                   </p>
                   <div class="testimonial-hero-attribution">
                     <div class="who">
@@ -911,7 +911,7 @@
         <div class="faq-list reveal">
           <div class="faq-item">
             <button class="faq-question">Is there a getting started guide?<span class="faq-icon">+</span></button>
-            <div class="faq-answer"><p>Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice — typically under 15 minutes.</p></div>
+            <div class="faq-answer"><p>Yes. The Getting Started section walks you through agency setup, inviting team members, creating your first project, and sending your first invoice - typically under 15 minutes.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question">Does Eidoncore offer API documentation?<span class="faq-icon">+</span></button>
@@ -936,34 +936,26 @@
     <!-- CTA -->
         <section class="pre-footer-wrap">
       <div class="wrap">
-        <div class="newsletter">
-          <div class="nl-glow"></div>
-          <div class="nl-glow two"></div>
-          <div class="nl-left">
-            <div class="nl-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-                <rect x="3" y="5" width="18" height="14" rx="2.5" />
-                <path d="M3.5 6.5l8.5 6 8.5-6" />
-              </svg>
+        <section class="newsletter">
+          <div class="newsletter-copy">
+            <h2>The agency playbook, monthly.</h2>
+            <p>New workflows, fresh integrations, and what we shipped - one email, no fluff.</p>
+          </div>
+          <form class="newsletter-form" onsubmit="return false;">
+            <div class="capsule">
+              <input type="email" placeholder="you@agency.com" required>
+              <button type="submit">Subscribe</button>
             </div>
-            <h2>Stay in the loop</h2>
-            <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
-          </div>
-          <div class="nl-right">
-            <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'color:var(--teal);font-weight:600;\'>✓ Subscribed! Welcome aboard.</div>';">
-              <input class="nl-input" type="email" placeholder="Enter your email" required>
-              <button type="submit" class="btn-pill btn-primary">Subscribe</button>
-            </form>
-            <p class="nl-note">No spam — unsubscribe anytime.</p>
-          </div>
-        </div>
+            <span class="fine">No spam. Unsubscribe anytime.</span>
+          </form>
+        </section>
 
         <div class="cta">
           <div class="cta-blob a"></div>
           <div class="cta-blob b"></div>
           <div class="cta-dots"></div>
 
-          <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+          <div class="cta-eyebrow">14-day free PRO trial</div>
           <h2>Still have questions?</h2>
           <p class="cta-sub">Our team is here to help. Reach out anytime and we'll get back to you quickly.</p>
           <div class="cta-btn-row">
@@ -981,7 +973,7 @@
 
   </main>
 
-  <!-- Inline docs data — works on file:// and HTTP servers alike -->
+  <!-- Inline docs data - works on file:// and HTTP servers alike -->
   <script src="_docs_data.js"></script>
   <script src="../components.min.js"></script>
 
@@ -1295,7 +1287,7 @@
 
         buildNav(allDocs, searchEl.value);
         articleEl.scrollIntoView({ behavior: 'instant', block: 'start' });
-        document.title = doc.title + ' — Eidoncore Docs';
+        document.title = doc.title + ' - Eidoncore Docs';
       }
 
       /* ── Sidebar mobile ── */
@@ -1342,7 +1334,7 @@
       }
 
       if (window.__DOCS__ && Array.isArray(window.__DOCS__) && window.__DOCS__.length > 0) {
-        // Inline data available — use immediately (works on file://)
+        // Inline data available - use immediately (works on file://)
         initDocs(window.__DOCS__);
       } else {
         // Try fetching from server (HTTP deployments)

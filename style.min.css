@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root{
   /* Brand */
@@ -83,9 +83,9 @@ p{margin:0;}
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--mono, "Geist Mono", monospace);
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 600;
   color: var(--accent, #4C6FA5);
   background: var(--accent-soft, #EDF1F8);
   border: 1px solid var(--accent-soft-border, #D7E1F0);
@@ -93,6 +93,7 @@ p{margin:0;}
   border-radius: 100px;
   margin-bottom: 16px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .eyebrow::before {
   content: '' !important;
@@ -203,7 +204,7 @@ body.nav-open .navbar {
 }
 
 /* ============================================================
-   HERO — asymmetric split, signature "live feed" panel
+   HERO - asymmetric split, signature "live feed" panel
    ============================================================ */
 .hero{position:relative;overflow:hidden;padding:88px 0 72px;}
 .hero-glow{position:absolute;inset:0;pointer-events:none;z-index:0;}
@@ -397,7 +398,7 @@ body.nav-open .navbar {
 }
 
 /* ============================================================
-   FEATURES — bento grid
+   FEATURES - bento grid
    ============================================================ */
 .bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:dense;gap:16px;align-items:stretch;}
 @media (max-width:920px){.bento{grid-template-columns:repeat(2,1fr);}}
@@ -467,7 +468,7 @@ body.nav-open .navbar {
 @media (max-width:580px){.bento.uniform{grid-template-columns:1fr !important;}}
 
 /* ============================================================
-   HOW IT WORKS — timeline
+   HOW IT WORKS - timeline
    ============================================================ */
 .timeline{position:relative;display:grid;grid-template-columns:repeat(var(--timeline-count,4),minmax(0,1fr));gap:24px;}
 @media (max-width:860px){.timeline{grid-template-columns:1fr;}}
@@ -1624,7 +1625,7 @@ body.nav-open .navbar {
 .footer-social a:hover{color:var(--secondary);}
 
 /* ============================================================
-   INNER PAGES — shared components
+   INNER PAGES - shared components
    ============================================================ */
 
 /* Simple page header (breadcrumb + title + subtitle) */
@@ -1754,9 +1755,9 @@ body.nav-open .navbar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--mono, "Geist Mono", monospace);
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 600;
   color: var(--accent, #4C6FA5);
   background: var(--accent-soft, #EDF1F8);
   border: 1px solid var(--accent-soft-border, #D7E1F0);
@@ -1764,6 +1765,7 @@ body.nav-open .navbar {
   border-radius: 100px;
   margin-bottom: 16px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .feature-row .eyebrow .num-dot,
@@ -2427,11 +2429,11 @@ body.nav-open .navbar {
 
 
 /* ============================================
-   EIDONCORE — Shared Components (Merged)
+   EIDONCORE - Shared Components (Merged)
    ============================================ */
 
 /* ============================================
-   EIDONCORE — Shared Components
+   EIDONCORE - Shared Components
    Nav, Footer, Newsletter, Page Headers
    ============================================ */
 
@@ -3131,8 +3133,8 @@ body.nav-open .navbar {
 }
 
 /* ============================================================
-   EIDONCORE — Design System
-   Signature: "Live Agency Feed" — an ambient stream of AI actions
+   EIDONCORE - Design System
+   Signature: "Live Agency Feed" - an ambient stream of AI actions
    ============================================================ */
 
 /* ============================================================
@@ -3482,21 +3484,19 @@ body.nav-open .navbar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 5px 13px;
   border-radius: 100px;
   border: 1px solid #D7E1F0;
   background: #EDF1F8;
-  font-family: "Geist Mono", monospace;
-  font-size: 12px;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 11px;
   color: #4C6FA5;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 22px;
+  letter-spacing: 0.05em;
 }
 .features-grid-section .eyebrow .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #2F9E96;
+  display: none !important;
 }
 .features-grid-section h2 {
   font-size: clamp(32px, 3.5vw, 44px);
@@ -3704,21 +3704,19 @@ body.nav-open .navbar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 5px 13px;
   border-radius: 100px;
   border: 1px solid #D7E1F0;
   background: #EDF1F8;
-  font-family: "Geist Mono", monospace;
-  font-size: 12px;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 11px;
   color: #4C6FA5;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 22px;
+  letter-spacing: 0.05em;
 }
 .home-tabs-section .eyebrow .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #2F9E96;
+  display: none !important;
 }
 .home-tabs-section h2 {
   font-size: clamp(32px, 3.8vw, 48px);
@@ -3966,122 +3964,185 @@ body.nav-open .navbar {
   margin: 0 auto;
   padding: 80px 24px;
 }
+/* ============ NEWSLETTER (redesigned) ============ */
 .newsletter {
+  --nl-ink: #0E1A2A;
+  --nl-muted: #4C5567;
+  --nl-accent: #3F6199;
+  --nl-accent-dark: #2E4A78;
+  --nl-card-bg: #F6F7FA;
+  --nl-line: #E1E4EA;
+  --nl-dot: rgba(14, 26, 42, 0.07);
   position: relative;
-  overflow: hidden;
-  background: #ffffff;
-  border: 1px solid var(--border, #E3E7EE);
-  border-radius: 20px;
-  padding: 40px 44px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 40px;
-  box-shadow: 0 4px 24px -6px rgba(16, 26, 43, 0.05);
+  background:
+    radial-gradient(var(--nl-dot) 1.4px, transparent 1.4px) 0 0/22px 22px,
+    var(--nl-card-bg) !important;
+  border: 1px solid var(--nl-line) !important;
+  border-radius: 28px !important;
+  padding: 44px 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 40px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  font-family: 'Plus Jakarta Sans', var(--font-sans, system-ui), sans-serif;
+  margin-bottom: 28px;
 }
-.nl-glow {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  top: -180px;
-  left: -80px;
-  background: radial-gradient(circle, #4C6FA5, transparent 68%);
-  opacity: 0.12;
-  filter: blur(60px);
-  pointer-events: none;
+.newsletter::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 6% !important;
+  right: 6% !important;
+  height: 2px !important;
+  width: auto !important;
+  border-radius: 0 !important;
+  background: linear-gradient(90deg, transparent, var(--nl-accent) 45%, var(--nl-accent) 55%, transparent) !important;
+  opacity: 0.55 !important;
+  display: block !important;
 }
-.nl-glow.two {
-  left: auto;
-  right: -120px;
-  top: auto;
-  bottom: -200px;
-  background: radial-gradient(circle, #2F9E96, transparent 68%);
-  opacity: 0.1;
+.newsletter-copy {
+  max-width: 430px;
 }
-.nl-left {
-  position: relative;
-  z-index: 1;
-  max-width: 420px;
+.newsletter-copy h2 {
+  margin: 0 0 10px !important;
+  font-size: clamp(24px, 2.6vw, 30px) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--nl-ink) !important;
 }
-.nl-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #EDF1F8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
+.newsletter-copy p {
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  color: var(--nl-muted) !important;
+  font-weight: 400 !important;
 }
-.nl-icon svg {
-  width: 20px;
-  height: 20px;
-  stroke: #4C6FA5;
+.newsletter-form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  gap: 0 !important;
 }
-.newsletter h2,
-.newsletter h3 {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin-bottom: 8px;
-  color: var(--ink, #10182B);
+.capsule {
+  display: flex !important;
+  align-items: center !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--nl-line) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+  box-shadow: 0 1px 2px rgba(14, 26, 42, 0.04) !important;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease !important;
 }
-.newsletter .nl-sub {
-  font-size: 15px;
-  color: var(--text-soft, #5B6472);
-  line-height: 1.55;
+.capsule:focus-within {
+  border-color: var(--nl-accent) !important;
+  box-shadow: 0 0 0 4px rgba(63, 97, 153, 0.12) !important;
 }
-.nl-right {
-  margin-top: 20px;
-  flex-shrink: 0;
+.capsule input {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
+  color: var(--nl-ink) !important;
+  padding: 11px 8px 11px 18px !important;
+  width: 230px !important;
+  min-width: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
-.nl-form {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.capsule input::placeholder {
+  color: #9AA1B0 !important;
 }
-.nl-input {
-  width: 260px;
-  padding: 13px 18px;
-  border-radius: 100px;
-  border: 1px solid var(--border, #E3E7EE);
-  background: #F7F9FC;
-  font-family: inherit;
-  font-size: 14.5px;
-  color: var(--ink, #10182B);
-  outline: none;
-  transition: border-color 0.2s ease;
+.capsule button {
+  border: none !important;
+  cursor: pointer !important;
+  background: var(--nl-accent) !important;
+  color: #fff !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 11px 24px !important;
+  border-radius: 999px !important;
+  transition: background 0.18s ease, transform 0.18s ease !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  line-height: normal !important;
 }
-.nl-input:focus {
-  border-color: #4C6FA5;
+.capsule button:hover {
+  background: var(--nl-accent-dark) !important;
+  transform: translateY(-1px) !important;
 }
-.nl-input::placeholder {
-  color: var(--text-mute, #8B93A1);
+.newsletter-form .fine {
+  margin: 10px 4px 0 0 !important;
+  font-size: 12.5px !important;
+  color: #8C93A3 !important;
 }
-.nl-note {
-  font-size: 12px;
-  color: var(--text-mute, #8B93A1);
-  margin-top: 14px;
-}
-@media (max-width: 760px) {
+
+@media (max-width: 768px) {
   .newsletter {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 28px 24px;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 36px 24px !important;
+    gap: 28px !important;
   }
-  .nl-right {
-    margin-top: 16px;
-    width: 100%;
+  .newsletter-copy {
+    max-width: none !important;
+    text-align: center !important;
   }
-  .nl-form {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+  .newsletter-form {
+    align-items: stretch !important;
+    width: 100% !important;
   }
-  .nl-input {
-    width: 100%;
+  .capsule {
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  .capsule:focus-within {
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  .capsule input {
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border: 1px solid var(--nl-line, #E1E4EA) !important;
+    border-radius: 999px !important;
+    padding: 13px 20px !important;
+    font-size: 15px !important;
+    box-shadow: 0 1px 2px rgba(14, 26, 42, 0.04) !important;
+    box-sizing: border-box !important;
+    color: var(--nl-ink, #0E1A2A) !important;
+    text-align: center !important;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease !important;
+  }
+  .capsule input:focus {
+    border-color: var(--nl-accent, #3F6199) !important;
+    box-shadow: 0 0 0 4px rgba(63, 97, 153, 0.12) !important;
+  }
+  .capsule button {
+    width: 100% !important;
+    padding: 13px 24px !important;
+    border-radius: 999px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  .newsletter-form .fine {
+    align-self: center !important;
+    text-align: center !important;
+    margin: 10px auto 0 !important;
   }
 }
 
@@ -4132,20 +4193,19 @@ body.nav-open .navbar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 5px 13px;
   border-radius: 100px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
-  font-family: var(--mono, "Geist Mono", monospace);
-  font-size: 12px;
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 600;
   color: #B6C2D9;
   margin-bottom: 22px;
+  letter-spacing: 0.05em;
 }
 .cta-eyebrow .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #2F9E96;
+  display: none !important;
 }
 .cta h2 {
   font-size: clamp(28px, 4vw, 42px);
@@ -4315,14 +4375,14 @@ body.nav-open .navbar {
   box-shadow: 0 4px 14px rgba(63, 114, 175, 0.15);
 }
 
-/* Eyebrow Unified Brand Styling (Regular Weight Tablet/Pill) */
+/* Eyebrow Unified Brand Styling (Bold Monospace Tablet/Pill) */
 .eyebrow, .cta-eyebrow, .loop-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--mono, "JetBrains Mono", monospace);
-  font-size: 12px;
-  font-weight: 400 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
   color: #3f72af !important;
   background: #edf2f9 !important;
   border: 1px solid #d7e1f0 !important;
@@ -4330,17 +4390,30 @@ body.nav-open .navbar {
   border-radius: 100px;
   margin-bottom: 18px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   box-shadow: 0 1px 3px rgba(16, 26, 43, 0.04);
   transition: transform 0.2s ease;
 }
-.eyebrow::before, .cta-eyebrow::before, .loop-eyebrow::before {
+.eyebrow::before, .cta-eyebrow::before {
   content: '' !important;
   width: 6px !important;
   height: 6px !important;
   border-radius: 50% !important;
   background: #00adb5 !important;
   display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+.loop-eyebrow::before {
+  display: none !important;
+}
+.eyebrow .dot,
+.cta-eyebrow .dot,
+.loop-eyebrow .dot,
+.eyebrow .num-dot,
+.cta-eyebrow .num-dot,
+.features-grid-section .eyebrow .dot,
+.home-tabs-section .eyebrow .dot {
+  display: none !important;
 }
 .eyebrow:hover, .cta-eyebrow:hover, .loop-eyebrow:hover {
   transform: translateY(-1px);
@@ -4350,7 +4423,7 @@ body.nav-open .navbar {
    2-TONE SECTION CADENCE
    ========================================================================== */
 
-/* 1. HERO SECTION — Tone B: Shade of White (#f5f7fb) */
+/* 1. HERO SECTION - Tone B: Shade of White (#f5f7fb) */
 .hero {
   background: #f5f7fb !important;
   border-bottom: 1px solid rgba(16, 26, 43, 0.08);
@@ -4377,7 +4450,7 @@ body.nav-open .navbar {
   animation: radarPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* 2. TRUST BENTO GRID — Tone A: Pure White (#ffffff) */
+/* 2. TRUST BENTO GRID - Tone A: Pure White (#ffffff) */
 .trust-bento {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4417,7 +4490,7 @@ body.nav-open .navbar {
   color: #101a2c;
 }
 
-/* 3. FEATURES & MODULES GRID — Tone B: Shade of White (#f5f7fb) */
+/* 3. FEATURES & MODULES GRID - Tone B: Shade of White (#f5f7fb) */
 .features-grid-section {
   background: #f5f7fb !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08);
@@ -4449,7 +4522,7 @@ body.nav-open .navbar {
   box-shadow: 0 20px 40px -15px rgba(13, 26, 43, 0.4) !important;
 }
 
-/* 4. HOW IT WORKS — Tone A: Pure White (#ffffff) */
+/* 4. HOW IT WORKS - Tone A: Pure White (#ffffff) */
 #how-it-works {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4474,7 +4547,7 @@ body.nav-open .navbar {
   box-shadow: 0 16px 40px -15px rgba(16, 26, 43, 0.1) !important;
 }
 
-/* 5. WORKFLOW LOOP — Cohesive Dark Accent Canvas (#0b1a2b) */
+/* 5. WORKFLOW LOOP - Cohesive Dark Accent Canvas (#0b1a2b) */
 #workflow-loop {
   background: #0b1a2b !important;
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -4489,8 +4562,15 @@ body.nav-open .navbar {
   border-color: #00adb5 !important;
   background: #182d4d !important;
 }
+#workflow-loop .node-tip {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  width: 220px !important;
+  text-align: left !important;
+}
 
-/* 6. DASHBOARD PREVIEW — Tone A: Pure White (#ffffff) */
+/* 6. DASHBOARD PREVIEW - Tone A: Pure White (#ffffff) */
 .home-tabs-section {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4526,7 +4606,7 @@ body.nav-open .navbar {
   box-shadow: 0 28px 64px -20px rgba(16, 26, 43, 0.2) !important;
 }
 
-/* 7. WHY EIDONCORE — Tone B: Shade of White (#f5f7fb) */
+/* 7. WHY EIDONCORE - Tone B: Shade of White (#f5f7fb) */
 .why-eidoncore-section {
   background: #f5f7fb !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4550,7 +4630,7 @@ body.nav-open .navbar {
   font-weight: 600 !important;
 }
 
-/* 8. REPLACE YOUR STACK — Tone A: Pure White (#ffffff) */
+/* 8. REPLACE YOUR STACK - Tone A: Pure White (#ffffff) */
 .compare-section {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4586,7 +4666,7 @@ body.nav-open .navbar {
   margin-right: 6px;
 }
 
-/* 9. PRICING SECTION — Tone B: Shade of White (#f5f7fb) */
+/* 9. PRICING SECTION - Tone B: Shade of White (#f5f7fb) */
 .pricing-section, #pricing {
   background: #f5f7fb !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4618,7 +4698,7 @@ body.nav-open .navbar {
   box-shadow: 0 2px 8px rgba(63, 114, 175, 0.3) !important;
 }
 
-/* 10. TESTIMONIALS CAROUSEL — Tone A: Pure White (#ffffff) */
+/* 10. TESTIMONIALS CAROUSEL - Tone A: Pure White (#ffffff) */
 .testimonials-section, #testimonials {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4655,7 +4735,7 @@ body.nav-open .navbar {
   box-shadow: 0 4px 12px rgba(63, 114, 175, 0.2) !important;
 }
 
-/* 11. FAQ ACCORDIONS — Tone B: Shade of White (#f5f7fb) */
+/* 11. FAQ ACCORDIONS - Tone B: Shade of White (#f5f7fb) */
 .faq-section, #faq {
   background: #f5f7fb !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
@@ -4695,23 +4775,10 @@ body.nav-open .navbar {
   transform: rotate(45deg);
 }
 
-/* 12. PRE-FOOTER — Tone A: Pure White (#ffffff) with Dark Navy CTA Banner */
+/* 12. PRE-FOOTER - Tone A: Pure White (#ffffff) with Dark Navy CTA Banner */
 .pre-footer-wrap {
   background: #ffffff !important;
   border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-}
-.newsletter {
-  background: #f8fafc !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
-  box-shadow: 0 8px 28px -10px rgba(16, 26, 43, 0.05) !important;
-}
-.nl-input {
-  background: #ffffff !important;
-  border: 1px solid #dbe2ea !important;
-}
-.nl-input:focus {
-  border-color: #3f72af !important;
-  box-shadow: 0 0 0 3px rgba(63, 114, 175, 0.15) !important;
 }
 .cta {
   background: #0b1a2b !important;

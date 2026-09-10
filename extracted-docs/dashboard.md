@@ -10,7 +10,7 @@ Your dashboard is the first thing you see when you log in. It provides an at-a-g
 
 ## Onboarding Checklist
 
-The first time you log in, a **personalized setup checklist** appears at the top of your dashboard. It guides you through the most important first steps based on your role — with a progress ring and auto-detection of completed tasks. The checklist collapses once you complete all steps or dismiss it.
+The first time you log in, a **personalized setup checklist** appears at the top of your dashboard. It guides you through the most important first steps based on your role - with a progress ring and auto-detection of completed tasks. The checklist collapses once you complete all steps or dismiss it.
 
 > **See also:** [Onboarding](./onboarding) for full details on the checklist and role-specific steps
 
@@ -77,7 +77,7 @@ Real-time alert banners appear at the top of the dashboard when action is needed
 | **Unassigned Tasks** | More than 5 active tasks with no assignee |
 | **Draft Invoices Pending** | Auto-generated draft invoices from recurring billing awaiting your review |
 
-Click any alert to navigate directly to the relevant page. Dismiss alerts with the × button — they'll reappear on your next visit if the underlying condition persists.
+Click any alert to navigate directly to the relevant page. Dismiss alerts with the × button - they'll reappear on your next visit if the underlying condition persists.
 
 ### Monthly Revenue Trend
 
@@ -85,9 +85,9 @@ A chart showing your revenue over the last 6 months, making it easy to spot grow
 
 ### Additional Data
 
-- **Upcoming invoices** — next 10 invoices due
-- **Recent activity** — last 8 actions across the workspace
-- **Messaging unread badge** — the Messages nav item in the sidebar shows a count of channels with unread messages. A branded dot also appears on the browser favicon when you have unread messages
+- **Upcoming invoices** - next 10 invoices due
+- **Recent activity** - last 8 actions across the workspace
+- **Messaging unread badge** - the Messages nav item in the sidebar shows a count of channels with unread messages. A branded dot also appears on the browser favicon when you have unread messages
 
 > **See also:** [Messaging](./messaging) for real-time chat features
 
@@ -139,7 +139,7 @@ If your agency has configured a **welcome message** in portal branding, it appea
 
 | Role | Dashboard Type | Key Content |
 |------|---------------|-------------|
-| Owner | Executive | Full agency overview — revenue, projects, team, alerts |
+| Owner | Executive | Full agency overview - revenue, projects, team, alerts |
 | Admin | Executive | Same as Owner |
 | Project Manager | Executive | Same as Owner |
 | Accountant | Executive | Same as Owner |

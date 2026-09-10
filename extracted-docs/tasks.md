@@ -16,11 +16,11 @@ Tasks can be viewed in multiple ways:
 
 | View | Best For |
 |------|----------|
-| **Kanban Board** | Visual workflow — drag and drop tasks between status columns |
+| **Kanban Board** | Visual workflow - drag and drop tasks between status columns |
 | **List View** | Detailed table with sorting, filtering, and drag-and-drop between status groups |
 | **Workload View** | See task distribution, capacity levels, and overdue counts per team member |
 
-Switch between views using the view toggle at the top of the tasks page. Your selected view persists via the URL — refreshing the page keeps you on the same view.
+Switch between views using the view toggle at the top of the tasks page. Your selected view persists via the URL - refreshing the page keeps you on the same view.
 
 ### Column Settings (List View)
 
@@ -69,11 +69,11 @@ Above the task list, a quick-reference analytics strip shows:
 
 ### Deferred Task Creation
 
-When you click **"+ New Task"**, a title input appears first — the task is only created in the database after you provide a real title and press `Enter`. Press `Escape` to cancel without creating anything.
+When you click **"+ New Task"**, a title input appears first - the task is only created in the database after you provide a real title and press `Enter`. Press `Escape` to cancel without creating anything.
 
 ### Task Drawer
 
-Click any task to open the **Task Drawer** — a slide-out panel for editing all task details, viewing comments, attachments, checklists, time entries, and the activity log.
+Click any task to open the **Task Drawer** - a slide-out panel for editing all task details, viewing comments, attachments, checklists, time entries, and the activity log.
 
 ### Activity Log
 
@@ -101,10 +101,10 @@ Each project can define its own task statuses to match your workflow. Click the 
 - **Create** new statuses with a custom name and color
 - **Rename** existing statuses
 - **Reorder** statuses via drag-and-drop (this changes the column order on the Kanban board)
-- **Delete** statuses — you'll be prompted to reassign any tasks using that status
-- **Mark as closed** — closed statuses (like "Done") indicate completed work
+- **Delete** statuses - you'll be prompted to reassign any tasks using that status
+- **Mark as closed** - closed statuses (like "Done") indicate completed work
 
-New projects are automatically seeded with the four default statuses. Custom statuses are scoped per project — they don't affect other projects.
+New projects are automatically seeded with the four default statuses. Custom statuses are scoped per project - they don't affect other projects.
 
 ---
 
@@ -120,14 +120,14 @@ Project
 │   │   └── Task
 │   └── List
 ├── List (top-level, no section)
-└── Tasks (project root — no list)
+└── Tasks (project root - no list)
 ```
 
 ### Key Concepts
 
 | Concept | Description |
 |---------|-------------|
-| **Sections** | Folders that group related lists. Strictly flat — no nested sections. Deleting a section moves its lists to the top level. |
+| **Sections** | Folders that group related lists. Strictly flat - no nested sections. Deleting a section moves its lists to the top level. |
 | **Lists** | Each list has its own tasks and an independent status pipeline. Deleting a list moves its tasks to the project root. |
 | **Project Root** | Tasks with no list assignment appear in the "All Tasks" view. |
 
@@ -150,12 +150,12 @@ The project sidebar shows a collapsible tree of Sections → Lists:
 - **Rename or delete** via right-click context menu
 - **Reorder** sections and lists with drag-and-drop
 - **Move lists between sections** by dragging a list onto a different section header
-- **Collapsed mode** — icon-only sidebar rail (56px) with tooltips for compact navigation
-- **Mobile** — slide-over sheet on small screens
+- **Collapsed mode** - icon-only sidebar rail (56px) with tooltips for compact navigation
+- **Mobile** - slide-over sheet on small screens
 
 ### URL Deep Linking
 
-Selecting a list sets `?list={listId}` in the URL. Links are bookmarkable and shareable — opening the link auto-switches to the Tasks tab with the correct list selected.
+Selecting a list sets `?list={listId}` in the URL. Links are bookmarkable and shareable - opening the link auto-switches to the Tasks tab with the correct list selected.
 
 ### Grouping Options
 
@@ -195,7 +195,7 @@ Time logged on a task by someone other than the assignee triggers a notification
 
 ### Billed Entry Protection
 
-Once a time entry is linked to an invoice (billed), it becomes **immutable** — it cannot be edited or deleted. Billed entries display a 🔒 lock icon.
+Once a time entry is linked to an invoice (billed), it becomes **immutable** - it cannot be edited or deleted. Billed entries display a 🔒 lock icon.
 
 Unbilled entries can be deleted, which automatically restores the consumed quota balance.
 
@@ -222,7 +222,7 @@ Type `@` followed by a team member's name to mention them. They'll receive a not
 
 ### Reactions
 
-React to comments with emojis for quick feedback — 👍, ❤️, 😂, 🎉, 🤔, 👀, 🚀, and more.
+React to comments with emojis for quick feedback - 👍, ❤️, 😂, 🎉, 🤔, 👀, 🚀, and more.
 
 The comment author is notified when someone reacts to their comment.
 
@@ -232,7 +232,7 @@ The comment author is notified when someone reacts to their comment.
 
 ## Task Sharing
 
-Share a task externally using a **public share link** — anyone with the link can view the task details without logging in.
+Share a task externally using a **public share link** - anyone with the link can view the task details without logging in.
 
 Toggle the share link on or off from the task drawer.
 
@@ -291,7 +291,7 @@ Break large tasks into smaller **subtasks**. Subtasks are full tasks linked to a
 Add a checklist to any task for a quick to-do list:
 
 - Check off items as they're completed
-- Checklist items support **nesting** — add sub-items under any checklist item for multi-level checklists
+- Checklist items support **nesting** - add sub-items under any checklist item for multi-level checklists
 - A **checklist progress bar** shows the completion percentage on every task card
 - When **all items** are checked, the task assignee and creator are notified
 - Great for multi-step processes that don't need full subtasks
@@ -374,7 +374,7 @@ The assignee dropdown shows different people depending on context:
 | Task inside a project | Project team members + Agency Owner |
 | Task without a project | All agency staff + Agency Owner |
 
-Client users (Organization Owner / Organization Member) **cannot be assigned tasks** — only agency staff appear in the assignee dropdown.
+Client users (Organization Owner / Organization Member) **cannot be assigned tasks** - only agency staff appear in the assignee dropdown.
 
 ---
 

@@ -8,7 +8,7 @@ slug: "reports"
 
 Monitor your agency's performance with real-time dashboards and detailed reports across revenue, clients, projects, tasks, and time tracking.
 
-> **See also:** [Dashboard](./dashboard) for full details on executive, team member, and client dashboards — including KPIs, alerts, and role-specific views
+> **See also:** [Dashboard](./dashboard) for full details on executive, team member, and client dashboards - including KPIs, alerts, and role-specific views
 
 ---
 
@@ -104,15 +104,15 @@ Organization Owners see a separate set of 3 report tabs, automatically scoped to
 
 | Element | Type |
 |---------|------|
-| Active Projects | KPI — count of active projects |
-| Task Completion | KPI — completion percentage |
-| Overdue Tasks | KPI — count of overdue tasks |
-| Avg Turnaround | KPI — average days from task creation to completion |
-| Hours Invested | KPI — total hours logged by agency team |
-| Outstanding | KPI — outstanding invoice amount |
-| Total Spent | KPI — combined invoice payments + service purchases |
-| Project Health | Donut chart — On Track, At Risk, Off Track |
-| Task Status | Donut chart — Done, In Progress, To Do, In Review |
+| Active Projects | KPI - count of active projects |
+| Task Completion | KPI - completion percentage |
+| Overdue Tasks | KPI - count of overdue tasks |
+| Avg Turnaround | KPI - average days from task creation to completion |
+| Hours Invested | KPI - total hours logged by agency team |
+| Outstanding | KPI - outstanding invoice amount |
+| Total Spent | KPI - combined invoice payments + service purchases |
+| Project Health | Donut chart - On Track, At Risk, Off Track |
+| Task Status | Donut chart - Done, In Progress, To Do, In Review |
 
 ### Projects & Tasks Tab
 
@@ -120,22 +120,22 @@ Organization Owners see a separate set of 3 report tabs, automatically scoped to
 |---------|------|
 | Total / Active / Completed Projects | KPIs |
 | Total Tasks / Completion Rate / In Progress | KPIs |
-| Project Status | Donut chart — Not Started, In Progress, Completed |
-| Task Priority | Donut chart — High, Medium, Low, Urgent |
-| Task Completion Trend | Bar chart — monthly completed tasks |
+| Project Status | Donut chart - Not Started, In Progress, Completed |
+| Task Priority | Donut chart - High, Medium, Low, Urgent |
+| Task Completion Trend | Bar chart - monthly completed tasks |
 | Project Health | Donut chart |
-| Tasks by Agency Member | Table — member, total, done, in progress, overdue, completion % |
+| Tasks by Agency Member | Table - member, total, done, in progress, overdue, completion % |
 
 ### Team Activity Tab
 
 | Element | Type |
 |---------|------|
-| Team Members | KPI — count of agency members on your projects |
-| Total Hours | KPI — hours logged by agency team |
-| Avg Turnaround | KPI — average task completion time |
+| Team Members | KPI - count of agency members on your projects |
+| Total Hours | KPI - hours logged by agency team |
+| Avg Turnaround | KPI - average task completion time |
 | Hours by Team Member | Bar chart |
 | Task Priority Distribution | Donut chart |
-| Agency Team Performance | Table — member, tasks, completed, in progress, overdue, completion % |
+| Agency Team Performance | Table - member, tasks, completed, in progress, overdue, completion % |
 
 Organization Members do not have access to Reports. Only Organization Owners can view the report tabs scoped to their organization.
 

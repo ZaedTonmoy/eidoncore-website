@@ -39,9 +39,9 @@ Navigate to **Intake Forms** in the sidebar (under Tools) and click **"New Form"
 
 | Status | Meaning |
 |--------|---------|
-| **Draft** | Being built — not available to clients |
-| **Published** | Active and linked to services — clients can fill it out |
-| **Archived** | Retired — no longer available for new submissions |
+| **Draft** | Being built - not available to clients |
+| **Published** | Active and linked to services - clients can fill it out |
+| **Archived** | Retired - no longer available for new submissions |
 
 ---
 
@@ -104,7 +104,7 @@ Use the drag-and-drop field builder to add questions. Eidoncore supports **27 fi
 
 | Type | What It Collects | Input Control |
 |------|-----------------|---------------|
-| **Repeater** | Repeatable groups of data | Dynamic row group — clients can add and remove rows, each with configurable sub-fields |
+| **Repeater** | Repeatable groups of data | Dynamic row group - clients can add and remove rows, each with configurable sub-fields |
 
 ---
 
@@ -152,7 +152,7 @@ Organize longer forms across multiple pages for a better client experience:
 - Add pages using the **page tab bar** in the form builder
 - Drag fields onto different pages or set the page number in field settings
 - Clients see a **step wizard** with numbered progress indicators
-- **Per-page validation** — required fields must be filled before advancing to the next page
+- **Per-page validation** - required fields must be filled before advancing to the next page
 - The **Submit** button only appears on the last page
 
 This is ideal for comprehensive onboarding questionnaires with distinct sections (e.g., Company Info → Project Scope → Brand Guidelines → Technical Requirements).
@@ -176,7 +176,7 @@ Each intake form can be assigned to **one or more services**:
 
 - One form can serve multiple services (e.g., a general onboarding form)
 - Each service can only have one intake form
-- Removing a form from a service doesn't delete the form — it just unlinks them
+- Removing a form from a service doesn't delete the form - it just unlinks them
 - Forms work with both project-based services and digital products
 
 > **See also:** [Services](./services/overview#intake-forms) for how intake forms fit into the service workflow
@@ -212,9 +212,9 @@ If a client hasn't submitted the intake form within 24 hours, the system sends a
 
 When a client submits an intake form:
 
-1. **A project document is created** — Responses are formatted into a readable HTML document and saved as a **pinned document** in the project
-2. **A submission record is saved** — Linking the response data to the form, project, and submitter
-3. **The agency owner is notified** — A notification is sent so you can review the responses immediately
+1. **A project document is created** - Responses are formatted into a readable HTML document and saved as a **pinned document** in the project
+2. **A submission record is saved** - Linking the response data to the form, project, and submitter
+3. **The agency owner is notified** - A notification is sent so you can review the responses immediately
 
 ---
 

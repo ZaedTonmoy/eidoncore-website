@@ -41,7 +41,7 @@ Once connected, your AI assistant can read and interact with your workspace data
 The AI Connector uses **OAuth 2.1 with PKCE** for secure authentication. When connecting:
 
 1. Your AI tool redirects to your workspace's consent page
-2. You review the requested permissions — the page shows which capabilities are available and which are restricted based on your role
+2. You review the requested permissions - the page shows which capabilities are available and which are restricted based on your role
 3. You approve the connection
 4. The AI tool receives secure, time-limited tokens
 
@@ -95,7 +95,7 @@ Agency Owners and Admins can control which modules are available to AI assistant
 2. Scroll to **Exposed Modules**
 3. Toggle individual modules on or off
 
-When a module is disabled, AI assistants cannot read or write data in that module — even if the user has the necessary permissions.
+When a module is disabled, AI assistants cannot read or write data in that module - even if the user has the necessary permissions.
 
 ---
 
@@ -149,12 +149,12 @@ View and manage active AI connections under **Settings → Agency → Integratio
 
 The AI Connector is built with enterprise-grade security:
 
-- **OAuth 2.1 with PKCE** — Industry-standard authorization with proof key for code exchange
-- **Token rotation** — Refresh tokens are single-use; old tokens are automatically revoked
-- **Audit logging** — Every AI tool call is logged with the user, action, and timestamp
-- **Tenant isolation** — AI assistants can only access data within your workspace
-- **Live permission checks** — Permissions are verified on every request, ensuring instant revocation
-- **Scope enforcement** — AI tools can only access the modules and actions you've approved
+- **OAuth 2.1 with PKCE** - Industry-standard authorization with proof key for code exchange
+- **Token rotation** - Refresh tokens are single-use; old tokens are automatically revoked
+- **Audit logging** - Every AI tool call is logged with the user, action, and timestamp
+- **Tenant isolation** - AI assistants can only access data within your workspace
+- **Live permission checks** - Permissions are verified on every request, ensuring instant revocation
+- **Scope enforcement** - AI tools can only access the modules and actions you've approved
 
 ---
 

@@ -7,147 +7,147 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Full platform localization — 6 languages via next-intl with translated auth, cart, invoices, proposals, tickets, account, offerings, timer, PWA, onboarding, command palette, and email modules"
+                "text": "Full platform localization - 6 languages via next-intl with translated auth, cart, invoices, proposals, tickets, account, offerings, timer, PWA, onboarding, command palette, and email modules"
             },
             {
                 "type": "feature",
-                "text": "Observability stack — 4-tier structured logging (financial → communication → infrastructure → auxiliary) with Sentry SDK v10 migration, 18 formerly-silent catch blocks instrumented with logger.error"
+                "text": "Observability stack - 4-tier structured logging (financial → communication → infrastructure → auxiliary) with Sentry SDK v10 migration, 18 formerly-silent catch blocks instrumented with logger.error"
             },
             {
                 "type": "feature",
-                "text": "Sentry Cron Monitors — all 15 cron jobs report heartbeat check-ins with maxRuntime synced to route maxDuration for automatic failure detection"
+                "text": "Sentry Cron Monitors - all 15 cron jobs report heartbeat check-ins with maxRuntime synced to route maxDuration for automatic failure detection"
             },
             {
                 "type": "feature",
-                "text": "Atomic invoice numbering — centralized utility with self-healing retry (withInvoiceNumberRetry) across all 12 invoice creation paths, eliminating duplicate invoice numbers under concurrent load"
+                "text": "Atomic invoice numbering - centralized utility with self-healing retry (withInvoiceNumberRetry) across all 12 invoice creation paths, eliminating duplicate invoice numbers under concurrent load"
             },
             {
                 "type": "feature",
-                "text": "Multi-contact CSV import — import contacts in bulk with template download, validation preview, and contactsAdded tracking per organization"
+                "text": "Multi-contact CSV import - import contacts in bulk with template download, validation preview, and contactsAdded tracking per organization"
             },
             {
                 "type": "feature",
-                "text": "Unified time & billing modals — consolidated time entry and billing interfaces with compact date pickers and contextual InfoPopovers"
+                "text": "Unified time & billing modals - consolidated time entry and billing interfaces with compact date pickers and contextual InfoPopovers"
             },
             {
                 "type": "feature",
-                "text": "Interactive dashboard donut charts — clickable chart segments with shared Tooltip component for revenue, project, and cash flow breakdowns"
+                "text": "Interactive dashboard donut charts - clickable chart segments with shared Tooltip component for revenue, project, and cash flow breakdowns"
             },
             {
                 "type": "feature",
-                "text": "AI Connector update_proposal — create and update proposals with structured blocks via MCP, expanding tool catalog to 112 across 19 modules"
+                "text": "AI Connector update_proposal - create and update proposals with structured blocks via MCP, expanding tool catalog to 112 across 19 modules"
             },
             {
                 "type": "feature",
-                "text": "AI Connector role-aware consent — consent page now filters scopes by user role with padlock icons on inaccessible modules in the Module Reference"
+                "text": "AI Connector role-aware consent - consent page now filters scopes by user role with padlock icons on inaccessible modules in the Module Reference"
             },
             {
                 "type": "feature",
-                "text": "Resend Email action — resend previously sent invoices with one click from the invoice action bar"
+                "text": "Resend Email action - resend previously sent invoices with one click from the invoice action bar"
             },
             {
                 "type": "feature",
-                "text": "Unified time entries view — cross-project time entry list with role-based access control and CSV export in Reports"
+                "text": "Unified time entries view - cross-project time entry list with role-based access control and CSV export in Reports"
             },
             {
                 "type": "feature",
-                "text": "Premium invoice email template — standardized billing contact resolution across 9 invoice delivery paths with branded email layout"
+                "text": "Premium invoice email template - standardized billing contact resolution across 9 invoice delivery paths with branded email layout"
             },
             {
                 "type": "feature",
-                "text": "CI security guards — automated vulnerability scanning and security guard checks in the CI pipeline"
+                "text": "CI security guards - automated vulnerability scanning and security guard checks in the CI pipeline"
             },
             {
                 "type": "feature",
-                "text": "Ticket reply visual differentiation — Organization and Team replies now have distinct colors derived from branding variables, with labeled badges and a redesigned original description section"
+                "text": "Ticket reply visual differentiation - Organization and Team replies now have distinct colors derived from branding variables, with labeled badges and a redesigned original description section"
             },
             {
                 "type": "improvement",
-                "text": "InvoiceEditor consolidation — merged invoice create and edit flows into a single shared component, reducing code duplication"
+                "text": "InvoiceEditor consolidation - merged invoice create and edit flows into a single shared component, reducing code duplication"
             },
             {
                 "type": "improvement",
-                "text": "Dashboard cash flow — merged Outstanding into Upcoming segment for clearer financial forecasting"
+                "text": "Dashboard cash flow - merged Outstanding into Upcoming segment for clearer financial forecasting"
             },
             {
                 "type": "improvement",
-                "text": "Emailit rate limiter — added retry-on-429 with inter-email throttling to prevent API rate limit exhaustion during bulk operations"
+                "text": "Emailit rate limiter - added retry-on-429 with inter-email throttling to prevent API rate limit exhaustion during bulk operations"
             },
             {
                 "type": "improvement",
-                "text": "Bank details on invoices — bank/wire transfer details now render on invoice print view, PDF export, and HTML email surfaces"
+                "text": "Bank details on invoices - bank/wire transfer details now render on invoice print view, PDF export, and HTML email surfaces"
             },
             {
                 "type": "improvement",
-                "text": "MCP session display — sessions now show correct tool count (based on granted scope types) and session expiry date instead of access token expiry"
+                "text": "MCP session display - sessions now show correct tool count (based on granted scope types) and session expiry date instead of access token expiry"
             },
             {
                 "type": "improvement",
-                "text": "MCP revoke endpoint — now accepts form-urlencoded request bodies per RFC 7009 for broader client compatibility"
+                "text": "MCP revoke endpoint - now accepts form-urlencoded request bodies per RFC 7009 for broader client compatibility"
             },
             {
                 "type": "improvement",
-                "text": "Startup environment validation — degraded security variables (ENCRYPTION_KEY_V2, Upstash, Turnstile, VirusTotal) now log warnings instead of blocking startup"
+                "text": "Startup environment validation - degraded security variables (ENCRYPTION_KEY_V2, Upstash, Turnstile, VirusTotal) now log warnings instead of blocking startup"
             },
             {
                 "type": "improvement",
-                "text": "Ticket drawer expanded — wider drawer (680px), extracted CSS to dedicated stylesheet, fixed missing translation key"
+                "text": "Ticket drawer expanded - wider drawer (680px), extracted CSS to dedicated stylesheet, fixed missing translation key"
             },
             {
                 "type": "fix",
-                "text": "Cron timeout failures — added maxDuration export to all 15 cron routes and Sentry.flush() to cron monitor, resolving false-positive timeout check-in failures"
+                "text": "Cron timeout failures - added maxDuration export to all 15 cron routes and Sentry.flush() to cron monitor, resolving false-positive timeout check-in failures"
             },
             {
                 "type": "fix",
-                "text": "CSP nonce propagation — fixed blank page and hydration mismatch caused by missing nonce in Content-Security-Policy headers"
+                "text": "CSP nonce propagation - fixed blank page and hydration mismatch caused by missing nonce in Content-Security-Policy headers"
             },
             {
                 "type": "fix",
-                "text": "Invoice numbering collisions — wrapped all 4 proposal conversion mutations and convertMultiInvoice in withInvoiceNumberRetry to prevent duplicate numbers"
+                "text": "Invoice numbering collisions - wrapped all 4 proposal conversion mutations and convertMultiInvoice in withInvoiceNumberRetry to prevent duplicate numbers"
             },
             {
                 "type": "fix",
-                "text": "Ticket SLA cron — corrected stale field name (responseMinutes → firstResponseMinutes) that was silently skipping SLA deadline calculations"
+                "text": "Ticket SLA cron - corrected stale field name (responseMinutes → firstResponseMinutes) that was silently skipping SLA deadline calculations"
             },
             {
                 "type": "fix",
-                "text": "Service Worker stale data — removed API response cache from SW to ensure mutations immediately reflect in the UI without manual refresh"
+                "text": "Service Worker stale data - removed API response cache from SW to ensure mutations immediately reflect in the UI without manual refresh"
             },
             {
                 "type": "fix",
-                "text": "Turnstile on custom domains — bypassed Cloudflare Turnstile for custom domain workspaces (free tier hostname limit), updated security whitepaper to v2.2"
+                "text": "Turnstile on custom domains - bypassed Cloudflare Turnstile for custom domain workspaces (free tier hostname limit), updated security whitepaper to v2.2"
             },
             {
                 "type": "fix",
-                "text": "Proposals share page — exempted /proposals/share/* from middleware fast auth gate, fixing blank page for unauthenticated proposal recipients"
+                "text": "Proposals share page - exempted /proposals/share/* from middleware fast auth gate, fixing blank page for unauthenticated proposal recipients"
             },
             {
                 "type": "fix",
-                "text": "MCP scope alignment — fixed permission key mismatches between OAuth scopes and actual PERMISSIONS constants, preventing 403 errors on valid tools"
+                "text": "MCP scope alignment - fixed permission key mismatches between OAuth scopes and actual PERMISSIONS constants, preventing 403 errors on valid tools"
             },
             {
                 "type": "fix",
-                "text": "MCP update_proposal registration — registered update_proposal in tier-filter WRITE_TOOLS and MODULE_MAP for proper plan-gated access"
+                "text": "MCP update_proposal registration - registered update_proposal in tier-filter WRITE_TOOLS and MODULE_MAP for proper plan-gated access"
             },
             {
                 "type": "fix",
-                "text": "i18n Turbopack compatibility — switched message JSON imports to relative paths to resolve Turbopack module resolution failures"
+                "text": "i18n Turbopack compatibility - switched message JSON imports to relative paths to resolve Turbopack module resolution failures"
             },
             {
                 "type": "fix",
-                "text": "i18n TypeScript errors — synced package-lock, fixed type errors in localized modules, and updated stale test expectations"
+                "text": "i18n TypeScript errors - synced package-lock, fixed type errors in localized modules, and updated stale test expectations"
             },
             {
                 "type": "fix",
-                "text": "Reports type error — typed reduce accumulator as number in reports/page.tsx, resolving TS2365 build error"
+                "text": "Reports type error - typed reduce accumulator as number in reports/page.tsx, resolving TS2365 build error"
             },
             {
                 "type": "fix",
-                "text": "Invoice collision log level — downgraded invoice number collision logs from error to warn since they self-heal via retry"
+                "text": "Invoice collision log level - downgraded invoice number collision logs from error to warn since they self-heal via retry"
             },
             {
                 "type": "fix",
-                "text": "Database migrations — added missing migration files for MCP, inbound email, portal, and Sprint 2 tables with 6 remaining columns"
+                "text": "Database migrations - added missing migration files for MCP, inbound email, portal, and Sprint 2 tables with 6 remaining columns"
             }
         ]
     },
@@ -159,171 +159,171 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Inbound email replies — reply to ticket notifications and task comments directly from your email client without logging in. Replies are automatically threaded back to the correct ticket or task"
+                "text": "Inbound email replies - reply to ticket notifications and task comments directly from your email client without logging in. Replies are automatically threaded back to the correct ticket or task"
             },
             {
                 "type": "feature",
-                "text": "Email threading — unique reply-to addresses per conversation with Message-ID/References headers for proper email thread grouping in all mail clients"
+                "text": "Email threading - unique reply-to addresses per conversation with Message-ID/References headers for proper email thread grouping in all mail clients"
             },
             {
                 "type": "feature",
-                "text": "Credit Notes — create, apply, and track credit notes on invoices with remaining balance, applied allocations, and contextual tooltips"
+                "text": "Credit Notes - create, apply, and track credit notes on invoices with remaining balance, applied allocations, and contextual tooltips"
             },
             {
                 "type": "feature",
-                "text": "AI Connector Phase 5–6 — expanded from 66 to 111 tools across 19 modules with admin-configurable write modules per plan"
+                "text": "AI Connector Phase 5–6 - expanded from 66 to 111 tools across 19 modules with admin-configurable write modules per plan"
             },
             {
                 "type": "feature",
-                "text": "Portal announcements — agency-wide or per-client announcements with dismissible banners, scheduling via DatePicker, and admin CRUD management"
+                "text": "Portal announcements - agency-wide or per-client announcements with dismissible banners, scheduling via DatePicker, and admin CRUD management"
             },
             {
                 "type": "feature",
-                "text": "Ticket @mentions — mention team members in ticket replies with autocomplete, triggering in-app and email notifications"
+                "text": "Ticket @mentions - mention team members in ticket replies with autocomplete, triggering in-app and email notifications"
             },
             {
                 "type": "feature",
-                "text": "Default ticket responders — configure automatic assignees for new tickets, plus assignee dropdown in TicketDrawer"
+                "text": "Default ticket responders - configure automatic assignees for new tickets, plus assignee dropdown in TicketDrawer"
             },
             {
                 "type": "feature",
-                "text": "TicketDrawer actions — delete tickets, change priority, update SLA, and edit descriptions with Rich Text Editor directly from the drawer"
+                "text": "TicketDrawer actions - delete tickets, change priority, update SLA, and edit descriptions with Rich Text Editor directly from the drawer"
             },
             {
                 "type": "feature",
-                "text": "Roles & Permissions editor — split into Agency Roles and Organization Roles sections, sorted by power level, with all 85 permissions visible across 15 groups and assigned member counts per role"
+                "text": "Roles & Permissions editor - split into Agency Roles and Organization Roles sections, sorted by power level, with all 85 permissions visible across 15 groups and assigned member counts per role"
             },
             {
                 "type": "feature",
-                "text": "Premium portal invite emails — redesigned welcome and account setup email templates with distinct visual layouts for new contacts vs. invited users"
+                "text": "Premium portal invite emails - redesigned welcome and account setup email templates with distinct visual layouts for new contacts vs. invited users"
             },
             {
                 "type": "feature",
-                "text": "Plan page — resource usage dashboard, cancel/reactivate subscription, billing history, and data export all on a single settings page"
+                "text": "Plan page - resource usage dashboard, cancel/reactivate subscription, billing history, and data export all on a single settings page"
             },
             {
                 "type": "feature",
-                "text": "Proposal bulk action bar — multi-select proposals with floating action bar for bulk status updates"
+                "text": "Proposal bulk action bar - multi-select proposals with floating action bar for bulk status updates"
             },
             {
                 "type": "feature",
-                "text": "Proposal extension banner — notification banner for proposals nearing expiry with quick-extend action"
+                "text": "Proposal extension banner - notification banner for proposals nearing expiry with quick-extend action"
             },
             {
                 "type": "feature",
-                "text": "Cloudflare Turnstile — bot protection on login, registration, and forgot-password forms"
+                "text": "Cloudflare Turnstile - bot protection on login, registration, and forgot-password forms"
             },
             {
                 "type": "feature",
-                "text": "Centralized HMAC utility — unified token signing and verification for password resets, impersonation, and email unsubscribe links"
+                "text": "Centralized HMAC utility - unified token signing and verification for password resets, impersonation, and email unsubscribe links"
             },
             {
                 "type": "feature",
-                "text": "Session enforcement on all API routes — consistent authentication checks across all 20+ REST endpoints"
+                "text": "Session enforcement on all API routes - consistent authentication checks across all 20+ REST endpoints"
             },
             {
                 "type": "feature",
-                "text": "Settings template tabs — Project Templates and Proposal Templates split into dedicated tab components for cleaner navigation"
+                "text": "Settings template tabs - Project Templates and Proposal Templates split into dedicated tab components for cleaner navigation"
             },
             {
                 "type": "improvement",
-                "text": "AI Connector module reference — replaced bulky accordion layout with compact searchable grid and slide-out drawer for detailed tool information"
+                "text": "AI Connector module reference - replaced bulky accordion layout with compact searchable grid and slide-out drawer for detailed tool information"
             },
             {
                 "type": "improvement",
-                "text": "Invoice action bar — all action buttons (edit, send, void, refund, record payment, delete) now permission-gated per role with proper visibility controls"
+                "text": "Invoice action bar - all action buttons (edit, send, void, refund, record payment, delete) now permission-gated per role with proper visibility controls"
             },
             {
                 "type": "improvement",
-                "text": "Service Worker v4 — improved real-time cache invalidation with Pusher task event listeners and cross-query invalidation for ticket and task data"
+                "text": "Service Worker v4 - improved real-time cache invalidation with Pusher task event listeners and cross-query invalidation for ticket and task data"
             },
             {
                 "type": "improvement",
-                "text": "Ticket settings typography — replaced hardcoded font sizes with design system variables for consistent branding"
+                "text": "Ticket settings typography - replaced hardcoded font sizes with design system variables for consistent branding"
             },
             {
                 "type": "improvement",
-                "text": "Session section descriptions — clearer wording on Security and AI Connector pages explaining active session management"
+                "text": "Session section descriptions - clearer wording on Security and AI Connector pages explaining active session management"
             },
             {
                 "type": "improvement",
-                "text": "Notification delivery — all delivery channels (in-app, email, push, Slack) now run in parallel via Promise.allSettled for faster, more reliable delivery"
+                "text": "Notification delivery - all delivery channels (in-app, email, push, Slack) now run in parallel via Promise.allSettled for faster, more reliable delivery"
             },
             {
                 "type": "improvement",
-                "text": "PWA push subscription auto-healing — automatically re-subscribes to push notifications when the subscription expires or is lost"
+                "text": "PWA push subscription auto-healing - automatically re-subscribes to push notifications when the subscription expires or is lost"
             },
             {
                 "type": "improvement",
-                "text": "Mobile bottom nav badges — unread notification and message count badges now appear on mobile tab bar items"
+                "text": "Mobile bottom nav badges - unread notification and message count badges now appear on mobile tab bar items"
             },
             {
                 "type": "improvement",
-                "text": "Dead code cleanup — removed 4 unused backend procedures (updateStripeKeys, getInvoicePrintSettings, updateInvoicePrintSettings, searchForMention) reducing codebase size"
+                "text": "Dead code cleanup - removed 4 unused backend procedures (updateStripeKeys, getInvoicePrintSettings, updateInvoicePrintSettings, searchForMention) reducing codebase size"
             },
             {
                 "type": "fix",
-                "text": "Case-insensitive login — email addresses are now normalized to lowercase on login, preventing 'user not found' errors for mixed-case emails"
+                "text": "Case-insensitive login - email addresses are now normalized to lowercase on login, preventing 'user not found' errors for mixed-case emails"
             },
             {
                 "type": "fix",
-                "text": "Double email on contact invite — prevented duplicate welcome + notification emails when adding a contact to an organization"
+                "text": "Double email on contact invite - prevented duplicate welcome + notification emails when adding a contact to an organization"
             },
             {
                 "type": "fix",
-                "text": "Inbound email sender detection — replies from client contacts now correctly identified as client replies using role-aware detection instead of treating all replies as staff"
+                "text": "Inbound email sender detection - replies from client contacts now correctly identified as client replies using role-aware detection instead of treating all replies as staff"
             },
             {
                 "type": "fix",
-                "text": "TicketDrawer cache flickering — fixed stale data flashing by using gcTime instead of placeholderData for cache hydration"
+                "text": "TicketDrawer cache flickering - fixed stale data flashing by using gcTime instead of placeholderData for cache hydration"
             },
             {
                 "type": "fix",
-                "text": "Ticket edit button visibility — edit button now shows label + border instead of icon-only, positioned closer to description text"
+                "text": "Ticket edit button visibility - edit button now shows label + border instead of icon-only, positioned closer to description text"
             },
             {
                 "type": "fix",
-                "text": "Ticket description editing — upgraded from plain textarea to Rich Text Editor for consistent formatting"
+                "text": "Ticket description editing - upgraded from plain textarea to Rich Text Editor for consistent formatting"
             },
             {
                 "type": "fix",
-                "text": "InfoPopover nested button error — resolved DOM nesting violation by rendering as span when inside button contexts"
+                "text": "InfoPopover nested button error - resolved DOM nesting violation by rendering as span when inside button contexts"
             },
             {
                 "type": "fix",
-                "text": "Pusher live updates on tickets — TicketDrawer now receives real-time updates via Pusher instead of requiring manual refresh"
+                "text": "Pusher live updates on tickets - TicketDrawer now receives real-time updates via Pusher instead of requiring manual refresh"
             },
             {
                 "type": "fix",
-                "text": "PWA auto re-fetch on focus — app data now refreshes when returning to a backgrounded PWA tab or waking from screen lock"
+                "text": "PWA auto re-fetch on focus - app data now refreshes when returning to a backgrounded PWA tab or waking from screen lock"
             },
             {
                 "type": "fix",
-                "text": "MobileBottomNav useEffect — removed unnecessary window guard that could cause hydration mismatches"
+                "text": "MobileBottomNav useEffect - removed unnecessary window guard that could cause hydration mismatches"
             },
             {
                 "type": "fix",
-                "text": "Email delivery reliability — Emailit HTTP API routing with correct per-agency API keys and 10-second timeout for custom SMTP"
+                "text": "Email delivery reliability - Emailit HTTP API routing with correct per-agency API keys and 10-second timeout for custom SMTP"
             },
             {
                 "type": "fix",
-                "text": "Webhook signature verification — corrected Svix-format HMAC verification for inbound email webhooks"
+                "text": "Webhook signature verification - corrected Svix-format HMAC verification for inbound email webhooks"
             },
             {
                 "type": "fix",
-                "text": "Connection pool stability — removed non-default pool option causing TypeScript errors, restored default non-pooled behavior"
+                "text": "Connection pool stability - removed non-default pool option causing TypeScript errors, restored default non-pooled behavior"
             },
             {
                 "type": "fix",
-                "text": "Roles page sort order — roles now display sorted by power level (most powerful first) in both Agency and Organization sections"
+                "text": "Roles page sort order - roles now display sorted by power level (most powerful first) in both Agency and Organization sections"
             },
             {
                 "type": "fix",
-                "text": "Hidden internal markers — org:* internal permission markers no longer visible in the Roles & Permissions editor"
+                "text": "Hidden internal markers - org:* internal permission markers no longer visible in the Roles & Permissions editor"
             },
             {
                 "type": "fix",
-                "text": "Resource usage counts — Plan page now counts resources directly instead of going through checkLimit, showing accurate current usage"
+                "text": "Resource usage counts - Plan page now counts resources directly instead of going through checkLimit, showing accurate current usage"
             }
         ]
     },
@@ -331,187 +331,187 @@
         "version": "8.7.0",
         "date": "2026-04-15",
         "title": "AI Connector, Client Portal, PWA & Mobile Overhaul",
-        "summary": "Landmark release — AI Connector with 66 MCP tools and OAuth 2.1 for Claude/Cursor/Windsurf integration, Client Portal Sprints 1-3 (action-first dashboard, approval workflows, file requests, milestone celebrations), PWA with Web Push notifications and offline support, Ticketing Phase 4 (intake forms, message-to-ticket, merge, convert to proposal), Client Reports with branded PDF delivery, CRM Tiers 1-5 with Docs & Files tab, comprehensive mobile responsiveness sweep, Settings restructured into 5 role-based sections, edge middleware for instant auth, and 30+ critical bug fixes including Stripe webhook reliability, timer race conditions, and connection pool exhaustion.",
+        "summary": "Landmark release - AI Connector with 66 MCP tools and OAuth 2.1 for Claude/Cursor/Windsurf integration, Client Portal Sprints 1-3 (action-first dashboard, approval workflows, file requests, milestone celebrations), PWA with Web Push notifications and offline support, Ticketing Phase 4 (intake forms, message-to-ticket, merge, convert to proposal), Client Reports with branded PDF delivery, CRM Tiers 1-5 with Docs & Files tab, comprehensive mobile responsiveness sweep, Settings restructured into 5 role-based sections, edge middleware for instant auth, and 30+ critical bug fixes including Stripe webhook reliability, timer race conditions, and connection pool exhaustion.",
         "changes": [
             {
                 "type": "feature",
-                "text": "AI Connector (MCP) — connect Claude, Cursor, Windsurf, and any MCP client to your workspace via OAuth 2.1. 66 tools across 15 modules: tasks, projects, invoices, proposals, clients, tickets, reports, messaging, services, files, search, dashboard, team, automations, and client reports"
+                "text": "AI Connector (MCP) - connect Claude, Cursor, Windsurf, and any MCP client to your workspace via OAuth 2.1. 66 tools across 15 modules: tasks, projects, invoices, proposals, clients, tickets, reports, messaging, services, files, search, dashboard, team, automations, and client reports"
             },
             {
                 "type": "feature",
-                "text": "MCP OAuth 2.1 — industry-standard authentication with PKCE, dynamic client registration, RFC 9728/8414 discovery endpoints, single-use refresh token rotation with reuse detection, and branded consent screen"
+                "text": "MCP OAuth 2.1 - industry-standard authentication with PKCE, dynamic client registration, RFC 9728/8414 discovery endpoints, single-use refresh token rotation with reuse detection, and branded consent screen"
             },
             {
                 "type": "feature",
-                "text": "AI Connector settings — master toggle, exposed modules control, eligible roles, configurable rate limits (10/25/60 per min), workspace-level AI instructions, active session management, audit trail, and Module Reference with example prompts"
+                "text": "AI Connector settings - master toggle, exposed modules control, eligible roles, configurable rate limits (10/25/60 per min), workspace-level AI instructions, active session management, audit trail, and Module Reference with example prompts"
             },
             {
                 "type": "feature",
-                "text": "Client Portal Sprint 1 — action-first dashboard transformation with task-centric widgets and streamlined client experience"
+                "text": "Client Portal Sprint 1 - action-first dashboard transformation with task-centric widgets and streamlined client experience"
             },
             {
                 "type": "feature",
-                "text": "Client Portal Sprint 2 — approval workflows with Approve/Request Changes email buttons, file requests, project timeline, and work requests"
+                "text": "Client Portal Sprint 2 - approval workflows with Approve/Request Changes email buttons, file requests, project timeline, and work requests"
             },
             {
                 "type": "feature",
-                "text": "Client Portal Sprint 3 — per-client welcome messages, quiet hours with timezone support, and milestone celebration animations"
+                "text": "Client Portal Sprint 3 - per-client welcome messages, quiet hours with timezone support, and milestone celebration animations"
             },
             {
                 "type": "feature",
-                "text": "PWA foundation — installable Progressive Web App with app shell caching, background sync, Web Push notifications via VAPID, share target, and badging API"
+                "text": "PWA foundation - installable Progressive Web App with app shell caching, background sync, Web Push notifications via VAPID, share target, and badging API"
             },
             {
                 "type": "feature",
-                "text": "Service Worker v3 — navigation preload for instant page loads, cache-first statics, LRU image cache, stale-while-revalidate API responses, and offline fallback"
+                "text": "Service Worker v3 - navigation preload for instant page loads, cache-first statics, LRU image cache, stale-while-revalidate API responses, and offline fallback"
             },
             {
                 "type": "feature",
-                "text": "PWA install banner — mobile install prompt encouraging users to add the app to their home screen"
+                "text": "PWA install banner - mobile install prompt encouraging users to add the app to their home screen"
             },
             {
                 "type": "feature",
-                "text": "Ticketing Phase 4 — settings page with status pipeline management, canned response template picker, ticket merge modal, and convert ticket to proposal"
+                "text": "Ticketing Phase 4 - settings page with status pipeline management, canned response template picker, ticket merge modal, and convert ticket to proposal"
             },
             {
                 "type": "feature",
-                "text": "Intake forms on tickets — dynamic form mapping to ticket types with field configuration"
+                "text": "Intake forms on tickets - dynamic form mapping to ticket types with field configuration"
             },
             {
                 "type": "feature",
-                "text": "Create ticket from message — convert chat messages into support tickets directly from the messaging interface"
+                "text": "Create ticket from message - convert chat messages into support tickets directly from the messaging interface"
             },
             {
                 "type": "feature",
-                "text": "Client Reports — generate, send, and track branded client reports with milestone queries, PDF delivery, and CLIENT_REPORT_SENT notifications"
+                "text": "Client Reports - generate, send, and track branded client reports with milestone queries, PDF delivery, and CLIENT_REPORT_SENT notifications"
             },
             {
                 "type": "feature",
-                "text": "CRM Tiers 1-5 — Docs & Files tab with file upload, link creation, rich text documents, type-specific icons, image thumbnails, lightbox preview, file pinning, and PDF inline preview"
+                "text": "CRM Tiers 1-5 - Docs & Files tab with file upload, link creation, rich text documents, type-specific icons, image thumbnails, lightbox preview, file pinning, and PDF inline preview"
             },
             {
                 "type": "feature",
-                "text": "Organization Member role expansion — project-work permissions added for Org Members to participate in assigned projects"
+                "text": "Organization Member role expansion - project-work permissions added for Org Members to participate in assigned projects"
             },
             {
                 "type": "feature",
-                "text": "Last Worked By column — see who last worked on each task in list views"
+                "text": "Last Worked By column - see who last worked on each task in list views"
             },
             {
                 "type": "feature",
-                "text": "Last month & custom date range filters — new time period options for dashboard and reports"
+                "text": "Last month & custom date range filters - new time period options for dashboard and reports"
             },
             {
                 "type": "feature",
-                "text": "Health endpoint — /api/health keep-alive to prevent Vercel cold starts"
+                "text": "Health endpoint - /api/health keep-alive to prevent Vercel cold starts"
             },
             {
                 "type": "feature",
-                "text": "InfoPopover shared component — platform-wide contextual help tooltips with portal rendering"
+                "text": "InfoPopover shared component - platform-wide contextual help tooltips with portal rendering"
             },
             {
                 "type": "feature",
-                "text": "Refundable badge — info popover on tasks showing refund eligibility, gated behind TASKS_DELETE permission"
+                "text": "Refundable badge - info popover on tasks showing refund eligibility, gated behind TASKS_DELETE permission"
             },
             {
                 "type": "feature",
-                "text": "Unviewed report badge — sidebar notification badge for org users when new client reports arrive"
+                "text": "Unviewed report badge - sidebar notification badge for org users when new client reports arrive"
             },
             {
                 "type": "feature",
-                "text": "Project file request badges — visual indicators in sidebar, project sidebar, and list page for pending file requests"
+                "text": "Project file request badges - visual indicators in sidebar, project sidebar, and list page for pending file requests"
             },
             {
                 "type": "improvement",
-                "text": "Settings restructured into 5 role-based sections — Account, Agency Settings, Workspace, Billing, and About with per-item permission filtering"
+                "text": "Settings restructured into 5 role-based sections - Account, Agency Settings, Workspace, Billing, and About with per-item permission filtering"
             },
             {
                 "type": "improvement",
-                "text": "AI Connector read-only mode — non-admin users see Module Reference, Connection Details, Compatible Tools, and Security sections without admin controls"
+                "text": "AI Connector read-only mode - non-admin users see Module Reference, Connection Details, Compatible Tools, and Security sections without admin controls"
             },
             {
                 "type": "improvement",
-                "text": "Reports sidebar navigation — collapsible sidebar replacing tab bar for better navigation across report types"
+                "text": "Reports sidebar navigation - collapsible sidebar replacing tab bar for better navigation across report types"
             },
             {
                 "type": "improvement",
-                "text": "Comprehensive mobile responsiveness — platform-wide sweep across all pages with proper KPI cards, filter dropdowns, action buttons, and table layouts on small screens"
+                "text": "Comprehensive mobile responsiveness - platform-wide sweep across all pages with proper KPI cards, filter dropdowns, action buttons, and table layouts on small screens"
             },
             {
                 "type": "improvement",
-                "text": "Edge middleware fast auth — skip cold start for unauthenticated users, root redirect moved to edge layer"
+                "text": "Edge middleware fast auth - skip cold start for unauthenticated users, root redirect moved to edge layer"
             },
             {
                 "type": "improvement",
-                "text": "Login page renders immediately — no longer blocks on branding API call"
+                "text": "Login page renders immediately - no longer blocks on branding API call"
             },
             {
                 "type": "improvement",
-                "text": "Page layout standardization — Automations, Intake Forms, and Bug Reports modernized to consistent layout pattern"
+                "text": "Page layout standardization - Automations, Intake Forms, and Bug Reports modernized to consistent layout pattern"
             },
             {
                 "type": "improvement",
-                "text": "ProjectSidebar nav grouping — organized into TASKS, PROJECT, and ADMIN sections with visual dividers"
+                "text": "ProjectSidebar nav grouping - organized into TASKS, PROJECT, and ADMIN sections with visual dividers"
             },
             {
                 "type": "improvement",
-                "text": "SVG icon migration — replaced all remaining emoji icons (CRM, locks, badges) with consistent SVG icons"
+                "text": "SVG icon migration - replaced all remaining emoji icons (CRM, locks, badges) with consistent SVG icons"
             },
             {
                 "type": "improvement",
-                "text": "Collapsed OrgSidebar dividers — visual separators between icon groups when sidebar is collapsed"
+                "text": "Collapsed OrgSidebar dividers - visual separators between icon groups when sidebar is collapsed"
             },
             {
                 "type": "improvement",
-                "text": "Ticket UI branding compliance — branded fonts, display preference support, and SLA audit fixes"
+                "text": "Ticket UI branding compliance - branded fonts, display preference support, and SLA audit fixes"
             },
             {
                 "type": "improvement",
-                "text": "Dark logo on auth pages — better contrast on dark backgrounds for login and signup"
+                "text": "Dark logo on auth pages - better contrast on dark backgrounds for login and signup"
             },
             {
                 "type": "improvement",
-                "text": "PWA skyline logo — new icon design with maskable variants to remove Chrome badge overlay on Android"
+                "text": "PWA skyline logo - new icon design with maskable variants to remove Chrome badge overlay on Android"
             },
             {
                 "type": "fix",
-                "text": "Stripe webhook notifications never fired — critical FK crash on audit log prevented all webhook-triggered notifications"
+                "text": "Stripe webhook notifications never fired - critical FK crash on audit log prevented all webhook-triggered notifications"
             },
             {
                 "type": "fix",
-                "text": "Connection pool exhaustion — lastActiveAt fire-and-forget updates causing deadlocks, fixed with 5s timeout and pool increase (2 → 5)"
+                "text": "Connection pool exhaustion - lastActiveAt fire-and-forget updates causing deadlocks, fixed with 5s timeout and pool increase (2 → 5)"
             },
             {
                 "type": "fix",
-                "text": "Login timeout — idle_in_transaction_session_timeout added to prevent abandoned transaction locks"
+                "text": "Login timeout - idle_in_transaction_session_timeout added to prevent abandoned transaction locks"
             },
             {
                 "type": "fix",
-                "text": "Timer vanishing on start — use mutation response instead of refetch to eliminate race conditions"
+                "text": "Timer vanishing on start - use mutation response instead of refetch to eliminate race conditions"
             },
             {
                 "type": "fix",
-                "text": "Timer widget positioning — now renders above chat bubble to prevent overlap"
+                "text": "Timer widget positioning - now renders above chat bubble to prevent overlap"
             },
             {
                 "type": "fix",
-                "text": "PWA navigation preload — cancelled preload causing false offline page on resume from screen lock"
+                "text": "PWA navigation preload - cancelled preload causing false offline page on resume from screen lock"
             },
             {
                 "type": "fix",
-                "text": "PWA HTML page caching reverted — was causing auth/session failures after login"
+                "text": "PWA HTML page caching reverted - was causing auth/session failures after login"
             },
             {
                 "type": "fix",
-                "text": "Financial data gating — Total Spent/Outstanding stripped from client insights for PM role, Activity Timeline invoice data gated behind canViewFinancials"
+                "text": "Financial data gating - Total Spent/Outstanding stripped from client insights for PM role, Activity Timeline invoice data gated behind canViewFinancials"
             },
             {
                 "type": "fix",
-                "text": "Tenant scoping — agencyId added to all Sprint 2 queries to prevent cross-tenant data access"
+                "text": "Tenant scoping - agencyId added to all Sprint 2 queries to prevent cross-tenant data access"
             },
             {
                 "type": "fix",
-                "text": "React hydration mismatches — fixed #418, #310 (Decimal object), viewMode localStorage read, and dashboard quote"
+                "text": "React hydration mismatches - fixed #418, #310 (Decimal object), viewMode localStorage read, and dashboard quote"
             },
             {
                 "type": "fix",
@@ -523,19 +523,19 @@
             },
             {
                 "type": "fix",
-                "text": "Chat line breaks preserved — white-space: pre-wrap applied to message content"
+                "text": "Chat line breaks preserved - white-space: pre-wrap applied to message content"
             },
             {
                 "type": "fix",
-                "text": "System user ID lookups — replaced all userId: 'system' with real user lookups to prevent FK constraint violations"
+                "text": "System user ID lookups - replaced all userId: 'system' with real user lookups to prevent FK constraint violations"
             },
             {
                 "type": "fix",
-                "text": "Client Report milestone query — use COMPLETED status instead of nonexistent completedAt, correct field names"
+                "text": "Client Report milestone query - use COMPLETED status instead of nonexistent completedAt, correct field names"
             },
             {
                 "type": "fix",
-                "text": "MobileBottomNav clearance — fixed across 4 pages where fixed elements were overlapping the bottom navigation"
+                "text": "MobileBottomNav clearance - fixed across 4 pages where fixed elements were overlapping the bottom navigation"
             }
         ]
     },
@@ -543,115 +543,115 @@
         "version": "8.6.0",
         "date": "2026-04-03",
         "title": "Project Sidebar, Task Lists, Messaging Upgrades & Column Resizing",
-        "summary": "Major update — project sidebar with collapsible task hierarchy tree, sections and lists with drag-and-drop reordering, 12+ messaging upgrades (floating chat widget, pinned messages, message search, forwarding, slash commands, personal notes), task column resizing with sticky frozen columns, project templates, URL unfurling, task bulk actions, and proposal auto-checkout with PDF export.",
+        "summary": "Major update - project sidebar with collapsible task hierarchy tree, sections and lists with drag-and-drop reordering, 12+ messaging upgrades (floating chat widget, pinned messages, message search, forwarding, slash commands, personal notes), task column resizing with sticky frozen columns, project templates, URL unfurling, task bulk actions, and proposal auto-checkout with PDF export.",
         "changes": [
             {
                 "type": "feature",
-                "text": "Project sidebar — collapsible sidebar with task hierarchy tree, section views, list navigation, project switcher, and URL state management"
+                "text": "Project sidebar - collapsible sidebar with task hierarchy tree, section views, list navigation, project switcher, and URL state management"
             },
             {
                 "type": "feature",
-                "text": "Task lists & sections — organize tasks into lists within sections, drag-and-drop reorder, cross-container drag from kanban/list view to sidebar lists"
+                "text": "Task lists & sections - organize tasks into lists within sections, drag-and-drop reorder, cross-container drag from kanban/list view to sidebar lists"
             },
             {
                 "type": "feature",
-                "text": "Floating chat widget — Messenger-style floating chat bubble with channel search, message actions, optimistic sending, and display preferences compliance"
+                "text": "Floating chat widget - Messenger-style floating chat bubble with channel search, message actions, optimistic sending, and display preferences compliance"
             },
             {
                 "type": "feature",
-                "text": "Message search — server-side full-text search across all channels with results list and jump-to-message"
+                "text": "Message search - server-side full-text search across all channels with results list and jump-to-message"
             },
             {
                 "type": "feature",
-                "text": "Pinned messages — pin important messages to channels for quick reference"
+                "text": "Pinned messages - pin important messages to channels for quick reference"
             },
             {
                 "type": "feature",
-                "text": "Message forwarding — forward messages to other channels via picker modal"
+                "text": "Message forwarding - forward messages to other channels via picker modal"
             },
             {
                 "type": "feature",
-                "text": "Slash command entity mentions — /task, /project, /org, /proposal commands to link entities in chat"
+                "text": "Slash command entity mentions - /task, /project, /org, /proposal commands to link entities in chat"
             },
             {
                 "type": "feature",
-                "text": "Personal notes per channel — private notes with RichTextEditor, per-channel storage, and confirm-before-clear"
+                "text": "Personal notes per channel - private notes with RichTextEditor, per-channel storage, and confirm-before-clear"
             },
             {
                 "type": "feature",
-                "text": "Notification sound & mute toggle — audio alerts for new messages with per-channel mute control"
+                "text": "Notification sound & mute toggle - audio alerts for new messages with per-channel mute control"
             },
             {
                 "type": "feature",
-                "text": "Channel info side-drawer — unified channel info panel with member list, accessible via ⓘ button"
+                "text": "Channel info side-drawer - unified channel info panel with member list, accessible via ⓘ button"
             },
             {
                 "type": "feature",
-                "text": "Task column resizing — drag column headers to resize widths with per-group independent sizing and localStorage persistence"
+                "text": "Task column resizing - drag column headers to resize widths with per-group independent sizing and localStorage persistence"
             },
             {
                 "type": "feature",
-                "text": "Sticky frozen columns — drag handle, checkbox, and title columns stay fixed during horizontal scroll with shadow indicator"
+                "text": "Sticky frozen columns - drag handle, checkbox, and title columns stay fixed during horizontal scroll with shadow indicator"
             },
             {
                 "type": "feature",
-                "text": "Task bulk action bar — multi-select tasks with floating action bar for bulk status change, assignment, priority, and deletion"
+                "text": "Task bulk action bar - multi-select tasks with floating action bar for bulk status change, assignment, priority, and deletion"
             },
             {
                 "type": "feature",
-                "text": "Project templates — save and reuse project structures with task lists, sections, and custom statuses for consistent project setup"
+                "text": "Project templates - save and reuse project structures with task lists, sections, and custom statuses for consistent project setup"
             },
             {
                 "type": "feature",
-                "text": "URL unfurling — link preview cards with title, description, and thumbnail for URLs shared in chat and rich text editors"
+                "text": "URL unfurling - link preview cards with title, description, and thumbnail for URLs shared in chat and rich text editors"
             },
             {
                 "type": "feature",
-                "text": "Proposal auto-checkout — automatic Stripe checkout on proposal acceptance with deferred service provisioning"
+                "text": "Proposal auto-checkout - automatic Stripe checkout on proposal acceptance with deferred service provisioning"
             },
             {
                 "type": "feature",
-                "text": "Proposal PDF — download, print, and email proposals as PDF with smart date labels, recurring badges, and cursive signature font"
+                "text": "Proposal PDF - download, print, and email proposals as PDF with smart date labels, recurring badges, and cursive signature font"
             },
             {
                 "type": "feature",
-                "text": "Proposal auto-save — optimistic debounced auto-save in proposal builder with visual save indicator"
+                "text": "Proposal auto-save - optimistic debounced auto-save in proposal builder with visual save indicator"
             },
             {
                 "type": "feature",
-                "text": "11 proposal transactional emails — dedicated email templates for sent, viewed, accepted, declined, expired, counter-proposal, review, and reminder events"
+                "text": "11 proposal transactional emails - dedicated email templates for sent, viewed, accepted, declined, expired, counter-proposal, review, and reminder events"
             },
             {
                 "type": "feature",
-                "text": "HIDDEN service visibility — mark service templates as internal-only, invisible on the public catalog"
+                "text": "HIDDEN service visibility - mark service templates as internal-only, invisible on the public catalog"
             },
             {
                 "type": "feature",
-                "text": "Dashboard lifetime filter — view all-time KPI stats with new Lifetime period option"
+                "text": "Dashboard lifetime filter - view all-time KPI stats with new Lifetime period option"
             },
             {
                 "type": "feature",
-                "text": "Auto-linkify URLs — URLs in chat messages are automatically converted to clickable links"
+                "text": "Auto-linkify URLs - URLs in chat messages are automatically converted to clickable links"
             },
             {
                 "type": "improvement",
-                "text": "Project name initials — replaced project lead avatar with project name initials and hashed accent colors for consistent project identification"
+                "text": "Project name initials - replaced project lead avatar with project name initials and hashed accent colors for consistent project identification"
             },
             {
                 "type": "improvement",
-                "text": "Sidebar collapse/expand — single chevron toggle in header, hidden back-to-projects link when collapsed, standardized 56px rail width"
+                "text": "Sidebar collapse/expand - single chevron toggle in header, hidden back-to-projects link when collapsed, standardized 56px rail width"
             },
             {
                 "type": "improvement",
-                "text": "Configurable invoice defaults — set default payment terms, notes, and footer text in branding settings for all new invoices"
+                "text": "Configurable invoice defaults - set default payment terms, notes, and footer text in branding settings for all new invoices"
             },
             {
                 "type": "improvement",
-                "text": "Cross-section list dragging — drag lists between sections in the project sidebar"
+                "text": "Cross-section list dragging - drag lists between sections in the project sidebar"
             },
             {
                 "type": "fix",
-                "text": "Org-role users seeing 0 projects — fixed project query scoping for Organization Owner/Admin/Member roles"
+                "text": "Org-role users seeing 0 projects - fixed project query scoping for Organization Owner/Admin/Member roles"
             },
             {
                 "type": "fix",
@@ -663,7 +663,7 @@
             },
             {
                 "type": "fix",
-                "text": "YouTube/Vimeo embeds — added to CSP frame-src for video embed support"
+                "text": "YouTube/Vimeo embeds - added to CSP frame-src for video embed support"
             },
             {
                 "type": "fix",
@@ -671,7 +671,7 @@
             },
             {
                 "type": "fix",
-                "text": "DnD conflict resolution — fixed dnd-kit vs native drag conflicts for task and list dragging"
+                "text": "DnD conflict resolution - fixed dnd-kit vs native drag conflicts for task and list dragging"
             }
         ]
     },
@@ -683,43 +683,43 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Keyboard shortcuts expanded — added shortcuts to Projects, Invoices, and Organizations pages with G→O quick navigation"
+                "text": "Keyboard shortcuts expanded - added shortcuts to Projects, Invoices, and Organizations pages with G→O quick navigation"
             },
             {
                 "type": "feature",
-                "text": "File details panel — view file metadata, download history, and tracking in the file manager"
+                "text": "File details panel - view file metadata, download history, and tracking in the file manager"
             },
             {
                 "type": "feature",
-                "text": "File Browser Picker — browse and select from existing uploaded files (owner-only)"
+                "text": "File Browser Picker - browse and select from existing uploaded files (owner-only)"
             },
             {
                 "type": "feature",
-                "text": "File manager bulk actions — floating action bar for multi-select file operations"
+                "text": "File manager bulk actions - floating action bar for multi-select file operations"
             },
             {
                 "type": "improvement",
-                "text": "PM financial data gating — hide financial KPIs, revenue columns, invoices tab, time tracking data, and Generate Invoice button from PM/Team Member roles across dashboard, reports, projects, and organizations pages"
+                "text": "PM financial data gating - hide financial KPIs, revenue columns, invoices tab, time tracking data, and Generate Invoice button from PM/Team Member roles across dashboard, reports, projects, and organizations pages"
             },
             {
                 "type": "improvement",
-                "text": "Backend time entry filtering — enforce server-side filtering for non-financial roles to prevent data leaks"
+                "text": "Backend time entry filtering - enforce server-side filtering for non-financial roles to prevent data leaks"
             },
             {
                 "type": "improvement",
-                "text": "PM team management restricted — removed MANAGE_TEAM_MEMBERS from PM role defaults"
+                "text": "PM team management restricted - removed MANAGE_TEAM_MEMBERS from PM role defaults"
             },
             {
                 "type": "improvement",
-                "text": "PM/Team Member own-invoice access — PMs and Team Members can only view invoices they personally created"
+                "text": "PM/Team Member own-invoice access - PMs and Team Members can only view invoices they personally created"
             },
             {
                 "type": "improvement",
-                "text": "Role rename — Owner → Agency Owner, Team Member → Agency Member for clarity"
+                "text": "Role rename - Owner → Agency Owner, Team Member → Agency Member for clarity"
             },
             {
                 "type": "improvement",
-                "text": "CSS architecture — split features.css (5,951 lines) into 7 focused domain-specific stylesheets"
+                "text": "CSS architecture - split features.css (5,951 lines) into 7 focused domain-specific stylesheets"
             },
             {
                 "type": "improvement",
@@ -727,15 +727,15 @@
             },
             {
                 "type": "improvement",
-                "text": "Email branding — role-aware wording, enriched digests, and consistent proposal email formatting"
+                "text": "Email branding - role-aware wording, enriched digests, and consistent proposal email formatting"
             },
             {
                 "type": "fix",
-                "text": "Signed URL expiry breaking avatars and branding images — switched to permanent public URLs"
+                "text": "Signed URL expiry breaking avatars and branding images - switched to permanent public URLs"
             },
             {
                 "type": "fix",
-                "text": "Renewals cron now supports all Stripe payment method types (card, link, etc.) — not just card"
+                "text": "Renewals cron now supports all Stripe payment method types (card, link, etc.) - not just card"
             },
             {
                 "type": "fix",
@@ -743,11 +743,11 @@
             },
             {
                 "type": "fix",
-                "text": "Chat digest emails — only notify about NEW messages since last digest, fixed dedup and subject count"
+                "text": "Chat digest emails - only notify about NEW messages since last digest, fixed dedup and subject count"
             },
             {
                 "type": "fix",
-                "text": "Task assignment email refactor — moved to server-side fire-at-assignment, prevents duplicate emails, respects user email preferences"
+                "text": "Task assignment email refactor - moved to server-side fire-at-assignment, prevents duplicate emails, respects user email preferences"
             },
             {
                 "type": "fix",
@@ -755,7 +755,7 @@
             },
             {
                 "type": "fix",
-                "text": "Org owner can now view invoices correctly — fixed requireAnyPermission OR logic"
+                "text": "Org owner can now view invoices correctly - fixed requireAnyPermission OR logic"
             },
             {
                 "type": "fix",
@@ -763,7 +763,7 @@
             },
             {
                 "type": "fix",
-                "text": "Workload view filtered to agency staff only — org-role members excluded"
+                "text": "Workload view filtered to agency staff only - org-role members excluded"
             },
             {
                 "type": "fix",
@@ -771,11 +771,11 @@
             },
             {
                 "type": "fix",
-                "text": "OverviewTab audit — pinned notes priority, field dropdowns, and other corrections"
+                "text": "OverviewTab audit - pinned notes priority, field dropdowns, and other corrections"
             },
             {
                 "type": "fix",
-                "text": "Chat digest cron SQL error — ungrouped column in subquery"
+                "text": "Chat digest cron SQL error - ungrouped column in subquery"
             },
             {
                 "type": "fix",
@@ -806,52 +806,52 @@
     {
         "version": "8.5.0",
         "date": "2026-03-23",
-        "title": "Proposals — Block-Based Proposal Builder & Client Delivery",
-        "summary": "Complete proposal management system — create professional proposals with an 18-block visual builder, send to clients for review, track views and engagement, accept signatures, and convert accepted proposals to projects or invoices.",
+        "title": "Proposals - Block-Based Proposal Builder & Client Delivery",
+        "summary": "Complete proposal management system - create professional proposals with an 18-block visual builder, send to clients for review, track views and engagement, accept signatures, and convert accepted proposals to projects or invoices.",
         "changes": [
             {
                 "type": "feature",
-                "text": "Proposal builder — drag-and-drop block editor with 18 content types: headings, rich text, images, pricing tables, deliverables, timeline, terms, signature, testimonials, case studies, attachments, video embeds, team bios, and interactive pricing configurator"
+                "text": "Proposal builder - drag-and-drop block editor with 18 content types: headings, rich text, images, pricing tables, deliverables, timeline, terms, signature, testimonials, case studies, attachments, video embeds, team bios, and interactive pricing configurator"
             },
             {
                 "type": "feature",
-                "text": "Proposal lifecycle — full status workflow from Draft → Pending Review → Sent → Viewed → Accepted/Declined/Expired with withdraw, revise, and counter-proposal support"
+                "text": "Proposal lifecycle - full status workflow from Draft → Pending Review → Sent → Viewed → Accepted/Declined/Expired with withdraw, revise, and counter-proposal support"
             },
             {
                 "type": "feature",
-                "text": "Client acceptance — clients can review proposals via a branded public share link, accept with e-signature, decline with reason, or submit counter-proposals"
+                "text": "Client acceptance - clients can review proposals via a branded public share link, accept with e-signature, decline with reason, or submit counter-proposals"
             },
             {
                 "type": "feature",
-                "text": "Proposal-to-project/invoice conversion — convert accepted proposals to projects, invoices, or both with a single click"
+                "text": "Proposal-to-project/invoice conversion - convert accepted proposals to projects, invoices, or both with a single click"
             },
             {
                 "type": "feature",
-                "text": "Proposal analytics — track view counts, unique viewers, average view duration, completion rate, device breakdown, and time-to-decision"
+                "text": "Proposal analytics - track view counts, unique viewers, average view duration, completion rate, device breakdown, and time-to-decision"
             },
             {
                 "type": "feature",
-                "text": "Internal review workflow — submit proposals for team review before sending, with approve/reject feedback loop"
+                "text": "Internal review workflow - submit proposals for team review before sending, with approve/reject feedback loop"
             },
             {
                 "type": "feature",
-                "text": "Version history — track changes across proposal revisions with total difference comparison"
+                "text": "Version history - track changes across proposal revisions with total difference comparison"
             },
             {
                 "type": "feature",
-                "text": "Proposal templates — save and reuse proposal structures for consistent client communications"
+                "text": "Proposal templates - save and reuse proposal structures for consistent client communications"
             },
             {
                 "type": "improvement",
-                "text": "Proposals tab on organization detail page — view all proposals for a client with status, amount, and quick-create button"
+                "text": "Proposals tab on organization detail page - view all proposals for a client with status, amount, and quick-create button"
             },
             {
                 "type": "improvement",
-                "text": "Proposal notifications — new 'Proposal activity' category in notification settings for sent, viewed, accepted, declined, and expired events"
+                "text": "Proposal notifications - new 'Proposal activity' category in notification settings for sent, viewed, accepted, declined, and expired events"
             },
             {
                 "type": "fix",
-                "text": "Fixed organization list not loading in create proposal modal — limit parameter exceeded backend maximum"
+                "text": "Fixed organization list not loading in create proposal modal - limit parameter exceeded backend maximum"
             }
         ]
     },
@@ -863,75 +863,75 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "⌘K Command Palette — universal search across pages, tasks, projects, invoices, and settings with instant navigation"
+                "text": "⌘K Command Palette - universal search across pages, tasks, projects, invoices, and settings with instant navigation"
             },
             {
                 "type": "feature",
-                "text": "Keyboard shortcuts — J/K to navigate lists, X to complete tasks, E to edit, G→ for quick navigation, ⌘⇧N new task, ⌘D duplicate, ⌘\\\\ toggle sidebar"
+                "text": "Keyboard shortcuts - J/K to navigate lists, X to complete tasks, E to edit, G→ for quick navigation, ⌘⇧N new task, ⌘D duplicate, ⌘\\\\ toggle sidebar"
             },
             {
                 "type": "feature",
-                "text": "Shortcuts help overlay — press ? to see all available shortcuts for your role, with OS-aware modifier keys (⌘ on Mac, Ctrl+ on Windows)"
+                "text": "Shortcuts help overlay - press ? to see all available shortcuts for your role, with OS-aware modifier keys (⌘ on Mac, Ctrl+ on Windows)"
             },
             {
                 "type": "feature",
-                "text": "Partial payments — accept and track multiple partial payments per invoice with running balance"
+                "text": "Partial payments - accept and track multiple partial payments per invoice with running balance"
             },
             {
                 "type": "feature",
-                "text": "Generate invoice from time entries — convert tracked project time into invoice line items"
+                "text": "Generate invoice from time entries - convert tracked project time into invoice line items"
             },
             {
                 "type": "feature",
-                "text": "PM & Team Member invoice access — can create invoices and view only the ones they personally created"
+                "text": "PM & Team Member invoice access - can create invoices and view only the ones they personally created"
             },
             {
                 "type": "feature",
-                "text": "Timer controls in project header — Start, Pause, and Stop buttons directly on project pages with budget integration"
+                "text": "Timer controls in project header - Start, Pause, and Stop buttons directly on project pages with budget integration"
             },
             {
                 "type": "feature",
-                "text": "Email-first guest checkout — enter email, get matched to existing account or continue as guest"
+                "text": "Email-first guest checkout - enter email, get matched to existing account or continue as guest"
             },
             {
                 "type": "feature",
-                "text": "Inline login on checkout — existing members can log in without leaving the checkout page, with seamless cart transfer"
+                "text": "Inline login on checkout - existing members can log in without leaving the checkout page, with seamless cart transfer"
             },
             {
                 "type": "feature",
-                "text": "Intake form reminders — progressive nudges for pending submissions with in-page popup and dashboard alerts"
+                "text": "Intake form reminders - progressive nudges for pending submissions with in-page popup and dashboard alerts"
             },
             {
                 "type": "feature",
-                "text": "Intake form submission tracking — see which buyers have completed their forms in the sales tracker"
+                "text": "Intake form submission tracking - see which buyers have completed their forms in the sales tracker"
             },
             {
                 "type": "feature",
-                "text": "Slack integration — receive notifications in Slack channels with rich formatting"
+                "text": "Slack integration - receive notifications in Slack channels with rich formatting"
             },
             {
                 "type": "feature",
-                "text": "Auto-create messaging channel — optionally create a conversation channel when a service is purchased"
+                "text": "Auto-create messaging channel - optionally create a conversation channel when a service is purchased"
             },
             {
                 "type": "feature",
-                "text": "Deferred task creation — enter a title before the task is saved (no more blank tasks)"
+                "text": "Deferred task creation - enter a title before the task is saved (no more blank tasks)"
             },
             {
                 "type": "feature",
-                "text": "Custom task status colors — pick colors for task statuses in the status manager"
+                "text": "Custom task status colors - pick colors for task statuses in the status manager"
             },
             {
                 "type": "feature",
-                "text": "Configurable task list columns — choose which columns appear in task list view"
+                "text": "Configurable task list columns - choose which columns appear in task list view"
             },
             {
                 "type": "feature",
-                "text": "Font size & UI density preferences — customize text size and interface spacing in Settings"
+                "text": "Font size & UI density preferences - customize text size and interface spacing in Settings"
             },
             {
                 "type": "feature",
-                "text": "Delete comments — agency owners and admins can delete task comments"
+                "text": "Delete comments - agency owners and admins can delete task comments"
             },
             {
                 "type": "improvement",
@@ -951,7 +951,7 @@
             },
             {
                 "type": "improvement",
-                "text": "Agency user sidebar menu — Documentation, Help, and Logout grouped in a popover"
+                "text": "Agency user sidebar menu - Documentation, Help, and Logout grouped in a popover"
             },
             {
                 "type": "fix",
@@ -1011,31 +1011,31 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Server-side branding cache — branding data cached with 5-min TTL and tag-based invalidation, eliminating redundant DB lookups on every page load"
+                "text": "Server-side branding cache - branding data cached with 5-min TTL and tag-based invalidation, eliminating redundant DB lookups on every page load"
             },
             {
                 "type": "improvement",
-                "text": "Organization page modularized — split into 6 focused tab components (Overview, Notes, Communications, Documents, Settings, Contacts) for faster rendering"
+                "text": "Organization page modularized - split into 6 focused tab components (Overview, Notes, Communications, Documents, Settings, Contacts) for faster rendering"
             },
             {
                 "type": "improvement",
-                "text": "Component architecture overhaul — icons, project tabs, service builder, and intake form builder split into focused modules for better code organization"
+                "text": "Component architecture overhaul - icons, project tabs, service builder, and intake form builder split into focused modules for better code organization"
             },
             {
                 "type": "improvement",
-                "text": "Service list pagination — service queries now bounded to prevent slow unbounded fetches on large catalogs"
+                "text": "Service list pagination - service queries now bounded to prevent slow unbounded fetches on large catalogs"
             },
             {
                 "type": "improvement",
-                "text": "~300KB bundle reduction — jsPDF dynamically imported only when generating invoice PDFs instead of loaded on every page"
+                "text": "~300KB bundle reduction - jsPDF dynamically imported only when generating invoice PDFs instead of loaded on every page"
             },
             {
                 "type": "improvement",
-                "text": "3 composite database indexes — Task (assignee + status), Notification (user + read state), OrgService (org + status) for faster filtered queries"
+                "text": "3 composite database indexes - Task (assignee + status), Notification (user + read state), OrgService (org + status) for faster filtered queries"
             },
             {
                 "type": "improvement",
-                "text": "Task status config caching — lookups now use server-side cache with tag-based invalidation instead of per-request DB queries"
+                "text": "Task status config caching - lookups now use server-side cache with tag-based invalidation instead of per-request DB queries"
             }
         ]
     },
@@ -1047,31 +1047,31 @@
         "changes": [
             {
                 "type": "feature",
-                "text": "Digital Products Sales Tracker — dedicated page with MRR, revenue, active sales, and churn stats cards, status filter pills, search, and sortable table (A-Z/Z-A on all 7 columns)"
+                "text": "Digital Products Sales Tracker - dedicated page with MRR, revenue, active sales, and churn stats cards, status filter pills, search, and sortable table (A-Z/Z-A on all 7 columns)"
             },
             {
                 "type": "feature",
-                "text": "Sale Detail Panel — slide-out drawer for managing digital product sales: change status, fulfillment, dates (styled DatePicker), auto-renew toggle, internal notes, intake form display, and sale timeline"
+                "text": "Sale Detail Panel - slide-out drawer for managing digital product sales: change status, fulfillment, dates (styled DatePicker), auto-renew toggle, internal notes, intake form display, and sale timeline"
             },
             {
                 "type": "feature",
-                "text": "Invoice PDF attachment — emails now include a proper PDF invoice instead of an HTML file, generated via jsPDF with accurate layout matching the print template"
+                "text": "Invoice PDF attachment - emails now include a proper PDF invoice instead of an HTML file, generated via jsPDF with accurate layout matching the print template"
             },
             {
                 "type": "feature",
-                "text": "Styled confirmation dialogs — replaced all native browser confirm() prompts with a polished modal component across the entire app"
+                "text": "Styled confirmation dialogs - replaced all native browser confirm() prompts with a polished modal component across the entire app"
             },
             {
                 "type": "feature",
-                "text": "Organization self-service member management — org owners can now invite, edit roles, and remove their own team members"
+                "text": "Organization self-service member management - org owners can now invite, edit roles, and remove their own team members"
             },
             {
                 "type": "feature",
-                "text": "Chat member panel — view channel members in messaging, with org contacts auto-joined to project channels on link"
+                "text": "Chat member panel - view channel members in messaging, with org contacts auto-joined to project channels on link"
             },
             {
                 "type": "feature",
-                "text": "Multi-page invoice preview — InvoicePreview now shows page break indicators for long invoices and scales to 1:1 match with the print version"
+                "text": "Multi-page invoice preview - InvoicePreview now shows page break indicators for long invoices and scales to 1:1 match with the print version"
             },
             {
                 "type": "feature",
@@ -1079,7 +1079,7 @@
             },
             {
                 "type": "improvement",
-                "text": "Internal note toggle hidden from organization users — only agency staff can see the internal note option in messaging"
+                "text": "Internal note toggle hidden from organization users - only agency staff can see the internal note option in messaging"
             },
             {
                 "type": "improvement",
@@ -1087,11 +1087,11 @@
             },
             {
                 "type": "improvement",
-                "text": "Invoice signature field and logo positioning — logo moved to billed-from position, signature line added to preview and print"
+                "text": "Invoice signature field and logo positioning - logo moved to billed-from position, signature line added to preview and print"
             },
             {
                 "type": "fix",
-                "text": "Organization page tabs no longer invisible — fixed min-height and CSS scoping issues"
+                "text": "Organization page tabs no longer invisible - fixed min-height and CSS scoping issues"
             },
             {
                 "type": "fix",
@@ -1107,7 +1107,7 @@
             },
             {
                 "type": "fix",
-                "text": "PDF logo format — WebP and SVG logos automatically converted to PNG for PDF compatibility"
+                "text": "PDF logo format - WebP and SVG logos automatically converted to PNG for PDF compatibility"
             },
             {
                 "type": "fix",
@@ -1119,67 +1119,67 @@
         "version": "8.1.0",
         "date": "2026-03-10",
         "title": "Live Messaging, Reactions, Read Receipts & Real-Time UX",
-        "summary": "Complete real-time messaging system — live chat via Pusher Channels, message reactions & thread replies, Facebook-style read receipts, typing indicators, optimistic message sending, unread badges (sidebar + favicon dot), inline DM search, notification grouping, settings search, reports UX upgrade, and mobile responsive layouts.",
+        "summary": "Complete real-time messaging system - live chat via Pusher Channels, message reactions & thread replies, Facebook-style read receipts, typing indicators, optimistic message sending, unread badges (sidebar + favicon dot), inline DM search, notification grouping, settings search, reports UX upgrade, and mobile responsive layouts.",
         "changes": [
             {
                 "type": "feature",
-                "text": "Live Messaging (Phases 1–8) — real-time chat via Pusher Channels with private/presence channels, channel sync, DM finder, message retention cron, chat digest emails, plan gating, and 90-day retention"
+                "text": "Live Messaging (Phases 1–8) - real-time chat via Pusher Channels with private/presence channels, channel sync, DM finder, message retention cron, chat digest emails, plan gating, and 90-day retention"
             },
             {
                 "type": "feature",
-                "text": "Message reactions — emoji reaction bar with one-per-user swap logic, hover action bar (😊 react, ↩️ reply, ⋮ more), and click-to-open emoji picker"
+                "text": "Message reactions - emoji reaction bar with one-per-user swap logic, hover action bar (😊 react, ↩️ reply, ⋮ more), and click-to-open emoji picker"
             },
             {
                 "type": "feature",
-                "text": "Thread replies — reply-to with swipe gesture, reply preview in chat, and CHAT_REPLY notifications"
+                "text": "Thread replies - reply-to with swipe gesture, reply preview in chat, and CHAT_REPLY notifications"
             },
             {
                 "type": "feature",
-                "text": "Facebook-style read receipts — tiny avatar circles at bottom-right of your sent messages showing who's seen them, readReceipts tRPC query with 10s polling"
+                "text": "Facebook-style read receipts - tiny avatar circles at bottom-right of your sent messages showing who's seen them, readReceipts tRPC query with 10s polling"
             },
             {
                 "type": "feature",
-                "text": "Typing indicator — 'Name is typing...' with animated dots, client-typing Pusher events with 2s throttle, auto-clear after 3s"
+                "text": "Typing indicator - 'Name is typing...' with animated dots, client-typing Pusher events with 2s throttle, auto-clear after 3s"
             },
             {
                 "type": "feature",
-                "text": "Optimistic message sending — messages appear instantly (opacity 0.6), matched by clientId on server confirmation, ~200ms perceived send time"
+                "text": "Optimistic message sending - messages appear instantly (opacity 0.6), matched by clientId on server confirmation, ~200ms perceived send time"
             },
             {
                 "type": "feature",
-                "text": "Favicon unread dot — branded primary-color dot overlay on tab favicon using 32×32 canvas, polls in background even when tab is inactive"
+                "text": "Favicon unread dot - branded primary-color dot overlay on tab favicon using 32×32 canvas, polls in background even when tab is inactive"
             },
             {
                 "type": "feature",
-                "text": "Sidebar unread badge — count pill next to Messages nav item (expanded: number badge, collapsed: dot), globalUnreadCount query with background polling"
+                "text": "Sidebar unread badge - count pill next to Messages nav item (expanded: number badge, collapsed: dot), globalUnreadCount query with background polling"
             },
             {
                 "type": "feature",
-                "text": "Inline DM search — replaced '+New DM' button with search box that filters existing channels and shows DM candidates"
+                "text": "Inline DM search - replaced '+New DM' button with search box that filters existing channels and shows DM candidates"
             },
             {
                 "type": "feature",
-                "text": "@mention autocomplete — type @ in chat to see org member suggestions with avatar and name"
+                "text": "@mention autocomplete - type @ in chat to see org member suggestions with avatar and name"
             },
             {
                 "type": "feature",
-                "text": "Drag-and-drop file uploads — drop files anywhere in the chat area to attach"
+                "text": "Drag-and-drop file uploads - drop files anywhere in the chat area to attach"
             },
             {
                 "type": "feature",
-                "text": "Settings search — deep keyword search across 13 settings pages with 200+ terms, flash-highlight on navigate, collapsible plan table"
+                "text": "Settings search - deep keyword search across 13 settings pages with 200+ terms, flash-highlight on navigate, collapsible plan table"
             },
             {
                 "type": "feature",
-                "text": "Reports page UX upgrade — tooltips, data caching, CSV export, KPI trends"
+                "text": "Reports page UX upgrade - tooltips, data caching, CSV export, KPI trends"
             },
             {
                 "type": "feature",
-                "text": "Mobile responsive CSS — kanban board, filter bar, and table layouts adapt to small screens"
+                "text": "Mobile responsive CSS - kanban board, filter bar, and table layouts adapt to small screens"
             },
             {
                 "type": "feature",
-                "text": "Integrations hub — refactored sub-pages pattern for Stripe and Slack integrations with search routing"
+                "text": "Integrations hub - refactored sub-pages pattern for Stripe and Slack integrations with search routing"
             },
             {
                 "type": "feature",
@@ -1187,35 +1187,35 @@
             },
             {
                 "type": "improvement",
-                "text": "Fire-and-forget message send — notifications, Pusher broadcast, and unread updates run in background for instant response"
+                "text": "Fire-and-forget message send - notifications, Pusher broadcast, and unread updates run in background for instant response"
             },
             {
                 "type": "improvement",
-                "text": "Notification grouping — CHAT_REPLY and CHAT_REACTION now grouped by type + same day (batch threshold ≥2)"
+                "text": "Notification grouping - CHAT_REPLY and CHAT_REACTION now grouped by type + same day (batch threshold ≥2)"
             },
             {
                 "type": "improvement",
-                "text": "Auto-focus message input — editor focuses on channel load and reply click for instant typing"
+                "text": "Auto-focus message input - editor focuses on channel load and reply click for instant typing"
             },
             {
                 "type": "improvement",
-                "text": "Bell notification deep links — clicking a chat mention notification navigates directly to the mentioned channel"
+                "text": "Bell notification deep links - clicking a chat mention notification navigates directly to the mentioned channel"
             },
             {
                 "type": "fix",
-                "text": "Fix React hooks violation — globalUnreadCount query moved before early return in Sidebar (rules of hooks)"
+                "text": "Fix React hooks violation - globalUnreadCount query moved before early return in Sidebar (rules of hooks)"
             },
             {
                 "type": "fix",
-                "text": "Fix favicon distortion — use fixed 32×32 canvas to prevent SVG natural dimension stretch"
+                "text": "Fix favicon distortion - use fixed 32×32 canvas to prevent SVG natural dimension stretch"
             },
             {
                 "type": "fix",
-                "text": "Fix message order — newest messages now correctly at bottom, oldest at top"
+                "text": "Fix message order - newest messages now correctly at bottom, oldest at top"
             },
             {
                 "type": "fix",
-                "text": "Fix full page scroll on messages — constrain chat panel height"
+                "text": "Fix full page scroll on messages - constrain chat panel height"
             },
             {
                 "type": "fix",
@@ -1231,7 +1231,7 @@
             },
             {
                 "type": "fix",
-                "text": "Fix bubble squeeze — 65% max-width with proper action bar positioning"
+                "text": "Fix bubble squeeze - 65% max-width with proper action bar positioning"
             },
             {
                 "type": "fix",
@@ -1239,7 +1239,7 @@
             },
             {
                 "type": "fix",
-                "text": "Scope settings audit log by role — team members see only their own changes"
+                "text": "Scope settings audit log by role - team members see only their own changes"
             }
         ]
     },

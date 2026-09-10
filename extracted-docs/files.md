@@ -24,11 +24,11 @@ Files can be uploaded in several places:
 | **Branding settings** | Logos, favicons, and signatures |
 | **Invoice signatures** | Signature images |
 
-All uploads use a simple **drag-and-drop** interface — you can also click the upload area to browse your files.
+All uploads use a simple **drag-and-drop** interface - you can also click the upload area to browse your files.
 
 ### Supported Files
 
-File types are validated on upload — only safe, common file types are accepted:
+File types are validated on upload - only safe, common file types are accepted:
 
 - **Images**: JPG, PNG, GIF, SVG, WebP
 - **Documents**: PDF, DOC, DOCX, TXT
@@ -78,7 +78,7 @@ Toggle between three view modes at the top right:
 
 | Mode | Best For |
 |------|----------|
-| **List** | Compact view — file name, type, size, date, context |
+| **List** | Compact view - file name, type, size, date, context |
 | **Detail** | Thumbnail previews with uploader info |
 | **Grid** | Large thumbnail grid for visual browsing |
 
@@ -110,7 +110,7 @@ Combine filters with the **search bar** to find files by name.
 
 ### Permissions
 
-The Files page is **Owner-only** — accessible through the Tools section of the sidebar.
+The Files page is **Owner-only** - accessible through the Tools section of the sidebar.
 
 ---
 

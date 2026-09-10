@@ -6,7 +6,7 @@ slug: "tickets"
 
 # Tickets
 
-The ticketing system provides structured support request management for your agency. Tickets represent **external requests** from your clients — bug reports, questions, feature requests, and support inquiries. They are separate from tasks, which represent internal work for your team.
+The ticketing system provides structured support request management for your agency. Tickets represent **external requests** from your clients - bug reports, questions, feature requests, and support inquiries. They are separate from tasks, which represent internal work for your team.
 
 ## Tickets vs Tasks
 
@@ -45,9 +45,9 @@ Tickets can be created from multiple sources:
   
     Clients can submit tickets from the portal in three ways:
 
-    - **Tickets page** — dedicated page in the portal sidebar
-    - **"Need Help?" button** — floating action button on every portal page
-    - **"Report an Issue"** — button on project detail pages (pre-fills the project context)
+    - **Tickets page** - dedicated page in the portal sidebar
+    - **"Need Help?" button** - floating action button on every portal page
+    - **"Report an Issue"** - button on project detail pages (pre-fills the project context)
 
     The submission form includes: Subject, Description (rich text with file upload), Type, Priority (default: Normal), and optional Project.
   
@@ -90,7 +90,7 @@ Every ticket follows a structured lifecycle through configurable statuses. Six d
     The ticket is confirmed complete. No further action expected.
   
 
-  On Pro plans, you can create **custom statuses** beyond the 6 defaults — with custom names, colors, SLA pause behavior, and display ordering.
+  On Pro plans, you can create **custom statuses** beyond the 6 defaults - with custom names, colors, SLA pause behavior, and display ordering.
 
 ## Ticket types
 
@@ -124,8 +124,8 @@ Five priority levels determine SLA targets and notification urgency:
 
 Tickets can be assigned to any agency team member (Owner, Admin, PM, or Team Member):
 
-- **Manual assignment** — select an assignee when creating or from the ticket detail
-- **Auto-assignment rules** (Enterprise) — route tickets automatically based on type, priority, or client using Specific, Round-Robin, or Least-Busy methods
+- **Manual assignment** - select an assignee when creating or from the ticket detail
+- **Auto-assignment rules** (Enterprise) - route tickets automatically based on type, priority, or client using Specific, Round-Robin, or Least-Busy methods
 
 When a ticket is assigned, the assignee receives a `TICKET_ASSIGNED` notification.
 
@@ -155,20 +155,20 @@ Service Level Agreements define your response and resolution commitments per pri
 
 ### How SLA computation works
 
-  Simple `resolvedAt - createdAt` math is **wrong** for SLA. If a ticket bounces between "In Progress" and "Waiting on Client" — paused for 4 days out of 5 — the actual active time is 1 day, not 5.
+  Simple `resolvedAt - createdAt` math is **wrong** for SLA. If a ticket bounces between "In Progress" and "Waiting on Client" - paused for 4 days out of 5 - the actual active time is 1 day, not 5.
 
 The system uses an **accumulator approach**:
 
 1. Every status change logs the time spent in the previous status
 2. If the previous status had **SLA active** (e.g., Open, In Progress), that duration is added to the accumulated active time
 3. If the previous status had **SLA paused** (e.g., Waiting on Client), time is logged but **not** added to the accumulator
-4. SLA breach checks compare accumulated active time against the target — not wall-clock time
+4. SLA breach checks compare accumulated active time against the target - not wall-clock time
 
 ### SLA breach handling
 
-- **Warning at 80%** — `TICKET_SLA_WARNING` notification to the assigned agent and agency owner (P1 priority, bypasses email digests)
-- **Breach at 100%** — `TICKET_SLA_BREACHED` notification to owner and admin; ticket flagged as breached
-- **Optional escalation** — configure automation rules to auto-reassign breached tickets
+- **Warning at 80%** - `TICKET_SLA_WARNING` notification to the assigned agent and agency owner (P1 priority, bypasses email digests)
+- **Breach at 100%** - `TICKET_SLA_BREACHED` notification to owner and admin; ticket flagged as breached
+- **Optional escalation** - configure automation rules to auto-reassign breached tickets
 
 ### First response time
 
@@ -191,9 +191,9 @@ When a ticket is resolved, the client can rate their experience:
 
 Save frequently used responses as reusable templates:
 
-- **Title and content** — rich text body with categories and optional shortcut keys
-- **Template management** — Owner, Admin, and PM can create, edit, and delete
-- **Quick insert** — all agents can insert templates from a dropdown in the reply editor
+- **Title and content** - rich text body with categories and optional shortcut keys
+- **Template management** - Owner, Admin, and PM can create, edit, and delete
+- **Quick insert** - all agents can insert templates from a dropdown in the reply editor
 
   Canned templates require the **Pro plan** or higher (`ticketTemplates` feature flag).
 
@@ -314,7 +314,7 @@ The ticket submission form includes:
 | Priority | ✅ | Default: Normal |
 | Project | ❌ | Optional project context |
 
-  On Pro plans with intake forms enabled, ticket types can be linked to structured intake forms — showing category-specific fields like "Steps to Reproduce" for bug reports.
+  On Pro plans with intake forms enabled, ticket types can be linked to structured intake forms - showing category-specific fields like "Steps to Reproduce" for bug reports.
 
 ## Role-based visibility
 
@@ -357,7 +357,7 @@ Clients can reply to tickets from the ticket detail view:
 | Org Admin | ✅ | On any organization ticket |
 | Org Member | ✅ | Only on tickets they created or are watching |
 
-  Internal notes added by agency team members are completely hidden from all organization roles. The system enforces this server-side — not just in the UI — so notes cannot be exposed via API inspection.
+  Internal notes added by agency team members are completely hidden from all organization roles. The system enforces this server-side - not just in the UI - so notes cannot be exposed via API inspection.
 
 ## Rating satisfaction (CSAT)
 
@@ -366,7 +366,7 @@ When a ticket is resolved, clients receive a notification with a CSAT rating pro
 1. Open the resolved ticket in the portal
 2. Click the **star rating** (1–5)
 3. Optionally add a **text comment** with feedback
-4. Submit — the rating is recorded with the rater's identity and timestamp
+4. Submit - the rating is recorded with the rater's identity and timestamp
 
 CSAT ratings can also be submitted from the resolution notification email link.
 
@@ -393,7 +393,7 @@ Org Owner and Org Admin can add or remove **watchers** (CC) on their organizatio
 
 The **Tickets** sidebar item appears for all organization roles (Org Owner, Org Admin, Org Member) when the agency has ticketing enabled.
 
-  The agency can hide the Tickets nav item via the `portalHiddenNavItems` branding setting — same pattern as hiding Invoices, Projects, or other portal sections.
+  The agency can hide the Tickets nav item via the `portalHiddenNavItems` branding setting - same pattern as hiding Invoices, Projects, or other portal sections.
 
 ## Notifications for clients
 

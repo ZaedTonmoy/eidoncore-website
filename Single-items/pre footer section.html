@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Eidoncore — Newsletter + CTA</title>
+    <title>Eidoncore - Newsletter + CTA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -41,163 +41,192 @@
             padding: 90px 48px;
         }
 
-        /* ---------- Newsletter card ---------- */
+        /* ---------- Newsletter card (redesigned) ---------- */
         .newsletter {
+            --nl-ink: #0E1A2A;
+            --nl-muted: #4C5567;
+            --nl-accent: #3F6199;
+            --nl-accent-dark: #2E4A78;
+            --nl-card-bg: #F6F7FA;
+            --nl-line: #E1E4EA;
+            --nl-dot: rgba(14, 26, 42, 0.07);
             position: relative;
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px 44px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .nl-glow {
-            position: absolute;
-            width: 380px;
-            height: 380px;
-            top: -180px;
-            left: -80px;
-            background: radial-gradient(circle, var(--accent), transparent 68%);
-            opacity: 0.12;
-            filter: blur(60px);
-            pointer-events: none;
-        }
-
-        .nl-glow.two {
-            left: auto;
-            right: -120px;
-            top: auto;
-            bottom: -200px;
-            background: radial-gradient(circle, var(--teal), transparent 68%);
-            opacity: 0.1;
-        }
-
-        .nl-left {
-            position: relative;
-            z-index: 1;
-            max-width: 420px;
-        }
-
-        .nl-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: var(--accent-soft);
+            background:
+                radial-gradient(var(--nl-dot) 1.4px, transparent 1.4px) 0 0/22px 22px,
+                var(--nl-card-bg);
+            border: 1px solid var(--nl-line);
+            border-radius: 28px;
+            padding: 44px 52px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
+            justify-content: space-between;
+            gap: 40px;
+            overflow: hidden;
         }
 
-        .nl-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--accent);
+        .newsletter::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 6%;
+            right: 6%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--nl-accent) 45%, var(--nl-accent) 55%, transparent);
+            opacity: 0.55;
         }
 
-        .newsletter h2 {
-            font-size: 26px;
+        .newsletter-copy {
+            max-width: 430px;
+        }
+
+        .newsletter-copy h2 {
+            margin: 0 0 10px;
+            font-size: clamp(24px, 2.6vw, 30px);
             font-weight: 800;
+            line-height: 1.15;
             letter-spacing: -0.01em;
-            margin-bottom: 8px;
+            color: var(--nl-ink);
         }
 
-        .newsletter .nl-sub {
-            font-size: 15px;
-            color: var(--text-secondary);
+        .newsletter-copy p {
+            margin: 0;
+            font-size: 16px;
             line-height: 1.55;
+            color: var(--nl-muted);
+            font-weight: 400;
         }
 
-        .nl-right {
-            margin-top: 60px;
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
             flex-shrink: 0;
         }
 
-        .nl-form {
-            position: relative;
-            z-index: 1;
+        .capsule {
             display: flex;
             align-items: center;
-            gap: 10px;
+            background: #FFFFFF;
+            border: 1px solid var(--nl-line);
+            border-radius: 999px;
+            padding: 4px;
+            box-shadow: 0 1px 2px rgba(14, 26, 42, 0.04);
+            transition: border-color .18s ease, box-shadow .18s ease;
         }
 
-        .nl-input {
-            width: 260px;
-            padding: 13px 18px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            font-family: inherit;
-            font-size: 14.5px;
-            color: var(--ink);
-            outline: none;
-            transition: border-color 0.2s ease;
+        .capsule:focus-within {
+            border-color: var(--nl-accent);
+            box-shadow: 0 0 0 4px rgba(63, 97, 153, 0.12);
         }
 
-        .nl-input:focus {
-            border-color: var(--accent);
-        }
-
-        .nl-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .btn-pill {
-            padding: 13px 24px;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 14.5px;
-            cursor: pointer;
+        .capsule input {
             border: none;
+            outline: none;
+            background: transparent;
             font-family: inherit;
-            white-space: nowrap;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            font-size: 15px;
+            color: var(--nl-ink);
+            padding: 11px 8px 11px 18px;
+            width: 230px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+        .capsule input::placeholder {
+            color: #9AA1B0;
+        }
+
+        .capsule button {
+            border: none;
+            cursor: pointer;
+            background: var(--nl-accent);
             color: #fff;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 11px 24px;
+            border-radius: 999px;
+            transition: background .18s ease, transform .18s ease;
+            white-space: nowrap;
         }
 
-        .btn-primary:hover {
+        .capsule button:hover {
+            background: var(--nl-accent-dark);
             transform: translateY(-1px);
-            box-shadow: 0 10px 20px -10px rgba(76, 111, 165, 0.5);
         }
 
-        .btn-outline {
-            background: #fff;
-            color: var(--ink);
-            border: 1px solid var(--border);
+        .newsletter-form .fine {
+            margin: 10px 4px 0 0;
+            font-size: 12.5px;
+            color: #8C93A3;
         }
 
-        .nl-note {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 20px;
-        }
-
-        @media (max-width: 760px) {
+        @media (max-width: 768px) {
             .newsletter {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
+                padding: 36px 24px;
+                gap: 28px;
             }
 
-            .nl-right {
-                margin-top: 24px;
+            .newsletter-copy {
+                max-width: none;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                align-items: stretch;
                 width: 100%;
             }
 
-            .nl-form {
+            .capsule {
                 width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                background: transparent;
+                border: none;
+                padding: 0;
+                box-shadow: none;
             }
 
-            .nl-input {
-                flex: 1;
-                width: auto;
+            .capsule:focus-within {
+                box-shadow: none;
+                border-color: transparent;
+            }
+
+            .capsule input {
+                width: 100%;
+                background: #FFFFFF;
+                border: 1px solid var(--nl-line);
+                border-radius: 999px;
+                padding: 13px 20px;
+                font-size: 15px;
+                box-shadow: 0 1px 2px rgba(14, 26, 42, 0.04);
+                box-sizing: border-box;
+                color: var(--nl-ink);
+                text-align: center;
+                transition: border-color 0.18s ease, box-shadow 0.18s ease;
+            }
+
+            .capsule input:focus {
+                border-color: var(--nl-accent);
+                box-shadow: 0 0 0 4px rgba(63, 97, 153, 0.12);
+            }
+
+            .capsule button {
+                width: 100%;
+                padding: 13px 24px;
+                border-radius: 999px;
+                font-size: 15px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+
+            .newsletter-form .fine {
+                align-self: center;
+                text-align: center;
+                margin: 10px auto 0;
             }
         }
 
@@ -338,34 +367,26 @@
 
     <div class="wrap">
 
-        <div class="newsletter">
-            <div class="nl-glow"></div>
-            <div class="nl-glow two"></div>
-            <div class="nl-left">
-                <div class="nl-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-                        <rect x="3" y="5" width="18" height="14" rx="2.5" />
-                        <path d="M3.5 6.5l8.5 6 8.5-6" />
-                    </svg>
-                </div>
-                <h2>Stay in the loop</h2>
-                <p class="nl-sub">Get product updates, agency tips, and early access to new features.</p>
+        <section class="newsletter">
+          <div class="newsletter-copy">
+            <h2>The agency playbook, monthly.</h2>
+            <p>New workflows, fresh integrations, and what we shipped - one email, no fluff.</p>
+          </div>
+          <form class="newsletter-form" onsubmit="return false;">
+            <div class="capsule">
+              <input type="email" placeholder="you@agency.com" required>
+              <button type="submit">Subscribe</button>
             </div>
-            <div class="nl-right">
-                <div class="nl-form">
-                    <input class="nl-input" type="email" placeholder="Enter your email">
-                    <button class="btn-pill btn-primary">Subscribe</button>
-                </div>
-                <p class="nl-note">No spam — unsubscribe anytime.</p>
-            </div>
-        </div>
+            <span class="fine">No spam. Unsubscribe anytime.</span>
+          </form>
+        </section>
 
         <div class="cta">
             <div class="cta-blob a"></div>
             <div class="cta-blob b"></div>
             <div class="cta-dots"></div>
 
-            <div class="cta-eyebrow"><span class="dot"></span>14-day free PRO trial</div>
+            <div class="cta-eyebrow">14-day free PRO trial</div>
             <h2>Ready to streamline your agency?</h2>
             <p class="cta-sub">Join thousands of agencies managing their entire workflow from a single platform. No
                 credit card required.</p>

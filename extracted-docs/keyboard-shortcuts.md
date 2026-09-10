@@ -14,12 +14,12 @@ Speed up your workflow with keyboard shortcuts available throughout the platform
 
 | Shortcut | Action |
 |----------|--------|
-| `⌘K` / `Ctrl+K` | Open Command Palette — search tasks, projects, clients, invoices, and navigate anywhere |
+| `⌘K` / `Ctrl+K` | Open Command Palette - search tasks, projects, clients, invoices, and navigate anywhere |
 | `⌘\` / `Ctrl+\` | Toggle sidebar collapse |
 | `⌘⇧P` | Create new project |
 | `?` | Open keyboard shortcuts help overlay |
 
-Navigation commands in the Command Palette are **role-filtered** — client users only see pages they can access. When focused inside the rich text editor, `⌘K` opens the insert link dialog instead.
+Navigation commands in the Command Palette are **role-filtered** - client users only see pages they can access. When focused inside the rich text editor, `⌘K` opens the insert link dialog instead.
 
 ### Command Palette
 
@@ -69,7 +69,7 @@ Shortcuts available on the Tasks page. Ignored when focus is inside a text input
 
 Focused rows show a highlighted accent border and auto-scroll into view. When inline editing (`E`), press `Enter` to save or `Escape` to cancel.
 
-The Task Drawer supports **Tab-prefix shortcuts** — press `Tab`, then a follow-up key within 600ms. Ignored when focus is inside a text input or editor.
+The Task Drawer supports **Tab-prefix shortcuts** - press `Tab`, then a follow-up key within 600ms. Ignored when focus is inside a text input or editor.
 
 | Shortcut | Action |
 |----------|--------|

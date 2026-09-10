@@ -96,7 +96,7 @@ Add team members to a project under the **Members** tab. Each member has a speci
 
 | Role | What They Can Do |
 |------|-----------------|
-| **Lead** | Full project management — edit project details, manage members, all task operations |
+| **Lead** | Full project management - edit project details, manage members, all task operations |
 | **Member** | Work on tasks, log time, upload files, add comments |
 | **Viewer** | Read-only access to project data |
 
@@ -132,7 +132,7 @@ Create rich text documents directly within a project (e.g., briefs, meeting note
 
 Leave comments directly on a project to discuss scope, share updates, or ask questions.
 
-- **Internal comments** are only visible to agency staff — not visible to client portal users
+- **Internal comments** are only visible to agency staff - not visible to client portal users
 - **Standard comments** are visible to everyone with access to the project
 - Comment threads support replies and @mentions
 - React to comments with emojis for quick feedback
@@ -172,7 +172,7 @@ Time entry statistics are aggregated per project and per task, showing:
 
 ### Start Timer from Project
 
-You can start a live timer directly from the project page header using the **Start Timer** button. This works the same as the task-level timer — you can pause, resume, and stop it at any time. When stopped, the elapsed time is saved as a time entry on the project. If a timer is already running on a task within the project, the button shows the active timer instead.
+You can start a live timer directly from the project page header using the **Start Timer** button. This works the same as the task-level timer - you can pause, resume, and stop it at any time. When stopped, the elapsed time is saved as a time entry on the project. If a timer is already running on a task within the project, the button shows the active timer instead.
 
 When time is logged on a task by someone other than the assignee, the assignee is notified.
 
@@ -211,7 +211,7 @@ Project detail pages are organized into tabs for quick navigation:
 
 ## Project Templates
 
-Save time on repetitive project setups with **project templates**. A template captures the structure of a project — milestones, tasks, and checklists — so you can reuse it when creating new projects.
+Save time on repetitive project setups with **project templates**. A template captures the structure of a project - milestones, tasks, and checklists - so you can reuse it when creating new projects.
 
 ### Creating Templates
 
@@ -226,10 +226,10 @@ Go to **Settings → Agency → Templates** to manage your project templates.
 
 Each template can include:
 
-- **Milestones** — key project phases
-- **Tasks** — pre-configured with title, description, priority, and sort order
-- **Checklist items** — per-task checklists for detailed work breakdowns
-- **Default settings** — priority, budget type, and budget amount
+- **Milestones** - key project phases
+- **Tasks** - pre-configured with title, description, priority, and sort order
+- **Checklist items** - per-task checklists for detailed work breakdowns
+- **Default settings** - priority, budget type, and budget amount
 
 ### Using Templates
 

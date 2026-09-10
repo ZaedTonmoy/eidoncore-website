@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eidoncore — the Loop</title>
+<title>Eidoncore - the Loop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -244,11 +244,15 @@
     bottom: calc(100% + 10px);
     left:50%;
     transform: translateX(-50%) translateY(4px);
-    width: 190px;
+    width: 220px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
     background: var(--surface-2);
     border: 1px solid var(--line-strong);
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     font-size: 12.5px;
     line-height: 1.5;
     color: var(--muted);
@@ -256,6 +260,7 @@
     pointer-events:none;
     transition: opacity .2s ease, transform .2s ease;
     z-index: 5;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   }
   .node-btn:hover .node-tip,
   .node-btn:focus-visible .node-tip{
@@ -343,10 +348,10 @@
 
     <!-- Left: copy -->
     <div>
-      <span class="eyebrow"><span class="dot"></span>LIVE LOOP</span>
+      <span class="eyebrow">LIVE LOOP</span>
       <h1>Built as a Loop, Not a Funnel</h1>
       <p class="lede">
-        Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> — every closed job feeds
+        Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> - every closed job feeds
         your reports, and every report surfaces the next lead. This is the cycle running
         underneath your agency, stage by stage, on repeat.
       </p>
@@ -356,7 +361,7 @@
           <path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#00adb5" stroke-width="2" stroke-linecap="round"/>
           <path d="M16 4v4h-4M8 20v-4h4" stroke="#00adb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <p>Hover any stage to see what happens there. Watch the pulse — it never stops at <span>Report</span>, it turns back into <span>Lead</span>.</p>
+        <p>Hover any stage to see what happens there. Watch the pulse - it never stops at <span>Report</span>, it turns back into <span>Lead</span>.</p>
       </div>
     </div>
 
@@ -374,7 +379,7 @@
         <div class="node" style="--i:0">
           <div class="node-btn" tabindex="0">
             <span class="node-num">01</span><span class="node-name">Lead</span>
-            <div class="node-tip">Inbound interest lands here first — before it's anyone's account.</div>
+            <div class="node-tip">Inbound interest lands here first - before it's anyone's account.</div>
           </div>
         </div>
         <div class="node" style="--i:1">
@@ -386,7 +391,7 @@
         <div class="node" style="--i:2">
           <div class="node-btn" tabindex="0">
             <span class="node-num">03</span><span class="node-name">Proposal</span>
-            <div class="node-tip">Scope and pricing go out for signature — tracked until it's signed.</div>
+            <div class="node-tip">Scope and pricing go out for signature - tracked until it's signed.</div>
           </div>
         </div>
         <div class="node" style="--i:3">
@@ -410,13 +415,13 @@
         <div class="node" style="--i:6">
           <div class="node-btn" tabindex="0">
             <span class="node-num">07</span><span class="node-name">Invoice</span>
-            <div class="node-tip">Billed the moment the work closes — no separate step to remember.</div>
+            <div class="node-tip">Automated invoices and recurring billing - seamlessly connected to every project.</div>
           </div>
         </div>
         <div class="node" style="--i:7">
           <div class="node-btn" tabindex="0">
             <span class="node-num">08</span><span class="node-name">Report</span>
-            <div class="node-tip">Margins and outcomes roll up — and point straight at the next lead.</div>
+            <div class="node-tip">Margins and outcomes roll up - and point straight at the next lead.</div>
           </div>
         </div>
       </div>
@@ -430,7 +435,7 @@
       <div class="t-row"><div class="t-head"><span class="t-num">04</span><span class="t-name">Project</span></div><p class="t-desc">The work kicks off on a timeline.</p></div>
       <div class="t-row"><div class="t-head"><span class="t-num">05</span><span class="t-name">Task</span></div><p class="t-desc">Execution, assigned and tracked to done.</p></div>
       <div class="t-row"><div class="t-head"><span class="t-num">06</span><span class="t-name">Support</span></div><p class="t-desc">Client requests, handled without derailing the project.</p></div>
-      <div class="t-row"><div class="t-head"><span class="t-num">07</span><span class="t-name">Invoice</span></div><p class="t-desc">Billed the moment the work closes.</p></div>
+      <div class="t-row"><div class="t-head"><span class="t-num">07</span><span class="t-name">Invoice</span></div><p class="t-desc">Automated invoices and recurring billing, connected to every project.</p></div>
       <div class="t-row"><div class="t-head"><span class="t-num">08</span><span class="t-name">Report</span></div><p class="t-desc">Margins and outcomes roll up.</p></div>
       <div class="t-loop">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 14.5-4.6M20 12a8 8 0 0 1-14.5 4.6" stroke="#00adb5" stroke-width="2" stroke-linecap="round"/><path d="M16 4v4h-4M8 20v-4h4" stroke="#00adb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>

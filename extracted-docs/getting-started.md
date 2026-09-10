@@ -20,7 +20,7 @@ Enter your **agency name** and choose a **workspace URL** (e.g., `myagency.eidon
 
 Enter your **name**, **email**, and **password** (minimum 8 characters with at least one uppercase letter, one lowercase letter, and one digit). Click **Create Account**.
 
-Your workspace subdomain is provisioned automatically — no DNS setup required.
+Your workspace subdomain is provisioned automatically - no DNS setup required.
 
 ### Email Verification
 
@@ -50,7 +50,7 @@ All steps include a "Prefer not to say" option. Your answers help us tailor the 
 
 ### Free Trial
 
-Every new workspace starts with a **14-day free trial** of the Pro plan. You'll get full access to Pro features — no credit card required. When the trial ends, your workspace downgrades to the Free plan unless you subscribe.
+Every new workspace starts with a **14-day free trial** of the Pro plan. You'll get full access to Pro features - no credit card required. When the trial ends, your workspace downgrades to the Free plan unless you subscribe.
 
 > **See also:** [Settings](./settings/billing#plans--billing) for plan details and pricing
 
@@ -90,7 +90,7 @@ For security, you can only request 3 resets per 10 minutes. Password requirement
 
 The dashboard you see depends on your role in the agency.
 
-**For Owners, Admins, and Project Managers** — Your command center for agency operations:
+**For Owners, Admins, and Project Managers** - Your command center for agency operations:
 
 | Section | What It Shows |
 |---------|--------------|
@@ -100,9 +100,9 @@ The dashboard you see depends on your role in the agency.
 | **Recent Activity** | Latest actions across the workspace |
 | **Alerts** | Actionable banners for overdue invoices, at-risk projects, failed automations, and more |
 
-Alerts are computed in real time from your workspace data. Dismiss them with the × button — they'll reappear on your next visit if the underlying issue hasn't been resolved.
+Alerts are computed in real time from your workspace data. Dismiss them with the × button - they'll reappear on your next visit if the underlying issue hasn't been resolved.
 
-The dashboard also features a **daily motivational quote** that rotates every day — drawn from a curated collection of 345 quotes across leadership, creativity, resilience, and more.
+The dashboard also features a **daily motivational quote** that rotates every day - drawn from a curated collection of 345 quotes across leadership, creativity, resilience, and more.
 
 A focused view showing:
 
@@ -127,16 +127,16 @@ Eidoncore has two categories of users:
 | Role | What They Can Do |
 |------|-----------------|
 | **Owner** | Full access to everything. Manages billing, plan, and team roles |
-| **Admin** | Full operational access — settings, branding, team management |
+| **Admin** | Full operational access - settings, branding, team management |
 | **Project Manager** | Manages projects, tasks, and team assignments |
 | **Accountant** | Manages invoices, payments, and financial reports |
 | **Team Member** | Works on assigned tasks, logs time, manages their own work |
 
 | Role | What They Can Do |
 |------|-----------------|
-| **Organization Owner** | Full client portal access — projects, tasks, invoices, services, reports, and member management |
-| **Organization Admin** | Projects, tasks, invoices, and documents — no member management |
-| **Organization Member** | Project work only — tasks, comments, and statuses. No financial access |
+| **Organization Owner** | Full client portal access - projects, tasks, invoices, services, reports, and member management |
+| **Organization Admin** | Projects, tasks, invoices, and documents - no member management |
+| **Organization Member** | Project work only - tasks, comments, and statuses. No financial access |
 
 > **See also:** [Team Management](./team) for inviting staff · [Clients](./clients/overview) for setting up client portal access · [Client Portal](./client-portal/overview) for what clients see
 

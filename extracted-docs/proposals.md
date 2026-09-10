@@ -34,7 +34,7 @@ Use **proposal templates** to save time on frequently-sent proposals. Templates 
 
 ## Proposal Builder
 
-The proposal builder uses a **block-based editor** — add, reorder, and customize content blocks to build your proposal. Changes are **auto-saved** with a debounce delay, so you never lose work.
+The proposal builder uses a **block-based editor** - add, reorder, and customize content blocks to build your proposal. Changes are **auto-saved** with a debounce delay, so you never lose work.
 
 ### Content Block Types
 
@@ -69,8 +69,8 @@ The **Line Items** tab lets you manage individual pricing entries for your propo
 
 You can add line items in two ways:
 
-- **Manual items** — Enter a custom name, quantity, unit price, and optional discount or tax
-- **From Service Catalog** — Click **"Add from catalog"** to pull in services with their configured pricing. Billing type badges show whether an item is recurring (/mo, /yr), hourly (/hr), or one-time
+- **Manual items** - Enter a custom name, quantity, unit price, and optional discount or tax
+- **From Service Catalog** - Click **"Add from catalog"** to pull in services with their configured pricing. Billing type badges show whether an item is recurring (/mo, /yr), hourly (/hr), or one-time
 
 ### Line Item Features
 
@@ -79,17 +79,17 @@ You can add line items in two ways:
 | **Quantity & Unit Price** | Set the quantity and per-unit price |
 | **Discounts** | Per-item percentage or fixed discount |
 | **Tax** | Per-item or proposal-level tax rate |
-| **Optional Items** | Mark items as optional — clients choose whether to include them during acceptance |
+| **Optional Items** | Mark items as optional - clients choose whether to include them during acceptance |
 | **Billing Type Badges** | Visual indicators: **RECURRING**, **SERVICE**, **ONE-TIME** |
 
 ### Pricing Summary
 
 The proposal automatically calculates:
 
-- **Subtotal** — sum of all non-optional accepted items
-- **Discount** — document-level percentage or fixed discount
-- **Tax** — applied to subtotal after discount
-- **Grand Total** — final amount
+- **Subtotal** - sum of all non-optional accepted items
+- **Discount** - document-level percentage or fixed discount
+- **Tax** - applied to subtotal after discount
+- **Grand Total** - final amount
 
 When a client accepts a proposal with optional items, the totals are **recalculated** based on which optional items they selected.
 
@@ -111,8 +111,8 @@ Agency Owners and Admins can manage templates. When creating a new proposal, you
 
 The **Proposals** list page supports two views:
 
-- **Table view** — sortable list with status filter tabs
-- **Card view** — visual cards with proposal summaries
+- **Table view** - sortable list with status filter tabs
+- **Card view** - visual cards with proposal summaries
 
 Your view preference is saved automatically.
 
@@ -149,7 +149,7 @@ Proposals is a **Pro plan** feature. Free plan users will see a lock icon on the
 
 ---
 
-Once a proposal is accepted, convert it into actionable work — manually or automatically. This page covers all conversion options, deposit handling, and service-linked billing workflows.
+Once a proposal is accepted, convert it into actionable work - manually or automatically. This page covers all conversion options, deposit handling, and service-linked billing workflows.
 
 ---
 
@@ -180,7 +180,7 @@ You can configure proposals to **automatically convert** when the client accepts
 
 | Setting | Behavior |
 |---------|----------|
-| **Manual** | No automation — you convert manually |
+| **Manual** | No automation - you convert manually |
 | **Auto → Project** | Automatically creates a project on acceptance |
 | **Auto → Invoice** | Automatically creates an invoice and redirects the client to pay via Stripe |
 | **Auto → Both** | Creates both a project and invoice, with Stripe checkout redirect |
@@ -207,8 +207,8 @@ Use **pricing configurator** blocks in the proposal builder to let clients choos
 
 Enable **deposit payments** on a proposal to split the payment:
 
-- **Percentage-based** — e.g., 50% upfront, 50% on completion
-- **Fixed amount** — e.g., $1,000 deposit, remainder on completion
+- **Percentage-based** - e.g., 50% upfront, 50% on completion
+- **Fixed amount** - e.g., $1,000 deposit, remainder on completion
 
 When converted, the system creates two invoices: one for the deposit (due immediately) and one for the remainder.
 
@@ -218,7 +218,7 @@ In proposal settings, toggle **"Require Deposit"** and choose percentage or fixe
 
 Client accepts and signs the proposal.
 
-Two invoices are generated — deposit invoice (due now) and balance invoice (due on completion).
+Two invoices are generated - deposit invoice (due now) and balance invoice (due on completion).
 
 If auto-conversion is enabled, the client is directed to pay the deposit invoice via Stripe immediately.
 
@@ -242,9 +242,9 @@ Each milestone creates a separate invoice linked to the proposal. Progress throu
 
 After conversion, the proposal maintains links to all created records:
 
-- **Linked Project** — view and manage the project from the proposal detail page
-- **Linked Invoice(s)** — track payment status of all generated invoices
-- **Linked Subscriptions** — monitor active subscriptions from service-linked items
+- **Linked Project** - view and manage the project from the proposal detail page
+- **Linked Invoice(s)** - track payment status of all generated invoices
+- **Linked Subscriptions** - monitor active subscriptions from service-linked items
 
 These connections provide a full audit trail from initial proposal through project delivery and final payment.
 
@@ -252,7 +252,7 @@ These connections provide a full audit trail from initial proposal through proje
 
 ---
 
-Once a proposal is built, deliver it to clients, track their engagement, and handle their response — all from the proposal detail page.
+Once a proposal is built, deliver it to clients, track their engagement, and handle their response - all from the proposal detail page.
 
 ---
 
@@ -283,7 +283,7 @@ stateDiagram-v2
 
 | Status | Meaning |
 |--------|---------|
-| **Draft** | Work in progress — not yet sent to the client |
+| **Draft** | Work in progress - not yet sent to the client |
 | **Pending Review** | Submitted for internal review before sending |
 | **Sent** | Delivered to the client and awaiting response |
 | **Viewed** | Client has opened and viewed the proposal |
@@ -322,7 +322,7 @@ Send reminder notifications to clients who haven't yet responded to a proposal.
 
 ### Share Links
 
-Sent proposals have a **public share link** that you can copy and send directly to anyone — no login required.
+Sent proposals have a **public share link** that you can copy and send directly to anyone - no login required.
 
 ---
 
@@ -334,8 +334,8 @@ When a client receives a proposal, they can take the following actions:
 
 Clients review the proposal, select any optional items, then accept and sign. The signature can be:
 
-- **Typed** — enter their name as a signature
-- **Drawn** — draw a signature on an ink canvas
+- **Typed** - enter their name as a signature
+- **Drawn** - draw a signature on an ink canvas
 
 The acceptance records the client's name, signature, IP address, and timestamp for a complete audit trail.
 

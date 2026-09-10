@@ -52,9 +52,9 @@ The Products page shows all digital products in a grid layout with cover images,
 Track all digital product sales in one place via **Products --> Sales Tracker**:
 
 - **Stats cards** at the top showing Monthly Recurring Revenue, Total Revenue, Active Sales, and Churn
-- **Filter by status** — All, Active, Pending, or Cancelled (with counts)
+- **Filter by status** - All, Active, Pending, or Cancelled (with counts)
 - **Search** by product name or client company
-- **Sortable table** with 7 columns (Product, Client, Price, Type, Status, Fulfillment, Date) — click any column header to toggle A-Z / Z-A sorting
+- **Sortable table** with 7 columns (Product, Client, Price, Type, Status, Fulfillment, Date) - click any column header to toggle A-Z / Z-A sorting
 
 Click any row to open the **Sale Detail Panel** (slide-out drawer) where you can:
 
@@ -80,18 +80,18 @@ Clicking a row opens a detail panel where clients can:
 
 - **Download** the product file (if fulfilled and a delivery URL exists)
 - **Submit an intake form** (if the product has one assigned)
-- **Cancel a recurring subscription** — with a reason selection (6 predefined options + custom text)
+- **Cancel a recurring subscription** - with a reason selection (6 predefined options + custom text)
 - View delivery instructions, timeline, and cancellation details
 
 ### File Security
 
 Digital product downloads are protected with:
 
-- **Authentication** — Only verified purchasers can download
-- **Rate limiting** — 10 downloads per hour per user
-- **Signed URLs** — Temporary download links that expire after 60 minutes
-- **Fulfillment check** — Files are only served when the product is marked as Delivered
-- **Virus scanning** — All uploaded files are scanned before being made available
+- **Authentication** - Only verified purchasers can download
+- **Rate limiting** - 10 downloads per hour per user
+- **Signed URLs** - Temporary download links that expire after 60 minutes
+- **Fulfillment check** - Files are only served when the product is marked as Delivered
+- **Virus scanning** - All uploaded files are scanned before being made available
 
 ---
 
@@ -104,7 +104,7 @@ For more complex project scaffolding, create **Service Templates** that define:
 - **Pre-configured milestones** (name, sort order)
 - An optional **SLA configuration**
 
-Multiple templates can exist for a single service — the user picks one at assignment time.
+Multiple templates can exist for a single service - the user picks one at assignment time.
 
 ---
 
@@ -114,7 +114,7 @@ Organize your service catalog with **categories**:
 
 - Each category has a name, slug, description, and color badge
 - Filter services by category in the catalog
-- Deleting a category doesn't delete the services in it — they simply become uncategorized
+- Deleting a category doesn't delete the services in it - they simply become uncategorized
 
 ---
 
@@ -164,9 +164,9 @@ Preview, edit the URL slug, and publish
 
 | Status | Meaning |
 |--------|---------|
-| **Draft** | Being prepared — not visible to clients, cannot be assigned |
+| **Draft** | Being prepared - not visible to clients, cannot be assigned |
 | **Published** | Live and available for assignment or purchase |
-| **Archived** | Soft-deleted — no longer active |
+| **Archived** | Soft-deleted - no longer active |
 
 You can switch between Draft and Published at any time. To publish, a service must have a name and valid pricing.
 
@@ -189,7 +189,7 @@ Enrich your service listings with:
 Choose which content sections clients can see on the catalog page:
 
 - Show/hide pricing, FAQ, deliverables, gallery, and reviews independently
-- These settings are enforced server-side — hidden content is never sent to the client
+- These settings are enforced server-side - hidden content is never sent to the client
 
 ---
 
@@ -211,9 +211,9 @@ Services can have an optional **intake form** that clients fill out after purcha
 
 | Status | Meaning |
 |--------|---------|
-| **Draft** | Form is being built — not available to clients |
-| **Published** | Active and linked to services — clients can fill it out |
-| **Archived** | Retired — no longer available for new submissions |
+| **Draft** | Form is being built - not available to clients |
+| **Published** | Active and linked to services - clients can fill it out |
+| **Archived** | Retired - no longer available for new submissions |
 
 ### How It Works
 
@@ -265,20 +265,20 @@ After purchasing a service, clients see the intake form on the confirmation page
 
 | Field Type | What It Collects |
 |-----------|-----------------|
-| Heading | Section heading (no input — for structure) |
+| Heading | Section heading (no input - for structure) |
 | Paragraph | Description text block |
 | Divider | Visual separator |
 | Hidden | Pre-filled hidden field |
-| Repeater | Dynamic row group — add/remove rows with configurable sub-fields |
+| Repeater | Dynamic row group - add/remove rows with configurable sub-fields |
 
 ### Field Configuration
 
 Each field supports:
-- **Required** toggle — must be filled to submit
-- **Placeholder** and **Help Text** — guide the client
-- **Width** — Full or Half width for side-by-side layout
-- **Validation** rules — min/max length, pattern matching, file types, max file size, max rating
-- **Conditional visibility** — show/hide based on another field's value
+- **Required** toggle - must be filled to submit
+- **Placeholder** and **Help Text** - guide the client
+- **Width** - Full or Half width for side-by-side layout
+- **Validation** rules - min/max length, pattern matching, file types, max file size, max rating
+- **Conditional visibility** - show/hide based on another field's value
 
 Use **multi-page forms** for longer forms. Clients see a step wizard with numbered progress indicators and per-page validation.
 
@@ -401,11 +401,11 @@ Eidoncore supports 5 pricing models to fit different agency service types:
 
 | Model | How It Works | Example |
 |-------|-------------|---------|
-| **One-Time Fixed** | Single flat fee for a deliverable | Website redesign — $5,000 |
-| **Recurring Monthly** | Ongoing subscription (monthly, quarterly, or yearly) | SEO retainer — $2,000/mo |
-| **Hourly Rate** | Bill per hour worked | Consulting — $150/hr |
-| **Hourly Block** | Prepaid block of hours per period | Support package — 20 hours/mo |
-| **Credit Pack** | Prepaid credits for work units | Design credits — 100 credits/mo |
+| **One-Time Fixed** | Single flat fee for a deliverable | Website redesign - $5,000 |
+| **Recurring Monthly** | Ongoing subscription (monthly, quarterly, or yearly) | SEO retainer - $2,000/mo |
+| **Hourly Rate** | Bill per hour worked | Consulting - $150/hr |
+| **Hourly Block** | Prepaid block of hours per period | Support package - 20 hours/mo |
+| **Credit Pack** | Prepaid credits for work units | Design credits - 100 credits/mo |
 
 ### Billing Configuration
 
@@ -433,7 +433,7 @@ For Hourly Block and Credit Pack services:
 
 When a client's included hours or credits are running low, additional quota can be added:
 
-**Immediate top-up** — On the project's quota section, click **"+ Add Quota"** to add hours, credits, or tasks directly.
+**Immediate top-up** - On the project's quota section, click **"+ Add Quota"** to add hours, credits, or tasks directly.
 
 - Top-ups are added to a separate top-up balance that carries over indefinitely (regular renewals only reset the base balance)
 - Not available for Usage-Based services
@@ -442,7 +442,7 @@ When a client's included hours or credits are running low, additional quota can 
 
 On their project page, clients click **"Request Top-Up"** and enter the desired amount
 
-The request appears as **Pending** — the agency owner can **Approve** or **Reject** it
+The request appears as **Pending** - the agency owner can **Approve** or **Reject** it
 
 If approved, the client sees a **"Pay"** button that redirects to Stripe checkout
 
@@ -493,7 +493,7 @@ When a project is linked to a service, the project page shows real-time quota in
 
 | Display | Meaning |
 |---------|---------|
-| **Green** | Normal usage — plenty of balance remaining |
+| **Green** | Normal usage - plenty of balance remaining |
 | **Amber** | Over 75% consumed |
 | **Red** | Over 90% consumed or fully exhausted |
 
@@ -516,7 +516,7 @@ For one-time service projects, a **"Complete & Invoice"** button appears in the 
 When time is logged against a service with included hours:
 
 - Time is split into **regular** (within balance) and **overtime** (beyond balance) minutes
-- The hourly rate and overtime rate are **snapshotted** at the time of logging — changes to the service rate don't retroactively affect past entries
+- The hourly rate and overtime rate are **snapshotted** at the time of logging - changes to the service rate don't retroactively affect past entries
 - Once a time entry is **billed** (linked to an invoice), it becomes **immutable** and cannot be edited or deleted
 - **Written-off** entries (agency comp) are excluded from invoice totals
 

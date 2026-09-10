@@ -25,7 +25,7 @@ All sensitive data is encrypted before being stored:
 
 ### Encryption in Transit
 
-All connections use **HTTPS/TLS** — data is encrypted between your browser and the platform at all times.
+All connections use **HTTPS/TLS** - data is encrypted between your browser and the platform at all times.
 
 ---
 
@@ -43,7 +43,7 @@ Scan the QR code with your authenticator app (Google Authenticator, Authy, 1Pass
 
 Enter the 6-digit verification code
 
-Save your **8 recovery codes** — store these somewhere safe
+Save your **8 recovery codes** - store these somewhere safe
 
 ```mermaid
 graph LR
@@ -95,8 +95,8 @@ Under **Settings → Account → Security → Active Sessions**, you can see:
 
 ### Revoking Sessions
 
-- **Revoke a single session** — End a specific login session on another device
-- **Revoke all other sessions** — End all sessions except the one you're currently using
+- **Revoke a single session** - End a specific login session on another device
+- **Revoke all other sessions** - End all sessions except the one you're currently using
 
 This is useful if you suspect unauthorized access or have logged in on a shared device.
 
@@ -136,7 +136,7 @@ Each event records the **IP address** and **browser/device** used. View your sec
 
 Each agency workspace is completely isolated:
 
-- All data is scoped to your organization — no data is shared between workspaces
+- All data is scoped to your organization - no data is shared between workspaces
 - Even if the same email address is used across multiple agencies, profile data (name, avatar) is independent per workspace
 - Client data, projects, tasks, invoices, and all other records are strictly separated
 
@@ -169,8 +169,8 @@ The platform includes built-in protection against:
 
 If you use a custom domain, sessions are automatically scoped to prevent cross-domain leaking:
 
-- **Subdomain access** (`slug.eidoncore.com`) — Sessions are shared across your workspace subdomains
-- **Custom domain access** (`app.youragency.com`) — Sessions are scoped to the exact hostname
+- **Subdomain access** (`slug.eidoncore.com`) - Sessions are shared across your workspace subdomains
+- **Custom domain access** (`app.youragency.com`) - Sessions are scoped to the exact hostname
 
 DNS verification uses secure DNS-over-HTTPS to prevent spoofing.
 

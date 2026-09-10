@@ -16,10 +16,10 @@ The settings sidebar includes a **keyword-based search** to help you find any se
 
 1. Type in the search bar at the top of the settings sidebar
 2. Results match both page titles and deep content keywords (form labels, toggle names, feature names)
-3. Click a result to navigate directly to that setting — the matching section is **highlighted with a flash animation** so you can spot it immediately
+3. Click a result to navigate directly to that setting - the matching section is **highlighted with a flash animation** so you can spot it immediately
 4. For pages with tabs (e.g., Branding → Email, Invoice, Portal), search results link directly to the correct tab
 
-Search results are scoped to your role — you'll only see settings you have permission to access.
+Search results are scoped to your role - you'll only see settings you have permission to access.
 
 ---
 
@@ -43,19 +43,19 @@ Customize how the interface looks for you. These settings apply globally across 
 | Setting | Options | Default | Description |
 |---------|---------|---------|-------------|
 | **Font Size** | Small, Medium, Large | Medium | Adjusts all text sizes across the interface |
-| **UI Density** | Comfortable, Compact | Comfortable | Controls spacing and padding — Compact fits more content on screen |
+| **UI Density** | Comfortable, Compact | Comfortable | Controls spacing and padding - Compact fits more content on screen |
 
 Changes apply instantly and persist across sessions. Your display preferences do not affect what other users see.
 
 ### Password & Security
 
-- **Change Password** — Requires your current password. New password must meet strength requirements (minimum 8 characters, including uppercase, lowercase, and digit)
-- **Two-Factor Authentication (2FA)** — Add an extra layer of security using an authenticator app
+- **Change Password** - Requires your current password. New password must meet strength requirements (minimum 8 characters, including uppercase, lowercase, and digit)
+- **Two-Factor Authentication (2FA)** - Add an extra layer of security using an authenticator app
  - Scan the QR code with your authenticator app (Google Authenticator, Authy, etc.)
  - Enter the 6-digit code to verify
- - Save your **8 recovery codes** in a safe place — these are your backup if you lose access to your authenticator
+ - Save your **8 recovery codes** in a safe place - these are your backup if you lose access to your authenticator
  - Disable 2FA with your password and a verification code
-- **Active Sessions** — View all devices where you're logged in
+- **Active Sessions** - View all devices where you're logged in
  - See device type, browser, location, and last activity
  - Revoke individual sessions or all other sessions at once
 
@@ -172,22 +172,22 @@ Manage your subscription under **Settings → Plan & Billing** (Owner only).
 
 ### Managing Your Plan
 
-- **Upgrade** — Click the upgrade button on any plan to start a Stripe checkout
-- **Downgrade** — Changes take effect at the end of your current billing period
-- **Cancel** — Schedule cancellation with a reason (e.g., "Too expensive", "Not using it", "Switching provider"); you keep access until period end
-- **Reactivate** — Reverse a pending cancellation before the period ends
-- **Billing Portal** — Manage payment methods, view invoices, and update billing details via Stripe's billing portal
-- **Usage Dashboard** — See your current resource usage vs. plan limits
-- **Data Export** — Export all agency data as a downloadable bundle. Includes projects, tasks, clients, invoices, time entries, team members, and services. Available in CSV and JSON formats. Useful for backups, compliance, or migrating to another platform
+- **Upgrade** - Click the upgrade button on any plan to start a Stripe checkout
+- **Downgrade** - Changes take effect at the end of your current billing period
+- **Cancel** - Schedule cancellation with a reason (e.g., "Too expensive", "Not using it", "Switching provider"); you keep access until period end
+- **Reactivate** - Reverse a pending cancellation before the period ends
+- **Billing Portal** - Manage payment methods, view invoices, and update billing details via Stripe's billing portal
+- **Usage Dashboard** - See your current resource usage vs. plan limits
+- **Data Export** - Export all agency data as a downloadable bundle. Includes projects, tasks, clients, invoices, time entries, team members, and services. Available in CSV and JSON formats. Useful for backups, compliance, or migrating to another platform
 
 ### Plan Status Indicators
 
 | Status | Meaning |
 |--------|---------|
 | **Active** | Subscription is current and paid |
-| **Trialing** | Free 14-day Pro trial — no credit card required |
-| **Past Due** | Payment failed — update your payment method (you still have access) |
-| **Frozen** | 3+ payment failures — read-only access until payment is resolved |
+| **Trialing** | Free 14-day Pro trial - no credit card required |
+| **Past Due** | Payment failed - update your payment method (you still have access) |
+| **Frozen** | 3+ payment failures - read-only access until payment is resolved |
 
 A global status banner appears (visible to the Owner only) when your plan needs attention.
 
@@ -195,11 +195,11 @@ A global status banner appears (visible to the Owner only) when your plan needs 
 
 When your plan downgrades (e.g., from Pro to Free):
 
-- **Your data is never deleted** — all existing projects, tasks, invoices, and files remain accessible
+- **Your data is never deleted** - all existing projects, tasks, invoices, and files remain accessible
 - New creation is blocked when you exceed Free plan limits (e.g., can't add a 3rd team member on Free)
 - **Automations** and **recurring invoices** that exceed limits are paused automatically
 - When you upgrade again, paused automations and recurring invoices are **automatically reactivated**
-- Existing team members keep access — only new invites are blocked beyond the limit
+- Existing team members keep access - only new invites are blocked beyond the limit
 
 ### Trial
 
@@ -213,11 +213,11 @@ Report issues directly from your workspace using the built-in **Bug Report** sys
 
 ### Quick Report (Floating Button)
 
-A **bug report button** appears on every page in the workspace. Click it to instantly open the bug report form — the current page is auto-filled, and you can capture a **screenshot** of what you're seeing:
+A **bug report button** appears on every page in the workspace. Click it to instantly open the bug report form - the current page is auto-filled, and you can capture a **screenshot** of what you're seeing:
 
-- **Automatic screenshot** — captures the current page using the browser's rendering engine
-- **Screenshot markup** — annotate the screenshot to highlight the issue before submitting
-- **Manual image upload** — drag and drop an image (PNG, JPG, GIF, WebP — up to 5 MB) if you prefer
+- **Automatic screenshot** - captures the current page using the browser's rendering engine
+- **Screenshot markup** - annotate the screenshot to highlight the issue before submitting
+- **Manual image upload** - drag and drop an image (PNG, JPG, GIF, WebP - up to 5 MB) if you prefer
 
 ### Filing a Report
 
@@ -233,7 +233,7 @@ A **bug report button** appears on every page in the workspace. Click it to inst
 
 | Status | Meaning |
 |--------|---------|
-| **Open** | Newly submitted — awaiting review |
+| **Open** | Newly submitted - awaiting review |
 | **In Progress** | Being investigated |
 | **Resolved** | Fix has been applied |
 | **Closed** | Issue is resolved and closed |
@@ -363,7 +363,7 @@ Click **"Add Domain"** and enter your domain (e.g., `app.myagency.com`)
 
 Create a **CNAME record** in your DNS pointing to the provided target
 
-Click **"Verify"** — the platform checks your DNS and provisions SSL automatically
+Click **"Verify"** - the platform checks your DNS and provisions SSL automatically
 
 Once verified, users can access your workspace via your custom domain. Both the custom domain and your subdomain (`slug.eidoncore.com`) continue to work.
 
@@ -416,9 +416,9 @@ Client contacts with portal access are assigned one of three roles:
 
 | Role | Access Level |
 |------|-------------|
-| **Organization Owner** | Full client portal access — projects, tasks, invoices, services, reports, and member management |
-| **Organization Admin** | Projects, tasks, invoices, documents — no member management |
-| **Organization Member** | Project work only — tasks, comments, statuses. No financial access |
+| **Organization Owner** | Full client portal access - projects, tasks, invoices, services, reports, and member management |
+| **Organization Admin** | Projects, tasks, invoices, documents - no member management |
+| **Organization Member** | Project work only - tasks, comments, statuses. No financial access |
 
 Agency staff assign portal roles when adding contacts or via the role dropdown on the Contacts tab.
 
