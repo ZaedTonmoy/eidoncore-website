@@ -4553,14 +4553,25 @@ body.nav-open .navbar {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
+#workflow-loop .node {
+  z-index: 10;
+}
+#workflow-loop .node:hover,
+#workflow-loop .node:focus-within,
+#workflow-loop .node:has(.node-btn:hover),
+#workflow-loop .node:has(.node-btn:focus-visible) {
+  z-index: 9999 !important;
+}
 #workflow-loop .node-btn {
   background: #122542;
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
 }
-#workflow-loop .node-btn:hover {
+#workflow-loop .node-btn:hover,
+#workflow-loop .node-btn:focus-visible {
   border-color: #00adb5 !important;
   background: #182d4d !important;
+  z-index: 9999 !important;
 }
 #workflow-loop .node-tip {
   white-space: normal !important;
@@ -4568,6 +4579,18 @@ body.nav-open .navbar {
   overflow-wrap: break-word !important;
   width: 220px !important;
   text-align: left !important;
+  z-index: 10000 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+}
+#workflow-loop .node:hover .node-tip,
+#workflow-loop .node:focus-within .node-tip,
+#workflow-loop .node-btn:hover .node-tip,
+#workflow-loop .node-btn:focus-visible .node-tip {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+  z-index: 10000 !important;
 }
 
 /* 6. DASHBOARD PREVIEW - Tone A: Pure White (#ffffff) */

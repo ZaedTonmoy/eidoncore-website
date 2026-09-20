@@ -54,14 +54,31 @@
     align-items:center;
     gap:8px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    background: var(--accent-dim);
-    border: 1px solid var(--accent-line);
-    padding: 6px 12px 6px 10px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 5px 12px 5px 10px;
     border-radius: 999px;
     margin-bottom: 22px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+  .eyebrow .loop-eyebrow-text{
+    color: #FFFFFF;
+    opacity: 1;
+  }
+  .eyebrow:hover{
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #FFFFFF;
+  }
+  .eyebrow:hover .loop-eyebrow-text{
+    color: #FFFFFF;
+    opacity: 1;
   }
   .eyebrow .dot{
     width:6px; height:6px; border-radius:50%;
@@ -198,6 +215,13 @@
     position:absolute;
     top:50%; left:50%;
     transform: rotate(calc(45deg * var(--i))) translate(var(--radius-node)) rotate(calc(-45deg * var(--i)));
+    z-index: 10;
+  }
+  .node:hover,
+  .node:focus-within,
+  .node:has(.node-btn:hover),
+  .node:has(.node-btn:focus-visible){
+    z-index: 9999 !important;
   }
 
   .node-btn{
@@ -221,6 +245,7 @@
     background: var(--surface-2);
     transform: translate(-50%,-50%) scale(1.06);
     outline: none;
+    z-index: 9999 !important;
   }
   @keyframes flash{
     0%   { border-color: var(--accent); background: var(--surface-2); box-shadow: 0 0 0 4px var(--accent-dim); }
@@ -257,15 +282,21 @@
     line-height: 1.5;
     color: var(--muted);
     opacity:0;
+    visibility: hidden;
     pointer-events:none;
-    transition: opacity .2s ease, transform .2s ease;
-    z-index: 5;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+    z-index: 10000 !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
   }
   .node-btn:hover .node-tip,
-  .node-btn:focus-visible .node-tip{
+  .node-btn:focus-visible .node-tip,
+  .node:hover .node-tip,
+  .node:focus-within .node-tip{
     opacity:1;
+    visibility: visible;
+    pointer-events: auto;
     transform: translateX(-50%) translateY(0);
+    z-index: 10000 !important;
   }
 
   /* ---------- Mobile timeline ---------- */
@@ -348,7 +379,7 @@
 
     <!-- Left: copy -->
     <div>
-      <span class="eyebrow">LIVE LOOP</span>
+      <span class="eyebrow"><span class="dot"></span><span class="loop-eyebrow-text">LIVE LOOP</span></span>
       <h1>Built as a Loop, Not a Funnel</h1>
       <p class="lede">
         Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> - every closed job feeds

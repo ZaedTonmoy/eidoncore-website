@@ -371,10 +371,26 @@
         #workflow-loop .loop-eyebrow{
           display:inline-flex;align-items:center;gap:8px;
           font-family:'JetBrains Mono',monospace;
-          font-size:12px;letter-spacing:0.14em;
-          color:var(--loop-accent);background:var(--loop-accent-dim);
-          border:1px solid var(--loop-accent-line);
-          padding:6px 12px 6px 10px;border-radius:999px;margin-bottom:22px;
+          font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+          color:#FFFFFF !important;
+          background:rgba(255, 255, 255, 0.08) !important;
+          border:1px solid rgba(255, 255, 255, 0.16) !important;
+          padding:5px 12px 5px 10px;border-radius:999px;margin-bottom:22px;
+          backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+          transition:all 0.2s ease;
+        }
+        #workflow-loop .loop-eyebrow .loop-eyebrow-text{
+          color:#FFFFFF !important;
+          opacity:1 !important;
+        }
+        #workflow-loop .loop-eyebrow:hover{
+          background:rgba(255, 255, 255, 0.14) !important;
+          border-color:rgba(255, 255, 255, 0.28) !important;
+          color:#FFFFFF !important;
+        }
+        #workflow-loop .loop-eyebrow:hover .loop-eyebrow-text{
+          color:#FFFFFF !important;
+          opacity:1 !important;
         }
         #workflow-loop .loop-eyebrow::before{display:none!important;}
         #workflow-loop .loop-eyebrow .ping-dot{
@@ -457,6 +473,13 @@
         #workflow-loop .node{
           --i:0;position:absolute;top:50%;left:50%;
           transform:rotate(calc(45deg*var(--i))) translate(var(--radius-node)) rotate(calc(-45deg*var(--i)));
+          z-index:10;
+        }
+        #workflow-loop .node:hover,
+        #workflow-loop .node:focus-within,
+        #workflow-loop .node:has(.node-btn:hover),
+        #workflow-loop .node:has(.node-btn:focus-visible){
+          z-index:9999 !important;
         }
         #workflow-loop .node-btn{
           display:flex;align-items:center;gap:9px;
@@ -471,6 +494,7 @@
         #workflow-loop .node-btn:hover,#workflow-loop .node-btn:focus-visible{
           border-color:var(--loop-accent-line);background:var(--loop-surface-2);
           transform:translate(-50%,-50%) scale(1.06);outline:none;
+          z-index:9999 !important;
         }
         @keyframes node-flash{
           0%  {border-color:var(--loop-accent);background:var(--loop-surface-2);box-shadow:0 0 0 4px var(--loop-accent-dim);}
@@ -491,13 +515,16 @@
           border:1px solid var(--loop-line-strong);
           border-radius:10px;padding:10px 14px;
           font-size:12.5px;line-height:1.5;color:var(--loop-muted);
-          opacity:0;pointer-events:none;
-          transition:opacity .2s ease,transform .2s ease;z-index:5;
-          box-shadow:0 8px 24px rgba(0,0,0,0.35);
+          opacity:0;visibility:hidden;pointer-events:none;
+          transition:opacity .2s ease,transform .2s ease,visibility .2s ease;z-index:10000 !important;
+          box-shadow:0 12px 32px rgba(0,0,0,0.5);
         }
         #workflow-loop .node-btn:hover .node-tip,
-        #workflow-loop .node-btn:focus-visible .node-tip{
-          opacity:1;transform:translateX(-50%) translateY(0);
+        #workflow-loop .node-btn:focus-visible .node-tip,
+        #workflow-loop .node:hover .node-tip,
+        #workflow-loop .node:focus-within .node-tip{
+          opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
+          z-index:10000 !important;
         }
         /* Mobile timeline */
         #workflow-loop .loop-timeline{
@@ -540,7 +567,7 @@
 
         <!-- Left: copy -->
         <div>
-          <span class="loop-eyebrow"><span class="ping-dot"></span>LIVE LOOP</span>
+          <span class="loop-eyebrow"><span class="ping-dot"></span><span class="loop-eyebrow-text">LIVE LOOP</span></span>
           <h2>Built as a Loop, Not a Funnel</h2>
           <p class="loop-lede">
             Most agency tools stop at the invoice. <b>Eidoncore doesn't</b> - every closed job feeds
