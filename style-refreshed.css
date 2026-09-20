@@ -1118,26 +1118,38 @@ p {
 }
 
 /* ==========================================================================
-   WHY EIDONCORE (STACK CARDS) — LESS HEAVY
+   WHY EIDONCORE (STACK CARDS) — RESTORE SCROLL-STACKING & ORIGINAL GAP
    ========================================================================== */
 .why-eidoncore-section {
   padding: 96px 0 !important;
-  background: #FFFFFF !important;
+  background: #f8fafc !important;
+  border-top: 1px solid var(--line) !important;
   border-bottom: 1px solid var(--line) !important;
+  position: relative !important;
+}
+
+.stack-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  padding-top: 4px !important;
+  padding-bottom: 200px !important;
 }
 
 .stack-card {
-  border-radius: var(--radius-md) !important;
+  position: sticky !important;
+  top: calc(100px + var(--i, 0) * 22px) !important;
+  z-index: calc(10 + var(--i, 0)) !important;
+  margin-bottom: 36px !important;
+  border-radius: var(--radius-lg) !important;
   border: 1px solid #E2E8F0 !important;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFD 50%, #F3F5F9 100%) !important;
-  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04), 0 10px 25px -8px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
-  padding: 36px !important;
-  position: relative !important;
-  overflow: hidden !important;
+  border-top: 3px solid var(--accent, #3f72af) !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.04), 0 10px 25px -8px rgba(15, 23, 42, 0.08) !important;
+  padding: 36px 38px !important;
   transition: transform var(--duration-hover) var(--ease-smooth),
               box-shadow var(--duration-hover) var(--ease-smooth),
-              border-color var(--duration-hover) var(--ease-smooth),
-              background var(--duration-hover) var(--ease-smooth) !important;
+              border-color var(--duration-hover) var(--ease-smooth) !important;
 }
 
 .stack-card::before {
@@ -1152,21 +1164,72 @@ p {
 }
 
 .stack-card:hover {
-  transform: translateY(-3px) !important;
+  transform: translateY(-2px) !important;
   border-color: #CBD5E1 !important;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #EFF3F8 100%) !important;
-  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 16px 32px -8px rgba(15, 23, 42, 0.06), inset 0 1px 0 #FFFFFF !important;
+  box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.06), 0 16px 32px -8px rgba(15, 23, 42, 0.12) !important;
 }
 
 .diff-num {
   font-family: var(--mono) !important;
-  font-size: 12px !important;
-  letter-spacing: 0.08em !important;
+  font-size: 13px !important;
+  letter-spacing: 0.06em !important;
   font-weight: 600 !important;
-  color: var(--accent, var(--primary)) !important;
+  color: var(--accent, #3f72af) !important;
   margin-bottom: 12px !important;
   display: inline-block;
 }
+
+.stack-card h3 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin: 10px 0 10px !important;
+  color: var(--text) !important;
+}
+
+.stack-card p {
+  color: var(--text-soft) !important;
+  font-size: 0.96rem !important;
+  max-width: 62ch !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 920px) {
+  .stack-section .container {
+    display: block !important;
+  }
+  .stack-section .section-head {
+    position: sticky !important;
+    top: 74px !important;
+    z-index: 15 !important;
+    background: #f8fafc !important;
+    padding: 16px 0 12px !important;
+    margin-bottom: 28px !important;
+  }
+  .stack-wrap {
+    padding-bottom: 60px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .stack-section .section-head {
+    position: relative !important;
+    top: auto !important;
+    z-index: auto !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .stack-wrap {
+    padding-bottom: 0 !important;
+  }
+  .stack-card, .stack-section .stack-card {
+    position: relative !important;
+    top: auto !important;
+    z-index: auto !important;
+    margin-bottom: 20px !important;
+  }
+}
+
 
 /* ==========================================================================
    COMPARISON TABLE — MINIMAL HAIRLINE LINES
