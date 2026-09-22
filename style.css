@@ -52,10 +52,10 @@
   --duration-hover: 260ms;
   --duration-reveal: 1350ms;
   --duration-ambient: 26s;
-  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.08) 100%);
-  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.30) 0%, rgba(15, 23, 42, 0.14) 100%);
-  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%);
-  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.14) 100%);
+  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.03) 100%);
+  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.07) 100%);
+  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
   --transition:all .25s var(--ease);
   --primary-glow:rgba(63,114,175,0.36);
 }
@@ -4491,23 +4491,23 @@ section,
 }
 .trust-bento .card {
   background: #f8fafc !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.24s ease !important;
 }
 .trust-bento .card:hover {
   transform: none !important;
   background: #ffffff !important;
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
 }
 .trust-bento .tile-main {
   background: #f8fafc !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
 }
 .trust-bento .tm-logos span {
   background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.14);
+  border: 1px solid rgba(15, 23, 42, 0.07);
   padding: 6px 14px;
   border-radius: 100px;
   transition: border-color 0.2s ease, color 0.2s ease;
@@ -4524,22 +4524,22 @@ section,
 }
 .module-card {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.24s ease !important;
 }
 .module-card:hover {
   transform: none !important;
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
 }
 .module-card.more {
   background: #0d1a2b !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 .module-card.more:hover {
   transform: none !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
   box-shadow: none !important;
 }
 
@@ -4558,12 +4558,12 @@ section,
 }
 #how-it-works .hw-tab.active {
   background: #f5f7fb !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
   box-shadow: none !important;
 }
 #how-it-works .hw-device {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
 }
 
@@ -4583,14 +4583,14 @@ section,
 #workflow-loop .node-btn {
   transform: translate(-50%, -50%) !important;
   background: #122542 !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
   transition: background 0.25s ease, border-color 0.25s ease !important;
 }
 #workflow-loop .node-btn:hover,
 #workflow-loop .node-btn:focus-visible {
   transform: translate(-50%, -50%) !important;
-  border-color: #00adb5 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
   background: #182d4d !important;
   box-shadow: none !important;
   z-index: 9999 !important;
@@ -4621,12 +4621,12 @@ section,
 }
 .stack-card {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.22s ease !important;
 }
 .stack-card:hover {
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   transform: none !important;
   box-shadow: none !important;
 }
@@ -4643,12 +4643,12 @@ section,
 }
 .compare-wrap {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
 }
 .compare-table th {
   background: #f5f7fb !important;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
 }
 .compare-table tr:hover td {
   background: #f8fafc;
@@ -4660,13 +4660,13 @@ section,
 }
 .price-card {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.24s ease !important;
 }
 .price-card:hover {
   transform: none !important;
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
 }
 .price-card.featured {
@@ -4684,13 +4684,13 @@ section,
 }
 .testimonial-hero-card {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.22s ease !important;
 }
 .testimonial-hero-card:hover {
   transform: none !important;
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
 }
 
@@ -4700,12 +4700,12 @@ section,
 }
 .faq-item {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
   transition: border-color 0.2s ease !important;
 }
 .faq-item:hover {
-  border-color: rgba(15, 23, 42, 0.28) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
   transform: none !important;
   box-shadow: none !important;
 }
@@ -4720,7 +4720,7 @@ section,
 }
 .cta {
   background: #0b1a2b !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
 

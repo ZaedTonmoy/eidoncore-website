@@ -55,16 +55,16 @@
   --duration-reveal: 1350ms;
   --duration-ambient: 26s;
 
-  /* Minimal Gradient Borders (Strictly Non-Colorful) */
-  /* Light Mode: Visibly Darker Gradients (Black → Semi-Black) */
-  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.08) 100%);
-  --border-gradient-light-subtle: linear-gradient(180deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0.05) 100%);
-  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.30) 0%, rgba(15, 23, 42, 0.14) 100%);
+  /* Minimal Linear-Grade Hairline Gradient Borders */
+  /* Light Mode */
+  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.03) 100%);
+  --border-gradient-light-subtle: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.015) 100%);
+  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.07) 100%);
 
-  /* Dark Mode & Dark Sections: White → Semi-White Gradients */
-  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%);
-  --border-gradient-dark-subtle: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.14) 100%);
+  /* Dark Mode & Dark Sections (Linear Aesthetic) */
+  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --border-gradient-dark-subtle: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
 
   /* Typography */
   --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -4228,31 +4228,32 @@ p {
   box-shadow: none !important;
 }
 
-/* Dark Sections & Dark Mode Cards Minimal Gradient Borders (White → Semi-White) */
+/* Dark Sections & Dark Mode Cards Minimal Borders (Linear Aesthetic) */
 .features-modules-grid .card.module-card.more,
 .cta,
 .dark-card,
 .section-dark .card {
-  background: linear-gradient(160deg, #0F172A 0%, #162036 50%, #0A0F1D 100%) padding-box, var(--border-gradient-dark) border-box !important;
-  border: 1px solid transparent !important;
+  background: #0d1a2b !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
   transition: transform var(--duration-hover) var(--ease-spring),
-              background var(--duration-hover) var(--ease-smooth) !important;
+              border-color var(--duration-hover) var(--ease-smooth) !important;
 }
 
 .features-modules-grid .card.module-card.more:hover,
 .dark-card:hover,
-.section-dark .card:hover {
-  background: linear-gradient(160deg, #131E35 0%, #1B2945 50%, #0D1424 100%) padding-box, var(--border-gradient-dark-hover) border-box !important;
+.section-dark .card:hover,
+.cta:hover {
+  border-color: rgba(255, 255, 255, 0.16) !important;
   transform: translateY(-2px) !important;
   box-shadow: none !important;
 }
 
-/* Workflow Loop Node Buttons — Firmly in place, no gradient, no jump on hover */
+/* Workflow Loop Node Buttons — Linear-grade minimal hairline border */
 #workflow-loop .node-btn {
   transform: translate(-50%, -50%) !important;
   background: #122542 !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
   transition: background var(--duration-hover) var(--ease-smooth),
               border-color var(--duration-hover) var(--ease-smooth) !important;
@@ -4262,7 +4263,7 @@ p {
 #workflow-loop .node-btn:focus-visible {
   transform: translate(-50%, -50%) !important;
   background: #182d4d !important;
-  border-color: #00adb5 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -4515,7 +4516,7 @@ section,
   background: #09111e !important;
 }
 
-/* Card Borders in Light Sections: Visibly darker borders, not white */
+/* Card Borders in Light Sections: Minimal Linear-grade hairline border */
 .card,
 .feature-card,
 .module-card,
@@ -4528,9 +4529,11 @@ section,
 .partner-card,
 .doc-card,
 .stack-card,
-.faq-item {
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+.faq-item,
+.compare-wrap {
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
   box-shadow: none !important;
+  transition: border-color var(--duration-hover) var(--ease-smooth) !important;
 }
 
 .card:hover,
@@ -4545,8 +4548,9 @@ section,
 .partner-card:hover,
 .doc-card:hover,
 .stack-card:hover,
-.faq-item:hover {
-  border-color: rgba(15, 23, 42, 0.28) !important;
+.faq-item:hover,
+.compare-wrap:hover {
+  border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
 }
 
