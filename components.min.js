@@ -379,47 +379,50 @@
       });
     }
 
-    /* Subtle per-word text reveal */
+    /* Per-character text reveal — bottom-to-top letter stagger */
     function initWordReveal() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       document.querySelectorAll('.word-reveal').forEach(el => {
         if (el.dataset.wordRevealInit) return;
         el.dataset.wordRevealInit = 'true';
-        const originalText = el.textContent.trim();
-        if (!originalText) return;
+
+        // Collect full plain-text for accessibility
+        const originalText = el.innerText || el.textContent || '';
+        if (!originalText.trim()) return;
         el.setAttribute('aria-label', originalText);
 
-        const childNodes = Array.from(el.childNodes);
-        let wordIndex = 0;
-        let newContent = '';
+        let charIndex = 0;
 
-        childNodes.forEach(node => {
+        function wrapChars(text) {
+          return text.split('').map(ch => {
+            if (ch === ' ' || ch === '\u00A0') {
+              // Non-breaking space preserves natural word wrapping without animation
+              return '<span class="wr-space" aria-hidden="true">\u00A0</span>';
+            }
+            return `<span class="wr-char" style="--c-i:${charIndex++}" aria-hidden="true">${ch}</span>`;
+          }).join('');
+        }
+
+        // Walk child nodes so we don't destroy existing inline tags (<br>, <strong>, etc.)
+        function processNode(node) {
           if (node.nodeType === Node.TEXT_NODE) {
             const text = node.textContent;
-            const parts = text.split(/(\s+)/);
-            parts.forEach(part => {
-              if (/\S/.test(part)) {
-                newContent += `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
-              } else {
-                newContent += part;
-              }
-            });
+            if (!text) return '';
+            return wrapChars(text);
           } else if (node.nodeType === Node.ELEMENT_NODE) {
-            const text = node.textContent;
-            const parts = text.split(/(\s+)/);
-            const wrapped = parts.map(part => {
-              if (/\S/.test(part)) {
-                return `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
-              }
-              return part;
-            }).join('');
-            const clone = node.cloneNode(false);
-            clone.innerHTML = wrapped;
-            clone.setAttribute('aria-hidden', 'true');
-            newContent += clone.outerHTML;
+            const tag = node.tagName.toLowerCase();
+            if (tag === 'br') return '<br>';
+            const attrs = Array.from(node.attributes)
+              .map(a => `${a.name}="${a.value}"`)
+              .join(' ');
+            const inner = Array.from(node.childNodes).map(processNode).join('');
+            return `<${tag}${attrs ? ' ' + attrs : ''} aria-hidden="true">${inner}</${tag}>`;
           }
-        });
-        el.innerHTML = newContent;
+          return '';
+        }
+
+        const wrapped = Array.from(el.childNodes).map(processNode).join('');
+        el.innerHTML = wrapped;
       });
     }
 

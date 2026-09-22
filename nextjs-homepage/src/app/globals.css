@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #5B5FEF;
+  --highlight: #E6F23A;
+  --bg-page: #FFFFFF;
+  --bg-card: #FAFAFA;
+  --border-color: #E7E7EA;
+  --text-main: #0B0B0F;
+  --text-muted: #6B6F76;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #0B0B0F;
+  background-color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(91, 95, 239, 0.15);
+  color: #0B0B0F;
+}

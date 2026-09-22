@@ -2227,10 +2227,11 @@ body.nav-open .navbar {
 .reveal.in{opacity:1;transform:translateY(0);will-change:auto;}
 .reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity 1s cubic-bezier(0.16, 1, 0.3, 1),transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important;transition-delay:calc(var(--i, 0) * 120ms);will-change:opacity,transform;}
 .reveal-stagger.in > *{opacity:1;transform:translateY(0);will-change:auto;}
-.word-reveal{display:inline-block;}
-h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100% !important;}
-.word-reveal .wr-word{display:inline-block;opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity 1s cubic-bezier(0.16, 1, 0.3, 1),transform 1s cubic-bezier(0.16, 1, 0.3, 1),filter 1s cubic-bezier(0.16, 1, 0.3, 1) !important;transition-delay:calc(var(--w-i, 0) * 60ms);will-change:opacity,transform,filter;}
-.reveal.in .word-reveal .wr-word,.word-reveal.in .wr-word{opacity:1;transform:translateY(0);filter:blur(0);will-change:auto;}
+.word-reveal{display:block;overflow:visible !important;}
+h1.word-reveal,h2.word-reveal,h3.word-reveal,h4.word-reveal{display:block !important;overflow:visible !important;height:auto !important;max-height:none !important;clip-path:none !important;}
+.word-reveal .wr-char{display:inline-block;opacity:0;transform:translateY(18px);transition:opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);transition-delay:calc(var(--c-i, 0) * 30ms);will-change:opacity,transform;}
+.word-reveal .wr-space{display:inline;white-space:pre;}
+.reveal.in .word-reveal .wr-char,.word-reveal.in .wr-char{opacity:1;transform:translateY(0);will-change:auto;}
 
 /* ---------- How It Works (Interactive Light Mockup) ---------- */
 #how-it-works {
@@ -4856,7 +4857,7 @@ select:focus {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal, .reveal-stagger > *, .word-reveal .wr-word {
+  .reveal, .reveal-stagger > *, .word-reveal .wr-char {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
