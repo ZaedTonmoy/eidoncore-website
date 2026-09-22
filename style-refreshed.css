@@ -959,7 +959,29 @@ p {
   background: var(--surface-subtle) !important;
 }
 
+.section-head {
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 48px !important;
+}
+
+.section-head.center {
+  align-items: center !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.section-head:not(.center) {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.section-head .eyebrow,
 .eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
   font-family: var(--mono) !important;
   font-size: 11px !important;
   font-weight: 600 !important;
@@ -970,6 +992,29 @@ p {
   border: 1px solid rgba(63, 114, 175, 0.12) !important;
   padding: 5px 12px !important;
   border-radius: var(--radius-full) !important;
+  margin-bottom: 16px !important;
+  width: fit-content !important;
+}
+
+.section-head h2,
+.section-head h1 {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 16px 0 !important;
+  font-family: var(--display) !important;
+  font-size: clamp(2rem, 3.8vw, 2.75rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.18 !important;
+}
+
+.section-head p,
+.section-head .sub {
+  display: block !important;
+  margin: 0 !important;
+  color: var(--text-soft) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
 }
 
 .features-grid-section h2 {
@@ -1241,35 +1286,22 @@ p {
 
 .stack-card {
   position: sticky !important;
-  top: calc(100px + var(--i, 0) * 22px) !important;
+  top: calc(104px + var(--i, 0) * 22px) !important;
   z-index: calc(10 + var(--i, 0)) !important;
-  margin-bottom: 36px !important;
+  margin-bottom: 32px !important;
   border-radius: var(--radius-lg) !important;
-  border: 1px solid #E2E8F0 !important;
-  border-top: 3px solid var(--accent, #3f72af) !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.04), 0 10px 25px -8px rgba(15, 23, 42, 0.08) !important;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
   padding: 36px 38px !important;
   transition: transform var(--duration-hover) var(--ease-smooth),
-              box-shadow var(--duration-hover) var(--ease-smooth),
-              border-color var(--duration-hover) var(--ease-smooth) !important;
-}
-
-.stack-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
-  pointer-events: none;
+              background var(--duration-hover) var(--ease-smooth) !important;
 }
 
 .stack-card:hover {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
   transform: translateY(-2px) !important;
-  border-color: #CBD5E1 !important;
-  box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.06), 0 16px 32px -8px rgba(15, 23, 42, 0.12) !important;
+  box-shadow: none !important;
 }
 
 .diff-num {
@@ -1277,7 +1309,7 @@ p {
   font-size: 13px !important;
   letter-spacing: 0.06em !important;
   font-weight: 600 !important;
-  color: var(--accent, #3f72af) !important;
+  color: var(--primary) !important;
   margin-bottom: 12px !important;
   display: inline-block;
 }
@@ -4259,7 +4291,15 @@ p {
    SUBTLE PER-WORD TEXT ENTRANCE ANIMATION (CALM, SMOOTH & CLEAR)
    ========================================================================== */
 .word-reveal {
-  display: inline;
+  display: inline-block;
+}
+
+h1.word-reveal,
+h2.word-reveal,
+h3.word-reveal,
+h4.word-reveal {
+  display: block !important;
+  width: 100% !important;
 }
 
 .word-reveal .wr-word {

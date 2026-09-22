@@ -120,10 +120,11 @@ p{margin:0;}
   display: none !important;
 }
 
-.section-head{max-width:640px;margin-bottom:52px;}
-.section-head h2{font-size:clamp(1.7rem,3.2vw,2.5rem);margin:16px 0 14px;font-weight:700;}
-.section-head p{color:var(--text-soft);font-size:1.05rem;}
-.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-head{max-width:640px;margin-bottom:52px;display:flex !important;flex-direction:column !important;}
+.section-head h2{font-size:clamp(1.7rem,3.2vw,2.5rem);margin:0 0 14px;font-weight:700;display:block !important;width:100% !important;}
+.section-head p{color:var(--text-soft);font-size:1.05rem;margin:0 !important;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;align-items:center !important;}
+.section-head:not(.center){align-items:flex-start !important;text-align:left !important;}
 
 section{padding:72px 0;}
 .section-alt{background:var(--surface);}
@@ -553,17 +554,16 @@ body.nav-open .navbar {
 }
 .stack-card{
   position:sticky;
-  top:calc(100px + var(--i, 0) * 22px);
+  top:calc(104px + var(--i, 0) * 22px);
   z-index:calc(10 + var(--i, 0));
-  background:var(--surface);
-  border:1px solid var(--line);
+  background:linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
+  border:1px solid transparent !important;
   border-radius:var(--radius-lg);
   padding:36px 38px;
-  box-shadow:0 -6px 20px rgba(11,26,43,0.05), var(--shadow-md);
-  border-top:3px solid var(--accent,var(--primary));
-  margin-bottom:36px;
+  box-shadow:none !important;
+  margin-bottom:32px;
 }
-.stack-card .diff-num{font-family:var(--mono);font-size:0.75rem;color:var(--accent,var(--secondary-dark));font-weight:600;}
+.stack-card .diff-num{font-family:var(--mono);font-size:0.75rem;color:var(--primary, #3f72af) !important;font-weight:600;}
 .stack-card h3{font-size:1.2rem;font-weight:700;margin:10px 0 10px;}
 .stack-card p{color:var(--text-soft);font-size:0.96rem;max-width:62ch;line-height:1.6;}
 
@@ -2227,7 +2227,8 @@ body.nav-open .navbar {
 .reveal.in{opacity:1;transform:translateY(0);will-change:auto;}
 .reveal-stagger > *{opacity:0;transform:translateY(18px);transition:opacity 1.05s var(--ease-spring, var(--ease)),transform 1.05s var(--ease-spring, var(--ease));transition-delay:calc(var(--i, 0) * 110ms);will-change:opacity,transform;}
 .reveal-stagger.in > *{opacity:1;transform:translateY(0);will-change:auto;}
-.word-reveal{display:inline;}
+.word-reveal{display:inline-block;}
+h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100% !important;}
 .word-reveal .wr-word{display:inline-block;opacity:0;transform:translateY(12px);filter:blur(3px);transition:opacity 0.95s var(--ease-spring, var(--ease)),transform 0.95s var(--ease-spring, var(--ease)),filter 0.95s var(--ease-spring, var(--ease));transition-delay:calc(var(--w-i, 0) * 55ms);will-change:opacity,transform,filter;}
 .reveal.in .word-reveal .wr-word,.word-reveal.in .wr-word{opacity:1;transform:translateY(0);filter:blur(0);will-change:auto;}
 
@@ -4636,18 +4637,18 @@ body.nav-open .navbar {
   border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
 }
 .stack-card {
-  background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
-  border-top: 3px solid var(--accent, #3f72af) !important;
-  box-shadow: 0 -3px 12px rgba(16, 26, 43, 0.03), 0 8px 24px -8px rgba(16, 26, 43, 0.07) !important;
-  transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: transform 0.22s ease !important;
 }
 .stack-card:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 -4px 16px rgba(16, 26, 43, 0.05), 0 16px 36px -10px rgba(16, 26, 43, 0.1) !important;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
 }
 .stack-card .diff-num {
-  color: var(--accent, #3f72af) !important;
+  color: var(--primary, #3f72af) !important;
   font-family: var(--mono, "JetBrains Mono", monospace) !important;
   font-size: 0.8rem !important;
   font-weight: 600 !important;
