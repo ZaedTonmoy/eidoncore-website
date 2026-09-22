@@ -1597,9 +1597,7 @@
     ">
       <style>
         #workflow-loop{
-          background:
-            radial-gradient(ellipse 900px 500px at 12% -10%, rgba(0,173,181,0.14), rgba(63,114,175,0.12) 50%, transparent 80%),
-            var(--loop-bg);
+          background: var(--loop-bg) !important;
           color: var(--loop-text);
         }
         #workflow-loop .loop-layout{
@@ -1736,7 +1734,7 @@
         }
         #workflow-loop .node-btn:hover,#workflow-loop .node-btn:focus-visible{
           border-color:var(--loop-accent-line);background:var(--loop-surface-2);
-          transform:translate(-50%,-50%) scale(1.06);outline:none;
+          transform:translate(-50%,-50%);outline:none;
           z-index:9999 !important;
         }
         @keyframes node-flash{

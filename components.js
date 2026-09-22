@@ -441,12 +441,12 @@
 
       const vh = window.innerHeight || document.documentElement.clientHeight;
 
-      // Only reveal elements strictly visible above the fold on initial load (Hero section or upper viewport)
-      // Elements below the fold must NOT trigger until the user scrolls down to them!
+      // Only reveal elements strictly visible inside the hero section on initial load.
+      // All other sections will smoothly animate in as the user scrolls them well into the viewport.
       revealEls.forEach(el => {
-        const rect = el.getBoundingClientRect();
         const inHero = el.closest('#hero') || el.closest('.hero');
-        if ((inHero && rect.top < vh) || (rect.top >= 0 && rect.bottom > 0 && rect.top <= vh * 0.45)) {
+        const rect = el.getBoundingClientRect();
+        if (inHero && rect.top < vh && rect.bottom > 0) {
           el.classList.add('in');
         }
       });
@@ -460,8 +460,8 @@
             }
           });
         }, {
-          threshold: 0.12,
-          rootMargin: '0px 0px -100px 0px' // Must be 100px inside viewport before triggering
+          threshold: 0.15,
+          rootMargin: '0px 0px -120px 0px' // Must be 120px well inside viewport before triggering
         });
 
         revealEls.forEach(el => {

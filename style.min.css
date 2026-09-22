@@ -50,12 +50,12 @@
   --ease-hover: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-micro: 180ms;
   --duration-hover: 260ms;
-  --duration-reveal: 1100ms;
+  --duration-reveal: 1350ms;
   --duration-ambient: 26s;
-  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0.03) 100%);
-  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.22) 0%, rgba(15, 23, 42, 0.06) 100%);
-  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
-  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.08) 100%);
+  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.08) 100%);
+  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.30) 0%, rgba(15, 23, 42, 0.14) 100%);
+  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%);
+  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.14) 100%);
   --transition:all .25s var(--ease);
   --primary-glow:rgba(63,114,175,0.36);
 }
@@ -2223,13 +2223,13 @@ body.nav-open .navbar {
   .footer-link-columns{grid-template-columns:1fr;}
   .breadcrumb{flex-wrap:wrap;}
 }
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 1.1s var(--ease-spring, var(--ease)),transform 1.1s var(--ease-spring, var(--ease));will-change:opacity,transform;}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1),transform 1.35s cubic-bezier(0.16, 1, 0.3, 1) !important;will-change:opacity,transform;}
 .reveal.in{opacity:1;transform:translateY(0);will-change:auto;}
-.reveal-stagger > *{opacity:0;transform:translateY(18px);transition:opacity 1.05s var(--ease-spring, var(--ease)),transform 1.05s var(--ease-spring, var(--ease));transition-delay:calc(var(--i, 0) * 110ms);will-change:opacity,transform;}
+.reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) !important;transition-delay:calc(var(--i, 0) * 135ms);will-change:opacity,transform;}
 .reveal-stagger.in > *{opacity:1;transform:translateY(0);will-change:auto;}
 .word-reveal{display:inline-block;}
 h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100% !important;}
-.word-reveal .wr-word{display:inline-block;opacity:0;transform:translateY(12px);filter:blur(3px);transition:opacity 0.95s var(--ease-spring, var(--ease)),transform 0.95s var(--ease-spring, var(--ease)),filter 0.95s var(--ease-spring, var(--ease));transition-delay:calc(var(--w-i, 0) * 55ms);will-change:opacity,transform,filter;}
+.word-reveal .wr-word{display:inline-block;opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),transform 1.25s cubic-bezier(0.16, 1, 0.3, 1),filter 1.25s cubic-bezier(0.16, 1, 0.3, 1) !important;transition-delay:calc(var(--w-i, 0) * 75ms);will-change:opacity,transform,filter;}
 .reveal.in .word-reveal .wr-word,.word-reveal.in .wr-word{opacity:1;transform:translateY(0);filter:blur(0);will-change:auto;}
 
 /* ---------- How It Works (Interactive Light Mockup) ---------- */
@@ -4451,11 +4451,38 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
   animation: radarPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* ==========================================================================
+   ORGANIC SECTION CONTRAST (NO DIVIDER BORDERS & ALTERNATING BACKGROUNDS)
+   Adjacent sections alternate tones naturally with zero divider lines.
+   ========================================================================== */
+section,
+.hero,
+.trust-bento,
+.features-grid-section,
+#how-it-works,
+#workflow-loop,
+.why-eidoncore-section,
+.compare-section,
+.pricing-section,
+#pricing,
+.testimonials-section,
+#testimonials,
+.faq-section,
+#faq,
+.pre-footer-wrap,
+.footer {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* 1. HERO - Tone: Off-white (#f8fafc) */
+.hero, #hero {
+  background: #f8fafc !important;
+}
+
 /* 2. TRUST BENTO GRID - Tone A: Pure White (#ffffff) */
 .trust-bento {
   background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
 }
 .trust-bento .kicker {
   color: #7c8797;
@@ -4464,70 +4491,61 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
 }
 .trust-bento .card {
   background: #f8fafc !important;
-  border: 1px solid rgba(16, 26, 43, 0.09) !important;
-  box-shadow: 0 2px 8px rgba(16, 26, 43, 0.03) !important;
-  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
+  transition: border-color 0.24s ease !important;
 }
 .trust-bento .card:hover {
-  transform: translateY(-3px) !important;
+  transform: none !important;
   background: #ffffff !important;
-  border-color: rgba(63, 114, 175, 0.35) !important;
-  box-shadow: 0 12px 28px -8px rgba(16, 26, 43, 0.1) !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  box-shadow: none !important;
 }
 .trust-bento .tile-main {
   background: #f8fafc !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
 }
 .trust-bento .tm-logos span {
   background: #ffffff;
-  border: 1px solid rgba(16, 26, 43, 0.1);
+  border: 1px solid rgba(15, 23, 42, 0.14);
   padding: 6px 14px;
   border-radius: 100px;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 .trust-bento .tm-logos span:hover {
-  transform: translateY(-2px);
+  transform: none;
   border-color: #3f72af;
   color: #101a2c;
 }
 
-/* 3. FEATURES & MODULES GRID - Tone B: Shade of White (#f5f7fb) */
-.features-grid-section {
+/* 3. FEATURES & MODULES GRID - Tone B: Soft Gray-Blue (#f5f7fb) */
+.features-grid-section, #features {
   background: #f5f7fb !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08);
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08);
 }
 .module-card {
   background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.09) !important;
-  box-shadow: 0 2px 10px rgba(16, 26, 43, 0.04);
-  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
+  transition: border-color 0.24s ease !important;
 }
 .module-card:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(63, 114, 175, 0.35) !important;
-  box-shadow: 0 16px 36px -12px rgba(16, 26, 43, 0.12) !important;
-}
-.module-card .module-icon-tile {
-  transition: transform 0.22s ease;
-}
-.module-card:hover .module-icon-tile {
-  transform: scale(1.08);
+  transform: none !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  box-shadow: none !important;
 }
 .module-card.more {
   background: #0d1a2b !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
 }
 .module-card.more:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 20px 40px -15px rgba(13, 26, 43, 0.4) !important;
+  transform: none !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: none !important;
 }
 
 /* 4. HOW IT WORKS - Tone A: Pure White (#ffffff) */
 #how-it-works {
   background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
 }
 #how-it-works .hw-tab {
   background: transparent;
@@ -4536,23 +4554,22 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
 }
 #how-it-works .hw-tab:hover {
   background: #f5f7fb;
+  transform: none !important;
 }
 #how-it-works .hw-tab.active {
   background: #f5f7fb !important;
-  border-color: rgba(16, 26, 43, 0.12) !important;
-  box-shadow: 0 4px 14px rgba(16, 26, 43, 0.05) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
 }
 #how-it-works .hw-device {
   background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.12) !important;
-  box-shadow: 0 16px 40px -15px rgba(16, 26, 43, 0.1) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
 }
 
-/* 5. WORKFLOW LOOP - Cohesive Dark Accent Canvas (#0b1a2b) */
+/* 5. WORKFLOW LOOP - Cohesive Dark Accent Canvas (#0b1a2b, Solid) */
 #workflow-loop {
   background: #0b1a2b !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 #workflow-loop .node {
   z-index: 10;
@@ -4564,14 +4581,18 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
   z-index: 9999 !important;
 }
 #workflow-loop .node-btn {
-  background: #122542;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  transform: translate(-50%, -50%) !important;
+  background: #122542 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+  transition: background 0.25s ease, border-color 0.25s ease !important;
 }
 #workflow-loop .node-btn:hover,
 #workflow-loop .node-btn:focus-visible {
+  transform: translate(-50%, -50%) !important;
   border-color: #00adb5 !important;
   background: #182d4d !important;
+  box-shadow: none !important;
   z-index: 9999 !important;
 }
 #workflow-loop .node-tip {
@@ -4594,57 +4615,19 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
   z-index: 10000 !important;
 }
 
-/* 6. DASHBOARD PREVIEW - Tone A: Pure White (#ffffff) */
-.home-tabs-section {
+/* 6. WHY EIDONCORE - Tone A: Pure White (#ffffff) */
+.why-eidoncore-section, #why-eidoncore {
   background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
-  color: #101a2c !important;
-}
-.home-tabs-section h2 {
-  color: #101a2c !important;
-}
-.home-tabs-section .sub {
-  color: #5b6472 !important;
-}
-.home-tabs-section .tabs {
-  background: #f5f7fb !important;
-  border: 1px solid rgba(16, 26, 43, 0.09) !important;
-}
-.home-tabs-section .tab {
-  color: #5b6472 !important;
-  transition: all 0.2s ease !important;
-}
-.home-tabs-section .tab:hover:not(.active) {
-  color: #101a2c !important;
-}
-.home-tabs-section .tab.active {
-  background: #ffffff !important;
-  color: #3f72af !important;
-  border-color: rgba(16, 26, 43, 0.09) !important;
-  box-shadow: 0 2px 8px rgba(16, 26, 43, 0.06) !important;
-}
-.home-tabs-section .device {
-  background: #0d1a2b !important;
-  border: 1px solid rgba(16, 26, 43, 0.14) !important;
-  box-shadow: 0 28px 64px -20px rgba(16, 26, 43, 0.2) !important;
-}
-
-/* 7. WHY EIDONCORE - Tone B: Shade of White (#f5f7fb) */
-.why-eidoncore-section {
-  background: #f5f7fb !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
 }
 .stack-card {
-  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
-  border: 1px solid transparent !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
   box-shadow: none !important;
-  transition: transform 0.22s ease !important;
+  transition: border-color 0.22s ease !important;
 }
 .stack-card:hover {
-  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
-  transform: translateY(-2px) !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 .stack-card .diff-num {
@@ -4654,160 +4637,116 @@ h1.word-reveal,h2.word-reveal,h3.word-reveal{display:block !important;width:100%
   font-weight: 600 !important;
 }
 
-/* 8. REPLACE YOUR STACK - Tone A: Pure White (#ffffff) */
-.compare-section {
-  background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+/* 7. REPLACE YOUR STACK - Tone B: Soft Gray-Blue (#f5f7fb) */
+.compare-section, #compare {
+  background: #f5f7fb !important;
 }
 .compare-wrap {
   background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
-  box-shadow: 0 8px 28px -10px rgba(16, 26, 43, 0.06) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
 }
 .compare-table th {
   background: #f5f7fb !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.09) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12) !important;
 }
 .compare-table tr:hover td {
   background: #f8fafc;
 }
-.compare-table td.win {
-  color: #1e9e6b !important;
-  font-weight: 600;
-}
-.compare-table td.win span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #e2f7ed;
-  color: #1e9e6b;
-  font-size: 10px;
-  font-weight: 700;
-  margin-right: 6px;
-}
 
-/* 9. PRICING SECTION - Tone B: Shade of White (#f5f7fb) */
+/* 8. PRICING SECTION - Tone A: Pure White (#ffffff) */
 .pricing-section, #pricing {
-  background: #f5f7fb !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+  background: #ffffff !important;
 }
 .price-card {
   background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
-  box-shadow: 0 4px 16px -6px rgba(16, 26, 43, 0.05);
-  transition: transform 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.24s cubic-bezier(0.16, 0.8, 0.24, 1), border-color 0.24s ease !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
+  transition: border-color 0.24s ease !important;
 }
 .price-card:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(63, 114, 175, 0.35) !important;
-  box-shadow: 0 16px 36px -12px rgba(16, 26, 43, 0.12) !important;
+  transform: none !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  box-shadow: none !important;
 }
 .price-card.featured {
   border: 2px solid #3f72af !important;
-  box-shadow: 0 14px 36px -10px rgba(63, 114, 175, 0.22) !important;
+  box-shadow: none !important;
 }
 .price-card.featured:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 20px 48px -12px rgba(63, 114, 175, 0.3) !important;
-}
-.popular-badge {
-  background: #3f72af !important;
-  color: #ffffff !important;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(63, 114, 175, 0.3) !important;
-}
-
-/* 10. TESTIMONIALS CAROUSEL - Tone A: Pure White (#ffffff) */
-.testimonials-section, #testimonials {
-  background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
-}
-.testimonial-hero-card {
-  background: #f8fafc !important;
-  border: 1px solid rgba(16, 26, 43, 0.1) !important;
-  box-shadow: 0 10px 30px -12px rgba(16, 26, 43, 0.06) !important;
-  transition: transform 0.22s ease, box-shadow 0.22s ease !important;
-}
-.testimonial-hero-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px -12px rgba(16, 26, 43, 0.1) !important;
-}
-.quote-mark-bg {
-  color: #3f72af !important;
-  opacity: 0.08 !important;
-}
-.testimonial-hero-quote .quote-highlight {
-  color: #3f72af;
-  font-weight: 600;
-}
-.avatar-nav-item {
-  background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.12) !important;
-  transition: all 0.22s ease !important;
-}
-.avatar-nav-item.active {
-  background: #edf2f9 !important;
-  border-color: #3f72af !important;
-  color: #2c568b !important;
-  transform: scale(1.1) !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 
-/* 11. FAQ ACCORDIONS - Tone B: Shade of White (#f5f7fb) */
-.faq-section, #faq {
+/* 9. TESTIMONIALS CAROUSEL - Tone B: Soft Gray-Blue (#f5f7fb) */
+.testimonials-section, #testimonials {
   background: #f5f7fb !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
-  border-bottom: 1px solid rgba(16, 26, 43, 0.08) !important;
+}
+.testimonial-hero-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
+  transition: border-color 0.22s ease !important;
+}
+.testimonial-hero-card:hover {
+  transform: none !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  box-shadow: none !important;
+}
+
+/* 10. FAQ ACCORDIONS - Tone A: Pure White (#ffffff) */
+.faq-section, #faq {
+  background: #ffffff !important;
 }
 .faq-item {
   background: #ffffff !important;
-  border: 1px solid rgba(16, 26, 43, 0.09) !important;
-  box-shadow: 0 1px 4px rgba(16, 26, 43, 0.03);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease !important;
 }
 .faq-item:hover {
-  border-color: rgba(63, 114, 175, 0.3) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -4px rgba(16, 26, 43, 0.06) !important;
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 .faq-item.open {
   border-color: rgba(63, 114, 175, 0.35) !important;
-  box-shadow: 0 8px 20px -6px rgba(16, 26, 43, 0.08) !important;
-}
-.faq-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #edf2f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #3f72af !important;
-  font-weight: 700;
-  font-size: 14px;
-  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease !important;
-}
-.faq-item.open .faq-icon {
-  background: #3f72af;
-  color: #ffffff !important;
-  transform: rotate(45deg);
+  box-shadow: none !important;
 }
 
-/* 12. PRE-FOOTER - Tone A: Pure White (#ffffff) with Dark Navy CTA Banner */
+/* 11. PRE-FOOTER - Tone B: Soft Gray-Blue (#f5f7fb) with Dark Navy CTA Banner */
 .pre-footer-wrap {
-  background: #ffffff !important;
-  border-top: 1px solid rgba(16, 26, 43, 0.08) !important;
+  background: #f5f7fb !important;
 }
 .cta {
   background: #0b1a2b !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 20px 50px -15px rgba(11, 26, 43, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+
+/* BUTTON HOVER STABILIZATION (NO JUMPING OR MISPLACEMENT) */
+.btn,
+.btn-pill,
+.btn-primary,
+.btn-outline,
+.nav-cta,
+button.btn,
+a.btn,
+.hero-left .btn-pill,
+.faq-question {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+}
+
+.btn:hover,
+.btn-pill:hover,
+.btn-primary:hover,
+.btn-outline:hover,
+.nav-cta:hover,
+button.btn:hover,
+a.btn:hover,
+.hero-left .btn-pill:hover,
+.faq-question:hover {
+  transform: none !important;
 }
 
 /* ==========================================================================
