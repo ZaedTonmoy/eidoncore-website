@@ -379,20 +379,48 @@
       });
     }
 
-    /* Scroll reveal */
-    function initScrollReveal() {
-      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-      if (!revealEls.length) return;
+    /* Subtle per-word text reveal */
+    function initWordReveal() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.querySelectorAll('.word-reveal').forEach(el => {
+        if (el.dataset.wordRevealInit) return;
+        el.dataset.wordRevealInit = 'true';
+        const originalText = el.textContent.trim();
+        if (!originalText) return;
+        el.setAttribute('aria-label', originalText);
 
-      function checkReveal() {
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        revealEls.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= vh + 600 && rect.bottom >= -600) {
-            el.classList.add('in');
+        const words = originalText.split(/\s+/);
+        el.innerHTML = words.map((word, idx) => {
+          return `<span class="wr-word" style="--w-i:${idx}" aria-hidden="true">${word}</span>`;
+        }).join(' ');
+      });
+    }
+
+    /* Eye-Soothing Scroll Reveal & Organic Stagger System */
+    function initScrollReveal() {
+      initWordReveal();
+
+      // Auto-assign --i stagger indices to children in grids/stagger containers if not present
+      document.querySelectorAll('.reveal-stagger, .features-modules-grid, .pricing-grid, .testimonials-grid, .trust-bento .grid, .tools-grid, .compare-wrap').forEach(grid => {
+        Array.from(grid.children).forEach((child, index) => {
+          if (!child.style.getPropertyValue('--i')) {
+            child.style.setProperty('--i', index);
           }
         });
-      }
+      });
+
+      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger, .word-reveal');
+      if (!revealEls.length) return;
+
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      // Immediately reveal elements that are already within or above the viewport on initial load
+      revealEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= vh * 0.92 && rect.bottom >= 0) {
+          el.classList.add('in');
+        }
+      });
 
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
@@ -402,19 +430,33 @@
               io.unobserve(entry.target);
             }
           });
-        }, { threshold: 0, rootMargin: '300px 0px 300px 0px' });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-        revealEls.forEach(el => io.observe(el));
+        revealEls.forEach(el => {
+          if (!el.classList.contains('in')) {
+            io.observe(el);
+          }
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        function checkReveal() {
+          const winHeight = window.innerHeight || document.documentElement.clientHeight;
+          revealEls.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= winHeight * 0.95 && rect.bottom >= 0) {
+              el.classList.add('in');
+            }
+          });
+        }
+        window.addEventListener('scroll', checkReveal, { passive: true });
+        window.addEventListener('resize', checkReveal, { passive: true });
+        checkReveal();
       }
 
-      checkReveal();
-      window.addEventListener('scroll', checkReveal, { passive: true });
-      window.addEventListener('resize', checkReveal, { passive: true });
-
-      // Fail-safe: ensure all page elements are visible after initial load
-      setTimeout(() => {
+      // Safety fallback: ensure elements become visible if user jumps or prints
+      window.addEventListener('beforeprint', () => {
         revealEls.forEach(el => el.classList.add('in'));
-      }, 600);
+      });
     }
 
     if (document.readyState === 'loading') {

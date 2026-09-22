@@ -45,10 +45,26 @@
   --shadow-lg: 0 16px 36px -10px rgba(15, 23, 42, 0.07), 0 4px 12px -4px rgba(15, 23, 42, 0.03);
   --shadow-float: 0 25px 60px -15px rgba(11, 26, 43, 0.22);
 
-  /* Slow, Smooth Animation Curves */
-  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-hover: 0.45s;
-  --duration-ambient: 12s;
+  /* Motion System — Eye-Soothing Premium Physics */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-hover: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-micro: 180ms;
+  --duration-hover: 280ms;
+  --duration-reveal: 650ms;
+  --duration-ambient: 26s;
+
+  /* Minimal Gradient Borders (Strictly Non-Colorful) */
+  /* Light Mode: Black → Semi-Black Gradients */
+  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0.03) 100%);
+  --border-gradient-light-subtle: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.02) 100%);
+  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.22) 0%, rgba(15, 23, 42, 0.06) 100%);
+
+  /* Dark Mode: White → Semi-White Gradients */
+  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --border-gradient-dark-subtle: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.08) 100%);
 
   /* Typography */
   --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -145,7 +161,7 @@ p {
 }
 
 /* ==========================================================================
-   REFRESHED BUTTONS
+   REFRESHED BUTTONS & MICRO-INTERACTIONS
    ========================================================================== */
 .btn-pill,
 .btn {
@@ -153,10 +169,43 @@ p {
   font-weight: 600;
   border-radius: var(--radius-full);
   padding: 11px 22px;
-  transition: transform var(--duration-hover) var(--ease-smooth),
-              box-shadow var(--duration-hover) var(--ease-smooth),
-              background 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform var(--duration-hover) var(--ease-spring),
+              box-shadow var(--duration-hover) var(--ease-spring),
+              background var(--duration-hover) var(--ease-smooth),
+              border-color var(--duration-hover) var(--ease-smooth),
+              color var(--duration-hover) var(--ease-smooth);
+  will-change: transform;
+}
+
+.btn:active,
+.btn-pill:active,
+.btn-primary:active,
+.btn-outline:active,
+.cw-btn-primary:active {
+  transform: translateY(0.5px) scale(0.985) !important;
+  transition-duration: var(--duration-micro) !important;
+}
+
+.btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.cw-btn-primary:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.14) !important;
+}
+
+.btn-arrow,
+.badge-arrow,
+.module-card-arrow {
+  display: inline-block;
+  transition: transform var(--duration-hover) var(--ease-spring) !important;
+}
+
+.btn:hover .btn-arrow,
+.btn-pill:hover .btn-arrow,
+.badge:hover .badge-arrow,
+.module-card:hover .module-card-arrow {
+  transform: translateX(3.5px) !important;
 }
 
 .btn-primary {
@@ -169,21 +218,21 @@ p {
 .btn-primary:hover {
   background: #1E293B !important;
   border-color: #1E293B !important;
-  transform: translateY(-2px);
+  transform: translateY(-2px) !important;
   box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.16) !important;
 }
 
 .btn-outline {
-  background: #FFFFFF !important;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
   color: var(--text) !important;
-  border: 1px solid var(--line-strong) !important;
+  border: 1px solid transparent !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
 }
 
 .btn-outline:hover {
-  border-color: var(--text);
-  color: var(--text);
-  transform: translateY(-2px);
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
+  color: var(--text) !important;
+  transform: translateY(-2px) !important;
   box-shadow: 0 6px 16px -3px rgba(15, 23, 42, 0.06) !important;
 }
 
@@ -206,10 +255,38 @@ p {
   opacity: 0.35 !important;
 }
 
-/* Subtle, airy blobs */
+/* Subtle, airy blobs with gentle macro ambient drift */
 .bg-blobs .blob {
   opacity: 0.12 !important;
   filter: blur(80px) !important;
+  animation: ambientDrift var(--duration-ambient) infinite ease-in-out alternate !important;
+  will-change: transform;
+}
+
+.bg-blobs .blob-2 {
+  animation-duration: 34s !important;
+  animation-delay: -9s !important;
+  animation-direction: alternate-reverse !important;
+}
+
+.bg-blobs .blob-3 {
+  animation-duration: 29s !important;
+  animation-delay: -15s !important;
+}
+
+@keyframes ambientDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(24px, -18px, 0) scale(1.05);
+  }
+  66% {
+    transform: translate3d(-18px, 20px, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(12px, -8px, 0) scale(1.02);
+  }
 }
 
 .hero.hero-centered .hero-content {
@@ -232,13 +309,14 @@ p {
   margin: 0 auto;
 }
 
-/* Refreshed Hero Badge Centered with Subtle Pulse Dot */
-.hero-header-text .badge {
+/* Refreshed Hero Badge Centered with Subtle Pulse Dot & Minimal Gradient Border */
+.hero-header-text .badge,
+.badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #FFFFFF !important;
-  border: 1px solid var(--line-strong) !important;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
+  border: 1px solid transparent !important;
   padding: 6px 16px !important;
   border-radius: var(--radius-full) !important;
   font-size: 13px !important;
@@ -246,34 +324,50 @@ p {
   color: var(--text) !important;
   box-shadow: var(--shadow-sm) !important;
   margin: 0 auto 28px auto !important;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--duration-hover) var(--ease-spring),
+              box-shadow var(--duration-hover) var(--ease-spring),
+              background var(--duration-hover) var(--ease-smooth);
   text-decoration: none;
 }
 
-.hero-header-text .badge:hover {
-  border-color: var(--primary);
-  transform: translateY(-1px);
+.hero-header-text .badge:hover,
+.badge:hover {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
+  transform: translateY(-1.5px);
   box-shadow: var(--shadow-md);
 }
 
-.hero-header-text .badge .badge-dot {
+.hero-header-text .badge .badge-dot,
+.badge-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 0 0 0 2px rgba(63, 114, 175, 0.2);
   display: inline-block;
+  animation: dotPulse 2.4s infinite ease-in-out !important;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 2px rgba(63, 114, 175, 0.2);
+  }
+  50% {
+    transform: scale(1.22);
+    box-shadow: 0 0 0 5px rgba(63, 114, 175, 0.08);
+  }
 }
 
 .hero-header-text .badge .badge-arrow {
   font-size: 12px;
   color: var(--text-mute);
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-hover) var(--ease-spring) !important;
   margin-left: 2px;
 }
 
 .hero-header-text .badge:hover .badge-arrow {
-  transform: translateX(2px);
+  transform: translateX(3px);
   color: var(--primary);
 }
 
@@ -4024,4 +4118,234 @@ p {
   color: #FFFFFF !important;
   opacity: 1 !important;
 }
+
+/* ==========================================================================
+   MINIMAL GRADIENT BORDERS (STRICTLY NON-COLORFUL)
+   Light mode: Black → Semi-Black. Dark mode: White → Semi-White.
+   ========================================================================== */
+
+/* Light Mode Card & Container Gradient Borders */
+.card,
+.feature-card,
+.module-card,
+.features-modules-grid .card.module-card,
+.trust-bento .card,
+.price-card,
+.testimonial-card,
+.testimonial-item,
+.testimonial-hero-card,
+.bento-card,
+.tool-card,
+.use-card,
+.partner-card,
+.doc-card,
+.faq-item,
+.cw-card {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light) border-box !important;
+  border: 1px solid transparent !important;
+  transition: transform var(--duration-hover) var(--ease-spring),
+              box-shadow var(--duration-hover) var(--ease-spring),
+              background var(--duration-hover) var(--ease-smooth) !important;
+}
+
+.card:hover,
+.feature-card:hover,
+.module-card:hover,
+.features-modules-grid .card.module-card:hover,
+.trust-bento .card:hover,
+.price-card:hover,
+.testimonial-card:hover,
+.testimonial-item:hover,
+.testimonial-hero-card:hover,
+.bento-card:hover,
+.tool-card:hover,
+.use-card:hover,
+.partner-card:hover,
+.doc-card:hover,
+.cw-card:hover {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, var(--border-gradient-light-hover) border-box !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+/* Featured Price Card Minimal Gradient Border */
+.price-card.featured {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(180deg, rgba(15, 23, 42, 0.40) 0%, rgba(15, 23, 42, 0.14) 100%) border-box !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04) !important;
+}
+
+.price-card.featured:hover {
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(180deg, rgba(15, 23, 42, 0.55) 0%, rgba(15, 23, 42, 0.22) 100%) border-box !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Dark Sections & Dark Mode Cards Minimal Gradient Borders (White → Semi-White) */
+.features-modules-grid .card.module-card.more,
+.cta,
+#workflow-loop .node-btn,
+.dark-card,
+.section-dark .card {
+  background: linear-gradient(160deg, #0F172A 0%, #162036 50%, #0A0F1D 100%) padding-box, var(--border-gradient-dark) border-box !important;
+  border: 1px solid transparent !important;
+  transition: transform var(--duration-hover) var(--ease-spring),
+              box-shadow var(--duration-hover) var(--ease-spring),
+              background var(--duration-hover) var(--ease-smooth) !important;
+}
+
+.features-modules-grid .card.module-card.more:hover,
+#workflow-loop .node-btn:hover,
+.dark-card:hover,
+.section-dark .card:hover {
+  background: linear-gradient(160deg, #131E35 0%, #1B2945 50%, #0D1424 100%) padding-box, var(--border-gradient-dark-hover) border-box !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ==========================================================================
+   ENHANCED FLUID SCROLL ENTRANCE & CASCADE STAGGER SYSTEM
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity var(--duration-reveal) var(--ease-spring),
+              transform var(--duration-reveal) var(--ease-spring) !important;
+  will-change: opacity, transform;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity 0.65s var(--ease-spring),
+              transform 0.65s var(--ease-spring) !important;
+  transition-delay: calc(var(--i, 0) * 55ms);
+  will-change: opacity, transform;
+}
+
+.reveal-stagger.in > * {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Clear will-change after transition settles to conserve GPU memory */
+.reveal.in,
+.reveal-stagger.in > * {
+  will-change: auto;
+}
+
+/* ==========================================================================
+   SUBTLE PER-WORD TEXT ENTRANCE ANIMATION
+   ========================================================================== */
+.word-reveal {
+  display: inline;
+}
+
+.word-reveal .wr-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(3px);
+  transition: opacity 0.58s var(--ease-spring),
+              transform 0.58s var(--ease-spring),
+              filter 0.58s var(--ease-spring) !important;
+  transition-delay: calc(var(--w-i, 0) * 38ms);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.in .word-reveal .wr-word,
+.word-reveal.in .wr-word {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  will-change: auto;
+}
+
+/* ==========================================================================
+   FORM INPUTS & INTERACTIVE ELEMENTS MICRO-INTERACTIONS
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select,
+.newsletter input {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border-radius: var(--radius-sm) !important;
+  transition: border-color var(--duration-hover) var(--ease-smooth),
+              box-shadow var(--duration-hover) var(--ease-spring),
+              background var(--duration-hover) var(--ease-smooth) !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus,
+.newsletter input:focus {
+  outline: none !important;
+  border-color: var(--text) !important;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Accordion chevrons */
+.faq-icon {
+  transition: transform var(--duration-hover) var(--ease-spring), color var(--duration-hover) var(--ease-smooth) !important;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg) !important;
+  color: var(--text) !important;
+}
+
+/* Links micro-motion */
+.footer-links a,
+.footer a {
+  display: inline-block;
+  transition: color var(--duration-hover) var(--ease-smooth),
+              transform var(--duration-hover) var(--ease-spring) !important;
+}
+
+.footer-links a:hover,
+.footer a:hover {
+  transform: translateX(2px) !important;
+}
+
+/* ==========================================================================
+   STRICT ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-stagger > *,
+  .word-reveal .wr-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .bg-blobs .blob,
+  .badge-dot,
+  #cwVirtualCursor,
+  .cw-progress-fill {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 
