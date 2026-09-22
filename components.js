@@ -389,10 +389,37 @@
         if (!originalText) return;
         el.setAttribute('aria-label', originalText);
 
-        const words = originalText.split(/\s+/);
-        el.innerHTML = words.map((word, idx) => {
-          return `<span class="wr-word" style="--w-i:${idx}" aria-hidden="true">${word}</span>`;
-        }).join(' ');
+        const childNodes = Array.from(el.childNodes);
+        let wordIndex = 0;
+        let newContent = '';
+
+        childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            const parts = text.split(/(\s+)/);
+            parts.forEach(part => {
+              if (/\S/.test(part)) {
+                newContent += `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
+              } else {
+                newContent += part;
+              }
+            });
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const text = node.textContent;
+            const parts = text.split(/(\s+)/);
+            const wrapped = parts.map(part => {
+              if (/\S/.test(part)) {
+                return `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
+              }
+              return part;
+            }).join('');
+            const clone = node.cloneNode(false);
+            clone.innerHTML = wrapped;
+            clone.setAttribute('aria-hidden', 'true');
+            newContent += clone.outerHTML;
+          }
+        });
+        el.innerHTML = newContent;
       });
     }
 
@@ -414,10 +441,12 @@
 
       const vh = window.innerHeight || document.documentElement.clientHeight;
 
-      // Immediately reveal elements that are already within or above the viewport on initial load
+      // Only reveal elements strictly visible above the fold on initial load (Hero section or upper viewport)
+      // Elements below the fold must NOT trigger until the user scrolls down to them!
       revealEls.forEach(el => {
         const rect = el.getBoundingClientRect();
-        if (rect.top <= vh * 0.92 && rect.bottom >= 0) {
+        const inHero = el.closest('#hero') || el.closest('.hero');
+        if ((inHero && rect.top < vh) || (rect.top >= 0 && rect.bottom > 0 && rect.top <= vh * 0.45)) {
           el.classList.add('in');
         }
       });
@@ -430,7 +459,10 @@
               io.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -100px 0px' // Must be 100px inside viewport before triggering
+        });
 
         revealEls.forEach(el => {
           if (!el.classList.contains('in')) {
@@ -443,7 +475,7 @@
           const winHeight = window.innerHeight || document.documentElement.clientHeight;
           revealEls.forEach(el => {
             const rect = el.getBoundingClientRect();
-            if (rect.top <= winHeight * 0.95 && rect.bottom >= 0) {
+            if (rect.top <= winHeight - 100 && rect.bottom >= 0) {
               el.classList.add('in');
             }
           });
