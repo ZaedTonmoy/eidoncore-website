@@ -4300,39 +4300,58 @@ a.btn:hover,
 }
 
 /* ==========================================================================
-   CALM, EYE-SOOTHING SLOW SCROLL ENTRANCE & CASCADE STAGGER SYSTEM
-   1s transition time with smooth deceleration, triggered at 40% of viewport.
+   ELEMENT-BY-ELEMENT SYNCHRONIZED ANIMATION SYSTEM
+   Each [data-anim] element animates individually on scroll.
+   Movement is tiny (10px), duration is slow (0.85s), smooth non-bouncy easing.
+   Sequence is encoded via data-delay="Nms" in HTML.
+   ========================================================================== */
+
+/* Starting state — invisible, barely below final position */
+[data-anim] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: var(--anim-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* Visible state */
+[data-anim].anim-in {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+/* ==========================================================================
+   LEGACY REVEAL CLASSES (kept with reduced offset for sub-pages)
    ========================================================================== */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform: translateY(8px);
+  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   will-change: opacity, transform;
 }
 
 .reveal.in {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: calc(var(--i, 0) * 120ms);
+  transform: translateY(8px);
+  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  transition-delay: calc(var(--i, 0) * 100ms);
   will-change: opacity, transform;
 }
 
 .reveal-stagger.in > * {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Clear will-change after transition settles to conserve GPU memory */
-.reveal.in,
-.reveal-stagger.in > * {
   will-change: auto;
 }
 
@@ -4579,6 +4598,7 @@ section,
     scroll-behavior: auto !important;
   }
 
+  [data-anim],
   .reveal,
   .reveal-stagger > *,
   .word-reveal .wr-char {

@@ -426,9 +426,79 @@
       });
     }
 
-    /* Eye-Soothing Scroll Reveal & Organic Stagger System */
+    /* Element-by-element synchronized animation system */
+    function initElementReveal() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('[data-anim]').forEach(el => {
+          el.classList.add('anim-in');
+        });
+        return;
+      }
+
+      const animEls = document.querySelectorAll('[data-anim]');
+      if (!animEls.length) return;
+
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      // Set CSS custom property for delay from data-delay attribute
+      animEls.forEach(el => {
+        const delay = el.getAttribute('data-delay');
+        if (delay) {
+          el.style.setProperty('--anim-delay', delay + 'ms');
+        }
+        // Immediately reveal elements visible in the hero on page load
+        const inHero = el.closest('#hero') || el.closest('.hero');
+        const rect = el.getBoundingClientRect();
+        if (inHero && rect.top <= vh * 0.85 && rect.bottom > 0) {
+          el.classList.add('anim-in');
+        }
+      });
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('anim-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0,
+          rootMargin: '0px 0px -30% 0px' // trigger when 30% into viewport
+        });
+
+        animEls.forEach(el => {
+          if (!el.classList.contains('anim-in')) {
+            io.observe(el);
+          }
+        });
+      } else {
+        // Fallback
+        function checkAnim() {
+          const wh = window.innerHeight || document.documentElement.clientHeight;
+          animEls.forEach(el => {
+            if (el.classList.contains('anim-in')) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= wh * 0.70 && rect.bottom >= 0) {
+              el.classList.add('anim-in');
+            }
+          });
+        }
+        window.addEventListener('scroll', checkAnim, { passive: true });
+        window.addEventListener('resize', checkAnim, { passive: true });
+        checkAnim();
+      }
+
+      // Safety: print, programmatic jump
+      window.addEventListener('beforeprint', () => {
+        animEls.forEach(el => el.classList.add('anim-in'));
+      });
+    }
+
+    /* Eye-Soothing Scroll Reveal & Organic Stagger System (legacy — kept for sub-pages) */
     function initScrollReveal() {
       initWordReveal();
+      initElementReveal();
 
       // Auto-assign --i stagger indices to children in grids/stagger containers if not present
       document.querySelectorAll('.reveal-stagger, .features-modules-grid, .pricing-grid, .testimonials-grid, .trust-bento .grid, .tools-grid, .compare-wrap').forEach(grid => {
@@ -457,7 +527,6 @@
         const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              // Add a graceful delay before triggering animation once 40% in viewport
               setTimeout(() => {
                 entry.target.classList.add('in');
               }, 60);
@@ -466,7 +535,7 @@
           });
         }, {
           threshold: 0,
-          rootMargin: '0px 0px -40% 0px' // Exactly when element comes into 40% of screen viewport!
+          rootMargin: '0px 0px -40% 0px'
         });
 
         revealEls.forEach(el => {
@@ -475,12 +544,10 @@
           }
         });
       } else {
-        // Fallback for browsers without IntersectionObserver
         function checkReveal() {
           const winHeight = window.innerHeight || document.documentElement.clientHeight;
           revealEls.forEach(el => {
             const rect = el.getBoundingClientRect();
-            // Triggers when reaching 40% into screen viewport (top <= 60% of winHeight)
             if (rect.top <= winHeight * 0.60 && rect.bottom >= 0) {
               el.classList.add('in');
             }
