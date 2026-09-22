@@ -441,12 +441,11 @@
 
       const vh = window.innerHeight || document.documentElement.clientHeight;
 
-      // Only reveal elements strictly visible inside the hero section on initial load.
-      // All other sections will smoothly animate in as the user scrolls them well into the viewport.
+      // Only reveal elements strictly visible inside the hero section on initial load if within top 60% of viewport
       revealEls.forEach(el => {
         const inHero = el.closest('#hero') || el.closest('.hero');
         const rect = el.getBoundingClientRect();
-        if (inHero && rect.top < vh && rect.bottom > 0) {
+        if (inHero && rect.top <= vh * 0.60 && rect.bottom > 0) {
           el.classList.add('in');
         }
       });
@@ -455,13 +454,16 @@
         const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('in');
+              // Add a graceful delay before triggering animation once 40% in viewport
+              setTimeout(() => {
+                entry.target.classList.add('in');
+              }, 60);
               io.unobserve(entry.target);
             }
           });
         }, {
-          threshold: 0.15,
-          rootMargin: '0px 0px -120px 0px' // Must be 120px well inside viewport before triggering
+          threshold: 0,
+          rootMargin: '0px 0px -40% 0px' // Exactly when element comes into 40% of screen viewport!
         });
 
         revealEls.forEach(el => {
@@ -475,7 +477,8 @@
           const winHeight = window.innerHeight || document.documentElement.clientHeight;
           revealEls.forEach(el => {
             const rect = el.getBoundingClientRect();
-            if (rect.top <= winHeight - 100 && rect.bottom >= 0) {
+            // Triggers when reaching 40% into screen viewport (top <= 60% of winHeight)
+            if (rect.top <= winHeight * 0.60 && rect.bottom >= 0) {
               el.classList.add('in');
             }
           });

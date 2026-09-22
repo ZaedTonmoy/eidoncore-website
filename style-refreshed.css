@@ -52,19 +52,19 @@
   --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
   --duration-micro: 180ms;
   --duration-hover: 280ms;
-  --duration-reveal: 1350ms;
+  --duration-reveal: 1000ms;
   --duration-ambient: 26s;
 
-  /* Minimal Linear-Grade Hairline Gradient Borders */
+  /* Minimal Linear-Grade Hairline Gradient Borders (45° Angle) */
   /* Light Mode */
-  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.03) 100%);
-  --border-gradient-light-subtle: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.015) 100%);
-  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.07) 100%);
+  --border-gradient-light: linear-gradient(45deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.02) 100%);
+  --border-gradient-light-subtle: linear-gradient(45deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.01) 100%);
+  --border-gradient-light-hover: linear-gradient(45deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.05) 100%);
 
-  /* Dark Mode & Dark Sections (Linear Aesthetic) */
-  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
-  --border-gradient-dark-subtle: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
-  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
+  /* Dark Mode & Dark Sections (Linear Aesthetic 45° Angle) */
+  --border-gradient-dark: linear-gradient(45deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --border-gradient-dark-subtle: linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --border-gradient-dark-hover: linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
 
   /* Typography */
   --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -4301,13 +4301,13 @@ a.btn:hover,
 
 /* ==========================================================================
    CALM, EYE-SOOTHING SLOW SCROLL ENTRANCE & CASCADE STAGGER SYSTEM
-   Deep 1.35s luxury motion with smooth deceleration and generous viewport trigger.
+   1s transition time with smooth deceleration, triggered at 40% of viewport.
    ========================================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: opacity, transform;
 }
 
@@ -4319,9 +4319,9 @@ a.btn:hover,
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: calc(var(--i, 0) * 135ms);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: calc(var(--i, 0) * 120ms);
   will-change: opacity, transform;
 }
 
@@ -4356,10 +4356,10 @@ h4.word-reveal {
   opacity: 0;
   transform: translateY(14px);
   filter: blur(4px);
-  transition: opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.25s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 1.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: calc(var(--w-i, 0) * 75ms);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: calc(var(--w-i, 0) * 60ms);
   will-change: opacity, transform, filter;
 }
 
