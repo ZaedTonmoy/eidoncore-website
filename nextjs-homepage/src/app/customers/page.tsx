@@ -11,6 +11,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
+import AnimatedImage from "@/components/AnimatedImage";
 import { Check, ArrowRight, TrendingUp, Clock, DollarSign, Users, Sparkles, Shield } from "lucide-react";
 
 const CASE_STUDIES = [
@@ -222,13 +223,13 @@ export default function CustomersPage() {
                           app.eidoncore.com/case-study/{study.company.toLowerCase().replace(/\s+/g, "-")}
                         </span>
                       </div>
-                      <div className="rounded-xl overflow-hidden border border-[#E2E8F0] bg-white">
-                        <img
-                          src={study.image}
-                          alt={study.company}
-                          className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                        />
-                      </div>
+                      <AnimatedImage
+                        src={study.image}
+                        alt={study.company}
+                        origin={isReverse ? "top-left" : "top-right"}
+                        className="rounded-xl border border-[#E2E8F0] bg-white"
+                        imgClassName="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
                     </div>
                   </div>
                 </div>

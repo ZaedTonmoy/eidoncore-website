@@ -11,6 +11,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
+import AnimatedImage from "@/components/AnimatedImage";
 import {
   Megaphone,
   Palette,
@@ -242,13 +243,14 @@ export default function UseCasesPage() {
                       app.eidoncore.com/solutions/{current.id}
                     </span>
                   </div>
-                  <div className="rounded-xl overflow-hidden border border-[#E2E8F0] bg-white">
-                    <img
-                      src={current.image}
-                      alt={current.name}
-                      className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                    />
-                  </div>
+                  <AnimatedImage
+                    key={current.image}
+                    src={current.image}
+                    alt={current.name}
+                    origin="top-right"
+                    className="rounded-xl border border-[#E2E8F0] bg-white"
+                    imgClassName="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  />
                 </div>
               </div>
             </div>

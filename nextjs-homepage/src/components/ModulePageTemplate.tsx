@@ -13,6 +13,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
+import AnimatedImage from "@/components/AnimatedImage";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 export interface ModuleFeature {
@@ -163,14 +164,13 @@ export default function ModulePageTemplate({
                       </div>
 
                       {feat.image ? (
-                        <div className="rounded-xl overflow-hidden border border-[#E2E8F0] bg-white">
-                          <img
-                            src={feat.image}
-                            alt={feat.title}
-                            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                            loading="lazy"
-                          />
-                        </div>
+                        <AnimatedImage
+                          src={feat.image}
+                          alt={feat.title}
+                          origin={isReverse ? "top-left" : "top-right"}
+                          className="rounded-xl border border-[#E2E8F0] bg-white"
+                          imgClassName="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                        />
                       ) : (
                         <div className="rounded-xl p-6 bg-white border border-[#E2E8F0] flex flex-col gap-4">
                           <div className="flex items-center justify-between">

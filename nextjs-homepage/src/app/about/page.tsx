@@ -13,6 +13,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import SectionBadge from "@/components/SectionBadge";
+import AnimatedImage from "@/components/AnimatedImage";
 import {
   Compass,
   Cpu,
@@ -128,14 +129,13 @@ export default function AboutPage() {
               {/* Dashboard Preview Graphic */}
               <div className="lg:col-span-6">
                 <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-lg bg-[#0F172A]/5 p-2 sm:p-3">
-                  <div className="rounded-xl overflow-hidden border border-[#E2E8F0] bg-white shadow-2xs">
-                    <img
-                      src="/images/dashboard.webp"
-                      alt="Eidoncore unified dashboard"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
+                  <AnimatedImage
+                    src="/images/dashboard.webp"
+                    alt="Eidoncore unified dashboard"
+                    origin="top-right"
+                    className="rounded-xl border border-[#E2E8F0] bg-white shadow-2xs"
+                    imgClassName="w-full h-auto object-cover"
+                  />
                 </div>
               </div>
 
@@ -253,14 +253,13 @@ export default function AboutPage() {
                   key={leader.name}
                   className="bg-white border border-[#E2E8F0] rounded-3xl p-7 sm:p-9 flex flex-col items-start shadow-2xs hover:shadow-xs transition-all duration-300"
                 >
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[#E2E8F0] shadow-xs mb-6 relative">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className="w-full h-full object-cover object-top"
-                      loading="lazy"
-                    />
-                  </div>
+                  <AnimatedImage
+                    src={leader.image}
+                    alt={leader.name}
+                    origin="top-left"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-[#E2E8F0] shadow-xs mb-6 shrink-0"
+                    imgClassName="w-full h-full object-cover object-top"
+                  />
 
                   <h3 className="text-xl font-bold text-[#0F172A] tracking-tight">
                     {leader.name}

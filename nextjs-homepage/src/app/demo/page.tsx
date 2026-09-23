@@ -11,6 +11,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
+import AnimatedImage from "@/components/AnimatedImage";
 import {
   Users,
   FolderKanban,
@@ -242,13 +243,14 @@ export default function DemoPage() {
                       app.eidoncore.com/workflow/{TOUR_STEPS[activeStep].step}
                     </span>
                   </div>
-                  <div className="rounded-xl overflow-hidden border border-[#E2E8F0] bg-white shadow-2xs">
-                    <img
-                      src={TOUR_STEPS[activeStep].image}
-                      alt={TOUR_STEPS[activeStep].title}
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
+                  <AnimatedImage
+                    key={TOUR_STEPS[activeStep].image}
+                    src={TOUR_STEPS[activeStep].image}
+                    alt={TOUR_STEPS[activeStep].title}
+                    origin="top-right"
+                    className="rounded-xl border border-[#E2E8F0] bg-white shadow-2xs"
+                    imgClassName="w-full h-auto object-cover"
+                  />
                 </div>
               </div>
             </div>
