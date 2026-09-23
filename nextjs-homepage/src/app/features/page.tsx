@@ -10,6 +10,7 @@ import FAQSection from "@/components/FAQSection";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
+import SectionBadge from "@/components/SectionBadge";
 import {
   Bot,
   FolderKanban,
@@ -347,9 +348,7 @@ export default function FeaturesPage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Unified Ecosystem
-              </span>
+              <SectionBadge text="Unified Ecosystem" />
               <AnimatedHeading
                 as="h2"
                 text="Why Unified Architecture Matters"

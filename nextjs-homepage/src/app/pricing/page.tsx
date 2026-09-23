@@ -12,6 +12,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import { Check, X, Shield, Lock, Users, Zap, HelpCircle, ChevronDown, ArrowRight } from "lucide-react";
 
 interface PlanTier {
@@ -267,9 +268,7 @@ export default function PricingPage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Side-By-Side Comparison
-              </span>
+              <SectionBadge text="Side-By-Side Comparison" />
               <AnimatedHeading
                 as="h2"
                 text="Full Feature Matrix"

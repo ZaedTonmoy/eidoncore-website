@@ -12,6 +12,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 export interface ModuleFeature {
@@ -111,9 +112,7 @@ export default function ModulePageTemplate({
                       <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#3F72AF] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20">
                         {feat.idx}
                       </span>
-                      <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                        {feat.eyebrow}
-                      </span>
+                      <SectionBadge text={feat.eyebrow} className="!mb-0" />
                     </div>
 
                     <AnimatedHeading
@@ -231,9 +230,7 @@ export default function ModulePageTemplate({
           <section className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
               <div className="max-w-2xl mb-14">
-                <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                  {bentoEyebrow}
-                </span>
+                <SectionBadge text={bentoEyebrow} />
                 <AnimatedHeading
                   as="h2"
                   text={bentoTitle}

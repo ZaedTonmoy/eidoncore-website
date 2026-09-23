@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import Testimonials from "@/components/Testimonials";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import { Check, X } from "lucide-react";
 
 export interface CompetitorData {
@@ -144,9 +145,7 @@ export default function CompetitorCompareView({ slug }: { slug: string }) {
           <div className="max-w-[900px] mx-auto px-4 sm:px-6">
             <div className="bg-white border border-[#E2E8F0] rounded-3xl p-6 sm:p-10 shadow-xs">
               <div className="mb-8">
-                <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                  Feature Breakdown
-                </span>
+                <SectionBadge text="Feature Breakdown" />
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] mt-2">
                   How Eidoncore Compares to {comp.name}
                 </h2>

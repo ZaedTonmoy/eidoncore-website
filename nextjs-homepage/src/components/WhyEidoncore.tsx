@@ -3,6 +3,7 @@
 import React from "react";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
+import SectionBadge from "./SectionBadge";
 import { LayoutGrid, Palette, ShieldCheck, Cpu, Check, ArrowRight } from "lucide-react";
 
 interface DiffCard {
@@ -56,9 +57,7 @@ export default function WhyEidoncore() {
           
           {/* Left Column: Sticky Title, Description & Highlights */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 self-start flex flex-col items-start">
-            <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-              Why Eidoncore
-            </span>
+            <SectionBadge text="Why Eidoncore" />
 
             <AnimatedHeading
               as="h2"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteContent } from "@/content/site-content";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
+import SectionBadge from "./SectionBadge";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
 import {
   Bot,
@@ -37,9 +38,7 @@ export default function FeaturesBento() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-              {modulesHeading.eyebrow}
-            </span>
+            <SectionBadge text={modulesHeading.eyebrow} />
             <AnimatedHeading
               as="h2"
               text={modulesHeading.title}

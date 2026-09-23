@@ -11,6 +11,7 @@ import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
+import SectionBadge from "@/components/SectionBadge";
 import { Check, X, AlertCircle, ArrowRight, DollarSign, Layers, Shield, Zap } from "lucide-react";
 
 interface Competitor {
@@ -123,9 +124,7 @@ export default function ComparePage() {
         <section className="py-16 md:py-24 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Direct Alternatives
-              </span>
+              <SectionBadge text="Direct Alternatives" />
               <AnimatedHeading
                 as="h2"
                 text="Evaluate Before You Switch"
@@ -175,9 +174,7 @@ export default function ComparePage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Side-by-Side Table
-              </span>
+              <SectionBadge text="Side-by-Side Table" />
               <AnimatedHeading
                 as="h2"
                 text="Quick Platform Comparison"

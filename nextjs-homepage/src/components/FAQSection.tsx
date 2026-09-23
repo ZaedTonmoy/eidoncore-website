@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { siteContent } from "@/content/site-content";
 import AnimatedHeading from "./AnimatedHeading";
+import SectionBadge from "./SectionBadge";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
 import { ChevronDown, Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,9 +22,7 @@ export default function FAQSection() {
         
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-            {eyebrow}
-          </span>
+          <SectionBadge text={eyebrow} />
           <AnimatedHeading
             as="h2"
             text={title}

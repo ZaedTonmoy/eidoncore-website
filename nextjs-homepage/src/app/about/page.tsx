@@ -12,6 +12,7 @@ import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
+import SectionBadge from "@/components/SectionBadge";
 import {
   Compass,
   Cpu,
@@ -99,9 +100,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               
               <div className="lg:col-span-6 flex flex-col items-start">
-                <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                  The Genesis
-                </span>
+                <SectionBadge text="The Genesis" />
                 <AnimatedHeading
                   as="h2"
                   text="From Frustration to Foundation"
@@ -148,9 +147,7 @@ export default function AboutPage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Etymology
-              </span>
+              <SectionBadge text="Etymology" />
               <AnimatedHeading
                 as="h2"
                 text="Why the Name Eidoncore?"
@@ -199,9 +196,7 @@ export default function AboutPage() {
         <section className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Guiding Principles
-              </span>
+              <SectionBadge text="Guiding Principles" />
               <AnimatedHeading
                 as="h2"
                 text="What Drives Us Every Day"
@@ -241,9 +236,7 @@ export default function AboutPage() {
         <section id="leadership" className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Leadership
-              </span>
+              <SectionBadge text="Leadership" />
               <AnimatedHeading
                 as="h2"
                 text="Meet the Team Behind Eidoncore"

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
+import SectionBadge from "./SectionBadge";
 import { ArrowRight, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 interface Testimonial {
@@ -111,9 +112,7 @@ export default function Testimonials() {
         
         {/* Section Head */}
         <div className="max-w-2xl mx-auto text-center mb-16">
-          <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-            What Agencies Say
-          </span>
+          <SectionBadge text="What Agencies Say" />
           <AnimatedHeading
             as="h2"
             text="Loved by 500+ Agencies Worldwide"

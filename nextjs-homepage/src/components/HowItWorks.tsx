@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
+import SectionBadge from "./SectionBadge";
 import { Check, Copy, ArrowRight, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -62,9 +63,7 @@ export default function HowItWorks() {
         
         {/* Section Head */}
         <div className="max-w-2xl mx-auto text-center mb-16">
-          <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-            How It Works
-          </span>
+          <SectionBadge text="How It Works" />
           <AnimatedHeading
             as="h2"
             text="Up And Running in Minutes"

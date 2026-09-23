@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import { Handshake, TrendingUp, DollarSign, Clock, Users, ArrowRight, Check } from "lucide-react";
 
 export default function PartnersPage() {
@@ -80,9 +81,7 @@ export default function PartnersPage() {
         <section className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="max-w-2xl mb-14">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Partner Tiers
-              </span>
+              <SectionBadge text="Partner Tiers" />
               <AnimatedHeading
                 as="h2"
                 text="Two High-Yield Ways to Partner"

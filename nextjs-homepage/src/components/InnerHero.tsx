@@ -5,6 +5,7 @@ import Link from "next/link";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import AnimatedButton from "./AnimatedButton";
+import SectionBadge from "./SectionBadge";
 import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbItem {
@@ -61,12 +62,7 @@ export default function InnerHero({
         </nav>
 
         {/* Eyebrow badge */}
-        {eyebrow && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full text-xs font-mono font-semibold tracking-wider text-[#3F72AF] uppercase mb-4 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#3F72AF] animate-pulse" />
-            <span>{eyebrow}</span>
-          </div>
-        )}
+        {eyebrow && <SectionBadge text={eyebrow} className="mb-4" />}
 
         {/* Main Title */}
         <AnimatedHeading

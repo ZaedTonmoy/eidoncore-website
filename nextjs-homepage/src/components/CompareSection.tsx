@@ -5,6 +5,7 @@ import { siteContent } from "@/content/site-content";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import AnimatedButton from "./AnimatedButton";
+import SectionBadge from "./SectionBadge";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
 import { Check } from "lucide-react";
 
@@ -16,9 +17,7 @@ export default function CompareSection() {
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-          <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-            {eyebrow}
-          </span>
+          <SectionBadge text={eyebrow} />
           <AnimatedHeading
             as="h2"
             text={title}

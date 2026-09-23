@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import { Check, ArrowRight, TrendingUp, Clock, DollarSign, Users, Sparkles, Shield } from "lucide-react";
 
 const CASE_STUDIES = [
@@ -240,9 +241,7 @@ export default function CustomersPage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="max-w-2xl mb-14">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Agency Transformation
-              </span>
+              <SectionBadge text="Agency Transformation" />
               <AnimatedHeading
                 as="h2"
                 text="Why Modern Agencies Are Leaving Fragmented SaaS"

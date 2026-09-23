@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
+import SectionBadge from "@/components/SectionBadge";
 import {
   Megaphone,
   Palette,
@@ -129,9 +130,7 @@ export default function UseCasesPage() {
         <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="max-w-2xl mb-14">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Industry Solutions
-              </span>
+              <SectionBadge text="Industry Solutions" />
               <AnimatedHeading
                 as="h2"
                 text="Tailored for Your Exact Business Model"
@@ -188,9 +187,7 @@ export default function UseCasesPage() {
                   <span className="w-8 h-8 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center shadow-2xs">
                     {current.icon}
                   </span>
-                  <span className="text-xs font-mono text-[#3F72AF] font-bold uppercase tracking-wider">
-                    {current.name} Solution
-                  </span>
+                  <SectionBadge text={`${current.name} Solution`} className="!mb-0" />
                 </div>
 
                 <AnimatedHeading
