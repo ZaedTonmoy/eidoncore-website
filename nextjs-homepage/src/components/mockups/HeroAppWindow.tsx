@@ -212,10 +212,10 @@ export default function HeroAppWindow() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-[#FFFFFF] border border-[#E2E8F0] rounded-2xl shadow-[0_16px_50px_rgba(15,23,42,0.08)] overflow-hidden transition-all duration-300"
+      className="relative w-full max-h-[80vh] md:max-h-none flex flex-col bg-[#FFFFFF] border border-[#E2E8F0] rounded-2xl shadow-[0_16px_50px_rgba(15,23,42,0.08)] overflow-hidden transition-all duration-300"
     >
       {/* 1. Browser Window Header (Only 3 dots [red yellow green] + responsive URL bar with mobile overflow) */}
-      <div className="h-10 sm:h-11 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
+      <div className="h-10 sm:h-11 shrink-0 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
         {/* 3 dots */}
         <div className="flex items-center gap-1.5 shrink-0">
           <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40" />
@@ -249,7 +249,7 @@ export default function HeroAppWindow() {
       </div>
 
       {/* Mobile Horizontal Navigation Tabs (Visible on < md screens) */}
-      <div className="md:hidden flex items-center gap-1 overflow-x-auto no-scrollbar p-2 bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-medium">
+      <div className="shrink-0 md:hidden flex items-center gap-1 overflow-x-auto no-scrollbar p-2 bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-medium">
         <button
           onClick={() => setCurrentView("dashboard")}
           className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
@@ -306,7 +306,7 @@ export default function HeroAppWindow() {
       </div>
 
       {/* 2. Eidoncore App Shell: Sidebar + Content Canvas */}
-      <div className="grid grid-cols-12 min-h-[560px] text-xs">
+      <div className="flex-1 grid grid-cols-12 min-h-0 md:min-h-[560px] text-xs overflow-hidden">
         
         {/* Desktop App Sidebar Navigation */}
         <aside className="hidden md:flex md:col-span-3 lg:col-span-2.5 border-r border-[#E2E8F0] bg-[#FFFFFF] p-3 flex-col justify-between select-none">
@@ -480,7 +480,7 @@ export default function HeroAppWindow() {
         </aside>
 
         {/* Main Content Canvas */}
-        <main className="col-span-12 md:col-span-9 lg:col-span-9.5 p-3.5 sm:p-5 flex flex-col gap-4 bg-[#F8FAFC]/50 relative">
+        <main className="col-span-12 md:col-span-9 lg:col-span-9.5 p-3.5 sm:p-5 flex flex-col gap-4 bg-[#F8FAFC]/50 relative overflow-y-auto no-scrollbar">
           
           {/* Top Bar inside App Canvas */}
           <div className="flex items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
@@ -1325,7 +1325,7 @@ export default function HeroAppWindow() {
           {/* AI COPILOT MODAL */}
           {copilotOpen && (
             <div className="absolute inset-0 bg-black/35 backdrop-blur-[2px] z-50 flex items-center justify-center p-3 animate-fadeIn">
-              <div className="w-[96%] sm:max-w-xl bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3">
+              <div className="w-[96%] sm:max-w-xl max-h-[90%] overflow-y-auto no-scrollbar bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-3">
