@@ -306,10 +306,10 @@ export default function HeroAppWindow() {
       </div>
 
       {/* 2. Eidoncore App Shell: Sidebar + Content Canvas */}
-      <div className="flex-1 grid grid-cols-12 min-h-0 md:min-h-[560px] text-xs overflow-hidden">
+      <div className="flex-1 flex min-h-0 md:min-h-[560px] text-xs overflow-hidden">
         
-        {/* Desktop App Sidebar Navigation */}
-        <aside className="hidden md:flex md:col-span-3 lg:col-span-2.5 border-r border-[#E2E8F0] bg-[#FFFFFF] p-3 flex-col justify-between select-none">
+        {/* Desktop App Sidebar Navigation (Less wide, proportional matching real app) */}
+        <aside className="hidden md:flex w-[190px] lg:w-[205px] shrink-0 border-r border-[#E2E8F0] bg-[#FFFFFF] p-2.5 flex-col justify-between select-none">
           <div className="flex flex-col gap-3">
             
             {/* Workspace Brand Header */}
@@ -480,7 +480,7 @@ export default function HeroAppWindow() {
         </aside>
 
         {/* Main Content Canvas */}
-        <main className="col-span-12 md:col-span-9 lg:col-span-9.5 p-3.5 sm:p-5 flex flex-col gap-4 bg-[#F8FAFC]/50 relative overflow-y-auto no-scrollbar">
+        <main className="flex-1 min-w-0 p-3.5 sm:p-5 flex flex-col gap-4 bg-[#F8FAFC]/50 relative overflow-y-auto no-scrollbar">
           
           {/* Top Bar inside App Canvas */}
           <div className="flex items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
@@ -542,29 +542,74 @@ export default function HeroAppWindow() {
           {currentView === "dashboard" && (
             <div className="flex flex-col gap-3.5 sm:gap-4 animate-fadeIn">
               
-              {/* Greeting Hero Card */}
-              <div className="p-4 sm:p-5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#2563EB] uppercase tracking-wider font-semibold">
-                    <Sparkles size={11} />
-                    <span>YOUR PERSONAL COCKPIT</span>
+              {/* Row 1: Greeting Cockpit Card (Left) + Upcoming Milestone Card (Right) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4">
+                
+                {/* Left: Personal Cockpit Greeting */}
+                <div className="lg:col-span-8 p-4 sm:p-5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#2563EB] uppercase tracking-wider font-semibold">
+                      <Sparkles size={11} />
+                      <span>YOUR PERSONAL COCKPIT</span>
+                    </div>
+                    <h4 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">
+                      Good morning, Alex
+                    </h4>
+                    <p className="text-[11px] text-[#64748B] leading-relaxed max-w-lg">
+                      A clear view of what needs your attention today, upcoming milestones, and AI recommendations to keep your team moving forward.
+                    </p>
                   </div>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">
-                    Good morning, Alex
-                  </h4>
-                  <p className="text-[11px] text-[#64748B] max-w-xl leading-relaxed">
-                    A clear view of what needs your attention today, upcoming milestones, and AI recommendations to keep your team moving forward.
-                  </p>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-slate-100/80">
+                    <button
+                      ref={openBoardBtnRef}
+                      onClick={() => setCurrentView("tasks")}
+                      className="px-3.5 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2 shrink-0 transition-colors shadow-xs"
+                    >
+                      <span>Open task board</span>
+                      <ArrowRight size={12} />
+                    </button>
+                    <span className="text-[10px] font-mono text-[#94A3B8]">
+                      Monday, September 21, 2026
+                    </span>
+                  </div>
                 </div>
 
-                <button
-                  ref={openBoardBtnRef}
-                  onClick={() => setCurrentView("tasks")}
-                  className="px-3.5 py-2 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2 shrink-0 transition-colors shadow-xs"
-                >
-                  <span>Open task board</span>
-                  <ArrowRight size={13} />
-                </button>
+                {/* Right: Upcoming Milestone Card */}
+                <div className="lg:col-span-4 p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[10px] font-mono text-[#2563EB] uppercase tracking-wider font-semibold">
+                      UPCOMING MILESTONE
+                    </span>
+                    <button
+                      onClick={() => setCurrentView("projects")}
+                      className="text-[#94A3B8] hover:text-[#0F172A] transition-colors"
+                    >
+                      <ArrowRight size={13} />
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[13px] font-bold text-[#0F172A] truncate">
+                      Maintenance March
+                    </span>
+                    <span className="text-[10px] text-[#64748B] flex items-center gap-1">
+                      <Calendar size={11} className="text-[#94A3B8]" />
+                      <span>Due Mar 30, 2026</span>
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 pt-2 border-t border-slate-100">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="text-[#64748B]">Sprint progress</span>
+                      <span className="font-bold text-[#0F172A]">85%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="w-[85%] h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" />
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
               {/* 4 Metric Cards */}
@@ -595,62 +640,93 @@ export default function HeroAppWindow() {
               </div>
 
               {/* Your Priorities Section + Execution Widget */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-                <div className="lg:col-span-2 p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-3">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#F1F5F9]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4">
+                
+                {/* Left: Priorities List */}
+                <div className="lg:col-span-8 p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#F1F5F9] flex-wrap gap-2">
                     <div>
                       <h5 className="font-bold text-[#0F172A] text-xs">Your priorities</h5>
                       <span className="text-[10px] text-[#64748B]">Everything assigned to you that requires action</span>
                     </div>
                     <div className="flex items-center gap-1 text-[10px]">
-                      <span className="px-2 py-0.5 bg-[#EDF2F7] text-[#1E40AF] rounded font-medium">All work 2</span>
-                      <span className="px-2 py-0.5 text-[#64748B]">Overdue 2</span>
+                      <span className="px-2 py-0.5 bg-[#EDF2F7] text-[#1E40AF] rounded font-semibold">All work 2</span>
+                      <span className="px-2 py-0.5 text-[#64748B]">Today 0</span>
+                      <span className="px-2 py-0.5 text-red-600 bg-red-50 rounded font-medium">Overdue 2</span>
+                      <span className="px-2 py-0.5 text-[#64748B]">In review 1</span>
                     </div>
+                  </div>
+
+                  {/* Search inside priorities */}
+                  <div className="flex items-center gap-2 px-2.5 py-1.5 bg-slate-50 border border-slate-200/70 rounded-lg text-[#64748B] text-[11px]">
+                    <Search size={11} className="text-[#94A3B8]" />
+                    <span className="text-[#94A3B8] flex-1">Search your assigned tasks...</span>
+                    <kbd className="text-[9px] bg-white border border-slate-200 px-1 rounded text-[#94A3B8]">/</kbd>
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <div className="p-2.5 border border-red-100 bg-red-50/30 rounded-lg flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                        <div>
-                          <span className="font-semibold text-[#0F172A] text-[11px] block">Client Portal Domain DNS &amp; SSL</span>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                        <div className="truncate">
+                          <span className="font-semibold text-[#0F172A] text-[11px] block truncate">Client Portal Domain DNS &amp; SSL</span>
                           <span className="text-[9.5px] text-[#64748B]">Starlight Pay • Due Oct 12, 2026</span>
                         </div>
                       </div>
-                      <span className="px-1.5 py-0.5 bg-red-100 text-red-700 font-mono text-[9px] rounded font-semibold">Overdue</span>
+                      <span className="px-1.5 py-0.5 bg-red-100 text-red-700 font-mono text-[9px] rounded font-semibold shrink-0">Overdue</span>
                     </div>
 
                     <div className="p-2.5 border border-amber-100 bg-amber-50/30 rounded-lg flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                        <div>
-                          <span className="font-semibold text-[#0F172A] text-[11px] block">Design System Token Review</span>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                        <div className="truncate">
+                          <span className="font-semibold text-[#0F172A] text-[11px] block truncate">Design System Token Review</span>
                           <span className="text-[9.5px] text-[#64748B]">Acme Corp Rebrand • Due Oct 18, 2026</span>
                         </div>
                       </div>
-                      <span className="px-1.5 py-0.5 bg-amber-100 text-amber-800 font-mono text-[9px] rounded font-semibold">In Review</span>
+                      <span className="px-1.5 py-0.5 bg-amber-100 text-amber-800 font-mono text-[9px] rounded font-semibold shrink-0">In Review</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-3">
+                {/* Right: Execution Widget */}
+                <div className="lg:col-span-4 p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-3">
                   <div>
-                    <h5 className="font-bold text-[#0F172A] text-xs">Execution progress</h5>
-                    <span className="text-[10px] text-[#64748B]">Task assignments by status</span>
-                    <div className="mt-3 flex items-center justify-between text-xs">
-                      <span className="font-medium text-[#0F172A]">Sprint Velocity</span>
-                      <span className="font-bold text-[#2563EB]">97%</span>
+                    <div className="flex items-center justify-between">
+                      <h5 className="font-bold text-[#0F172A] text-xs">Execution</h5>
+                      <span className="text-sm font-bold text-[#0F172A]">2</span>
                     </div>
-                    <div className="w-full h-2 bg-slate-100 rounded-full mt-1.5 overflow-hidden">
-                      <div className="w-[88%] h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" />
+                    <span className="text-[10px] text-[#64748B]">Task assignments, by status.</span>
+
+                    <div className="mt-3 flex flex-col gap-2">
+                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden flex">
+                        <div className="w-1/2 h-full bg-blue-500" title="In Progress: 1" />
+                        <div className="w-1/2 h-full bg-indigo-500" title="In Review: 1" />
+                      </div>
+                      <div className="flex items-center justify-between text-[10px] text-[#64748B]">
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-blue-500" />
+                          <span>1 In progress (50%)</span>
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                          <span>1 In review (50%)</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
 
                   <div className="pt-3 border-t border-[#F1F5F9] flex items-center gap-2 text-[10.5px]">
-                    <CheckCircle2 size={13} className="text-emerald-500" />
-                    <span className="text-[#64748B]">2 tasks completed this week</span>
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                      <Check size={11} className="stroke-[3]" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-[#0F172A] text-[10.5px]">Recently finished</span>
+                      <span className="text-[#64748B] text-[9.5px]">2 tasks completed in the past 7 days.</span>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
           )}

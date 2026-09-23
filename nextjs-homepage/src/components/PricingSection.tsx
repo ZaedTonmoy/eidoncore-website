@@ -31,35 +31,35 @@ export default function PricingSection() {
           />
 
           {/* Billing Frequency Switch */}
-          <div className="mt-8 inline-flex items-center gap-3 p-1 bg-[#FAFAFA] border border-[#E7E7EA] rounded-full text-xs">
+          <div className="mt-8 inline-flex items-center gap-2 p-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full shadow-2xs">
             <button
               onClick={() => setIsAnnual(false)}
-              className={`px-3 py-1.5 rounded-full font-medium transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                 !isAnnual
-                  ? "bg-white text-[#0B0B0F] shadow-2xs"
-                  : "text-[#6B6F76] hover:text-[#0B0B0F]"
+                  ? "bg-[#0F172A] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#0F172A]"
               }`}
             >
-              Monthly
+              Monthly billing
             </button>
             <button
               onClick={() => setIsAnnual(true)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-medium transition-all ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                 isAnnual
-                  ? "bg-white text-[#0B0B0F] shadow-2xs"
-                  : "text-[#6B6F76] hover:text-[#0B0B0F]"
+                  ? "bg-[#0F172A] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#0F172A]"
               }`}
             >
-              <span>Annual</span>
-              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full font-mono">
-                Save 20%
+              <span>Annual billing</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800">
+                SAVE 20%
               </span>
             </button>
           </div>
         </div>
 
         {/* 3 Pricing Cards */}
-        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <StaggerGroup viewportAmount={0.01} className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {tiers.map((tier) => {
             const price = isAnnual ? tier.annualPrice : tier.monthlyPrice;
 

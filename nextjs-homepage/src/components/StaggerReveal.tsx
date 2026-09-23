@@ -12,16 +12,21 @@ import { fadeUpBlurBox, staggerContainer, TIMING } from "../lib/animations";
 type StaggerGroupProps = {
   children: React.ReactNode;
   className?: string;
+  viewportAmount?: number | "some" | "all";
 };
 
-export function StaggerGroup({ children, className = "" }: StaggerGroupProps) {
+export function StaggerGroup({
+  children,
+  className = "",
+  viewportAmount = 0.02,
+}: StaggerGroupProps) {
   return (
     <motion.div
       className={className}
       variants={staggerContainer(TIMING.cardStagger)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: TIMING.viewportAmount }}
+      viewport={{ once: true, amount: viewportAmount }}
     >
       {children}
     </motion.div>

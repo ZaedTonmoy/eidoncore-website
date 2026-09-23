@@ -185,9 +185,9 @@ export default function PricingPage() {
         </InnerHero>
 
         {/* 3 Pricing Cards Grid */}
-        <section className="py-16 md:py-24 bg-white border-b border-[#E7E7EA]">
+        <section className="pt-6 pb-16 md:pt-10 md:pb-24 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <StaggerGroup className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            <StaggerGroup viewportAmount={0.01} className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
               {PLANS.map((plan) => {
                 const price = annual ? plan.annualPrice : plan.monthlyPrice;
 

@@ -14,7 +14,7 @@ export const TIMING = {
   letterStagger: 0.018,  // delay between each letter
   wordStagger: 0.04,     // delay between each word
   cardStagger: 0.14,     // 2x more spacious 140ms delay between cards
-  viewportAmount: 0.2,   // % of element visible to trigger
+  viewportAmount: 0.04,  // % of element visible to trigger (lowered to trigger immediately without blank whitespace)
 };
 
 // One "item" animation (letters, words, inline text):
