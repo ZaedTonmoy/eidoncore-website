@@ -14,6 +14,7 @@ import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
+import BlendedFeaturePreview from "@/components/BlendedFeaturePreview";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 export interface ModuleFeature {
@@ -52,6 +53,7 @@ export interface ModulePageProps {
   bentoDescription?: string;
   bentoCards: BentoCard[];
   customSection?: React.ReactNode;
+  useBlendedImages?: boolean;
 }
 
 export default function ModulePageTemplate({
@@ -68,12 +70,14 @@ export default function ModulePageTemplate({
   bentoDescription = "Every tool is designed to work in synergy with the entire Eidoncore suite.",
   bentoCards,
   customSection,
+  useBlendedImages,
 }: ModulePageProps) {
+  const isBlended = useBlendedImages || name.toLowerCase() === "projects";
   return (
-    <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
+    <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={breadcrumbs}
@@ -153,25 +157,45 @@ export default function ModulePageTemplate({
 
                   {/* Right / Visual Preview */}
                   <div className="flex-1 w-full max-w-xl">
-                    <div className="relative rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-5 shadow-xs overflow-hidden group">
-                      <div className="flex items-center gap-1.5 pb-3 border-b border-[#E2E8F0] mb-3">
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                        <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
-                          app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
-                        </span>
-                      </div>
-
-                      {feat.image ? (
-                        <AnimatedImage
-                          src={feat.image}
-                          alt={feat.title}
-                          origin={isReverse ? "top-left" : "top-right"}
-                          className="rounded-xl border border-[#E2E8F0] bg-white"
-                          imgClassName="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    {feat.image ? (
+                      isBlended ? (
+                        <BlendedFeaturePreview
+                          image={feat.image}
+                          title={feat.title}
+                          isReverse={isReverse}
+                          moduleName={name}
+                          featureIndex={feat.idx}
                         />
                       ) : (
+                        <div className="relative rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-5 shadow-xs overflow-hidden group">
+                          <div className="flex items-center gap-1.5 pb-3 border-b border-[#E2E8F0] mb-3">
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                            <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
+                              app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
+                            </span>
+                          </div>
+
+                          <AnimatedImage
+                            src={feat.image}
+                            alt={feat.title}
+                            origin={isReverse ? "top-left" : "top-right"}
+                            className="rounded-xl border border-[#E2E8F0] bg-white"
+                            imgClassName="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                          />
+                        </div>
+                      )
+                    ) : (
+                      <div className="relative rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-5 shadow-xs overflow-hidden group">
+                        <div className="flex items-center gap-1.5 pb-3 border-b border-[#E2E8F0] mb-3">
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
+                          <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
+                            app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
+                          </span>
+                        </div>
                         <div className="rounded-xl p-6 bg-white border border-[#E2E8F0] flex flex-col gap-4">
                           <div className="flex items-center justify-between">
                             <span className="text-xs font-semibold text-[#0F172A]">{feat.title}</span>
@@ -193,8 +217,8 @@ export default function ModulePageTemplate({
                             </div>
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
