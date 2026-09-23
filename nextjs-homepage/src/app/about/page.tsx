@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InnerHero from "@/components/InnerHero";
 import CTA from "@/components/CTA";
+import FAQSection from "@/components/FAQSection";
 import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -286,6 +287,9 @@ export default function AboutPage() {
 
         {/* Customer Testimonials Carousel */}
         <Testimonials />
+
+        {/* Unified FAQ Section */}
+        <FAQSection />
 
         {/* Global CTA */}
         <CTA />

@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InnerHero from "@/components/InnerHero";
 import CTA from "@/components/CTA";
+import FAQSection from "@/components/FAQSection";
 import Testimonials from "@/components/Testimonials";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -136,32 +137,8 @@ const COMPARISON_ROWS = [
   },
 ];
 
-const FAQS = [
-  {
-    q: "What happens after the 14-day free trial?",
-    a: "Your workspace automatically downgrades to the Free tier. None of your data, clients, or projects are ever deleted. You can upgrade anytime to reactivate advanced automations and features.",
-  },
-  {
-    q: "Can I switch between monthly and annual billing?",
-    a: "Yes! You can toggle between monthly and annual plans at any time in your workspace settings. Annual billing comes with a 20% discount applied immediately.",
-  },
-  {
-    q: "What payment methods do you support?",
-    a: "We accept all major credit and debit cards (Visa, Mastercard, Amex) through secure Stripe checkout. Enterprise annual invoices can also be paid via ACH or wire transfer.",
-  },
-  {
-    q: "Are there per-seat or per-user add-on fees?",
-    a: "No! Unlike tools that bill $15–$25 per user every month, Eidoncore provides flat agency-tier pricing. You can invite your team without watching costs skyrocket.",
-  },
-  {
-    q: "How does the White-Label portal work?",
-    a: "On Pro and Enterprise plans, you can customize your logo, colors, client login portal, and invoice styling. Enterprise plans also support custom CNAME domains (e.g. portal.youragency.com).",
-  },
-];
-
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
@@ -381,52 +358,8 @@ export default function PricingPage() {
         {/* Customer Testimonials Carousel */}
         <Testimonials />
 
-        {/* Pricing FAQ Accordion */}
-        <section className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
-          <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-            <div className="text-center mb-12">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                Got Questions?
-              </span>
-              <AnimatedHeading
-                as="h2"
-                text="Frequently Asked Questions"
-                className="mt-3 text-3xl font-bold tracking-tight text-[#0F172A] justify-center"
-              />
-            </div>
-
-            <div className="flex flex-col gap-3">
-              {FAQS.map((faq, idx) => {
-                const isOpen = openFaq === idx;
-
-                return (
-                  <div
-                    key={faq.q}
-                    className="border border-[#E2E8F0] rounded-2xl overflow-hidden transition-all duration-200"
-                  >
-                    <button
-                      onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full py-4 px-5 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
-                    >
-                      <span>{faq.q}</span>
-                      <ChevronDown
-                        size={18}
-                        className={`text-[#64748B] shrink-0 transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-[#3F72AF]" : ""
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#64748B] leading-relaxed border-t border-[#F1F5F9]">
-                        {faq.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Unified FAQ Section */}
+        <FAQSection />
 
         {/* Global CTA */}
         <CTA />

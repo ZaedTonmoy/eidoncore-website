@@ -6,34 +6,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InnerHero from "@/components/InnerHero";
 import CTA from "@/components/CTA";
+import FAQSection from "@/components/FAQSection";
 import Testimonials from "@/components/Testimonials";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Mail, MessageCircle, Clock, Globe, ChevronDown, CheckCircle2, ArrowRight } from "lucide-react";
 
-const CONTACT_FAQS = [
-  {
-    q: "How do I request a live demo?",
-    a: "Fill out the form with 'Request a Demo' selected. Our product team will schedule a tailored 20-minute screen walkthrough demonstrating how Eidoncore consolidates your agency's specific workflows.",
-  },
-  {
-    q: "Is there a free trial available?",
-    a: "Yes! Every new account begins with a 14-day free Pro trial — zero credit card required. You get full unconstrained access to all 19 modules, automations, and white-label client portal features.",
-  },
-  {
-    q: "What kind of customer support do you offer?",
-    a: "All plans include email support with under 24-hour SLA. Pro plans receive priority queueing, and Enterprise plans include dedicated onboarding, real-time live chat, and a custom Slack channel.",
-  },
-  {
-    q: "Can we migrate data from our existing tools?",
-    a: "Absolutely. Eidoncore provides seamless CSV and JSON import tools for contacts, client companies, tasks, and project history. For Enterprise teams, our engineers provide white-glove assisted migration.",
-  },
-];
-
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -280,52 +261,8 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact FAQ Accordion */}
-        <section className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
-          <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-            <div className="text-center mb-12">
-              <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
-                FAQ
-              </span>
-              <AnimatedHeading
-                as="h2"
-                text="Common Inquiries"
-                className="mt-3 text-3xl font-bold tracking-tight text-[#0F172A] justify-center"
-              />
-            </div>
-
-            <div className="flex flex-col gap-3">
-              {CONTACT_FAQS.map((faq, idx) => {
-                const isOpen = openFaq === idx;
-
-                return (
-                  <div
-                    key={faq.q}
-                    className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden transition-all duration-200 shadow-2xs"
-                  >
-                    <button
-                      onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full py-4 px-5 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
-                    >
-                      <span>{faq.q}</span>
-                      <ChevronDown
-                        size={18}
-                        className={`text-[#64748B] shrink-0 transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-[#3F72AF]" : ""
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#64748B] leading-relaxed border-t border-[#F1F5F9]">
-                        {faq.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Unified FAQ Section */}
+        <FAQSection />
 
         {/* Testimonials */}
         <Testimonials />

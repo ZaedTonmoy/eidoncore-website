@@ -18,9 +18,11 @@ export default function Footer() {
           {/* Logo column */}
           <div className="col-span-2 sm:col-span-3 md:col-span-2 flex flex-col gap-3">
             <div className="flex items-center gap-2.5">
-              <span className="w-7 h-7 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center text-xs font-extrabold shadow-2xs">
-                EC
-              </span>
+              <img
+                src="/images/logo.png"
+                alt="Eidoncore Logo"
+                className="w-7 h-7 object-contain rounded-lg shadow-2xs"
+              />
               <span className="font-bold text-base tracking-tight text-[#0F172A]">
                 {logo.name}
               </span>

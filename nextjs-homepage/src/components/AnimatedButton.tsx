@@ -8,7 +8,8 @@ type AnimatedButtonProps = {
   onClick?: () => void;
   href?: string;
   className?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "outline";
+  as?: string;
 };
 
 export default function AnimatedButton({
@@ -17,8 +18,9 @@ export default function AnimatedButton({
   href,
   className = "",
   variant = "primary",
+  as,
 }: AnimatedButtonProps) {
-  const isSecondary = variant === "secondary";
+  const isSecondary = variant === "secondary" || variant === "outline";
 
   const baseClasses = `
     group relative inline-flex items-center justify-center

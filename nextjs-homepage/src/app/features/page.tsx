@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InnerHero from "@/components/InnerHero";
 import CTA from "@/components/CTA";
+import FAQSection from "@/components/FAQSection";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
@@ -400,6 +401,9 @@ export default function FeaturesPage() {
             </div>
           </div>
         </section>
+
+        {/* Unified FAQ Section */}
+        <FAQSection />
 
         {/* Global CTA Section */}
         <CTA />

@@ -14,6 +14,7 @@ interface BreadcrumbItem {
 
 interface InnerHeroProps {
   breadcrumbs: BreadcrumbItem[];
+  badge?: string;
   eyebrow?: string;
   title: string;
   description: string;
@@ -24,6 +25,7 @@ interface InnerHeroProps {
 
 export default function InnerHero({
   breadcrumbs,
+  badge,
   eyebrow,
   title,
   description,

@@ -14,26 +14,26 @@ export default function Navbar() {
   const { logo } = siteContent.navbar;
 
   const featureLinks = [
-    { title: "Projects", desc: "Budgets, milestones, health scoring", href: "https://eidoncore.com/projects/" },
-    { title: "Tasks", desc: "Kanban boards, list views, subtasks", href: "https://eidoncore.com/tasks/" },
-    { title: "CRM & Clients", desc: "Pipeline, contacts, health tracking", href: "https://eidoncore.com/crm/" },
-    { title: "Invoicing", desc: "Recurring billing, automated payments", href: "https://eidoncore.com/invoicing/" },
-    { title: "Offerings", desc: "Productized service catalog", href: "https://eidoncore.com/services/" },
-    { title: "Proposals", desc: "E-signatures & line item estimates", href: "https://eidoncore.com/proposals/" },
-    { title: "Messaging", desc: "Internal & client communication", href: "https://eidoncore.com/messaging/" },
-    { title: "Automations", desc: "Trigger-action workflow rules", href: "https://eidoncore.com/automations/" },
-    { title: "Client Portal", desc: "100% white-label client access", href: "https://eidoncore.com/portal/" },
-    { title: "AI Workspace", desc: "MCP agents, Claude & Cursor sync", href: "https://eidoncore.com/ai-workspace/" },
-    { title: "Notifications", desc: "Real-time activity alerts", href: "https://eidoncore.com/notifications/" },
-    { title: "Reports", desc: "Financial & delivery intelligence", href: "https://eidoncore.com/reports/" },
+    { title: "Projects", desc: "Budgets, milestones, health scoring", href: "/projects/" },
+    { title: "Tasks", desc: "Kanban boards, list views, subtasks", href: "/tasks/" },
+    { title: "CRM & Clients", desc: "Pipeline, contacts, health tracking", href: "/crm/" },
+    { title: "Invoicing", desc: "Recurring billing, automated payments", href: "/invoicing/" },
+    { title: "Offerings", desc: "Productized service catalog", href: "/services/" },
+    { title: "Proposals", desc: "E-signatures & line item estimates", href: "/proposals/" },
+    { title: "Messaging", desc: "Internal & client communication", href: "/messaging/" },
+    { title: "Automations", desc: "Trigger-action workflow rules", href: "/automations/" },
+    { title: "Client Portal", desc: "100% white-label client access", href: "/portal/" },
+    { title: "AI Workspace", desc: "MCP agents, Claude & Cursor sync", href: "/ai-workspace/" },
+    { title: "Notifications", desc: "Real-time activity alerts", href: "/notifications/" },
+    { title: "Reports", desc: "Financial & delivery intelligence", href: "/reports/" },
   ];
 
   const useCaseLinks = [
-    { title: "Marketing Agencies", href: "https://eidoncore.com/use-cases/marketing-agencies/" },
-    { title: "Design Studios", href: "https://eidoncore.com/use-cases/design-studios/" },
-    { title: "Development Agencies", href: "https://eidoncore.com/use-cases/development-agencies/" },
-    { title: "Consulting Firms", href: "https://eidoncore.com/use-cases/consulting-firms/" },
-    { title: "Freelancers & Solo", href: "https://eidoncore.com/use-cases/freelancers/" },
+    { title: "Marketing Agencies", href: "/use-cases/" },
+    { title: "Design Studios", href: "/use-cases/" },
+    { title: "Development Agencies", href: "/use-cases/" },
+    { title: "Consulting Firms", href: "/use-cases/" },
+    { title: "Freelancers & Solo", href: "/use-cases/" },
   ];
 
   return (
@@ -41,9 +41,11 @@ export default function Navbar() {
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="w-7 h-7 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center text-xs font-bold group-hover:scale-105 transition-transform duration-200 shadow-2xs">
-            {logo.symbol}
-          </span>
+          <img
+            src="/images/logo.png"
+            alt="Eidoncore Logo"
+            className="w-7 h-7 object-contain rounded-lg group-hover:scale-105 transition-transform duration-200 shadow-2xs"
+          />
           <span className="font-bold text-base tracking-tight text-[#0B0B0F]">
             {logo.name}
           </span>
