@@ -33,7 +33,7 @@ export default function Hero() {
           <AnimatedHeading
             as="h1"
             text={headline}
-            className="text-4xl sm:text-5xl lg:text-[56px] font-medium tracking-tight text-[#0B0B0F] leading-[1.06] justify-center"
+            className="text-4xl sm:text-5xl lg:text-[58px] font-bold tracking-tight text-[#0F172A] leading-[1.08] justify-center"
           />
 
           {/* Subheadline */}
