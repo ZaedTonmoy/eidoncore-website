@@ -219,7 +219,7 @@ export default function HeroAppWindow() {
       ref={containerRef}
       className="relative w-full bg-[#FFFFFF] border border-[#E2E8F0] rounded-2xl shadow-[0_16px_50px_rgba(15,23,42,0.08)] overflow-hidden transition-all duration-300"
     >
-      {/* 1. Browser Window Header (Strictly: 3 dots [red yellow green] + responsive URL bar with mobile overflow) */}
+      {/* 1. Browser Window Header (Only 3 dots [red yellow green] + responsive URL bar with mobile overflow) */}
       <div className="h-10 sm:h-11 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
         {/* 3 dots */}
         <div className="flex items-center gap-1.5 shrink-0">
@@ -246,7 +246,7 @@ export default function HeroAppWindow() {
           </div>
         </div>
 
-        {/* Placeholder to balance the 3 dots */}
+        {/* Spacer to balance dots */}
         <div className="w-9 shrink-0" />
       </div>
 
@@ -303,14 +303,14 @@ export default function HeroAppWindow() {
           }`}
         >
           <span>Tickets</span>
-          <span className="text-[9px] bg-amber-400 text-amber-950 px-1 rounded font-bold">9</span>
+          <span className="text-[9px] bg-blue-100 text-blue-800 px-1 rounded font-bold">9</span>
         </button>
       </div>
 
       {/* 2. Eidoncore App Shell: Sidebar + Content Canvas */}
       <div className="grid grid-cols-12 min-h-[560px] text-xs">
         
-        {/* Desktop App Sidebar Navigation (Faithful to Screenshot) */}
+        {/* Desktop App Sidebar Navigation */}
         <aside className="hidden md:flex md:col-span-3 lg:col-span-2.5 border-r border-[#E2E8F0] bg-[#FFFFFF] p-3 flex-col justify-between select-none">
           <div className="flex flex-col gap-3">
             
@@ -484,7 +484,7 @@ export default function HeroAppWindow() {
         {/* Main Content Canvas */}
         <main className="col-span-12 md:col-span-9 lg:col-span-9.5 p-3.5 sm:p-5 flex flex-col gap-4 bg-[#F8FAFC]/50 relative">
           
-          {/* Top Bar inside App Canvas (Faithful to Screenshots) */}
+          {/* Top Bar inside App Canvas */}
           <div className="flex items-center justify-between gap-3 pb-3 border-b border-[#E2E8F0]">
             <div className="flex items-center gap-2 min-w-0">
               {currentView === "dashboard" && <LayoutDashboard size={17} className="text-[#0F172A]" />}
@@ -532,15 +532,15 @@ export default function HeroAppWindow() {
 
               <div className="flex items-center gap-1.5 pl-1 cursor-pointer">
                 <div className="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center font-semibold text-[10px]">
-                  ST
+                  AM
                 </div>
-                <span className="text-[11px] font-medium text-[#0F172A] hidden lg:inline">Sakib Tanoy</span>
+                <span className="text-[11px] font-medium text-[#0F172A] hidden lg:inline">Alex Morgan</span>
                 <ChevronDown size={11} className="text-[#94A3B8]" />
               </div>
             </div>
           </div>
 
-          {/* VIEW 1: DASHBOARD ("My day" - Screenshot 5) */}
+          {/* VIEW 1: DASHBOARD ("My day") */}
           {currentView === "dashboard" && (
             <div className="flex flex-col gap-3.5 sm:gap-4 animate-fadeIn">
               
@@ -552,7 +552,7 @@ export default function HeroAppWindow() {
                     <span>YOUR PERSONAL COCKPIT</span>
                   </div>
                   <h4 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">
-                    Good morning, Sakib
+                    Good morning, Alex
                   </h4>
                   <p className="text-[11px] text-[#64748B] max-w-xl leading-relaxed">
                     A clear view of what needs your attention today, upcoming milestones, and AI recommendations to keep your team moving forward.
@@ -615,8 +615,8 @@ export default function HeroAppWindow() {
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
                         <div>
-                          <span className="font-semibold text-[#0F172A] text-[11px] block">Maintenance March</span>
-                          <span className="text-[9.5px] text-[#64748B]">Website Maintenance • Due Mar 30, 2026</span>
+                          <span className="font-semibold text-[#0F172A] text-[11px] block">Client Portal Domain DNS &amp; SSL</span>
+                          <span className="text-[9.5px] text-[#64748B]">Starlight Pay • Due Oct 12, 2026</span>
                         </div>
                       </div>
                       <span className="px-1.5 py-0.5 bg-red-100 text-red-700 font-mono text-[9px] rounded font-semibold">Overdue</span>
@@ -626,8 +626,8 @@ export default function HeroAppWindow() {
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                         <div>
-                          <span className="font-semibold text-[#0F172A] text-[11px] block">AI connector Test</span>
-                          <span className="text-[9.5px] text-[#64748B]">Internal Tasks • Due Apr 17, 2026</span>
+                          <span className="font-semibold text-[#0F172A] text-[11px] block">Design System Token Review</span>
+                          <span className="text-[9.5px] text-[#64748B]">Acme Corp Rebrand • Due Oct 18, 2026</span>
                         </div>
                       </div>
                       <span className="px-1.5 py-0.5 bg-amber-100 text-amber-800 font-mono text-[9px] rounded font-semibold">In Review</span>
@@ -657,7 +657,7 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIEW 2: PROJECTS (Screenshot 1) */}
+          {/* VIEW 2: PROJECTS */}
           {currentView === "projects" && (
             <div className="flex flex-col gap-3 animate-fadeIn">
               {/* 6 Metric Cards Row */}
@@ -737,7 +737,7 @@ export default function HeroAppWindow() {
                 </button>
               </div>
 
-              {/* Project Cards 3x2 Grid (Faithful to Screenshot 1) */}
+              {/* Project Cards 3x2 Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 
                 {/* Project 1 */}
@@ -745,26 +745,26 @@ export default function HeroAppWindow() {
                   <div>
                     <div className="flex items-center justify-between text-[10px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                        <span className="text-[#64748B] font-medium">Not Started</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span className="text-[#2563EB] font-medium">In Progress</span>
                       </div>
                       <MoreHorizontal size={12} className="text-[#94A3B8]" />
                     </div>
                     <div className="flex items-start gap-2 mt-2">
-                      <div className="w-6 h-6 rounded bg-slate-100 text-[#0F172A] font-bold text-[9px] flex items-center justify-center shrink-0">
-                        SA
+                      <div className="w-6 h-6 rounded bg-blue-50 text-[#2563EB] font-bold text-[9px] flex items-center justify-center shrink-0">
+                        AC
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          Spry Architecture — Custom Website &amp; Portfolio Management Platform
+                          Acme Corp — Global Rebrand &amp; Design System
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">SpryArch</span>
+                        <span className="text-[10px] text-[#64748B]">Acme Corporation</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px] text-[#64748B]">
-                    <span>0% (0/0 tasks)</span>
-                    <span className="flex items-center gap-1"><Calendar size={10} /> No deadline</span>
+                    <span>68% (12/18 tasks)</span>
+                    <span className="flex items-center gap-1"><Calendar size={10} /> Oct 28, 2026</span>
                   </div>
                 </div>
 
@@ -773,26 +773,26 @@ export default function HeroAppWindow() {
                   <div>
                     <div className="flex items-center justify-between text-[10px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                        <span className="text-[#64748B] font-medium">Not Started</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span className="text-[#2563EB] font-medium">In Progress</span>
                       </div>
                       <MoreHorizontal size={12} className="text-[#94A3B8]" />
                     </div>
                     <div className="flex items-start gap-2 mt-2">
                       <div className="w-6 h-6 rounded bg-slate-100 text-[#0F172A] font-bold text-[9px] flex items-center justify-center shrink-0">
-                        C(
+                        SP
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          custom (Copy)
+                          Fintech Mobile App &amp; Customer Portal
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">Test Zba</span>
+                        <span className="text-[10px] text-[#64748B]">Starlight Pay</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px] text-[#64748B]">
-                    <span>0% (0/0 tasks)</span>
-                    <span className="flex items-center gap-1"><Calendar size={10} /> No deadline</span>
+                    <span>85% (17/20 tasks)</span>
+                    <span className="flex items-center gap-1"><Calendar size={10} /> Nov 04, 2026</span>
                   </div>
                 </div>
 
@@ -801,26 +801,26 @@ export default function HeroAppWindow() {
                   <div>
                     <div className="flex items-center justify-between text-[10px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                        <span className="text-[#64748B] font-medium">Not Started</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                        <span className="text-amber-800 font-medium">In Review</span>
                       </div>
                       <MoreHorizontal size={12} className="text-[#94A3B8]" />
                     </div>
                     <div className="flex items-start gap-2 mt-2">
-                      <div className="w-6 h-6 rounded bg-slate-100 text-[#0F172A] font-bold text-[9px] flex items-center justify-center shrink-0">
-                        CU
+                      <div className="w-6 h-6 rounded bg-purple-50 text-purple-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                        HA
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          custom
+                          SaaS Marketing Website &amp; 3D Assets
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">Test Zba</span>
+                        <span className="text-[10px] text-[#64748B]">HyperScale AI</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px] text-[#64748B]">
-                    <span>0% (0/0 tasks)</span>
-                    <span className="flex items-center gap-1"><Calendar size={10} /> No deadline</span>
+                    <span>42% (8/19 tasks)</span>
+                    <span className="flex items-center gap-1"><Calendar size={10} /> Nov 15, 2026</span>
                   </div>
                 </div>
 
@@ -836,19 +836,19 @@ export default function HeroAppWindow() {
                     </div>
                     <div className="flex items-start gap-2 mt-2">
                       <div className="w-6 h-6 rounded bg-emerald-50 text-emerald-800 font-bold text-[9px] flex items-center justify-center shrink-0">
-                        WM
+                        LR
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          Website Maintenance
+                          E-Commerce Headless Storefront Migration
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">Creationwave LLC</span>
+                        <span className="text-[10px] text-[#64748B]">Lumina Retail</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px]">
-                    <span className="font-bold text-emerald-600">100%</span>
-                    <span className="text-red-500 flex items-center gap-1"><Calendar size={10} /> 144d overdue</span>
+                    <span className="font-bold text-emerald-600">100% (24/24)</span>
+                    <span className="text-emerald-600 flex items-center gap-1"><Calendar size={10} /> Delivered</span>
                   </div>
                 </div>
 
@@ -857,26 +857,26 @@ export default function HeroAppWindow() {
                   <div>
                     <div className="flex items-center justify-between text-[10px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                        <span className="text-[#64748B] font-medium">Not Started</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                        <span className="text-[#64748B] font-medium">Planning</span>
                       </div>
                       <MoreHorizontal size={12} className="text-[#94A3B8]" />
                     </div>
                     <div className="flex items-start gap-2 mt-2">
                       <div className="w-6 h-6 rounded bg-slate-100 text-[#0F172A] font-bold text-[9px] flex items-center justify-center shrink-0">
-                        RV
+                        VL
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          Regular VPS Hosting
+                          Enterprise Cloud Infrastructure Setup
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">Jill Alexander Homes</span>
+                        <span className="text-[10px] text-[#64748B]">Vortex Labs</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px] text-[#64748B]">
-                    <span>0%</span>
-                    <span className="flex items-center gap-1"><Calendar size={10} /> No deadline</span>
+                    <span>15% (3/20 tasks)</span>
+                    <span className="flex items-center gap-1"><Calendar size={10} /> Dec 02, 2026</span>
                   </div>
                 </div>
 
@@ -885,26 +885,26 @@ export default function HeroAppWindow() {
                   <div>
                     <div className="flex items-center justify-between text-[10px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                        <span className="text-[#64748B] font-medium">Not Started</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span className="text-[#2563EB] font-medium">In Progress</span>
                       </div>
                       <MoreHorizontal size={12} className="text-[#94A3B8]" />
                     </div>
                     <div className="flex items-start gap-2 mt-2">
                       <div className="w-6 h-6 rounded bg-slate-100 text-[#0F172A] font-bold text-[9px] flex items-center justify-center shrink-0">
-                        WB
+                        OM
                       </div>
                       <div>
                         <h6 className="font-bold text-[#0F172A] text-xs leading-snug">
-                          WordPress Build &amp; Managed Hosting — searchrecon.com
+                          Brand Strategy &amp; Video Campaign
                         </h6>
-                        <span className="text-[10px] text-[#64748B]">Sdarr Studios</span>
+                        <span className="text-[10px] text-[#64748B]">Oasis Media</span>
                       </div>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[10px] text-[#64748B]">
-                    <span>0%</span>
-                    <span className="flex items-center gap-1"><Calendar size={10} /> No deadline</span>
+                    <span>55% (11/20 tasks)</span>
+                    <span className="flex items-center gap-1"><Calendar size={10} /> Dec 10, 2026</span>
                   </div>
                 </div>
 
@@ -912,7 +912,7 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIEW 3: TASKS KANBAN (Screenshot 3) */}
+          {/* VIEW 3: TASKS KANBAN */}
           {currentView === "tasks" && (
             <div className="flex flex-col gap-3 animate-fadeIn">
               
@@ -974,7 +974,7 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* 4 Kanban Columns (Faithful to Screenshot 3) */}
+              {/* 4 Kanban Columns */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
                 
                 {/* Column 1: To Do */}
@@ -988,12 +988,12 @@ export default function HeroAppWindow() {
                     <Plus size={12} className="text-[#94A3B8]" />
                   </div>
                   <div className="p-2.5 bg-slate-50 border border-[#E2E8F0] rounded-lg shadow-2xs flex flex-col gap-1.5">
-                    <span className="font-semibold text-[#0F172A] text-xs">chatgpt ads</span>
-                    <span className="text-[10px] text-[#64748B]">Living With Lolo Website</span>
+                    <span className="font-semibold text-[#0F172A] text-xs">Audit design tokens for WCAG AA</span>
+                    <span className="text-[10px] text-[#64748B]">Acme Corp Rebrand</span>
                     <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[9.5px]">
                       <span className="text-[#64748B]">Progress: 0%</span>
                       <div className="w-4 h-4 rounded-full bg-slate-700 text-white text-[8px] flex items-center justify-center font-bold">
-                        Z
+                        ER
                       </div>
                     </div>
                   </div>
@@ -1014,17 +1014,17 @@ export default function HeroAppWindow() {
                     className="p-2.5 bg-white border border-blue-400 rounded-lg shadow-xs flex flex-col gap-1.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-[#0F172A] text-xs">Maintenance Mar...</span>
+                      <span className="font-semibold text-[#0F172A] text-xs">Configure portal SSL &amp; CNAME</span>
                       <span className="px-1 py-0.2 bg-red-100 text-red-700 font-mono text-[9px] rounded font-semibold">Overdue</span>
                     </div>
                     <span className="text-[10px] text-red-500 font-mono flex items-center gap-1">
-                      <Calendar size={10} /> Mar 30, 2026
+                      <Calendar size={10} /> Oct 12, 2026
                     </span>
-                    <span className="text-[10px] text-[#64748B]">Website Maintenance</span>
+                    <span className="text-[10px] text-[#64748B]">Starlight Pay</span>
                     <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[9.5px]">
-                      <span className="text-[#64748B]">Progress: 0%</span>
+                      <span className="text-[#64748B]">Progress: 60%</span>
                       <div className="w-4 h-4 rounded-full bg-blue-700 text-white text-[8px] flex items-center justify-center font-bold">
-                        ST
+                        AM
                       </div>
                     </div>
                   </div>
@@ -1042,17 +1042,17 @@ export default function HeroAppWindow() {
                   </div>
                   <div className="p-2.5 bg-slate-50 border border-[#E2E8F0] rounded-lg shadow-2xs flex flex-col gap-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-[#0F172A] text-xs">AI connector Test</span>
+                      <span className="font-semibold text-[#0F172A] text-xs">Figma component library handoff</span>
                       <span className="px-1 py-0.2 bg-red-100 text-red-700 font-mono text-[9px] rounded font-semibold">Overdue</span>
                     </div>
                     <span className="text-[10px] text-red-500 font-mono flex items-center gap-1">
-                      <Calendar size={10} /> Apr 17, 2026
+                      <Calendar size={10} /> Oct 18, 2026
                     </span>
-                    <span className="text-[10px] text-[#64748B]">Internal Tasks</span>
+                    <span className="text-[10px] text-[#64748B]">Acme Corp Rebrand</span>
                     <div className="flex items-center justify-between pt-1 border-t border-slate-200/60 text-[9.5px]">
-                      <span className="text-[#64748B]">Progress: 0%</span>
+                      <span className="text-[#64748B]">Progress: 90%</span>
                       <div className="w-4 h-4 rounded-full bg-slate-700 text-white text-[8px] flex items-center justify-center font-bold">
-                        ST
+                        SC
                       </div>
                     </div>
                   </div>
@@ -1069,15 +1069,15 @@ export default function HeroAppWindow() {
                     <Plus size={12} className="text-[#94A3B8]" />
                   </div>
                   <div className="p-2.5 bg-slate-50 border border-[#E2E8F0] rounded-lg shadow-2xs flex flex-col gap-1 opacity-90">
-                    <span className="font-medium text-[#0F172A] text-xs">TCT Task</span>
+                    <span className="font-medium text-[#0F172A] text-xs">Milestone 2 sign-off &amp; invoice</span>
                     <span className="text-[9.5px] text-[#64748B] flex items-center gap-1">
-                      <Calendar size={10} /> Mar 25, 2026 • Internal Tasks
+                      <Calendar size={10} /> Oct 02, 2026 • Vortex Labs
                     </span>
                   </div>
                   <div className="p-2.5 bg-slate-50 border border-[#E2E8F0] rounded-lg shadow-2xs flex flex-col gap-1 opacity-90">
-                    <span className="font-medium text-[#0F172A] text-xs">Maintenance April</span>
+                    <span className="font-medium text-[#0F172A] text-xs">Automate SLA escalation rules</span>
                     <span className="text-[9.5px] text-[#64748B] flex items-center gap-1">
-                      <Calendar size={10} /> Apr 29, 2026 • Internal Tasks
+                      <Calendar size={10} /> Oct 08, 2026 • Internal Workflows
                     </span>
                   </div>
                 </div>
@@ -1086,7 +1086,7 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIEW 4: MESSAGES (Screenshot 2) */}
+          {/* VIEW 4: MESSAGES */}
           {currentView === "messages" && (
             <div className="grid grid-cols-1 md:grid-cols-3 border border-[#E2E8F0] rounded-xl overflow-hidden bg-white shadow-2xs animate-fadeIn min-h-[360px]">
               
@@ -1104,21 +1104,21 @@ export default function HeroAppWindow() {
                   <div className="flex items-center justify-between px-2 py-1.5 bg-[#EDF2F7] text-[#1E40AF] rounded-lg font-medium">
                     <div className="flex items-center gap-2">
                       <FolderKanban size={13} className="text-[#2563EB]" />
-                      <span>Internal Tasks</span>
+                      <span>Acme Corp Rebrand</span>
                     </div>
-                    <span className="text-[9.5px] text-[#64748B]">Jun 2</span>
+                    <span className="text-[9.5px] text-[#64748B]">2m ago</span>
                   </div>
                   <div className="flex items-center justify-between px-2 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg">
                     <div className="flex items-center gap-2">
                       <FolderKanban size={13} />
-                      <span className="truncate">Living With Lolo Website</span>
+                      <span className="truncate">Starlight Pay Mobile</span>
                     </div>
-                    <span className="text-[9.5px] text-[#94A3B8]">Mar 30</span>
+                    <span className="text-[9.5px] text-[#94A3B8]">1h ago</span>
                   </div>
                   <div className="flex items-center justify-between px-2 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg">
                     <div className="flex items-center gap-2">
                       <FolderKanban size={13} />
-                      <span>TSGDR</span>
+                      <span>HyperScale AI</span>
                     </div>
                     <span className="text-[9px] bg-blue-100 text-blue-700 px-1 rounded">New</span>
                   </div>
@@ -1131,14 +1131,14 @@ export default function HeroAppWindow() {
                   <div className="flex items-center justify-between px-2 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg">
                     <div className="flex items-center gap-2">
                       <Building size={13} />
-                      <span>Trigger Digital</span>
+                      <span>Acme Corporation</span>
                     </div>
-                    <span className="text-[9.5px] text-[#94A3B8]">Apr 6</span>
+                    <span className="text-[9.5px] text-emerald-600 font-medium">Active</span>
                   </div>
                   <div className="flex items-center justify-between px-2 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg">
                     <div className="flex items-center gap-2">
                       <Building size={13} />
-                      <span>CyberCletch</span>
+                      <span>Lumina Retail</span>
                     </div>
                     <span className="text-[9px] bg-blue-100 text-blue-700 px-1 rounded">New</span>
                   </div>
@@ -1150,7 +1150,7 @@ export default function HeroAppWindow() {
                 <div className="p-3 border-b border-[#E2E8F0] flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <FolderKanban size={14} className="text-[#2563EB]" />
-                    <span className="font-bold text-[#0F172A] text-xs">Internal Tasks</span>
+                    <span className="font-bold text-[#0F172A] text-xs">Acme Corp Rebrand</span>
                   </div>
                   <span className="text-[10px] text-[#64748B]">All project members</span>
                 </div>
@@ -1158,36 +1158,36 @@ export default function HeroAppWindow() {
                 <div className="p-3.5 flex flex-col gap-3 max-h-[260px] overflow-y-auto text-[11.5px]">
                   <div className="flex items-start gap-2">
                     <div className="w-5 h-5 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5">
-                      ZT
+                      MV
                     </div>
                     <div>
-                      <span className="font-bold text-[10.5px] text-[#0F172A]">Zaed Tonmoy <span className="font-normal text-[9.5px] text-[#94A3B8]">02:14 PM</span></span>
+                      <span className="font-bold text-[10.5px] text-[#0F172A]">Marcus Vance (Client Lead) <span className="font-normal text-[9.5px] text-[#94A3B8]">02:14 PM</span></span>
                       <p className="bg-slate-100 p-2 rounded-xl rounded-tl-none text-[#0F172A] mt-0.5">
-                        koddur?
+                        Hey team, the design token handoff looks fantastic! Did you push the portal DNS update?
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2 self-end text-right">
                     <div>
-                      <span className="font-bold text-[10.5px] text-[#0F172A]">Sakib Tanoy <span className="font-normal text-[9.5px] text-[#94A3B8]">02:14 PM</span></span>
+                      <span className="font-bold text-[10.5px] text-[#0F172A]">Alex Morgan (Agency Lead) <span className="font-normal text-[9.5px] text-[#94A3B8]">02:15 PM</span></span>
                       <p className="bg-[#2563EB] text-white p-2 rounded-xl rounded-tr-none mt-0.5 text-left">
-                        love e jhamela kortase.
+                        Thanks Marcus! Yes, the custom CNAME is live with auto-renewing SSL active. Check your portal link.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2">
                     <div className="w-5 h-5 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5">
-                      ZT
+                      MV
                     </div>
                     <div>
-                      <span className="font-bold text-[10.5px] text-[#0F172A]">Zaed Tonmoy <span className="font-normal text-[9.5px] text-[#94A3B8]">02:15 PM</span></span>
+                      <span className="font-bold text-[10.5px] text-[#0F172A]">Marcus Vance <span className="font-normal text-[9.5px] text-[#94A3B8]">02:16 PM</span></span>
                       <div className="bg-slate-100 p-2 rounded-xl rounded-tl-none text-[#0F172A] mt-0.5 relative group">
-                        ssl plugin namailan?
+                        Verified on our end — loads lightning fast. Milestone 2 approved!
                         <div className="mt-1 flex items-center gap-1 text-[10px]">
-                          <span className="px-1 py-0.2 bg-white border border-slate-200 rounded flex items-center gap-0.5"><Smile size={10} /> 😊</span>
-                          <span className="px-1 py-0.2 bg-white border border-slate-200 rounded flex items-center gap-0.5"><Undo2 size={10} /> ↩️</span>
+                          <span className="px-1 py-0.2 bg-white border border-slate-200 rounded flex items-center gap-0.5"><Smile size={10} /> 🚀</span>
+                          <span className="px-1 py-0.2 bg-white border border-slate-200 rounded flex items-center gap-0.5"><Undo2 size={10} /> 👍</span>
                         </div>
                       </div>
                     </div>
@@ -1212,7 +1212,7 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIEW 5: TICKETS (Screenshot 4) */}
+          {/* VIEW 5: TICKETS */}
           {currentView === "tickets" && (
             <div className="flex flex-col gap-2.5 border border-[#E2E8F0] rounded-xl overflow-hidden bg-white shadow-2xs animate-fadeIn">
               
@@ -1256,9 +1256,9 @@ export default function HeroAppWindow() {
                   </thead>
                   <tbody className="divide-y divide-[#E2E8F0]">
                     <tr className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-29</td>
-                      <td className="py-2 px-3 font-semibold text-[#0F172A]">VEEN/Canmedical.ca</td>
-                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">CyberCletch</td>
+                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-1081</td>
+                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Update custom CNAME DNS for client portal</td>
+                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">Acme Corporation</td>
                       <td className="py-2 px-3">
                         <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9.5px] font-medium bg-blue-50 text-blue-700">
                           <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Open
@@ -1267,14 +1267,14 @@ export default function HeroAppWindow() {
                       <td className="py-2 px-3 hidden md:table-cell">
                         <span className="text-amber-600 font-medium">● High</span>
                       </td>
-                      <td className="py-2 px-3 italic text-[#94A3B8] hidden lg:table-cell">Unassigned</td>
-                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">9m</td>
+                      <td className="py-2 px-3 text-[#0F172A] hidden lg:table-cell">Alex Morgan</td>
+                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">5m ago</td>
                     </tr>
 
                     <tr className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-28</td>
-                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Please Help Resolve</td>
-                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">Living With Lolo</td>
+                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-1080</td>
+                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Configure automated Stripe billing webhook</td>
+                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">Starlight Pay</td>
                       <td className="py-2 px-3">
                         <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9.5px] font-medium bg-emerald-50 text-emerald-700">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Resolved
@@ -1283,14 +1283,14 @@ export default function HeroAppWindow() {
                       <td className="py-2 px-3 hidden md:table-cell">
                         <span className="text-amber-600 font-medium">● High</span>
                       </td>
-                      <td className="py-2 px-3 italic text-[#94A3B8] hidden lg:table-cell">Unassigned</td>
-                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">4m</td>
+                      <td className="py-2 px-3 text-[#0F172A] hidden lg:table-cell">Marcus Vance</td>
+                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">2h ago</td>
                     </tr>
 
                     <tr className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-24</td>
-                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Team waldron</td>
-                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">CyberCletch</td>
+                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-1078</td>
+                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Add team member permissions for Q4 campaign</td>
+                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">HyperScale AI</td>
                       <td className="py-2 px-3">
                         <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9.5px] font-medium bg-amber-50 text-amber-800">
                           <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> In Progress
@@ -1299,14 +1299,14 @@ export default function HeroAppWindow() {
                       <td className="py-2 px-3 hidden md:table-cell">
                         <span className="text-red-600 font-bold">● Critical</span>
                       </td>
-                      <td className="py-2 px-3 italic text-[#94A3B8] hidden lg:table-cell">Unassigned</td>
-                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">4d ago</td>
+                      <td className="py-2 px-3 text-[#0F172A] hidden lg:table-cell">Sarah Chen</td>
+                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">4h ago</td>
                     </tr>
 
                     <tr className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-22</td>
-                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Design assets update request</td>
-                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">Test Zba</td>
+                      <td className="py-2 px-3 font-mono text-[#2563EB] font-bold">TKT-1075</td>
+                      <td className="py-2 px-3 font-semibold text-[#0F172A]">Client asset approval for billboard campaign</td>
+                      <td className="py-2 px-3 text-[#64748B] hidden sm:table-cell">Lumina Retail</td>
                       <td className="py-2 px-3">
                         <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9.5px] font-medium bg-purple-50 text-purple-700">
                           <span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> Waiting on Client
@@ -1315,8 +1315,8 @@ export default function HeroAppWindow() {
                       <td className="py-2 px-3 hidden md:table-cell">
                         <span className="text-yellow-600 font-medium">● Low</span>
                       </td>
-                      <td className="py-2 px-3 text-[#0F172A] hidden lg:table-cell">Zaed Tonmoy</td>
-                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">Sep 9</td>
+                      <td className="py-2 px-3 text-[#0F172A] hidden lg:table-cell">Alex Morgan</td>
+                      <td className="py-2 px-3 text-right text-[#64748B] font-mono text-[10px]">1d ago</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1324,7 +1324,7 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* AI COPILOT MODAL (Faithful to Screenshot 5 - media_1790171865044.png) */}
+          {/* AI COPILOT MODAL */}
           {copilotOpen && (
             <div className="absolute inset-0 bg-black/35 backdrop-blur-[2px] z-50 flex items-center justify-center p-3 animate-fadeIn">
               <div className="w-[96%] sm:max-w-xl bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3">
@@ -1434,8 +1434,8 @@ export default function HeroAppWindow() {
                       <span>Workspace Analysis Complete:</span>
                     </div>
                     <p className="text-[11px] leading-relaxed text-[#334155] m-0">
-                      • <strong>Projects</strong>: 11 active projects. Spry Architecture milestone review pending client approval.<br />
-                      • <strong>Tasks</strong>: 2 overdue items flagged (Maintenance March &amp; AI connector test).
+                      • <strong>Projects</strong>: 11 active projects. Acme Corp milestone review approved, DNS propagation verified.<br />
+                      • <strong>Tasks</strong>: 2 items in flight (Portal SSL setup &amp; Figma token handoff).
                     </p>
                   </div>
                 )}
