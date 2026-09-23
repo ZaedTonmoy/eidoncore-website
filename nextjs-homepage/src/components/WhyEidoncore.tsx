@@ -55,7 +55,7 @@ export default function WhyEidoncore() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
           {/* Left Column: Sticky Title, Description & Highlights */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 flex flex-col items-start">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 self-start flex flex-col items-start">
             <span className="text-xs font-mono text-[#3F72AF] uppercase tracking-wider font-semibold">
               Why Eidoncore
             </span>
@@ -95,14 +95,15 @@ export default function WhyEidoncore() {
           </div>
 
           {/* Right Column: Cards (Stacking sticky on desktop, clean spaced cards on mobile) */}
-          <div className="lg:col-span-7 relative pb-12 lg:pb-28 flex flex-col gap-4 sm:gap-6">
+          <div className="lg:col-span-7 relative pb-12 lg:pb-52 flex flex-col">
             {CARDS.map((card, idx) => (
               <div
                 key={card.num}
                 style={{
+                  ["--i" as any]: idx,
                   zIndex: 10 + idx,
-                }}
-                className="relative lg:sticky lg:top-[calc(100px+var(--idx)*22px)] bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-9 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
+                } as React.CSSProperties}
+                className="sticky-stack-card relative bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-9 mb-4 sm:mb-6 lg:mb-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
               >
                 <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5">
                   <span className="font-mono text-xs font-bold text-[#3F72AF] tracking-wider">

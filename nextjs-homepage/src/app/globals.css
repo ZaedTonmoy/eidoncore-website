@@ -27,3 +27,11 @@ body {
   background: rgba(91, 95, 239, 0.15);
   color: #0B0B0F;
 }
+
+@media (min-width: 1024px) {
+  .sticky-stack-card {
+    position: sticky !important;
+    top: calc(104px + var(--i, 0) * 26px) !important;
+    z-index: calc(10 + var(--i, 0)) !important;
+  }
+}
