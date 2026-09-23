@@ -54,8 +54,8 @@ export default function LiveLoopSection() {
               Most agency tools stop at the invoice. <strong className="text-white font-semibold">Eidoncore doesn&apos;t</strong> - every closed job feeds your reports, and every report surfaces the next lead. This is the cycle running underneath your agency, stage by stage, on repeat.
             </p>
 
-            {/* Loop Note */}
-            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex items-start gap-2.5 sm:gap-3 text-xs sm:text-[13px] text-[#8D92A8] leading-relaxed">
+            {/* Loop Note (Visible on desktop where hover orbit exists, hidden on mobile) */}
+            <div className="hidden sm:flex mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 items-start gap-2.5 sm:gap-3 text-xs sm:text-[13px] text-[#8D92A8] leading-relaxed">
               <RefreshCw size={16} className="text-[#00ADB5] shrink-0 mt-0.5" />
               <p>
                 Hover any stage to see what happens there. Watch the pulse - it never stops at <span className="text-[#00ADB5] font-medium">Report</span>, it turns back into <span className="text-[#00ADB5] font-medium">Lead</span>.
