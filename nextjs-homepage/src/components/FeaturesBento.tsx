@@ -68,7 +68,7 @@ export default function FeaturesBento() {
           {modules.map((mod) => (
             <StaggerItem
               key={mod.id}
-              className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-all duration-300"
+              className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
             >
               <div>
                 {/* Top Badge & Icon */}
@@ -105,7 +105,7 @@ export default function FeaturesBento() {
           ))}
 
           {/* Special "Explore all modules" card */}
-          <StaggerItem className="group bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border border-[#1E293B] rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-all duration-300">
+          <StaggerItem className="group bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border border-[#1E293B] rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-[border-color,background-color,box-shadow] duration-200">
             <div>
               <div className="flex items-center justify-between mb-5">
                 <span className="text-[10.5px] font-mono bg-[#38BDF8]/20 text-[#38BDF8] border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full font-bold">

@@ -50,10 +50,10 @@ export default function TrustBento() {
           />
         </div>
 
-        {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 with entrance delay */}
+        {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch"
-          variants={staggerContainer(TIMING.cardStagger, 0.28)}
+          variants={staggerContainer(TIMING.cardStagger, 0.1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: TIMING.viewportAmount }}
@@ -61,7 +61,7 @@ export default function TrustBento() {
           {/* Left Half (6 cols): 500+ Agencies + Copy + Logos */}
           <motion.div
             variants={fadeUpBlurItem}
-            className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 flex flex-col justify-between shadow-xs hover:border-[#3F72AF]/40 hover:shadow-xs transition-all duration-300"
+            className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 flex flex-col justify-between shadow-xs hover:border-[#3F72AF]/40 hover:shadow-xs transition-[border-color,box-shadow,background-color] duration-200"
           >
             <div>
               <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-wider text-[#3F72AF] font-bold">
@@ -93,14 +93,14 @@ export default function TrustBento() {
 
           {/* Right Half (6 cols): 2x2 Grid of 4 Security & Reliability Tiles */}
           <motion.div
-            variants={staggerContainer(TIMING.cardStagger, 0.14)}
+            variants={staggerContainer(TIMING.cardStagger, 0.05)}
             className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4"
           >
             {securityCards.map((card) => (
               <motion.div
                 key={card.title}
                 variants={fadeUpBlurItem}
-                className="group bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all duration-300 shadow-2xs"
+                className="group bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-[border-color,box-shadow,background-color] duration-200 shadow-2xs"
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] border border-[#E2E8F0]/60 text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-105 transition-transform duration-200">
                   {card.icon}
