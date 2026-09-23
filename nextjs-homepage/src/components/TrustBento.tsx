@@ -50,10 +50,10 @@ export default function TrustBento() {
           />
         </div>
 
-        {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 */}
+        {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 with entrance delay */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch"
-          variants={staggerContainer(TIMING.cardStagger)}
+          variants={staggerContainer(TIMING.cardStagger, 0.28)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: TIMING.viewportAmount }}
@@ -93,7 +93,7 @@ export default function TrustBento() {
 
           {/* Right Half (6 cols): 2x2 Grid of 4 Security & Reliability Tiles */}
           <motion.div
-            variants={staggerContainer(TIMING.cardStagger)}
+            variants={staggerContainer(TIMING.cardStagger, 0.14)}
             className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4"
           >
             {securityCards.map((card) => (
