@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:root": "next build && rm -rf ../_next && cp -r out/_next ../ && cp out/index.html ../index.html && touch ../.nojekyll",
     "start": "next start",
     "lint": "next lint"
   },
