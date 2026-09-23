@@ -122,34 +122,20 @@ export default function BlendedFeaturePreview({
   };
 
   return (
-    <div className="relative rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC] to-white p-3 sm:p-5 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.06),0_1px_3px_rgba(15,23,42,0.04)] overflow-hidden group">
-      {/* Ambient subtle spotlight glow */}
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[340px] h-[220px] bg-gradient-to-b from-[#3F72AF]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
+    <div className="relative w-full group">
+      {/* Ambient subtle spotlight glow behind screenshot */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-[340px] h-[220px] bg-gradient-to-b from-[#3F72AF]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-      {/* Clean minimal browser top bar */}
-      <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]/70 mb-3 relative z-10">
-        <div className="flex items-center gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]/80" />
-        </div>
-        <div className="px-2.5 py-0.5 rounded-md bg-white/90 border border-[#E2E8F0] text-[10px] font-mono text-[#64748B] shadow-2xs flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span>app.eidoncore.com/{moduleName.toLowerCase().replace(/\s+/g, "-")}</span>
-        </div>
-        <div className="w-8" />
-      </div>
-
-      {/* Main Visual Display with Linear-Style Bottom Blend */}
-      <div className="relative rounded-xl overflow-hidden bg-white border border-[#E2E8F0]/80">
+      {/* Main Visual Display - Pure blended screenshot without device/browser frame */}
+      <div className="relative rounded-2xl overflow-hidden bg-white border border-[#E2E8F0] shadow-[0_12px_36px_-12px_rgba(15,23,42,0.08),0_1px_3px_rgba(15,23,42,0.04)]">
         {/* Soft Masked Image */}
         <div
           className="relative overflow-hidden"
           style={{
             maskImage:
-              "linear-gradient(to bottom, black 50%, rgba(0,0,0,0.6) 75%, transparent 100%)",
+              "linear-gradient(to bottom, black 50%, rgba(0,0,0,0.5) 75%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to bottom, black 50%, rgba(0,0,0,0.6) 75%, transparent 100%)",
+              "linear-gradient(to bottom, black 50%, rgba(0,0,0,0.5) 75%, transparent 100%)",
           }}
         >
           <AnimatedImage
