@@ -37,11 +37,25 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* Subtle ambient spotlight */}
-          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-[#3F72AF]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
+          {/* True Linear Radial Spotlight */}
+          <div
+            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(63, 114, 175, 0.14) 0%, rgba(63, 114, 175, 0.04) 50%, transparent 80%)",
+            }}
+          />
 
-          {/* Eidoncore Workspace Surface (Border removed) */}
-          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
+          <div
+            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+            }}
+          >
             {/* Eidoncore Real App Toolbar */}
             <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-56 min-w-0">
@@ -185,9 +199,9 @@ export default function BlendedFeaturePreview({
               className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-4 opacity-70"
               style={{
                 maskImage:
-                  "linear-gradient(to bottom, black 20%, transparent 95%)",
+                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, black 20%, transparent 95%)",
+                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
               }}
             >
               <div className="flex items-center gap-3">
@@ -201,8 +215,14 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* Bottom Gradient Fade */}
-            <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+            {/* Bottom Soft Radial Vignette Fade */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </div>
         </div>
       );
@@ -214,10 +234,25 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "02") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none rounded-full" />
+          {/* True Linear Radial Spotlight */}
+          <div
+            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 80%)",
+            }}
+          />
 
-          {/* Eidoncore Workspace Surface (Border removed) */}
-          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
+          <div
+            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+            }}
+          >
             {/* Header: Project Milestone Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -316,9 +351,9 @@ export default function BlendedFeaturePreview({
                 className="flex items-center justify-between p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 opacity-60 gap-2 min-w-0"
                 style={{
                   maskImage:
-                    "linear-gradient(to bottom, black 30%, transparent 100%)",
+                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
                   WebkitMaskImage:
-                    "linear-gradient(to bottom, black 30%, transparent 100%)",
+                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
                 }}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
@@ -340,8 +375,14 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* Bottom Gradient Fade */}
-            <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+            {/* Bottom Soft Radial Vignette Fade */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </div>
         </div>
       );
@@ -353,10 +394,25 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "03") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-emerald-500/10 to-transparent blur-3xl pointer-events-none rounded-full" />
+          {/* True Linear Radial Spotlight */}
+          <div
+            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0.04) 50%, transparent 80%)",
+            }}
+          />
 
-          {/* Eidoncore Workspace Surface (Border removed) */}
-          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
+          <div
+            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+            }}
+          >
             {/* Header: Live Stopwatch Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -439,9 +495,9 @@ export default function BlendedFeaturePreview({
                 className="p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 flex items-center justify-between gap-2 opacity-60 min-w-0"
                 style={{
                   maskImage:
-                    "linear-gradient(to bottom, black 30%, transparent 100%)",
+                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
                   WebkitMaskImage:
-                    "linear-gradient(to bottom, black 30%, transparent 100%)",
+                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
                 }}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
@@ -468,8 +524,14 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* Bottom Gradient Fade */}
-            <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+            {/* Bottom Soft Radial Vignette Fade */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </div>
         </div>
       );
@@ -480,9 +542,23 @@ export default function BlendedFeaturePreview({
   if (image) {
     return (
       <div className="relative w-full max-w-xl group">
-        <div className="relative rounded-2xl bg-white overflow-hidden">
+        <div
+          className="relative rounded-2xl bg-white overflow-hidden"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 105% 85% at 50% 15%, black 45%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 105% 85% at 50% 15%, black 45%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
+          }}
+        >
           <img src={image} alt={title} className="w-full h-auto object-cover" />
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+          <div
+            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
+            }}
+          />
         </div>
       </div>
     );
