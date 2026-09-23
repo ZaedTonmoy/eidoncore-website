@@ -14,7 +14,7 @@ interface BreadcrumbItem {
 }
 
 interface InnerHeroProps {
-  breadcrumbs: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItem[];
   badge?: string;
   eyebrow?: string;
   title: string;
@@ -42,24 +42,26 @@ export default function InnerHero({
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center text-center">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="mb-3 sm:mb-6 flex items-center gap-1.5 text-xs text-[#64748B]">
-          {breadcrumbs.map((crumb, idx) => (
-            <React.Fragment key={crumb.label}>
-              {idx > 0 && <ChevronRight size={13} className="text-[#94A3B8]" />}
-              {crumb.href ? (
-                <Link
-                  href={crumb.href}
-                  className="hover:text-[#0F172A] transition-colors font-medium"
-                >
-                  {crumb.label}
-                </Link>
-              ) : (
-                <span className="text-[#0F172A] font-semibold">{crumb.label}</span>
-              )}
-            </React.Fragment>
-          ))}
-        </nav>
+        {/* Breadcrumb Navigation - only displayed on subpages (nested > 2 levels) */}
+        {breadcrumbs && breadcrumbs.length > 2 && (
+          <nav aria-label="Breadcrumb" className="mb-3 sm:mb-6 flex items-center gap-1.5 text-xs text-[#64748B]">
+            {breadcrumbs.map((crumb, idx) => (
+              <React.Fragment key={crumb.label}>
+                {idx > 0 && <ChevronRight size={13} className="text-[#94A3B8]" />}
+                {crumb.href ? (
+                  <Link
+                    href={crumb.href}
+                    className="hover:text-[#0F172A] transition-colors font-medium"
+                  >
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span className="text-[#0F172A] font-semibold">{crumb.label}</span>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+        )}
 
         {/* Eyebrow badge */}
         {eyebrow && <SectionBadge text={eyebrow} className="mb-3 sm:mb-4" />}
