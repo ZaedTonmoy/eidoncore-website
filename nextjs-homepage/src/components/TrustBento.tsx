@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import AnimatedText from "./AnimatedText";
+import { fadeUpBlurItem, staggerContainer, TIMING } from "../lib/animations";
 import { Lock, Clock, ShieldCheck, Globe } from "lucide-react";
 
 export default function TrustBento() {
@@ -12,6 +14,29 @@ export default function TrustBento() {
     "Nova Studio",
     "Apex Agency",
     "Clarity Co.",
+  ];
+
+  const securityCards = [
+    {
+      icon: <Lock size={18} className="text-[#3F72AF]" />,
+      title: "256-bit Encryption",
+      desc: "Data encrypted in transit and at rest, always.",
+    },
+    {
+      icon: <Clock size={18} className="text-emerald-600" />,
+      title: "99.9% Uptime SLA",
+      desc: "Sustained over the trailing 90 days.",
+    },
+    {
+      icon: <ShieldCheck size={18} className="text-blue-600" />,
+      title: "SOC 2 Ready",
+      desc: "Type II audit currently in progress.",
+    },
+    {
+      icon: <Globe size={18} className="text-purple-600" />,
+      title: "GDPR Compliant",
+      desc: "Full EU and UK data residency support.",
+    },
   ];
 
   return (
@@ -26,10 +51,18 @@ export default function TrustBento() {
         </div>
 
         {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
-          
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch"
+          variants={staggerContainer(TIMING.cardStagger)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: TIMING.viewportAmount }}
+        >
           {/* Left Half (6 cols): 500+ Agencies + Copy + Logos */}
-          <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 flex flex-col justify-between shadow-xs">
+          <motion.div
+            variants={fadeUpBlurItem}
+            className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 flex flex-col justify-between shadow-xs hover:border-[#3F72AF]/40 hover:shadow-xs transition-all duration-300"
+          >
             <div>
               <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-wider text-[#3F72AF] font-bold">
                 TRUSTED WORLDWIDE
@@ -56,66 +89,34 @@ export default function TrustBento() {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Half (6 cols): 2x2 Grid of 4 Security & Reliability Tiles */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-            
-            {/* 1. 256-bit Encryption */}
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all shadow-2xs">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4">
-                <Lock size={17} className="text-[#3F72AF]" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base font-bold text-[#0F172A]">256-bit Encryption</h4>
-                <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
-                  Data encrypted in transit and at rest, always.
-                </p>
-              </div>
-            </div>
-
-            {/* 2. 99.9% Uptime SLA */}
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all shadow-2xs">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4">
-                <Clock size={17} className="text-emerald-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base font-bold text-[#0F172A]">99.9% Uptime SLA</h4>
-                <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
-                  Sustained over the trailing 90 days.
-                </p>
-              </div>
-            </div>
-
-            {/* 3. SOC 2 Ready */}
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all shadow-2xs">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4">
-                <ShieldCheck size={17} className="text-blue-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base font-bold text-[#0F172A]">SOC 2 Ready</h4>
-                <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
-                  Type II audit currently in progress.
-                </p>
-              </div>
-            </div>
-
-            {/* 4. GDPR Compliant */}
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all shadow-2xs">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4">
-                <Globe size={17} className="text-purple-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base font-bold text-[#0F172A]">GDPR Compliant</h4>
-                <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
-                  Full EU and UK data residency support.
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
+          <motion.div
+            variants={staggerContainer(TIMING.cardStagger)}
+            className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4"
+          >
+            {securityCards.map((card) => (
+              <motion.div
+                key={card.title}
+                variants={fadeUpBlurItem}
+                className="group bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-all duration-300 shadow-2xs"
+              >
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F1F5F9] border border-[#E2E8F0]/60 text-[#0F172A] flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-105 transition-transform duration-200">
+                  {card.icon}
+                </div>
+                <div>
+                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] group-hover:text-[#3F72AF] transition-colors">
+                    {card.title}
+                  </h4>
+                  <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
