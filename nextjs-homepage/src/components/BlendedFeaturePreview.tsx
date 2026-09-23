@@ -40,8 +40,8 @@ export default function BlendedFeaturePreview({
           {/* Subtle ambient spotlight */}
           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-[#3F72AF]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-          {/* Eidoncore Workspace Surface */}
-          <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface (Border removed) */}
+          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
             {/* Eidoncore Real App Toolbar */}
             <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-56 min-w-0">
@@ -216,8 +216,8 @@ export default function BlendedFeaturePreview({
         <div className="relative w-full max-w-xl group min-w-0">
           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-          {/* Eidoncore Workspace Surface */}
-          <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface (Border removed) */}
+          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
             {/* Header: Project Milestone Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -355,8 +355,8 @@ export default function BlendedFeaturePreview({
         <div className="relative w-full max-w-xl group min-w-0">
           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[340px] h-[160px] bg-gradient-to-b from-emerald-500/10 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-          {/* Eidoncore Workspace Surface */}
-          <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-4 sm:p-6 overflow-hidden w-full min-w-0">
+          {/* Eidoncore Workspace Surface (Border removed) */}
+          <div className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0">
             {/* Header: Live Stopwatch Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -480,7 +480,7 @@ export default function BlendedFeaturePreview({
   if (image) {
     return (
       <div className="relative w-full max-w-xl group">
-        <div className="relative rounded-2xl bg-white border border-[#E2E8F0] shadow-sm overflow-hidden">
+        <div className="relative rounded-2xl bg-white overflow-hidden">
           <img src={image} alt={title} className="w-full h-auto object-cover" />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
         </div>
