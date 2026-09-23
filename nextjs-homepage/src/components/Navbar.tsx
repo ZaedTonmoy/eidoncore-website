@@ -3,90 +3,249 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { siteContent } from "@/content/site-content";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, Sparkles } from "lucide-react";
+import AnimatedButton from "./AnimatedButton";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { logo, links, actions } = siteContent.navbar;
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
+  const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
+  const { logo } = siteContent.navbar;
+
+  const featureLinks = [
+    { title: "Projects", desc: "Budgets, milestones, health scoring", href: "https://eidoncore.com/projects/" },
+    { title: "Tasks", desc: "Kanban boards, list views, subtasks", href: "https://eidoncore.com/tasks/" },
+    { title: "CRM & Clients", desc: "Pipeline, contacts, health tracking", href: "https://eidoncore.com/crm/" },
+    { title: "Invoicing", desc: "Recurring billing, automated payments", href: "https://eidoncore.com/invoicing/" },
+    { title: "Offerings", desc: "Productized service catalog", href: "https://eidoncore.com/services/" },
+    { title: "Proposals", desc: "E-signatures & line item estimates", href: "https://eidoncore.com/proposals/" },
+    { title: "Messaging", desc: "Internal & client communication", href: "https://eidoncore.com/messaging/" },
+    { title: "Automations", desc: "Trigger-action workflow rules", href: "https://eidoncore.com/automations/" },
+    { title: "Client Portal", desc: "100% white-label client access", href: "https://eidoncore.com/portal/" },
+    { title: "AI Workspace", desc: "MCP agents, Claude & Cursor sync", href: "https://eidoncore.com/ai-workspace/" },
+    { title: "Notifications", desc: "Real-time activity alerts", href: "https://eidoncore.com/notifications/" },
+    { title: "Reports", desc: "Financial & delivery intelligence", href: "https://eidoncore.com/reports/" },
+  ];
+
+  const useCaseLinks = [
+    { title: "Marketing Agencies", href: "https://eidoncore.com/use-cases/marketing-agencies/" },
+    { title: "Design Studios", href: "https://eidoncore.com/use-cases/design-studios/" },
+    { title: "Development Agencies", href: "https://eidoncore.com/use-cases/development-agencies/" },
+    { title: "Consulting Firms", href: "https://eidoncore.com/use-cases/consulting-firms/" },
+    { title: "Freelancers & Solo", href: "https://eidoncore.com/use-cases/freelancers/" },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-md border-b border-[#E7E7EA] transition-colors">
-      <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#E7E7EA] transition-colors">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="w-5 h-5 rounded-md bg-[#0B0B0F] text-white flex items-center justify-center text-[10px] font-bold group-hover:scale-105 transition-transform duration-200">
+          <span className="w-7 h-7 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center text-xs font-bold group-hover:scale-105 transition-transform duration-200 shadow-2xs">
             {logo.symbol}
           </span>
-          <span className="font-medium text-sm tracking-tight text-[#0B0B0F]">
+          <span className="font-bold text-base tracking-tight text-[#0B0B0F]">
             {logo.name}
+          </span>
+          <span className="hidden sm:inline-block text-[10px] font-mono text-[#3F72AF] bg-[#3F72AF]/10 px-2 py-0.5 rounded-full font-medium">
+            AI Platform
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-[13.5px] text-[#6B6F76] hover:text-[#0B0B0F] font-normal transition-colors duration-200"
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* Desktop Navigation Links with Multi-Page Submenus */}
+        <nav className="hidden lg:flex items-center gap-7">
+          {/* Features Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setActiveDropdown("features")}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <button className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2">
+              <span>Features</span>
+              <ChevronDown size={13} className={`transition-transform duration-200 ${activeDropdown === "features" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "features" && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[520px] bg-white border border-[#E7E7EA] rounded-2xl p-4 shadow-lg grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-1 duration-150">
+                {featureLinks.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="p-2.5 rounded-xl hover:bg-[#FAFAFA] transition-colors group flex flex-col gap-0.5"
+                  >
+                    <span className="text-xs font-semibold text-[#0B0B0F] group-hover:text-[#3F72AF] transition-colors">
+                      {item.title}
+                    </span>
+                    <span className="text-[11px] text-[#6B6F76] leading-tight">
+                      {item.desc}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <a
+            href="https://eidoncore.com/pricing/"
+            className="text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors"
+          >
+            Pricing
+          </a>
+
+          {/* Use Cases Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setActiveDropdown("use-cases")}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <button className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2">
+              <span>Use Cases</span>
+              <ChevronDown size={13} className={`transition-transform duration-200 ${activeDropdown === "use-cases" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "use-cases" && (
+              <div className="absolute top-full left-0 w-[240px] bg-white border border-[#E7E7EA] rounded-2xl p-3 shadow-lg flex flex-col gap-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                {useCaseLinks.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="px-3 py-2 rounded-lg text-xs font-medium text-[#0B0B0F] hover:bg-[#FAFAFA] hover:text-[#3F72AF] transition-colors"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <a
+            href="https://eidoncore.com/about/"
+            className="text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors"
+          >
+            About
+          </a>
+
+          <a
+            href="https://eidoncore.com/contact/"
+            className="text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors"
+          >
+            Contact
+          </a>
         </nav>
 
         {/* Right CTA Actions */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link
-            href={actions.login.href}
-            className="text-[13.5px] text-[#6B6F76] hover:text-[#0B0B0F] font-normal transition-colors duration-200"
+        <div className="hidden lg:flex items-center gap-4">
+          <a
+            href="https://register.eidoncore.com/login"
+            className="text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors"
           >
-            {actions.login.label}
-          </Link>
-          <Link
-            href={actions.signup.href}
-            className="inline-flex items-center justify-center text-[13px] font-medium text-white bg-[#0B0B0F] hover:bg-[#23242A] px-3.5 py-1.5 rounded-full transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+            Log In
+          </a>
+          <AnimatedButton
+            href="https://register.eidoncore.com/"
+            className="text-[13px] !px-4 !py-2 shadow-sm font-semibold"
           >
-            {actions.signup.label}
-          </Link>
+            Start Free Trial
+          </AnimatedButton>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-1 text-[#6B6F76] hover:text-[#0B0B0F]"
+          className="lg:hidden p-2 text-[#4A4E57] hover:text-[#0B0B0F] rounded-lg"
           aria-label="Toggle navigation"
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown Drawer */}
+      {/* Mobile Navigation Drawer */}
       {mobileOpen && (
-        <div className="md:hidden border-b border-[#E7E7EA] bg-white px-6 py-4 flex flex-col gap-3">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-sm text-[#6B6F76] hover:text-[#0B0B0F] py-1"
+        <div className="lg:hidden border-b border-[#E7E7EA] bg-white px-5 py-5 flex flex-col gap-3.5 max-h-[85vh] overflow-y-auto shadow-lg animate-in fade-in duration-200">
+          
+          {/* Features Accordion */}
+          <div>
+            <button
+              onClick={() => setMobileFeaturesOpen(!mobileFeaturesOpen)}
+              className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]"
             >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-2 border-t border-[#E7E7EA] flex items-center justify-between">
-            <Link
-              href={actions.login.href}
-              className="text-sm text-[#6B6F76]"
+              <span>Features (12 Modules)</span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 text-[#6B6F76] ${
+                  mobileFeaturesOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {mobileFeaturesOpen && (
+              <div className="grid grid-cols-2 gap-2 pl-2 pt-1 pb-2">
+                {featureLinks.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="text-xs text-[#334155] py-1 hover:text-[#3F72AF]"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Use Cases Accordion */}
+          <div>
+            <button
+              onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
+              className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]"
             >
-              {actions.login.label}
-            </Link>
-            <Link
-              href={actions.signup.href}
-              className="text-xs font-medium text-white bg-[#0B0B0F] px-4 py-2 rounded-full"
+              <span>Use Cases</span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 text-[#6B6F76] ${
+                  mobileUseCasesOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {mobileUseCasesOpen && (
+              <div className="flex flex-col gap-1 pl-2 pt-1 pb-2">
+                {useCaseLinks.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="text-xs text-[#334155] py-1 hover:text-[#3F72AF]"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="pt-2 border-t border-[#E7E7EA] flex flex-col gap-2.5">
+            <a href="https://eidoncore.com/pricing/" className="text-sm font-semibold text-[#0B0B0F] py-1">
+              Pricing
+            </a>
+            <a href="https://eidoncore.com/about/" className="text-sm font-semibold text-[#0B0B0F] py-1">
+              About
+            </a>
+            <a href="https://eidoncore.com/contact/" className="text-sm font-semibold text-[#0B0B0F] py-1">
+              Contact
+            </a>
+          </div>
+
+          <div className="pt-4 border-t border-[#E7E7EA] flex items-center justify-between gap-3">
+            <a
+              href="https://register.eidoncore.com/login"
+              className="text-sm font-semibold text-[#4A4E57] px-3 py-2 rounded-lg hover:bg-neutral-100"
             >
-              {actions.signup.label}
-            </Link>
+              Log In
+            </a>
+            <AnimatedButton
+              href="https://register.eidoncore.com/"
+              className="text-xs !px-5 !py-2.5 font-bold"
+            >
+              Start Free Trial
+            </AnimatedButton>
           </div>
         </div>
       )}

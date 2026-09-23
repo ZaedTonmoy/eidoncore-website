@@ -18,7 +18,7 @@ export default {
         highlight: "var(--highlight, #E6F23A)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-plus-jakarta-sans)", "sans-serif"],
       },
       letterSpacing: {
         tighter: "-0.04em",

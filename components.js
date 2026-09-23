@@ -379,126 +379,53 @@
       });
     }
 
-    /* Per-character text reveal — bottom-to-top letter stagger */
+    /* Subtle per-word text reveal */
     function initWordReveal() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       document.querySelectorAll('.word-reveal').forEach(el => {
         if (el.dataset.wordRevealInit) return;
         el.dataset.wordRevealInit = 'true';
-
-        // Collect full plain-text for accessibility
-        const originalText = el.innerText || el.textContent || '';
-        if (!originalText.trim()) return;
+        const originalText = el.textContent.trim();
+        if (!originalText) return;
         el.setAttribute('aria-label', originalText);
 
-        let charIndex = 0;
+        const childNodes = Array.from(el.childNodes);
+        let wordIndex = 0;
+        let newContent = '';
 
-        function wrapChars(text) {
-          return text.split('').map(ch => {
-            if (ch === ' ' || ch === '\u00A0') {
-              // Non-breaking space preserves natural word wrapping without animation
-              return '<span class="wr-space" aria-hidden="true">\u00A0</span>';
-            }
-            return `<span class="wr-char" style="--c-i:${charIndex++}" aria-hidden="true">${ch}</span>`;
-          }).join('');
-        }
-
-        // Walk child nodes so we don't destroy existing inline tags (<br>, <strong>, etc.)
-        function processNode(node) {
+        childNodes.forEach(node => {
           if (node.nodeType === Node.TEXT_NODE) {
             const text = node.textContent;
-            if (!text) return '';
-            return wrapChars(text);
+            const parts = text.split(/(\s+)/);
+            parts.forEach(part => {
+              if (/\S/.test(part)) {
+                newContent += `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
+              } else {
+                newContent += part;
+              }
+            });
           } else if (node.nodeType === Node.ELEMENT_NODE) {
-            const tag = node.tagName.toLowerCase();
-            if (tag === 'br') return '<br>';
-            const attrs = Array.from(node.attributes)
-              .map(a => `${a.name}="${a.value}"`)
-              .join(' ');
-            const inner = Array.from(node.childNodes).map(processNode).join('');
-            return `<${tag}${attrs ? ' ' + attrs : ''} aria-hidden="true">${inner}</${tag}>`;
+            const text = node.textContent;
+            const parts = text.split(/(\s+)/);
+            const wrapped = parts.map(part => {
+              if (/\S/.test(part)) {
+                return `<span class="wr-word" style="--w-i:${wordIndex++}" aria-hidden="true">${part}</span>`;
+              }
+              return part;
+            }).join('');
+            const clone = node.cloneNode(false);
+            clone.innerHTML = wrapped;
+            clone.setAttribute('aria-hidden', 'true');
+            newContent += clone.outerHTML;
           }
-          return '';
-        }
-
-        const wrapped = Array.from(el.childNodes).map(processNode).join('');
-        el.innerHTML = wrapped;
+        });
+        el.innerHTML = newContent;
       });
     }
 
-    /* Element-by-element synchronized animation system */
-    function initElementReveal() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('[data-anim]').forEach(el => {
-          el.classList.add('anim-in');
-        });
-        return;
-      }
-
-      const animEls = document.querySelectorAll('[data-anim]');
-      if (!animEls.length) return;
-
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-
-      // Set CSS custom property for delay from data-delay attribute
-      animEls.forEach(el => {
-        const delay = el.getAttribute('data-delay');
-        if (delay) {
-          el.style.setProperty('--anim-delay', delay + 'ms');
-        }
-        // Immediately reveal elements visible in the hero on page load
-        const inHero = el.closest('#hero') || el.closest('.hero');
-        const rect = el.getBoundingClientRect();
-        if (inHero && rect.top <= vh * 0.85 && rect.bottom > 0) {
-          el.classList.add('anim-in');
-        }
-      });
-
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('anim-in');
-              io.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0,
-          rootMargin: '0px 0px -30% 0px' // trigger when 30% into viewport
-        });
-
-        animEls.forEach(el => {
-          if (!el.classList.contains('anim-in')) {
-            io.observe(el);
-          }
-        });
-      } else {
-        // Fallback
-        function checkAnim() {
-          const wh = window.innerHeight || document.documentElement.clientHeight;
-          animEls.forEach(el => {
-            if (el.classList.contains('anim-in')) return;
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= wh * 0.70 && rect.bottom >= 0) {
-              el.classList.add('anim-in');
-            }
-          });
-        }
-        window.addEventListener('scroll', checkAnim, { passive: true });
-        window.addEventListener('resize', checkAnim, { passive: true });
-        checkAnim();
-      }
-
-      // Safety: print, programmatic jump
-      window.addEventListener('beforeprint', () => {
-        animEls.forEach(el => el.classList.add('anim-in'));
-      });
-    }
-
-    /* Eye-Soothing Scroll Reveal & Organic Stagger System (legacy — kept for sub-pages) */
+    /* Eye-Soothing Scroll Reveal & Organic Stagger System */
     function initScrollReveal() {
       initWordReveal();
-      initElementReveal();
 
       // Auto-assign --i stagger indices to children in grids/stagger containers if not present
       document.querySelectorAll('.reveal-stagger, .features-modules-grid, .pricing-grid, .testimonials-grid, .trust-bento .grid, .tools-grid, .compare-wrap').forEach(grid => {
@@ -514,11 +441,12 @@
 
       const vh = window.innerHeight || document.documentElement.clientHeight;
 
-      // Only reveal elements strictly visible inside the hero section on initial load if within top 60% of viewport
+      // Only reveal elements strictly visible inside the hero section on initial load.
+      // All other sections will smoothly animate in as the user scrolls them well into the viewport.
       revealEls.forEach(el => {
         const inHero = el.closest('#hero') || el.closest('.hero');
         const rect = el.getBoundingClientRect();
-        if (inHero && rect.top <= vh * 0.60 && rect.bottom > 0) {
+        if (inHero && rect.top < vh && rect.bottom > 0) {
           el.classList.add('in');
         }
       });
@@ -527,15 +455,13 @@
         const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              setTimeout(() => {
-                entry.target.classList.add('in');
-              }, 60);
+              entry.target.classList.add('in');
               io.unobserve(entry.target);
             }
           });
         }, {
-          threshold: 0,
-          rootMargin: '0px 0px -40% 0px'
+          threshold: 0.15,
+          rootMargin: '0px 0px -120px 0px' // Must be 120px well inside viewport before triggering
         });
 
         revealEls.forEach(el => {
@@ -544,11 +470,12 @@
           }
         });
       } else {
+        // Fallback for browsers without IntersectionObserver
         function checkReveal() {
           const winHeight = window.innerHeight || document.documentElement.clientHeight;
           revealEls.forEach(el => {
             const rect = el.getBoundingClientRect();
-            if (rect.top <= winHeight * 0.60 && rect.bottom >= 0) {
+            if (rect.top <= winHeight - 100 && rect.bottom >= 0) {
               el.classList.add('in');
             }
           });

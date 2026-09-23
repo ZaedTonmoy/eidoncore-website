@@ -52,19 +52,19 @@
   --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
   --duration-micro: 180ms;
   --duration-hover: 280ms;
-  --duration-reveal: 1000ms;
+  --duration-reveal: 1350ms;
   --duration-ambient: 26s;
 
-  /* Minimal Linear-Grade Hairline Gradient Borders (45° Angle) */
+  /* Minimal Linear-Grade Hairline Gradient Borders */
   /* Light Mode */
-  --border-gradient-light: linear-gradient(45deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.02) 100%);
-  --border-gradient-light-subtle: linear-gradient(45deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.01) 100%);
-  --border-gradient-light-hover: linear-gradient(45deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.05) 100%);
+  --border-gradient-light: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.03) 100%);
+  --border-gradient-light-subtle: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.015) 100%);
+  --border-gradient-light-hover: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.07) 100%);
 
-  /* Dark Mode & Dark Sections (Linear Aesthetic 45° Angle) */
-  --border-gradient-dark: linear-gradient(45deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%);
-  --border-gradient-dark-subtle: linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-  --border-gradient-dark-hover: linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
+  /* Dark Mode & Dark Sections (Linear Aesthetic) */
+  --border-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --border-gradient-dark-subtle: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+  --border-gradient-dark-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
 
   /* Typography */
   --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -4300,67 +4300,47 @@ a.btn:hover,
 }
 
 /* ==========================================================================
-   ELEMENT-BY-ELEMENT SYNCHRONIZED ANIMATION SYSTEM
-   Each [data-anim] element animates individually on scroll.
-   Movement is tiny (10px), duration is slow (0.85s), smooth non-bouncy easing.
-   Sequence is encoded via data-delay="Nms" in HTML.
-   ========================================================================== */
-
-/* Starting state — invisible, barely below final position */
-[data-anim] {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition-delay: var(--anim-delay, 0ms);
-  will-change: opacity, transform;
-}
-
-/* Visible state */
-[data-anim].anim-in {
-  opacity: 1;
-  transform: translateY(0);
-  will-change: auto;
-}
-
-/* ==========================================================================
-   LEGACY REVEAL CLASSES (kept with reduced offset for sub-pages)
+   CALM, EYE-SOOTHING SLOW SCROLL ENTRANCE & CASCADE STAGGER SYSTEM
+   Deep 1.35s luxury motion with smooth deceleration and generous viewport trigger.
    ========================================================================== */
 .reveal {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  transform: translateY(22px);
+  transition: opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: opacity, transform;
 }
 
 .reveal.in {
   opacity: 1;
   transform: translateY(0);
-  will-change: auto;
 }
 
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  transition-delay: calc(var(--i, 0) * 100ms);
+  transform: translateY(20px);
+  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: calc(var(--i, 0) * 135ms);
   will-change: opacity, transform;
 }
 
 .reveal-stagger.in > * {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Clear will-change after transition settles to conserve GPU memory */
+.reveal.in,
+.reveal-stagger.in > * {
   will-change: auto;
 }
 
 /* ==========================================================================
-   PER-CHARACTER TEXT ENTRANCE ANIMATION (BOTTOM-TO-TOP LETTER STAGGER)
+   SUBTLE PER-WORD TEXT ENTRANCE ANIMATION (CALM, SMOOTH & CLEAR)
    ========================================================================== */
 .word-reveal {
-  display: block;
-  overflow: visible !important;
+  display: inline-block;
 }
 
 h1.word-reveal,
@@ -4368,37 +4348,26 @@ h2.word-reveal,
 h3.word-reveal,
 h4.word-reveal {
   display: block !important;
-  overflow: visible !important;
-  /* Never clip the descending or second line */
-  min-height: 0 !important;
-  height: auto !important;
-  max-height: none !important;
-  clip-path: none !important;
-  -webkit-clip-path: none !important;
+  width: 100% !important;
 }
 
-/* Each animated character */
-.word-reveal .wr-char {
+.word-reveal .wr-word {
   display: inline-block;
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--c-i, 0) * 30ms);
-  will-change: opacity, transform;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition: opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: calc(var(--w-i, 0) * 75ms);
+  will-change: opacity, transform, filter;
 }
 
-/* Spaces — keep as inline, no animation, just spacing */
-.word-reveal .wr-space {
-  display: inline;
-  white-space: pre;
-}
-
-/* Triggered state */
-.reveal.in .word-reveal .wr-char,
-.word-reveal.in .wr-char {
+.reveal.in .word-reveal .wr-word,
+.word-reveal.in .wr-word {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
   will-change: auto;
 }
 
@@ -4598,10 +4567,9 @@ section,
     scroll-behavior: auto !important;
   }
 
-  [data-anim],
   .reveal,
   .reveal-stagger > *,
-  .word-reveal .wr-char {
+  .word-reveal .wr-word {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;

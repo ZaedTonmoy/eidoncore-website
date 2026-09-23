@@ -2,260 +2,437 @@ export const siteContent = {
   // 1. NAVBAR
   navbar: {
     logo: {
-      name: "Platform",
-      symbol: "▲",
+      name: "Eidoncore",
+      symbol: "EC",
+      badge: "AI-Powered",
     },
     links: [
-      { label: "Product", href: "#product" },
-      { label: "Resources", href: "#resources" },
-      { label: "Customers", href: "#customers" },
+      { label: "Features", href: "#features" },
+      { label: "Modules", href: "#modules" },
+      { label: "How It Works", href: "#how-it-works" },
+      { label: "Why Eidoncore", href: "#why-eidoncore" },
+      { label: "Compare", href: "#compare" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Now", href: "#now" },
-      { label: "Contact", href: "#contact" },
+      { label: "FAQ", href: "#faq" },
     ],
     actions: {
-      login: { label: "Log in", href: "#login" },
-      signup: { label: "Sign up", href: "#signup" },
+      login: { label: "Log in", href: "https://app.eidoncore.com/login" },
+      signup: { label: "Start Free Trial →", href: "https://register.eidoncore.com" },
     },
   },
 
   // 2. HERO
   hero: {
-    headline: "The product development system for teams and agents",
-    subheadline: "A purpose-built workspace uniting issue tracking, roadmaps, and automated agents into one fluid flow.",
-    announcement: {
-      text: "New: Autonomous Triage 2.0 →",
-      href: "#announcement",
+    eyebrow: "AI-Powered Agency Platform",
+    eyebrowHref: "#features",
+    headline: "Run your AI-powered agency from one platform",
+    subheadline:
+      "The all-in-one system for client portals, projects, billing, CRM, and autonomous AI workflows — beautifully unified in a single platform.",
+    ctaPrimary: {
+      label: "Start Free Trial →",
+      href: "https://register.eidoncore.com/",
     },
-    appMockup: {
-      sidebar: {
-        workspace: "Acme Studio",
-        user: "Sarah Jenkins",
-        navItems: [
-          { label: "Inbox", count: 3 },
-          { label: "My Issues", count: 12 },
-          { label: "Roadmaps", count: null },
-          { label: "Views", count: null },
-        ],
-        teams: [
-          { name: "Core Engine", count: 8 },
-          { name: "Frontend Platform", count: 14 },
-          { name: "Agent Infrastructure", count: 6 },
-        ],
-      },
-      issue: {
-        id: "ENG-1042",
-        team: "Core Engine",
-        title: "Refactor agent orchestration protocol for high-concurrency event streams",
-        description:
-          "Implement optimistic reconciliation for agent dispatching pipelines. Ensure fallback channels trigger sub-50ms failover without dropped WebSocket frames.",
-        checklist: [
-          { done: true, text: "Define protocol buffer schemas for event payloads" },
-          { done: true, text: "Add distributed trace IDs across message hops" },
-          { done: false, text: "Benchmark p99 latency under 20k simulated agent workers" },
-        ],
-        activity: [
-          { author: "Alex Rivera", action: "pushed commit", meta: "c8f921a - Add worker pool balancer", time: "18m ago" },
-          { author: "Linear Agent", action: "auto-linked PR", meta: "#482 (Passing all tests)", time: "12m ago" },
-          { author: "Sarah Jenkins", action: "approved PR", meta: "Ready for canary rollout", time: "4m ago" },
-        ],
-        properties: {
-          status: "In Progress",
-          priority: "Urgent",
-          assignee: "Sarah Jenkins",
-          cycle: "Cycle 42",
-          project: "Autonomous Ops Q3",
-          labels: ["Architecture", "Agent Engine", "P0"],
-        },
-      },
+    ctaSecondary: {
+      label: "Explore Features",
+      href: "#features",
+    },
+    trustNotes: [
+      "14-day free trial",
+      "No credit card required",
+      "Setup in 2 minutes",
+    ],
+    announcement: {
+      text: "Explore 19 Modules & 111+ Tools →",
+      href: "#modules",
     },
   },
 
-  // 3. LOGO STRIP
-  logoStrip: {
-    label: "Trusted by the world’s best product teams",
-    logos: [
-      "VERCEL",
-      "RAMP",
-      "SCALE AI",
-      "SUBSTACK",
-      "MERCURY",
-      "DESCRIPT",
-      "RETOOL",
+  // 3. METRICS / TRUST BENTO
+  metrics: [
+    {
+      value: "19",
+      label: "Modules",
+      desc: "Client portals to automated invoicing",
+    },
+    {
+      value: "111+",
+      label: "Native Tools",
+      desc: "Built-in AI agents & automations",
+    },
+    {
+      value: "99.9%",
+      label: "Uptime SLA",
+      desc: "Enterprise-grade cloud infrastructure",
+    },
+    {
+      value: "500+",
+      label: "Agencies Worldwide",
+      desc: "Scale client operations with ease",
+    },
+  ],
+
+  // 4. CLIENT LOGOS
+  clientLogos: [
+    "Pixel Forge",
+    "Mosaic Digital",
+    "Vanguard Creative",
+    "Nova Studio",
+    "Apex Agency",
+    "Clarity Co.",
+  ],
+
+  // 5. CORE MODULES / FEATURES
+  modulesHeading: {
+    eyebrow: "Platform modules",
+    title: "Everything your agency needs — now with AI",
+    description:
+      "From first proposal to final invoice, run the complete client lifecycle seamlessly without stitching together disjointed apps.",
+  },
+  modules: [
+    {
+      id: "ai-workspace",
+      tag: "NEW",
+      title: "AI Workspace",
+      description:
+        "Connect AI assistants to manage tasks, invoices, and projects via MCP — with role-based access and OAuth 2.1 security.",
+      href: "#features",
+      color: "indigo",
+    },
+    {
+      id: "proposals",
+      tag: "CORE",
+      title: "Proposals & Contracts",
+      description:
+        "Block-based builder, line item pricing, e-signatures, analytics, and one-click conversion to live projects.",
+      href: "#features",
+      color: "blue",
+    },
+    {
+      id: "projects",
+      tag: "CORE",
+      title: "Projects & Health Scoring",
+      description:
+        "Budgets, milestones, real-time health scoring, team assignments, time tracking, and progress monitoring.",
+      href: "#features",
+      color: "blue",
+    },
+    {
+      id: "tasks",
+      tag: "CORE",
+      title: "Tasks & Kanban Boards",
+      description:
+        "Interactive Kanban boards, list views, subtasks, checklists, dependencies, labels, and live timers.",
+      href: "#features",
+      color: "emerald",
+    },
+    {
+      id: "crm",
+      tag: "CORE",
+      title: "CRM & Client Portals",
+      description:
+        "Full client lifecycle — deal pipelines, shared deliverables, contact directories, follow-ups, and health metrics.",
+      href: "#features",
+      color: "amber",
+    },
+    {
+      id: "invoicing",
+      tag: "FINANCE",
+      title: "Smart Invoicing & Billing",
+      description:
+        "Automated recurring subscriptions, Stripe sync, tax calculations, automatic reminders, and instant payments.",
+      href: "#features",
+      color: "violet",
+    },
+    {
+      id: "portal",
+      tag: "PORTAL",
+      title: "Branded Client Portal",
+      description:
+        "Dedicated self-serve portal for clients to view work deliverables, approve milestones, and self-serve.",
+      href: "https://eidoncore.com/portal/",
+      color: "sky",
+    },
+  ],
+
+  // 6. HOW IT WORKS
+  howItWorks: {
+    eyebrow: "How It Works",
+    title: "Up and running in minutes",
+    description: "Get your fully branded agency workspace live in four simple steps.",
+    steps: [
+      {
+        num: "01",
+        title: "Create your workspace",
+        desc: "Pick your agency name and claim your custom subdomain in under 60 seconds.",
+      },
+      {
+        num: "02",
+        title: "Customize & brand",
+        desc: "Upload logo, set custom colors, email templates, or map your own custom domain.",
+      },
+      {
+        num: "03",
+        title: "Invite your team",
+        desc: "Assign roles to project managers, developers, designers, and clients with granular permissions.",
+      },
+      {
+        num: "04",
+        title: "Start delivering",
+        desc: "Onboard clients, launch projects, track hours, and send automated invoices effortlessly.",
+      },
     ],
   },
 
-  // 4. BIG STATEMENT
-  statement: {
-    firstSentence: "A new speed of software design. Purpose-built for modern product teams.",
-    rest: "An all-in-one system to plan, build, and deliver the next generation of software products with unrelenting craft, tactile responsiveness, and sub-50ms velocity.",
+  // 7. WHY EIDONCORE
+  whyEidoncore: {
+    eyebrow: "Why Eidoncore",
+    title: "What makes us different",
+    description: "Other tools solve one problem. Eidoncore unites them all — without compromise.",
+    cards: [
+      {
+        index: "01 / 04",
+        title: "All-In-One Platform",
+        description:
+          "Projects, tasks, CRM, invoicing, services, automations, reporting, and a client portal — all in a single app. Eliminate context switching.",
+      },
+      {
+        index: "02 / 04",
+        title: "Full White-Label",
+        description:
+          "Custom logo, brand colors, fonts, email templates, and your own domain. Clients see only your brand, never Eidoncore.",
+      },
+      {
+        index: "03 / 04",
+        title: "Multi-Tenant by Design",
+        description:
+          "Built from day one for agencies managing multiple client organizations. Complete data isolation and strict role-based access.",
+      },
+      {
+        index: "04 / 04",
+        title: "AI-Native Architecture",
+        description:
+          "Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace with 111+ tools across 19 modules.",
+      },
+    ],
   },
 
-  // 5. THREE FEATURE COLUMNS (Pillars)
-  pillars: [
-    {
-      index: "1.0",
-      title: "Purpose-built for product craft",
-      description: "Obsessively engineered for high-agency software teams who treat software as craft rather than paperwork.",
-      iconType: "compass",
-    },
-    {
-      index: "1.1",
-      title: "Designed for modern velocity",
-      description: "Keyboard-first navigation, optimistic UI updates, and sub-50ms synchronization that never blocks your flow.",
-      iconType: "stack",
-    },
-    {
-      index: "1.2",
-      title: "Built for teams and agents",
-      description: "Seamlessly integrate autonomous agents directly into your sprint cycles, code reviews, and issue triage.",
-      iconType: "lattice",
-    },
-  ],
+  // 8. COMPARE
+  compare: {
+    eyebrow: "Consolidate",
+    title: "Replace your entire tool stack",
+    description: "Stop paying for 6+ separate subscriptions. One Eidoncore plan covers everything.",
+    savingsNote: "Estimated agency savings: $200+/month",
+    rows: [
+      { need: "Project Management", traditional: "Asana / Monday.com", eidoncore: "Built-in" },
+      { need: "Task Boards", traditional: "Trello / ClickUp", eidoncore: "Built-in" },
+      { need: "CRM & Client Pipeline", traditional: "HubSpot / Pipedrive", eidoncore: "Built-in" },
+      { need: "Invoicing & Billing", traditional: "QuickBooks / FreshBooks", eidoncore: "Built-in" },
+      { need: "Client Portal", traditional: "Custom build / Notion", eidoncore: "Built-in" },
+      { need: "Proposals & E-Signatures", traditional: "PandaDoc / Better Proposals", eidoncore: "Built-in" },
+      { need: "Client Support & Ticketing", traditional: "Zendesk / Freshdesk", eidoncore: "Built-in" },
+      { need: "AI Assistants & Workspace", traditional: "Custom GPTs / Plugins", eidoncore: "Built-in" },
+    ],
+  },
 
-  // 6. FOUR FEATURE SECTIONS
-  featureSections: [
-    {
-      id: "intake",
-      title: "Intake and integrations",
-      description: "Consolidate customer bug reports, community Discord pings, and internal requests directly into prioritised execution boards without losing context.",
-      learnMoreHref: "#intake-details",
-      features: [
-        { label: "Slack & Discord sync", href: "#slack" },
-        { label: "Customer portal", href: "#portal" },
-        { label: "Bi-directional GitHub links", href: "#github" },
-        { label: "Public issue submission", href: "#public" },
-      ],
-    },
-    {
-      id: "planning",
-      title: "Planning and monitoring",
-      description: "Align your entire organization around multi-quarter roadmaps, automated velocity tracking, and cycle burndowns that stay honest.",
-      learnMoreHref: "#planning-details",
-      features: [
-        { label: "Interactive Gantt roadmaps", href: "#gantt" },
-        { label: "Cycle burndown scatter", href: "#burndown" },
-        { label: "Capacity heatmaps", href: "#capacity" },
-        { label: "Initiative dependencies", href: "#dependencies" },
-      ],
-    },
-    {
-      id: "ai",
-      title: "AI and automations",
-      description: "Put repetitive triage on autopilot. Autonomous agents summarize stack traces, identify duplicate bugs, and draft pull request descriptions in seconds.",
-      learnMoreHref: "#ai-details",
-      features: [
-        { label: "Autonomous stack trace triage", href: "#triage" },
-        { label: "Duplicate issue clustering", href: "#clustering" },
-        { label: "Workflow state transitions", href: "#transitions" },
-        { label: "Custom webhook recipes", href: "#webhooks" },
-      ],
-    },
-    {
-      id: "build",
-      title: "Build, review, and ship",
-      description: "Close the feedback loop with native git branch management, PR review gates, and automated issue resolution upon production deployment.",
-      learnMoreHref: "#build-details",
-      features: [
-        { label: "Git branch synchronization", href: "#branch" },
-        { label: "Inline diff inspection", href: "#diff" },
-        { label: "Staging deployment markers", href: "#deploy" },
-        { label: "Release notes generator", href: "#release" },
-      ],
-    },
-  ],
+  // 9. PRICING
+  pricing: {
+    eyebrow: "Pricing",
+    title: "Simple, transparent pricing",
+    description: "Start with a 14-day free PRO trial. No credit card required.",
+    tiers: [
+      {
+        name: "Free",
+        monthlyPrice: 0,
+        annualPrice: 0,
+        desc: "For freelancers getting started",
+        features: [
+          "2 Team Members",
+          "3 Clients",
+          "5 Active Projects",
+          "3 Offerings / Services",
+          "500 MB Storage",
+          "Basic Reports",
+          "In-App Reminders",
+        ],
+        cta: "Get Started Free",
+        href: "https://register.eidoncore.com/",
+        featured: false,
+      },
+      {
+        name: "Pro",
+        monthlyPrice: 29,
+        annualPrice: 23,
+        desc: "For growing agencies",
+        popularBadge: "Most Popular",
+        features: [
+          "15 Team Members",
+          "50 Clients",
+          "100 Active Projects",
+          "30 Services",
+          "20 Automations",
+          "10 GB Storage",
+          "AI Workspace (19 Modules)",
+          "Advanced Reports",
+          "Custom Roles & Permissions",
+          "Branded Emails & Client Portal",
+        ],
+        cta: "Start 14-Day Free Trial",
+        href: "https://register.eidoncore.com/",
+        featured: true,
+      },
+      {
+        name: "Enterprise",
+        monthlyPrice: 79,
+        annualPrice: 63,
+        desc: "For established agencies",
+        features: [
+          "Unlimited Everything",
+          "AI Workspace (Full Write Access)",
+          "Custom SMTP & Custom Domain",
+          "Full White-Label Removal",
+          "Advanced Security & Audit Logs",
+          "100 GB Cloud Storage",
+          "Dedicated Success Manager",
+          "Priority 24/7 SLA Support",
+        ],
+        cta: "Contact Sales",
+        href: "#contact",
+        featured: false,
+      },
+    ],
+  },
 
-  // 7. CHANGELOG
-  changelog: {
-    heading: "Changelog",
-    viewAllHref: "#changelog-all",
+  // 10. TESTIMONIALS
+  testimonials: {
+    eyebrow: "What Agencies Say",
+    title: "Loved by 500+ agencies worldwide",
+    description: "Here's how Eidoncore replaces the tool stack for real agencies every single day.",
     items: [
       {
-        tag: "ENGINE",
-        title: "Autonomous Agent Protocol v2",
-        description: "Zero-latency event streaming for multi-agent triage and review tasks.",
-        date: "Sep 18, 2026",
+        quote:
+          "We replaced Trello, HubSpot, and QuickBooks with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform saved us 15+ hours every week and eliminated all context switching.",
+        author: "Sarah Lindqvist",
+        role: "Managing Director at Studio Nine",
+        stats: "15 hrs saved / week",
+        replaced: "Trello + HubSpot + QuickBooks",
       },
       {
-        tag: "SYNC",
-        title: "Sub-50ms Sync Engine",
-        description: "Optimistic conflict resolution with local SQLite cache for all clients.",
-        date: "Sep 11, 2026",
-      },
-      {
-        tag: "PLANNING",
-        title: "Dynamic Milestone Dependencies",
-        description: "Automatic timeline cascading and resource capacity warnings.",
-        date: "Aug 28, 2026",
-      },
-      {
-        tag: "DESKTOP",
-        title: "Desktop Client 2.4",
-        description: "Multi-tab workspaces, global command palette, and offline queues.",
-        date: "Aug 14, 2026",
+        quote:
+          "The white-label client portal is what sold us. Our clients log into our own domain, see their project deliverables and invoices, and love the transparency. It elevated our agency's credibility overnight.",
+        author: "Marcus Vance",
+        role: "Founder at Apex Digital",
+        stats: "100% white-label",
+        replaced: "Notion + PandaDoc + ClickUp",
       },
     ],
   },
 
-  // 8. TESTIMONIALS
-  testimonials: {
-    cardLeft: {
-      quote: "The speed of execution we unlocked after standardizing on this platform transformed how our engineering teams ship every single week.",
-      author: "Sarah Lin",
-      role: "VP of Engineering, OpenAI",
-    },
-    cardRight: {
-      quote: "It’s exceedingly rare to find software that respects your keyboard shortcuts and attention this deeply. It feels like an extension of your own mind.",
-      author: "Alexandre Martin",
-      role: "Head of Product, Ramp",
-    },
-    footerLabel: "Read how leading teams accelerate release cadence",
-    customerStoriesHref: "#customer-stories",
+  // 11. FAQ
+  faq: {
+    eyebrow: "FAQ",
+    title: "Frequently Asked Questions",
+    items: [
+      {
+        q: "Is there a free plan?",
+        a: "Yes! Eidoncore offers a permanent Free plan with up to 2 team members, 3 clients, 5 projects, and core agency features. No credit card required.",
+      },
+      {
+        q: "Can I use my own domain?",
+        a: "Absolutely. Pro and Enterprise plans allow you to map your own custom domain (e.g., portal.youragency.com) to the client portal so clients see only your agency's brand.",
+      },
+      {
+        q: "What happens after the 14-day trial?",
+        a: "Your workspace automatically downgrades to the Free plan. No data is lost — you can upgrade anytime to restore Pro or Enterprise capabilities.",
+      },
+      {
+        q: "Can I migrate from another tool?",
+        a: "Yes. Our team offers free migration assistance for Pro and Enterprise customers. We'll help you import clients, projects, tasks, and historical invoice records.",
+      },
+      {
+        q: "Is my data secure?",
+        a: "Eidoncore uses AES-256 encryption, TLS 1.3, two-factor authentication, and strict multi-tenant isolation. Your data is protected by enterprise-grade security protocols.",
+      },
+      {
+        q: "Does Eidoncore support AI assistants?",
+        a: "Yes! The built-in AI Workspace lets you connect any MCP-compatible AI assistant — like Claude, Cursor, or Windsurf — to query and manage your projects, tasks, invoices, and more securely using OAuth 2.1.",
+      },
+    ],
   },
 
-  // 9. FINAL CALL TO ACTION
+  // 12. CTA
   cta: {
-    heading: "Built for the future. Available today.",
-    subheading: "Join thousands of world-class software teams building with clarity and velocity.",
-    buttonPrimary: { label: "Get started", href: "#get-started" },
-    buttonSecondary: { label: "Contact sales", href: "#contact-sales" },
+    eyebrow: "14-day free PRO trial",
+    heading: "Ready to streamline your agency?",
+    subheading:
+      "Join hundreds of agencies running their entire client workflow from a single platform. Start your 14-day free PRO trial — no credit card required.",
+    buttonPrimary: {
+      label: "Start Free Trial →",
+      href: "https://register.eidoncore.com/",
+    },
+    buttonSecondary: {
+      label: "Explore Live Demo",
+      href: "#how-it-works",
+    },
+    trustBadges: [
+      "No credit card required",
+      "Cancel anytime",
+      "SOC2-ready security",
+    ],
   },
 
-  // 10. FOOTER
+  // 13. FOOTER
   footer: {
     logo: {
-      name: "Platform",
-      tagline: "The modern software development operating system.",
+      name: "Eidoncore",
+      tagline: "The AI-powered platform to manage and scale your client agency.",
     },
     columns: [
       {
         title: "Product",
-        links: ["Issues", "Cycles", "Roadmaps", "Insights", "Automations", "Integrations"],
+        links: [
+          { label: "Features", href: "#features" },
+          { label: "Modules", href: "#modules" },
+          { label: "AI Workspace", href: "#features" },
+          { label: "Client Portal", href: "#features" },
+          { label: "Pricing", href: "#pricing" },
+        ],
       },
       {
-        title: "Features",
-        links: ["Keyboard shortcuts", "Command menu", "Offline sync", "Security & SOC2", "Desktop apps"],
-      },
-      {
-        title: "Company",
-        links: ["About us", "Changelog", "Careers", "Brand assets", "Contact us"],
+        title: "Modules",
+        links: [
+          { label: "Projects", href: "#features" },
+          { label: "Tasks", href: "#features" },
+          { label: "Invoicing", href: "#features" },
+          { label: "CRM", href: "#features" },
+          { label: "Proposals", href: "#features" },
+        ],
       },
       {
         title: "Resources",
-        links: ["Documentation", "API Reference", "Community Discord", "Status page", "Customers"],
+        links: [
+          { label: "Documentation", href: "#" },
+          { label: "Changelog", href: "#" },
+          { label: "API & MCP", href: "#" },
+          { label: "Status", href: "#" },
+        ],
       },
       {
-        title: "Connect",
-        links: ["GitHub", "Twitter / X", "LinkedIn", "YouTube", "Newsletter"],
+        title: "Company",
+        links: [
+          { label: "About", href: "#" },
+          { label: "Customers", href: "#" },
+          { label: "Careers", href: "#" },
+          { label: "Contact", href: "#" },
+        ],
       },
     ],
     legal: {
-      copyright: "© 2026 Platform Technologies Inc. All rights reserved.",
+      copyright: `© ${new Date().getFullYear()} Eidoncore, Inc. All rights reserved.`,
+      badges: ["AES-256 Encrypted", "SOC 2 Ready", "GDPR Compliant"],
       links: [
-        { label: "Privacy Policy", href: "#privacy" },
-        { label: "Terms of Service", href: "#terms" },
-        { label: "Security", href: "#security" },
-        { label: "Cookie Settings", href: "#cookies" },
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms of Service", href: "#" },
+        { label: "Security", href: "#" },
       ],
     },
   },

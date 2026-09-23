@@ -4,3 +4,13 @@
 .Spotlight-V100
 .Trashes
 scratch/
+animation-kit.zip
+*.backup.html
+
+# dependencies & builds
+node_modules/
+.next/
+*.tsbuildinfo
+nextjs-homepage/node_modules/
+nextjs-homepage/.next/
+nextjs-homepage/tsconfig.tsbuildinfo
