@@ -14,6 +14,7 @@ import {
   LayoutGrid,
   List,
 } from "lucide-react";
+import BlendMockupCard from "@/components/BlendMockupCard";
 
 interface BlendedFeaturePreviewProps {
   image?: string;
@@ -46,16 +47,8 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
-          <div
-            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
-            style={{
-              maskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-            }}
-          >
+          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
+          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Eidoncore Real App Toolbar */}
             <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-56 min-w-0">
@@ -214,16 +207,7 @@ export default function BlendedFeaturePreview({
                 </div>
               </div>
             </div>
-
-            {/* Bottom Soft Radial Vignette Fade */}
-            <div
-              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            />
-          </div>
+          </BlendMockupCard>
         </div>
       );
     }
@@ -243,16 +227,8 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
-          <div
-            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
-            style={{
-              maskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-            }}
-          >
+          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
+          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Header: Project Milestone Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -374,16 +350,7 @@ export default function BlendedFeaturePreview({
                 </span>
               </div>
             </div>
-
-            {/* Bottom Soft Radial Vignette Fade */}
-            <div
-              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            />
-          </div>
+          </BlendMockupCard>
         </div>
       );
     }
@@ -403,16 +370,8 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Eidoncore Workspace Surface with Linear Radial Gradient Mask */}
-          <div
-            className="relative rounded-2xl bg-white p-4 sm:p-6 overflow-hidden w-full min-w-0"
-            style={{
-              maskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 105% 85% at 50% 12%, black 50%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-            }}
-          >
+          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
+          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Header: Live Stopwatch Overview */}
             <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -523,16 +482,7 @@ export default function BlendedFeaturePreview({
                 </div>
               </div>
             </div>
-
-            {/* Bottom Soft Radial Vignette Fade */}
-            <div
-              className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            />
-          </div>
+          </BlendMockupCard>
         </div>
       );
     }
@@ -542,24 +492,9 @@ export default function BlendedFeaturePreview({
   if (image) {
     return (
       <div className="relative w-full max-w-xl group">
-        <div
-          className="relative rounded-2xl bg-white overflow-hidden"
-          style={{
-            maskImage:
-              "radial-gradient(ellipse 105% 85% at 50% 15%, black 45%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 105% 85% at 50% 15%, black 45%, rgba(0, 0, 0, 0.55) 75%, transparent 100%)",
-          }}
-        >
+        <BlendMockupCard className="bg-white rounded-2xl w-full min-w-0 overflow-hidden">
           <img src={image} alt={title} className="w-full h-auto object-cover" />
-          <div
-            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 90% 70% at 50% 100%, #ffffff 50%, rgba(255, 255, 255, 0) 100%)",
-            }}
-          />
-        </div>
+        </BlendMockupCard>
       </div>
     );
   }
