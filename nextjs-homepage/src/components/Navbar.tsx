@@ -49,9 +49,6 @@ export default function Navbar() {
           <span className="font-bold text-base tracking-tight text-[#0B0B0F]">
             {logo.name}
           </span>
-          <span className="hidden sm:inline-block text-[10px] font-mono text-[#3F72AF] bg-[#3F72AF]/10 px-2 py-0.5 rounded-full font-medium">
-            AI Platform
-          </span>
         </Link>
 
         {/* Desktop Navigation Links with Multi-Page Submenus */}
