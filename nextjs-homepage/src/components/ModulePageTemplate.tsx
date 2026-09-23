@@ -112,9 +112,9 @@ export default function ModulePageTemplate({
                   } items-center gap-12 lg:gap-16`}
                 >
                   {/* Left / Text side */}
-                  <div className="flex-1 max-w-xl">
+                  <div className="flex-1 w-full max-w-xl min-w-0">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#3F72AF] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20">
+                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#3F72AF] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20 shrink-0">
                         {feat.idx}
                       </span>
                       <SectionBadge text={feat.eyebrow} className="!mb-0" />
@@ -156,7 +156,7 @@ export default function ModulePageTemplate({
                   </div>
 
                   {/* Right / Visual Preview */}
-                  <div className="flex-1 w-full max-w-xl">
+                  <div className="flex-1 w-full max-w-xl min-w-0">
                     {feat.image ? (
                       isBlended ? (
                         <BlendedFeaturePreview

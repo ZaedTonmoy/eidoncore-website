@@ -63,14 +63,14 @@ export default function InnerHero({
 
         {/* Optional Action Buttons */}
         {(ctaPrimary || ctaSecondary) && (
-          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
             {ctaPrimary && (
-              <AnimatedButton href={ctaPrimary.href} variant="primary">
+              <AnimatedButton href={ctaPrimary.href} variant="primary" className="w-full sm:w-auto justify-center text-center">
                 {ctaPrimary.label}
               </AnimatedButton>
             )}
             {ctaSecondary && (
-              <AnimatedButton href={ctaSecondary.href} variant="secondary">
+              <AnimatedButton href={ctaSecondary.href} variant="secondary" className="w-full sm:w-auto justify-center text-center">
                 {ctaSecondary.label}
               </AnimatedButton>
             )}
