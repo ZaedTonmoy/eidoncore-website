@@ -16,6 +16,8 @@ type AnimatedImageProps = {
   origin?: Corner; // which corner the reveal grows from
   className?: string; // classes for the outer wrapper (set width/height/rounded here)
   imgClassName?: string; // classes for the <img> itself (e.g. object-cover)
+  delay?: number; // optional delay in seconds
+  duration?: number; // optional duration in seconds
 };
 
 const CORNER_POSITION: Record<Corner, string> = {
@@ -31,6 +33,8 @@ export default function AnimatedImage({
   origin = "top-left",
   className = "",
   imgClassName = "",
+  delay = 0.3,
+  duration = 1.4,
 }: AnimatedImageProps) {
   const position = CORNER_POSITION[origin];
 
@@ -41,7 +45,8 @@ export default function AnimatedImage({
     show: {
       clipPath: `circle(150% at ${position})`, // 150% safely covers the full box
       transition: {
-        duration: TIMING.duration + 0.35, // slightly slower than text, feels smoother on images
+        delay,
+        duration, // slower, majestic reveal so visitors see the curtain unfold
         ease: EASE,
       },
     },
@@ -56,7 +61,8 @@ export default function AnimatedImage({
       opacity: 1,
       filter: "blur(0px)",
       transition: {
-        duration: TIMING.duration + 0.15,
+        delay: delay + 0.05,
+        duration: Math.max(duration - 0.2, 0.9),
         ease: EASE,
       },
     },
@@ -68,7 +74,7 @@ export default function AnimatedImage({
       variants={wipeVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: "some" }}
+      viewport={{ once: true, amount: "some", margin: "0px 0px -80px 0px" }}
     >
       <motion.img
         src={src}
