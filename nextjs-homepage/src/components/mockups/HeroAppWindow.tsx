@@ -51,10 +51,11 @@ export default function HeroAppWindow() {
   const [copilotOpen, setCopilotOpen] = useState(false);
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
-  const [cursorPos, setCursorPos] = useState({ x: 340, y: 180, visible: true });
+  const [cursorPos, setCursorPos] = useState({ x: 380, y: 160, visible: true });
   const [cursorClicked, setCursorClicked] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const isCancelledRef = useRef(false);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
   // Interactive targets for virtual cursor
@@ -75,140 +76,134 @@ export default function HeroAppWindow() {
     timeoutsRef.current = [];
   };
 
-  const moveCursor = (
+  const sleep = (ms: number) =>
+    new Promise<void>((resolve) => {
+      const timer = setTimeout(() => {
+        if (!isCancelledRef.current) resolve();
+      }, ms);
+      timeoutsRef.current.push(timer);
+    });
+
+  const moveTo = async (
     targetRef: React.RefObject<HTMLElement | null>,
-    callback?: () => void,
-    dwellMs = 1200
+    offsetXRatio = 0.5,
+    offsetYRatio = 0.5
   ) => {
-    if (!targetRef.current || !containerRef.current) {
-      if (callback) callback();
-      return;
-    }
+    if (isCancelledRef.current || !targetRef.current || !containerRef.current) return;
+
+    // Small delay to ensure any dynamic layout shift has stabilized
+    await sleep(60);
+    if (isCancelledRef.current || !targetRef.current || !containerRef.current) return;
+
     const cRect = containerRef.current.getBoundingClientRect();
     const tRect = targetRef.current.getBoundingClientRect();
 
-    const x = tRect.left - cRect.left + tRect.width / 2;
-    const y = tRect.top - cRect.top + tRect.height / 2;
+    // Calculate exact target coordinate relative to the outer containerRef
+    const x = tRect.left - cRect.left + tRect.width * offsetXRatio - 3;
+    const y = tRect.top - cRect.top + tRect.height * offsetYRatio - 3;
 
     setCursorPos({ x, y, visible: true });
 
-    const t = setTimeout(() => {
-      setCursorClicked(true);
-      setTimeout(() => setCursorClicked(false), 240);
-      if (callback) callback();
-    }, dwellMs);
-    timeoutsRef.current.push(t);
+    // Wait for the smooth glide transition to complete (850ms) + settle dwell (200ms)
+    await sleep(950);
   };
 
-  const runSimulation = () => {
+  const click = async () => {
+    if (isCancelledRef.current) return;
+    setCursorClicked(true);
+    await sleep(180);
+    setCursorClicked(false);
+    await sleep(100);
+  };
+
+  const startTour = async () => {
+    isCancelledRef.current = false;
     clearTimeouts();
     setCopilotOpen(false);
     setCopilotSubmitted(false);
     setCopilotQuery("");
     setCurrentView("dashboard");
-    setCursorPos({ x: 340, y: 180, visible: true });
 
-    // Step 1: Dwell on Dashboard -> move to "Open task board" button (T = 2.0s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(openBoardBtnRef, () => {
-          setCurrentView("tasks");
-        }, 1100);
-      }, 2000)
-    );
+    setCursorPos({ x: 380, y: 160, visible: true });
+    await sleep(1400);
 
-    // Step 2: In Tasks -> hover task card (T = 5.2s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(taskCardRef, () => {}, 1000);
-      }, 5200)
-    );
+    while (!isCancelledRef.current) {
+      // Step 1: In Dashboard -> Move to "Open task board" button
+      await moveTo(openBoardBtnRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCurrentView("tasks");
+      await sleep(1600);
 
-    // Step 3: Move to Projects in sidebar (T = 8.5s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(navProjectsRef, () => {
-          setCurrentView("projects");
-        }, 1100);
-      }, 8500)
-    );
+      // Step 2: In Tasks -> Hover active task card
+      await moveTo(taskCardRef, 0.4, 0.4);
+      await sleep(1400);
 
-    // Step 4: Move to AI Copilot in topbar (T = 12.0s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(copilotTriggerRef, () => {
-          setCopilotOpen(true);
-        }, 1100);
-      }, 12000)
-    );
+      // Step 3: Move to Projects in sidebar
+      await moveTo(navProjectsRef, 0.45, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCurrentView("projects");
+      await sleep(2000);
 
-    // Step 5: Inside Copilot -> click chip (T = 14.8s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(copilotChipRef, () => {
-          setCopilotQuery("Summarize weekly project progress & blockers across active clients");
-        }, 1000);
-      }, 14800)
-    );
+      // Step 4: Move to AI Copilot in topbar
+      await moveTo(copilotTriggerRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCopilotOpen(true);
+      await sleep(1200);
 
-    // Step 6: Submit prompt (T = 17.5s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(copilotSubmitRef, () => {
-          setCopilotSubmitted(true);
-        }, 1000);
-      }, 17500)
-    );
+      // Step 5: Inside Copilot -> Click chip
+      await moveTo(copilotChipRef, 0.35, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCopilotQuery("Review project progress, milestones, approvals and missing deliverables.");
+      await sleep(1100);
 
-    // Step 7: Close Copilot modal (T = 22.0s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(copilotCloseRef, () => {
-          setCopilotOpen(false);
-          setCopilotSubmitted(false);
-          setCopilotQuery("");
-        }, 1100);
-      }, 22000)
-    );
+      // Step 6: Click "Ask Assistant"
+      await moveTo(copilotSubmitRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCopilotSubmitted(true);
+      await sleep(2800);
 
-    // Step 8: Move to Tickets in sidebar (T = 24.8s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(navTicketsRef, () => {
-          setCurrentView("tickets");
-        }, 1100);
-      }, 24800)
-    );
+      // Step 7: Close Copilot modal
+      await moveTo(copilotCloseRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCopilotOpen(false);
+      setCopilotSubmitted(false);
+      setCopilotQuery("");
+      await sleep(1200);
 
-    // Step 9: Move to Messages in sidebar (T = 29.0s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(navMessagesRef, () => {
-          setCurrentView("messages");
-        }, 1100);
-      }, 29000)
-    );
+      // Step 8: Move to Tickets in sidebar
+      await moveTo(navTicketsRef, 0.45, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCurrentView("tickets");
+      await sleep(2200);
 
-    // Step 10: Return to Dashboard (T = 33.5s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        moveCursor(navDashboardRef, () => {
-          setCurrentView("dashboard");
-        }, 1100);
-      }, 33500)
-    );
+      // Step 9: Move to Messages in sidebar
+      await moveTo(navMessagesRef, 0.45, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCurrentView("messages");
+      await sleep(2200);
 
-    // Step 11: Repeat cycle (T = 37.0s)
-    timeoutsRef.current.push(
-      setTimeout(() => {
-        runSimulation();
-      }, 37000)
-    );
+      // Step 10: Return to Dashboard
+      await moveTo(navDashboardRef, 0.45, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCurrentView("dashboard");
+      await sleep(3000);
+    }
   };
 
   useEffect(() => {
-    const initTimer = setTimeout(runSimulation, 800);
+    isCancelledRef.current = false;
+    const initTimer = setTimeout(startTour, 600);
     return () => {
+      isCancelledRef.current = true;
       clearTimeout(initTimer);
       clearTimeouts();
     };
@@ -237,7 +232,10 @@ export default function HeroAppWindow() {
               <span className="text-[#2563EB] shrink-0">/{currentView}</span>
             </div>
             <button
-              onClick={runSimulation}
+              onClick={() => {
+                isCancelledRef.current = true;
+                setTimeout(startTour, 100);
+              }}
               title="Restart automated tour"
               className="text-[#94A3B8] hover:text-[#0F172A] transition-colors ml-2 shrink-0"
             >
@@ -1443,37 +1441,45 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIRTUAL ANIMATED CURSOR */}
-          {cursorPos.visible && (
-            <div
-              style={{
-                transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`,
-                transition: "transform 1.05s cubic-bezier(0.25, 1, 0.5, 1)",
-              }}
-              className="hidden md:block absolute pointer-events-none z-50 transition-opacity duration-300"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                className={`filter drop-shadow-md transition-transform duration-150 ${
-                  cursorClicked ? "scale-90" : "scale-100"
-                }`}
-              >
-                <path
-                  d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"
-                  fill="#0F172A"
-                  stroke="#FFFFFF"
-                  strokeWidth="2"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          )}
-
         </main>
       </div>
+
+      {/* VIRTUAL ANIMATED CURSOR (Mounted directly at root of container for pixel-perfect coordinates) */}
+      {cursorPos.visible && (
+        <div
+          style={{
+            transform: `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)`,
+            transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+          className="hidden md:block absolute top-0 left-0 pointer-events-none z-[120]"
+        >
+          <div className="relative">
+            {/* Click ripple animation on click */}
+            {cursorClicked && (
+              <span className="absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full bg-blue-500/30 border-2 border-blue-600 animate-ping pointer-events-none" />
+            )}
+
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              className={`filter drop-shadow-md transition-transform duration-100 ${
+                cursorClicked ? "scale-90 translate-y-0.5" : "scale-100"
+              }`}
+            >
+              <path
+                d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"
+                fill="#0F172A"
+                stroke="#FFFFFF"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
