@@ -68,12 +68,12 @@ export default function AnimatedImage({
       variants={wipeVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: TIMING.viewportAmount }}
+      viewport={{ once: true, amount: "some" }}
     >
       <motion.img
         src={src}
         alt={alt}
-        className={`h-full w-full ${imgClassName}`}
+        className={`block w-full h-auto ${imgClassName}`}
         variants={fadeVariants}
       />
     </motion.div>
