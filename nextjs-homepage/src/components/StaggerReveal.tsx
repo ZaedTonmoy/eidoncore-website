@@ -7,7 +7,7 @@
 // Box 1 animates in, then box 2 after a short delay, then box 3, etc.
 
 import { motion } from "framer-motion";
-import { fadeUpBlurItem, staggerContainer, TIMING } from "../lib/animations";
+import { fadeUpBlurBox, staggerContainer, TIMING } from "../lib/animations";
 
 type StaggerGroupProps = {
   children: React.ReactNode;
@@ -35,7 +35,7 @@ type StaggerItemProps = {
 
 export function StaggerItem({ children, className = "" }: StaggerItemProps) {
   return (
-    <motion.div className={className} variants={fadeUpBlurItem}>
+    <motion.div className={className} variants={fadeUpBlurBox}>
       {children}
     </motion.div>
   );
