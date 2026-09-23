@@ -18,6 +18,7 @@ type AnimatedImageProps = {
   imgClassName?: string; // classes for the <img> itself (e.g. object-cover)
   delay?: number; // optional delay in seconds
   duration?: number; // optional duration in seconds
+  isHero?: boolean; // if in hero section, animates immediately with minimal delay
 };
 
 const CORNER_POSITION: Record<Corner, string> = {
@@ -33,10 +34,13 @@ export default function AnimatedImage({
   origin = "top-left",
   className = "",
   imgClassName = "",
-  delay = 0.3,
-  duration = 1.4,
+  delay,
+  duration,
+  isHero = false,
 }: AnimatedImageProps) {
   const position = CORNER_POSITION[origin];
+  const effectiveDelay = delay !== undefined ? delay : isHero ? 0.04 : 0.15;
+  const effectiveDuration = duration !== undefined ? duration : isHero ? 0.75 : 1.1;
 
   const wipeVariants = {
     hidden: {
@@ -45,8 +49,8 @@ export default function AnimatedImage({
     show: {
       clipPath: `circle(150% at ${position})`, // 150% safely covers the full box
       transition: {
-        delay,
-        duration, // slower, majestic reveal so visitors see the curtain unfold
+        delay: effectiveDelay,
+        duration: effectiveDuration,
         ease: EASE,
       },
     },
@@ -61,8 +65,8 @@ export default function AnimatedImage({
       opacity: 1,
       filter: "blur(0px)",
       transition: {
-        delay: delay + 0.05,
-        duration: Math.max(duration - 0.2, 0.9),
+        delay: effectiveDelay + 0.02,
+        duration: Math.max(effectiveDuration - 0.15, 0.6),
         ease: EASE,
       },
     },
@@ -73,8 +77,9 @@ export default function AnimatedImage({
       className={`overflow-hidden ${className}`}
       variants={wipeVariants}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: "some", margin: "0px 0px -80px 0px" }}
+      {...(isHero
+        ? { animate: "show" }
+        : { whileInView: "show", viewport: { once: true, amount: "some", margin: "0px 0px -40px 0px" } })}
     >
       <motion.img
         src={src}

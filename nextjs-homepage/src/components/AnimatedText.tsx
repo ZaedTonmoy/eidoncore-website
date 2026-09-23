@@ -14,6 +14,8 @@ type AnimatedTextProps = {
   mode?: "word" | "line";
   as?: "p" | "span" | "div";
   className?: string;
+  immediate?: boolean;
+  delay?: number;
 };
 
 export default function AnimatedText({
@@ -21,6 +23,8 @@ export default function AnimatedText({
   mode = "word",
   as = "p",
   className = "",
+  immediate = false,
+  delay = 0.05,
 }: AnimatedTextProps) {
   const Tag = motion[as];
 
@@ -31,10 +35,11 @@ export default function AnimatedText({
   return (
     <Tag
       className={className}
-      variants={staggerContainer(TIMING.wordStagger)}
+      variants={staggerContainer(immediate ? 0.015 : TIMING.wordStagger, immediate ? delay : 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: TIMING.viewportAmount }}
+      {...(immediate
+        ? { animate: "show" }
+        : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
     >
       {pieces.map((piece, index) => (
         <motion.span

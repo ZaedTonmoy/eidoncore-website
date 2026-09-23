@@ -12,12 +12,16 @@ type AnimatedHeadingProps = {
   text: string;
   as?: "h1" | "h2" | "h3" | "h4";
   className?: string;
+  immediate?: boolean;
+  delay?: number;
 };
 
 export default function AnimatedHeading({
   text,
   as = "h2",
   className = "",
+  immediate = false,
+  delay = 0,
 }: AnimatedHeadingProps) {
   const Tag = motion[as]; // motion.h1 / motion.h2 / etc.
 
@@ -29,10 +33,11 @@ export default function AnimatedHeading({
     <Tag
       className={className}
       style={{ display: "flex", flexWrap: "wrap" }}
-      variants={staggerContainer(TIMING.letterStagger)}
+      variants={staggerContainer(immediate ? 0.008 : TIMING.letterStagger, delay)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: TIMING.viewportAmount }}
+      {...(immediate
+        ? { animate: "show" }
+        : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
     >
       {words.map((word, wordIndex) => (
         <span
