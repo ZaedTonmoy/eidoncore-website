@@ -53,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={plusJakartaSans.variable}>
-      <body className="font-sans bg-white text-[#0B0B0F] antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-hidden">
+      <body className="font-sans bg-white text-[#0B0B0F] antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
         {children}
       </body>
     </html>

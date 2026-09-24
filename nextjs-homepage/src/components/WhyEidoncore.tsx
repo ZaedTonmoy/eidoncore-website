@@ -94,7 +94,7 @@ export default function WhyEidoncore() {
           </div>
 
           {/* Right Column: Cards (Stacking sticky on desktop, clean spaced cards on mobile) */}
-          <div className="lg:col-span-7 relative pb-12 lg:pb-52 flex flex-col">
+          <div className="lg:col-span-7 relative flex flex-col pb-8 lg:pb-0">
             {CARDS.map((card, idx) => (
               <div
                 key={card.num}
@@ -122,6 +122,8 @@ export default function WhyEidoncore() {
                 </p>
               </div>
             ))}
+            {/* Desktop spacer to ensure all 4 cards have ample scroll track to stack and remain visible */}
+            <div className="hidden lg:block h-72 xl:h-80" aria-hidden="true" />
           </div>
 
         </div>

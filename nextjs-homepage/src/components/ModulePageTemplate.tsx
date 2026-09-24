@@ -74,10 +74,10 @@ export default function ModulePageTemplate({
 }: ModulePageProps) {
   const isBlended = useBlendedImages || name.toLowerCase() === "projects";
   return (
-    <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />
 
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-clip">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={breadcrumbs}
