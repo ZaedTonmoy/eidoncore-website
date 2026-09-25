@@ -89,8 +89,58 @@ export default function PrivacyPage() {
                 </ul>
               </div>
 
+              <div id="email-integrations" className="scroll-mt-24">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4">
+                  5. Email Integrations (Gmail Add-on, Browser Extension and Capture Addresses)
+                </h2>
+                
+                <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">What we access</h3>
+                <p>
+                  When you use the EidonCore add-on for Gmail or the EidonCore browser extension, we read only the email that is open when you choose an EidonCore action — its subject, sender, recipients, date, body and the attachments you select. We never scan, index or sync your mailbox. If you connect your Google account to send replies from EidonCore, we use permission to send email on your behalf only when you press Send; we cannot read your mailbox with it. Email you forward, copy (BCC) or auto-forward to your personal EidonCore address is received by us like any other email.
+                </p>
+
+                <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">What we store</h3>
+                <p>
+                  Only what you choose to save, in the privacy mode you choose: the full email, the content without names and addresses, a redacted version (with phone numbers, payment details, one-time codes, signatures and names removed), or no copy of the original at all. You also choose who in your workspace may see the original. Workspace administrators may set stricter minimums and retention periods. Stored email is deleted when its retention period ends, when you delete the record, or when your workspace is deleted.
+                </p>
+
+                <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">How we use it</h3>
+                <p>
+                  Solely to provide the features you use: creating and updating tasks, tickets, notes and client history, showing linked email to people allowed to see it, sending replies you write, and optional AI summaries and suggestions you request. We do not sell email data, use it for advertising, or let people read it except where you or your workspace share it, where needed for security or legal reasons, or with your consent for support.
+                </p>
+
+                <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">AI features</h3>
+                <p>
+                  Optional email AI features send the privacy-processed text (after redaction) to our AI provider only when you request them. Data received from Google APIs is never used to develop, improve or train generalized AI or machine-learning models.
+                </p>
+
+                <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">Browser extension</h3>
+                <p>
+                  The extension stores its sign-in tokens in your browser, reads the current page only when you use &ldquo;Send to EidonCore&rdquo;, and sends data only to your EidonCore workspace. It contains no analytics or tracking. Disconnecting revokes its access.
+                </p>
+
+                <div className="mt-5 p-4 sm:p-5 bg-[#F8FAFC] border border-[#3F72AF]/30 rounded-xl">
+                  <h3 className="text-sm font-bold text-[#0F172A] mb-1.5 flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-[#3F72AF]" />
+                    <span>Google API Services User Data Policy</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                    EidonCore&apos;s use and transfer to any other app of information received from Google APIs will adhere to the{" "}
+                    <a
+                      href="https://developers.google.com/terms/api-services-user-data-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#3F72AF] font-medium underline hover:text-[#112D4E]"
+                    >
+                      Google API Services User Data Policy
+                    </a>
+                    , including the Limited Use requirements.
+                  </p>
+                </div>
+              </div>
+
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4">5. Your Legal Rights (GDPR & CCPA)</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4">6. Your Legal Rights (GDPR & CCPA)</h2>
                 <p>
                   You hold the legal right to access, export, rectify, or permanently delete all personal data associated with your Eidoncore account at any time. To request a complete data archive or account deletion, contact our privacy team at <a href="mailto:privacy@eidoncore.com" className="text-[#3F72AF] underline">privacy@eidoncore.com</a>.
                 </p>
