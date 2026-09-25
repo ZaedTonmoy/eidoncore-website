@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[7847],{8471:(e,s,r)=>{Promise.resolve().then(r.bind(r,6400))},6400:(e,s,r)=>{"use strict";r.r(s),r.d(s,{default:()=>a});var u=r(5155);r(2115);var n=r(4729);function a(){return(0,u.jsx)(n.A,{slug:"moxie"})}}},e=>{var s=s=>e(e.s=s);e.O(0,[2958,5565,3929,4729,8441,1517,7358],()=>s(8471)),_N_E=e.O()}]);
