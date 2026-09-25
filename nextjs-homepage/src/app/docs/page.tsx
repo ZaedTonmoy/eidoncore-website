@@ -437,10 +437,10 @@ export default function DocsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* ── Left Sidebar (Desktop Sticky) ── */}
-            <aside className="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24 max-h-[calc(100vh-120px)] overflow-hidden flex flex-col bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-xs">
+            <aside className="hidden lg:flex flex-col lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24 h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] overflow-hidden bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-xs">
               
               {/* Search Box */}
-              <div className="p-3.5 border-b border-[#E2E8F0] bg-white rounded-t-2xl">
+              <div className="shrink-0 p-3.5 border-b border-[#E2E8F0] bg-white rounded-t-2xl">
                 <div className="relative">
                   <Search
                     size={14}
@@ -472,7 +472,7 @@ export default function DocsPage() {
               </div>
 
               {/* Navigation Scrollable Area */}
-              <div className="overflow-y-auto flex-1 p-3 space-y-5">
+              <div className="docs-sidebar-scroll overflow-y-auto flex-1 min-h-0 p-3 space-y-5">
                 {filteredGroups.length === 0 ? (
                   <div className="py-8 text-center text-xs text-[#94A3B8]">
                     No guides match &ldquo;{search}&rdquo;
@@ -536,7 +536,7 @@ export default function DocsPage() {
               </div>
 
               {/* Sidebar Footer Support Pill */}
-              <div className="p-3 border-t border-[#E2E8F0] bg-white rounded-b-2xl text-[11px] text-[#64748B] flex items-center justify-between">
+              <div className="shrink-0 p-3 border-t border-[#E2E8F0] bg-white rounded-b-2xl text-[11px] text-[#64748B] flex items-center justify-between">
                 <span>Need custom help?</span>
                 <a
                   href="/contact/"
@@ -674,7 +674,7 @@ export default function DocsPage() {
             <div className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-[#F8FAFC] border-r border-[#E2E8F0] flex flex-col shadow-2xl z-10 animate-in slide-in-from-left duration-200">
               
               {/* Drawer Header */}
-              <div className="p-4 bg-white border-b border-[#E2E8F0] flex items-center justify-between">
+              <div className="shrink-0 p-4 bg-white border-b border-[#E2E8F0] flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <BookOpen size={18} className="text-[#3F72AF]" />
                   <span className="text-sm font-bold text-[#0F172A]">Documentation</span>
@@ -688,7 +688,7 @@ export default function DocsPage() {
               </div>
 
               {/* Drawer Search */}
-              <div className="p-3 border-b border-[#E2E8F0] bg-white">
+              <div className="shrink-0 p-3 border-b border-[#E2E8F0] bg-white">
                 <div className="relative">
                   <Search
                     size={14}
@@ -713,7 +713,7 @@ export default function DocsPage() {
               </div>
 
               {/* Drawer Categories & Articles */}
-              <div className="overflow-y-auto flex-1 p-3 space-y-4">
+              <div className="docs-sidebar-scroll overflow-y-auto flex-1 min-h-0 p-3 space-y-4">
                 {filteredGroups.map((group) => (
                   <div key={group.category} className="space-y-1">
                     <div className="px-2 py-1 text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-wider">
@@ -752,7 +752,7 @@ export default function DocsPage() {
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-3 bg-white border-t border-[#E2E8F0] text-center text-xs">
+              <div className="shrink-0 p-3 bg-white border-t border-[#E2E8F0] text-center text-xs">
                 <a
                   href="/"
                   className="text-[#64748B] hover:text-[#0F172A] font-medium"
