@@ -28,10 +28,9 @@ CATEGORIES = {
     'getting-started': 'Getting Started', 'onboarding': 'Getting Started', 'dashboard': 'Getting Started',
     'projects': 'Core Features', 'tasks': 'Core Features', 'clients': 'Core Features',
     'invoicing': 'Core Features', 'services': 'Core Features', 'messaging': 'Core Features',
-    'proposals': 'Core Features', 'tickets': 'Core Features', 'ai-copilot': 'Core Features',
+    'proposals': 'Core Features', 'tickets': 'Core Features',
     'team': 'Team & Workflow', 'automations': 'Team & Workflow',
     'reports': 'Team & Workflow', 'notifications': 'Team & Workflow',
-    'email-integration': 'Team & Workflow', 'mobile': 'Team & Workflow',
     'ai-connector': 'Configuration',
     'settings': 'Configuration', 'client-portal': 'Configuration', 'files': 'Configuration',
     'intake-forms': 'Configuration', 'security': 'Configuration',
@@ -59,10 +58,8 @@ ICONS = {
     'invoicing': 'wallet', 'services': 'wrench', 'messaging': 'message-circle',
     'proposals': 'file-text',
     'tickets': 'life-buoy',
-    'ai-copilot': 'sparkles',
     'team': 'user-plus', 'automations': 'zap', 'reports': 'bar-chart',
-    'notifications': 'bell', 'email-integration': 'mail', 'mobile': 'smartphone',
-    'settings': 'settings', 'client-portal': 'globe',
+    'notifications': 'bell', 'settings': 'settings', 'client-portal': 'globe',
     'files': 'file', 'intake-forms': 'edit', 'security': 'lock',
     'keyboard-shortcuts': 'command',
     'ai-connector': 'bot',
@@ -70,15 +67,14 @@ ICONS = {
 
 ORDER = {
     'getting-started': 1, 'onboarding': 2, 'dashboard': 3,
-    'projects': 4, 'tasks': 5, 'ai-copilot': 6, 'clients': 7, 'invoicing': 8,
-    'services': 9, 'messaging': 10, 'proposals': 11,
-    'tickets': 12,
-    'team': 13, 'automations': 14,
-    'reports': 15, 'notifications': 16, 'email-integration': 17, 'mobile': 18,
-    'ai-connector': 19,
-    'settings': 20,
-    'client-portal': 21, 'files': 22, 'intake-forms': 23, 'security': 24,
-    'keyboard-shortcuts': 25,
+    'projects': 4, 'tasks': 5, 'clients': 6, 'invoicing': 7,
+    'services': 8, 'messaging': 9, 'proposals': 10,
+    'tickets': 11,
+    'team': 12, 'automations': 13,
+    'reports': 14, 'notifications': 15, 'ai-connector': 16,
+    'settings': 17,
+    'client-portal': 18, 'files': 19, 'intake-forms': 20, 'security': 21,
+    'keyboard-shortcuts': 22,
 }
 
 # Documentation.ai JSX component tags to strip for website rendering
@@ -241,23 +237,3 @@ with open(out, 'w') as f:
     f.write(f'window.__DOCS__ = {raw};')
 print(f"✓ Generated {out}")
 PYEOF2
-
-# Sync docs.json to nextjs-homepage data directory
-NEXTJS_DATA="${SCRIPT_DIR}/nextjs-homepage/src/data/docs.json"
-if [ -d "$(dirname "$NEXTJS_DATA")" ]; then
-  cp "$OUT" "$NEXTJS_DATA"
-  echo "✓ Synced docs.json to $NEXTJS_DATA"
-fi
-
-# Build Next.js static export if nextjs-homepage is configured
-if [ "$NO_EXPORT" != "1" ] && [ -d "$SCRIPT_DIR/nextjs-homepage/node_modules" ]; then
-  echo "Exporting Next.js static documentation site..."
-  cd "$SCRIPT_DIR/nextjs-homepage"
-  if command -v pnpm >/dev/null 2>&1; then
-    pnpm run build:root
-  else
-    npm run build:root
-  fi
-  echo "✓ Next.js static documentation site exported to $SCRIPT_DIR/docs"
-fi
-

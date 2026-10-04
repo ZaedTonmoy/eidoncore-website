@@ -32,7 +32,7 @@ const CASE_STUDIES = [
       "Automated milestone invoicing cut invoice chasing to zero",
       "Full agency migration completed in under 48 hours",
     ],
-    image: "/images/dashboard.webp",
+    image: "/images/01-dashboard-myday-flightdeck-overview.png",
   },
   {
     company: "Northline Studio",
@@ -51,7 +51,7 @@ const CASE_STUDIES = [
       "Automated weekly client milestone digests",
       "Team onboarded in a single afternoon",
     ],
-    image: "/images/invoices.webp",
+    image: "/images/30-invoicing-my-invoices-and-drafts-list.png",
   },
   {
     company: "Fieldworks",
@@ -70,7 +70,7 @@ const CASE_STUDIES = [
       "Revenue tracking keeps partner distributions completely transparent",
       "AI Workspace generates weekly executive client summaries",
     ],
-    image: "/images/crm.webp",
+    image: "/images/04-crm-organizations-list-table-view.png",
   },
 ];
 

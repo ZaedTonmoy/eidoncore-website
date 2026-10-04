@@ -130,7 +130,7 @@ export default function AboutPage() {
               <div className="lg:col-span-6">
                 <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-lg bg-[#0F172A]/5 p-2 sm:p-3">
                   <AnimatedImage
-                    src="/images/dashboard.webp"
+                    src="/images/01-dashboard-myday-flightdeck-overview.png"
                     alt="Eidoncore unified dashboard"
                     origin="top-right"
                     className="rounded-xl border border-[#E2E8F0] bg-white shadow-2xs"

@@ -32,7 +32,7 @@ const TOUR_STEPS = [
     title: "1. Win the Client",
     desc: "Track prospective deals through your pipeline, send interactive proposals with legal e-signatures, and auto-convert won deals into active projects.",
     icon: <Users size={20} className="text-amber-600" />,
-    image: "/images/crm-content.webp",
+    image: "/images/04-crm-organizations-list-table-view.png",
     points: [
       "Visual drag-and-drop deal pipeline",
       "Automatic contract & proposal generation",
@@ -45,7 +45,7 @@ const TOUR_STEPS = [
     title: "2. Launch Project & Budget",
     desc: "Deploy pre-built agency templates for web design, marketing, or development. Set fixed or hourly budgets and milestone release schedules.",
     icon: <FolderKanban size={20} className="text-[#3F72AF]" />,
-    image: "/images/projects-content.webp",
+    image: "/images/11-projects-portfolio-active-delivery-overview.png",
     points: [
       "Hourly or fixed-dollar budget modes",
       "Milestone breakdown with dependency gates",
@@ -58,7 +58,7 @@ const TOUR_STEPS = [
     title: "3. Assign & Execute Tasks",
     desc: "Fluid Kanban boards and compact list views give specialists clarity on deliverables, priorities, and deadlines without context switching.",
     icon: <CheckCircle2 size={20} className="text-emerald-600" />,
-    image: "/images/tasks-board-content.webp",
+    image: "/images/20-tasks-kanban-board-in-progress-column.png",
     points: [
       "Drag-and-drop Kanban columns with WIP limits",
       "Checklists and multi-specialist subtasks",
@@ -71,7 +71,7 @@ const TOUR_STEPS = [
     title: "4. Collaborate in Context",
     desc: "Chat directly in project channels and 1-on-1 team direct messages. Keep internal strategy private from clients with clear security tags.",
     icon: <MessageSquare size={20} className="text-blue-600" />,
-    image: "/images/messages-content.webp",
+    image: "/images/26-messaging-project-channels-and-dms.png",
     points: [
       "Project-linked channels preserving decision history",
       "Internal-only notes invisible to client eyes",
@@ -84,7 +84,7 @@ const TOUR_STEPS = [
     title: "5. Automate Repetitive Work",
     desc: "Trigger actions when milestones are reached, invoices are paid, or tasks are assigned. Zero code or Zapier subscription needed.",
     icon: <Zap size={20} className="text-purple-600" />,
-    image: "/images/automations-content.webp",
+    image: "/images/02-dashboard-command-palette-modal.png",
     points: [
       "Visual Trigger → Condition → Action rule builder",
       "Automated Slack alerts for team milestones",
@@ -97,7 +97,7 @@ const TOUR_STEPS = [
     title: "6. Invoice & Get Paid Fast",
     desc: "Convert completed milestones or logged time into professional invoices with one click. Retainers recur on schedule and bill cards automatically.",
     icon: <Receipt size={20} className="text-rose-600" />,
-    image: "/images/invoices-content.webp",
+    image: "/images/30-invoicing-my-invoices-and-drafts-list.png",
     points: [
       "Instant Stripe checkout with credit card and ACH",
       "Automated recurring retainer subscriptions",
@@ -110,7 +110,7 @@ const TOUR_STEPS = [
     title: "7. Report & Scale Profitably",
     desc: "Measure gross margin by offering, billable utilization per employee, and client lifetime value. Scale with data-driven confidence.",
     icon: <BarChart3 size={20} className="text-teal-600" />,
-    image: "/images/reports-content.webp",
+    image: "/images/33-reports-workspace-overview-at-a-glance.png",
     points: [
       "Live MRR and cash flow velocity tracking",
       "Team billable vs. overhead hours breakdown",

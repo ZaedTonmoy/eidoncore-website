@@ -39,9 +39,6 @@ import {
   BookOpen,
   Check,
   Copy,
-  Sparkles,
-  Mail,
-  Smartphone,
 } from "lucide-react";
 
 export interface DocArticle {
@@ -103,12 +100,6 @@ function renderDocIcon(iconName: string, size = 16, className = "") {
       return <Shield {...props} />;
     case "command":
       return <Command {...props} />;
-    case "sparkles":
-      return <Sparkles {...props} />;
-    case "mail":
-      return <Mail {...props} />;
-    case "smartphone":
-      return <Smartphone {...props} />;
     default:
       return <BookOpen {...props} />;
   }

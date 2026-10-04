@@ -39,7 +39,7 @@ const VERTICALS = [
       "White-label client portal for real-time campaign reporting",
       "Intake questionnaires for rapid onboarding of new client accounts",
     ],
-    image: "/images/crm-content.webp",
+    image: "/images/04-crm-organizations-list-table-view.png",
   },
   {
     id: "design",
@@ -53,7 +53,7 @@ const VERTICALS = [
       "Productized design subscriptions and one-click add-ons",
       "Expiring download links protecting raw source files",
     ],
-    image: "/images/digital-assets-content.webp",
+    image: "/images/24-offerings-digital-products-catalog-grid.png",
   },
   {
     id: "development",
@@ -67,7 +67,7 @@ const VERTICALS = [
       "Real-time budget burndown alerts when hours exceed estimates",
       "Outbound signed webhooks to GitHub, Slack, and internal APIs",
     ],
-    image: "/images/tasks-board-content.webp",
+    image: "/images/20-tasks-kanban-board-in-progress-column.png",
   },
   {
     id: "consulting",
@@ -81,7 +81,7 @@ const VERTICALS = [
       "Custom proposal contracts with legally binding digital e-signatures",
       "Professional itemized invoices supporting multi-currency billing",
     ],
-    image: "/images/reports-content.webp",
+    image: "/images/33-reports-workspace-overview-at-a-glance.png",
   },
   {
     id: "freelancers",
@@ -95,7 +95,7 @@ const VERTICALS = [
       "Productized service catalog allowing clients to buy online",
       "Flat pricing that never penalizes you for inviting contractors",
     ],
-    image: "/images/invoices-content.webp",
+    image: "/images/30-invoicing-my-invoices-and-drafts-list.png",
   },
 ];
 

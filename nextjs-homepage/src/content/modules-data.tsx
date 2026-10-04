@@ -66,7 +66,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Comprehensive JSON Schema for all agency tools",
           "Automated token rotation and audit trails",
         ],
-        image: "/images/dashboard-content.webp",
+        image: "/images/01-dashboard-myday-flightdeck-overview.png",
       },
       {
         idx: "02",
@@ -80,7 +80,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Instant client onboarding workflows",
           "Cross-module intelligence and search",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/02-dashboard-command-palette-modal.png",
       },
       {
         idx: "03",
@@ -94,7 +94,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Human-in-the-loop approvals for sensitive payouts",
           "Full compliance logging for all AI prompts",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/21-tasks-team-workload-capacity-allocation.png",
       },
     ],
     bentoTitle: "Complete AI Command Center",
@@ -173,7 +173,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Health scoring: On Track, At Risk, and Off Track",
           "Revenue recognition tied directly to client deliverables",
         ],
-        image: "/images/projects-content.webp",
+        image: "/images/11-projects-portfolio-active-delivery-overview.png",
       },
       {
         idx: "02",
@@ -187,7 +187,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Percentage completion calculation",
           "Client review states directly inside the portal",
         ],
-        image: "/images/projects.webp",
+        image: "/images/16-projects-living-with-lolo-project-view.png",
       },
       {
         idx: "03",
@@ -201,7 +201,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Live stopwatch and manual timesheet entry",
           "Exportable audit logs for client invoicing",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/17-projects-living-with-lolo-timeline-view.png",
       },
     ],
     bentoCards: [
@@ -274,7 +274,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Rich Markdown task descriptions and image pasting",
           "Real-time collaborator avatars on active cards",
         ],
-        image: "/images/tasks-board.webp",
+        image: "/images/20-tasks-kanban-board-in-progress-column.png",
       },
       {
         idx: "02",
@@ -288,7 +288,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Progress bar calculation on parent cards",
           "Keyboard shortcuts for lightning-fast creation",
         ],
-        image: "/images/tasks-list.webp",
+        image: "/images/19-tasks-active-work-todo-list-view.png",
       },
       {
         idx: "03",
@@ -302,7 +302,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Billable vs non-billable toggle",
           "Auto-syncs with invoice generation modules",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/22-tasks-active-work-dashboard-overview.png",
       },
     ],
     bentoCards: [
@@ -375,7 +375,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Lifetime value (LTV) and historical revenue analytics",
           "Custom account notes and quarterly business reviews",
         ],
-        image: "/images/crm-content.webp",
+        image: "/images/04-crm-organizations-list-table-view.png",
       },
       {
         idx: "02",
@@ -389,7 +389,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Auto-generate proposals and contracts from deals",
           "Instant one-click conversion to active client workspaces",
         ],
-        image: "/images/crm.webp",
+        image: "/images/07-crm-org-detail-steven-losada-overview.png",
       },
       {
         idx: "03",
@@ -403,7 +403,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Tagging and filtering for targeted email campaigns",
           "Direct invitation to branded client portals",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/05-crm-organizations-metrics-account-stability.png",
       },
     ],
     bentoCards: [
@@ -476,7 +476,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Automated failed payment retries (dunning management)",
           "Prorated charges and rollover hours calculation",
         ],
-        image: "/images/invoices-content.webp",
+        image: "/images/30-invoicing-my-invoices-and-drafts-list.png",
       },
       {
         idx: "02",
@@ -490,7 +490,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Custom discounts, tax rates, and currency options",
           "Itemized breakdowns with transparent client visibility",
         ],
-        image: "/images/invoice-creation.webp",
+        image: "/images/31-invoicing-invoice-detail-inv-00043-paid.png",
       },
       {
         idx: "03",
@@ -504,7 +504,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Downloadable PDF receipts with your agency branding",
           "Automatic status sync to client balance and accounting reports",
         ],
-        image: "/images/invoices.webp",
+        image: "/images/32-expenses-tracking-dashboard-overview.png",
       },
     ],
     bentoCards: [
@@ -577,7 +577,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Optional add-ons and rush delivery upsells",
           "Public catalog links or private client portal listings",
         ],
-        image: "/images/services-content.webp",
+        image: "/images/23-offerings-services-catalog-grid.png",
       },
       {
         idx: "02",
@@ -591,7 +591,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Sends automated welcome email with portal credentials",
           "Zero administrative latency between payment and kickoff",
         ],
-        image: "/images/services.webp",
+        image: "/images/24-offerings-digital-products-catalog-grid.png",
       },
       {
         idx: "03",
@@ -605,7 +605,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Custom pricing tiers for VIP clients",
           "Real-time service utilization tracking",
         ],
-        image: "/images/dashboard-charts-content.webp",
+        image: "/images/15-projects-internal-tasks-budget-time.png",
       },
     ],
     bentoCards: [
@@ -678,7 +678,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Rich text scope explanations and milestone schedules",
           "Mobile-responsive web view for easy signing on phones",
         ],
-        image: "/images/proposals-content.webp",
+        image: "/images/09-proposals-pipeline-dashboard-list.png",
       },
       {
         idx: "02",
@@ -692,7 +692,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Tamper-evident verification hash",
           "Custom legal terms and conditions boilerplate",
         ],
-        image: "/images/proposals.webp",
+        image: "/images/10-proposals-editor-draft-preview-prop-015.png",
       },
       {
         idx: "03",
@@ -706,7 +706,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Notifies team leads via Slack or email instantly",
           "Tracks proposal open and view activity in real time",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/37-reports-proposals-conversion-analytics.png",
       },
     ],
     bentoCards: [
@@ -779,7 +779,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Custom welcome announcements and onboard greeting",
           "Branded automated transactional notification emails",
         ],
-        image: "/images/dashboard-content.webp",
+        image: "/images/07-crm-org-detail-steven-losada-overview.png",
       },
       {
         idx: "02",
@@ -793,7 +793,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Centralized file library with download links",
           "Support ticket submission with status tracking",
         ],
-        image: "/images/dashboard-charts-content.webp",
+        image: "/images/08-crm-org-detail-steven-losada-settings.png",
       },
       {
         idx: "03",
@@ -807,7 +807,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Magic-link or passwordless login options",
           "Role-based client seats (Owner, Billing, Reviewer)",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/31-invoicing-invoice-detail-inv-00043-paid.png",
       },
     ],
     bentoCards: [
@@ -880,7 +880,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Cross-module triggers spanning CRM, tasks, and billing",
           "Real-time execution log and error monitoring",
         ],
-        image: "/images/automations-content.webp",
+        image: "/images/02-dashboard-command-palette-modal.png",
       },
       {
         idx: "02",
@@ -894,7 +894,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Escalation alerts for overdue tasks and invoices",
           "Automated review requests after project delivery",
         ],
-        image: "/images/automations.webp",
+        image: "/images/03-dashboard-flightdeck-launch-window-agenda.png",
       },
       {
         idx: "03",
@@ -908,7 +908,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Payload testing and inspection console",
           "Full REST API compatibility",
         ],
-        image: "/images/integrations-content.webp",
+        image: "/images/12-projects-internal-tasks-sidebar-expanded.png",
       },
     ],
     bentoCards: [
@@ -981,7 +981,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "File attachments with thumbnail previews and downloads",
           "Searchable communication archive spanning all clients",
         ],
-        image: "/images/messages-content.webp",
+        image: "/images/26-messaging-project-channels-and-dms.png",
       },
       {
         idx: "02",
@@ -995,7 +995,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Email notifications with reply-by-email convenience",
           "Unread badges and typing indicators for real-time responsiveness",
         ],
-        image: "/images/messages.webp",
+        image: "/images/25-team-directory-members-list.png",
       },
       {
         idx: "03",
@@ -1009,7 +1009,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Read receipts and delivery confirmation",
           "Exportable chat logs for compliance and records",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/26-messaging-project-channels-and-dms.png",
       },
     ],
     bentoCards: [
@@ -1076,7 +1076,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Net profit margin by service offering and client category",
           "Revenue projections based on active milestone schedules",
         ],
-        image: "/images/reports-content.webp",
+        image: "/images/33-reports-workspace-overview-at-a-glance.png",
       },
       {
         idx: "02",
@@ -1090,7 +1090,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Time audit logs exportable for payroll reconciliation",
           "Historical capacity vs. demand trendlines",
         ],
-        image: "/images/reports.webp",
+        image: "/images/34-reports-delivery-projects-and-tasks.png",
       },
       {
         idx: "03",
@@ -1104,7 +1104,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Automated quarterly executive PDF summaries",
           "Custom filtered exports for accounting software",
         ],
-        image: "/images/dashboard-charts-content.webp",
+        image: "/images/36-reports-organizations-client-portfolio.png",
       },
     ],
     bentoCards: [
@@ -1171,7 +1171,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Direct jump links to tasks, proposals, or tickets",
           "Clean desktop browser notifications",
         ],
-        image: "/images/notifications-content.webp",
+        image: "/images/01-dashboard-myday-flightdeck-overview.png",
       },
       {
         idx: "02",
@@ -1185,7 +1185,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Do Not Disturb quiet hours for work-life balance",
           "Priority bypass for urgent security or payment alerts",
         ],
-        image: "/images/notifications.webp",
+        image: "/images/03-dashboard-flightdeck-launch-window-agenda.png",
       },
       {
         idx: "03",
@@ -1199,7 +1199,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Direct login links embedded in each alert",
           "Zero Eidoncore branding visible to clients",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/26-messaging-project-channels-and-dms.png",
       },
     ],
     bentoCards: [
@@ -1266,7 +1266,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "DDoS mitigation and automated rate-limiting via Cloudflare",
           "PCI-DSS Level 1 payment compliance via Stripe",
         ],
-        image: "/images/settings.webp",
+        image: "/images/08-crm-org-detail-steven-losada-settings.png",
       },
       {
         idx: "02",
@@ -1280,7 +1280,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Session management and remote device revocation",
           "Role-based privilege boundaries on all API calls",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/25-team-directory-members-list.png",
       },
       {
         idx: "03",
@@ -1294,7 +1294,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "GDPR & CCPA compliance tools (Right to be Forgotten)",
           "OAuth 2.1 PKCE security for all API and MCP tokens",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/02-dashboard-command-palette-modal.png",
       },
     ],
     bentoCards: [
@@ -1361,7 +1361,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Contractors see only their assigned task checklists",
           "Instant one-click role upgrades or revocations",
         ],
-        image: "/images/team-content.webp",
+        image: "/images/25-team-directory-members-list.png",
       },
       {
         idx: "02",
@@ -1375,7 +1375,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Vacation and out-of-office scheduling",
           "Project reassignment in two clicks",
         ],
-        image: "/images/team.webp",
+        image: "/images/21-tasks-team-workload-capacity-allocation.png",
       },
       {
         idx: "03",
@@ -1389,7 +1389,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Fast email invitations with custom onboarding messages",
           "Audit history of all team contributions",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/08-crm-org-detail-steven-losada-settings.png",
       },
     ],
     bentoCards: [
@@ -1456,7 +1456,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "File size up to 2GB per upload on Pro plans",
           "Tagging by deliverable stage (Draft, Review, Final)",
         ],
-        image: "/images/digital-assets-content.webp",
+        image: "/images/13-projects-internal-tasks-overview-details.png",
       },
       {
         idx: "02",
@@ -1470,7 +1470,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Branded download pages with agency watermark options",
           "Version history preventing accidental file overwrites",
         ],
-        image: "/images/digital-assets.webp",
+        image: "/images/24-offerings-digital-products-catalog-grid.png",
       },
       {
         idx: "03",
@@ -1484,7 +1484,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Auto-expiration after 24 hours, 7 days, or 30 days",
           "Encrypted S3-compatible cloud storage architecture",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/16-projects-living-with-lolo-project-view.png",
       },
     ],
     bentoCards: [
@@ -1551,7 +1551,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Custom welcome splash screens and thank-you confirmation pages",
           "Embed on your website or share as a standalone branded link",
         ],
-        image: "/images/crm-content.webp",
+        image: "/images/04-crm-organizations-list-table-view.png",
       },
       {
         idx: "02",
@@ -1565,7 +1565,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Trigger Slack notifications and welcome emails automatically",
           "Zero manual data entry between lead capture and project kickoff",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/07-crm-org-detail-steven-losada-overview.png",
       },
       {
         idx: "03",
@@ -1579,7 +1579,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Embeddable iframe or full-page popup widget",
           "Spam protection and honeypot validation built in",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/08-crm-org-detail-steven-losada-settings.png",
       },
     ],
     bentoCards: [
@@ -1646,7 +1646,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Clients visit your URL and see your favicon and page title",
           "Zero 'Powered by' badges or Eidoncore watermarks",
         ],
-        image: "/images/settings.webp",
+        image: "/images/08-crm-org-detail-steven-losada-settings.png",
       },
       {
         idx: "02",
@@ -1660,7 +1660,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Branded email templates matching your portal style",
           "Direct reply-to routing back to your team inbox",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/07-crm-org-detail-steven-losada-overview.png",
       },
       {
         idx: "03",
@@ -1674,7 +1674,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Bespoke login page wallpaper and welcome messaging",
           "Branded invoice PDFs and contract signature certificates",
         ],
-        image: "/images/dashboard-content.webp",
+        image: "/images/01-dashboard-myday-flightdeck-overview.png",
       },
     ],
     bentoCards: [
@@ -1741,7 +1741,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "License key generation and validation for software tools",
           "Pay-what-you-want and discount coupon code support",
         ],
-        image: "/images/digital-assets-content.webp",
+        image: "/images/24-offerings-digital-products-catalog-grid.png",
       },
       {
         idx: "02",
@@ -1755,7 +1755,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Automated invoice and VAT/GST receipt generation",
           "Cross-sell agency services to digital product buyers",
         ],
-        image: "/images/digital-assets.webp",
+        image: "/images/23-offerings-services-catalog-grid.png",
       },
       {
         idx: "03",
@@ -1769,7 +1769,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Multi-currency conversion for international buyers",
           "Automatic refund and chargeback management",
         ],
-        image: "/images/invoices.webp",
+        image: "/images/31-invoicing-invoice-detail-inv-00043-paid.png",
       },
     ],
     bentoCards: [
@@ -1836,7 +1836,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Active project health indicators (On Track vs. At Risk)",
           "Real-time currency localization for international agencies",
         ],
-        image: "/images/dashboard-content.webp",
+        image: "/images/01-dashboard-myday-flightdeck-overview.png",
       },
       {
         idx: "02",
@@ -1850,7 +1850,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "One-click jump to inspect any referenced task or invoice",
           "Real-time websocket updates with zero manual page refreshing",
         ],
-        image: "/images/dashboard-charts-content.webp",
+        image: "/images/03-dashboard-flightdeck-launch-window-agenda.png",
       },
       {
         idx: "03",
@@ -1864,7 +1864,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Unassigned customer support tickets",
           "Quick-action buttons to create projects, tasks, or invoices",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/33-reports-workspace-overview-at-a-glance.png",
       },
     ],
     bentoCards: [
@@ -1931,7 +1931,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Customer portal integration for updating credit cards on file",
           "Full multi-currency support covering 135+ international currencies",
         ],
-        image: "/images/integrations-content.webp",
+        image: "/images/02-dashboard-command-palette-modal.png",
       },
       {
         idx: "02",
@@ -1945,7 +1945,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Daily morning digest posted directly into team channels",
           "Support ticket alerts for rapid SLA resolution",
         ],
-        image: "/images/integrations.webp",
+        image: "/images/26-messaging-project-channels-and-dms.png",
       },
       {
         idx: "03",
@@ -1959,7 +1959,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "API keys with granular read/write permission scopes",
           "Full MCP (Model Context Protocol) compliance for AI assistants",
         ],
-        image: "/images/settings-content.webp",
+        image: "/images/12-projects-internal-tasks-sidebar-expanded.png",
       },
     ],
     bentoCards: [
@@ -2026,7 +2026,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Clients view real-time status: Open, In Progress, and Resolved",
           "Automated email updates when team post responses",
         ],
-        image: "/images/tickets-content.webp",
+        image: "/images/27-tickets-support-inbox-table-view.png",
       },
       {
         idx: "02",
@@ -2040,7 +2040,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Internal team notes invisible to clients",
           "Canned response templates for frequent client questions",
         ],
-        image: "/images/tickets.webp",
+        image: "/images/28-tickets-support-inbox-active-queue-1.png",
       },
       {
         idx: "03",
@@ -2054,7 +2054,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
           "Ticket automatically updates when corresponding task is resolved",
           "Tracks billable time spent resolving customer support requests",
         ],
-        image: "/images/tasks-board-content.webp",
+        image: "/images/35-reports-support-response-times-and-sla.png",
       },
     ],
     bentoCards: [
