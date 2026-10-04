@@ -1189,7 +1189,7 @@ export default function HeroAppWindow() {
 
               {/* Toolbar & Filter Bar - Underline tabs & icon tools matching screenshot */}
               {/* Action Toolbar */}
-              <div className="flex flex-wrap lg:flex-nowrap items-center justify-between gap-2.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+              <div className="flex items-center justify-between gap-2.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs overflow-x-auto no-scrollbar">
                 <div className="flex items-center gap-3 shrink-0">
                   <button
                     onClick={() => setActiveProjectTab("all")}
@@ -1228,24 +1228,24 @@ export default function HeroAppWindow() {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                   {/* Rounded search pill */}
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
-                    <Search size={12} className="text-[#94A3B8]" />
-                    <span className="text-[10.5px] text-[#94A3B8]">Search projects...</span>
-                    <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 py-0.5 rounded ml-0.5">/</kbd>
+                  <div className="flex items-center gap-1 px-2 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                    <Search size={11} className="text-[#94A3B8]" />
+                    <span className="text-[10px] text-[#94A3B8]">Search...</span>
+                    <kbd className="text-[8.5px] font-mono bg-[#F1F5F9] text-slate-500 px-1 py-0.2 rounded ml-0.5">/</kbd>
                   </div>
 
                   {/* Icon tools: Check, Flag, Users */}
                   <div className="flex items-center gap-0.5 text-slate-400">
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={15} />
+                      <CheckCircle2 size={14} />
                     </button>
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <Flag size={15} />
+                      <Flag size={14} />
                     </button>
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <Users size={15} />
+                      <Users size={14} />
                     </button>
                   </div>
 
@@ -1253,27 +1253,27 @@ export default function HeroAppWindow() {
                   <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`px-2.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] ${
+                      className={`px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
                         projectViewMode === "cards" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <Columns3 size={11} /> Card view
+                      <Columns3 size={10} /> Card view
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] ${
+                      className={`px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
                         projectViewMode === "table" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <List size={11} /> Table view
+                      <List size={10} /> Table view
                     </button>
-                    <button className="px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] hover:text-slate-900">
-                      <Kanban size={11} /> Board
+                    <button className="px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] hover:text-slate-900">
+                      <Kanban size={10} /> Board
                     </button>
                   </div>
 
-                  <button className="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
-                    <Plus size={12} /> New project <kbd className="text-[8.5px] bg-blue-700 px-1 py-0.2 rounded ml-0.5">n</kbd>
+                  <button className="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
+                    <Plus size={11} /> New project <kbd className="text-[8px] bg-blue-700 px-1 py-0.2 rounded ml-0.5">n</kbd>
                   </button>
                 </div>
               </div>
@@ -1607,7 +1607,7 @@ export default function HeroAppWindow() {
               </div>
 
               {/* Toolbar & Filters (Matching Screenshot) */}
-              <div className="flex flex-wrap lg:flex-nowrap items-center justify-between gap-2.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+              <div className="flex items-center justify-between gap-2.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs overflow-x-auto no-scrollbar">
                 <div className="flex items-center gap-3 shrink-0">
                   <button
                     onClick={() => setActiveTaskTab("all")}
@@ -1646,64 +1646,64 @@ export default function HeroAppWindow() {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                   {/* Rounded search pill */}
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
-                    <Search size={12} className="text-[#94A3B8]" />
-                    <span className="text-[10.5px] text-[#94A3B8]">Search tasks...</span>
-                    <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 py-0.5 rounded ml-0.5">/</kbd>
+                  <div className="flex items-center gap-1 px-2 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                    <Search size={11} className="text-[#94A3B8]" />
+                    <span className="text-[10px] text-[#94A3B8]">Search...</span>
+                    <kbd className="text-[8.5px] font-mono bg-[#F1F5F9] text-slate-500 px-1 py-0.2 rounded ml-0.5">/</kbd>
                   </div>
 
                   {/* Icon tools: Check, Flag, Warning, Folder */}
                   <div className="flex items-center gap-0.5 text-slate-400">
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={15} />
+                      <CheckCircle2 size={14} />
                     </button>
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <Flag size={15} />
+                      <Flag size={14} />
                     </button>
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <AlertTriangle size={15} />
+                      <AlertTriangle size={14} />
                     </button>
                     <button className="p-1 hover:text-slate-700 transition-colors">
-                      <FolderKanban size={15} />
+                      <FolderKanban size={14} />
                     </button>
                   </div>
 
                   {/* My Tasks Switch */}
                   <div className="flex items-center gap-1 text-xs text-[#64748B]">
-                    <div className="w-6 h-3.5 bg-slate-200 rounded-full p-0.5 cursor-pointer flex items-center">
-                      <div className="w-2.5 h-2.5 bg-white rounded-full shadow-xs" />
+                    <div className="w-5 h-3 bg-slate-200 rounded-full p-0.5 cursor-pointer flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full shadow-xs" />
                     </div>
-                    <span className="text-[10.5px] font-medium text-slate-700 whitespace-nowrap">My Tasks</span>
+                    <span className="text-[10px] font-medium text-slate-700 whitespace-nowrap">My Tasks</span>
                   </div>
 
                   {/* View Switcher: List | Board | Workload */}
                   <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setTaskViewMode("list")}
-                      className={`px-2.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] ${
+                      className={`px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
                         taskViewMode === "list" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <List size={11} /> List
+                      <List size={10} /> List
                     </button>
                     <button
                       ref={taskBoardToggleRef}
                       onClick={() => setTaskViewMode("board")}
-                      className={`px-2.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] ${
+                      className={`px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
                         taskViewMode === "board" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <Kanban size={11} /> Board
+                      <Kanban size={10} /> Board
                     </button>
-                    <button className="px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10.5px] hover:text-slate-900">
-                      <Users size={11} /> Workload
+                    <button className="px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] hover:text-slate-900">
+                      <Users size={10} /> Workload
                     </button>
                   </div>
 
-                  <button className="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
-                    <Plus size={12} /> New task <kbd className="text-[8.5px] bg-blue-700 px-1 py-0.2 rounded ml-0.5">n</kbd>
+                  <button className="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
+                    <Plus size={11} /> New task <kbd className="text-[8px] bg-blue-700 px-1 py-0.2 rounded ml-0.5">n</kbd>
                   </button>
                 </div>
               </div>
