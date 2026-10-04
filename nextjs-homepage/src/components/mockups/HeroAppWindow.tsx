@@ -141,7 +141,8 @@ export default function HeroAppWindow() {
     setCurrentView("dashboard");
 
     setCursorPos({ x: 340, y: 160, visible: true });
-    await sleep(1500);
+    // Initial pause on Dashboard before first click
+    await sleep(5000);
 
     while (!isCancelledRef.current) {
       // Step 1: In Dashboard -> Move cursor to AI Copilot button in top bar
@@ -149,45 +150,50 @@ export default function HeroAppWindow() {
       if (isCancelledRef.current) break;
       await click();
       setCopilotOpen(true);
-      await sleep(1000);
+      // Wait at least 5s after opening copilot
+      await sleep(5000);
 
       // Step 2: Hover over suggested prompt chip inside the Copilot popup
       await moveTo(copilotChipRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotQuery("Find blockers, unfinished checklist items and the next tasks to prioritize.");
-      await sleep(1100);
+      // Wait at least 5s after choosing prompt
+      await sleep(5000);
 
       // Step 3: Click Copilot send button
       await moveTo(copilotSendRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotSubmitted(true);
-      await sleep(2600);
+      // Wait at least 5s for user to read AI Copilot response
+      await sleep(5500);
 
       // Step 4: Close Copilot popup via 'X' close button
       await moveTo(copilotCloseRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotOpen(false);
-      await sleep(1200);
+      // Wait at least 5s after closing copilot to view Dashboard
+      await sleep(5000);
 
       // Step 5: In Dashboard -> Hover the urgent task row in priorities table
       await moveTo(taskRowRef, 0.35, 0.5);
       if (isCancelledRef.current) break;
-      await sleep(1400);
+      await sleep(5000);
 
       // Step 6: Move to sidebar "Projects" and click
       await moveTo(navProjectsRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("projects");
-      await sleep(1400);
+      // Wait at least 5s on Projects view
+      await sleep(5000);
 
       // Step 7: Hover an active project card
       await moveTo(projectCardRef, 0.5, 0.4);
       if (isCancelledRef.current) break;
-      await sleep(1800);
+      await sleep(5000);
 
       // Step 8: Move to sidebar "Tasks" and click
       await moveTo(navTasksRef, 0.45, 0.5);
@@ -195,19 +201,21 @@ export default function HeroAppWindow() {
       await click();
       setCurrentView("tasks");
       setTaskViewMode("list");
-      await sleep(1500);
+      // Wait at least 5s on Tasks List view
+      await sleep(5000);
 
       // Step 9: In Tasks -> Click the "Board" view toggle
       await moveTo(taskBoardToggleRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setTaskViewMode("board");
-      await sleep(2000);
+      // Wait at least 5s on Tasks Kanban Board view
+      await sleep(5000);
 
       // Step 10: In Board -> Hover active task card
       await moveTo(taskCardRef, 0.5, 0.4);
       if (isCancelledRef.current) break;
-      await sleep(1800);
+      await sleep(5000);
 
       // Step 11: Switch back to Dashboard to loop
       await moveTo(navDashboardRef, 0.45, 0.5);
@@ -216,7 +224,8 @@ export default function HeroAppWindow() {
       setCurrentView("dashboard");
       setCopilotSubmitted(false);
       setCopilotQuery("");
-      await sleep(1600);
+      // Wait at least 5s on Dashboard before repeating cycle
+      await sleep(5000);
     }
   };
 
