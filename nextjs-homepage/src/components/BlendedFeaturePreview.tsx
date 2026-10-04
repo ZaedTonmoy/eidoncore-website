@@ -550,7 +550,7 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 border border-slate-200/80 shadow-xs" disableMask={true}>
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0">
             {/* Top Navigation Bar: Search, Filters & View Toggle */}
             <div className="flex items-center justify-between gap-2 pb-3.5 border-b border-slate-100 mb-3.5 min-w-0">
               <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/90 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-52 min-w-0">
@@ -901,7 +901,7 @@ export default function BlendedFeaturePreview({
 
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0 border border-slate-200/80 shadow-xs" disableMask={true}>
+          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Granular Checklist & Subtasks Detail (100% Matching media_1791139525719.png) */}
             <div className="space-y-6">
               {/* CHECKLIST CONTAINER */}
@@ -1121,7 +1121,7 @@ export default function BlendedFeaturePreview({
 
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0 border border-slate-200/80 shadow-xs" disableMask={true}>
+          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Drawer Header Tabs (Comments vs Activity) */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 min-w-0">
               <div className="flex items-center gap-2">
