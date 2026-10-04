@@ -745,62 +745,100 @@ export default function BlendedFeaturePreview({
 
                 {/* Section: PROJECTS */}
                 <div>
-                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block px-1.5 mb-1">
+                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block px-1.5 mb-1.5">
                     PROJECTS
                   </span>
-                  <div className="flex flex-col gap-0.5">
-                    {/* Active Channel: Internal Tasks */}
-                    <div className="p-1.5 rounded-lg bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <div className="w-5 h-5 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                          <Folder size={11} />
+                  <div className="flex flex-col gap-1">
+                    {/* Active Project 1: Acme Corp Website */}
+                    <div className="p-1.5 sm:p-2 rounded-xl bg-white border border-slate-200/90 shadow-2xs flex items-center justify-between">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
+                          <Folder size={12} />
                         </div>
                         <div className="min-w-0">
-                          <span className="font-semibold text-slate-900 text-[11px] block truncate">Internal Tasks</span>
-                          <span className="text-[9.5px] text-slate-400 block truncate">2 active notes</span>
+                          <span className="font-semibold text-slate-900 text-xs block truncate">Acme Portal Redesign</span>
+                          <span className="text-[10px] text-slate-400 block truncate">Internal scope note</span>
                         </div>
                       </div>
-                      <span className="text-[9px] font-medium text-blue-600 shrink-0">Now</span>
+                      <span className="text-[9.5px] font-medium text-slate-400 shrink-0 ml-1">32m</span>
                     </div>
 
-                    {/* Channel 2 */}
-                    <div className="p-1.5 rounded-lg hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <div className="w-5 h-5 rounded-md bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
-                          <Folder size={11} />
+                    {/* Project 2: Zenith Brand Portal */}
+                    <div className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+                          <Folder size={12} />
                         </div>
-                        <span className="text-[11px] truncate">Client Portal V2</span>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-slate-700 block truncate">Nexus Web App</span>
+                          <span className="text-[10px] text-slate-400 block truncate">Alex M. joined the channel</span>
+                        </div>
                       </div>
-                      <span className="text-[9px] text-slate-400 shrink-0">Mar 30</span>
+                      <span className="text-[9.5px] text-slate-400 shrink-0 ml-1">Mar 30</span>
                     </div>
 
-                    {/* Channel 3 */}
-                    <div className="p-1.5 rounded-lg hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <div className="w-5 h-5 rounded-md bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
-                          <Folder size={11} />
+                    {/* Project 3: Apex Design System */}
+                    <div className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+                          <Folder size={12} />
                         </div>
-                        <span className="text-[11px] truncate">Maintenance SLA</span>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-slate-700 block truncate">Apex Design System</span>
+                          <span className="text-[10px] text-slate-400 block truncate">David K. joined the channel</span>
+                        </div>
                       </div>
-                      <span className="text-[9px] text-slate-400 shrink-0">New</span>
+                      <span className="text-[9.5px] text-slate-400 shrink-0 ml-1">New</span>
+                    </div>
+
+                    {/* Project 4: CloudScale Maintenance */}
+                    <div className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+                          <Folder size={12} />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-slate-700 block truncate">CloudScale SLA</span>
+                          <span className="text-[10px] text-slate-400 block truncate">Channel created</span>
+                        </div>
+                      </div>
+                      <span className="text-[9.5px] text-slate-400 shrink-0 ml-1">New</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Section: ORGANIZATIONS */}
                 <div className="mt-1 pt-2 border-t border-slate-100">
-                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block px-1.5 mb-1">
+                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block px-1.5 mb-1.5">
                     ORGANIZATIONS
                   </span>
-                  <div className="flex flex-col gap-0.5">
-                    <div className="p-1.5 rounded-lg hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <div className="w-5 h-5 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                          <Users size={10} />
+                  <div className="flex flex-col gap-1">
+                    {/* Org 1 */}
+                    <div className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-100">
+                          <Users size={11} />
                         </div>
-                        <span className="text-[11px] truncate">Acme Studios</span>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-slate-700 block truncate">Velocity Studios</span>
+                          <span className="text-[10px] text-slate-400 block truncate">Tasks mentioned from the menu...</span>
+                        </div>
                       </div>
-                      <span className="text-[9px] text-slate-400 shrink-0">Apr 6</span>
+                      <span className="text-[9.5px] text-slate-400 shrink-0 ml-1">Apr 6</span>
+                    </div>
+
+                    {/* Org 2 */}
+                    <div className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100/60 transition-colors flex items-center justify-between text-slate-600">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+                          <Users size={11} />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-xs font-medium text-slate-700 block truncate">Beacon Health Tech</span>
+                          <span className="text-[10px] text-slate-400 block truncate">Elena R. joined the channel</span>
+                        </div>
+                      </div>
+                      <span className="text-[9.5px] text-slate-400 shrink-0 ml-1">New</span>
                     </div>
                   </div>
                 </div>
@@ -826,38 +864,40 @@ export default function BlendedFeaturePreview({
                 </div>
 
                 {/* Messages Feed */}
-                <div className="flex flex-col gap-3.5 mb-3">
-                  {/* Message 1: Zaed Tonmoy (Dummy generic name: Alex T.) */}
+                <div className="flex flex-col gap-3.5 mb-3 overflow-hidden">
+                  {/* Message 1: Project Lead (Dummy Alex Morgan) */}
                   <div className="flex items-start gap-2.5 text-xs">
                     <div className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">
-                      ZT
+                      AM
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="font-bold text-slate-900 text-[11px]">Zaed Tonmoy</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-slate-900 text-[11px]">Alex Morgan</span>
                         <span className="text-[9.5px] text-slate-400 font-mono">07:32 AM</span>
                       </div>
-                      <p className="text-slate-600 text-[11px] leading-relaxed">
-                        Hello, I hope this message finds you well. I am reaching out to discuss our upcoming project milestones and review deliverable handovers.
-                      </p>
-                      <span className="inline-block mt-1 text-[10.5px] font-medium text-blue-600 hover:underline cursor-pointer">
-                        @Sakib Tanoy
+                      <div className="text-slate-600 text-[11px] leading-relaxed space-y-1.5">
+                        <p>Hello, I hope this message finds you well. I am reaching out to discuss our upcoming projects and see if you have any updates to share.</p>
+                        <p>Hi there! Just checking in to see how things are going on your end. I'd love to hear how your week is shaping up and if there's anything we can help you with.</p>
+                        <p>Please note that all deliverables have been documented in the project ledger.</p>
+                      </div>
+                      <span className="inline-block mt-1.5 text-[10.5px] font-medium text-blue-600 hover:underline cursor-pointer">
+                        @Jordan Lee
                       </span>
                     </div>
                   </div>
 
-                  {/* Message 2: Sakib Tanoy reply */}
+                  {/* Message 2: Jordan Lee reply */}
                   <div className="flex items-start gap-2.5 text-xs">
                     <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">
-                      ST
+                      JL
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <span className="font-bold text-slate-900 text-[11px]">Sakib Tanoy</span>
-                        <span className="text-[9.5px] text-slate-400 font-mono">11:32 AM</span>
+                        <span className="font-bold text-slate-900 text-[11px]">Jordan Lee</span>
+                        <span className="text-[9.5px] text-slate-400 font-mono">11:32 PM</span>
                       </div>
                       <p className="text-slate-600 text-[11px] leading-relaxed">
-                        The new deployment guidelines are working smoothly across all staging environments. Everything is tested and ready.
+                        Our new release workflow is working smoothly and simplifying all pipeline deployment steps. Everything is fully tested and verified.
                       </p>
                     </div>
                   </div>
@@ -907,11 +947,11 @@ export default function BlendedFeaturePreview({
               {/* Message with Orange Internal Note Pill */}
               <div className="flex items-start gap-2.5 text-xs">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                  ST
+                  JL
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                    <span className="font-bold text-slate-900 text-xs">Sakib Tanoy</span>
+                    <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
                     <span className="text-[10px] text-slate-400 font-mono">02:02 AM</span>
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
                       <Lock size={10} className="text-amber-600" />
@@ -920,8 +960,8 @@ export default function BlendedFeaturePreview({
                   </div>
 
                   {/* Highlighted Internal Note Container matching Screenshot 3 */}
-                  <div className="p-3 bg-amber-50/60 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs leading-relaxed font-normal shadow-2xs">
-                    Client requested revision on scope — internal dev budget margin is safe at +36.5%. Keep this note internal before sending official milestone quote.
+                  <div className="p-3 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs leading-relaxed font-normal shadow-2xs">
+                    This is an internal note
                   </div>
                 </div>
               </div>
@@ -958,84 +998,146 @@ export default function BlendedFeaturePreview({
 
     // =========================================================================
     // FEATURE 03: Threaded Focus (Eliminate Chaotic Message Sprawl)
-    // Matches screenshot media_1791144277902.png (Message Action Hover & Quick Reactions)
+    // Matches screenshot media_1791144277902.png (Message Action Hover & Thread Context)
     // =========================================================================
     if (featureIndex === "03") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5">
-            {/* Header: Thread Focus */}
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3">
+            {/* Top Channel Header matching screenshot */}
             <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
-                  <MessageSquare size={14} />
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
+                  <Folder size={14} />
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 tracking-tight">Thread: Architecture Deliverables</h4>
+                <div className="min-w-0">
+                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm truncate">Acme Portal Redesign</h4>
+                  <span className="text-[10px] text-slate-400 block">Project • 2 members</span>
+                </div>
               </div>
-              <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                Resolved ✓
-              </span>
+
+              <div className="flex items-center gap-2">
+                <div className="flex items-center -space-x-1.5">
+                  <span className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-2xs">
+                    AM
+                  </span>
+                  <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-2xs">
+                    JL
+                  </span>
+                </div>
+                <Info size={14} className="text-slate-400 ml-1 cursor-pointer" />
+              </div>
             </div>
 
-            {/* Focused Thread Item with Reaction Bar & Reply Hover (Screenshot 2) */}
-            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
-                  ZT
+            {/* Chat Thread Feed matching Screenshot 2 */}
+            <div className="flex flex-col gap-3 bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
+              {/* Message 1 */}
+              <div className="flex items-start gap-2.5 text-xs">
+                <div className="w-7 h-7 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                  AM
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 text-xs">Zaed Tonmoy</span>
-                      <span className="text-[10px] text-slate-400 font-mono">Friday 02:55 PM</span>
-                    </div>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="font-bold text-slate-900 text-xs">Alex Morgan</span>
+                    <span className="text-[10px] text-slate-400 font-mono">07:32 AM</span>
                   </div>
-                  <p className="text-xs text-slate-700 leading-relaxed">
-                    The schema design and client portal tokens are verified. Let’s proceed with deploying the release candidate to staging!
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    Hello, I hope this message finds you well. I am reaching out to discuss our upcoming projects and see if you have any updates to share.
                   </p>
-
-                  {/* Reaction Pill & Thread Reply Count */}
-                  <div className="flex items-center gap-2 mt-3">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200/70">
-                      <span>👍</span>
-                      <span>3</span>
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-purple-50 text-purple-700 border border-purple-200/70">
-                      <span>🎉</span>
-                      <span>2</span>
-                    </span>
-                    <span className="text-[11px] text-slate-400 ml-1">4 thread replies</span>
-                  </div>
                 </div>
               </div>
 
-              {/* Floating Action Bar (Like screenshot: Thumbs up, Reply, More) */}
-              <div className="absolute top-3 right-3 flex items-center gap-1 bg-white border border-slate-200 shadow-sm rounded-lg p-1 text-slate-500">
-                <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Like">
-                  <ThumbsUp size={12} />
-                </button>
-                <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Reply in thread">
-                  <Reply size={12} />
-                </button>
-                <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-400 transition-colors">
-                  <MoreHorizontal size={12} />
-                </button>
+              {/* Date Separator Pill matching screenshot */}
+              <div className="relative flex items-center justify-center my-1">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-100" />
+                </div>
+                <span className="relative z-10 px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[10px] font-medium text-slate-400">
+                  Friday
+                </span>
+              </div>
+
+              {/* Message 2: With hover action bar matching Screenshot 2 */}
+              <div className="group/msg relative flex items-start gap-2.5 text-xs p-2 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200/80">
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                  JL
+                </div>
+                <div className="min-w-0 flex-1 pr-16 sm:pr-20">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
+                    <span className="text-[10px] text-slate-400 font-mono">02:55 PM</span>
+                  </div>
+                  <p className="text-slate-800 text-xs font-medium">
+                    Wow!
+                  </p>
+                </div>
+
+                {/* Exact Action capsule from screenshot (Thumbs up, Reply, More) */}
+                <div className="absolute top-2 right-2 flex items-center gap-1 bg-white border border-slate-200 shadow-sm rounded-lg p-1 text-slate-500">
+                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Like">
+                    <ThumbsUp size={12} />
+                  </button>
+                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Reply in thread">
+                    <Reply size={12} />
+                  </button>
+                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-400 transition-colors">
+                    <MoreHorizontal size={12} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Date Separator Pill: Today */}
+              <div className="relative flex items-center justify-center my-1">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-100" />
+                </div>
+                <span className="relative z-10 px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[10px] font-medium text-slate-400">
+                  Today
+                </span>
+              </div>
+
+              {/* Message 3: Internal Note Capsule */}
+              <div className="flex items-start gap-2.5 text-xs">
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                  JL
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
+                    <span className="text-[10px] text-slate-400 font-mono">02:02 AM</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+                      <Lock size={10} className="text-amber-600" />
+                      <span>Internal note</span>
+                    </span>
+                  </div>
+                  <div className="p-2.5 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs shadow-2xs">
+                    This is an internal note
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Nested Reply preview */}
-            <div className="ml-6 pl-4 border-l-2 border-blue-500/30 flex items-start gap-2.5 text-xs bg-slate-50/60 p-2.5 rounded-r-xl">
-              <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[9px] flex items-center justify-center shrink-0">
-                ST
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="font-bold text-slate-900 text-[11px]">Sakib Tanoy</span>
-                  <span className="text-[9.5px] text-slate-400 font-mono">03:10 PM</span>
+            {/* Input Composer Box matching Screenshot 2 */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-2.5 sm:p-3 shadow-2xs flex flex-col gap-2">
+              <span className="text-xs text-slate-400 font-normal">
+                Type a message... (@ to mention, / to search)
+              </span>
+              <div className="flex items-center justify-between pt-1 border-t border-slate-100">
+                <div className="flex items-center gap-2">
+                  <button type="button" className="p-1 text-slate-400 hover:text-slate-600 transition-colors">
+                    <Paperclip size={14} />
+                  </button>
+                  <button type="button" className="p-1 text-slate-400 hover:text-slate-600 transition-colors">
+                    <Sparkles size={14} />
+                  </button>
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-slate-600 bg-slate-100/80">
+                    <Lock size={11} className="text-slate-500" />
+                    <span>Internal note</span>
+                  </div>
                 </div>
-                <p className="text-[11px] text-slate-600">
-                  Confirmed. Staging build passed with zero regression errors.
-                </p>
+                <button type="button" className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+                  <Send size={12} />
+                </button>
               </div>
             </div>
           </BlendMockupCard>
