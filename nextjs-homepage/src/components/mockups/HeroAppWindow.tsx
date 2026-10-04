@@ -52,6 +52,7 @@ import {
   Plus,
   RefreshCw,
   ExternalLink,
+  MoreHorizontal,
 } from "lucide-react";
 
 export default function HeroAppWindow() {
@@ -1147,8 +1148,8 @@ export default function HeroAppWindow() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[#0F172A]">Delivery insight</span>
-                      <span className="text-[9.5px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                      <span className="text-xs font-semibold text-[#0F172A]">Delivery insight</span>
+                      <span className="text-[9.5px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
                         ● All on track
                       </span>
                     </div>
@@ -1158,18 +1159,18 @@ export default function HeroAppWindow() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-medium text-[#475569]">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-normal text-[#475569]">
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    ⚠️ Roadblock audit
+                    <AlertTriangle size={11} className="text-amber-500" /> Roadblock audit
                   </span>
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    ☑️ Task velocity
+                    <CheckSquare size={11} className="text-slate-500" /> Task velocity
                   </span>
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    ➡️ Milestone catch-up
+                    <ArrowRight size={11} className="text-slate-500" /> Milestone catch-up
                   </span>
-                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-semibold">
-                    ✨ Delivery briefing ▾
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-medium">
+                    <Sparkles size={11} className="text-blue-600" /> Delivery briefing <ChevronDown size={10} />
                   </span>
                 </div>
               </div>
@@ -1180,7 +1181,7 @@ export default function HeroAppWindow() {
                   <button
                     onClick={() => setActiveProjectTab("all")}
                     className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                      activeProjectTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
                     }`}
                   >
                     All Projects <span className="font-mono text-[10px] ml-1">21</span>
@@ -1188,7 +1189,7 @@ export default function HeroAppWindow() {
                   <button
                     onClick={() => setActiveProjectTab("active")}
                     className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "active" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                      activeProjectTab === "active" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
                     }`}
                   >
                     Active delivery <span className="font-mono text-[10px] ml-1">11</span>
@@ -1196,7 +1197,7 @@ export default function HeroAppWindow() {
                   <button
                     onClick={() => setActiveProjectTab("attention")}
                     className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "attention" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                      activeProjectTab === "attention" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
                     }`}
                   >
                     Needs Attention
@@ -1204,7 +1205,7 @@ export default function HeroAppWindow() {
                   <button
                     onClick={() => setActiveProjectTab("delivered")}
                     className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "delivered" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                      activeProjectTab === "delivered" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
                     }`}
                   >
                     Delivered <span className="font-mono text-[10px] ml-1">1</span>
@@ -1220,25 +1221,25 @@ export default function HeroAppWindow() {
                   <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "cards" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "cards" ? "bg-slate-100 font-semibold text-[#0F172A]" : ""}`}
                     >
                       <Columns3 size={12} className="inline mr-1" /> Card view
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "table" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "table" ? "bg-slate-100 font-semibold text-[#0F172A]" : ""}`}
                     >
                       <List size={12} className="inline mr-1" /> Table view
                     </button>
                   </div>
 
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium flex items-center gap-1">
                     <Plus size={12} /> New project <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
                   </button>
                 </div>
               </div>
 
-              {/* 8 Projects Cards Grid (4 cols x 2 rows) - Authentic Screenshot 11 Layout */}
+              {/* 8 Projects Cards Grid (4 cols x 2 rows) - Clean refined typography and weight */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
                   {
@@ -1374,45 +1375,45 @@ export default function HeroAppWindow() {
                   <div
                     key={idx}
                     ref={proj.ref}
-                    className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-3"
+                    className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-2.5 min-h-[190px]"
                   >
-                    <div className="flex flex-col gap-2.5">
+                    <div className="flex flex-col gap-2">
                       {/* Avatar + Client & Title */}
-                      <div className="flex items-start gap-2.5">
-                        <div className={`w-8 h-8 rounded-full ${proj.color} font-bold text-xs flex items-center justify-center shrink-0`}>
+                      <div className="flex items-start gap-2">
+                        <div className={`w-7 h-7 rounded-full ${proj.color} font-medium text-[11px] flex items-center justify-center shrink-0`}>
                           {proj.init}
                         </div>
-                        <div className="min-w-0">
-                          <span className="text-[10px] text-[#64748B] block truncate">{proj.client}</span>
-                          <h4 className="text-xs font-bold text-[#0F172A] leading-tight line-clamp-2">
+                        <div className="min-w-0 flex-1">
+                          <span className="text-[10px] text-[#64748B] block truncate leading-tight">{proj.client}</span>
+                          <h4 className="text-[11.5px] font-semibold text-[#0F172A] leading-snug line-clamp-2 mt-0.5">
                             {proj.title}
                           </h4>
                         </div>
                       </div>
 
                       {/* Status + Health + Flag row */}
-                      <div className="flex items-center gap-1.5 text-[9.5px]">
-                        <span className={`px-2 py-0.5 rounded-md border font-medium ${
+                      <div className="flex items-center gap-1.5 text-[9px]">
+                        <span className={`px-1.5 py-0.5 rounded border font-medium ${
                           proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
                           proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
                           proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
-                          "bg-slate-100 text-slate-700 border-slate-200"
+                          "bg-slate-50 text-slate-600 border-slate-200"
                         }`}>
                           ● {proj.status}
                         </span>
-                        <span className="px-2 py-0.5 rounded-md border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
+                        <span className="px-1.5 py-0.5 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
                           ● {proj.health}
                         </span>
-                        <Flag size={11} className="text-slate-300 ml-auto" />
+                        <Flag size={10} className="text-slate-300 ml-auto" />
                       </div>
 
                       {/* Progress bar */}
-                      <div className="flex flex-col gap-1 pt-0.5">
-                        <div className="flex items-center justify-between text-[10px] text-[#64748B]">
+                      <div className="flex flex-col gap-0.5 pt-0.5">
+                        <div className="flex items-center justify-between text-[9.5px] text-[#64748B]">
                           <span>{proj.tasksLabel}</span>
-                          <span className="font-mono font-bold text-[#0F172A]">{proj.progress}%</span>
+                          <span className="font-mono text-[9.5px] font-medium text-[#0F172A]">{proj.progress}%</span>
                         </div>
-                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full ${proj.progress === 100 ? "bg-[#16A34A]" : "bg-blue-600"}`}
                             style={{ width: `${proj.progress}%` }}
@@ -1420,20 +1421,20 @@ export default function HeroAppWindow() {
                         </div>
                       </div>
 
-                      {/* Inner mini-metrics box matching Screenshot 11 */}
-                      <div className="p-2 bg-[#F8FAFC] border border-[#F1F5F9] rounded-lg grid grid-cols-3 gap-1 text-[9px] font-mono">
+                      {/* Inner mini-metrics box */}
+                      <div className="p-1.5 bg-[#F8FAFC] border border-[#F1F5F9] rounded-lg grid grid-cols-3 gap-1 text-[8.5px] font-mono">
                         <div>
-                          <span className="text-[#94A3B8] block text-[8px] uppercase">OPEN TASKS</span>
-                          <span className="font-bold text-[#0F172A]">{proj.openTasks}</span>
+                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">OPEN TASKS</span>
+                          <span className="font-medium text-[#0F172A]">{proj.openTasks}</span>
                         </div>
                         <div>
-                          <span className="text-[#94A3B8] block text-[8px] uppercase">LATE TASKS</span>
-                          <span className="font-bold text-[#0F172A]">{proj.lateTasks}</span>
+                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">LATE TASKS</span>
+                          <span className="font-medium text-[#0F172A]">{proj.lateTasks}</span>
                         </div>
                         <div>
-                          <span className="text-[#94A3B8] block text-[8px] uppercase">ACTIVITY</span>
-                          <span className="font-semibold text-[#0F172A] flex items-center gap-1">
-                            <span className={`text-[6px] ${proj.activityColor}`}>●</span>
+                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">ACTIVITY</span>
+                          <span className="font-normal text-[#0F172A] flex items-center gap-0.5 truncate">
+                            <span className={`text-[5px] ${proj.activityColor}`}>●</span>
                             <span>{proj.activity}</span>
                           </span>
                         </div>
@@ -1441,12 +1442,12 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card Footer: Avatar + Due Date */}
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-[#64748B]">
-                      <div className="w-5 h-5 rounded-full bg-slate-700 text-white text-[8.5px] font-bold flex items-center justify-center">
+                    <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[9px] text-[#64748B]">
+                      <div className="w-4 h-4 rounded-full bg-slate-700 text-white text-[7.5px] font-semibold flex items-center justify-center">
                         {proj.avatar}
                       </div>
-                      <span className="font-mono text-[9.5px] text-[#94A3B8] flex items-center gap-1">
-                        <Calendar size={10} /> {proj.date}
+                      <span className="font-mono text-[8.5px] text-[#94A3B8] flex items-center gap-1">
+                        <Calendar size={9} /> {proj.date}
                       </span>
                     </div>
                   </div>
@@ -1547,18 +1548,18 @@ export default function HeroAppWindow() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-medium text-[#475569]">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-normal text-[#475569]">
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    ⚡ Plan my day
+                    <Zap size={11} className="text-amber-500" /> Plan my day
                   </span>
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    🪄 Unblock overdue
+                    <AlertTriangle size={11} className="text-slate-500" /> Unblock overdue
                   </span>
                   <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    📈 Summarize week
+                    <TrendingUp size={11} className="text-slate-500" /> Summarize week
                   </span>
-                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-semibold">
-                    ✨ Workload briefing ▾
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-medium">
+                    <Sparkles size={11} className="text-blue-600" /> Workload briefing <ChevronDown size={10} />
                   </span>
                 </div>
               </div>
@@ -1761,112 +1762,250 @@ export default function HeroAppWindow() {
                 </div>
               )}
 
-              {/* TASK VIEW MODE: KANBAN BOARD (Screenshot 20) */}
+              {/* TASK VIEW MODE: KANBAN BOARD (100% IDENTICAL TO CROPPED SCREENSHOTS) */}
               {taskViewMode === "board" && (
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 animate-fadeIn">
                   {/* Column 1: TO DO (2) */}
-                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-slate-300 rounded-2xl p-2.5 flex flex-col gap-2.5">
+                    {/* Header */}
+                    <div className="flex items-center justify-between text-xs pb-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-slate-400" />
-                        <span>TO DO</span>
-                        <span className="text-[10px] font-mono text-[#64748B]">2</span>
-                      </div>
-                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
-                    </div>
-
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-2">
-                      <span className="font-bold text-xs text-[#0F172A]">Brand Identity Guidelines & Asset Library</span>
-                      <div className="flex items-center justify-between text-[10px]">
-                        <span className="text-amber-600 font-medium flex items-center gap-1">
-                          <Flag size={9} /> Medium
+                        <span className="px-2 py-0.5 rounded-full border border-slate-300 bg-white font-mono text-[10px] font-medium text-slate-700 flex items-center gap-1">
+                          <span className="w-2.5 h-2.5 rounded-full border border-slate-400" />
+                          TO DO
                         </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">2</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-400">
+                        <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                        <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
+                    {/* Card 1: Task Ultron */}
                     <div
                       ref={taskCardRef}
-                      className="p-3 bg-white border border-blue-400 rounded-xl shadow-xs ring-2 ring-blue-500/10 flex flex-col gap-2"
+                      className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5"
                     >
-                      <span className="font-bold text-xs text-[#0F172A]">Deploy Client Portal Custom Domain SSL</span>
-                      <div className="flex items-center gap-1.5 text-[9.5px]">
-                        <span className="text-red-600 font-bold flex items-center gap-1 bg-red-50 px-1.5 py-0.2 rounded border border-red-200">
-                          <Flag size={9} /> Urgent
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
+                        Task Ultron
+                      </h4>
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-amber-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Medium
                         </span>
-                        <span className="text-blue-600 font-medium bg-blue-50 px-1.5 py-0.2 rounded">
-                          ● Client Onboarding
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Oct 15
                         </span>
                       </div>
-                      <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-[10px] text-[#64748B]">
-                        <div className="w-4 h-4 rounded-full bg-slate-800 text-white text-[8px] font-bold flex items-center justify-center">
+                      {/* Subtask checklist progress bar */}
+                      <div className="flex items-center gap-2 text-slate-400 pt-0.5">
+                        <CheckSquare size={12} className="text-slate-500 shrink-0" />
+                        <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-600 rounded-full w-1/2" />
+                        </div>
+                        <span className="font-mono text-[10px] text-slate-500 shrink-0">1/2</span>
+                      </div>
+                      {/* Card footer: avatar, attachments/check count & arrow */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
                           AM
                         </div>
-                        <span className="flex items-center gap-0.5 text-[#94A3B8]">
-                          <Paperclip size={9} /> 1
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
+                            <CheckSquare size={11} className="text-slate-400" /> 3
+                          </span>
+                          <ArrowRight size={12} className="text-slate-400" />
+                        </div>
                       </div>
                     </div>
 
-                    <button className="p-2 border border-dashed border-slate-300 rounded-xl text-[11px] text-[#64748B] hover:bg-white text-center">
-                      + Add task
+                    {/* Card 2: Move Sdarr Site */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
+                        Move Sdarr Site
+                      </h4>
+                      <div className="flex items-center gap-1.5 text-[10.5px]">
+                        <span className="text-red-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                        <span>Internal Tasks</span>
+                      </div>
+                      {/* Card footer: avatar, attachments count & arrow */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          AM
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
+                            <Paperclip size={11} className="text-slate-400" /> 1
+                          </span>
+                          <ArrowRight size={12} className="text-slate-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
+                      <Plus size={12} /> Add task
                     </button>
                   </div>
 
                   {/* Column 2: IN PROGRESS (0) */}
-                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-blue-500" />
-                        <span>IN PROGRESS</span>
-                        <span className="text-[10px] font-mono text-[#64748B]">0</span>
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-blue-500 rounded-2xl p-2.5 flex flex-col justify-between min-h-[300px]">
+                    <div>
+                      {/* Header */}
+                      <div className="flex items-center justify-between text-xs pb-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="px-2 py-0.5 rounded-full border border-blue-200 bg-blue-50/80 font-mono text-[10px] font-medium text-blue-700 flex items-center gap-1">
+                            <Clock size={10} className="text-blue-600" />
+                            IN PROGRESS
+                          </span>
+                          <span className="text-[11px] font-mono text-[#64748B]">0</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-400">
+                          <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                          <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
+                        </div>
                       </div>
-                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
+
+                      <div className="py-14 text-center text-xs text-slate-400">
+                        Drop tasks here
+                      </div>
                     </div>
 
-                    <div className="p-6 border border-dashed border-slate-300 rounded-xl text-center text-xs text-[#94A3B8]">
-                      Drop tasks here
-                    </div>
+                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
+                      <Plus size={12} /> Add task
+                    </button>
                   </div>
 
                   {/* Column 3: IN REVIEW (0) */}
-                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-amber-500" />
-                        <span>IN REVIEW</span>
-                        <span className="text-[10px] font-mono text-[#64748B]">0</span>
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-amber-500 rounded-2xl p-2.5 flex flex-col justify-between min-h-[300px]">
+                    <div>
+                      {/* Header */}
+                      <div className="flex items-center justify-between text-xs pb-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="px-2 py-0.5 rounded-full border border-amber-200 bg-amber-50/80 font-mono text-[10px] font-medium text-amber-700 flex items-center gap-1">
+                            <Clock size={10} className="text-amber-600" />
+                            IN REVIEW
+                          </span>
+                          <span className="text-[11px] font-mono text-[#64748B]">0</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-400">
+                          <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                          <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
+                        </div>
                       </div>
-                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
+
+                      <div className="py-14 text-center text-xs text-slate-400">
+                        Drop tasks here
+                      </div>
                     </div>
 
-                    <div className="p-6 border border-dashed border-slate-300 rounded-xl text-center text-xs text-[#94A3B8]">
-                      Drop tasks here
-                    </div>
+                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
+                      <Plus size={12} /> Add task
+                    </button>
                   </div>
 
                   {/* Column 4: DONE (101) */}
-                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-emerald-500 rounded-2xl p-2.5 flex flex-col gap-2.5">
+                    {/* Header */}
+                    <div className="flex items-center justify-between text-xs pb-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span>DONE</span>
-                        <span className="text-[10px] font-mono text-[#64748B]">101</span>
+                        <span className="px-2 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 font-mono text-[10px] font-medium text-emerald-700 flex items-center gap-1">
+                          <CheckCircle2 size={10} className="text-emerald-600" />
+                          DONE
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">101</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-400">
+                        <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                        <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-1.5 opacity-80">
-                      <span className="font-bold text-xs text-[#0F172A]">TCT Deliverable Finalization</span>
-                      <div className="flex items-center justify-between text-[10px] text-[#64748B]">
-                        <span className="text-amber-600 font-medium">Medium</span>
-                        <span className="font-mono">Mar 25</span>
+                    {/* Card 1: TCT Task */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
+                        TCT Task
+                      </h4>
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-amber-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Medium
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Mar 25
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                        <span>Internal Tasks</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          AM
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
+                            <Paperclip size={11} className="text-slate-400" /> 1
+                          </span>
+                          <ArrowRight size={12} className="text-slate-400" />
+                        </div>
                       </div>
                     </div>
 
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-1.5 opacity-80">
-                      <span className="font-bold text-xs text-[#0F172A]">Monthly Maintenance March</span>
-                      <div className="flex items-center justify-between text-[10px] text-[#64748B]">
-                        <span className="text-red-600 font-medium">Urgent</span>
-                        <span className="font-mono">Mar 30</span>
+                    {/* Card 2: Maintenance March */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
+                        Maintenance March
+                      </h4>
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-red-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Mar 30
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                        <span>Website Maintenance</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          AM
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400" />
+                      </div>
+                    </div>
+
+                    {/* Card 3: AI connector Test */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
+                        AI connector Test
+                      </h4>
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-amber-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Medium
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Apr 17
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                        <span>Internal Tasks</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          AM
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400" />
                       </div>
                     </div>
                   </div>
