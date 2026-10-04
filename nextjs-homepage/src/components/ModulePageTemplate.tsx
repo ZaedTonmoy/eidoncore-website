@@ -72,7 +72,10 @@ export default function ModulePageTemplate({
   customSection,
   useBlendedImages,
 }: ModulePageProps) {
-  const isBlended = useBlendedImages || name.toLowerCase() === "projects";
+  const isBlended =
+    useBlendedImages ||
+    name.toLowerCase() === "projects" ||
+    name.toLowerCase() === "tasks";
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />
