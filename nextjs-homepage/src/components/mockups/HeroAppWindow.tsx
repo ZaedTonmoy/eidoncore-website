@@ -1068,13 +1068,22 @@ export default function HeroAppWindow() {
                       <span className="text-2xl font-extrabold text-[#0F172A]">11</span>
                       <span className="text-xs text-[#64748B]">in delivery</span>
                     </div>
-                    {/* Multi-segment bar */}
+                    {/* Multi-segment bar matching exact screenshot 11 proportions */}
                     <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
-                      <div className="w-[30%] bg-slate-400" />
-                      <div className="w-[45%] bg-blue-500" />
-                      <div className="w-[10%] bg-amber-500" />
-                      <div className="w-[10%] bg-emerald-500" />
-                      <div className="w-[5%] bg-red-500" />
+                      <div className="w-[28%] bg-slate-400" />
+                      <div className="w-[50%] bg-blue-600" />
+                      <div className="w-[5%] bg-cyan-400" />
+                      <div className="w-[9%] bg-amber-500" />
+                      <div className="w-[4%] bg-emerald-500" />
+                      <div className="w-[4%] bg-rose-500" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[9px] text-[#64748B] font-mono mt-2 pt-1 border-t border-slate-50">
+                      <span>• Not Started 6</span>
+                      <span>• In Progress 11</span>
+                      <span>• In Review 0</span>
+                      <span>• On Hold 2</span>
+                      <span>• Completed 1</span>
+                      <span>• Cancelled 1</span>
                     </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] flex items-center justify-between border-t border-slate-100 mt-2">
@@ -1086,8 +1095,8 @@ export default function HeroAppWindow() {
                 {/* 2. Delivered */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <CheckCircle2 size={11} className="text-emerald-500" /> Delivered
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <CheckCircle2 size={12} className="text-emerald-500" /> Delivered
                     </span>
                     <div className="mt-2">
                       <span className="text-2xl font-extrabold text-[#0F172A]">1</span>
@@ -1101,13 +1110,13 @@ export default function HeroAppWindow() {
                 {/* 3. Operational Stability */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <Clock size={11} className="text-blue-500" /> Operational stability
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <Clock size={12} className="text-blue-500" /> Operational stability
                     </span>
                     <div className="mt-2">
                       <span className="text-2xl font-extrabold text-[#0F172A]">100%</span>
                     </div>
-                    <div className="h-1.5 w-full bg-blue-500 rounded-full mt-2" />
+                    <div className="h-1.5 w-full bg-blue-500 rounded-full mt-2.5" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     21 of 21 projects clear of risk
@@ -1117,8 +1126,8 @@ export default function HeroAppWindow() {
                 {/* 4. Needs Attention */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <AlertTriangle size={11} className="text-amber-500" /> Needs Attention
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <AlertTriangle size={12} className="text-amber-500" /> Needs Attention
                     </span>
                     <div className="mt-2">
                       <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
@@ -1211,13 +1220,13 @@ export default function HeroAppWindow() {
                   <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`px-2 py-1 rounded ${projectViewMode === "cards" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "cards" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
                     >
                       <Columns3 size={12} className="inline mr-1" /> Card view
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`px-2 py-1 rounded ${projectViewMode === "table" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "table" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
                     >
                       <List size={12} className="inline mr-1" /> Table view
                     </button>
@@ -1229,115 +1238,148 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* 8 Projects Cards Grid (4 cols x 2 rows) */}
+              {/* 8 Projects Cards Grid (4 cols x 2 rows) - Authentic Screenshot 11 Layout */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
                   {
                     ref: projectCardRef,
                     init: "SA",
-                    color: "bg-blue-50 text-blue-600 border-blue-200",
+                    color: "bg-blue-600 text-white",
                     client: "Apex Architecture",
                     title: "Apex Architecture — Custom Website & Portfolio",
                     status: "Not Started",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "25d ago",
+                    activityColor: "text-red-500",
+                    avatar: "TS",
                     date: "No deadline",
                   },
                   {
                     init: "CC",
-                    color: "bg-emerald-50 text-emerald-600 border-emerald-200",
+                    color: "bg-emerald-600 text-white",
                     client: "Creative Core LLC",
                     title: "Enterprise E-Commerce Platform Rebrand",
                     status: "Not Started",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "25d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
                     date: "No deadline",
                   },
                   {
                     init: "CU",
-                    color: "bg-teal-50 text-teal-600 border-teal-200",
+                    color: "bg-teal-600 text-white",
                     client: "CloudScale Unit",
                     title: "SaaS Infrastructure & Design System",
                     status: "Not Started",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "25d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
                     date: "No deadline",
                   },
                   {
                     init: "WM",
-                    color: "bg-indigo-50 text-indigo-600 border-indigo-200",
+                    color: "bg-indigo-600 text-white",
                     client: "Wave Media LLC",
                     title: "Website Maintenance Retainer & SLA",
                     status: "Completed",
                     health: "On Track",
-                    tasks: "2/2 tasks",
+                    tasksLabel: "2/2 tasks",
                     progress: 100,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "13d ago",
+                    activityColor: "text-red-500",
+                    avatar: "TS",
                     date: "Apr 29",
                   },
                   {
                     init: "RH",
-                    color: "bg-rose-50 text-rose-600 border-rose-200",
+                    color: "bg-rose-600 text-white",
                     client: "Riviera Homes",
                     title: "Dedicated Cloud VPS Hosting & Backups",
                     status: "Not Started",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "43d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
                     date: "No deadline",
                   },
                   {
                     init: "WS",
-                    color: "bg-red-50 text-red-600 border-red-200",
+                    color: "bg-red-600 text-white",
                     client: "WebCraft Studios",
                     title: "Headless WordPress & Next.js Migration",
                     status: "Not Started",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "159d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
                     date: "No deadline",
                   },
                   {
                     init: "SO",
-                    color: "bg-emerald-50 text-emerald-600 border-emerald-200",
+                    color: "bg-emerald-600 text-white",
                     client: "Skyline Media",
                     title: "Client Portal & Analytics Dashboard",
                     status: "In Progress",
                     health: "On Track",
-                    tasks: "7/7 tasks",
+                    tasksLabel: "7/7 tasks",
                     progress: 100,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "Today",
+                    activityColor: "text-emerald-500",
+                    avatar: "TS",
                     date: "No deadline",
                   },
                   {
                     init: "ZT",
-                    color: "bg-amber-50 text-amber-600 border-amber-200",
+                    color: "bg-amber-600 text-white",
                     client: "Zenith Tech",
                     title: "Mobile Application QA & Testing Suite",
                     status: "On Hold",
                     health: "On Track",
-                    tasks: "No tasks yet",
+                    tasksLabel: "No tasks yet",
                     progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
                     activity: "161d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
                     date: "No deadline",
                   },
                 ].map((proj, idx) => (
                   <div
                     key={idx}
                     ref={proj.ref}
-                    className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-2.5"
+                    className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-3"
                   >
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2.5">
+                      {/* Avatar + Client & Title */}
                       <div className="flex items-start gap-2.5">
-                        <div className={`w-7 h-7 rounded-lg ${proj.color} border font-bold text-xs flex items-center justify-center shrink-0`}>
+                        <div className={`w-8 h-8 rounded-full ${proj.color} font-bold text-xs flex items-center justify-center shrink-0`}>
                           {proj.init}
                         </div>
                         <div className="min-w-0">
@@ -1348,8 +1390,9 @@ export default function HeroAppWindow() {
                         </div>
                       </div>
 
+                      {/* Status + Health + Flag row */}
                       <div className="flex items-center gap-1.5 text-[9.5px]">
-                        <span className={`px-1.5 py-0.2 rounded border font-medium ${
+                        <span className={`px-2 py-0.5 rounded-md border font-medium ${
                           proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
                           proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
                           proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
@@ -1357,40 +1400,54 @@ export default function HeroAppWindow() {
                         }`}>
                           ● {proj.status}
                         </span>
-                        <span className="px-1.5 py-0.2 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
+                        <span className="px-2 py-0.5 rounded-md border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
                           ● {proj.health}
                         </span>
-                        <Flag size={9} className="text-slate-400 ml-auto" />
+                        <Flag size={11} className="text-slate-300 ml-auto" />
                       </div>
 
-                      <div className="flex flex-col gap-1 pt-1">
+                      {/* Progress bar */}
+                      <div className="flex flex-col gap-1 pt-0.5">
                         <div className="flex items-center justify-between text-[10px] text-[#64748B]">
-                          <span>{proj.tasks}</span>
-                          <span className="font-mono font-bold">{proj.progress}%</span>
+                          <span>{proj.tasksLabel}</span>
+                          <span className="font-mono font-bold text-[#0F172A]">{proj.progress}%</span>
                         </div>
-                        <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${proj.progress === 100 ? "bg-emerald-500" : "bg-blue-500"}`}
+                            className={`h-full rounded-full ${proj.progress === 100 ? "bg-[#16A34A]" : "bg-blue-600"}`}
                             style={{ width: `${proj.progress}%` }}
                           />
                         </div>
                       </div>
+
+                      {/* Inner mini-metrics box matching Screenshot 11 */}
+                      <div className="p-2 bg-[#F8FAFC] border border-[#F1F5F9] rounded-lg grid grid-cols-3 gap-1 text-[9px] font-mono">
+                        <div>
+                          <span className="text-[#94A3B8] block text-[8px] uppercase">OPEN TASKS</span>
+                          <span className="font-bold text-[#0F172A]">{proj.openTasks}</span>
+                        </div>
+                        <div>
+                          <span className="text-[#94A3B8] block text-[8px] uppercase">LATE TASKS</span>
+                          <span className="font-bold text-[#0F172A]">{proj.lateTasks}</span>
+                        </div>
+                        <div>
+                          <span className="text-[#94A3B8] block text-[8px] uppercase">ACTIVITY</span>
+                          <span className="font-semibold text-[#0F172A] flex items-center gap-1">
+                            <span className={`text-[6px] ${proj.activityColor}`}>●</span>
+                            <span>{proj.activity}</span>
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-100 flex flex-col gap-1 text-[9.5px] text-[#64748B]">
-                      <div className="flex items-center justify-between font-mono">
-                        <span>OPEN TASKS 0</span>
-                        <span>LATE 0</span>
-                        <span className="text-[#0F172A] font-semibold">● {proj.activity}</span>
+                    {/* Card Footer: Avatar + Due Date */}
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-[#64748B]">
+                      <div className="w-5 h-5 rounded-full bg-slate-700 text-white text-[8.5px] font-bold flex items-center justify-center">
+                        {proj.avatar}
                       </div>
-                      <div className="flex items-center justify-between text-[#94A3B8] pt-1">
-                        <div className="w-4 h-4 rounded-full bg-slate-200 text-slate-700 text-[8px] font-bold flex items-center justify-center">
-                          AM
-                        </div>
-                        <span className="font-mono text-[9px] flex items-center gap-1">
-                          <Calendar size={9} /> {proj.date}
-                        </span>
-                      </div>
+                      <span className="font-mono text-[9.5px] text-[#94A3B8] flex items-center gap-1">
+                        <Calendar size={10} /> {proj.date}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -1405,7 +1462,7 @@ export default function HeroAppWindow() {
               
               {/* 4 Top Metric Cards (Matching Screenshot 19) */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {/* 1. Active Work */}
+                {/* 1. Active Work - 98% completion rate with predominantly green bar */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold">ACTIVE WORK</span>
@@ -1413,27 +1470,28 @@ export default function HeroAppWindow() {
                       <span className="text-2xl font-extrabold text-[#0F172A]">2</span>
                       <span className="text-xs text-[#64748B]">open tasks</span>
                     </div>
-                    {/* Segmented bar */}
+                    {/* Segmented bar: 98% green (completed) and 2% slate (open) matching screenshot 19 */}
                     <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
-                      <div className="w-[15%] bg-emerald-500" />
-                      <div className="w-[85%] bg-slate-200" />
+                      <div className="w-[98%] bg-emerald-500" />
+                      <div className="w-[2%] bg-slate-400" />
                     </div>
-                    <div className="flex items-center gap-2 text-[9.5px] text-[#64748B] pt-1.5 font-mono">
+                    <div className="flex items-center gap-2 text-[9px] text-[#64748B] pt-1.5 font-mono">
                       <span>• To Do 2</span>
                       <span>• In Progress 0</span>
+                      <span>• In Review 0</span>
                       <span>• Done 101</span>
                     </div>
                   </div>
-                  <div className="pt-2 text-[9px] text-[#94A3B8] border-t border-slate-100 mt-2">
-                    103 tasks in view · 98% completion rate
+                  <div className="pt-2 text-[9px] text-[#94A3B8] border-t border-slate-100 mt-2 truncate">
+                    103 tasks in view · 0 done this week · 98% completion rate · avg 629h to complete
                   </div>
                 </div>
 
                 {/* 2. Overdue */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <AlertTriangle size={11} className="text-amber-500" /> Overdue
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <AlertTriangle size={12} className="text-amber-500" /> Overdue
                     </span>
                     <div className="mt-1">
                       <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
@@ -1447,8 +1505,8 @@ export default function HeroAppWindow() {
                 {/* 3. Due Today */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <Clock size={11} className="text-blue-500" /> Due Today
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <Clock size={12} className="text-blue-500" /> Due Today
                     </span>
                     <div className="mt-1">
                       <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
@@ -1462,8 +1520,8 @@ export default function HeroAppWindow() {
                 {/* 4. Due This Week */}
                 <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
-                      <Calendar size={11} className="text-indigo-500" /> Due This Week
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
+                      <Calendar size={12} className="text-indigo-500" /> Due This Week
                     </span>
                     <div className="mt-1">
                       <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
@@ -1505,7 +1563,7 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* Toolbar & Filters */}
+              {/* Toolbar & Filters (Matching Screenshot 19) */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-1 text-xs">
                   <button
@@ -1670,7 +1728,19 @@ export default function HeroAppWindow() {
                     <div className="flex items-center gap-2">
                       <ChevronRight size={14} className="text-[#94A3B8]" />
                       <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-mono text-[10px]">
-                        IN PROGRESS
+                        🕒 IN PROGRESS
+                      </span>
+                      <span className="text-[11px] font-mono text-[#94A3B8]">0</span>
+                    </div>
+                    <span className="text-[11px] text-[#94A3B8]">No tasks</span>
+                  </div>
+
+                  {/* GROUP: IN REVIEW (0) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
+                    <div className="flex items-center gap-2">
+                      <ChevronRight size={14} className="text-[#94A3B8]" />
+                      <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full font-mono text-[10px]">
+                        🕒 IN REVIEW
                       </span>
                       <span className="text-[11px] font-mono text-[#94A3B8]">0</span>
                     </div>
@@ -1682,7 +1752,7 @@ export default function HeroAppWindow() {
                     <div className="flex items-center gap-2">
                       <ChevronRight size={14} className="text-[#94A3B8]" />
                       <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-mono text-[10px]">
-                        DONE
+                        ✓ DONE
                       </span>
                       <span className="text-[11px] font-mono text-[#94A3B8]">101</span>
                     </div>
