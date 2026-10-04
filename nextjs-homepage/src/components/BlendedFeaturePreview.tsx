@@ -46,6 +46,7 @@ export default function BlendedFeaturePreview({
   featureIndex,
 }: BlendedFeaturePreviewProps) {
   // Live animated state for Tasks features
+  const [activeTaskView, setActiveTaskView] = useState<"board" | "list">("board");
   const [checklistChecked, setChecklistChecked] = useState(false);
   const [subtaskChecked, setSubtaskChecked] = useState(false);
   const [subtask3Checked, setSubtask3Checked] = useState(false);
@@ -73,6 +74,14 @@ export default function BlendedFeaturePreview({
       }, 3000);
     }, 5000);
     return () => clearInterval(cycle);
+  }, []);
+
+  // Automated gentle switching between Board and List view for Feature 01
+  useEffect(() => {
+    const viewInterval = setInterval(() => {
+      setActiveTaskView((prev) => (prev === "board" ? "list" : "board"));
+    }, 4000);
+    return () => clearInterval(viewInterval);
   }, []);
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {

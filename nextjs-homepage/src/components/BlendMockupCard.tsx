@@ -11,24 +11,30 @@ import React from "react";
 type BlendMockupCardProps = {
   children: React.ReactNode;
   className?: string; // set background color, padding, rounded corners here
+  disableMask?: boolean;
 };
 
 export default function BlendMockupCard({
   children,
   className = "",
+  disableMask = false,
 }: BlendMockupCardProps) {
   return (
     <div
       className={`relative ${className}`}
-      style={{
-        // Center of the card stays fully visible.
-        // Toward the edges it fades to transparent (both -webkit and
-        // standard versions needed for browser support).
-        WebkitMaskImage:
-          "radial-gradient(ellipse 85% 80% at 50% 45%, black 45%, transparent 92%)",
-        maskImage:
-          "radial-gradient(ellipse 85% 80% at 50% 45%, black 45%, transparent 92%)",
-      }}
+      style={
+        disableMask
+          ? undefined
+          : {
+              // Center of the card stays fully visible.
+              // Toward the edges it fades to transparent (both -webkit and
+              // standard versions needed for browser support).
+              WebkitMaskImage:
+                "radial-gradient(ellipse 85% 80% at 50% 45%, black 45%, transparent 92%)",
+              maskImage:
+                "radial-gradient(ellipse 85% 80% at 50% 45%, black 45%, transparent 92%)",
+            }
+      }
     >
       {children}
     </div>

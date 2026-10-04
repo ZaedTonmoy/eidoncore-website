@@ -1054,53 +1054,54 @@ export default function HeroAppWindow() {
           {currentView === "projects" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
               
-              {/* Top 4 Metrics Cards */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {/* Top 4 Metrics Cards - Continuous card container with dividers */}
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-xs grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0] overflow-hidden">
                 {/* 1. Active Delivery */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold">ACTIVE DELIVERY</span>
-                      <span className="text-[9.5px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
-                        ● All on track
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">ACTIVE DELIVERY</span>
+                      <span className="text-[9.5px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> All on track
                       </span>
                     </div>
-                    <div className="mt-2 flex items-baseline gap-1.5">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">11</span>
+                    <div className="mt-2.5 flex items-baseline gap-1.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">11</span>
                       <span className="text-xs text-[#64748B]">in delivery</span>
                     </div>
-                    {/* Multi-segment bar matching exact screenshot 11 proportions */}
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
-                      <div className="w-[28%] bg-slate-400" />
-                      <div className="w-[50%] bg-blue-600" />
-                      <div className="w-[5%] bg-cyan-400" />
-                      <div className="w-[9%] bg-amber-500" />
-                      <div className="w-[4%] bg-emerald-500" />
-                      <div className="w-[4%] bg-rose-500" />
+                    {/* Multi-segment bar */}
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-3">
+                      <div className="w-[32%] bg-slate-500" />
+                      <div className="w-[45%] bg-blue-600" />
+                      <div className="w-[8%] bg-amber-500" />
+                      <div className="w-[5%] bg-emerald-500" />
+                      <div className="w-[10%] bg-rose-500" />
                     </div>
-                    <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[9px] text-[#64748B] font-mono mt-2 pt-1 border-t border-slate-50">
-                      <span>• Not Started 6</span>
-                      <span>• In Progress 11</span>
-                      <span>• In Review 0</span>
-                      <span>• On Hold 2</span>
-                      <span>• Completed 1</span>
-                      <span>• Cancelled 1</span>
+                    <div className="grid grid-cols-3 gap-x-2 gap-y-1 text-[9px] text-[#64748B] mt-2.5 pt-1">
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> Not Started <b>6</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> In Progress <b>11</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> In Review <b>0</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> On Hold <b>2</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Completed <b>1</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-rose-500" /> Cancelled <b>1</b></span>
                     </div>
                   </div>
-                  <div className="pt-2 text-[9.5px] text-[#64748B] flex items-center justify-between border-t border-slate-100 mt-2">
-                    <span>21 projects</span>
-                    <span>5% delivered</span>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2 font-medium">
+                    <b>21 projects</b> · 5% delivered
                   </div>
                 </div>
 
                 {/* 2. Delivered */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <CheckCircle2 size={12} className="text-emerald-500" /> Delivered
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <CheckCircle2 size={13} className="text-emerald-600" /> Delivered
                     </span>
-                    <div className="mt-2">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">1</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">1</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                      <div className="w-[5%] bg-emerald-500 h-full rounded-full" />
                     </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
@@ -1109,15 +1110,15 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* 3. Operational Stability */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <Clock size={12} className="text-blue-500" /> Operational stability
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <Clock size={13} className="text-blue-600" /> Operational stability
                     </span>
-                    <div className="mt-2">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">100%</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">100%</span>
                     </div>
-                    <div className="h-1.5 w-full bg-blue-500 rounded-full mt-2.5" />
+                    <div className="h-1.5 w-full bg-blue-600 rounded-full mt-3" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     21 of 21 projects clear of risk
@@ -1125,14 +1126,15 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* 4. Needs Attention */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <AlertTriangle size={12} className="text-amber-500" /> Needs Attention
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <AlertTriangle size={13} className="text-slate-400" /> Needs Attention
                     </span>
-                    <div className="mt-2">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
                     </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     No delivery risks flagged
@@ -1141,99 +1143,125 @@ export default function HeroAppWindow() {
               </div>
 
               {/* AI Delivery Insight Banner */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200 shrink-0">
-                    <Sparkles size={12} />
+                  <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
+                    <Sparkles size={13} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold text-[#0F172A]">Delivery insight</span>
-                      <span className="text-[9.5px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                      <span className="text-[9.5px] text-emerald-700 font-medium bg-emerald-50 px-2 py-0.2 rounded-full border border-emerald-200">
                         ● All on track
                       </span>
                     </div>
                     <span className="text-[10.5px] text-[#64748B]">
-                      11 active of 21 projects, 1 delivered. No delivery risks flagged right now.
+                      <b>11 active</b> of 21 projects, 1 delivered. No delivery risks flagged right now.
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-normal text-[#475569]">
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
                     <AlertTriangle size={11} className="text-amber-500" /> Roadblock audit
                   </span>
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
                     <CheckSquare size={11} className="text-slate-500" /> Task velocity
                   </span>
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
                     <ArrowRight size={11} className="text-slate-500" /> Milestone catch-up
                   </span>
-                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-medium">
-                    <Sparkles size={11} className="text-blue-600" /> Delivery briefing <ChevronDown size={10} />
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 font-medium text-slate-800">
+                    <Sparkles size={11} className="text-slate-700" /> Delivery briefing <ChevronDown size={10} className="text-slate-400" />
                   </span>
                 </div>
               </div>
 
-              {/* Toolbar & Filter Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center gap-1 text-xs">
+              {/* Toolbar & Filter Bar - Underline tabs & icon tools matching screenshot */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                <div className="flex items-center gap-4 text-xs border-b border-transparent">
                   <button
                     onClick={() => setActiveProjectTab("all")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeProjectTab === "all" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    All Projects <span className="font-mono text-[10px] ml-1">21</span>
+                    <span>All Projects</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-blue-50 text-blue-700 font-semibold">21</span>
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("active")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "active" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeProjectTab === "active" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Active delivery <span className="font-mono text-[10px] ml-1">11</span>
+                    <span>Active delivery</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">11</span>
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("attention")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "attention" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 ${
+                      activeProjectTab === "attention" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
                     Needs Attention
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("delivered")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeProjectTab === "delivered" ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeProjectTab === "delivered" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Delivered <span className="font-mono text-[10px] ml-1">1</span>
+                    <span>Delivered</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">1</span>
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B]">
-                    <Search size={11} className="text-[#94A3B8]" />
-                    <span className="text-[10.5px]">Search projects... /</span>
+                  {/* Rounded search pill */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                    <Search size={12} className="text-[#94A3B8]" />
+                    <span className="text-[11px] text-[#94A3B8]">Search projects...</span>
+                    <kbd className="text-[9px] font-mono bg-slate-100 text-slate-500 px-1 rounded ml-1">/</kbd>
                   </div>
 
-                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
+                  {/* Icon tools: Check, Flag, Users */}
+                  <div className="flex items-center gap-1 text-slate-400">
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <CheckCircle2 size={15} />
+                    </button>
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <Flag size={15} />
+                    </button>
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <Users size={15} />
+                    </button>
+                  </div>
+
+                  {/* Segmented view pill toggle: Card view | Table view | Board */}
+                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "cards" ? "bg-slate-100 font-semibold text-[#0F172A]" : ""}`}
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] ${
+                        projectViewMode === "cards" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      }`}
                     >
-                      <Columns3 size={12} className="inline mr-1" /> Card view
+                      <Columns3 size={11} /> Card view
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`px-2 py-1 rounded transition-colors ${projectViewMode === "table" ? "bg-slate-100 font-semibold text-[#0F172A]" : ""}`}
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] ${
+                        projectViewMode === "table" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      }`}
                     >
-                      <List size={12} className="inline mr-1" /> Table view
+                      <List size={11} /> Table view
+                    </button>
+                    <button className="px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] hover:text-slate-900">
+                      <Kanban size={11} /> Board
                     </button>
                   </div>
 
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium flex items-center gap-1">
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs">
                     <Plus size={12} /> New project <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
                   </button>
                 </div>
@@ -1461,42 +1489,43 @@ export default function HeroAppWindow() {
           {currentView === "tasks" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
               
-              {/* 4 Top Metric Cards (Matching Screenshot 19) */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {/* 1. Active Work - 98% completion rate with predominantly green bar */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+              {/* Top 4 Metrics Cards - Continuous card container matching screenshot */}
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-xs grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0] overflow-hidden">
+                {/* 1. Active Work - 4 open tasks with 96% green bar */}
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold">ACTIVE WORK</span>
-                    <div className="mt-1 flex items-baseline gap-1.5">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">2</span>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">ACTIVE WORK</span>
+                    <div className="mt-2.5 flex items-baseline gap-1.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">4</span>
                       <span className="text-xs text-[#64748B]">open tasks</span>
                     </div>
-                    {/* Segmented bar: 98% green (completed) and 2% slate (open) matching screenshot 19 */}
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
-                      <div className="w-[98%] bg-emerald-500" />
-                      <div className="w-[2%] bg-slate-400" />
+                    {/* Segmented bar: 4% grey (open) and 96% emerald green (completed) */}
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-3">
+                      <div className="w-[4%] bg-slate-400" />
+                      <div className="w-[96%] bg-emerald-500" />
                     </div>
-                    <div className="flex items-center gap-2 text-[9px] text-[#64748B] pt-1.5 font-mono">
-                      <span>• To Do 2</span>
-                      <span>• In Progress 0</span>
-                      <span>• In Review 0</span>
-                      <span>• Done 101</span>
+                    <div className="grid grid-cols-3 gap-x-2 gap-y-1 text-[9px] text-[#64748B] mt-2.5 pt-1">
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To Do <b>2</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> In Progress <b>0</b></span>
+                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> In Review <b>0</b></span>
+                      <span className="flex items-center gap-1 col-span-3"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Done <b>101</b></span>
                     </div>
                   </div>
-                  <div className="pt-2 text-[9px] text-[#94A3B8] border-t border-slate-100 mt-2 truncate">
-                    103 tasks in view · 0 done this week · 98% completion rate · avg 629h to complete
+                  <div className="pt-2 text-[9px] text-[#64748B] border-t border-slate-100 mt-2">
+                    <b>103 tasks in view</b> · 1 done this week · 96% completion rate · avg 627h to complete
                   </div>
                 </div>
 
                 {/* 2. Overdue */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <AlertTriangle size={12} className="text-amber-500" /> Overdue
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <AlertTriangle size={13} className="text-slate-400" /> Overdue
                     </span>
-                    <div className="mt-1">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
                     </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     Nothing past due
@@ -1504,14 +1533,15 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* 3. Due Today */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <Clock size={12} className="text-blue-500" /> Due Today
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <Clock size={13} className="text-amber-500" /> Due Today
                     </span>
-                    <div className="mt-1">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
                     </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     Open and due today
@@ -1519,112 +1549,149 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* 4. Due This Week */}
-                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                <div className="p-4 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1.5">
-                      <Calendar size={12} className="text-indigo-500" /> Due This Week
+                    <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
+                      <Calendar size={13} className="text-blue-500" /> Due This Week
                     </span>
-                    <div className="mt-1">
-                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    <div className="mt-2.5">
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
                     </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
-                    Open and due by end of week
+                    Open and due by the end of the week
                   </div>
                 </div>
               </div>
 
-              {/* Task Copilot Banner */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              {/* Task Copilot Banner matching screenshot */}
+              <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200 shrink-0">
-                    <Sparkles size={12} />
+                  <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
+                    <Sparkles size={13} />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#0F172A] block">Task Copilot</span>
+                    <span className="text-xs font-semibold text-[#0F172A] block">Task Copilot</span>
                     <span className="text-[10.5px] text-[#64748B]">
-                      2 active tasks: 0 overdue and 0 due today. Nothing completed yet this week.
+                      <b>4 active tasks</b>: 0 overdue and 0 due today. 1 task completed this week.
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-normal text-[#475569]">
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    <Zap size={11} className="text-amber-500" /> Plan my day
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
+                    <Zap size={11} className="text-blue-600" /> Plan my day
                   </span>
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    <AlertTriangle size={11} className="text-slate-500" /> Unblock overdue
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
+                    <Sparkles size={11} className="text-blue-600" /> Unblock overdue work
                   </span>
-                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
-                    <TrendingUp size={11} className="text-slate-500" /> Summarize week
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 text-slate-700">
+                    <TrendingUp size={11} className="text-blue-600" /> Summarize this week
                   </span>
-                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-medium">
-                    <Sparkles size={11} className="text-blue-600" /> Workload briefing <ChevronDown size={10} />
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-full hover:bg-slate-50 cursor-pointer flex items-center gap-1 font-medium text-slate-800">
+                    <Sparkles size={11} className="text-slate-700" /> Workload briefing <ChevronDown size={10} className="text-slate-400" />
                   </span>
                 </div>
               </div>
 
-              {/* Toolbar & Filters (Matching Screenshot 19) */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center gap-1 text-xs">
+              {/* Toolbar & Filters (Matching Screenshot) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                <div className="flex items-center gap-4 text-xs border-b border-transparent">
                   <button
                     onClick={() => setActiveTaskTab("all")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeTaskTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 ${
+                      activeTaskTab === "all" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
                     All tasks
                   </button>
                   <button
                     onClick={() => setActiveTaskTab("overdue")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeTaskTab === "overdue" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeTaskTab === "overdue" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Overdue <span className="font-mono text-[10px] ml-1">0</span>
+                    <span>Overdue</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">0</span>
                   </button>
                   <button
                     onClick={() => setActiveTaskTab("today")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeTaskTab === "today" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeTaskTab === "today" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Due Today <span className="font-mono text-[10px] ml-1">0</span>
+                    <span>Due Today</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">0</span>
                   </button>
                   <button
                     onClick={() => setActiveTaskTab("week")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                      activeTaskTab === "week" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    className={`pb-1 font-medium transition-colors border-b-2 flex items-center gap-1.5 ${
+                      activeTaskTab === "week" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Due This Week <span className="font-mono text-[10px] ml-1">0</span>
+                    <span>Due This Week</span>
+                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">0</span>
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B]">
-                    <Search size={11} className="text-[#94A3B8]" />
-                    <span className="text-[10.5px]">Search tasks... /</span>
+                  {/* Rounded search pill */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                    <Search size={12} className="text-[#94A3B8]" />
+                    <span className="text-[11px] text-[#94A3B8]">Search tasks...</span>
+                    <kbd className="text-[9px] font-mono bg-slate-100 text-slate-500 px-1 rounded ml-1">/</kbd>
                   </div>
 
-                  {/* View Switcher: List vs Board */}
-                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
+                  {/* Icon tools: Check, Flag, Warning, Folder */}
+                  <div className="flex items-center gap-1 text-slate-400">
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <CheckCircle2 size={15} />
+                    </button>
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <Flag size={15} />
+                    </button>
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <AlertTriangle size={15} />
+                    </button>
+                    <button className="p-1.5 hover:text-slate-700 transition-colors">
+                      <FolderKanban size={15} />
+                    </button>
+                  </div>
+
+                  {/* My Tasks Switch */}
+                  <div className="flex items-center gap-1.5 text-xs text-[#64748B] pl-1">
+                    <div className="w-8 h-4 bg-slate-200 rounded-full p-0.5 cursor-pointer flex items-center">
+                      <div className="w-3 h-3 bg-white rounded-full shadow-xs" />
+                    </div>
+                    <span className="text-[11px]">My Tasks</span>
+                  </div>
+
+                  {/* View Switcher: List | Board | Workload */}
+                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setTaskViewMode("list")}
-                      className={`px-2 py-1 rounded transition-colors ${taskViewMode === "list" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] ${
+                        taskViewMode === "list" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      }`}
                     >
-                      <List size={12} className="inline mr-1" /> List
+                      <List size={11} /> List
                     </button>
                     <button
                       ref={taskBoardToggleRef}
                       onClick={() => setTaskViewMode("board")}
-                      className={`px-2 py-1 rounded transition-colors ${taskViewMode === "board" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] ${
+                        taskViewMode === "board" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      }`}
                     >
-                      <Kanban size={12} className="inline mr-1" /> Board
+                      <Kanban size={11} /> Board
+                    </button>
+                    <button className="px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 text-[11px] hover:text-slate-900">
+                      <Users size={11} /> Workload
                     </button>
                   </div>
 
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs">
                     <Plus size={12} /> New task <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
                   </button>
                 </div>
