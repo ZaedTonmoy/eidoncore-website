@@ -2,70 +2,92 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Search,
-  Sparkles,
-  LayoutDashboard,
-  Building,
-  FileText,
   FolderKanban,
   CheckSquare,
-  Package,
-  Users,
   MessageSquare,
   Ticket,
-  Receipt,
-  CreditCard,
-  BarChart3,
-  FileSpreadsheet,
-  Bug,
-  Lock,
+  Search,
+  Sparkles,
   ArrowRight,
-  X,
-  Check,
-  RotateCw,
-  Settings,
-  ChevronLeft,
-  ChevronDown,
-  ChevronRight,
-  MoreHorizontal,
-  Plus,
-  Moon,
+  TrendingUp,
   Clock,
-  History,
-  Maximize2,
   Send,
+  Building2,
+  Users,
+  FileText,
+  DollarSign,
+  Settings,
+  ChevronDown,
+  RotateCw,
+  Lock,
+  Maximize2,
+  X,
+  History,
+  CheckCircle2,
+  HelpCircle,
   Flag,
   Calendar,
-  CheckCircle2,
+  Layers,
+  ChevronRight,
+  ShieldCheck,
+  Moon,
+  Zap,
+  Tag,
+  Paperclip,
+  Check,
+  LayoutDashboard,
+  Boxes,
+  Receipt,
+  Wallet,
+  BarChart3,
+  Inbox,
+  Bug,
+  Bell,
+  SlidersHorizontal,
+  ChevronLeft,
+  Columns3,
+  List,
+  Kanban,
+  AlertTriangle,
+  Plus,
+  RefreshCw,
+  ExternalLink,
 } from "lucide-react";
 
-export type ViewType = "dashboard" | "projects" | "tasks" | "messages" | "tickets";
-
 export default function HeroAppWindow() {
-  const [currentView, setCurrentView] = useState<ViewType>("dashboard");
-  const [copilotOpen, setCopilotOpen] = useState(true); // Open by default matching screenshot 01!
+  const [currentView, setCurrentView] = useState<
+    "dashboard" | "projects" | "tasks" | "tickets" | "messages"
+  >("dashboard");
+  const [copilotOpen, setCopilotOpen] = useState(false);
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
-  const [selectedDay, setSelectedDay] = useState<number>(4); // Oct 4
-  const [activeWorkTab, setActiveWorkTab] = useState<string>("all");
-  const [cursorPos, setCursorPos] = useState({ x: 420, y: 220, visible: true });
+  const [taskViewMode, setTaskViewMode] = useState<"list" | "board">("list");
+  const [projectViewMode, setProjectViewMode] = useState<"cards" | "table">("cards");
+  const [selectedDay, setSelectedDay] = useState(4);
+  const [activeWorkTab, setActiveWorkTab] = useState<"all" | "today" | "overdue" | "review">("all");
+  const [activeTaskTab, setActiveTaskTab] = useState<"all" | "overdue" | "today" | "week">("all");
+  const [activeProjectTab, setActiveProjectTab] = useState<"all" | "active" | "attention" | "delivered">("all");
+
+  const [cursorPos, setCursorPos] = useState({ x: 260, y: 180, visible: true });
   const [cursorClicked, setCursorClicked] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isCancelledRef = useRef(false);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
-  // Interactive targets for virtual cursor
-  const openBoardBtnRef = useRef<HTMLButtonElement>(null);
+  // Refs for virtual tour navigation
   const navProjectsRef = useRef<HTMLButtonElement>(null);
   const navTasksRef = useRef<HTMLButtonElement>(null);
   const navTicketsRef = useRef<HTMLButtonElement>(null);
-  const navMessagesRef = useRef<HTMLButtonElement>(null);
   const navDashboardRef = useRef<HTMLButtonElement>(null);
   const copilotToggleRef = useRef<HTMLButtonElement>(null);
   const copilotChipRef = useRef<HTMLButtonElement>(null);
   const copilotSendRef = useRef<HTMLButtonElement>(null);
-  const taskCardRef = useRef<HTMLTableRowElement>(null);
+  const copilotCloseRef = useRef<HTMLButtonElement>(null);
+  const taskRowRef = useRef<HTMLTableRowElement>(null);
+  const taskBoardToggleRef = useRef<HTMLButtonElement>(null);
+  const taskCardRef = useRef<HTMLDivElement>(null);
+  const projectCardRef = useRef<HTMLDivElement>(null);
 
   const clearTimeouts = () => {
     timeoutsRef.current.forEach(clearTimeout);
@@ -93,11 +115,11 @@ export default function HeroAppWindow() {
     const cRect = containerRef.current.getBoundingClientRect();
     const tRect = targetRef.current.getBoundingClientRect();
 
-    const x = tRect.left - cRect.left + tRect.width * offsetXRatio - 3;
-    const y = tRect.top - cRect.top + tRect.height * offsetYRatio - 3;
+    const x = tRect.left - cRect.left + tRect.width * offsetXRatio - 2;
+    const y = tRect.top - cRect.top + tRect.height * offsetYRatio - 2;
 
     setCursorPos({ x, y, visible: true });
-    await sleep(950);
+    await sleep(900);
   };
 
   const click = async () => {
@@ -105,86 +127,106 @@ export default function HeroAppWindow() {
     setCursorClicked(true);
     await sleep(180);
     setCursorClicked(false);
-    await sleep(100);
+    await sleep(120);
   };
 
   const startTour = async () => {
     isCancelledRef.current = false;
     clearTimeouts();
-    setCopilotOpen(true);
+    setCopilotOpen(false);
     setCopilotSubmitted(false);
     setCopilotQuery("");
+    setTaskViewMode("list");
     setCurrentView("dashboard");
 
-    setCursorPos({ x: 380, y: 220, visible: true });
-    await sleep(1400);
+    setCursorPos({ x: 340, y: 160, visible: true });
+    await sleep(1500);
 
     while (!isCancelledRef.current) {
-      // Step 1: In Dashboard -> Move cursor over AI Copilot prompt chip
-      await moveTo(copilotChipRef, 0.4, 0.5);
+      // Step 1: In Dashboard -> Move cursor to AI Copilot button in top bar
+      await moveTo(copilotToggleRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
-      setCopilotQuery("Review project progress, milestones, approvals and missing deliverables.");
-      await sleep(1200);
+      setCopilotOpen(true);
+      await sleep(1000);
 
-      // Step 2: Click Copilot send
+      // Step 2: Hover over suggested prompt chip inside the Copilot popup
+      await moveTo(copilotChipRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCopilotQuery("Find blockers, unfinished checklist items and the next tasks to prioritize.");
+      await sleep(1100);
+
+      // Step 3: Click Copilot send button
       await moveTo(copilotSendRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotSubmitted(true);
-      await sleep(2800);
+      await sleep(2600);
 
-      // Step 3: Click "Open task board" in Priorities
-      await moveTo(openBoardBtnRef, 0.5, 0.5);
+      // Step 4: Close Copilot popup via 'X' close button
+      await moveTo(copilotCloseRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
-      setCurrentView("tasks");
       setCopilotOpen(false);
-      await sleep(2000);
+      await sleep(1200);
 
-      // Step 4: In Tasks -> Hover active task card
-      await moveTo(taskCardRef, 0.4, 0.4);
-      await sleep(1600);
+      // Step 5: In Dashboard -> Hover the urgent task row in priorities table
+      await moveTo(taskRowRef, 0.35, 0.5);
+      if (isCancelledRef.current) break;
+      await sleep(1400);
 
-      // Step 5: Move to Projects in sidebar
+      // Step 6: Move to sidebar "Projects" and click
       await moveTo(navProjectsRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("projects");
-      await sleep(2200);
+      await sleep(1400);
 
-      // Step 6: Move to Tickets in sidebar
-      await moveTo(navTicketsRef, 0.45, 0.5);
+      // Step 7: Hover an active project card
+      await moveTo(projectCardRef, 0.5, 0.4);
+      if (isCancelledRef.current) break;
+      await sleep(1800);
+
+      // Step 8: Move to sidebar "Tasks" and click
+      await moveTo(navTasksRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
-      setCurrentView("tickets");
-      await sleep(2200);
+      setCurrentView("tasks");
+      setTaskViewMode("list");
+      await sleep(1500);
 
-      // Step 7: Move to Messages in sidebar
-      await moveTo(navMessagesRef, 0.45, 0.5);
+      // Step 9: In Tasks -> Click the "Board" view toggle
+      await moveTo(taskBoardToggleRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
-      setCurrentView("messages");
-      await sleep(2200);
+      setTaskViewMode("board");
+      await sleep(2000);
 
-      // Step 8: Return to Dashboard
+      // Step 10: In Board -> Hover active task card
+      await moveTo(taskCardRef, 0.5, 0.4);
+      if (isCancelledRef.current) break;
+      await sleep(1800);
+
+      // Step 11: Switch back to Dashboard to loop
       await moveTo(navDashboardRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("dashboard");
-      setCopilotOpen(true);
       setCopilotSubmitted(false);
       setCopilotQuery("");
-      await sleep(3000);
+      await sleep(1600);
     }
   };
 
   useEffect(() => {
-    isCancelledRef.current = false;
-    const initTimer = setTimeout(startTour, 800);
+    const timer = setTimeout(() => {
+      startTour();
+    }, 800);
+
     return () => {
       isCancelledRef.current = true;
-      clearTimeout(initTimer);
+      clearTimeout(timer);
       clearTimeouts();
     };
   }, []);
@@ -192,25 +234,23 @@ export default function HeroAppWindow() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full flex flex-col bg-[#FFFFFF] border border-[#E2E8F0] rounded-2xl shadow-[0_20px_60px_rgba(15,23,42,0.09)] overflow-hidden transition-all duration-300"
+      className="relative w-full rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] shadow-xl overflow-hidden font-sans select-none text-[#0F172A]"
+      style={{ minHeight: "780px" }}
     >
-      {/* 1. Browser Window Header */}
-      <div className="h-10 sm:h-11 shrink-0 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
-        {/* macOS Traffic Lights */}
-        <div className="flex items-center gap-1.5 shrink-0">
-          <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40" />
-          <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40" />
-          <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40" />
+      {/* 1. TOP BROWSER / OS CHROME BAR */}
+      <div className="flex items-center justify-between px-4 py-2.5 bg-white border-b border-[#E2E8F0] shrink-0">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#EF4444]/80 border border-[#DC2626]/40" />
+          <div className="w-3 h-3 rounded-full bg-[#F59E0B]/80 border border-[#D97706]/40" />
+          <div className="w-3 h-3 rounded-full bg-[#10B981]/80 border border-[#059669]/40" />
         </div>
 
-        {/* URL Bar */}
-        <div className="flex-1 max-w-[420px] mx-auto min-w-0">
-          <div className="flex items-center justify-between gap-1.5 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[11px] sm:text-[12px] font-mono text-[#64748B] shadow-2xs overflow-x-auto whitespace-nowrap no-scrollbar">
-            <div className="flex items-center gap-1.5 shrink-0">
-              <Lock size={11} className="text-emerald-500 shrink-0" />
-              <span className="text-[#0F172A] font-medium shrink-0">app.eidoncore.com</span>
-              <span className="text-[#2563EB] shrink-0">/{currentView}</span>
-            </div>
+        {/* Address Bar */}
+        <div className="flex-1 max-w-sm sm:max-w-md mx-4">
+          <div className="flex items-center justify-center gap-2 px-3 py-1 bg-[#F1F5F9] rounded-lg text-xs text-[#64748B] border border-[#E2E8F0]">
+            <Lock size={11} className="text-emerald-500 shrink-0" />
+            <span className="text-[#0F172A] font-medium shrink-0">app.eidoncore.com</span>
+            <span className="text-[#2563EB] shrink-0">/{currentView}</span>
             <button
               onClick={() => {
                 isCancelledRef.current = true;
@@ -224,7 +264,12 @@ export default function HeroAppWindow() {
           </div>
         </div>
 
-        <div className="w-9 shrink-0" />
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 hidden sm:inline-flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            LIVE WORKSPACE
+          </span>
+        </div>
       </div>
 
       {/* Mobile Horizontal Navigation Tabs */}
@@ -235,7 +280,7 @@ export default function HeroAppWindow() {
             currentView === "dashboard" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
           }`}
         >
-          My Day
+          Dashboard
         </button>
         <button
           onClick={() => setCurrentView("projects")}
@@ -254,14 +299,6 @@ export default function HeroAppWindow() {
           Tasks
         </button>
         <button
-          onClick={() => setCurrentView("messages")}
-          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
-            currentView === "messages" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
-          }`}
-        >
-          Messages
-        </button>
-        <button
           onClick={() => setCurrentView("tickets")}
           className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
             currentView === "tickets" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
@@ -270,47 +307,49 @@ export default function HeroAppWindow() {
           Tickets
         </button>
         <button
-          onClick={() => setCopilotOpen(!copilotOpen)}
+          onClick={() => setCurrentView("messages")}
           className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
-            copilotOpen ? "bg-indigo-600 text-white" : "bg-indigo-50 text-indigo-700"
+            currentView === "messages" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
           }`}
         >
-          AI Copilot
+          Messages
         </button>
       </div>
 
-      {/* 2. Eidoncore App Shell: Sidebar + Content Canvas + AI Copilot Drawer */}
-      <div className="flex-1 flex min-h-0 md:min-h-[620px] text-xs overflow-hidden bg-[#F3F4F6]">
+      {/* 2. MAIN APPLICATION WORKSPACE (Sidebar + Content View) */}
+      <div className="flex h-[740px] relative overflow-hidden bg-[#F8FAFC]">
         
-        {/* Desktop Left Sidebar Navigation */}
-        <aside className="hidden md:flex w-[190px] lg:w-[215px] shrink-0 border-r border-[#E5E7EB] bg-[#FFFFFF] p-3 flex-col justify-between select-none">
-          <div className="flex flex-col gap-3">
+        {/* LEFT AUTHENTIC SIDEBAR (Matching screenshots 01, 03, 11, 19, 27) */}
+        <aside className="w-[200px] shrink-0 border-r border-[#E2E8F0] bg-white p-3 hidden md:flex flex-col justify-between select-none">
+          <div className="flex flex-col gap-4 overflow-y-auto no-scrollbar">
             
-            {/* Workspace Brand Header */}
-            <div className="flex items-center justify-between px-2 py-1.5 text-[#0F172A]">
-              <div className="flex items-center gap-2 truncate">
-                <span className="w-5 h-5 rounded-md bg-[#0F172A] text-white flex items-center justify-center font-bold text-[10px]">
-                  C
-                </span>
-                <span className="font-bold text-[#0F172A] truncate text-[12px] tracking-tight">
-                  Creative Studio LLC
-                </span>
+            {/* Workspace Selector */}
+            <div className="flex items-center justify-between pb-2 border-b border-[#F1F5F9]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-5 h-5 rounded bg-[#0F172A] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  ⚡
+                </div>
+                <div className="flex items-center gap-1 min-w-0">
+                  <span className="text-xs font-bold text-[#0F172A] truncate">Creative Studio LLC</span>
+                  <ChevronDown size={12} className="text-[#94A3B8] shrink-0" />
+                </div>
               </div>
-              <ChevronLeft size={14} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" />
+              <ChevronLeft size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer shrink-0" />
             </div>
 
-            {/* NAVIGATION Group */}
-            <div>
-              <span className="px-2 text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
+            {/* NAVIGATION GROUP */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
                 NAVIGATION
               </span>
-              <nav className="mt-1 flex flex-col gap-0.5">
+
+              <nav className="flex flex-col gap-0.5">
                 <button
                   ref={navDashboardRef}
                   onClick={() => setCurrentView("dashboard")}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "dashboard"
-                      ? "bg-slate-100 text-[#0F172A] font-semibold"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
@@ -318,12 +357,12 @@ export default function HeroAppWindow() {
                   <span>Dashboard</span>
                 </button>
 
-                <div className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <Building size={14} className="text-[#64748B]" />
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
+                  <Building2 size={14} className="text-[#64748B]" />
                   <span>Organizations</span>
                 </div>
 
-                <div className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium text-[#475569] hover:bg-slate-50 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <FileText size={14} className="text-[#64748B]" />
                   <span>Proposals</span>
                 </div>
@@ -331,48 +370,53 @@ export default function HeroAppWindow() {
                 <button
                   ref={navProjectsRef}
                   onClick={() => setCurrentView("projects")}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "projects"
-                      ? "bg-slate-100 text-[#0F172A] font-semibold"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
-                  <FolderKanban size={14} className={currentView === "projects" ? "text-[#0F172A]" : "text-[#64748B]"} />
-                  <span>Projects</span>
+                  <div className="flex items-center gap-2.5">
+                    <FolderKanban size={14} className={currentView === "projects" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Projects</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">21</span>
                 </button>
 
                 <button
                   ref={navTasksRef}
                   onClick={() => setCurrentView("tasks")}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "tasks"
-                      ? "bg-slate-100 text-[#0F172A] font-semibold"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
-                  <CheckSquare size={14} className={currentView === "tasks" ? "text-[#0F172A]" : "text-[#64748B]"} />
-                  <span>Tasks</span>
+                  <div className="flex items-center gap-2.5">
+                    <CheckSquare size={14} className={currentView === "tasks" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Tasks</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">2</span>
                 </button>
 
-                <div className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <Package size={14} className="text-[#64748B]" />
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
+                  <div className="flex items-center gap-2.5">
+                    <Boxes size={14} className="text-[#64748B]" />
                     <span>Offerings</span>
                   </div>
-                  <ChevronRight size={12} className="text-[#94A3B8]" />
+                  <ChevronRight size={11} className="text-[#94A3B8]" />
                 </div>
 
-                <div className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium text-[#475569] hover:bg-slate-50 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <Users size={14} className="text-[#64748B]" />
                   <span>Team</span>
                 </div>
 
                 <button
-                  ref={navMessagesRef}
                   onClick={() => setCurrentView("messages")}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "messages"
-                      ? "bg-slate-100 text-[#0F172A] font-semibold"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
@@ -383,9 +427,9 @@ export default function HeroAppWindow() {
                 <button
                   ref={navTicketsRef}
                   onClick={() => setCurrentView("tickets")}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "tickets"
-                      ? "bg-slate-100 text-[#0F172A] font-semibold"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
@@ -395,111 +439,143 @@ export default function HeroAppWindow() {
               </nav>
             </div>
 
-            {/* FINANCE Group */}
-            <div>
-              <span className="px-2 text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
+            {/* FINANCE GROUP */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
                 FINANCE
               </span>
-              <nav className="mt-1 flex flex-col gap-0.5">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
+              <nav className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <Receipt size={14} className="text-[#64748B]" />
                   <span>Invoices</span>
                 </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <CreditCard size={14} className="text-[#64748B]" />
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
+                  <Wallet size={14} className="text-[#64748B]" />
                   <span>Expenses</span>
                 </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <BarChart3 size={14} className="text-[#64748B]" />
                   <span>Reports</span>
                 </div>
               </nav>
             </div>
 
-            {/* TOOLS Group */}
-            <div>
-              <span className="px-2 text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
+            {/* TOOLS GROUP */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
                 TOOLS
               </span>
-              <nav className="mt-1 flex flex-col gap-0.5">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <FileSpreadsheet size={14} className="text-[#64748B]" />
+              <nav className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
+                  <Inbox size={14} className="text-[#64748B]" />
                   <span>Capture inbox</span>
                 </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <FileText size={14} className="text-[#64748B]" />
                   <span>Intake Forms</span>
                 </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11.5px] text-[#475569] hover:bg-slate-50 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <Bug size={14} className="text-[#64748B]" />
                   <span>Bug Reports</span>
                 </div>
               </nav>
             </div>
+
           </div>
 
-          <div className="pt-2 border-t border-[#E2E8F0] flex items-center justify-between px-1 text-[10px] text-[#94A3B8]">
-            <span>Workspace</span>
-            <span className="font-mono text-emerald-600 font-semibold flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Connected
-            </span>
+          {/* Bottom user badge */}
+          <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[11px]">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-[10px]">
+                AM
+              </div>
+              <div className="leading-tight">
+                <span className="font-semibold block text-[#0F172A]">Alex Miller</span>
+                <span className="text-[9.5px] text-[#64748B]">Owner</span>
+              </div>
+            </div>
+            <Settings size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" />
           </div>
         </aside>
 
-        {/* Main Content Area */}
-        <main className="flex-1 min-w-0 p-3 sm:p-4.5 flex flex-col gap-3.5 bg-[#F9FAFB] relative overflow-y-auto no-scrollbar">
+        {/* MAIN CONTENT PANE (Scrollable) */}
+        <main className="flex-1 min-w-0 flex flex-col bg-[#F8FAFC] overflow-y-auto no-scrollbar relative">
           
-          {/* Top Header inside Main Content */}
-          <div className="flex items-center justify-between gap-3 pb-1 select-none">
+          {/* TOP APP HEADER (Matching screenshots 01, 03, 11, 19, 27) */}
+          <header className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
+            
+            {/* View Title */}
             <div className="flex items-center gap-2 min-w-0">
-              <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
-                <LayoutDashboard size={13} />
+              <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
+                {currentView === "dashboard" && <LayoutDashboard size={13} />}
+                {currentView === "projects" && <FolderKanban size={13} />}
+                {currentView === "tasks" && <CheckSquare size={13} />}
+                {currentView === "tickets" && <Ticket size={13} />}
+                {currentView === "messages" && <MessageSquare size={13} />}
               </div>
-              <h3 className="text-base font-bold text-[#0F172A] tracking-tight">
-                My Day
-              </h3>
+              <h2 className="text-sm font-bold text-[#0F172A] tracking-tight capitalize">
+                {currentView === "dashboard" ? "My Day" : currentView}
+              </h2>
             </div>
 
-            {/* Global Search Bar */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[360px] shadow-2xs">
-              <Search size={13} className="text-[#94A3B8]" />
-              <span className="text-[11px] text-[#94A3B8] flex-1">Search or jump to...</span>
-              <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 py-0.2 rounded text-[#64748B]">
+            {/* Center Search Bar */}
+            <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[320px] shadow-2xs mx-2">
+              <Search size={12} className="text-[#94A3B8]" />
+              <span className="text-[11px] text-[#94A3B8] flex-1 truncate">Search or jump to...</span>
+              <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#64748B] font-mono">
                 ⌘K
               </kbd>
             </div>
 
-            {/* AI Copilot Toggle Button (Top Right) */}
+            {/* Right Quick Actions */}
             <div className="flex items-center gap-2 shrink-0">
+              {/* AI Copilot Button */}
               <button
                 ref={copilotToggleRef}
                 onClick={() => setCopilotOpen(!copilotOpen)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border shadow-2xs ${
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all border shadow-2xs ${
                   copilotOpen
                     ? "bg-[#0F172A] text-white border-[#0F172A]"
-                    : "bg-white text-[#0F172A] border-[#E2E8F0] hover:bg-slate-50"
+                    : "bg-[#EFF6FF] text-[#2563EB] border-[#BFDBFE] hover:bg-blue-100/70"
                 }`}
               >
-                <Sparkles size={12} className={copilotOpen ? "text-amber-400" : "text-indigo-600"} />
-                <span>AI Copilot</span>
-                <kbd className={`text-[9px] px-1 rounded hidden sm:inline ${
-                  copilotOpen ? "bg-white/20 text-white" : "bg-slate-100 text-[#64748B]"
+                <Sparkles size={12} className={copilotOpen ? "text-amber-400" : "text-[#2563EB]"} />
+                <span className="hidden sm:inline">AI Copilot</span>
+                <kbd className={`text-[9px] px-1 rounded font-mono ${
+                  copilotOpen ? "bg-white/20 text-white" : "bg-white text-[#2563EB] border border-blue-200"
                 }`}>
                   ⌘J
                 </kbd>
               </button>
-            </div>
-          </div>
 
-          {/* VIEW 1: FLIGHT DECK (100% IDENTICAL TO SCREENSHOT 01) */}
+              <div className="p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
+                <Settings size={14} />
+              </div>
+
+              <div className="relative p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
+                <Bell size={14} />
+                <span className="absolute top-0 right-0 w-3 h-3 bg-blue-600 text-white rounded-full text-[8px] flex items-center justify-center font-bold">
+                  9
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 pl-1 border-l border-slate-200">
+                <div className="w-5 h-5 rounded-full bg-slate-800 text-white text-[9px] font-bold flex items-center justify-center">
+                  AM
+                </div>
+                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Alex Miller</span>
+                <ChevronDown size={11} className="text-[#94A3B8]" />
+              </div>
+            </div>
+          </header>
+
+          {/* VIEW 1: MY DAY / FLIGHT DECK (100% IDENTICAL TO SCREENSHOT 01 & 03) */}
           {currentView === "dashboard" && (
-            <div className="flex flex-col gap-3.5 animate-fadeIn">
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
               
-              {/* 1. DARK FLIGHT DECK HERO CONTAINER */}
+              {/* DARK FLIGHT DECK HERO CONTAINER */}
               <div className="bg-[#0D1524] border border-[#1E293B] rounded-2xl p-4 sm:p-5 text-white shadow-md relative overflow-hidden">
-                
-                {/* Flight Deck Header Line */}
+                {/* Header Line */}
                 <div className="flex items-center justify-between pb-3 text-xs border-b border-slate-800/80">
                   <div className="flex items-center gap-2 text-slate-400 text-[11px] font-mono">
                     <Moon size={12} className="text-slate-300" />
@@ -524,18 +600,24 @@ export default function HeroAppWindow() {
                   </div>
                 </div>
 
-                {/* Greeting & Subtitle */}
-                <div className="pt-4 pb-4">
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    Good evening, Alex
-                  </h2>
-                  <p className="mt-1 text-xs sm:text-[13px] text-slate-400 max-w-xl leading-relaxed">
-                    A clear view of what needs you next. Pick up your work, plan the week, and keep your team moving.
-                  </p>
+                {/* Greeting */}
+                <div className="pt-4 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                      Good evening, Alex
+                    </h3>
+                    <p className="mt-0.5 text-xs text-slate-400 max-w-xl">
+                      A clear view of what needs you next. Pick up your work, plan the week, and keep your team moving.
+                    </p>
+                  </div>
+                  <div className="hidden lg:flex flex-col items-end font-mono text-slate-400 text-xs">
+                    <span className="text-[9.5px] uppercase tracking-wider text-slate-500">LOCAL · GMT-4</span>
+                    <span className="text-sm font-bold text-slate-200">10:23:41</span>
+                  </div>
                 </div>
 
-                {/* Prime Focus Card: "YOUR NEXT TASK" */}
-                <div className="bg-[#131E32]/90 border border-[#243552] rounded-xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                {/* Prime Focus Card */}
+                <div className="bg-[#131E32]/90 border border-[#243552] rounded-xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                   <div className="flex items-start sm:items-center gap-3 min-w-0">
                     <span className="px-2 py-0.5 bg-[#1E293B] text-slate-300 font-mono text-[9px] rounded font-bold uppercase tracking-wider border border-slate-700/80 shrink-0">
                       PRIME
@@ -559,16 +641,15 @@ export default function HeroAppWindow() {
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                       <span>To do</span>
                     </span>
-                    <span className="text-[11px] text-red-400 font-medium flex items-center gap-1 bg-red-950/60 px-2 py-1 rounded-md border border-red-900/60">
-                      <Flag size={11} />
+                    <span className="text-[11px] text-red-400 font-medium flex items-center gap-1 bg-red-950/60 px-2 py-1 rounded-md border border-red-900/60 font-mono font-bold">
+                      <Flag size={10} />
                       <span>URGENT</span>
                     </span>
                   </div>
                 </div>
 
-                {/* 4 Bottom Metric Columns with divider */}
+                {/* 4 Bottom Metric Columns */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-slate-800/80 text-xs">
-                  {/* Due Today */}
                   <div className="flex flex-col gap-0.5">
                     <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
@@ -578,7 +659,6 @@ export default function HeroAppWindow() {
                     <span className="text-[10px] text-slate-400">On today&apos;s agenda</span>
                   </div>
 
-                  {/* Overdue */}
                   <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
@@ -593,7 +673,6 @@ export default function HeroAppWindow() {
                     <span className="text-[10px] text-slate-400">All on schedule</span>
                   </div>
 
-                  {/* Next 7 Days */}
                   <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
                     <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
@@ -603,7 +682,6 @@ export default function HeroAppWindow() {
                     <span className="text-[10px] text-slate-400">Upcoming deadlines</span>
                   </div>
 
-                  {/* Completed */}
                   <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
                     <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
@@ -613,7 +691,6 @@ export default function HeroAppWindow() {
                       <span className="text-2xl font-bold text-white">1</span>
                       <span className="text-[10px] text-slate-400">In the past 7 days</span>
                     </div>
-                    {/* Sparkline simulation */}
                     <div className="flex items-center gap-1 pt-1">
                       <div className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
                         <div className="h-full bg-blue-400 w-3/4 rounded-full" />
@@ -625,566 +702,1518 @@ export default function HeroAppWindow() {
 
               </div>
 
-              {/* 2. 7-DAY LAUNCH WINDOW (CALENDAR FOCUS SELECTOR) */}
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs">
-                <div className="flex items-center justify-between pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                      WIN
-                    </span>
-                    <div>
-                      <h4 className="text-xs font-bold text-[#0F172A]">7-day launch window</h4>
-                      <span className="text-[10px] text-[#64748B]">Select a day to focus • Asia/Dhaka</span>
+              {/* 2-COLUMN MAIN DASHBOARD SECTION (Left: Launch Window + Priorities; Right: Work in Motion + Recent + Updates) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                
+                {/* LEFT MAIN COLUMN (8 cols) */}
+                <div className="lg:col-span-8 flex flex-col gap-4">
+                  
+                  {/* 7-DAY LAUNCH WINDOW */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs">
+                    <div className="flex items-center justify-between pb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          WIN
+                        </span>
+                        <div>
+                          <h4 className="text-xs font-bold text-[#0F172A]">7-day launch window</h4>
+                          <span className="text-[10px] text-[#64748B]">Select a day to focus · America/New_York</span>
+                        </div>
+                      </div>
                     </div>
+
+                    <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
+                      {[
+                        { label: "TODAY", date: 4, tasks: 0 },
+                        { label: "MON", date: 5, tasks: 0 },
+                        { label: "TUE", date: 6, tasks: 0 },
+                        { label: "WED", date: 7, tasks: 0 },
+                        { label: "THU", date: 8, tasks: 0 },
+                        { label: "FRI", date: 9, tasks: 0 },
+                        { label: "SAT", date: 10, tasks: 0 },
+                      ].map((day) => {
+                        const isSelected = selectedDay === day.date;
+                        return (
+                          <button
+                            key={day.date}
+                            onClick={() => setSelectedDay(day.date)}
+                            className={`flex flex-col items-center justify-center p-2 rounded-xl border transition-all text-center ${
+                              isSelected
+                                ? "bg-white border-blue-500 ring-2 ring-blue-500/10 shadow-xs"
+                                : "bg-[#FAFAFA] border-[#E5E7EB] hover:bg-slate-50"
+                            }`}
+                          >
+                            <span className={`text-[9px] font-bold tracking-wider ${
+                              isSelected ? "text-blue-600 font-mono" : "text-[#64748B]"
+                            }`}>
+                              {day.label}
+                            </span>
+                            <span className="text-sm font-extrabold text-[#0F172A] mt-0.5">
+                              {day.date}
+                            </span>
+                            <div className="w-1 h-2.5 bg-slate-200 rounded-full mt-1" />
+                            <span className="text-[9.5px] text-[#94A3B8] mt-0.5 font-mono">
+                              {day.tasks}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* YOUR PRIORITIES TABLE SECTION */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          QUE
+                        </span>
+                        <div>
+                          <h4 className="text-xs font-bold text-[#0F172A]">Your priorities</h4>
+                          <span className="text-[10px] text-[#64748B]">Everything assigned to you, with space to focus on what matters now.</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setCurrentView("tasks")}
+                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
+                      >
+                        <span>Open task board</span>
+                        <ArrowRight size={12} />
+                      </button>
+                    </div>
+
+                    {/* Filter Pills + Search Input */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                      <div className="flex items-center gap-1 text-[11px] font-medium">
+                        <button
+                          onClick={() => setActiveWorkTab("all")}
+                          className={`px-2.5 py-1 rounded-md transition-colors ${
+                            activeWorkTab === "all"
+                              ? "bg-slate-100 text-[#0F172A] font-semibold"
+                              : "text-[#64748B] hover:bg-slate-50"
+                          }`}
+                        >
+                          All work <span className="text-[10px] font-mono ml-0.5">1</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveWorkTab("today")}
+                          className={`px-2.5 py-1 rounded-md transition-colors ${
+                            activeWorkTab === "today"
+                              ? "bg-slate-100 text-[#0F172A] font-semibold"
+                              : "text-[#64748B] hover:bg-slate-50"
+                          }`}
+                        >
+                          Today <span className="text-[10px] font-mono ml-0.5">0</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveWorkTab("overdue")}
+                          className={`px-2.5 py-1 rounded-md transition-colors ${
+                            activeWorkTab === "overdue"
+                              ? "bg-slate-100 text-[#0F172A] font-semibold"
+                              : "text-[#64748B] hover:bg-slate-50"
+                          }`}
+                        >
+                          Overdue <span className="text-[10px] font-mono ml-0.5">0</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveWorkTab("review")}
+                          className={`px-2.5 py-1 rounded-md transition-colors ${
+                            activeWorkTab === "review"
+                              ? "bg-slate-100 text-[#0F172A] font-semibold"
+                              : "text-[#64748B] hover:bg-slate-50"
+                          }`}
+                        >
+                          In review <span className="text-[10px] font-mono ml-0.5">0</span>
+                        </button>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] max-w-[200px]">
+                        <Search size={11} className="text-[#94A3B8]" />
+                        <span className="text-[10.5px] text-[#94A3B8] truncate">Search assigned tasks...</span>
+                      </div>
+                    </div>
+
+                    {/* Table */}
+                    <div className="border border-[#E5E7EB] rounded-xl overflow-hidden mt-1">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
+                          <tr>
+                            <th className="py-2.5 px-3 font-semibold">TASK</th>
+                            <th className="py-2.5 px-3 font-semibold">PROJECT</th>
+                            <th className="py-2.5 px-3 font-semibold">STATUS</th>
+                            <th className="py-2.5 px-3 font-semibold text-right">DUE</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
+                          <tr
+                            ref={taskRowRef}
+                            className="hover:bg-slate-50/80 transition-colors"
+                          >
+                            <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                              <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                                <span className="font-semibold text-[#0F172A]">Deploy Client Portal Custom Domain SSL</span>
+                                <span className="text-[9.5px] font-mono text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 font-bold flex items-center gap-1 shrink-0">
+                                  <Flag size={9} /> URGENT
+                                </span>
+                              </div>
+                            </td>
+                            <td className="py-2.5 px-3 text-[#475569]">
+                              <div className="flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                                <span>Client Onboarding</span>
+                              </div>
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10.5px] font-medium border border-slate-200">
+                                <span className="w-1 h-1 rounded-full bg-slate-500" />
+                                To do
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3 text-right text-[#94A3B8] font-mono text-[10.5px]">
+                              No deadline
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-1">
+                      <span>1–1 of 1 tasks</span>
+                    </div>
+                  </div>
+
+                  {/* YOUR WORK ACROSS PROJECTS */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          MSN
+                        </span>
+                        <div>
+                          <h4 className="text-xs font-bold text-[#0F172A]">Your work across projects</h4>
+                          <span className="text-[10px] text-[#64748B]">Your assignments and progress. Choose a project to focus your queue.</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setCurrentView("projects")}
+                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
+                      >
+                        <span>All projects</span>
+                        <ArrowRight size={12} />
+                      </button>
+                    </div>
+
+                    <div className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
+                        <div>
+                          <span className="text-xs font-bold text-[#0F172A] block">Internal Tasks</span>
+                          <span className="text-[10px] text-[#64748B]">1 active task</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-24 sm:w-32 bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-blue-600 h-full w-[91%] rounded-full" />
+                        </div>
+                        <span className="text-[11px] font-mono font-bold text-[#0F172A]">91%</span>
+                        <span className="text-[10px] text-[#64748B] hidden sm:inline">10 of 11 completed</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* RIGHT COLUMN (4 cols) - Work in Motion, Recently Finished, Latest Updates */}
+                <div className="lg:col-span-4 flex flex-col gap-4">
+                  
+                  {/* WORK IN MOTION (Radial Gauge Donut Chart) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                        LOAD
+                      </span>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#0F172A]">Work in motion</h4>
+                        <span className="text-[10px] text-[#64748B]">Your active assignments, by status.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-around py-3 border-t border-slate-100">
+                      {/* Donut Chart representation */}
+                      <div className="relative w-20 h-20 flex items-center justify-center">
+                        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                          <circle cx="18" cy="18" r="14" fill="none" stroke="#E2E8F0" strokeWidth="3" />
+                          <circle
+                            cx="18"
+                            cy="18"
+                            r="14"
+                            fill="none"
+                            stroke="#3B82F6"
+                            strokeWidth="3"
+                            strokeDasharray="88 88"
+                            strokeDashoffset="0"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        <div className="absolute flex flex-col items-center justify-center text-center">
+                          <span className="text-base font-extrabold text-[#0F172A] leading-none">1</span>
+                          <span className="text-[8px] font-mono text-[#64748B] uppercase tracking-wider">ACTIVE</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-1.5 text-xs">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-blue-500" />
+                          <span className="text-[#475569]">To do</span>
+                          <span className="font-bold text-[#0F172A] ml-2">1</span>
+                          <span className="text-[10px] text-[#94A3B8] font-mono">100%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RECENTLY FINISHED */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                        LOG
+                      </span>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#0F172A]">Recently finished</h4>
+                        <span className="text-[10px] text-[#64748B]">1 task completed in the past 7 days.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 pt-2 border-t border-slate-100 text-xs">
+                      <div className="text-[10px] font-mono text-[#64748B] leading-tight">
+                        <span className="block font-bold">16:37</span>
+                        <span>Sep 28</span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shrink-0">
+                        <Check size={11} />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="font-semibold text-[#0F172A] block truncate">Client Portal Beta Review</span>
+                        <span className="text-[10px] text-[#64748B]">Apex Studio Website</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* LATEST UPDATES */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                        COM
+                      </span>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#0F172A]">Your latest updates</h4>
+                        <span className="text-[10px] text-[#64748B]">Unread updates from the past 7 days.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center py-4 text-center border-t border-slate-100">
+                      <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mb-1.5">
+                        <Bell size={14} />
+                      </div>
+                      <span className="text-xs font-bold text-[#0F172A]">You&apos;re up to date</span>
+                      <span className="text-[10.5px] text-[#64748B] max-w-[200px] mt-0.5">
+                        Replies, mentions, and changes to your work will appear here.
+                      </span>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 text-right">
+                      <span className="text-[11px] text-blue-600 font-semibold cursor-pointer hover:underline">
+                        All notifications →
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Bottom status line */}
+              <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-2">
+                <span className="flex items-center gap-1.5">
+                  <Clock size={11} /> Automatically refreshed every minute
+                </span>
+                <span className="flex items-center gap-1 cursor-pointer hover:text-slate-600">
+                  <RefreshCw size={11} /> Refresh
+                </span>
+              </div>
+
+            </div>
+          )}
+
+          {/* VIEW 2: PROJECTS PORTFOLIO (100% IDENTICAL TO SCREENSHOT 11) */}
+          {currentView === "projects" && (
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
+              
+              {/* Top 4 Metrics Cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {/* 1. Active Delivery */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold">ACTIVE DELIVERY</span>
+                      <span className="text-[9.5px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
+                        ● All on track
+                      </span>
+                    </div>
+                    <div className="mt-2 flex items-baseline gap-1.5">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">11</span>
+                      <span className="text-xs text-[#64748B]">in delivery</span>
+                    </div>
+                    {/* Multi-segment bar */}
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
+                      <div className="w-[30%] bg-slate-400" />
+                      <div className="w-[45%] bg-blue-500" />
+                      <div className="w-[10%] bg-amber-500" />
+                      <div className="w-[10%] bg-emerald-500" />
+                      <div className="w-[5%] bg-red-500" />
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] flex items-center justify-between border-t border-slate-100 mt-2">
+                    <span>21 projects</span>
+                    <span>5% delivered</span>
                   </div>
                 </div>
 
-                {/* Days Grid: Today 4, Mon 5, Tue 6, Wed 7, Thu 8, Fri 9, Sat 10 */}
-                <div className="grid grid-cols-7 gap-2">
-                  {[
-                    { label: "TODAY", date: 4, tasks: 0 },
-                    { label: "MON", date: 5, tasks: 0 },
-                    { label: "TUE", date: 6, tasks: 0 },
-                    { label: "WED", date: 7, tasks: 0 },
-                    { label: "THU", date: 8, tasks: 0 },
-                    { label: "FRI", date: 9, tasks: 0 },
-                    { label: "SAT", date: 10, tasks: 0 },
-                  ].map((day) => {
-                    const isSelected = selectedDay === day.date;
-                    return (
-                      <button
-                        key={day.date}
-                        onClick={() => setSelectedDay(day.date)}
-                        className={`flex flex-col items-center justify-center p-2.5 rounded-xl border transition-all text-center ${
-                          isSelected
-                            ? "bg-white border-blue-500 ring-2 ring-blue-500/10 shadow-xs"
-                            : "bg-[#FAFAFA] border-[#E5E7EB] hover:bg-slate-50"
-                        }`}
-                      >
-                        <span className={`text-[9.5px] font-bold tracking-wider ${
-                          isSelected ? "text-blue-600 font-mono" : "text-[#64748B]"
-                        }`}>
-                          {day.label}
-                        </span>
-                        <span className="text-base font-extrabold text-[#0F172A] mt-1">
-                          {day.date}
-                        </span>
-                        <div className="w-1 h-3 bg-slate-200 rounded-full mt-1.5" />
-                        <span className="text-[10px] text-[#94A3B8] mt-1 font-mono">
-                          {day.tasks}
-                        </span>
-                      </button>
-                    );
-                  })}
+                {/* 2. Delivered */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <CheckCircle2 size={11} className="text-emerald-500" /> Delivered
+                    </span>
+                    <div className="mt-2">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">1</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    5% of the portfolio
+                  </div>
+                </div>
+
+                {/* 3. Operational Stability */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <Clock size={11} className="text-blue-500" /> Operational stability
+                    </span>
+                    <div className="mt-2">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">100%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-blue-500 rounded-full mt-2" />
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    21 of 21 projects clear of risk
+                  </div>
+                </div>
+
+                {/* 4. Needs Attention */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <AlertTriangle size={11} className="text-amber-500" /> Needs Attention
+                    </span>
+                    <div className="mt-2">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    No delivery risks flagged
+                  </div>
                 </div>
               </div>
 
-              {/* 3. YOUR PRIORITIES TABLE SECTION */}
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                      QUE
-                    </span>
-                    <div>
-                      <h4 className="text-xs font-bold text-[#0F172A]">Your priorities</h4>
-                      <span className="text-[10px] text-[#64748B]">Everything assigned to you, with space to focus on what matters now.</span>
-                    </div>
+              {/* AI Delivery Insight Banner */}
+              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200 shrink-0">
+                    <Sparkles size={12} />
                   </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-[#0F172A]">Delivery insight</span>
+                      <span className="text-[9.5px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                        ● All on track
+                      </span>
+                    </div>
+                    <span className="text-[10.5px] text-[#64748B]">
+                      11 active of 21 projects, 1 delivered. No delivery risks flagged right now.
+                    </span>
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-medium text-[#475569]">
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    ⚠️ Roadblock audit
+                  </span>
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    ☑️ Task velocity
+                  </span>
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    ➡️ Milestone catch-up
+                  </span>
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-semibold">
+                    ✨ Delivery briefing ▾
+                  </span>
+                </div>
+              </div>
+
+              {/* Toolbar & Filter Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-1 text-xs">
                   <button
-                    ref={openBoardBtnRef}
-                    onClick={() => setCurrentView("tasks")}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
+                    onClick={() => setActiveProjectTab("all")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeProjectTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
                   >
-                    <span>Open task board</span>
-                    <ArrowRight size={12} />
+                    All Projects <span className="font-mono text-[10px] ml-1">21</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProjectTab("active")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeProjectTab === "active" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Active delivery <span className="font-mono text-[10px] ml-1">11</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProjectTab("attention")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeProjectTab === "attention" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Needs Attention
+                  </button>
+                  <button
+                    onClick={() => setActiveProjectTab("delivered")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeProjectTab === "delivered" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Delivered <span className="font-mono text-[10px] ml-1">1</span>
                   </button>
                 </div>
 
-                {/* Filter Pills + Search Input */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-slate-100">
-                  <div className="flex items-center gap-1 text-[11px] font-medium">
-                    <button
-                      onClick={() => setActiveWorkTab("all")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${
-                        activeWorkTab === "all"
-                          ? "bg-slate-100 text-[#0F172A] font-semibold"
-                          : "text-[#64748B] hover:bg-slate-50"
-                      }`}
-                    >
-                      All work <span className="text-[10px] font-mono ml-0.5">1</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveWorkTab("today")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${
-                        activeWorkTab === "today"
-                          ? "bg-slate-100 text-[#0F172A] font-semibold"
-                          : "text-[#64748B] hover:bg-slate-50"
-                      }`}
-                    >
-                      Today <span className="text-[10px] font-mono ml-0.5">0</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveWorkTab("overdue")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${
-                        activeWorkTab === "overdue"
-                          ? "bg-slate-100 text-[#0F172A] font-semibold"
-                          : "text-[#64748B] hover:bg-slate-50"
-                      }`}
-                    >
-                      Overdue <span className="text-[10px] font-mono ml-0.5">0</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveWorkTab("review")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${
-                        activeWorkTab === "review"
-                          ? "bg-slate-100 text-[#0F172A] font-semibold"
-                          : "text-[#64748B] hover:bg-slate-50"
-                      }`}
-                    >
-                      In review <span className="text-[10px] font-mono ml-0.5">0</span>
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-xs w-full sm:w-64">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B]">
                     <Search size={11} className="text-[#94A3B8]" />
-                    <input
-                      type="text"
-                      placeholder="Search your assigned tasks..."
-                      className="text-[11px] text-[#0F172A] placeholder:text-[#94A3B8] bg-transparent outline-none flex-1"
-                    />
+                    <span className="text-[10.5px]">Search projects... /</span>
                   </div>
-                </div>
 
-                {/* Table */}
-                <div className="border border-[#E5E7EB] rounded-xl overflow-hidden mt-1">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
-                      <tr>
-                        <th className="py-2.5 px-3 font-semibold">TASK</th>
-                        <th className="py-2.5 px-3 font-semibold">PROJECT</th>
-                        <th className="py-2.5 px-3 font-semibold">STATUS</th>
-                        <th className="py-2.5 px-3 font-semibold text-right">DUE</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
-                      <tr
-                        ref={taskCardRef}
-                        className="hover:bg-slate-50/80 transition-colors"
-                      >
-                        <td className="py-3 px-3 font-medium text-[#0F172A]">
-                          <div className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
-                            <span className="font-semibold text-[#0F172A]">Deploy Client Portal Custom Domain SSL</span>
-                            <span className="text-[9.5px] font-mono text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 font-bold flex items-center gap-1 shrink-0">
-                              <Flag size={9} /> URGENT
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-3 text-[#475569]">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 rounded-full bg-blue-500" />
-                            <span>Client Onboarding</span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-3">
-                          <span className="inline-flex items-center gap-1 text-[10.5px] font-medium text-[#475569] bg-slate-100 px-2 py-0.5 rounded-full">
-                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                            To do
-                          </span>
-                        </td>
-                        <td className="py-3 px-3 text-right text-[#94A3B8] font-mono text-[10.5px]">
-                          No deadline
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
+                    <button
+                      onClick={() => setProjectViewMode("cards")}
+                      className={`px-2 py-1 rounded ${projectViewMode === "cards" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                    >
+                      <Columns3 size={12} className="inline mr-1" /> Card view
+                    </button>
+                    <button
+                      onClick={() => setProjectViewMode("table")}
+                      className={`px-2 py-1 rounded ${projectViewMode === "table" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                    >
+                      <List size={12} className="inline mr-1" /> Table view
+                    </button>
+                  </div>
 
-                <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-1">
-                  <span>1–1 of 1 tasks</span>
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                    <Plus size={12} /> New project <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
+                  </button>
                 </div>
+              </div>
+
+              {/* 8 Projects Cards Grid (4 cols x 2 rows) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {[
+                  {
+                    ref: projectCardRef,
+                    init: "SA",
+                    color: "bg-blue-50 text-blue-600 border-blue-200",
+                    client: "Apex Architecture",
+                    title: "Apex Architecture — Custom Website & Portfolio",
+                    status: "Not Started",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "25d ago",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "CC",
+                    color: "bg-emerald-50 text-emerald-600 border-emerald-200",
+                    client: "Creative Core LLC",
+                    title: "Enterprise E-Commerce Platform Rebrand",
+                    status: "Not Started",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "25d ago",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "CU",
+                    color: "bg-teal-50 text-teal-600 border-teal-200",
+                    client: "CloudScale Unit",
+                    title: "SaaS Infrastructure & Design System",
+                    status: "Not Started",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "25d ago",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "WM",
+                    color: "bg-indigo-50 text-indigo-600 border-indigo-200",
+                    client: "Wave Media LLC",
+                    title: "Website Maintenance Retainer & SLA",
+                    status: "Completed",
+                    health: "On Track",
+                    tasks: "2/2 tasks",
+                    progress: 100,
+                    activity: "13d ago",
+                    date: "Apr 29",
+                  },
+                  {
+                    init: "RH",
+                    color: "bg-rose-50 text-rose-600 border-rose-200",
+                    client: "Riviera Homes",
+                    title: "Dedicated Cloud VPS Hosting & Backups",
+                    status: "Not Started",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "43d ago",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "WS",
+                    color: "bg-red-50 text-red-600 border-red-200",
+                    client: "WebCraft Studios",
+                    title: "Headless WordPress & Next.js Migration",
+                    status: "Not Started",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "159d ago",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "SO",
+                    color: "bg-emerald-50 text-emerald-600 border-emerald-200",
+                    client: "Skyline Media",
+                    title: "Client Portal & Analytics Dashboard",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasks: "7/7 tasks",
+                    progress: 100,
+                    activity: "Today",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "ZT",
+                    color: "bg-amber-50 text-amber-600 border-amber-200",
+                    client: "Zenith Tech",
+                    title: "Mobile Application QA & Testing Suite",
+                    status: "On Hold",
+                    health: "On Track",
+                    tasks: "No tasks yet",
+                    progress: 0,
+                    activity: "161d ago",
+                    date: "No deadline",
+                  },
+                ].map((proj, idx) => (
+                  <div
+                    key={idx}
+                    ref={proj.ref}
+                    className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-2.5"
+                  >
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-start gap-2.5">
+                        <div className={`w-7 h-7 rounded-lg ${proj.color} border font-bold text-xs flex items-center justify-center shrink-0`}>
+                          {proj.init}
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-[10px] text-[#64748B] block truncate">{proj.client}</span>
+                          <h4 className="text-xs font-bold text-[#0F172A] leading-tight line-clamp-2">
+                            {proj.title}
+                          </h4>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 text-[9.5px]">
+                        <span className={`px-1.5 py-0.2 rounded border font-medium ${
+                          proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                          proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                          proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                          "bg-slate-100 text-slate-700 border-slate-200"
+                        }`}>
+                          ● {proj.status}
+                        </span>
+                        <span className="px-1.5 py-0.2 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
+                          ● {proj.health}
+                        </span>
+                        <Flag size={9} className="text-slate-400 ml-auto" />
+                      </div>
+
+                      <div className="flex flex-col gap-1 pt-1">
+                        <div className="flex items-center justify-between text-[10px] text-[#64748B]">
+                          <span>{proj.tasks}</span>
+                          <span className="font-mono font-bold">{proj.progress}%</span>
+                        </div>
+                        <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${proj.progress === 100 ? "bg-emerald-500" : "bg-blue-500"}`}
+                            style={{ width: `${proj.progress}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 flex flex-col gap-1 text-[9.5px] text-[#64748B]">
+                      <div className="flex items-center justify-between font-mono">
+                        <span>OPEN TASKS 0</span>
+                        <span>LATE 0</span>
+                        <span className="text-[#0F172A] font-semibold">● {proj.activity}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[#94A3B8] pt-1">
+                        <div className="w-4 h-4 rounded-full bg-slate-200 text-slate-700 text-[8px] font-bold flex items-center justify-center">
+                          AM
+                        </div>
+                        <span className="font-mono text-[9px] flex items-center gap-1">
+                          <Calendar size={9} /> {proj.date}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
             </div>
           )}
 
-          {/* VIEW 2: PROJECTS */}
-          {currentView === "projects" && (
-            <div className="flex flex-col gap-3 animate-fadeIn">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-0.5 shadow-2xs">
-                  <span className="text-[10px] text-[#64748B] font-mono uppercase">ACTIVE DELIVERY</span>
-                  <span className="text-xl font-bold text-[#0F172A]">11 in delivery</span>
-                  <span className="text-[10px] text-emerald-600 font-medium">All on track</span>
-                </div>
-                <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-0.5 shadow-2xs">
-                  <span className="text-[10px] text-[#64748B] font-mono uppercase">PORTFOLIO</span>
-                  <span className="text-xl font-bold text-[#0F172A]">21 projects</span>
-                  <span className="text-[10px] text-[#64748B]">5% delivered</span>
-                </div>
-                <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-0.5 shadow-2xs">
-                  <span className="text-[10px] text-[#64748B] font-mono uppercase">IN PROGRESS</span>
-                  <span className="text-xl font-bold text-blue-600">11</span>
-                  <span className="text-[10px] text-[#64748B]">Active sprint work</span>
-                </div>
-                <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-0.5 shadow-2xs">
-                  <span className="text-[10px] text-[#64748B] font-mono uppercase">ON HOLD</span>
-                  <span className="text-xl font-bold text-amber-600">2</span>
-                  <span className="text-[10px] text-[#64748B]">Awaiting client assets</span>
-                </div>
-              </div>
-
-              {/* Projects List Card */}
-              <div className="p-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-2xs flex flex-col gap-3">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                  <h4 className="font-bold text-[#0F172A] text-xs">Active Projects Portfolio</h4>
-                  <span className="text-[11px] text-blue-600 font-semibold cursor-pointer">View archived →</span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs">
-                        SA
-                      </div>
-                      <div>
-                        <span className="font-bold text-[#0F172A] text-xs block">Studio Architecture Redesign</span>
-                        <span className="text-[11px] text-[#64748B]">Living With Lolo • Custom Website &amp; Portfolio</span>
-                      </div>
-                    </div>
-                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded font-semibold text-[10px]">
-                      On Track
-                    </span>
-                  </div>
-
-                  <div className="p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-xs">
-                        IT
-                      </div>
-                      <div>
-                        <span className="font-bold text-[#0F172A] text-xs block">Internal Operations &amp; Client Migration</span>
-                        <span className="text-[11px] text-[#64748B]">Creative Studio LLC • Task Migration &amp; DNS</span>
-                      </div>
-                    </div>
-                    <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded font-semibold text-[10px]">
-                      In Progress
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* VIEW 3: TASKS KANBAN */}
+          {/* VIEW 3: TASKS (100% IDENTICAL TO SCREENSHOT 19 & 20) */}
           {currentView === "tasks" && (
-            <div className="flex flex-col gap-3 animate-fadeIn">
-              <div className="flex items-center justify-between pb-1">
-                <div>
-                  <h4 className="font-bold text-[#0F172A] text-xs">Active Work</h4>
-                  <span className="text-[10px] text-[#64748B]">103 tasks in view • 98% completion rate</span>
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
+              
+              {/* 4 Top Metric Cards (Matching Screenshot 19) */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {/* 1. Active Work */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold">ACTIVE WORK</span>
+                    <div className="mt-1 flex items-baseline gap-1.5">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">2</span>
+                      <span className="text-xs text-[#64748B]">open tasks</span>
+                    </div>
+                    {/* Segmented bar */}
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-2">
+                      <div className="w-[15%] bg-emerald-500" />
+                      <div className="w-[85%] bg-slate-200" />
+                    </div>
+                    <div className="flex items-center gap-2 text-[9.5px] text-[#64748B] pt-1.5 font-mono">
+                      <span>• To Do 2</span>
+                      <span>• In Progress 0</span>
+                      <span>• Done 101</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9px] text-[#94A3B8] border-t border-slate-100 mt-2">
+                    103 tasks in view · 98% completion rate
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="px-2 py-0.5 bg-slate-100 text-slate-700 text-[10px] font-semibold rounded">Board</span>
-                  <span className="px-2 py-0.5 text-slate-500 text-[10px] rounded">List</span>
+
+                {/* 2. Overdue */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <AlertTriangle size={11} className="text-amber-500" /> Overdue
+                    </span>
+                    <div className="mt-1">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    Nothing past due
+                  </div>
+                </div>
+
+                {/* 3. Due Today */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <Clock size={11} className="text-blue-500" /> Due Today
+                    </span>
+                    <div className="mt-1">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    Open and due today
+                  </div>
+                </div>
+
+                {/* 4. Due This Week */}
+                <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold flex items-center gap-1">
+                      <Calendar size={11} className="text-indigo-500" /> Due This Week
+                    </span>
+                    <div className="mt-1">
+                      <span className="text-2xl font-extrabold text-[#0F172A]">0</span>
+                    </div>
+                  </div>
+                  <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
+                    Open and due by end of week
+                  </div>
                 </div>
               </div>
 
-              {/* Kanban Columns */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {/* TO DO */}
-                <div className="p-3 bg-slate-100/70 border border-slate-200/80 rounded-xl flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-xs font-bold text-[#0F172A]">
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-slate-400" />
-                      TO DO (2)
-                    </span>
-                    <Plus size={13} className="text-[#64748B] cursor-pointer" />
-                  </div>
-                  <div className="p-2.5 bg-white border border-slate-200 rounded-lg shadow-2xs">
-                    <span className="font-semibold text-xs text-[#0F172A] block">Move Client Portal DNS</span>
-                    <span className="text-[10px] text-[#64748B] mt-0.5 block">Internal Tasks • Urgent</span>
-                  </div>
-                </div>
-
-                {/* IN PROGRESS */}
-                <div className="p-3 bg-slate-100/70 border border-slate-200/80 rounded-xl flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-xs font-bold text-[#0F172A]">
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-blue-500" />
-                      IN PROGRESS (1)
-                    </span>
-                    <Plus size={13} className="text-[#64748B] cursor-pointer" />
-                  </div>
-                  <div className="p-2.5 bg-white border border-slate-200 rounded-lg shadow-2xs">
-                    <span className="font-semibold text-xs text-[#0F172A] block">Task Automation Pipeline</span>
-                    <span className="text-[10px] text-amber-600 mt-0.5 block font-medium">Medium Priority</span>
-                  </div>
-                </div>
-
-                {/* DONE */}
-                <div className="p-3 bg-slate-100/70 border border-slate-200/80 rounded-xl flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-xs font-bold text-[#0F172A]">
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      DONE (101)
-                    </span>
-                    <Plus size={13} className="text-[#64748B] cursor-pointer" />
-                  </div>
-                  <div className="p-2.5 bg-white border border-slate-200 rounded-lg shadow-2xs opacity-75">
-                    <span className="font-semibold text-xs text-[#0F172A] line-through block">Website Wireframes Handed Off</span>
-                    <span className="text-[10px] text-emerald-600 mt-0.5 block font-medium">Completed yesterday</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* VIEW 4: MESSAGES */}
-          {currentView === "messages" && (
-            <div className="p-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-2xs flex flex-col gap-3 animate-fadeIn">
-              <h4 className="font-bold text-[#0F172A] text-xs">Project Channels &amp; DMs</h4>
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+              {/* Task Copilot Banner */}
+              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs">
-                    #
+                  <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200 shrink-0">
+                    <Sparkles size={12} />
                   </div>
                   <div>
-                    <span className="font-bold text-xs text-[#0F172A] block"># client-website-maintenance</span>
-                    <span className="text-[11px] text-[#64748B]">Alex Morgan: All staging checks passed, ready for production DNS</span>
+                    <span className="text-xs font-bold text-[#0F172A] block">Task Copilot</span>
+                    <span className="text-[10.5px] text-[#64748B]">
+                      2 active tasks: 0 overdue and 0 due today. Nothing completed yet this week.
+                    </span>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono text-[#94A3B8]">12m ago</span>
+
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-[10.5px] font-medium text-[#475569]">
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    ⚡ Plan my day
+                  </span>
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    🪄 Unblock overdue
+                  </span>
+                  <span className="px-2 py-1 bg-[#F8FAFC] border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer flex items-center gap-1">
+                    📈 Summarize week
+                  </span>
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 cursor-pointer flex items-center gap-1 font-semibold">
+                    ✨ Workload briefing ▾
+                  </span>
+                </div>
+              </div>
+
+              {/* Toolbar & Filters */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-1 text-xs">
+                  <button
+                    onClick={() => setActiveTaskTab("all")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeTaskTab === "all" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    All tasks
+                  </button>
+                  <button
+                    onClick={() => setActiveTaskTab("overdue")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeTaskTab === "overdue" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Overdue <span className="font-mono text-[10px] ml-1">0</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTaskTab("today")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeTaskTab === "today" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Due Today <span className="font-mono text-[10px] ml-1">0</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTaskTab("week")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                      activeTaskTab === "week" ? "bg-white text-[#0F172A] shadow-xs font-bold border border-slate-200" : "text-[#64748B]"
+                    }`}
+                  >
+                    Due This Week <span className="font-mono text-[10px] ml-1">0</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B]">
+                    <Search size={11} className="text-[#94A3B8]" />
+                    <span className="text-[10.5px]">Search tasks... /</span>
+                  </div>
+
+                  {/* View Switcher: List vs Board */}
+                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
+                    <button
+                      onClick={() => setTaskViewMode("list")}
+                      className={`px-2 py-1 rounded transition-colors ${taskViewMode === "list" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                    >
+                      <List size={12} className="inline mr-1" /> List
+                    </button>
+                    <button
+                      ref={taskBoardToggleRef}
+                      onClick={() => setTaskViewMode("board")}
+                      className={`px-2 py-1 rounded transition-colors ${taskViewMode === "board" ? "bg-slate-100 font-bold text-[#0F172A]" : ""}`}
+                    >
+                      <Kanban size={12} className="inline mr-1" /> Board
+                    </button>
+                  </div>
+
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                    <Plus size={12} /> New task <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
+                  </button>
+                </div>
+              </div>
+
+              {/* TASK VIEW MODE: LIST (Screenshot 19) */}
+              {taskViewMode === "list" && (
+                <div className="flex flex-col gap-3">
+                  {/* GROUP: TO DO (2) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                    <div className="bg-[#F8FAFC] px-3 py-2 border-b border-[#E2E8F0] flex items-center justify-between text-xs font-semibold text-[#0F172A]">
+                      <div className="flex items-center gap-2">
+                        <ChevronDown size={14} className="text-[#64748B]" />
+                        <span className="px-2 py-0.5 bg-slate-200 text-slate-700 rounded-full font-mono text-[10px]">
+                          TO DO
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">2</span>
+                      </div>
+                    </div>
+
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#FAFAFA] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                        <tr>
+                          <th className="py-2 px-3">TASK</th>
+                          <th className="py-2 px-3">PRIORITY</th>
+                          <th className="py-2 px-3">HEALTH</th>
+                          <th className="py-2 px-3">ASSIGNEE</th>
+                          <th className="py-2 px-3">DUE DATE</th>
+                          <th className="py-2 px-3">PROJECT</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Deploy Client Portal Custom Domain SSL</span>
+                              <span className="text-[10px] text-slate-400 flex items-center gap-0.5">
+                                <Paperclip size={10} /> 1
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-red-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Urgent
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● On Track
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-slate-800 text-white text-[8px] font-bold flex items-center justify-center">
+                                AM
+                              </div>
+                              <span className="text-[#475569]">Alex Miller</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-[#94A3B8]">—</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-blue-600 font-medium flex items-center gap-1">
+                              ● Client Onboarding
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Brand Identity Guidelines & Asset Library</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-amber-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Medium
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● On Track
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3 text-[#94A3B8]">Unassigned</td>
+                          <td className="py-2.5 px-3 font-mono text-[#94A3B8]">—</td>
+                          <td className="py-2.5 px-3 text-[#94A3B8]">—</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div className="p-2 border-t border-slate-100 bg-[#FAFAFA]">
+                      <button className="text-[11px] font-medium text-[#64748B] hover:text-[#0F172A] flex items-center gap-1">
+                        <Plus size={11} /> Add task
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* GROUP: IN PROGRESS (0) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
+                    <div className="flex items-center gap-2">
+                      <ChevronRight size={14} className="text-[#94A3B8]" />
+                      <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-mono text-[10px]">
+                        IN PROGRESS
+                      </span>
+                      <span className="text-[11px] font-mono text-[#94A3B8]">0</span>
+                    </div>
+                    <span className="text-[11px] text-[#94A3B8]">No tasks</span>
+                  </div>
+
+                  {/* GROUP: DONE (101) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
+                    <div className="flex items-center gap-2">
+                      <ChevronRight size={14} className="text-[#94A3B8]" />
+                      <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-mono text-[10px]">
+                        DONE
+                      </span>
+                      <span className="text-[11px] font-mono text-[#94A3B8]">101</span>
+                    </div>
+                    <span className="text-[11px] text-[#94A3B8]">101 completed tasks</span>
+                  </div>
+                </div>
+              )}
+
+              {/* TASK VIEW MODE: KANBAN BOARD (Screenshot 20) */}
+              {taskViewMode === "board" && (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 animate-fadeIn">
+                  {/* Column 1: TO DO (2) */}
+                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-slate-400" />
+                        <span>TO DO</span>
+                        <span className="text-[10px] font-mono text-[#64748B]">2</span>
+                      </div>
+                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
+                    </div>
+
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-2">
+                      <span className="font-bold text-xs text-[#0F172A]">Brand Identity Guidelines & Asset Library</span>
+                      <div className="flex items-center justify-between text-[10px]">
+                        <span className="text-amber-600 font-medium flex items-center gap-1">
+                          <Flag size={9} /> Medium
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      ref={taskCardRef}
+                      className="p-3 bg-white border border-blue-400 rounded-xl shadow-xs ring-2 ring-blue-500/10 flex flex-col gap-2"
+                    >
+                      <span className="font-bold text-xs text-[#0F172A]">Deploy Client Portal Custom Domain SSL</span>
+                      <div className="flex items-center gap-1.5 text-[9.5px]">
+                        <span className="text-red-600 font-bold flex items-center gap-1 bg-red-50 px-1.5 py-0.2 rounded border border-red-200">
+                          <Flag size={9} /> Urgent
+                        </span>
+                        <span className="text-blue-600 font-medium bg-blue-50 px-1.5 py-0.2 rounded">
+                          ● Client Onboarding
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-[10px] text-[#64748B]">
+                        <div className="w-4 h-4 rounded-full bg-slate-800 text-white text-[8px] font-bold flex items-center justify-center">
+                          AM
+                        </div>
+                        <span className="flex items-center gap-0.5 text-[#94A3B8]">
+                          <Paperclip size={9} /> 1
+                        </span>
+                      </div>
+                    </div>
+
+                    <button className="p-2 border border-dashed border-slate-300 rounded-xl text-[11px] text-[#64748B] hover:bg-white text-center">
+                      + Add task
+                    </button>
+                  </div>
+
+                  {/* Column 2: IN PROGRESS (0) */}
+                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-blue-500" />
+                        <span>IN PROGRESS</span>
+                        <span className="text-[10px] font-mono text-[#64748B]">0</span>
+                      </div>
+                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
+                    </div>
+
+                    <div className="p-6 border border-dashed border-slate-300 rounded-xl text-center text-xs text-[#94A3B8]">
+                      Drop tasks here
+                    </div>
+                  </div>
+
+                  {/* Column 3: IN REVIEW (0) */}
+                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-500" />
+                        <span>IN REVIEW</span>
+                        <span className="text-[10px] font-mono text-[#64748B]">0</span>
+                      </div>
+                      <Plus size={13} className="text-[#64748B] hover:text-[#0F172A] cursor-pointer" />
+                    </div>
+
+                    <div className="p-6 border border-dashed border-slate-300 rounded-xl text-center text-xs text-[#94A3B8]">
+                      Drop tasks here
+                    </div>
+                  </div>
+
+                  {/* Column 4: DONE (101) */}
+                  <div className="bg-[#F1F5F9]/70 border border-[#E2E8F0] rounded-xl p-2.5 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>DONE</span>
+                        <span className="text-[10px] font-mono text-[#64748B]">101</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-1.5 opacity-80">
+                      <span className="font-bold text-xs text-[#0F172A]">TCT Deliverable Finalization</span>
+                      <div className="flex items-center justify-between text-[10px] text-[#64748B]">
+                        <span className="text-amber-600 font-medium">Medium</span>
+                        <span className="font-mono">Mar 25</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col gap-1.5 opacity-80">
+                      <span className="font-bold text-xs text-[#0F172A]">Monthly Maintenance March</span>
+                      <div className="flex items-center justify-between text-[10px] text-[#64748B]">
+                        <span className="text-red-600 font-medium">Urgent</span>
+                        <span className="font-mono">Mar 30</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          )}
+
+          {/* VIEW 4: TICKETS (100% IDENTICAL TO SCREENSHOT 27) */}
+          {currentView === "tickets" && (
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 flex-wrap text-xs">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">
+                    <Search size={11} className="text-[#94A3B8]" />
+                    <span className="text-[10.5px]">Search tickets... /</span>
+                  </div>
+
+                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-lg font-bold text-[#0F172A] shadow-xs">
+                    All statuses
+                  </span>
+                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
+                    ● Open
+                  </span>
+                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
+                    ● In Progress
+                  </span>
+                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
+                    ● Waiting on Client
+                  </span>
+                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
+                    ● Closed
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
+                    <span className="px-2 py-1 rounded bg-slate-100 font-bold text-[#0F172A]">List</span>
+                    <span className="px-2 py-1 rounded">Board</span>
+                    <span className="px-2 py-1 rounded">SLA</span>
+                  </div>
+                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
+                    <Plus size={12} /> New Ticket <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
+                  </button>
+                </div>
+              </div>
+
+              {/* Tickets Data Table */}
+              <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                    <tr>
+                      <th className="py-2.5 px-3">ID</th>
+                      <th className="py-2.5 px-3">TITLE</th>
+                      <th className="py-2.5 px-3">ORGANIZATIONS</th>
+                      <th className="py-2.5 px-3">STATUS</th>
+                      <th className="py-2.5 px-3">PRIORITY</th>
+                      <th className="py-2.5 px-3">ASSIGNEE</th>
+                      <th className="py-2.5 px-3">REPLIES</th>
+                      <th className="py-2.5 px-3 text-right">UPDATED</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                    {[
+                      { id: "TKT-29", title: "Apex Architecture DNS Propagation", org: "Apex Studio", status: "Closed", priority: "High", priorityColor: "text-orange-600", replies: 4, updated: "5d ago" },
+                      { id: "TKT-28", title: "Client Portal Login Authentication", org: "Creative Core", status: "Closed", priority: "High", priorityColor: "text-orange-600", replies: 4, updated: "6d ago" },
+                      { id: "TKT-24", title: "API Webhook Retry Failure Alert", org: "CloudScale", status: "In Progress", priority: "Critical", priorityColor: "text-red-600 font-bold", replies: 16, updated: "Sep 16" },
+                      { id: "TKT-22", title: "Design Assets Update Request", org: "Zenith Brand", status: "Waiting on Client", priority: "Low", priorityColor: "text-slate-500", replies: 2, updated: "Sep 9" },
+                      { id: "TKT-20", title: "Billing Cycle Invoice Adjustment", org: "Wave Media", status: "Closed", priority: "Urgent", priorityColor: "text-red-600 font-bold", replies: 2, updated: "Sep 9" },
+                    ].map((tkt) => (
+                      <tr key={tkt.id} className="hover:bg-slate-50 transition-colors">
+                        <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B]">{tkt.id}</td>
+                        <td className="py-2.5 px-3 font-semibold text-[#0F172A]">
+                          {tkt.title} <span className="text-[9.5px] font-normal text-[#64748B] bg-slate-100 px-1 py-0.2 rounded ml-1">Support</span>
+                        </td>
+                        <td className="py-2.5 px-3 text-[#475569]">{tkt.org}</td>
+                        <td className="py-2.5 px-3">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                            tkt.status === "Closed" ? "bg-slate-100 text-slate-600 border-slate-200" :
+                            tkt.status === "In Progress" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                            "bg-purple-50 text-purple-700 border-purple-200"
+                          }`}>
+                            {tkt.status}
+                          </span>
+                        </td>
+                        <td className={`py-2.5 px-3 font-mono text-[10.5px] ${tkt.priorityColor}`}>
+                          <Flag size={9} className="inline mr-1" /> {tkt.priority}
+                        </td>
+                        <td className="py-2.5 px-3 text-[#94A3B8]">Unassigned</td>
+                        <td className="py-2.5 px-3 font-mono text-[#64748B]">💬 {tkt.replies}</td>
+                        <td className="py-2.5 px-3 text-right font-mono text-[#94A3B8]">{tkt.updated}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
 
-          {/* VIEW 5: TICKETS */}
-          {currentView === "tickets" && (
-            <div className="p-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-2xs flex flex-col gap-3 animate-fadeIn">
-              <h4 className="font-bold text-[#0F172A] text-xs">Support Queue (29 Tickets)</h4>
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <span className="font-mono text-blue-600 font-bold text-xs">TKT-29</span>
-                  <span className="font-semibold text-xs text-[#0F172A]">Stripe Webhook Server Relocation to Dedicated IP</span>
+          {/* VIEW 5: MESSAGES (Screenshot 26) */}
+          {currentView === "messages" && (
+            <div className="flex-1 flex overflow-hidden animate-fadeIn bg-white border-t border-[#E2E8F0]">
+              {/* Channels Sidebar */}
+              <div className="w-[210px] border-r border-[#E2E8F0] p-3 flex flex-col gap-3 shrink-0 bg-[#F8FAFC]">
+                <div className="px-2 py-1 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#94A3B8]">
+                  Search channels...
                 </div>
-                <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded text-[10px] font-semibold">
-                  In Progress
-                </span>
+                <div className="flex flex-col gap-1 text-xs">
+                  <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold px-1">PROJECTS</span>
+                  <div className="p-1.5 rounded-lg bg-white border border-slate-200 font-bold text-[#0F172A] flex items-center justify-between">
+                    <span className="truncate"># Internal Tasks</span>
+                    <span className="text-[9px] font-mono text-blue-600">3d</span>
+                  </div>
+                  <div className="p-1.5 rounded-lg text-[#64748B] hover:bg-slate-100 truncate cursor-pointer">
+                    # Apex Studio Website
+                  </div>
+                  <div className="p-1.5 rounded-lg text-[#64748B] hover:bg-slate-100 truncate cursor-pointer">
+                    # Website Maintenance
+                  </div>
+                </div>
+              </div>
+
+              {/* Chat Thread */}
+              <div className="flex-1 flex flex-col justify-between p-4 bg-white">
+                <div className="flex flex-col gap-3 overflow-y-auto">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <div>
+                      <h4 className="font-bold text-xs text-[#0F172A]"># Internal Tasks</h4>
+                      <span className="text-[10px] text-[#64748B]">Project · 2 members</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5 pt-2">
+                    <div className="w-6 h-6 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                      AM
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2 text-[11px]">
+                        <span className="font-bold text-[#0F172A]">Alex Miller</span>
+                        <span className="text-[9.5px] text-[#94A3B8]">03:46 PM (pinned)</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-slate-100 text-xs text-[#0F172A] leading-relaxed max-w-md">
+                        Welcome to the workspace! Let&apos;s keep all client deliverable updates synced right here.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5 pt-1">
+                    <div className="w-6 h-6 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                      JL
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2 text-[11px]">
+                        <span className="font-bold text-[#0F172A]">Jordan Lee</span>
+                        <span className="text-[9.5px] text-[#94A3B8]">04:12 PM</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-slate-100 text-xs text-[#0F172A] leading-relaxed max-w-md">
+                        Verified the custom domain SSL certificates. Everything is resolving correctly and ready for review.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3 p-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl flex items-center justify-between">
+                  <span className="text-xs text-[#94A3B8]">Type a message... (@ to mention, / for tools)</span>
+                  <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+                    <Send size={11} />
+                  </div>
+                </div>
               </div>
             </div>
+          )}
+
+          {/* Floating bottom-right chat bubble icon (matching screenshot 03) */}
+          <button
+            onClick={() => setCopilotOpen(!copilotOpen)}
+            className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center transition-transform hover:scale-105 z-20"
+          >
+            <MessageSquare size={16} />
+          </button>
+
+          {/* 3. AUTHENTIC AI COPILOT POPUP DRAWER (100% MATCHING SCREENSHOT 01) */}
+          {copilotOpen && (
+            <>
+              {/* Translucent backdrop overlay */}
+              <div
+                onClick={() => setCopilotOpen(false)}
+                className="absolute inset-0 bg-slate-900/10 backdrop-blur-[0.5px] z-30 transition-opacity animate-fadeIn"
+              />
+
+              {/* Slide-over Popup Drawer */}
+              <aside className="absolute top-0 right-0 bottom-0 w-full sm:w-[380px] max-w-full bg-white border-l border-[#E2E8F0] shadow-2xl z-40 flex flex-col justify-between select-none animate-in slide-in-from-right duration-250">
+                <div className="p-4 flex flex-col gap-3.5 overflow-y-auto no-scrollbar">
+                  
+                  {/* Popup Header */}
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200">
+                        <Sparkles size={14} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#0F172A] leading-none">AI Copilot</h4>
+                        <span className="text-[10px] text-[#64748B]">Project Manager</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-slate-400">
+                      <History size={13} className="hover:text-slate-700 cursor-pointer" />
+                      <Maximize2 size={13} className="hover:text-slate-700 cursor-pointer" />
+                      <button
+                        ref={copilotCloseRef}
+                        onClick={() => setCopilotOpen(false)}
+                        className="text-slate-400 hover:text-slate-700 p-0.5 rounded transition-colors"
+                      >
+                        <X size={15} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Greeting & Scope */}
+                  <div>
+                    <h3 className="text-sm font-bold text-[#0F172A]">
+                      Good evening, Alex
+                    </h3>
+                    <p className="text-[11px] text-[#64748B] mt-0.5">
+                      Ask about Dashboard or anything else you can access.
+                    </p>
+                  </div>
+
+                  {/* SUGGESTED Section */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
+                      SUGGESTED
+                    </span>
+
+                    <button
+                      onClick={() => {
+                        setCopilotQuery("What can you help me with using my current access?");
+                      }}
+                      className="text-left p-2.5 bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200/80 rounded-xl text-[11px] text-[#334155] transition-colors leading-snug flex items-start gap-2"
+                    >
+                      <MessageSquare size={13} className="text-[#94A3B8] shrink-0 mt-0.5" />
+                      <span>What can you help me with using my current access?</span>
+                    </button>
+
+                    <button
+                      ref={copilotChipRef}
+                      onClick={() => {
+                        setCopilotQuery("Find blockers, unfinished checklist items and the next tasks to prioritize.");
+                      }}
+                      className="text-left p-2.5 bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200/80 rounded-xl text-[11px] text-[#334155] transition-colors leading-snug flex items-start gap-2"
+                    >
+                      <MessageSquare size={13} className="text-[#94A3B8] shrink-0 mt-0.5" />
+                      <span>Find blockers, unfinished checklist items and the next tasks to prioritize.</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCopilotQuery("Review project progress, milestones, approvals and missing deliverables.");
+                      }}
+                      className="text-left p-2.5 bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200/80 rounded-xl text-[11px] text-[#334155] transition-colors leading-snug flex items-start gap-2"
+                    >
+                      <MessageSquare size={13} className="text-[#94A3B8] shrink-0 mt-0.5" />
+                      <span>Review project progress, milestones, approvals and missing deliverables.</span>
+                    </button>
+                  </div>
+
+                  {/* DRAFT WITH AI Grid (2x2) */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
+                      DRAFT WITH AI
+                    </span>
+
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
+                        <span className="font-bold text-[11px] text-[#0F172A] flex items-center gap-1">
+                          <CheckSquare size={10} className="text-blue-600" /> Task breakdown
+                        </span>
+                        <span className="text-[9.5px] text-[#64748B]">Plan a task with checklist</span>
+                      </div>
+
+                      <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
+                        <span className="font-bold text-[11px] text-[#0F172A] flex items-center gap-1">
+                          <Ticket size={10} className="text-indigo-600" /> Ticket triage
+                        </span>
+                        <span className="text-[9.5px] text-[#64748B]">Classify and draft a reply</span>
+                      </div>
+
+                      <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
+                        <span className="font-bold text-[11px] text-[#0F172A] flex items-center gap-1">
+                          <MessageSquare size={10} className="text-emerald-600" /> Polish message
+                        </span>
+                        <span className="text-[9.5px] text-[#64748B]">Rewrite in the right tone</span>
+                      </div>
+
+                      <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
+                        <span className="font-bold text-[11px] text-[#0F172A] flex items-center gap-1">
+                          <FileText size={10} className="text-amber-600" /> Proposal draft
+                        </span>
+                        <span className="text-[9.5px] text-[#64748B]">Scope, items and pricing</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RECENT Section */}
+                  <div className="flex flex-col gap-1 pt-1 border-t border-slate-100">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">RECENT</span>
+                      <span className="text-blue-600 hover:underline cursor-pointer">View all</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[10.5px] text-[#475569] py-0.5">
+                      <div className="flex items-center gap-1.5 truncate">
+                        <History size={11} className="text-[#94A3B8]" />
+                        <span className="truncate">can you create task?</span>
+                      </div>
+                      <span className="text-[9.5px] text-[#94A3B8] shrink-0 font-mono">3 days ago</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[10.5px] text-[#475569] py-0.5">
+                      <div className="flex items-center gap-1.5 truncate">
+                        <History size={11} className="text-[#94A3B8]" />
+                        <span className="truncate">can you create these 3 tasks? under internal tasks...</span>
+                      </div>
+                      <span className="text-[9.5px] text-[#94A3B8] shrink-0 font-mono">3 days ago</span>
+                    </div>
+                  </div>
+
+                  {/* Security & Access Notice */}
+                  <div className="flex flex-col gap-1 text-[9.5px] text-[#64748B] pt-1 border-t border-slate-100">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 size={11} className="text-emerald-600" />
+                      <span>Answers use only records your role can access, and cite their sources.</span>
+                    </span>
+                    <span className="text-blue-600 font-medium cursor-pointer pl-3.5">
+                      Available areas (16)
+                    </span>
+                  </div>
+
+                  {/* Simulated Response */}
+                  {copilotSubmitted && (
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-[11px] text-[#0F172A] flex flex-col gap-1.5 animate-fadeIn">
+                      <div className="flex items-center gap-1 text-emerald-800 font-bold text-[10.5px]">
+                        <Check size={12} />
+                        <span>Workspace Status Summary:</span>
+                      </div>
+                      <span className="text-[10px] text-slate-700 leading-relaxed">
+                        • 11 projects on schedule with 0 delivery risks flagged<br />
+                        • Next immediate priority: Deploy Client Portal SSL (urgent)<br />
+                        • 0 overdue items requiring escalation
+                      </span>
+                    </div>
+                  )}
+
+                </div>
+
+                {/* Copilot Bottom Input Box */}
+                <div className="p-3.5 bg-white border-t border-[#E2E8F0] flex flex-col gap-2">
+                  <div className="flex items-center gap-2 p-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 transition-all">
+                    <input
+                      type="text"
+                      value={copilotQuery}
+                      onChange={(e) => setCopilotQuery(e.target.value)}
+                      placeholder="Ask about your work, or type / for tools"
+                      className="flex-1 bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder-[#94A3B8]"
+                    />
+                    <button
+                      ref={copilotSendRef}
+                      onClick={() => {
+                        if (copilotQuery.trim()) {
+                          setCopilotSubmitted(true);
+                        }
+                      }}
+                      className="w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition-colors shadow-2xs shrink-0"
+                    >
+                      <ArrowRight size={12} className="-rotate-90" />
+                    </button>
+                  </div>
+                  <span className="text-[9px] text-[#94A3B8] leading-tight text-center">
+                    Enter to send · Shift+Enter for a new line · / for tools · ↑ to edit last question
+                  </span>
+                </div>
+              </aside>
+            </>
           )}
 
         </main>
-
-        {/* 3. RIGHT SIDEBAR: AUTHENTIC AI COPILOT DRAWER (MATCHING SCREENSHOT 01) */}
-        {copilotOpen && (
-          <aside className="w-[310px] lg:w-[340px] shrink-0 border-l border-[#E2E8F0] bg-[#FFFFFF] p-3.5 flex flex-col justify-between select-none animate-fadeIn">
-            <div className="flex flex-col gap-3 overflow-y-auto no-scrollbar">
-              
-              {/* Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-200">
-                    <Sparkles size={13} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-[#0F172A] leading-none">AI Copilot</h4>
-                    <span className="text-[10px] text-[#64748B]">Project Manager</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-1.5 text-slate-400">
-                  <History size={13} className="hover:text-slate-700 cursor-pointer" />
-                  <Maximize2 size={13} className="hover:text-slate-700 cursor-pointer" />
-                  <X
-                    size={14}
-                    className="hover:text-slate-700 cursor-pointer"
-                    onClick={() => setCopilotOpen(false)}
-                  />
-                </div>
-              </div>
-
-              {/* Greeting */}
-              <div>
-                <h3 className="text-sm font-bold text-[#0F172A]">
-                  Good evening, Alex
-                </h3>
-                <p className="text-[11px] text-[#64748B] mt-0.5">
-                  Ask about Dashboard or anything else you can access.
-                </p>
-              </div>
-
-              {/* SUGGESTED Section */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
-                  SUGGESTED
-                </span>
-
-                <button
-                  ref={copilotChipRef}
-                  onClick={() => {
-                    setCopilotQuery("Review project progress, milestones, approvals and missing deliverables.");
-                  }}
-                  className="text-left p-2 bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200/80 rounded-xl text-[11px] text-[#334155] transition-colors leading-snug flex items-start gap-2"
-                >
-                  <MessageSquare size={13} className="text-[#94A3B8] shrink-0 mt-0.5" />
-                  <span>Review project progress, milestones, approvals and missing deliverables.</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setCopilotQuery("Find blockers, unfinished checklist items and the next tasks to prioritize.");
-                  }}
-                  className="text-left p-2 bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200/80 rounded-xl text-[11px] text-[#334155] transition-colors leading-snug flex items-start gap-2"
-                >
-                  <MessageSquare size={13} className="text-[#94A3B8] shrink-0 mt-0.5" />
-                  <span>Find blockers, unfinished checklist items and the next tasks to prioritize.</span>
-                </button>
-              </div>
-
-              {/* DRAFT WITH AI Grid */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">
-                  DRAFT WITH AI
-                </span>
-
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
-                    <span className="font-bold text-[11px] text-[#0F172A]">Task breakdown</span>
-                    <span className="text-[9.5px] text-[#64748B]">Plan a task with a checklist</span>
-                  </div>
-
-                  <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
-                    <span className="font-bold text-[11px] text-[#0F172A]">Ticket triage</span>
-                    <span className="text-[9.5px] text-[#64748B]">Classify and draft a reply</span>
-                  </div>
-
-                  <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
-                    <span className="font-bold text-[11px] text-[#0F172A]">Polish message</span>
-                    <span className="text-[9.5px] text-[#64748B]">Rewrite in the right tone</span>
-                  </div>
-
-                  <div className="p-2 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col gap-0.5 hover:bg-slate-100 cursor-pointer">
-                    <span className="font-bold text-[11px] text-[#0F172A]">Proposal draft</span>
-                    <span className="text-[9.5px] text-[#64748B]">Scope, items and pricing</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* RECENT Section */}
-              <div className="flex flex-col gap-1 pt-1 border-t border-slate-100">
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="font-mono text-[#94A3B8] uppercase tracking-wider font-semibold">RECENT</span>
-                  <span className="text-blue-600 hover:underline cursor-pointer">View all</span>
-                </div>
-                <div className="flex items-center justify-between text-[10.5px] text-[#475569] py-0.5">
-                  <div className="flex items-center gap-1.5 truncate">
-                    <History size={11} className="text-[#94A3B8]" />
-                    <span className="truncate">Can you create task?</span>
-                  </div>
-                  <span className="text-[9.5px] text-[#94A3B8] shrink-0">3d ago</span>
-                </div>
-                <div className="flex items-center justify-between text-[10.5px] text-[#475569] py-0.5">
-                  <div className="flex items-center gap-1.5 truncate">
-                    <History size={11} className="text-[#94A3B8]" />
-                    <span className="truncate">Create 3 client migration tasks...</span>
-                  </div>
-                  <span className="text-[9.5px] text-[#94A3B8] shrink-0">3d ago</span>
-                </div>
-              </div>
-
-              {/* Security & Access Notice */}
-              <div className="flex flex-col gap-1 text-[9.5px] text-[#64748B] pt-1 border-t border-slate-100">
-                <span className="flex items-center gap-1">
-                  <CheckCircle2 size={11} className="text-emerald-600" />
-                  <span>Answers use only records your role can access.</span>
-                </span>
-                <span className="text-blue-600 font-medium cursor-pointer pl-3.5">
-                  Available areas (16)
-                </span>
-              </div>
-
-              {/* Copilot Submitted Result Simulation */}
-              {copilotSubmitted && (
-                <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-[11px] text-[#0F172A] flex flex-col gap-1 animate-fadeIn">
-                  <div className="flex items-center gap-1 text-emerald-800 font-bold text-[10px]">
-                    <Check size={11} />
-                    <span>Workspace Analysis Complete:</span>
-                  </div>
-                  <span className="text-[10px] text-slate-700 leading-snug">
-                    • 11 projects on schedule<br />
-                    • 0 blockers detected<br />
-                    • Ready to deploy custom domain SSL
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Bottom Prompt Input */}
-            <div className="pt-2 border-t border-slate-100">
-              <div className="p-2 border border-slate-200 rounded-xl bg-[#F8FAFC] flex flex-col gap-1.5 focus-within:border-slate-400 transition-colors">
-                <textarea
-                  rows={2}
-                  value={copilotQuery}
-                  onChange={(e) => setCopilotQuery(e.target.value)}
-                  placeholder="Ask about your work, or type / for tools"
-                  className="w-full text-xs text-[#0F172A] bg-transparent outline-none resize-none placeholder:text-[#94A3B8]"
-                />
-                <div className="flex items-center justify-between pt-1">
-                  <span className="text-[10px] text-[#94A3B8] font-mono">/ tools</span>
-                  <button
-                    ref={copilotSendRef}
-                    onClick={() => setCopilotSubmitted(true)}
-                    className="w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition-colors shadow-2xs"
-                  >
-                    <Send size={11} />
-                  </button>
-                </div>
-              </div>
-              <span className="text-[9px] text-[#94A3B8] block text-center mt-1">
-                Enter to send • Shift+Enter for new line
-              </span>
-            </div>
-
-          </aside>
-        )}
-
       </div>
 
-      {/* VIRTUAL ANIMATED CURSOR */}
+      {/* 4. REALISTIC ANIMATED VIRTUAL CURSOR */}
       {cursorPos.visible && (
         <div
+          className="absolute z-50 pointer-events-none transition-all duration-700 ease-out flex items-center justify-center"
           style={{
-            transform: `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)`,
-            transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)",
+            left: `${cursorPos.x}px`,
+            top: `${cursorPos.y}px`,
+            transform: cursorClicked ? "scale(0.85)" : "scale(1)",
           }}
-          className="hidden md:block absolute top-0 left-0 pointer-events-none z-[120]"
         >
-          <div className="relative">
-            {cursorClicked && (
-              <span className="absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full bg-blue-500/30 border-2 border-blue-600 animate-ping pointer-events-none" />
-            )}
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]"
+          >
+            <path
+              d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"
+              fill="#0F172A"
+              stroke="#FFFFFF"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+          </svg>
 
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              className={`filter drop-shadow-md transition-transform duration-100 ${
-                cursorClicked ? "scale-90 translate-y-0.5" : "scale-100"
-              }`}
-            >
-              <path
-                d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"
-                fill="#0F172A"
-                stroke="#FFFFFF"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          {cursorClicked && (
+            <span className="absolute -inset-1 rounded-full bg-blue-500/30 animate-ping" />
+          )}
         </div>
       )}
 
