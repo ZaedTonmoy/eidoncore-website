@@ -29,6 +29,8 @@ import {
   ArrowRight,
   Activity,
   DollarSign,
+  Timer,
+  Info,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -113,6 +115,25 @@ export default function BlendedFeaturePreview({
       setDiagnosticDone(true);
       setTimeout(() => setDiagnosticDone(false), 3000);
     }, 1200);
+  };
+
+  // State for Projects Feature 03 (Billable Time Tracker)
+  const [projectTimerRunning, setProjectTimerRunning] = useState(false);
+  const [projectTimerSeconds, setProjectTimerSeconds] = useState(0);
+
+  useEffect(() => {
+    if (!projectTimerRunning) return;
+    const interval = setInterval(() => {
+      setProjectTimerSeconds((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [projectTimerRunning]);
+
+  const formatProjectTime = (totalSeconds: number) => {
+    const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+    const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+    const secs = String(totalSeconds % 60).padStart(2, "0");
+    return `${hrs}:${mins}:${secs}`;
   };
 
   // Only apply custom Eidoncore focused cards on /projects
@@ -311,141 +332,152 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 02: Milestone Management (Eidoncore Gated Milestones & Tasks)
+    // FEATURE 02: Milestone Management (Authentic Eidoncore Milestones Timeline & Cards)
+    // Matches screenshot media_1791143193949.png 100%
     // =========================================================================
     if (featureIndex === "02") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Header: Project Milestone Overview */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-lg bg-[#0284C7] text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                  B
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-slate-900 truncate">
-                    Beta Mobile App — Production Handover
-                  </h4>
-                  <span className="text-[11px] text-slate-500 block truncate">
-                    3 of 4 Milestones Reached (75%)
-                  </span>
-                </div>
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5">
+            {/* Top Milestones Header */}
+            <div className="flex items-center justify-between gap-2 pb-1">
+              <div className="flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Milestones</h3>
+                <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold flex items-center justify-center border border-slate-200/60">
+                  3
+                </span>
+                <span className="text-xs text-slate-400 flex items-center gap-1 font-medium ml-1">
+                  <CheckCircle2 size={13} className="text-slate-400" />
+                  0/3 Completed
+                </span>
               </div>
-              <span className="text-[10.5px] font-mono text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded font-bold border border-blue-200/80 shrink-0">
-                Gated Billing
-              </span>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#2563EB] text-white rounded-lg text-xs font-semibold shadow-xs hover:bg-blue-700 transition-colors"
+              >
+                <Plus size={13} />
+                <span>Add Milestone</span>
+              </button>
             </div>
 
-            {/* Eidoncore Real Milestone Rows */}
-            <div className="flex flex-col gap-2.5 pb-2">
-              {/* Phase 1 */}
-              <div className="flex items-center justify-between p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 gap-2 min-w-0">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shrink-0">
-                    <CheckCircle2 size={13} />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-semibold text-slate-900 block truncate">
-                      Phase 1: Architecture & UX
-                    </span>
-                    <span className="text-[10.5px] text-slate-500 font-mono block truncate">
-                      14 deliverables signed off
-                    </span>
-                  </div>
-                </div>
-                <div className="text-right shrink-0">
-                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 block mb-0.5">
-                    Approved ✓
-                  </span>
-                  <span className="text-[9.5px] font-mono text-slate-500">Inv #1040 Paid ($5K)</span>
-                </div>
-              </div>
+            {/* Horizontal Timeline Track Card */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs relative">
+              <div className="relative flex items-center justify-between">
+                {/* Horizontal Bar */}
+                <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0.5 bg-slate-200 -z-0" />
 
-              {/* Phase 2 */}
-              <div className="flex items-center justify-between p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 gap-2 min-w-0">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shrink-0">
-                    <CheckCircle2 size={13} />
+                {/* Step 1 Node */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-6 h-6 rounded-full bg-white border-2 border-[#2563EB] text-[#2563EB] font-bold text-xs flex items-center justify-center shadow-xs">
+                    1
                   </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-semibold text-slate-900 block truncate">
-                      Phase 2: Database & Core APIs
-                    </span>
-                    <span className="text-[10.5px] text-slate-500 font-mono block truncate">
-                      Tenant isolation verified
-                    </span>
-                  </div>
-                </div>
-                <div className="text-right shrink-0">
-                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 block mb-0.5">
-                    Approved ✓
+                  <span className="text-[11px] font-medium text-slate-500 mt-1.5 absolute -bottom-5 whitespace-nowrap">
+                    Oct 10
                   </span>
-                  <span className="text-[9.5px] font-mono text-slate-500">Inv #1041 Paid ($7.5K)</span>
                 </div>
-              </div>
 
-              {/* Phase 3 - In Review / Active */}
-              <div className="flex items-center justify-between p-3 bg-white rounded-xl border-2 border-[#3F72AF]/50 shadow-2xs gap-2 min-w-0">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-5 h-5 rounded-md bg-blue-50 text-[#3F72AF] border border-blue-200 flex items-center justify-center shrink-0">
-                    <span className="w-2 h-2 rounded-full bg-[#3F72AF] animate-ping" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-bold text-slate-900 block truncate">
-                      Phase 3: Production Handover
-                    </span>
-                    <span className="text-[10.5px] text-[#3F72AF] font-mono font-medium block truncate">
-                      Client review in progress (92%)
-                    </span>
+                {/* Step 2 Node */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-6 h-6 rounded-full bg-white border border-slate-400 text-slate-600 font-medium text-xs flex items-center justify-center shadow-xs">
+                    2
                   </div>
                 </div>
-                <div className="text-right shrink-0">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#3F72AF] border border-blue-200 block mb-0.5">
-                    Sign-off Pending
-                  </span>
-                  <span className="text-[9.5px] font-mono text-slate-900 font-semibold">
-                    Auto-Inv #1042 ($8K)
+
+                {/* Step 3 Node */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-6 h-6 rounded-full bg-white border border-slate-400 text-slate-600 font-medium text-xs flex items-center justify-center shadow-xs">
+                    3
+                  </div>
+                  <span className="text-[11px] font-medium text-slate-500 mt-1.5 absolute -bottom-5 whitespace-nowrap">
+                    Oct 30
                   </span>
                 </div>
               </div>
+              <div className="h-4" /> {/* Spacer for labels */}
+            </div>
 
-              {/* Phase 4 - Fading Down */}
-              <div
-                className="flex items-center justify-between p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 opacity-60 gap-2 min-w-0"
-                style={{
-                  maskImage:
-                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                }}
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-5 h-5 rounded-md bg-slate-100 text-slate-400 border border-slate-200 flex items-center justify-center shrink-0">
-                    <Clock size={12} />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-medium text-slate-600 block truncate">
-                      Phase 4: Store Submission & SLA
-                    </span>
-                    <span className="text-[10.5px] text-slate-400 font-mono block truncate">
-                      Gated behind Phase 3 sign-off
-                    </span>
+            {/* Milestones Vertical List with Connecting Left Line */}
+            <div className="relative flex flex-col gap-3 pl-8 sm:pl-9">
+              {/* Vertical Connecting Guide Line */}
+              <div className="absolute left-3 sm:left-3.5 top-5 bottom-8 w-px bg-slate-200 -z-0" />
+
+              {/* Milestone 1 Card */}
+              <div className="relative">
+                {/* Circle Badge on the vertical line */}
+                <div className="absolute -left-8 sm:-left-9 top-4 w-6 h-6 rounded-full bg-white border-2 border-[#2563EB] text-[#2563EB] font-bold text-xs flex items-center justify-center shadow-xs z-10">
+                  1
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">Core Architecture & UX</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Design tokens, user journey flows & initial client review</p>
+                  <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
+                      <span>In Progress</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-500">
+                      <Calendar size={13} className="text-slate-400" />
+                      <span>Due: Oct 10</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                      <List size={13} className="text-slate-400" />
+                      <span>4 tasks</span>
+                    </div>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400 shrink-0">
-                  Scheduled
-                </span>
+              </div>
+
+              {/* Milestone 2 Card */}
+              <div className="relative">
+                {/* Circle Badge on the vertical line */}
+                <div className="absolute -left-8 sm:-left-9 top-4 w-6 h-6 rounded-full bg-white border border-slate-400 text-slate-600 font-medium text-xs flex items-center justify-center shadow-xs z-10">
+                  2
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">API Integration & Database</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Authentication endpoints, webhooks & storage pipeline</p>
+                  <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
+                      <span>Not Started</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-500">
+                      <Calendar size={13} className="text-slate-400" />
+                      <span>Due: Oct 17</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                      <List size={13} className="text-slate-400" />
+                      <span>6 tasks</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Milestone 3 Card */}
+              <div className="relative">
+                {/* Circle Badge on the vertical line */}
+                <div className="absolute -left-8 sm:-left-9 top-4 w-6 h-6 rounded-full bg-white border border-slate-400 text-slate-600 font-medium text-xs flex items-center justify-center shadow-xs z-10">
+                  3
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">Production Handover & QA</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Staging tests, client sign-off & DNS launch checklist</p>
+                  <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
+                      <span>Not Started</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-500">
+                      <Calendar size={13} className="text-slate-400" />
+                      <span>Due: Oct 30</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                      <List size={13} className="text-slate-400" />
+                      <span>3 tasks</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </BlendMockupCard>
@@ -454,129 +486,204 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 03: Team Bandwidth & Billable Timers (Eidoncore Live Ledger)
+    // FEATURE 03: Team Bandwidth & Billable Timers (Authentic Time Tracker & Table)
+    // Matches screenshot media_1791143196054.png 100%
     // =========================================================================
     if (featureIndex === "03") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Header: Live Stopwatch Overview */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shrink-0 shadow-2xs">
-                  <Clock size={16} />
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5">
+            {/* Top Bar: Time Tracker with Live Counter & Start/Stop Timer */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-[#2563EB] border border-blue-100">
+                  <Timer size={16} />
                 </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-slate-900 truncate">
-                    Live Team Bandwidth & Timers
-                  </h4>
-                  <span className="text-[11px] text-slate-500 flex items-center gap-1.5 truncate">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                    <span>3 active stopwatch sessions</span>
-                  </span>
-                </div>
+                <span className="text-sm font-bold text-slate-900 tracking-tight">Time Tracker</span>
               </div>
-              <span className="text-[10px] sm:text-[10.5px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200 shrink-0">
-                100% Billable
-              </span>
+
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <span className="font-mono text-base sm:text-lg font-bold text-slate-600 tracking-wider">
+                  {formatProjectTime(projectTimerSeconds)}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setProjectTimerRunning((prev) => !prev)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all shadow-xs active:scale-95 ${
+                    projectTimerRunning ? "bg-amber-600 hover:bg-amber-700" : "bg-[#2563EB] hover:bg-blue-700"
+                  }`}
+                >
+                  <Play size={11} className={projectTimerRunning ? "" : "fill-current"} />
+                  <span>{projectTimerRunning ? "Stop Timer" : "Start Timer"}</span>
+                </button>
+              </div>
             </div>
 
-            {/* Active Stopwatch Ledger */}
-            <div className="flex flex-col gap-2.5 pb-2">
-              {/* Member 1: Alex Rivera */}
-              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 flex items-center justify-between gap-2 min-w-0">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                    AR
+            {/* 3 Metric Cards Grid (My Hours, Billable, Non-Billable) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+              {/* Card 1: My Hours */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-1.5">
+                    <Clock size={13} className="text-blue-500" />
+                    <span className="text-xs font-medium text-slate-600">My Hours</span>
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-slate-900 truncate">Alex Rivera</span>
-                      <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">• Lead Dev</span>
-                    </div>
-                    <span className="text-[11px] text-slate-500 block truncate">
-                      Multi-tenant API & auth routing
-                    </span>
-                  </div>
+                  <Info size={12} className="text-slate-300" />
                 </div>
-                <div className="text-right shrink-0">
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 text-white rounded font-mono text-[11px] font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>03:42:15</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#3F72AF] font-semibold mt-0.5 block">
-                    $165/hr • Billable
-                  </span>
+                <div className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                  59.3h
                 </div>
               </div>
 
-              {/* Member 2: Elena Ruiz */}
-              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 flex items-center justify-between gap-2 min-w-0">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center shrink-0">
-                    ER
+              {/* Card 2: Billable */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-[10px] font-bold">
+                    $
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-slate-900 truncate">Elena Ruiz</span>
-                      <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">• Product Designer</span>
-                    </div>
-                    <span className="text-[11px] text-slate-500 block truncate">
-                      Figma tokens & client portal QA
-                    </span>
-                  </div>
+                  <span className="text-xs font-medium text-slate-600">Billable</span>
                 </div>
-                <div className="text-right shrink-0">
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 text-white rounded font-mono text-[11px] font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>02:18:40</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#3F72AF] font-semibold mt-0.5 block">
-                    $140/hr • Billable
-                  </span>
+                <div className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                  59.3h
                 </div>
               </div>
 
-              {/* Member 3: Marcus Vance (Fading Down) */}
-              <div
-                className="p-3 bg-[#F8FAFC] rounded-xl border border-slate-200/70 flex items-center justify-between gap-2 opacity-60 min-w-0"
-                style={{
-                  maskImage:
-                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                }}
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center shrink-0">
-                    MV
+              {/* Card 3: Non-Billable */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Timer size={13} className="text-slate-400" />
+                  <span className="text-xs font-medium text-slate-600">Non-Billable</span>
+                </div>
+                <div className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                  0.0h
+                </div>
+              </div>
+            </div>
+
+            {/* Time Entries Table Section */}
+            <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden">
+              {/* Table Top Header */}
+              <div className="p-3 sm:p-3.5 flex items-center justify-between border-b border-slate-100">
+                <div className="flex items-center gap-1.5">
+                  <Timer size={14} className="text-slate-500" />
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Time Entries</h4>
+                  <Info size={12} className="text-slate-300 ml-0.5" />
+                </div>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#2563EB] text-white rounded-lg text-xs font-semibold shadow-xs hover:bg-blue-700 transition-colors"
+                >
+                  <Plus size={12} />
+                  <span>Log Time</span>
+                </button>
+              </div>
+
+              {/* Table Header Columns */}
+              <div className="grid grid-cols-12 px-3 sm:px-3.5 py-2 bg-slate-50/70 border-b border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="col-span-4 sm:col-span-3">WHO</div>
+                <div className="col-span-2 text-center sm:text-left">DURATION</div>
+                <div className="hidden sm:block sm:col-span-4">TASK</div>
+                <div className="col-span-3 sm:col-span-2 text-center">BILLABLE</div>
+                <div className="col-span-3 sm:col-span-1 text-right">DATE</div>
+              </div>
+
+              {/* Rows matching Screenshot 2 (Dummy names & tasks) */}
+              <div className="divide-y divide-slate-100 text-xs">
+                {/* Row 1 */}
+                <div className="grid grid-cols-12 px-3 sm:px-3.5 py-2.5 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-4 sm:col-span-3 flex items-center gap-2 min-w-0">
+                    <span className="w-5 h-5 rounded-full bg-blue-100 text-[#2563EB] font-bold text-[9px] flex items-center justify-center shrink-0">
+                      AM
+                    </span>
+                    <span className="font-medium text-slate-800 truncate">Alex Miller</span>
                   </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-medium text-slate-800 block truncate">
-                      Marcus Vance
+                  <div className="col-span-2 font-bold text-slate-900 text-center sm:text-left">
+                    1h 30m
+                  </div>
+                  <div className="hidden sm:block sm:col-span-4 text-slate-600 truncate">
+                    Google Search Console & SEO QA
+                  </div>
+                  <div className="col-span-3 sm:col-span-2 text-center">
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                      Yes
                     </span>
-                    <span className="text-[11px] text-slate-400 block truncate">
-                      QA test coverage & bug bash
-                    </span>
+                  </div>
+                  <div className="col-span-3 sm:col-span-1 text-right text-slate-400 text-[11px]">
+                    Sep 2
                   </div>
                 </div>
-                <div className="text-right shrink-0">
-                  <span className="text-[11px] font-mono font-semibold text-slate-900 block">
-                    6.5 hrs
-                  </span>
-                  <span className="text-[10px] font-mono text-emerald-600 font-semibold block">
-                    $975 logged
-                  </span>
+
+                {/* Row 2 */}
+                <div className="grid grid-cols-12 px-3 sm:px-3.5 py-2.5 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-4 sm:col-span-3 flex items-center gap-2 min-w-0">
+                    <span className="w-5 h-5 rounded-full bg-blue-100 text-[#2563EB] font-bold text-[9px] flex items-center justify-center shrink-0">
+                      AM
+                    </span>
+                    <span className="font-medium text-slate-800 truncate">Alex Miller</span>
+                  </div>
+                  <div className="col-span-2 font-bold text-slate-900 text-center sm:text-left">
+                    1h
+                  </div>
+                  <div className="hidden sm:block sm:col-span-4 text-slate-600 truncate">
+                    Duplicate footer responsive module fix
+                  </div>
+                  <div className="col-span-3 sm:col-span-2 text-center">
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                      Yes
+                    </span>
+                  </div>
+                  <div className="col-span-3 sm:col-span-1 text-right text-slate-400 text-[11px]">
+                    Sep 30
+                  </div>
+                </div>
+
+                {/* Row 3 */}
+                <div className="grid grid-cols-12 px-3 sm:px-3.5 py-2.5 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-4 sm:col-span-3 flex items-center gap-2 min-w-0">
+                    <span className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                      ER
+                    </span>
+                    <span className="font-medium text-slate-800 truncate">Elena Reed</span>
+                  </div>
+                  <div className="col-span-2 font-bold text-slate-900 text-center sm:text-left">
+                    1h 30m
+                  </div>
+                  <div className="hidden sm:block sm:col-span-4 text-slate-600 truncate">
+                    Client authorization request header
+                  </div>
+                  <div className="col-span-3 sm:col-span-2 text-center">
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                      Yes
+                    </span>
+                  </div>
+                  <div className="col-span-3 sm:col-span-1 text-right text-slate-400 text-[11px]">
+                    Sep 16
+                  </div>
+                </div>
+
+                {/* Row 4 */}
+                <div className="grid grid-cols-12 px-3 sm:px-3.5 py-2.5 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-4 sm:col-span-3 flex items-center gap-2 min-w-0">
+                    <span className="w-5 h-5 rounded-full bg-purple-100 text-purple-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                      SL
+                    </span>
+                    <span className="font-medium text-slate-800 truncate">Sarah Lin</span>
+                  </div>
+                  <div className="col-span-2 font-bold text-slate-900 text-center sm:text-left">
+                    1h 20m
+                  </div>
+                  <div className="hidden sm:block sm:col-span-4 text-slate-600 truncate">
+                    FAQ Accordion & search filter indexing
+                  </div>
+                  <div className="col-span-3 sm:col-span-2 text-center">
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                      Yes
+                    </span>
+                  </div>
+                  <div className="col-span-3 sm:col-span-1 text-right text-slate-400 text-[11px]">
+                    Aug 31
+                  </div>
                 </div>
               </div>
             </div>
