@@ -26,6 +26,8 @@ import {
   Eye,
   Shield,
   Globe,
+  ArrowRight,
+  Activity,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -504,12 +506,13 @@ export default function BlendedFeaturePreview({
   // Only apply custom Eidoncore focused cards on /tasks
   if (moduleName.toLowerCase() === "tasks") {
     // =========================================================================
-    // FEATURE 01: Flexible Views That Adapt to Your Flow (Kanban Column & Cards)
+    // FEATURE 01: Flexible Views That Adapt to Your Flow (Authentic Kanban & Card)
+    // Matches screenshot media_1791139510552.png & media_1791139519845.png 100%
     // =========================================================================
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
+          {/* Linear Radial Spotlight */}
           <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
             style={{
@@ -518,11 +521,10 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Eidoncore App Header Bar */}
-            <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-4 min-w-0">
-              <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-56 min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0">
+            {/* Top Navigation Bar: Search, Filters & View Toggle */}
+            <div className="flex items-center justify-between gap-2 pb-3.5 border-b border-slate-100 mb-3.5 min-w-0">
+              <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/90 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-52 min-w-0">
                 <Search size={13} className="text-slate-400 shrink-0" />
                 <span className="truncate">Search tasks...</span>
                 <kbd className="ml-auto font-mono text-[10px] bg-white border border-slate-200 px-1 rounded text-slate-400 shrink-0">
@@ -531,173 +533,207 @@ export default function BlendedFeaturePreview({
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
-                <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/70 text-slate-600">
-                  <span className="p-1 bg-white rounded shadow-2xs text-[#3F72AF]">
-                    <Kanban size={13} />
+                {/* View switcher: List vs Board */}
+                <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs">
+                  <span className="flex items-center gap-1 px-2 py-1 text-slate-500 cursor-default">
+                    <List size={12} />
+                    <span className="hidden sm:inline">List</span>
                   </span>
-                  <span className="p-1 text-slate-400">
-                    <List size={13} />
+                  <span className="flex items-center gap-1 px-2 py-1 bg-white rounded-md shadow-2xs text-[#0F172A] font-bold">
+                    <Kanban size={12} className="text-[#3F72AF]" />
+                    <span className="hidden sm:inline">Board</span>
                   </span>
                 </div>
-                <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#3F72AF] text-white rounded-lg text-xs font-semibold shadow-xs">
+
+                <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#1D63ED] hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs">
                   <Plus size={13} />
                   <span className="hidden sm:inline">New task</span>
-                  <kbd className="hidden sm:inline font-mono text-[9px] bg-blue-700/60 px-1 rounded">n</kbd>
+                  <kbd className="hidden sm:inline font-mono text-[9px] bg-blue-800/60 px-1 rounded">n</kbd>
                 </div>
               </div>
             </div>
 
-            {/* Sub-header / Filter strip */}
-            <div className="flex items-center justify-between pb-3 text-xs border-b border-slate-100/80 mb-3.5">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-900 bg-slate-100/80 px-2 py-0.5 rounded">All tasks</span>
-                <span className="text-slate-500 text-[11px] font-mono">103 tasks in view</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="text-[11px] font-medium text-emerald-700">98% completion rate</span>
-              </div>
-            </div>
-
-            {/* Kanban Board Focused Columns: To Do & In Progress */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2.5">
-              {/* Column 1: TO DO (2) */}
-              <div className="bg-[#F8FAFC] border border-slate-200/70 rounded-xl p-3 flex flex-col gap-2.5">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-800 pb-1 border-b border-slate-200/50">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-slate-400" />
-                    <span className="tracking-wide">TO DO</span>
-                    <span className="text-[10px] font-mono bg-slate-200 text-slate-700 px-1.5 py-0.2 rounded-full">2</span>
-                  </div>
-                  <Plus size={12} className="text-slate-400 hover:text-slate-700 cursor-default" />
-                </div>
-
-                {/* Card 1: Move Sdarr Site (Urgent, Active Card) */}
-                <div className="bg-white rounded-xl border border-blue-200/90 shadow-2xs p-3 relative flex flex-col gap-2">
-                  <div className="flex items-start justify-between gap-1">
-                    <h5 className="text-xs font-bold text-slate-900 leading-snug">
-                      Move Sdarr Site
-                    </h5>
-                    <MoreHorizontal size={13} className="text-slate-400 shrink-0" />
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-50 text-red-600 border border-red-200 flex items-center gap-1">
-                      <Flag size={9} /> Urgent
-                    </span>
-                    <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-medium">
-                      Internal Tasks
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-[10px] text-slate-500">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded-full bg-slate-900 text-white font-bold text-[9px] flex items-center justify-center">
-                        ST
-                      </div>
-                      <span className="text-slate-600 font-medium">Sakib Tanoy</span>
-                    </div>
-                    <span className="text-slate-400 font-mono text-[9.5px]">Due Friday</span>
-                  </div>
-                </div>
-
-                {/* Card 2: Task Ultron */}
-                <div className="bg-white rounded-xl border border-slate-200/80 p-3 shadow-2xs flex flex-col gap-2">
-                  <div className="flex items-start justify-between gap-1">
-                    <h5 className="text-xs font-bold text-slate-900 leading-snug">
-                      Task Ultron
-                    </h5>
-                    <MoreHorizontal size={13} className="text-slate-400 shrink-0" />
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-50 text-amber-700 border border-amber-200 flex items-center gap-1">
-                      <Flag size={9} /> Medium
-                    </span>
-                    <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-medium">
-                      Internal Tasks
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-[10px] text-slate-400">
-                    <span>Unassigned</span>
-                    <span className="font-mono text-[9.5px]">Estimate: 4h</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Column 2: DONE (101) */}
-              <div className="bg-[#F8FAFC] border border-slate-200/70 rounded-xl p-3 flex flex-col gap-2.5">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-800 pb-1 border-b border-slate-200/50">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span className="tracking-wide">DONE</span>
-                    <span className="text-[10px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full">101</span>
-                  </div>
-                  <CheckCircle2 size={12} className="text-emerald-600" />
-                </div>
-
-                {/* Card 1: TCT Task */}
-                <div className="bg-white rounded-xl border border-slate-200/80 p-3 shadow-2xs flex flex-col gap-2 opacity-90">
-                  <div className="flex items-start justify-between gap-1">
-                    <h5 className="text-xs font-bold text-slate-900 leading-snug flex items-center gap-1.5">
-                      <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
-                      TCT Task
-                    </h5>
-                    <span className="text-[9.5px] font-mono text-slate-400">Mar 25</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
-                      Medium
-                    </span>
-                    <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-medium">
-                      Internal Tasks
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card 2: Maintenance March */}
-                <div className="bg-white rounded-xl border border-slate-200/80 p-3 shadow-2xs flex flex-col gap-2 opacity-90">
-                  <div className="flex items-start justify-between gap-1">
-                    <h5 className="text-xs font-bold text-slate-900 leading-snug flex items-center gap-1.5">
-                      <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
-                      Maintenance March
-                    </h5>
-                    <span className="text-[9.5px] font-mono text-slate-400">Mar 30</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-50 text-red-600 border border-red-200">
-                      Urgent
-                    </span>
-                    <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-medium">
-                      Website Maintenance
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Peeking Row: AI Copilot Prompt fading downward */}
-            <div
-              className="bg-[#F8FAFC] rounded-xl border border-slate-200/80 p-3 flex items-center justify-between opacity-75"
-              style={{
-                maskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-              }}
-            >
-              <div className="flex items-center gap-2 min-w-0">
-                <Sparkles size={13} className="text-[#3F72AF] shrink-0" />
-                <span className="text-xs font-semibold text-slate-800 truncate">
-                  Task Copilot: 2 active tasks, 0 overdue
+            {/* Sub-header Filter Tabs */}
+            <div className="flex items-center justify-between pb-3 text-xs mb-3 text-slate-600">
+              <div className="flex items-center gap-1 text-[11.5px]">
+                <span className="font-bold text-[#0F172A] pb-1 border-b-2 border-[#1D63ED] px-1">
+                  All tasks
+                </span>
+                <span className="px-2 py-0.5 text-slate-500 hover:text-slate-900">
+                  Overdue <span className="font-mono text-[10px] bg-slate-100 px-1 rounded-full text-slate-600 ml-0.5">0</span>
+                </span>
+                <span className="hidden sm:inline-block px-2 py-0.5 text-slate-500">
+                  Due Today <span className="font-mono text-[10px] bg-slate-100 px-1 rounded-full text-slate-600 ml-0.5">0</span>
+                </span>
+                <span className="hidden sm:inline-block px-2 py-0.5 text-slate-500">
+                  Due This Week <span className="font-mono text-[10px] bg-slate-100 px-1 rounded-full text-slate-600 ml-0.5">0</span>
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded font-semibold border border-blue-200 shrink-0">
-                Plan My Day
-              </span>
+            </div>
+
+            {/* Focused Authentic Kanban Column & Card Structure */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2.5">
+              {/* COLUMN 1: TO DO (2) */}
+              <div className="bg-[#EEF1F5]/80 border border-slate-200/80 rounded-2xl p-2.5 sm:p-3 flex flex-col gap-2.5">
+                {/* Column Pill Header */}
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200/90 rounded-full text-xs font-bold text-slate-700 shadow-2xs">
+                    <span className="w-2.5 h-2.5 rounded-full border-2 border-slate-400" />
+                    <span className="tracking-wide text-[11px]">TO DO</span>
+                    <span className="font-mono text-[11px] text-slate-400 ml-0.5">2</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-slate-400">
+                    <MoreHorizontal size={14} className="hover:text-slate-600 cursor-default" />
+                    <Plus size={14} className="hover:text-slate-600 cursor-default" />
+                  </div>
+                </div>
+
+                {/* EXACT CARD 1: Task Ultron (100% Matching Screenshot 2) */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
+                  <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    Task Ultron
+                  </h4>
+
+                  {/* Priority & Date Tags */}
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-[#D97706]">
+                      <Flag size={12} strokeWidth={2.2} /> Medium
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-slate-200 text-xs text-slate-700 bg-white font-medium">
+                      <Calendar size={11} className="text-slate-400" /> Oct 15
+                    </span>
+                  </div>
+
+                  {/* Progress Bar & Subtask fraction: 1/2 */}
+                  <div className="flex items-center gap-2.5 pt-0.5">
+                    <CheckSquare size={13} className="text-slate-400 shrink-0" />
+                    <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#2563EB] rounded-full w-1/2" />
+                    </div>
+                    <span className="font-mono text-xs text-slate-500 font-semibold shrink-0">
+                      1/2
+                    </span>
+                  </div>
+
+                  {/* Card Footer: Assignee Avatar, Checklist badge, Arrow */}
+                  <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
+                    <img
+                      src="/images/sakib-avatar.png"
+                      alt="Sakib Tanoy"
+                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
+                    />
+                    <div className="flex items-center gap-2.5 text-slate-500">
+                      <span className="flex items-center gap-1 font-mono text-xs font-semibold">
+                        <CheckSquare size={12} className="text-slate-400" /> 3
+                      </span>
+                      <ArrowRight size={13} className="text-slate-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* CARD 2: Move Sdarr Site */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
+                  <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    Move Sdarr Site
+                  </h4>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
+                      <Flag size={12} strokeWidth={2.5} /> Urgent
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span>Internal Tasks</span>
+                  </div>
+                  <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
+                    <img
+                      src="/images/sakib-avatar.png"
+                      alt="Sakib Tanoy"
+                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
+                    />
+                    <div className="flex items-center gap-2 text-slate-400">
+                      <Paperclip size={12} />
+                      <span className="font-mono text-xs">1</span>
+                      <ArrowRight size={13} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* + Add task button */}
+                <button className="text-xs text-slate-500 hover:text-slate-800 font-medium py-1 px-2 text-left flex items-center gap-1">
+                  <Plus size={13} /> Add task
+                </button>
+              </div>
+
+              {/* COLUMN 2: DONE (101) */}
+              <div className="bg-[#EEF1F5]/80 border border-slate-200/80 rounded-2xl p-2.5 sm:p-3 flex flex-col gap-2.5">
+                {/* Column Pill Header */}
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200/90 rounded-full text-xs font-bold text-slate-700 shadow-2xs">
+                    <CheckCircle2 size={13} className="text-emerald-600 fill-emerald-100" />
+                    <span className="tracking-wide text-[11px]">DONE</span>
+                    <span className="font-mono text-[11px] text-slate-400 ml-0.5">101</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-slate-400">
+                    <MoreHorizontal size={14} className="hover:text-slate-600 cursor-default" />
+                    <Plus size={14} className="hover:text-slate-600 cursor-default" />
+                  </div>
+                </div>
+
+                {/* DONE CARD 1: TCT Task */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5 opacity-90">
+                  <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    TCT Task
+                  </h4>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-[#D97706]">
+                      <Flag size={12} strokeWidth={2.2} /> Medium
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-slate-200 text-xs text-slate-700 bg-white font-medium">
+                      <Calendar size={11} className="text-slate-400" /> Mar 25
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span>Internal Tasks</span>
+                  </div>
+                  <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
+                    <img
+                      src="/images/sakib-avatar.png"
+                      alt="Sakib Tanoy"
+                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
+                    />
+                    <div className="flex items-center gap-2 text-slate-400">
+                      <Paperclip size={12} />
+                      <span className="font-mono text-xs">1</span>
+                      <ArrowRight size={13} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* DONE CARD 2: Maintenance March (Fading Down) */}
+                <div
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2 opacity-70"
+                  style={{
+                    maskImage:
+                      "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
+                    WebkitMaskImage:
+                      "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
+                  }}
+                >
+                  <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    Maintenance March
+                  </h4>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
+                      <Flag size={12} strokeWidth={2.5} /> Urgent
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-slate-200 text-xs text-slate-700 bg-white font-medium">
+                      <Calendar size={11} className="text-slate-400" /> Mar 30
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
@@ -705,12 +741,13 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 02: Granular Subtasks for Intricate Deliverables (Table & Checklists)
+    // FEATURE 02: Granular Subtasks for Intricate Deliverables (Checklists & Subtasks)
+    // Matches screenshot media_1791139525719.png & media_1791139546429.png 100%
     // =========================================================================
     if (featureIndex === "02") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
+          {/* Radial Spotlight */}
           <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
             style={{
@@ -719,143 +756,179 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
           <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Header: Dense List & Subtask Filter */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4 min-w-0">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center shrink-0 shadow-2xs">
-                  <CheckSquare size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-slate-900 truncate">
-                    Active Work • List & Subtask View
-                  </h4>
-                  <span className="text-[11px] text-slate-500 block truncate">
-                    2 tasks in TO DO • 101 completed
-                  </span>
-                </div>
-              </div>
-              <span className="text-[10.5px] font-mono text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded font-bold border border-blue-200/80 shrink-0">
-                Table View
-              </span>
-            </div>
-
-            {/* Structured Table Container */}
-            <div className="bg-white border border-slate-200/80 rounded-xl overflow-hidden shadow-2xs mb-2.5">
-              {/* Group Header: TO DO (2) */}
-              <div className="bg-[#F8FAFC] px-3 py-2 border-b border-slate-200 flex items-center justify-between text-xs font-semibold text-slate-900">
+            {/* Top Overview: Active Work Table Row (Matching media_1791139546429.png) */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs mb-5">
+              <div className="bg-[#F8FAFC] px-3 py-2 border-b border-slate-200 flex items-center justify-between text-xs font-semibold text-slate-800">
                 <div className="flex items-center gap-2">
-                  <ChevronDown size={14} className="text-slate-500" />
-                  <span className="px-2 py-0.5 bg-slate-200 text-slate-700 rounded-full font-mono text-[10px] font-bold">
-                    TO DO
+                  <ChevronDown size={14} className="text-slate-400" />
+                  <span className="px-2 py-0.5 bg-white border border-slate-200 rounded-full font-mono text-[10px] text-slate-700 font-bold">
+                    TO DO 2
                   </span>
-                  <span className="text-[11px] font-mono text-slate-500">2 tasks</span>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400">Sorted by Priority</span>
+                <span className="text-[10px] font-mono text-slate-400">Table View</span>
               </div>
 
               {/* Table Header */}
-              <div className="grid grid-cols-12 bg-[#FAFAFA] border-b border-slate-200 text-[10px] font-mono uppercase text-slate-500 py-1.5 px-3">
+              <div className="grid grid-cols-12 bg-[#FAFAFA] border-b border-slate-200 text-[10px] font-mono uppercase text-slate-500 py-2 px-3">
                 <span className="col-span-5 font-bold">TASK</span>
                 <span className="col-span-2 font-bold">PRIORITY</span>
                 <span className="col-span-2 font-bold">HEALTH</span>
                 <span className="col-span-3 font-bold text-right">ASSIGNEE</span>
               </div>
 
-              {/* Row 1: Move Sdarr Site with Subtasks Checklist preview */}
-              <div className="p-3 border-b border-slate-100 hover:bg-slate-50/70 transition-colors">
-                <div className="grid grid-cols-12 items-center text-xs">
-                  <div className="col-span-5 flex items-center gap-2 min-w-0 pr-1">
-                    <div className="w-3.5 h-3.5 rounded border border-slate-300 flex items-center justify-center shrink-0 bg-white" />
-                    <span className="font-bold text-slate-900 truncate">Move Sdarr Site</span>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-red-50 text-red-600 border border-red-200 inline-flex items-center gap-1">
-                      <Flag size={8} /> Urgent
-                    </span>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9.5px] font-medium">
-                      ● On Track
-                    </span>
-                  </div>
-                  <div className="col-span-3 flex items-center justify-end gap-1.5">
-                    <div className="w-4 h-4 rounded-full bg-slate-900 text-white text-[8px] font-bold flex items-center justify-center shrink-0">
-                      ST
-                    </div>
-                    <span className="text-[11px] text-slate-700 font-medium truncate">Sakib Tanoy</span>
+              {/* Row: Task Ultron with 3 checklists & 1/2 subtasks badges */}
+              <div className="grid grid-cols-12 items-center p-3 text-xs border-b border-slate-100 hover:bg-slate-50/60 transition-colors">
+                <div className="col-span-5 flex items-center gap-2 min-w-0 pr-1">
+                  <div className="w-4 h-4 rounded-full border-2 border-slate-300 shrink-0" />
+                  <span className="font-bold text-slate-900 truncate">Task Ultron</span>
+                  <div className="flex items-center gap-1 shrink-0 text-slate-500">
+                    <CheckSquare size={11} className="text-slate-400" />
+                    <span className="text-[10.5px] font-mono font-bold">3</span>
+                    <span className="text-[10px] font-mono bg-slate-100 px-1 rounded text-slate-600">1/2</span>
                   </div>
                 </div>
-
-                {/* Subtask Checklist Nested Breakdown */}
-                <div className="mt-2.5 ml-5 pl-3 border-l-2 border-indigo-200/80 space-y-1.5">
-                  <div className="flex items-center justify-between text-[11px] text-slate-600">
-                    <div className="flex items-center gap-1.5">
-                      <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
-                      <span className="line-through text-slate-400">Export database & media assets</span>
-                    </div>
-                    <span className="text-[9.5px] font-mono text-emerald-600 font-semibold">Done</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-700 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-sm border-2 border-indigo-500 bg-white shrink-0" />
-                      <span>Configure VPS NGINX & SSL certificates</span>
-                    </div>
-                    <span className="text-[9.5px] font-mono text-indigo-600 font-semibold">In Progress</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-500">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-sm border border-slate-300 bg-white shrink-0" />
-                      <span>Update Cloudflare DNS records & SLA verify</span>
-                    </div>
-                    <span className="text-[9.5px] font-mono text-slate-400">Pending</span>
-                  </div>
+                <div className="col-span-2">
+                  <span className="text-xs font-medium text-[#D97706] inline-flex items-center gap-1">
+                    <Flag size={11} /> Medium
+                  </span>
                 </div>
-              </div>
-
-              {/* Row 2: Task Ultron */}
-              <div className="p-3 border-b border-slate-100 hover:bg-slate-50/70 transition-colors">
-                <div className="grid grid-cols-12 items-center text-xs">
-                  <div className="col-span-5 flex items-center gap-2 min-w-0 pr-1">
-                    <div className="w-3.5 h-3.5 rounded border border-slate-300 flex items-center justify-center shrink-0 bg-white" />
-                    <span className="font-semibold text-slate-900 truncate">Task Ultron</span>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="px-1.5 py-0.5 rounded text-[9.5px] font-medium bg-amber-50 text-amber-700 border border-amber-200 inline-flex items-center gap-1">
-                      <Flag size={8} /> Medium
-                    </span>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9.5px] font-medium">
-                      ● On Track
-                    </span>
-                  </div>
-                  <div className="col-span-3 text-right text-[11px] text-slate-400">
-                    Unassigned
-                  </div>
+                <div className="col-span-2">
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold">
+                    ✓ On Track
+                  </span>
+                </div>
+                <div className="col-span-3 flex items-center justify-end gap-1.5 min-w-0">
+                  <img
+                    src="/images/sakib-avatar.png"
+                    alt="Sakib Tanoy"
+                    className="w-5 h-5 rounded-full object-cover border border-slate-200 shrink-0"
+                  />
+                  <span className="text-xs text-slate-800 font-medium truncate">Sakib Tanoy</span>
                 </div>
               </div>
             </div>
 
-            {/* Peeking Collapsed Group fading down */}
-            <div
-              className="bg-[#F8FAFC] rounded-xl border border-slate-200/70 p-2.5 flex items-center justify-between opacity-60"
-              style={{
-                maskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <ChevronRight size={13} className="text-slate-400" />
-                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-mono text-[10px] font-bold">
-                  DONE
-                </span>
-                <span className="text-[11px] font-mono text-slate-500">101 tasks</span>
+            {/* Granular Checklist & Subtasks Detail (100% Matching media_1791139525719.png) */}
+            <div className="space-y-5">
+              {/* CHECKLIST CONTAINER */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <CheckSquare size={16} className="text-[#0B0B0F]" />
+                    <h5 className="text-sm font-bold text-[#0B0B0F]">Checklist</h5>
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold">
+                      1/2
+                    </span>
+                    {/* Small Green Progress Capsule */}
+                    <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#16A34A] rounded-full w-1/2" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Big Green Progress Bar with 50% Indicator */}
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#16A34A] rounded-full w-1/2" />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-slate-700 shrink-0">50%</span>
+                </div>
+
+                {/* Checklist Item 1 (Checked / Strikethrough) */}
+                <div className="flex items-center gap-2.5 py-1.5 text-xs text-slate-400">
+                  <div className="w-4 h-4 rounded bg-[#2563EB] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                    <Check size={11} strokeWidth={3} />
+                  </div>
+                  <span className="line-through font-medium">Cehek list item 1</span>
+                </div>
+
+                {/* Checklist Item 2 (Unchecked) */}
+                <div className="flex items-center gap-2.5 py-1.5 text-xs text-slate-800">
+                  <div className="w-4 h-4 rounded border-2 border-slate-400 bg-white shrink-0" />
+                  <span className="font-medium">cehcklist item 2</span>
+                </div>
+
+                {/* Add item input row with + button */}
+                <div className="mt-2 flex items-center gap-2">
+                  <div className="flex-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-400">
+                    Add item...
+                  </div>
+                  <div className="w-7 h-7 rounded-lg bg-[#94A3B8]/40 hover:bg-[#94A3B8]/60 text-white flex items-center justify-center shrink-0">
+                    <Plus size={14} />
+                  </div>
+                </div>
               </div>
-              <span className="text-[10px] text-slate-400">All deliverables signed off</span>
+
+              {/* SUBTASKS CONTAINER (100% Matching Screenshot 4) */}
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className="flex items-center gap-2">
+                    <CheckSquare size={16} className="text-[#0B0B0F]" />
+                    <h5 className="text-sm font-bold text-[#0B0B0F]">Subtasks</h5>
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold">
+                      1/3
+                    </span>
+                    <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#16A34A] rounded-full w-1/3" />
+                    </div>
+                  </div>
+
+                  <button className="flex items-center gap-1 text-xs font-medium text-[#2563EB] hover:text-blue-800">
+                    <Sparkles size={13} />
+                    <span>AI breakdown</span>
+                  </button>
+                </div>
+
+                {/* Subtask Nested Card Box */}
+                <div className="border border-slate-200/90 rounded-2xl overflow-hidden bg-white divide-y divide-slate-100 shadow-2xs">
+                  {/* Subtask 1: Done */}
+                  <div className="p-3 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 text-xs">
+                      <div className="w-5 h-5 rounded-full bg-[#16A34A] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
+                      <ChevronRight size={13} className="text-slate-400" />
+                      <span className="line-through text-slate-500 font-medium">SUBtask 1 test</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-[#16A34A] border border-emerald-200 text-[11px] font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A]" /> Done
+                    </span>
+                  </div>
+
+                  {/* Subtask 2: To Do */}
+                  <div className="p-3 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 text-xs">
+                      <div className="w-5 h-5 rounded-full border-2 border-slate-300 bg-white shrink-0" />
+                      <ChevronRight size={13} className="text-slate-400" />
+                      <span className="text-slate-800 font-medium">subtask 2</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To Do
+                    </span>
+                  </div>
+
+                  {/* Subtask 3: To Do */}
+                  <div className="p-3 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 text-xs">
+                      <div className="w-5 h-5 rounded-full border-2 border-slate-300 bg-white shrink-0" />
+                      <ChevronRight size={13} className="text-slate-400" />
+                      <span className="text-slate-800 font-medium">SUB 3</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To Do
+                    </span>
+                  </div>
+
+                  {/* Add a subtask row */}
+                  <div className="p-3 flex items-center gap-2 text-xs text-slate-400 font-medium">
+                    <div className="w-5 h-5 rounded-full border border-dashed border-slate-300 flex items-center justify-center shrink-0">
+                      <Plus size={11} className="text-slate-400" />
+                    </div>
+                    <span>Add a subtask...</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
@@ -863,12 +936,13 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 03: Integrated Timers & Task Drawer (Live Stopwatch & Credentials)
+    // FEATURE 03: Never Lose a Billable Minute (Task Drawer & Stopwatch Timer)
+    // Matches screenshot media_1791139523756.png 100%
     // =========================================================================
     if (featureIndex === "03") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
+          {/* Radial Spotlight */}
           <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
             style={{
@@ -877,112 +951,111 @@ export default function BlendedFeaturePreview({
             }}
           />
 
-          {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
           <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Header: Task Drawer Top Bar */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-3.5 min-w-0">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-[11px] font-medium text-slate-500">Internal Tasks</span>
-                <span className="text-slate-300">›</span>
-                <span className="text-[11px] font-bold text-slate-900 truncate">
-                  listView Sdarr Website
-                </span>
+            {/* Drawer Header Tabs (Comments vs Activity) */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 min-w-0">
+              <div className="flex items-center gap-2">
+                <div className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-2xs">
+                  <span className="w-2 h-2 rounded-full border-2 border-slate-400" />
+                  <span>TO DO</span>
+                  <ChevronDown size={12} className="text-slate-400 ml-0.5" />
+                </div>
+                <button className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 text-xs text-slate-600 bg-white hover:bg-slate-50 font-medium">
+                  <div className="w-3.5 h-3.5 rounded-full border border-slate-300" />
+                  <span>Mark complete</span>
+                </button>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-50 text-[#3F72AF] font-bold border border-blue-200">
-                  Drawer View
+
+              <div className="flex items-center gap-3 text-xs font-semibold">
+                <span className="text-slate-400 hover:text-slate-700 flex items-center gap-1 cursor-default">
+                  <MessageSquare size={13} /> Comments
+                </span>
+                <span className="text-[#0F172A] border-b-2 border-[#1D63ED] pb-3 -mb-3 flex items-center gap-1">
+                  <Activity size={13} className="text-[#1D63ED]" /> Activity
                 </span>
               </div>
             </div>
 
-            {/* Task Title & Action Strip */}
-            <div className="flex items-start justify-between gap-3 mb-3">
-              <div className="min-w-0">
-                <h4 className="text-base font-bold text-slate-900 leading-snug truncate">
-                  Move Sdarr Site
-                </h4>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-[#3F72AF] border border-blue-200">
-                    TO DO
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-600 border border-red-200 flex items-center gap-1">
-                    <Flag size={9} /> Urgent
-                  </span>
-                </div>
-              </div>
+            {/* Task Title & Meta Fields */}
+            <h3 className="text-xl font-bold text-[#0B0B0F] tracking-tight mb-3">
+              Task Ultron
+            </h3>
 
-              {/* Integrated Stopwatch Component */}
-              <div className="bg-[#0F172A] text-white p-2 sm:px-3 sm:py-2 rounded-xl flex items-center gap-2 shadow-xs shrink-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <div className="text-right">
-                  <span className="font-mono text-xs font-bold block leading-none">01:48:22</span>
-                  <span className="text-[9px] text-emerald-400 font-mono font-medium block mt-0.5">
-                    100% Billable
-                  </span>
-                </div>
+            {/* Meta Properties Grid (100% Matching Screenshot 3) */}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs pb-4 border-b border-slate-100">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium flex items-center gap-1.5">
+                  <Users size={13} className="text-slate-400" /> Assignee
+                </span>
+                <span className="text-slate-800 font-medium">Unassigned</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium flex items-center gap-1.5">
+                  <Calendar size={13} className="text-slate-400" /> Due Date
+                </span>
+                <span className="text-slate-800 font-medium">Set due date</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium flex items-center gap-1.5">
+                  <Flag size={13} className="text-[#D97706]" /> Priority
+                </span>
+                <span className="text-[#D97706] font-semibold">Medium</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium flex items-center gap-1.5">
+                  <Clock size={13} className="text-slate-400" /> Estimate
+                </span>
+                <span className="font-mono text-slate-800">— h</span>
               </div>
             </div>
 
-            {/* Meta Properties Grid */}
-            <div className="grid grid-cols-2 gap-2 p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200/70 text-xs mb-3">
+            {/* FLOATING STOPWATCH WIDGET (100% Matching Floating Widget from media_1791139523756.png) */}
+            <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-lg relative">
+              {/* Header: Radio dot & "This task" */}
+              <div className="flex items-center justify-between pb-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] ring-4 ring-blue-100" />
+                  <span className="text-xs font-bold text-slate-800">This task</span>
+                </div>
+                <span className="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-default">—</span>
+              </div>
+
+              {/* Big Stopwatch Digits: 00:00:10 */}
+              <div className="py-2 text-center">
+                <span className="font-mono text-3xl sm:text-4xl font-extrabold text-[#0B0B0F] tracking-tight">
+                  00:00:10
+                </span>
+              </div>
+
+              {/* Add description input */}
+              <div className="px-3 py-1.5 bg-[#F8FAFC] border border-slate-200 rounded-xl text-xs text-slate-400 mb-3 text-left">
+                + Add description...
+              </div>
+
+              {/* Pause & Stop Buttons */}
+              <div className="grid grid-cols-2 gap-2">
+                <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-2xs">
+                  <span className="w-1 h-3 bg-slate-700 inline-block rounded-xs" />
+                  <span className="w-1 h-3 bg-slate-700 inline-block rounded-xs" />
+                  <span>Pause</span>
+                </button>
+                <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-xs font-bold text-[#DC2626] shadow-2xs">
+                  <div className="w-2.5 h-2.5 rounded-xs border-2 border-[#DC2626]" />
+                  <span>Stop</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Time Tracking Drawer Summary Row */}
+            <div className="mt-3 grid grid-cols-2 gap-2 p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200/60 text-xs">
               <div>
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Assignee</span>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <div className="w-4 h-4 rounded-full bg-slate-900 text-white font-bold text-[8px] flex items-center justify-center">
-                    ST
-                  </div>
-                  <span className="font-semibold text-slate-800 text-[11.5px]">Sakib Tanoy</span>
-                </div>
+                <span className="text-[10px] text-slate-400 block uppercase font-mono">My Logged</span>
+                <span className="font-bold text-slate-900 text-xs mt-0.5 block font-mono">0h 0m</span>
               </div>
               <div>
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">Time Logged</span>
-                <span className="font-mono font-bold text-emerald-600 text-[11.5px] block mt-0.5">
-                  1h 48m ($247.50)
-                </span>
+                <span className="text-[10px] text-slate-400 block uppercase font-mono">My Billable</span>
+                <span className="font-bold text-emerald-600 text-xs mt-0.5 block font-mono">0h 0m</span>
               </div>
-            </div>
-
-            {/* Attached Credentials & Internal Notes */}
-            <div className="bg-[#F8FAFC] rounded-xl border border-slate-200/80 p-3 mb-2.5">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200/60 mb-2">
-                <div className="flex items-center gap-1.5">
-                  <Shield size={12} className="text-[#3F72AF]" />
-                  <span className="text-[11px] font-bold text-slate-800">
-                    Vault Credentials (Internal Only)
-                  </span>
-                </div>
-                <span className="text-[9.5px] font-mono text-slate-400">Encrypted</span>
-              </div>
-
-              <div className="space-y-1.5 text-[11px]">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500 font-mono text-[10px]">Server:</span>
-                  <span className="font-mono text-slate-800 font-medium">fs-bonde.easywp.com:22</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500 font-mono text-[10px]">Username:</span>
-                  <span className="font-mono text-slate-800 font-medium">sdarr-studios-252caf</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Live Activity & Comments preview fading down */}
-            <div
-              className="bg-white rounded-xl border border-slate-200/80 p-3 flex items-center justify-between opacity-70"
-              style={{
-                maskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-              }}
-            >
-              <div className="flex items-center gap-2 min-w-0">
-                <MessageSquare size={13} className="text-slate-400 shrink-0" />
-                <span className="text-xs text-slate-700 truncate">
-                  <strong className="text-slate-900 font-semibold">Zaed Tonmoy:</strong> DNS change kora lagbe
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-slate-400 shrink-0">Just now</span>
             </div>
           </BlendMockupCard>
         </div>
