@@ -148,65 +148,63 @@ export default function BlendedFeaturePreview({
           {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
           <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5">
             {/* SCREENSHOT 1: Budget Configuration Bar */}
-            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-4 shadow-2xs relative">
+              <div className="flex items-center justify-between gap-2 sm:gap-4">
                 {/* Left: Icon & Title */}
                 <div className="flex items-center gap-2.5 shrink-0">
-                  <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 border border-slate-200/60">
-                    <DollarSign size={15} className="text-slate-600" />
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 border border-slate-200/60">
+                    <DollarSign size={16} className="text-slate-600" />
                   </div>
                   <span className="text-sm font-semibold text-slate-900 tracking-tight">Budget</span>
                 </div>
 
                 {/* Right: Inputs & Dropdown */}
-                <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+                <div className="flex items-end gap-2.5 sm:gap-3">
                   {/* Budget Type Selector with open menu */}
                   <div className="relative">
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-medium text-slate-400 mb-0.5 sm:hidden">Type</span>
-                      <div className="h-8 px-2.5 sm:px-3 bg-white border border-blue-400/80 rounded-lg text-xs font-medium text-slate-700 flex items-center gap-1.5 shadow-2xs ring-2 ring-blue-500/10">
-                        <span>{selectedBudget}</span>
-                        <ChevronDown size={13} className="text-slate-400" />
-                      </div>
+                    <div className="h-9 px-3 bg-white border border-blue-400 rounded-lg text-xs font-normal text-slate-800 flex items-center justify-between gap-2 shadow-2xs min-w-[90px] sm:min-w-[96px] ring-2 ring-blue-500/10">
+                      <span>{selectedBudget}</span>
+                      <ChevronDown size={14} className="text-slate-400 shrink-0" />
                     </div>
 
-                    {/* Popover Dropdown matching Screenshot 1 */}
-                    <div className="absolute top-[calc(100%+6px)] left-0 sm:left-auto sm:right-0 z-30 w-36 bg-[#52525B]/90 backdrop-blur-md rounded-xl p-1 shadow-xl text-white text-xs border border-white/10 animate-in fade-in zoom-in-95 duration-150">
+                    {/* Popover Dropdown matching Screenshot 1 exactly positioned overlapping the trigger */}
+                    <div className="absolute top-0 right-0 z-30 w-44 bg-[#555860] backdrop-blur-md rounded-xl p-1.5 shadow-2xl text-white text-xs border border-white/10 animate-in fade-in zoom-in-95 duration-150">
                       <button
                         type="button"
-                        onClick={() => setSelectedBudget("Fixed")}
-                        className="w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white/10 transition-colors text-slate-200"
+                        onClick={() => setSelectedBudget("Hourly")}
+                        className="w-full text-left px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-white/10 transition-colors text-slate-200 text-xs font-normal"
                       >
-                        <span className="w-3 text-[11px] text-white">None</span>
+                        <span className="w-3 text-xs" />
+                        <span>None</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedBudget("Fixed")}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
-                          selectedBudget === "Fixed" ? "text-white font-medium" : "text-slate-200 hover:bg-white/10"
+                        className={`w-full text-left px-3 py-1.5 rounded-lg flex items-center gap-2 transition-colors text-xs ${
+                          selectedBudget === "Fixed" ? "text-white font-medium bg-white/10" : "text-slate-200 hover:bg-white/10"
                         }`}
                       >
-                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Fixed" ? "✓" : ""}</span>
+                        <span className="w-3 text-xs font-bold">{selectedBudget === "Fixed" ? "✓" : ""}</span>
                         <span>Fixed</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedBudget("Hourly")}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
+                        className={`w-full text-left px-3 py-1.5 rounded-lg flex items-center gap-2 transition-colors text-xs ${
                           selectedBudget === "Hourly" ? "bg-[#0070F3] text-white font-medium shadow-xs" : "text-slate-200 hover:bg-white/10"
                         }`}
                       >
-                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Hourly" ? "✓" : ""}</span>
+                        <span className="w-3 text-xs font-bold">{selectedBudget === "Hourly" ? "✓" : ""}</span>
                         <span>Hourly</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedBudget("Retainer")}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
+                        className={`w-full text-left px-3 py-1.5 rounded-lg flex items-center gap-2 transition-colors text-xs ${
                           selectedBudget === "Retainer" ? "bg-[#0070F3] text-white font-medium" : "text-slate-200 hover:bg-white/10"
                         }`}
                       >
-                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Retainer" ? "✓" : ""}</span>
+                        <span className="w-3 text-xs font-bold">{selectedBudget === "Retainer" ? "✓" : ""}</span>
                         <span>Retainer</span>
                       </button>
                     </div>
@@ -214,18 +212,18 @@ export default function BlendedFeaturePreview({
 
                   {/* Amount Input */}
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-medium text-slate-400 mb-0.5 hidden sm:block">Amount</span>
-                    <div className="h-8 w-20 sm:w-24 px-2.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 flex items-center shadow-2xs">
+                    <span className="text-[11px] font-normal text-slate-500 mb-1">Amount</span>
+                    <div className="h-9 w-24 sm:w-36 px-3 bg-white border border-slate-200 rounded-lg text-xs font-normal text-slate-800 flex items-center shadow-2xs">
                       100
                     </div>
                   </div>
 
                   {/* Currency Input */}
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-medium text-slate-400 mb-0.5 hidden sm:block">Currency</span>
-                    <div className="h-8 px-2.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 flex items-center gap-1.5 shadow-2xs">
+                    <span className="text-[11px] font-normal text-slate-500 mb-1">Currency</span>
+                    <div className="h-9 px-3 min-w-[76px] sm:min-w-[84px] bg-white border border-slate-200 rounded-lg text-xs font-normal text-slate-800 flex items-center justify-between gap-2 shadow-2xs">
                       <span>USD</span>
-                      <ChevronDown size={13} className="text-slate-400" />
+                      <ChevronDown size={14} className="text-slate-400 shrink-0" />
                     </div>
                   </div>
                 </div>
