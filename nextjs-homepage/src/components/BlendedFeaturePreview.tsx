@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Search,
   CheckCircle2,
@@ -45,6 +45,35 @@ export default function BlendedFeaturePreview({
   moduleName,
   featureIndex,
 }: BlendedFeaturePreviewProps) {
+  // Live animated state for Tasks features
+  const [checklistChecked, setChecklistChecked] = useState(false);
+  const [subtaskChecked, setSubtaskChecked] = useState(false);
+  const [subtask3Checked, setSubtask3Checked] = useState(false);
+  const [timerSeconds, setTimerSeconds] = useState(10);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
+
+  // Live timer tick effect
+  useEffect(() => {
+    if (!isTimerRunning) return;
+    const interval = setInterval(() => {
+      setTimerSeconds((prev) => (prev >= 59 ? 10 : prev + 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isTimerRunning]);
+
+  // Automated gentle checking/unchecking cycle for interactive preview feel
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setChecklistChecked((prev) => !prev);
+      setTimeout(() => {
+        setSubtaskChecked((prev) => !prev);
+      }, 1500);
+      setTimeout(() => {
+        setSubtask3Checked((prev) => !prev);
+      }, 3000);
+    }, 5000);
+    return () => clearInterval(cycle);
+  }, []);
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {
     // =========================================================================
@@ -742,9 +771,13 @@ export default function BlendedFeaturePreview({
 
     // =========================================================================
     // FEATURE 02: Granular Subtasks for Intricate Deliverables (Checklists & Subtasks)
-    // Matches screenshot media_1791139525719.png & media_1791139546429.png 100%
+    // Matches screenshot media_1791139525719.png 100% (Clean focus on Checklist & Subtasks)
     // =========================================================================
     if (featureIndex === "02") {
+      const checklistDone = checklistChecked ? 2 : 1;
+      const checklistPercent = checklistChecked ? 100 : 50;
+      const subtasksDoneCount = 1 + (subtaskChecked ? 1 : 0) + (subtask3Checked ? 1 : 0);
+
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           {/* Radial Spotlight */}
@@ -757,82 +790,38 @@ export default function BlendedFeaturePreview({
           />
 
           <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Top Overview: Active Work Table Row (Matching media_1791139546429.png) */}
-            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs mb-5">
-              <div className="bg-[#F8FAFC] px-3 py-2 border-b border-slate-200 flex items-center justify-between text-xs font-semibold text-slate-800">
-                <div className="flex items-center gap-2">
-                  <ChevronDown size={14} className="text-slate-400" />
-                  <span className="px-2 py-0.5 bg-white border border-slate-200 rounded-full font-mono text-[10px] text-slate-700 font-bold">
-                    TO DO 2
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-slate-400">Table View</span>
-              </div>
-
-              {/* Table Header */}
-              <div className="grid grid-cols-12 bg-[#FAFAFA] border-b border-slate-200 text-[10px] font-mono uppercase text-slate-500 py-2 px-3">
-                <span className="col-span-5 font-bold">TASK</span>
-                <span className="col-span-2 font-bold">PRIORITY</span>
-                <span className="col-span-2 font-bold">HEALTH</span>
-                <span className="col-span-3 font-bold text-right">ASSIGNEE</span>
-              </div>
-
-              {/* Row: Task Ultron with 3 checklists & 1/2 subtasks badges */}
-              <div className="grid grid-cols-12 items-center p-3 text-xs border-b border-slate-100 hover:bg-slate-50/60 transition-colors">
-                <div className="col-span-5 flex items-center gap-2 min-w-0 pr-1">
-                  <div className="w-4 h-4 rounded-full border-2 border-slate-300 shrink-0" />
-                  <span className="font-bold text-slate-900 truncate">Task Ultron</span>
-                  <div className="flex items-center gap-1 shrink-0 text-slate-500">
-                    <CheckSquare size={11} className="text-slate-400" />
-                    <span className="text-[10.5px] font-mono font-bold">3</span>
-                    <span className="text-[10px] font-mono bg-slate-100 px-1 rounded text-slate-600">1/2</span>
-                  </div>
-                </div>
-                <div className="col-span-2">
-                  <span className="text-xs font-medium text-[#D97706] inline-flex items-center gap-1">
-                    <Flag size={11} /> Medium
-                  </span>
-                </div>
-                <div className="col-span-2">
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold">
-                    ✓ On Track
-                  </span>
-                </div>
-                <div className="col-span-3 flex items-center justify-end gap-1.5 min-w-0">
-                  <img
-                    src="/images/sakib-avatar.png"
-                    alt="Sakib Tanoy"
-                    className="w-5 h-5 rounded-full object-cover border border-slate-200 shrink-0"
-                  />
-                  <span className="text-xs text-slate-800 font-medium truncate">Sakib Tanoy</span>
-                </div>
-              </div>
-            </div>
-
             {/* Granular Checklist & Subtasks Detail (100% Matching media_1791139525719.png) */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               {/* CHECKLIST CONTAINER */}
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <CheckSquare size={16} className="text-[#0B0B0F]" />
                     <h5 className="text-sm font-bold text-[#0B0B0F]">Checklist</h5>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold">
-                      1/2
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold transition-all">
+                      {checklistDone}/2
                     </span>
                     {/* Small Green Progress Capsule */}
                     <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#16A34A] rounded-full w-1/2" />
+                      <div
+                        className="h-full bg-[#16A34A] rounded-full transition-all duration-500 ease-out"
+                        style={{ width: `${checklistPercent}%` }}
+                      />
                     </div>
                   </div>
                 </div>
 
-                {/* Big Green Progress Bar with 50% Indicator */}
+                {/* Big Green Progress Bar with 50% / 100% Indicator */}
                 <div className="flex items-center gap-3 mb-3">
                   <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-[#16A34A] rounded-full w-1/2" />
+                    <div
+                      className="h-full bg-[#16A34A] rounded-full transition-all duration-500 ease-out"
+                      style={{ width: `${checklistPercent}%` }}
+                    />
                   </div>
-                  <span className="font-mono text-xs font-bold text-slate-700 shrink-0">50%</span>
+                  <span className="font-mono text-xs font-bold text-slate-700 shrink-0 transition-all">
+                    {checklistPercent}%
+                  </span>
                 </div>
 
                 {/* Checklist Item 1 (Checked / Strikethrough) */}
@@ -843,14 +832,31 @@ export default function BlendedFeaturePreview({
                   <span className="line-through font-medium">Cehek list item 1</span>
                 </div>
 
-                {/* Checklist Item 2 (Unchecked) */}
-                <div className="flex items-center gap-2.5 py-1.5 text-xs text-slate-800">
-                  <div className="w-4 h-4 rounded border-2 border-slate-400 bg-white shrink-0" />
-                  <span className="font-medium">cehcklist item 2</span>
+                {/* Checklist Item 2 (Animated Toggling) */}
+                <div
+                  onClick={() => setChecklistChecked(!checklistChecked)}
+                  className="flex items-center gap-2.5 py-1.5 text-xs text-slate-800 cursor-pointer group/item select-none"
+                >
+                  <div
+                    className={`w-4 h-4 rounded flex items-center justify-center shrink-0 transition-colors ${
+                      checklistChecked
+                        ? "bg-[#2563EB] text-white"
+                        : "border-2 border-slate-400 bg-white group-hover/item:border-blue-500"
+                    }`}
+                  >
+                    {checklistChecked && <Check size={11} strokeWidth={3} />}
+                  </div>
+                  <span
+                    className={`font-medium transition-colors ${
+                      checklistChecked ? "line-through text-slate-400" : "text-slate-800"
+                    }`}
+                  >
+                    cehcklist item 2
+                  </span>
                 </div>
 
                 {/* Add item input row with + button */}
-                <div className="mt-2 flex items-center gap-2">
+                <div className="mt-2.5 flex items-center gap-2">
                   <div className="flex-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-400">
                     Add item...
                   </div>
@@ -866,16 +872,19 @@ export default function BlendedFeaturePreview({
                   <div className="flex items-center gap-2">
                     <CheckSquare size={16} className="text-[#0B0B0F]" />
                     <h5 className="text-sm font-bold text-[#0B0B0F]">Subtasks</h5>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold">
-                      1/3
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold transition-all">
+                      {subtasksDoneCount}/3
                     </span>
                     <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#16A34A] rounded-full w-1/3" />
+                      <div
+                        className="h-full bg-[#16A34A] rounded-full transition-all duration-500 ease-out"
+                        style={{ width: `${(subtasksDoneCount / 3) * 100}%` }}
+                      />
                     </div>
                   </div>
 
                   <button className="flex items-center gap-1 text-xs font-medium text-[#2563EB] hover:text-blue-800">
-                    <Sparkles size={13} />
+                    <Sparkles size={13} className="animate-pulse" />
                     <span>AI breakdown</span>
                   </button>
                 </div>
@@ -896,27 +905,83 @@ export default function BlendedFeaturePreview({
                     </span>
                   </div>
 
-                  {/* Subtask 2: To Do */}
-                  <div className="p-3 flex items-center justify-between gap-2">
+                  {/* Subtask 2: Animated toggle */}
+                  <div
+                    onClick={() => setSubtaskChecked(!subtaskChecked)}
+                    className="p-3 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/70 transition-colors select-none"
+                  >
                     <div className="flex items-center gap-2.5 text-xs">
-                      <div className="w-5 h-5 rounded-full border-2 border-slate-300 bg-white shrink-0" />
+                      <div
+                        className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                          subtaskChecked
+                            ? "bg-[#16A34A] text-white shadow-2xs"
+                            : "border-2 border-slate-300 bg-white"
+                        }`}
+                      >
+                        {subtaskChecked && <Check size={12} strokeWidth={3} />}
+                      </div>
                       <ChevronRight size={13} className="text-slate-400" />
-                      <span className="text-slate-800 font-medium">subtask 2</span>
+                      <span
+                        className={`font-medium transition-all ${
+                          subtaskChecked ? "line-through text-slate-400" : "text-slate-800"
+                        }`}
+                      >
+                        subtask 2
+                      </span>
                     </div>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To Do
+                    <span
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium border transition-colors ${
+                        subtaskChecked
+                          ? "bg-emerald-50 text-[#16A34A] border-emerald-200 font-bold"
+                          : "bg-slate-100 text-slate-600 border-slate-200"
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          subtaskChecked ? "bg-[#16A34A]" : "bg-slate-400"
+                        }`}
+                      />
+                      {subtaskChecked ? "Done" : "To Do"}
                     </span>
                   </div>
 
-                  {/* Subtask 3: To Do */}
-                  <div className="p-3 flex items-center justify-between gap-2">
+                  {/* Subtask 3: Animated toggle */}
+                  <div
+                    onClick={() => setSubtask3Checked(!subtask3Checked)}
+                    className="p-3 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/70 transition-colors select-none"
+                  >
                     <div className="flex items-center gap-2.5 text-xs">
-                      <div className="w-5 h-5 rounded-full border-2 border-slate-300 bg-white shrink-0" />
+                      <div
+                        className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                          subtask3Checked
+                            ? "bg-[#16A34A] text-white shadow-2xs"
+                            : "border-2 border-slate-300 bg-white"
+                        }`}
+                      >
+                        {subtask3Checked && <Check size={12} strokeWidth={3} />}
+                      </div>
                       <ChevronRight size={13} className="text-slate-400" />
-                      <span className="text-slate-800 font-medium">SUB 3</span>
+                      <span
+                        className={`font-medium transition-all ${
+                          subtask3Checked ? "line-through text-slate-400" : "text-slate-800"
+                        }`}
+                      >
+                        SUB 3
+                      </span>
                     </div>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To Do
+                    <span
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium border transition-colors ${
+                        subtask3Checked
+                          ? "bg-emerald-50 text-[#16A34A] border-emerald-200 font-bold"
+                          : "bg-slate-100 text-slate-600 border-slate-200"
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${
+                          subtask3Checked ? "bg-[#16A34A]" : "bg-slate-400"
+                        }`}
+                      />
+                      {subtask3Checked ? "Done" : "To Do"}
                     </span>
                   </div>
 
@@ -937,9 +1002,11 @@ export default function BlendedFeaturePreview({
 
     // =========================================================================
     // FEATURE 03: Never Lose a Billable Minute (Task Drawer & Stopwatch Timer)
-    // Matches screenshot media_1791139523756.png 100%
+    // Matches screenshot media_1791139523756.png 100% (With Live Running Timer)
     // =========================================================================
     if (featureIndex === "03") {
+      const formattedSeconds = String(timerSeconds).padStart(2, "0");
+
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           {/* Radial Spotlight */}
@@ -1009,21 +1076,21 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* FLOATING STOPWATCH WIDGET (100% Matching Floating Widget from media_1791139523756.png) */}
+            {/* FLOATING STOPWATCH WIDGET (With Live Active Timer & Pause/Resume Control) */}
             <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-lg relative">
               {/* Header: Radio dot & "This task" */}
               <div className="flex items-center justify-between pb-1">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] ring-4 ring-blue-100" />
+                  <span className={`w-2.5 h-2.5 rounded-full ${isTimerRunning ? 'bg-[#2563EB] ring-4 ring-blue-100 animate-pulse' : 'bg-slate-400 ring-4 ring-slate-100'}`} />
                   <span className="text-xs font-bold text-slate-800">This task</span>
                 </div>
                 <span className="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-default">—</span>
               </div>
 
-              {/* Big Stopwatch Digits: 00:00:10 */}
+              {/* Big Stopwatch Digits: 00:00:10 (Live updating seconds) */}
               <div className="py-2 text-center">
                 <span className="font-mono text-3xl sm:text-4xl font-extrabold text-[#0B0B0F] tracking-tight">
-                  00:00:10
+                  00:00:{formattedSeconds}
                 </span>
               </div>
 
@@ -1034,12 +1101,25 @@ export default function BlendedFeaturePreview({
 
               {/* Pause & Stop Buttons */}
               <div className="grid grid-cols-2 gap-2">
-                <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-2xs">
-                  <span className="w-1 h-3 bg-slate-700 inline-block rounded-xs" />
-                  <span className="w-1 h-3 bg-slate-700 inline-block rounded-xs" />
-                  <span>Pause</span>
+                <button
+                  onClick={() => setIsTimerRunning(!isTimerRunning)}
+                  className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border text-xs font-semibold shadow-2xs transition-colors ${
+                    isTimerRunning
+                      ? "border-slate-200 hover:bg-slate-50 text-slate-700"
+                      : "bg-blue-50 border-blue-200 text-blue-700"
+                  }`}
+                >
+                  <span className="w-1 h-3 bg-current inline-block rounded-xs" />
+                  <span className="w-1 h-3 bg-current inline-block rounded-xs" />
+                  <span>{isTimerRunning ? "Pause" : "Resume"}</span>
                 </button>
-                <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-xs font-bold text-[#DC2626] shadow-2xs">
+                <button
+                  onClick={() => {
+                    setTimerSeconds(0);
+                    setIsTimerRunning(false);
+                  }}
+                  className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-xs font-bold text-[#DC2626] shadow-2xs transition-colors"
+                >
                   <div className="w-2.5 h-2.5 rounded-xs border-2 border-[#DC2626]" />
                   <span>Stop</span>
                 </button>
@@ -1050,11 +1130,15 @@ export default function BlendedFeaturePreview({
             <div className="mt-3 grid grid-cols-2 gap-2 p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200/60 text-xs">
               <div>
                 <span className="text-[10px] text-slate-400 block uppercase font-mono">My Logged</span>
-                <span className="font-bold text-slate-900 text-xs mt-0.5 block font-mono">0h 0m</span>
+                <span className="font-bold text-slate-900 text-xs mt-0.5 block font-mono">
+                  0h {Math.floor(timerSeconds / 60)}m
+                </span>
               </div>
               <div>
                 <span className="text-[10px] text-slate-400 block uppercase font-mono">My Billable</span>
-                <span className="font-bold text-emerald-600 text-xs mt-0.5 block font-mono">0h 0m</span>
+                <span className="font-bold text-emerald-600 text-xs mt-0.5 block font-mono">
+                  0h {Math.floor(timerSeconds / 60)}m
+                </span>
               </div>
             </div>
           </BlendMockupCard>
