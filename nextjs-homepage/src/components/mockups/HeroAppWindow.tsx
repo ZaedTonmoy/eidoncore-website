@@ -1189,8 +1189,8 @@ export default function HeroAppWindow() {
 
               {/* Toolbar & Filter Bar - Underline tabs & icon tools matching screenshot */}
               {/* Action Toolbar */}
-              <div className="flex items-center justify-between gap-1.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
-                <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center justify-between gap-2 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+                <div className="flex items-center gap-2.5 shrink-0">
                   <button
                     onClick={() => setActiveProjectTab("all")}
                     className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-[11px] ${
@@ -1228,22 +1228,12 @@ export default function HeroAppWindow() {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1 shrink-0">
+                <div className="flex items-center gap-1.5 shrink-0">
                   {/* Search */}
                   <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white border border-[#E2E8F0] rounded-full text-[#64748B]">
                     <Search size={10} className="text-[#94A3B8]" />
                     <span className="text-[9.5px] text-[#94A3B8]">Search...</span>
                     <kbd className="text-[8px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
-                  </div>
-
-                  {/* Icon tools: Check, Flag */}
-                  <div className="flex items-center gap-0.5 text-slate-400">
-                    <button className="p-0.5 hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={13} />
-                    </button>
-                    <button className="p-0.5 hover:text-slate-700 transition-colors">
-                      <Flag size={13} />
-                    </button>
                   </div>
 
                   {/* Segmented view pill toggle */}
@@ -1604,8 +1594,8 @@ export default function HeroAppWindow() {
               </div>
 
               {/* Toolbar & Filters (Matching Screenshot) */}
-              <div className="flex items-center justify-between gap-1.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
-                <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center justify-between gap-2 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+                <div className="flex items-center gap-2.5 shrink-0">
                   <button
                     onClick={() => setActiveTaskTab("all")}
                     className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 whitespace-nowrap text-[11px] ${
@@ -1643,22 +1633,12 @@ export default function HeroAppWindow() {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1 shrink-0">
+                <div className="flex items-center gap-1.5 shrink-0">
                   {/* Search */}
                   <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white border border-[#E2E8F0] rounded-full text-[#64748B]">
                     <Search size={10} className="text-[#94A3B8]" />
                     <span className="text-[9.5px] text-[#94A3B8]">Search...</span>
                     <kbd className="text-[8px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
-                  </div>
-
-                  {/* Icon tools: Check, Flag */}
-                  <div className="flex items-center gap-0.5 text-slate-400">
-                    <button className="p-0.5 hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={13} />
-                    </button>
-                    <button className="p-0.5 hover:text-slate-700 transition-colors">
-                      <Flag size={13} />
-                    </button>
                   </div>
 
                   {/* My Tasks Switch */}
