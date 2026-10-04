@@ -76,13 +76,30 @@ export default function BlendedFeaturePreview({
     return () => clearInterval(cycle);
   }, []);
 
-  // Automated gentle switching between Board and List view for Feature 01
+  // Automated gentle switching between Board and List view for Feature 01 with realistic cursor click
+  const [cursorTarget, setCursorTarget] = useState<"list" | "board" | null>(null);
+  const [isClicking, setIsClicking] = useState(false);
+
   useEffect(() => {
     const viewInterval = setInterval(() => {
-      setActiveTaskView((prev) => (prev === "board" ? "list" : "board"));
-    }, 4000);
+      const nextView = activeTaskView === "board" ? "list" : "board";
+      // First show cursor moving to target tab
+      setCursorTarget(nextView);
+      // Then trigger click effect
+      setTimeout(() => {
+        setIsClicking(true);
+        setTimeout(() => {
+          setIsClicking(false);
+          setActiveTaskView(nextView);
+          // Hide cursor after click
+          setTimeout(() => {
+            setCursorTarget(null);
+          }, 600);
+        }, 250);
+      }, 500);
+    }, 4500);
     return () => clearInterval(viewInterval);
-  }, []);
+  }, [activeTaskView]);
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {
     // =========================================================================
@@ -563,10 +580,10 @@ export default function BlendedFeaturePreview({
 
               <div className="flex items-center gap-1.5 shrink-0">
                 {/* View switcher: List vs Board (Animated / Interactive) */}
-                <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs">
+                <div className="relative flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs">
                   <button
                     onClick={() => setActiveTaskView("list")}
-                    className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all ${
+                    className={`relative z-10 flex items-center gap-1 px-2.5 py-1 rounded-md transition-all duration-200 ${
                       activeTaskView === "list"
                         ? "bg-white shadow-2xs text-[#0F172A] font-bold"
                         : "text-slate-500 hover:text-slate-800"
@@ -577,7 +594,7 @@ export default function BlendedFeaturePreview({
                   </button>
                   <button
                     onClick={() => setActiveTaskView("board")}
-                    className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all ${
+                    className={`relative z-10 flex items-center gap-1 px-2.5 py-1 rounded-md transition-all duration-200 ${
                       activeTaskView === "board"
                         ? "bg-white shadow-2xs text-[#0F172A] font-bold"
                         : "text-slate-500 hover:text-slate-800"
@@ -586,6 +603,30 @@ export default function BlendedFeaturePreview({
                     <Kanban size={12} className={activeTaskView === "board" ? "text-[#3F72AF]" : ""} />
                     <span className="hidden sm:inline">Board</span>
                   </button>
+
+                  {/* Realistic Animated Floating Click Cursor */}
+                  {cursorTarget && (
+                    <div
+                      className={`pointer-events-none absolute z-30 transition-all duration-300 ease-out flex items-center ${
+                        cursorTarget === "list"
+                          ? "left-3 top-2.5"
+                          : "left-[58px] sm:left-[62px] top-2.5"
+                      }`}
+                    >
+                      <svg
+                        className={`w-4 h-4 text-slate-900 drop-shadow-md transition-transform duration-150 ${
+                          isClicking ? "scale-75 translate-y-0.5" : "scale-100"
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z" />
+                      </svg>
+                      {isClicking && (
+                        <span className="absolute -inset-1 rounded-full bg-blue-500/30 animate-ping" />
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#1D63ED] hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs">
@@ -614,10 +655,16 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* TOGGLE VIEW: BOARD vs LIST */}
-            {activeTaskView === "board" ? (
-              /* BOARD / KANBAN VIEW (100% Matching media_1791139510552.png) */
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2.5 transition-all duration-300">
+            {/* TOGGLE VIEW: BOARD vs LIST with Same Height & Smooth Transition Animation */}
+            <div className="relative min-h-[460px] sm:min-h-[440px] mb-2.5 overflow-hidden">
+              {/* BOARD / KANBAN VIEW (100% Matching media_1791139510552.png) */}
+              <div
+                className={`grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-500 ease-in-out ${
+                  activeTaskView === "board"
+                    ? "opacity-100 scale-100 pointer-events-auto"
+                    : "opacity-0 scale-[0.98] pointer-events-none absolute inset-0"
+                }`}
+              >
                 {/* COLUMN 1: TO DO (2) */}
                 <div className="bg-[#EEF1F5]/80 border border-slate-200/80 rounded-2xl p-2.5 sm:p-3 flex flex-col gap-2.5">
                   {/* Column Pill Header */}
@@ -770,9 +817,14 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
               </div>
-            ) : (
-              /* LIST VIEW (100% Matching media_1791139546429.png) */
-              <div className="space-y-3 mb-2.5 transition-all duration-300">
+              {/* LIST VIEW (100% Matching media_1791139546429.png) */}
+              <div
+                className={`space-y-3 transition-all duration-500 ease-in-out ${
+                  activeTaskView === "list"
+                    ? "opacity-100 scale-100 pointer-events-auto"
+                    : "opacity-0 scale-[0.98] pointer-events-none absolute inset-0"
+                }`}
+              >
                 {/* TO DO SECTION */}
                 <div className="border border-slate-200/80 rounded-2xl overflow-hidden bg-white shadow-2xs">
                   {/* Section Bar */}
@@ -884,7 +936,7 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </BlendMockupCard>
         </div>
       );
@@ -1209,11 +1261,17 @@ export default function BlendedFeaturePreview({
                   className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border text-xs font-semibold shadow-2xs transition-colors ${
                     isTimerRunning
                       ? "border-slate-200 hover:bg-slate-50 text-slate-700"
-                      : "bg-blue-50 border-blue-200 text-blue-700"
+                      : "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
                   }`}
                 >
-                  <span className="w-1 h-3 bg-current inline-block rounded-xs" />
-                  <span className="w-1 h-3 bg-current inline-block rounded-xs" />
+                  {isTimerRunning ? (
+                    <span className="flex items-center gap-0.5">
+                      <span className="w-1 h-3 bg-current inline-block rounded-xs" />
+                      <span className="w-1 h-3 bg-current inline-block rounded-xs" />
+                    </span>
+                  ) : (
+                    <Play size={13} className="fill-current" />
+                  )}
                   <span>{isTimerRunning ? "Pause" : "Resume"}</span>
                 </button>
                 <button
