@@ -28,6 +28,7 @@ import {
   Globe,
   ArrowRight,
   Activity,
+  DollarSign,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -100,182 +101,209 @@ export default function BlendedFeaturePreview({
     }, 4500);
     return () => clearInterval(viewInterval);
   }, [activeTaskView]);
+  // State for Projects Feature 01 (Budget configuration & AI Diagnostic)
+  const [selectedBudget, setSelectedBudget] = useState<"Hourly" | "Fixed" | "Retainer">("Hourly");
+  const [isDiagnosticRunning, setIsDiagnosticRunning] = useState(false);
+  const [diagnosticDone, setDiagnosticDone] = useState(false);
+
+  const handleRunDiagnostic = () => {
+    setIsDiagnosticRunning(true);
+    setTimeout(() => {
+      setIsDiagnosticRunning(false);
+      setDiagnosticDone(true);
+      setTimeout(() => setDiagnosticDone(false), 3000);
+    }, 1200);
+  };
+
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {
     // =========================================================================
-    // FEATURE 01: Real-Time Budget Burndown (Eidoncore Real Project Card)
+    // =========================================================================
+    // FEATURE 01: Real-Time Budget Burndown (Combined Budget Setup, Progress & AI Diagnostic)
     // =========================================================================
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* True Linear Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(63, 114, 175, 0.14) 0%, rgba(63, 114, 175, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           {/* Wrapped in BlendMockupCard for smooth light theme edge blending */}
-          <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
-            {/* Eidoncore Real App Toolbar */}
-            <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-4 min-w-0">
-              <div className="flex items-center gap-2 bg-[#F8FAFC] border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs text-slate-500 w-44 sm:w-56 min-w-0">
-                <Search size={13} className="text-slate-400 shrink-0" />
-                <span className="truncate">Search projects...</span>
-                <kbd className="ml-auto font-mono text-[10px] bg-white border border-slate-200 px-1 rounded text-slate-400 shrink-0">
-                  /
-                </kbd>
-              </div>
-
-              <div className="flex items-center gap-1.5 shrink-0">
-                <div className="hidden sm:flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/70 text-slate-600">
-                  <span className="p-1 bg-white rounded shadow-2xs text-[#3F72AF]">
-                    <LayoutGrid size={13} />
-                  </span>
-                  <span className="p-1 text-slate-400">
-                    <List size={13} />
-                  </span>
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5">
+            {/* SCREENSHOT 1: Budget Configuration Bar */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                {/* Left: Icon & Title */}
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 border border-slate-200/60">
+                    <DollarSign size={15} className="text-slate-600" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-900 tracking-tight">Budget</span>
                 </div>
-                <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#3F72AF] text-white rounded-lg text-xs font-semibold shadow-xs">
-                  <Plus size={13} />
-                  <span className="hidden sm:inline">New Project</span>
-                  <kbd className="hidden sm:inline font-mono text-[9px] bg-blue-700/60 px-1 rounded">n</kbd>
+
+                {/* Right: Inputs & Dropdown */}
+                <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+                  {/* Budget Type Selector with open menu */}
+                  <div className="relative">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-medium text-slate-400 mb-0.5 sm:hidden">Type</span>
+                      <div className="h-8 px-2.5 sm:px-3 bg-white border border-blue-400/80 rounded-lg text-xs font-medium text-slate-700 flex items-center gap-1.5 shadow-2xs ring-2 ring-blue-500/10">
+                        <span>{selectedBudget}</span>
+                        <ChevronDown size={13} className="text-slate-400" />
+                      </div>
+                    </div>
+
+                    {/* Popover Dropdown matching Screenshot 1 */}
+                    <div className="absolute top-[calc(100%+6px)] left-0 sm:left-auto sm:right-0 z-30 w-36 bg-[#52525B]/90 backdrop-blur-md rounded-xl p-1 shadow-xl text-white text-xs border border-white/10 animate-in fade-in zoom-in-95 duration-150">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedBudget("Fixed")}
+                        className="w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white/10 transition-colors text-slate-200"
+                      >
+                        <span className="w-3 text-[11px] text-white">None</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedBudget("Fixed")}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
+                          selectedBudget === "Fixed" ? "text-white font-medium" : "text-slate-200 hover:bg-white/10"
+                        }`}
+                      >
+                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Fixed" ? "✓" : ""}</span>
+                        <span>Fixed</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedBudget("Hourly")}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
+                          selectedBudget === "Hourly" ? "bg-[#0070F3] text-white font-medium shadow-xs" : "text-slate-200 hover:bg-white/10"
+                        }`}
+                      >
+                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Hourly" ? "✓" : ""}</span>
+                        <span>Hourly</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedBudget("Retainer")}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${
+                          selectedBudget === "Retainer" ? "bg-[#0070F3] text-white font-medium" : "text-slate-200 hover:bg-white/10"
+                        }`}
+                      >
+                        <span className="w-3 text-[11px] font-bold">{selectedBudget === "Retainer" ? "✓" : ""}</span>
+                        <span>Retainer</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Amount Input */}
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-medium text-slate-400 mb-0.5 hidden sm:block">Amount</span>
+                    <div className="h-8 w-20 sm:w-24 px-2.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 flex items-center shadow-2xs">
+                      100
+                    </div>
+                  </div>
+
+                  {/* Currency Input */}
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-medium text-slate-400 mb-0.5 hidden sm:block">Currency</span>
+                    <div className="h-8 px-2.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 flex items-center gap-1.5 shadow-2xs">
+                      <span>USD</span>
+                      <ChevronDown size={13} className="text-slate-400" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Eidoncore Project Card 1: Alpha Website Redesign */}
-            <div className="bg-white rounded-xl border border-blue-200/90 shadow-xs p-4 sm:p-5 relative mb-3">
-              {/* Card Top: Checkbox, Status Pill, Three-dots */}
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded border border-slate-300 flex items-center justify-center bg-white" />
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-[#3F72AF] border border-blue-100 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />
-                    In Progress
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
-                    On Track
-                  </span>
-                </div>
-                <MoreHorizontal size={16} className="text-slate-400 cursor-default" />
+            {/* SCREENSHOT 2: TASK PROGRESS Card */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5">
+                <span className="font-bold text-[11px] uppercase tracking-wider text-slate-500">TASK PROGRESS</span>
+                <span className="text-slate-400 font-medium">10/11 tasks</span>
               </div>
-
-              {/* Project Badge & Title */}
-              <div className="flex items-start gap-3 mb-4">
-                <div className="w-9 h-9 rounded-xl bg-[#EAB308] text-white font-bold flex items-center justify-center shrink-0 text-sm shadow-2xs">
-                  A
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug truncate">
-                    Alpha Website Redesign
-                  </h4>
-                  <span className="inline-block mt-0.5 px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[11px] font-medium">
-                    Alpha Corp
-                  </span>
-                </div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2.5">
+                91%
               </div>
+              {/* Progress Track */}
+              <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                <div
+                  className="bg-[#2563EB] h-2 rounded-full transition-all duration-700 ease-out"
+                  style={{ width: "91%" }}
+                />
+              </div>
+            </div>
 
-              {/* Progress Gauge & Stats */}
-              <div className="flex items-center gap-4 py-3 border-t border-slate-100">
-                {/* SVG Progress Ring 75% */}
-                <div className="relative w-12 h-12 flex items-center justify-center shrink-0">
-                  <svg className="w-12 h-12 -rotate-90 transform" viewBox="0 0 44 44">
-                    <circle cx="22" cy="22" r="18" fill="none" stroke="#F1F5F9" strokeWidth="4" />
-                    <circle
-                      cx="22"
-                      cy="22"
-                      r="18"
-                      fill="none"
-                      stroke="#3F72AF"
-                      strokeWidth="4"
-                      strokeDasharray={113}
-                      strokeDashoffset={113 * (1 - 0.75)}
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <span className="absolute text-xs font-bold text-slate-900">75%</span>
-                </div>
-                <div className="text-xs text-slate-500 space-y-1 min-w-0">
-                  <div className="flex items-center gap-1.5 text-slate-600 font-medium">
-                    <Calendar size={13} className="text-slate-400 shrink-0" />
-                    <span>Due in 14 days (Q3 Target)</span>
+            {/* 3 Metric Cards Grid (Hours Logged, Team, Files & Docs) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+              {/* Card 1: Hours Logged */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-6 h-6 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+                    <Clock size={13} />
                   </div>
-                  <div className="flex items-center gap-1.5 text-slate-500">
-                    <Clock size={13} className="text-slate-400 shrink-0" />
-                    <span>184.5h logged • 14/18 deliverables</span>
+                  <span className="text-xs font-medium text-slate-600">Hours Logged</span>
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                  2.7h
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">
+                  of 35h budget
+                </div>
+              </div>
+
+              {/* Card 2: Team */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-6 h-6 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600 border border-purple-100">
+                    <Users size={13} />
                   </div>
+                  <span className="text-xs font-medium text-slate-600">Team</span>
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                  2
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">
+                  PM: Alex M.
                 </div>
               </div>
 
-              {/* Eidoncore Signature 3-Column Financial Box */}
-              <div className="mt-2.5 p-2.5 sm:p-3 bg-[#F1F5F9]/80 rounded-xl grid grid-cols-3 text-center border border-slate-200/50">
-                <div className="min-w-0">
-                  <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">
-                    INVOICED
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-slate-900 mt-0.5 block truncate">
-                    $18,450
-                  </span>
+              {/* Card 3: Files & Docs */}
+              <div className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-3.5 shadow-2xs">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-6 h-6 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100">
+                    <Paperclip size={13} />
+                  </div>
+                  <span className="text-xs font-medium text-slate-600">Files & Docs</span>
                 </div>
-                <div className="border-x border-slate-200/70 min-w-0">
-                  <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">
-                    PAID
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-emerald-600 mt-0.5 block truncate">
-                    $12,500
-                  </span>
+                <div className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+                  0
                 </div>
-                <div className="min-w-0">
-                  <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">
-                    DUE
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-[#3F72AF] mt-0.5 block truncate">
-                    $5,950
-                  </span>
+                <div className="text-[11px] text-slate-400 mt-0.5">
+                  0 files, 0 docs
                 </div>
               </div>
+            </div>
 
-              {/* Team Assignees Footer */}
-              <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
-                <div className="flex items-center -space-x-1.5">
-                  <span className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white shadow-2xs">
-                    AR
-                  </span>
-                  <span className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-[10px] flex items-center justify-center border-2 border-white shadow-2xs">
-                    ER
-                  </span>
-                  <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 font-bold text-[9.5px] flex items-center justify-center border-2 border-white">
-                    +2
-                  </span>
+            {/* SCREENSHOT 2 (Bottom): AI Delivery Health & Velocity Diagnostic */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-2.5 sm:p-3 shadow-2xs flex flex-wrap items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100 shrink-0">
+                  <Sparkles size={14} className={isDiagnosticRunning ? "animate-spin" : ""} />
                 </div>
-                <span className="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60">
-                  Budget Margin: +36.5%
+                <span className="text-xs sm:text-sm font-semibold text-slate-900">
+                  AI Delivery Health & Velocity Diagnostic
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Velocity: Ahead / On Track
                 </span>
               </div>
-            </div>
 
-            {/* Second Peeking Eidoncore Card (Beta Mobile App) dissolving downward */}
-            <div
-              className="bg-white rounded-xl border border-slate-200/80 p-3 sm:p-4 opacity-70"
-              style={{
-                maskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 100% 80% at 50% 0%, black 20%, transparent 95%)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-lg bg-[#0284C7] text-white font-bold flex items-center justify-center text-xs">
-                  B
-                </div>
-                <div>
-                  <h5 className="text-xs font-bold text-slate-900">Beta Mobile App</h5>
-                  <span className="text-[10px] text-slate-400">Beta Inc • 4 milestones</span>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={handleRunDiagnostic}
+                disabled={isDiagnosticRunning}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 rounded-lg text-xs font-semibold border border-slate-200 shadow-2xs transition-all active:scale-95 shrink-0"
+              >
+                <Sparkles size={12} className={isDiagnosticRunning ? "text-blue-600 animate-spin" : "text-slate-500"} />
+                <span>{isDiagnosticRunning ? "Analyzing..." : diagnosticDone ? "Updated ✓" : "Run AI Diagnostic"}</span>
+              </button>
             </div>
           </BlendMockupCard>
         </div>
