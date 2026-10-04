@@ -541,15 +541,6 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* Linear Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(63, 114, 175, 0.14) 0%, rgba(63, 114, 175, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0">
             {/* Top Navigation Bar: Search, Filters & View Toggle */}
             <div className="flex items-center justify-between gap-2 pb-3.5 border-b border-slate-100 mb-3.5 min-w-0">
@@ -617,10 +608,10 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
 
-                {/* EXACT CARD 1: Task Ultron (100% Matching Screenshot 2) */}
+                {/* EXACT CARD 1: Dummy Agency Task */}
                 <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
                   <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
-                    Task Ultron
+                    Refactor Auth Middleware
                   </h4>
 
                   {/* Priority & Date Tags */}
@@ -646,11 +637,9 @@ export default function BlendedFeaturePreview({
 
                   {/* Card Footer: Assignee Avatar, Checklist badge, Arrow */}
                   <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
-                    <img
-                      src="/images/sakib-avatar.png"
-                      alt="Sakib Tanoy"
-                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
-                    />
+                    <div className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center border border-slate-200 shadow-2xs">
+                      AM
+                    </div>
                     <div className="flex items-center gap-2.5 text-slate-500">
                       <span className="flex items-center gap-1 font-mono text-xs font-semibold">
                         <CheckSquare size={12} className="text-slate-400" /> 3
@@ -660,10 +649,10 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
 
-                {/* CARD 2: Move Sdarr Site */}
+                {/* CARD 2: Dummy Agency Task */}
                 <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
                   <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
-                    Move Sdarr Site
+                    API Endpoint Rate Limiting
                   </h4>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
@@ -672,14 +661,12 @@ export default function BlendedFeaturePreview({
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span>Internal Tasks</span>
+                    <span>Core Platform</span>
                   </div>
                   <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
-                    <img
-                      src="/images/sakib-avatar.png"
-                      alt="Sakib Tanoy"
-                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
-                    />
+                    <div className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-[10px] flex items-center justify-center border border-slate-200 shadow-2xs">
+                      SJ
+                    </div>
                     <div className="flex items-center gap-2 text-slate-400">
                       <Paperclip size={12} />
                       <span className="font-mono text-xs">1</span>
@@ -709,10 +696,10 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
 
-                {/* DONE CARD 1: TCT Task */}
+                {/* DONE CARD 1: Dummy Agency Task */}
                 <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5 opacity-90">
                   <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
-                    TCT Task
+                    Design System Tokens Audit
                   </h4>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-[#D97706]">
@@ -724,14 +711,12 @@ export default function BlendedFeaturePreview({
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span>Internal Tasks</span>
+                    <span>Design Systems</span>
                   </div>
                   <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
-                    <img
-                      src="/images/sakib-avatar.png"
-                      alt="Sakib Tanoy"
-                      className="w-6 h-6 rounded-full object-cover border border-slate-200 shadow-2xs"
-                    />
+                    <div className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center border border-slate-200 shadow-2xs">
+                      AM
+                    </div>
                     <div className="flex items-center gap-2 text-slate-400">
                       <Paperclip size={12} />
                       <span className="font-mono text-xs">1</span>
@@ -740,7 +725,7 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
 
-                {/* DONE CARD 2: Maintenance March (Fading Down) */}
+                {/* DONE CARD 2: Dummy Agency Task (Fading Down) */}
                 <div
                   className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2 opacity-70"
                   style={{
@@ -751,7 +736,7 @@ export default function BlendedFeaturePreview({
                   }}
                 >
                   <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
-                    Maintenance March
+                    Database Index Optimization
                   </h4>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
@@ -780,15 +765,6 @@ export default function BlendedFeaturePreview({
 
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Granular Checklist & Subtasks Detail (100% Matching media_1791139525719.png) */}
             <div className="space-y-6">
@@ -829,7 +805,7 @@ export default function BlendedFeaturePreview({
                   <div className="w-4 h-4 rounded bg-[#2563EB] text-white flex items-center justify-center shrink-0 shadow-2xs">
                     <Check size={11} strokeWidth={3} />
                   </div>
-                  <span className="line-through font-medium">Cehek list item 1</span>
+                  <span className="line-through font-medium">Verify OAuth redirect callback URLs</span>
                 </div>
 
                 {/* Checklist Item 2 (Animated Toggling) */}
@@ -851,7 +827,7 @@ export default function BlendedFeaturePreview({
                       checklistChecked ? "line-through text-slate-400" : "text-slate-800"
                     }`}
                   >
-                    cehcklist item 2
+                    Configure JWT expiration headers
                   </span>
                 </div>
 
@@ -898,7 +874,7 @@ export default function BlendedFeaturePreview({
                         <Check size={12} strokeWidth={3} />
                       </div>
                       <ChevronRight size={13} className="text-slate-400" />
-                      <span className="line-through text-slate-500 font-medium">SUBtask 1 test</span>
+                      <span className="line-through text-slate-500 font-medium">Generate database schema migration</span>
                     </div>
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-[#16A34A] border border-emerald-200 text-[11px] font-bold">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A]" /> Done
@@ -926,7 +902,7 @@ export default function BlendedFeaturePreview({
                           subtaskChecked ? "line-through text-slate-400" : "text-slate-800"
                         }`}
                       >
-                        subtask 2
+                        Execute end-to-end integration tests
                       </span>
                     </div>
                     <span
@@ -966,7 +942,7 @@ export default function BlendedFeaturePreview({
                           subtask3Checked ? "line-through text-slate-400" : "text-slate-800"
                         }`}
                       >
-                        SUB 3
+                        Deploy artifact to staging preview
                       </span>
                     </div>
                     <span
@@ -1009,15 +985,6 @@ export default function BlendedFeaturePreview({
 
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          {/* Radial Spotlight */}
-          <div
-            className="absolute -top-12 left-1/2 -translate-x-1/2 w-[420px] h-[220px] pointer-events-none rounded-full"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 35%, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0.04) 50%, transparent 80%)",
-            }}
-          />
-
           <BlendMockupCard className="bg-white p-4 sm:p-6 rounded-2xl w-full min-w-0">
             {/* Drawer Header Tabs (Comments vs Activity) */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 min-w-0">
@@ -1045,7 +1012,7 @@ export default function BlendedFeaturePreview({
 
             {/* Task Title & Meta Fields */}
             <h3 className="text-xl font-bold text-[#0B0B0F] tracking-tight mb-3">
-              Task Ultron
+              Refactor Auth Middleware
             </h3>
 
             {/* Meta Properties Grid (100% Matching Screenshot 3) */}
@@ -1054,13 +1021,13 @@ export default function BlendedFeaturePreview({
                 <span className="text-slate-500 font-medium flex items-center gap-1.5">
                   <Users size={13} className="text-slate-400" /> Assignee
                 </span>
-                <span className="text-slate-800 font-medium">Unassigned</span>
+                <span className="text-slate-800 font-medium">Alex Morgan</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-500 font-medium flex items-center gap-1.5">
                   <Calendar size={13} className="text-slate-400" /> Due Date
                 </span>
-                <span className="text-slate-800 font-medium">Set due date</span>
+                <span className="text-slate-800 font-medium">Oct 15, 2026</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-500 font-medium flex items-center gap-1.5">
@@ -1072,12 +1039,12 @@ export default function BlendedFeaturePreview({
                 <span className="text-slate-500 font-medium flex items-center gap-1.5">
                   <Clock size={13} className="text-slate-400" /> Estimate
                 </span>
-                <span className="font-mono text-slate-800">— h</span>
+                <span className="font-mono text-slate-800">4.5 h</span>
               </div>
             </div>
 
             {/* FLOATING STOPWATCH WIDGET (With Live Active Timer & Pause/Resume Control) */}
-            <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-lg relative">
+            <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs relative">
               {/* Header: Radio dot & "This task" */}
               <div className="flex items-center justify-between pb-1">
                 <div className="flex items-center gap-2">
