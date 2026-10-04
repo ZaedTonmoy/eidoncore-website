@@ -296,7 +296,7 @@ export const siteContent = {
           "Priority 24/7 SLA Support",
         ],
         cta: "Contact Sales",
-        href: "#contact",
+        href: "/contact/",
         featured: false,
       },
     ],

@@ -53,6 +53,7 @@ export default function AnimatedHeading({
               {letter}
             </motion.span>
           ))}
+          {wordIndex < words.length - 1 ? " " : null}
         </span>
       ))}
     </Tag>

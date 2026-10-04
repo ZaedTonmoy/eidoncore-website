@@ -1,24 +1,8 @@
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
-  title: "Eidoncore Docs — Help Center & Documentation",
-  description:
-    "Comprehensive guides for every Eidoncore feature — from workspace setup to AI workflows, automations, billing, and developer tools.",
-  alternates: {
-    canonical: "/docs/",
-  },
-  openGraph: {
-    title: "Documentation — Eidoncore Help Center",
-    description:
-      "Comprehensive guides for every Eidoncore feature — from workspace setup to AI workflows, automations, billing, and developer tools.",
-    url: "https://eidoncore.com/docs/",
-  },
-};
+export const metadata = pageMetadata("docs");
 
-export default function DocsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PageLayout({ children }: { children: ReactNode }) {
   return children;
 }

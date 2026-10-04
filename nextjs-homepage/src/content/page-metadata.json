@@ -1,0 +1,166 @@
+{
+  "ai-workspace": {
+    "title": "AI Workspace — Eidoncore",
+    "description": "Connect Claude, Cursor, Windsurf, or any MCP-compatible AI assistant to manage your projects, tasks, invoices, and more — with enterprise-grade security and role-based access."
+  },
+  "projects": {
+    "title": "Projects — Eidoncore",
+    "description": "Create projects with budgets, milestones, and real-time health scoring. Track progress, allocate team bandwidth, and monitor billable hours — all automatically."
+  },
+  "tasks": {
+    "title": "Tasks — Eidoncore",
+    "description": "Manage agency work your way with fluid Kanban boards, dense lists, subtask checklists, and integrated time tracking that keeps your entire team synchronized."
+  },
+  "crm": {
+    "title": "CRM & Clients — Eidoncore",
+    "description": "Track every client from lead acquisition to repeat retainer. Monitor customer health scores, centralize communication history, and never lose track of an account."
+  },
+  "invoicing": {
+    "title": "Invoicing — Eidoncore",
+    "description": "Generate beautiful, professional invoices in seconds. Support recurring retainer billing, milestone disbursements, and instant Stripe payment processing."
+  },
+  "services": {
+    "title": "Offerings & Services — Eidoncore",
+    "description": "Transform custom hourly work into standardized, productized packages. Allow clients to browse your service catalog and order directly with checkout."
+  },
+  "proposals": {
+    "title": "Proposals — Eidoncore",
+    "description": "Send interactive proposals that clients can review, customize with optional line items, and sign digitally in seconds from any desktop or mobile device."
+  },
+  "portal": {
+    "title": "Client Portal — Eidoncore",
+    "description": "Deliver an unforgettable client experience with a custom-branded portal under your own domain. Clients track projects, approve deliverables, pay invoices, and submit tickets."
+  },
+  "automations": {
+    "title": "Automations — Eidoncore",
+    "description": "Eliminate repetitive manual tasks with powerful trigger-and-action rules. Connect project milestones, invoice payments, ticket alerts, and client emails effortlessly."
+  },
+  "messaging": {
+    "title": "Messaging & Chat — Eidoncore",
+    "description": "Centralize team discussions, client channels, and project files. Say goodbye to lost Slack threads and unorganized WhatsApp messages."
+  },
+  "reports": {
+    "title": "Reports & Intelligence — Eidoncore",
+    "description": "Actionable reports on agency profitability, team billable utilization, client revenue concentration, and on-time delivery rates."
+  },
+  "notifications": {
+    "title": "Notifications — Eidoncore",
+    "description": "Granular notification controls spanning in-app alerts, desktop notifications, and mobile emails. Never miss a critical client approval or urgent payment."
+  },
+  "security": {
+    "title": "Security & Compliance — Eidoncore",
+    "description": "Enterprise security built from the ground up: AES-256 encryption at rest, TLS 1.3 in transit, role-based access controls, and strict tenant isolation."
+  },
+  "team": {
+    "title": "Team Management — Eidoncore",
+    "description": "Invite designers, developers, account managers, and contractors. Set custom permissions, track team availability, and allocate workloads effortlessly."
+  },
+  "files": {
+    "title": "File Management — Eidoncore",
+    "description": "Keep all project assets, design files, contracts, and brand kits organized in one secure cloud repository. Share files with clients securely with password protection."
+  },
+  "intake-forms": {
+    "title": "Intake Forms — Eidoncore",
+    "description": "Create beautiful, high-converting intake forms with conditional logic, file uploads, and auto-conversion into active CRM deals, clients, or tasks."
+  },
+  "white-label": {
+    "title": "White-Label & Domains — Eidoncore",
+    "description": "Run your client portal under portal.youragency.com. Customize logos, brand color schemes, login screens, email SMTP, and invoice templates."
+  },
+  "digital-products": {
+    "title": "Digital Products — Eidoncore",
+    "description": "Monetize agency IP by selling Figma kits, Notion templates, code boilerplates, and creative assets directly to your audience with automated delivery."
+  },
+  "dashboard": {
+    "title": "Dashboard — Eidoncore",
+    "description": "Start your workday with instant clarity. See active projects, overdue deliverables, monthly revenue run-rate, team time logs, and recent client activity."
+  },
+  "integrations": {
+    "title": "Integrations — Eidoncore",
+    "description": "Integrate seamlessly with Stripe, Slack, Zapier, Webhooks, Google Workspace, and GitHub. Sync notifications, automate billing, and streamline workflows."
+  },
+  "tickets": {
+    "title": "Support Tickets — Eidoncore",
+    "description": "Replace messy email support with an organized ticketing system. Clients submit tickets in their portal, team members resolve with SLA clocks, and issues get tracked."
+  },
+  "features": {
+    "title": "Agency Management Features — Eidoncore",
+    "description": "Integrated modules designed to replace your entire disjointed software stack. From project inception to final invoice — every step seamlessly connected."
+  },
+  "partners": {
+    "title": "Partner Program — Eidoncore",
+    "description": "Refer agencies to the all-in-one AI platform and earn up to 30% recurring monthly commissions for the lifetime of every customer."
+  },
+  "contact": {
+    "title": "Contact Eidoncore",
+    "description": "Have questions about modules, custom enterprise setups, or looking for a live product demo? Our team is here to help."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions — Eidoncore",
+    "description": "Everything you need to know about Eidoncore plans, AI tools, client portals, and security. Need more help? Our team is always here for you."
+  },
+  "changelog": {
+    "title": "Product Changelog — Eidoncore",
+    "description": "Every major release, improvement, and performance tuning — shipped and documented. We build fast so your agency can scale faster."
+  },
+  "blog": {
+    "title": "Agency Insights & Playbooks — Eidoncore",
+    "description": "Actionable strategies, workflow automations, and operational best practices from agency operators who scaled past $1M ARR."
+  },
+  "compare": {
+    "title": "Compare Agency Management Platforms — Eidoncore",
+    "description": "See exactly how Eidoncore stacks up against alternative agency platforms. Honest, feature-by-feature breakdowns to help your agency choose with confidence."
+  },
+  "privacy": {
+    "title": "Privacy Policy — Eidoncore",
+    "description": "Last updated: March 1, 2026. At Eidoncore, your privacy matters. We maintain strict tenant isolation, zero third-party tracking, and GDPR-compliant data standards."
+  },
+  "demo": {
+    "title": "Product Demo — Eidoncore",
+    "description": "Walk through the complete lifecycle of an agency workflow — from winning a high-ticket client to delivering milestones and collecting payment. No credit card required."
+  },
+  "pricing": {
+    "title": "Plans & Pricing — Eidoncore",
+    "description": "Start with a 14-day free PRO trial. No credit card required. Flat transparent pricing — never pay per-seat penalties again."
+  },
+  "about": {
+    "title": "About Eidoncore",
+    "description": "We've lived the frustration of managing clients, deliverables, invoices, and teams across 5 disconnected browser tabs. Eidoncore is the unified operating system we wished existed."
+  },
+  "customers": {
+    "title": "Customer Stories — Eidoncore",
+    "description": "Real case studies from boutique studios and scaling 50-person agencies. Discover how teams reclaimed billable hours, consolidated tool spend, and delighted clients."
+  },
+  "terms": {
+    "title": "Terms of Service — Eidoncore",
+    "description": "Last updated: March 1, 2026. Please read these terms carefully before accessing or using Eidoncore's agency management platform and API services."
+  },
+  "use-cases": {
+    "title": "Agency Use Cases — Eidoncore",
+    "description": "Whether you run a fast-paced marketing agency, high-end design studio, software shop, or consulting practice — Eidoncore adapts to your exact workflow."
+  },
+  "compare/agencyhandy": {
+    "title": "Eidoncore vs AgencyHandy — Agency Platform Comparison",
+    "description": "Compare Eidoncore and AgencyHandy across agency management features, client portals, project workflows, invoicing, and pricing."
+  },
+  "compare/bonsai": {
+    "title": "Eidoncore vs Bonsai — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Bonsai across agency management features, client portals, project workflows, invoicing, and pricing."
+  },
+  "compare/honeybook": {
+    "title": "Eidoncore vs HoneyBook — Agency Platform Comparison",
+    "description": "Compare Eidoncore and HoneyBook across agency management features, client portals, project workflows, invoicing, and pricing."
+  },
+  "compare/kitchen": {
+    "title": "Eidoncore vs Kitchen.co — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Kitchen.co across agency management features, client portals, project workflows, invoicing, and pricing."
+  },
+  "compare/moxie": {
+    "title": "Eidoncore vs Moxie — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Moxie across agency management features, client portals, project workflows, invoicing, and pricing."
+  },
+  "docs": {
+    "title": "Eidoncore Docs — Help Center & Documentation",
+    "description": "Comprehensive guides for every Eidoncore feature — from workspace setup to AI workflows, automations, billing, and developer tools."
+  }
+}

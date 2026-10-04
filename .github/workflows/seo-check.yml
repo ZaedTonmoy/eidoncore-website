@@ -1,0 +1,39 @@
+name: Check public SEO
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Check committed site metadata and sitemap
+        run: python3 scripts/check-seo.py
+      - name: Keep sitemap generation free of build and error routes
+        run: |
+          mkdir -p nextjs-homepage/out/fixture 404
+          printf '<html>Build fixture</html>' > nextjs-homepage/out/fixture/index.html
+          cp sitemap.xml /tmp/sitemap-before.xml
+          bash generate-sitemap.sh
+          diff -u /tmp/sitemap-before.xml sitemap.xml
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: nextjs-homepage/package-lock.json
+      - run: npm ci
+        working-directory: nextjs-homepage
+      - name: Build and type-check source
+        run: npm run build
+        working-directory: nextjs-homepage
+      - name: Check freshly built metadata
+        run: python3 scripts/check-seo.py nextjs-homepage/out

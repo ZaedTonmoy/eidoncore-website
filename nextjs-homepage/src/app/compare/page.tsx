@@ -160,10 +160,10 @@ export default function ComparePage() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#3F72AF] font-semibold">
+                  <Link href={`/compare/${comp.id}/`} className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#3F72AF] font-semibold">
                     <span>Why agencies pick Eidoncore</span>
                     <ArrowRight size={13} />
-                  </div>
+                  </Link>
                 </StaggerItem>
               ))}
             </StaggerGroup>

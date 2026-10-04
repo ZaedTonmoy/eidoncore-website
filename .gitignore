@@ -14,3 +14,5 @@ node_modules/
 nextjs-homepage/node_modules/
 nextjs-homepage/.next/
 nextjs-homepage/tsconfig.tsbuildinfo
+
+nextjs-homepage/out/
