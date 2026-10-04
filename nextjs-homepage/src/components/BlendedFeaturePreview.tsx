@@ -1049,7 +1049,7 @@ export default function BlendedFeaturePreview({
                 </span>
               </div>
 
-              {/* Message 1: "Wow!" */}
+              {/* Message 1: Quick affirmation */}
               <div className="flex items-start gap-2.5 text-xs">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   JL
@@ -1060,7 +1060,7 @@ export default function BlendedFeaturePreview({
                     <span className="text-[10px] text-slate-400 font-mono">02:55 PM</span>
                   </div>
                   <p className="text-slate-800 text-xs font-normal">
-                    Wow!
+                    Looks fantastic! Staging preview passed all responsive checks.
                   </p>
                 </div>
               </div>
@@ -1090,7 +1090,7 @@ export default function BlendedFeaturePreview({
                     </span>
                   </div>
                   <div className="p-2.5 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs shadow-2xs mb-1.5 inline-block w-full">
-                    This is an internal note
+                    Client approved the updated deliverables roadmap. Let’s double-check the API rate limits before publishing.
                   </div>
                   {/* Heart Reaction Capsule matching screenshot */}
                   <div className="flex items-center">
@@ -1101,7 +1101,7 @@ export default function BlendedFeaturePreview({
                 </div>
               </div>
 
-              {/* Message 3: Task Mention pill #AI connector Test */}
+              {/* Message 3: Task Mention pill #Design-System-Sync */}
               <div className="flex items-start gap-2.5 text-xs">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   JL
@@ -1113,7 +1113,7 @@ export default function BlendedFeaturePreview({
                   </div>
                   {/* Blue Pill Task Mention */}
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-blue-50 text-blue-600 border border-blue-200/70 hover:bg-blue-100 transition-colors cursor-pointer">
-                    <span>#AI connector Test</span>
+                    <span>#Design-System-Sync</span>
                   </span>
                 </div>
               </div>
@@ -1136,12 +1136,12 @@ export default function BlendedFeaturePreview({
                       <span>Alex Morgan</span>
                     </div>
                     <span className="text-[11px] text-slate-500 truncate">
-                      Hi there! Just checking in to see how things are going on your end. I'd love to...
+                      Can we verify all webhook triggers on the checkout flow before deploying?
                     </span>
                   </div>
 
                   <p className="text-slate-800 text-xs font-normal mb-1.5">
-                    Perfect
+                    Completed! All endpoints returned 200 OK across test suites.
                   </p>
 
                   {/* Blue User Mention pill @Alex Morgan */}
