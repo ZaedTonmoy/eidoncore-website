@@ -31,6 +31,13 @@ import {
   DollarSign,
   Timer,
   Info,
+  Folder,
+  Lock,
+  Send,
+  ThumbsUp,
+  Reply,
+  Smile,
+  Bot,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
