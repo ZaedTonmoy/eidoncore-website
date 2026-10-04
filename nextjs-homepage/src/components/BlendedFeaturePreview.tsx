@@ -38,6 +38,11 @@ import {
   Reply,
   Smile,
   Bot,
+  Briefcase,
+  Zap,
+  AlertTriangle,
+  Heart,
+  Hash,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -142,6 +147,9 @@ export default function BlendedFeaturePreview({
     const secs = String(totalSeconds % 60).padStart(2, "0");
     return `${hrs}:${mins}:${secs}`;
   };
+
+  // State for Messaging Feature 03 (AI Polish Tone)
+  const [activeAiTone, setActiveAiTone] = useState<string>("Professional");
 
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {
@@ -997,8 +1005,8 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 03: Threaded Focus (Eliminate Chaotic Message Sprawl)
-    // Matches screenshot media_1791144277902.png (Message Action Hover & Thread Context)
+    // FEATURE 03: Threaded Focus & AI Tone Polish
+    // Matches screenshot media_1791147500994.png & media_1791147542050.png 100%
     // =========================================================================
     if (featureIndex === "03") {
       return (
@@ -1011,7 +1019,7 @@ export default function BlendedFeaturePreview({
                   <Folder size={14} />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm truncate">Acme Portal Redesign</h4>
+                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm truncate">Internal Tasks</h4>
                   <span className="text-[10px] text-slate-400 block">Project • 2 members</span>
                 </div>
               </div>
@@ -1019,36 +1027,20 @@ export default function BlendedFeaturePreview({
               <div className="flex items-center gap-2">
                 <div className="flex items-center -space-x-1.5">
                   <span className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-2xs">
-                    AM
+                    ZT
                   </span>
                   <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[9px] flex items-center justify-center border-2 border-white shadow-2xs">
-                    JL
+                    ST
                   </span>
                 </div>
                 <Info size={14} className="text-slate-400 ml-1 cursor-pointer" />
               </div>
             </div>
 
-            {/* Chat Thread Feed matching Screenshot 2 */}
-            <div className="flex flex-col gap-3 bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
-              {/* Message 1 */}
-              <div className="flex items-start gap-2.5 text-xs">
-                <div className="w-7 h-7 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
-                  AM
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-bold text-slate-900 text-xs">Alex Morgan</span>
-                    <span className="text-[10px] text-slate-400 font-mono">07:32 AM</span>
-                  </div>
-                  <p className="text-slate-600 text-xs leading-relaxed">
-                    Hello, I hope this message finds you well. I am reaching out to discuss our upcoming projects and see if you have any updates to share.
-                  </p>
-                </div>
-              </div>
-
-              {/* Date Separator Pill matching screenshot */}
-              <div className="relative flex items-center justify-center my-1">
+            {/* Chat Thread Feed matching Screenshot 1 (media_1791147500994.png) */}
+            <div className="flex flex-col gap-2.5 bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs relative">
+              {/* Date Separator Pill: Friday */}
+              <div className="relative flex items-center justify-center my-0.5">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-100" />
                 </div>
@@ -1057,37 +1049,24 @@ export default function BlendedFeaturePreview({
                 </span>
               </div>
 
-              {/* Message 2: With hover action bar matching Screenshot 2 */}
-              <div className="group/msg relative flex items-start gap-2.5 text-xs p-2 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200/80">
+              {/* Message 1: "Wow!" */}
+              <div className="flex items-start gap-2.5 text-xs">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   JL
                 </div>
-                <div className="min-w-0 flex-1 pr-16 sm:pr-20">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-0.5">
                     <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
                     <span className="text-[10px] text-slate-400 font-mono">02:55 PM</span>
                   </div>
-                  <p className="text-slate-800 text-xs font-medium">
+                  <p className="text-slate-800 text-xs font-normal">
                     Wow!
                   </p>
-                </div>
-
-                {/* Exact Action capsule from screenshot (Thumbs up, Reply, More) */}
-                <div className="absolute top-2 right-2 flex items-center gap-1 bg-white border border-slate-200 shadow-sm rounded-lg p-1 text-slate-500">
-                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Like">
-                    <ThumbsUp size={12} />
-                  </button>
-                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Reply in thread">
-                    <Reply size={12} />
-                  </button>
-                  <button type="button" className="p-1 hover:bg-slate-100 rounded text-slate-400 transition-colors">
-                    <MoreHorizontal size={12} />
-                  </button>
                 </div>
               </div>
 
               {/* Date Separator Pill: Today */}
-              <div className="relative flex items-center justify-center my-1">
+              <div className="relative flex items-center justify-center my-0.5">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-100" />
                 </div>
@@ -1096,7 +1075,7 @@ export default function BlendedFeaturePreview({
                 </span>
               </div>
 
-              {/* Message 3: Internal Note Capsule */}
+              {/* Message 2: Internal Note with Reaction Heart */}
               <div className="flex items-start gap-2.5 text-xs">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   JL
@@ -1110,32 +1089,181 @@ export default function BlendedFeaturePreview({
                       <span>Internal note</span>
                     </span>
                   </div>
-                  <div className="p-2.5 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs shadow-2xs">
+                  <div className="p-2.5 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-slate-800 text-xs shadow-2xs mb-1.5 inline-block w-full">
                     This is an internal note
                   </div>
+                  {/* Heart Reaction Capsule matching screenshot */}
+                  <div className="flex items-center">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-xs shadow-2xs hover:scale-105 transition-transform cursor-pointer">
+                      <span>❤️</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Message 3: Task Mention pill #AI connector Test */}
+              <div className="flex items-start gap-2.5 text-xs">
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                  JL
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
+                    <span className="text-[10px] text-slate-400 font-mono">02:57 AM</span>
+                  </div>
+                  {/* Blue Pill Task Mention */}
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-blue-50 text-blue-600 border border-blue-200/70 hover:bg-blue-100 transition-colors cursor-pointer">
+                    <span>#AI connector Test</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Message 4: Threaded Quote Reply + Text + User Mention @Alex Morgan */}
+              <div className="flex items-start gap-2.5 text-xs">
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                  JL
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-slate-900 text-xs">Jordan Lee</span>
+                    <span className="text-[10px] text-slate-400 font-mono">02:57 AM</span>
+                  </div>
+
+                  {/* Quoted Reply Capsule matching screenshot */}
+                  <div className="p-2 sm:p-2.5 bg-slate-50 border-l-2 border-blue-500 rounded-r-xl text-slate-600 text-xs mb-1.5 flex flex-col gap-0.5">
+                    <div className="flex items-center gap-1.5 font-semibold text-slate-800 text-[11px]">
+                      <Reply size={11} className="text-blue-500" />
+                      <span>Alex Morgan</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 truncate">
+                      Hi there! Just checking in to see how things are going on your end. I'd love to...
+                    </span>
+                  </div>
+
+                  <p className="text-slate-800 text-xs font-normal mb-1.5">
+                    Perfect
+                  </p>
+
+                  {/* Blue User Mention pill @Alex Morgan */}
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100 hover:underline cursor-pointer">
+                    @Alex Morgan
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Input Composer Box matching Screenshot 2 */}
-            <div className="bg-white rounded-xl border border-slate-200/80 p-2.5 sm:p-3 shadow-2xs flex flex-col gap-2">
-              <span className="text-xs text-slate-400 font-normal">
+            {/* Input Composer Box with Screenshot 2 AI Polish Tone Menu Popover */}
+            <div className="relative bg-white rounded-xl border border-blue-400/80 p-2.5 sm:p-3 shadow-2xs ring-2 ring-blue-500/10 flex flex-col gap-2">
+              <span className="text-xs text-slate-500 font-normal">
                 Type a message... (@ to mention, / to search)
               </span>
+
+              {/* Bottom Action Bar */}
               <div className="flex items-center justify-between pt-1 border-t border-slate-100">
                 <div className="flex items-center gap-2">
                   <button type="button" className="p-1 text-slate-400 hover:text-slate-600 transition-colors">
                     <Paperclip size={14} />
                   </button>
-                  <button type="button" className="p-1 text-slate-400 hover:text-slate-600 transition-colors">
-                    <Sparkles size={14} />
-                  </button>
+
+                  {/* Active AI Rewrite Sparkle Button */}
+                  <div className="relative">
+                    <button
+                      type="button"
+                      className="p-1.5 rounded-lg bg-blue-50 text-blue-600 border border-blue-200/80 shadow-2xs flex items-center justify-center transition-all hover:bg-blue-100"
+                    >
+                      <Sparkles size={14} className="text-blue-600" />
+                    </button>
+
+                    {/* SCREENSHOT 2: AI POLISH TONE POPOVER MENU (media_1791147542050.png) */}
+                    <div className="absolute bottom-[calc(100%+8px)] left-0 z-30 w-52 bg-white rounded-2xl p-2 shadow-2xl border border-slate-200/90 animate-in fade-in zoom-in-95 duration-150">
+                      {/* Popover Header */}
+                      <div className="flex items-center gap-2 px-2.5 py-1.5 text-xs font-bold text-blue-600 uppercase tracking-wider">
+                        <Sparkles size={14} className="text-blue-600" />
+                        <span>AI POLISH TONE</span>
+                      </div>
+
+                      {/* Tone Options */}
+                      <div className="flex flex-col gap-0.5 mt-1">
+                        {/* 1. Professional */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveAiTone("Professional")}
+                          className={`w-full text-left px-2.5 py-1.5 rounded-xl flex items-center gap-2.5 text-xs transition-colors ${
+                            activeAiTone === "Professional"
+                              ? "bg-blue-50 text-blue-700 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <Briefcase size={14} className={activeAiTone === "Professional" ? "text-blue-600" : "text-slate-500"} />
+                          <span>Professional</span>
+                        </button>
+
+                        {/* 2. Friendly & Warm */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveAiTone("Friendly & Warm")}
+                          className={`w-full text-left px-2.5 py-1.5 rounded-xl flex items-center gap-2.5 text-xs transition-colors ${
+                            activeAiTone === "Friendly & Warm"
+                              ? "bg-blue-50 text-blue-700 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <Smile size={14} className={activeAiTone === "Friendly & Warm" ? "text-blue-600" : "text-slate-500"} />
+                          <span>Friendly & Warm</span>
+                        </button>
+
+                        {/* 3. Short & Concise */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveAiTone("Short & Concise")}
+                          className={`w-full text-left px-2.5 py-1.5 rounded-xl flex items-center gap-2.5 text-xs transition-colors ${
+                            activeAiTone === "Short & Concise"
+                              ? "bg-blue-50 text-blue-700 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <Zap size={14} className={activeAiTone === "Short & Concise" ? "text-blue-600" : "text-slate-500"} />
+                          <span>Short & Concise</span>
+                        </button>
+
+                        {/* 4. Urgent Notice */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveAiTone("Urgent Notice")}
+                          className={`w-full text-left px-2.5 py-1.5 rounded-xl flex items-center gap-2.5 text-xs transition-colors ${
+                            activeAiTone === "Urgent Notice"
+                              ? "bg-blue-50 text-blue-700 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <AlertTriangle size={14} className={activeAiTone === "Urgent Notice" ? "text-blue-600" : "text-slate-500"} />
+                          <span>Urgent Notice</span>
+                        </button>
+
+                        {/* 5. Empathetic */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveAiTone("Empathetic")}
+                          className={`w-full text-left px-2.5 py-1.5 rounded-xl flex items-center gap-2.5 text-xs transition-colors ${
+                            activeAiTone === "Empathetic"
+                              ? "bg-blue-50 text-blue-700 font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <Heart size={14} className={activeAiTone === "Empathetic" ? "text-blue-600" : "text-slate-500"} />
+                          <span>Empathetic</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-slate-600 bg-slate-100/80">
                     <Lock size={11} className="text-slate-500" />
                     <span>Internal note</span>
                   </div>
                 </div>
-                <button type="button" className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+
+                <button type="button" className="w-7 h-7 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition-colors shadow-xs">
                   <Send size={12} />
                 </button>
               </div>

@@ -1087,13 +1087,13 @@ export default function HeroAppWindow() {
                       <div className="w-[5%] bg-[#10B981]" />
                       <div className="w-[10%] bg-[#F43F5E]" />
                     </div>
-                    <div className="grid grid-cols-3 gap-x-2 gap-y-1.5 text-[9px] text-[#64748B] mt-2.5 pt-1">
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#94A3B8]" /> Not Started <b>6</b></span>
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" /> In Progress <b>11</b></span>
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" /> In Review <b>0</b></span>
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" /> On Hold <b>2</b></span>
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Completed <b>1</b></span>
-                      <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#F43F5E]" /> Cancelled <b>1</b></span>
+                    <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[9px] text-[#64748B] mt-2.5 pt-1">
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#94A3B8]" /> Not Started <b className="text-[#0F172A]">6</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" /> In Progress <b className="text-[#0F172A]">11</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" /> In Review <b className="text-[#0F172A]">0</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" /> On Hold <b className="text-[#0F172A]">2</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Completed <b className="text-[#0F172A]">1</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#F43F5E]" /> Cancelled <b className="text-[#0F172A]">1</b></span>
                     </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2 font-medium">
@@ -1189,91 +1189,88 @@ export default function HeroAppWindow() {
 
               {/* Toolbar & Filter Bar - Underline tabs & icon tools matching screenshot */}
               {/* Action Toolbar */}
-              <div className="flex items-center justify-between gap-2.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs overflow-x-auto no-scrollbar">
-                <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center justify-between gap-1.5 pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => setActiveProjectTab("all")}
-                    className={`pb-2 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap ${
+                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-[11px] ${
                       activeProjectTab === "all" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
                     <span>All Projects</span>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-[#EFF6FF] text-[#2563EB] font-semibold">21</span>
+                    <span className="font-mono text-[9px] px-1.5 py-0.2 rounded-full bg-[#EFF6FF] text-[#2563EB] font-semibold">21</span>
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("active")}
-                    className={`pb-2 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap ${
+                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-[11px] ${
                       activeProjectTab === "active" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    <span>Active delivery</span>
-                    <span className="font-mono text-[9px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">11</span>
+                    <span>Active</span>
+                    <span className="font-mono text-[8.5px] px-1 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">11</span>
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("attention")}
-                    className={`pb-2 -mb-2 font-medium transition-colors border-b-2 whitespace-nowrap ${
+                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 whitespace-nowrap text-[11px] ${
                       activeProjectTab === "attention" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
-                    Needs Attention
+                    Attention
                   </button>
                   <button
                     onClick={() => setActiveProjectTab("delivered")}
-                    className={`pb-2 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap ${
+                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-[11px] ${
                       activeProjectTab === "delivered" ? "border-blue-600 text-[#0F172A] font-semibold" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
                     }`}
                   >
                     <span>Delivered</span>
-                    <span className="font-mono text-[9px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">1</span>
+                    <span className="font-mono text-[8.5px] px-1 py-0.2 rounded-full bg-slate-100 text-slate-700 font-medium">1</span>
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                  {/* Rounded search pill */}
-                  <div className="flex items-center gap-1 px-2 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
-                    <Search size={11} className="text-[#94A3B8]" />
-                    <span className="text-[10px] text-[#94A3B8]">Search...</span>
-                    <kbd className="text-[8.5px] font-mono bg-[#F1F5F9] text-slate-500 px-1 py-0.2 rounded ml-0.5">/</kbd>
+                <div className="flex items-center gap-1 shrink-0">
+                  {/* Search */}
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white border border-[#E2E8F0] rounded-full text-[#64748B]">
+                    <Search size={10} className="text-[#94A3B8]" />
+                    <span className="text-[9.5px] text-[#94A3B8]">Search...</span>
+                    <kbd className="text-[8px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
                   </div>
 
-                  {/* Icon tools: Check, Flag, Users */}
+                  {/* Icon tools: Check, Flag */}
                   <div className="flex items-center gap-0.5 text-slate-400">
-                    <button className="p-1 hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={14} />
+                    <button className="p-0.5 hover:text-slate-700 transition-colors">
+                      <CheckCircle2 size={13} />
                     </button>
-                    <button className="p-1 hover:text-slate-700 transition-colors">
-                      <Flag size={14} />
-                    </button>
-                    <button className="p-1 hover:text-slate-700 transition-colors">
-                      <Users size={14} />
+                    <button className="p-0.5 hover:text-slate-700 transition-colors">
+                      <Flag size={13} />
                     </button>
                   </div>
 
-                  {/* Segmented view pill toggle: Card view | Table view | Board */}
-                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
+                  {/* Segmented view pill toggle */}
+                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
+                      className={`px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-0.5 text-[9.5px] ${
                         projectViewMode === "cards" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <Columns3 size={10} /> Card view
+                      <Columns3 size={9.5} /> Cards
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] ${
+                      className={`px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-0.5 text-[9.5px] ${
                         projectViewMode === "table" ? "bg-white font-medium text-[#0F172A] shadow-xs" : "hover:text-slate-900"
                       }`}
                     >
-                      <List size={10} /> Table view
+                      <List size={9.5} /> Table
                     </button>
-                    <button className="px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-1 text-[10px] hover:text-slate-900">
-                      <Kanban size={10} /> Board
+                    <button className="px-1.5 py-0.5 rounded-full transition-colors flex items-center gap-0.5 text-[9.5px] hover:text-slate-900">
+                      <Kanban size={9.5} /> Board
                     </button>
                   </div>
 
-                  <button className="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
-                    <Plus size={11} /> New project <kbd className="text-[8px] bg-blue-700 px-1 py-0.2 rounded ml-0.5">n</kbd>
+                  <button className="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-[10px] font-medium flex items-center gap-1 shadow-xs whitespace-nowrap">
+                    <Plus size={10} /> New project <kbd className="text-[7.5px] bg-blue-700 px-1 rounded">n</kbd>
                   </button>
                 </div>
               </div>
