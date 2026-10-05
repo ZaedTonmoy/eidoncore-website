@@ -77,5 +77,12 @@ for url in urls:
     assert head.canonical == [url], f'{url}: sitemap/canonical mismatch'
     assert 'noindex' not in head.meta.get('robots', ''), f'{url}: noindex in sitemap'
     assert not head.meta.get('robots') == 'none'
+    assert head.meta.get('og:url') == url, f'{url}: missing or incorrect social URL'
+    assert head.meta.get('twitter:card') == 'summary_large_image', f'{url}: missing social card'
+    for key in ['og:title', 'og:description', 'twitter:title', 'twitter:description']:
+        assert head.meta.get(key), f'{url}: missing {key}'
+    for key in ['og:image', 'twitter:image']:
+        image = urlsplit(head.meta.get(key, ''))
+        assert image.netloc == 'eidoncore.com' and (ROOT / image.path.lstrip('/')).is_file(), f'{url}: missing {key}'
 assert f'Sitemap: {SITE}/sitemap.xml' in (ROOT / 'robots.txt').read_text()
 print(f'SEO checks passed: {len(pages)} Next.js routes and {len(urls)} sitemap URLs')
