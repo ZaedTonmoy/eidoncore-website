@@ -767,7 +767,7 @@ export default function BlendedFeaturePreview({
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           <BlendMockupCard className="bg-white p-3.5 sm:p-4 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800">
-            {/* Top Navigation Bar matching screenshot */}
+            {/* Top Navigation Bar - Clean & focused */}
             <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
@@ -777,31 +777,16 @@ export default function BlendedFeaturePreview({
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-44">
+                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-40 sm:w-48">
                   <Search size={12} className="text-slate-400 shrink-0" />
                   <span className="text-[11px] text-slate-400">Search or jump to...</span>
                   <span className="ml-auto font-mono text-[9px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
-                </div>
-                <div className="h-6 px-2 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[10px] font-medium flex items-center gap-1 shadow-2xs">
-                  <Sparkles size={11} className="text-[#3F72AF]" />
-                  <span>AI Copilot</span>
-                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
-                </div>
-                <div className="w-6 h-6 rounded-lg text-slate-400 flex items-center justify-center">
-                  <Settings size={13} />
                 </div>
                 <div className="relative w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
                   <Bell size={13} />
                   <span className="absolute -top-1 -right-1 bg-[#3F72AF] text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                     8
                   </span>
-                </div>
-                {/* Profile Pill with Dummy Avatar */}
-                <div className="flex items-center gap-1 pl-1">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 text-white font-bold text-[9px] flex items-center justify-center">
-                    AM
-                  </div>
-                  <span className="hidden md:inline text-xs font-semibold text-slate-700">Alex Morgan</span>
                 </div>
               </div>
             </div>
@@ -816,7 +801,7 @@ export default function BlendedFeaturePreview({
             </div>
 
             {/* Search Bar & View Mode Toggle */}
-            <div className="flex items-center justify-between gap-2 pt-1">
+            <div className="flex items-center justify-between gap-2 pt-0.5">
               <div className="flex-1 flex items-center gap-2 bg-slate-50/80 border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs">
                 <Search size={13} className="text-slate-400 shrink-0" />
                 <span className="text-[11px] text-slate-400">Search services...</span>
@@ -860,8 +845,8 @@ export default function BlendedFeaturePreview({
               </button>
             </div>
 
-            {/* Services Grid (6 cards matching Screenshot 2) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
+            {/* Services Grid (2 cards per row) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               {/* Card 1: Business VPS Hosting (Blue banner pattern) */}
               <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
                 <div>
@@ -1076,7 +1061,7 @@ export default function BlendedFeaturePreview({
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           <BlendMockupCard className="bg-white p-3.5 sm:p-4 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800">
-            {/* Top Navigation Bar matching screenshot */}
+            {/* Top Navigation Bar - Clean & focused */}
             <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
@@ -1086,30 +1071,16 @@ export default function BlendedFeaturePreview({
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-44">
+                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-40 sm:w-48">
                   <Search size={12} className="text-slate-400 shrink-0" />
                   <span className="text-[11px] text-slate-400">Search or jump to...</span>
                   <span className="ml-auto font-mono text-[9px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
-                </div>
-                <div className="h-6 px-2 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[10px] font-medium flex items-center gap-1 shadow-2xs">
-                  <Sparkles size={11} className="text-[#3F72AF]" />
-                  <span>AI Copilot</span>
-                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
-                </div>
-                <div className="w-6 h-6 rounded-lg text-slate-400 flex items-center justify-center">
-                  <Settings size={13} />
                 </div>
                 <div className="relative w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
                   <Bell size={13} />
                   <span className="absolute -top-1 -right-1 bg-[#3F72AF] text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                     8
                   </span>
-                </div>
-                <div className="flex items-center gap-1 pl-1">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 text-white font-bold text-[9px] flex items-center justify-center">
-                    AM
-                  </div>
-                  <span className="hidden md:inline text-xs font-semibold text-slate-700">Alex Morgan</span>
                 </div>
               </div>
             </div>
@@ -1124,7 +1095,7 @@ export default function BlendedFeaturePreview({
             </div>
 
             {/* Search Bar & View Mode Toggle */}
-            <div className="flex items-center justify-between gap-2 pt-1">
+            <div className="flex items-center justify-between gap-2 pt-0.5">
               <div className="flex-1 flex items-center gap-2 bg-slate-50/80 border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs">
                 <Search size={13} className="text-slate-400 shrink-0" />
                 <span className="text-[11px] text-slate-400">Search products...</span>
@@ -1168,8 +1139,8 @@ export default function BlendedFeaturePreview({
               </button>
             </div>
 
-            {/* Digital Products Grid (6 cards matching Screenshot 1) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
+            {/* Digital Products Grid (2 cards per row) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               {/* Product 1: Rank Math Pro + WP Rocket */}
               <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
                 <div>
