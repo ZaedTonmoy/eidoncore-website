@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[8621],{4079:(e,s,r)=>{Promise.resolve().then(r.bind(r,24))},24:(e,s,r)=>{"use strict";r.r(s),r.d(s,{default:()=>a});var n=r(5155);r(2115);var u=r(4729);function a(){return(0,n.jsx)(u.A,{slug:"bonsai"})}}},e=>{var s=s=>e(e.s=s);e.O(0,[2534,8321,5565,8718,1160,4729,8441,1517,7358],()=>s(4079)),_N_E=e.O()}]);

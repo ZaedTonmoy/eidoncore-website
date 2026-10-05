@@ -232,6 +232,16 @@ export default function HeroAppWindow() {
   };
 
   useEffect(() => {
+    if (copilotOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [copilotOpen]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       startTour();
     }, 800);
@@ -511,7 +521,11 @@ export default function HeroAppWindow() {
         </aside>
 
         {/* MAIN CONTENT PANE (Scrollable) */}
-        <main className="flex-1 min-w-0 flex flex-col bg-[#F8FAFC] overflow-y-auto no-scrollbar relative">
+        <main
+          className={`flex-1 min-w-0 flex flex-col bg-[#F8FAFC] no-scrollbar relative ${
+            copilotOpen ? "overflow-hidden" : "overflow-y-auto"
+          }`}
+        >
           
           {/* TOP APP HEADER (Matching screenshots 01, 03, 11, 19, 27) */}
           <header className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
@@ -2284,12 +2298,20 @@ export default function HeroAppWindow() {
               {/* Translucent backdrop overlay */}
               <div
                 onClick={() => setCopilotOpen(false)}
-                className="absolute inset-0 bg-slate-900/10 backdrop-blur-[0.5px] z-30 transition-opacity animate-fadeIn"
+                onWheel={(e) => e.preventDefault()}
+                onTouchMove={(e) => e.preventDefault()}
+                className="absolute inset-0 bg-slate-900/10 backdrop-blur-[0.5px] z-30 transition-opacity animate-fadeIn touch-none overscroll-none"
               />
 
               {/* Slide-over Popup Drawer */}
-              <aside className="absolute top-0 right-0 bottom-0 w-full sm:w-[380px] max-w-full bg-white border-l border-[#E2E8F0] shadow-2xl z-40 flex flex-col justify-between select-none animate-in slide-in-from-right duration-250">
-                <div className="p-4 flex flex-col gap-3.5 overflow-y-auto no-scrollbar">
+              <aside 
+                className="absolute top-0 right-0 bottom-0 w-full sm:w-[380px] max-w-full bg-white border-l border-[#E2E8F0] shadow-2xl z-40 flex flex-col justify-between select-none animate-in slide-in-from-right duration-250 overscroll-contain"
+                onWheel={(e) => e.stopPropagation()}
+              >
+                <div 
+                  className="p-4 flex flex-col gap-3.5 overflow-y-auto no-scrollbar overscroll-contain"
+                  onWheel={(e) => e.stopPropagation()}
+                >
                   
                   {/* Popup Header */}
                   <div className="flex items-center justify-between pb-2 border-b border-slate-100">
