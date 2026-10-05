@@ -50,6 +50,8 @@ import {
   ChevronUp,
   CheckCheck,
   CornerUpLeft,
+  Box,
+  ShoppingBag,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -181,6 +183,11 @@ export default function BlendedFeaturePreview({
       },
     }));
   };
+
+  // State for Offerings / Services Feature 01 & 03
+  const [offeringsTab, setOfferingsTab] = useState<"services" | "digital">("services");
+  const [serviceTagFilter, setServiceTagFilter] = useState<string>("all");
+  const [digitalTagFilter, setDigitalTagFilter] = useState<string>("all");
 
   // Only apply custom Eidoncore focused cards on /notifications
   if (moduleName.toLowerCase().includes("notif")) {
@@ -744,6 +751,626 @@ export default function BlendedFeaturePreview({
               <p className="text-xs text-slate-600 max-w-md mx-auto mt-1">
                 Custom SMTP configuration, email templates, and branded client portal notification preview will be updated with your admin screenshot.
               </p>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
+
+  // Only apply custom Eidoncore focused cards on /services or offerings
+  if (moduleName.toLowerCase().includes("offer") || moduleName.toLowerCase().includes("service")) {
+    // =========================================================================
+    // FEATURE 01: Productized Catalog (Services Catalog Grid - Screenshot 2)
+    // =========================================================================
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-4 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800">
+            {/* Top Navigation Bar matching screenshot */}
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
+                  <Box size={14} />
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 tracking-tight">Offerings</h3>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="hidden sm:flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-44">
+                  <Search size={12} className="text-slate-400 shrink-0" />
+                  <span className="text-[11px] text-slate-400">Search or jump to...</span>
+                  <span className="ml-auto font-mono text-[9px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
+                </div>
+                <div className="h-6 px-2 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[10px] font-medium flex items-center gap-1 shadow-2xs">
+                  <Sparkles size={11} className="text-[#3F72AF]" />
+                  <span>AI Copilot</span>
+                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
+                </div>
+                <div className="w-6 h-6 rounded-lg text-slate-400 flex items-center justify-center">
+                  <Settings size={13} />
+                </div>
+                <div className="relative w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
+                  <Bell size={13} />
+                  <span className="absolute -top-1 -right-1 bg-[#3F72AF] text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                    8
+                  </span>
+                </div>
+                {/* Profile Pill with Dummy Avatar */}
+                <div className="flex items-center gap-1 pl-1">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 text-white font-bold text-[9px] flex items-center justify-center">
+                    AM
+                  </div>
+                  <span className="hidden md:inline text-xs font-semibold text-slate-700">Alex Morgan</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-Header Tabs */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-4 text-xs font-semibold">
+                <span className="text-slate-400 cursor-pointer">All</span>
+                <span className="text-[#3F72AF] border-b-2 border-[#3F72AF] pb-1 cursor-pointer">Services</span>
+                <span className="text-slate-500 cursor-pointer">Digital Products</span>
+              </div>
+            </div>
+
+            {/* Search Bar & View Mode Toggle */}
+            <div className="flex items-center justify-between gap-2 pt-1">
+              <div className="flex-1 flex items-center gap-2 bg-slate-50/80 border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs">
+                <Search size={13} className="text-slate-400 shrink-0" />
+                <span className="text-[11px] text-slate-400">Search services...</span>
+              </div>
+              <div className="flex items-center gap-1 text-slate-400">
+                <div className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-slate-100 text-slate-600">
+                  <List size={14} />
+                </div>
+                <div className="w-7 h-7 rounded-md flex items-center justify-center bg-slate-100 text-slate-900">
+                  <LayoutGrid size={14} />
+                </div>
+              </div>
+            </div>
+
+            {/* Filter Pills */}
+            <div className="flex items-center gap-1.5 pt-0.5">
+              <button
+                type="button"
+                onClick={() => setServiceTagFilter("all")}
+                className={`h-6 px-2.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 transition-all ${
+                  serviceTagFilter === "all"
+                    ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                    : "text-slate-600 bg-slate-100/60"
+                }`}
+              >
+                <span>All</span>
+                <span className="bg-white/80 px-1 rounded-full text-[9px] font-bold">7</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setServiceTagFilter("wp")}
+                className={`h-6 px-2.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 transition-all ${
+                  serviceTagFilter === "wp"
+                    ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                    : "text-slate-600 bg-slate-100/60"
+                }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                <span>WordPress Plugin</span>
+                <span className="bg-white/80 px-1 rounded-full text-[9px] font-bold">0</span>
+              </button>
+            </div>
+
+            {/* Services Grid (6 cards matching Screenshot 2) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
+              {/* Card 1: Business VPS Hosting (Blue banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-blue-200/80 text-blue-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Business VPS Hosting
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Dedicated cloud VPS resources, isolated environment, and enterprise performance.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $40 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Small Managed Hosting (Peach/Orange banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#FFF4ED] relative flex items-center justify-center border-b border-orange-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-orange-200/80 text-orange-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Small Managed Hosting
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      High-speed cloud hosting with SSL, automated backups, and 99.9% uptime guarantee.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $9.99 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Protect Package — Monthly (Green banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#EDFDF5] relative flex items-center justify-center border-b border-emerald-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-emerald-200/80 text-emerald-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Protect Package — Monthly
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Enterprise-grade security, real-time WAF threat defense, and 3 hours/mo maintenance.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $299 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: Essential Package — Monthly (Yellow banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#FEF9ED] relative flex items-center justify-center border-b border-amber-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-amber-200/80 text-amber-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Essential Package — Monthly
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      High-performance website care featuring daily cloud backups and Core Web Vitals optimization.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $149 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 5: Maintain Package — Monthly (Pink/Rose banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#FFF1F2] relative flex items-center justify-center border-b border-rose-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-rose-200/80 text-rose-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Maintain Package — Monthly
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Essential 24/7 uptime monitoring, proactive security scans, and weekly safe updates.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $89 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 6: Design Sprint Support (Teal/Emerald banner pattern) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#EDFDF5] relative flex items-center justify-center border-b border-emerald-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-emerald-200/80 text-emerald-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[9px] font-semibold mb-1 border border-emerald-100">
+                      Hourly
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Design Sprint & UX Audit
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Dedicated on-demand UX teardown, wireframing, and Figma prototype design reviews.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $75 <span className="text-[10px] font-normal text-slate-500">/hr</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // FEATURE 02: Automated Onboarding (Pending automated task creation screenshot)
+    // =========================================================================
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3">
+            <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/40 p-4 text-center">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold mb-2">
+                <Clock size={13} />
+                <span>Pending Task Creation Screenshot</span>
+              </div>
+              <h4 className="text-sm font-bold text-slate-900">Instant Automated Task Creation</h4>
+              <p className="text-xs text-slate-600 max-w-md mx-auto mt-1">
+                Automated task creation, intake forms, and kickoff workflow previews will be updated with your upcoming screenshot.
+              </p>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // FEATURE 03: Client Self-Serve / Digital Products Catalog (Screenshot 1)
+    // =========================================================================
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-4 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800">
+            {/* Top Navigation Bar matching screenshot */}
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
+                  <Box size={14} />
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 tracking-tight">Offerings</h3>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="hidden sm:flex items-center gap-1.5 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-44">
+                  <Search size={12} className="text-slate-400 shrink-0" />
+                  <span className="text-[11px] text-slate-400">Search or jump to...</span>
+                  <span className="ml-auto font-mono text-[9px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
+                </div>
+                <div className="h-6 px-2 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[10px] font-medium flex items-center gap-1 shadow-2xs">
+                  <Sparkles size={11} className="text-[#3F72AF]" />
+                  <span>AI Copilot</span>
+                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
+                </div>
+                <div className="w-6 h-6 rounded-lg text-slate-400 flex items-center justify-center">
+                  <Settings size={13} />
+                </div>
+                <div className="relative w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
+                  <Bell size={13} />
+                  <span className="absolute -top-1 -right-1 bg-[#3F72AF] text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                    8
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 pl-1">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 text-white font-bold text-[9px] flex items-center justify-center">
+                    AM
+                  </div>
+                  <span className="hidden md:inline text-xs font-semibold text-slate-700">Alex Morgan</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-Header Tabs */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-4 text-xs font-semibold">
+                <span className="text-slate-400 cursor-pointer">All</span>
+                <span className="text-slate-500 cursor-pointer">Services</span>
+                <span className="text-[#3F72AF] border-b-2 border-[#3F72AF] pb-1 cursor-pointer">Digital Products</span>
+              </div>
+            </div>
+
+            {/* Search Bar & View Mode Toggle */}
+            <div className="flex items-center justify-between gap-2 pt-1">
+              <div className="flex-1 flex items-center gap-2 bg-slate-50/80 border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-xs">
+                <Search size={13} className="text-slate-400 shrink-0" />
+                <span className="text-[11px] text-slate-400">Search products...</span>
+              </div>
+              <div className="flex items-center gap-1 text-slate-400">
+                <div className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-slate-100 text-slate-600">
+                  <List size={14} />
+                </div>
+                <div className="w-7 h-7 rounded-md flex items-center justify-center bg-slate-100 text-slate-900">
+                  <LayoutGrid size={14} />
+                </div>
+              </div>
+            </div>
+
+            {/* Filter Pills */}
+            <div className="flex items-center gap-1.5 pt-0.5">
+              <button
+                type="button"
+                onClick={() => setDigitalTagFilter("all")}
+                className={`h-6 px-2.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 transition-all ${
+                  digitalTagFilter === "all"
+                    ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                    : "text-slate-600 bg-slate-100/60"
+                }`}
+              >
+                <span>All</span>
+                <span className="bg-white/80 px-1 rounded-full text-[9px] font-bold">36</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDigitalTagFilter("wp")}
+                className={`h-6 px-2.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 transition-all ${
+                  digitalTagFilter === "wp"
+                    ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                    : "text-slate-600 bg-slate-100/60"
+                }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                <span>WordPress Plugin</span>
+                <span className="bg-white/80 px-1 rounded-full text-[9px] font-bold">36</span>
+              </button>
+            </div>
+
+            {/* Digital Products Grid (6 cards matching Screenshot 1) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
+              {/* Product 1: Rank Math Pro + WP Rocket */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-gradient-to-r from-purple-900 to-rose-900 relative flex items-center justify-center p-2 text-white font-extrabold text-sm tracking-tight overflow-hidden">
+                    <span className="relative z-10 flex items-center gap-1">
+                      <span>RankMath</span>
+                      <span className="text-xs bg-white/20 px-1 py-0.5 rounded">PRO</span>
+                    </span>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Rank Math Pro + WP Rocket
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Rank Math + WP Rocket: Unlock SEO Excellence & Peak Performance.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $8.99 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 2: Job Manager Pro Bundle */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-yellow-400 relative flex items-center justify-center p-2 text-blue-900 font-black text-xl tracking-tighter">
+                    <span className="relative z-10">JM</span>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Job Manager Pro Bundle
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Complete WP job board solution with applicant tracking and candidate resumes.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $119 <span className="text-[10px] font-normal text-slate-500">/yr</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 3: The Hub Theme */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/80 border border-blue-200/80 text-blue-600 flex items-center justify-center shadow-2xs">
+                      <Box size={14} />
+                    </div>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[9px] font-semibold mb-1 border border-emerald-100">
+                      One-Time
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      The Hub Theme
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Premium multi-purpose WP theme with modern responsive components and builders.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $45
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 4: SureDash Lifetime */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-slate-200 relative flex items-center justify-center p-2 text-slate-900 font-black text-lg tracking-tighter">
+                    <span className="relative z-10">sureDash</span>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[9px] font-semibold mb-1 border border-emerald-100">
+                      One-Time
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      SureDash Lifetime
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      SureDash client portal — lifetime agency deal with custom domain support.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $199
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 5: Sure Trigger */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-slate-200 relative flex items-center justify-center p-2 text-slate-900 font-black text-lg tracking-tighter">
+                    <span className="relative z-10">sureTrig</span>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Sure Trigger
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      WordPress automation — 1000+ app integrations and webhook dispatcher.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $49 <span className="text-[10px] font-normal text-slate-500">/yr</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 6: Elementor Advanced Plan */}
+              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                <div>
+                  <div className="h-16 bg-slate-100 relative flex items-center justify-center p-2 text-rose-600 font-extrabold text-base tracking-tight">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-6 h-6 bg-rose-600 text-white rounded font-bold text-xs flex items-center justify-center">
+                        E
+                      </div>
+                      <span className="text-slate-900 font-bold text-sm">elementor</span>
+                    </div>
+                    <span className="absolute -bottom-1 left-2 text-[9px] bg-white/90 text-slate-800 font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      WordPress Plugin
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[9px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      Elementor Advanced Plan
+                    </h4>
+                    <p className="text-[10px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                      Elementor Pro — 3 site agency license with theme builder and custom widgets.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-2">
+                  <div className="text-xs font-extrabold text-slate-900">
+                    $99 <span className="text-[10px] font-normal text-slate-500">/yr</span>
+                  </div>
+                  <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900">
+                    <ArrowRight size={10} />
+                  </div>
+                </div>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
