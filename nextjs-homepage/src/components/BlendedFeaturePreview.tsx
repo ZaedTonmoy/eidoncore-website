@@ -845,127 +845,102 @@ export default function BlendedFeaturePreview({
               </button>
             </div>
 
-            {/* Services Grid (2x2 cards with standard taller cover images) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
-              {/* Card 1: Business VPS Hosting */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
-                    <div className="w-10 h-10 rounded-full bg-white/90 border border-blue-200 text-blue-600 flex items-center justify-center shadow-xs">
-                      <Box size={18} />
+            {/* Services Grid (1.5 x 2 layout: 1 main row of 2 cards + subtle peek of next row) */}
+            <div className="relative overflow-hidden max-h-[380px] pb-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {/* Card 1: Business VPS Hosting */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="h-24 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
+                      <div className="w-9 h-9 rounded-full bg-white/90 border border-blue-200 text-blue-600 flex items-center justify-center shadow-xs">
+                        <Box size={16} />
+                      </div>
+                    </div>
+                    <div className="p-3">
+                      <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
+                        Recurring
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                        Cloud VPS Architecture
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                        Dedicated cloud VPS resources, isolated environment, and enterprise performance.
+                      </p>
                     </div>
                   </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
-                      Recurring
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Business VPS Hosting
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      Dedicated cloud VPS resources, isolated environment, and enterprise performance.
-                    </p>
+                  <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
+                    <div className="text-xs font-extrabold text-slate-900">
+                      $40 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                    </div>
+                    <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
+                      <ArrowRight size={10} />
+                    </div>
                   </div>
                 </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $40 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+
+                {/* Card 2: Small Managed Hosting */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="h-24 bg-[#FFF4ED] relative flex items-center justify-center border-b border-orange-100/60">
+                      <div className="w-9 h-9 rounded-full bg-white/90 border border-orange-200 text-orange-600 flex items-center justify-center shadow-xs">
+                        <Box size={16} />
+                      </div>
+                    </div>
+                    <div className="p-3">
+                      <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
+                        Recurring
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                        Managed Web Infrastructure
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                        High-speed cloud hosting with SSL, automated backups, and 99.9% uptime guarantee.
+                      </p>
+                    </div>
                   </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
+                  <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
+                    <div className="text-xs font-extrabold text-slate-900">
+                      $19 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                    </div>
+                    <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
+                      <ArrowRight size={10} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 3 (Peek card in 1.5x2): Security Hardening */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs opacity-70">
+                  <div className="h-20 bg-[#EDFDF5] relative flex items-center justify-center border-b border-emerald-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/90 border border-emerald-200 text-emerald-600 flex items-center justify-center shadow-xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Security & WAF Shield</h4>
+                  </div>
+                </div>
+
+                {/* Card 4 (Peek card in 1.5x2): Speed Optimization */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs opacity-70">
+                  <div className="h-20 bg-[#FEF9ED] relative flex items-center justify-center border-b border-amber-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/90 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
+                      <Box size={14} />
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
+                      Recurring
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Core Vitals Performance</h4>
                   </div>
                 </div>
               </div>
 
-              {/* Card 2: Small Managed Hosting */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-[#FFF4ED] relative flex items-center justify-center border-b border-orange-100/60">
-                    <div className="w-10 h-10 rounded-full bg-white/90 border border-orange-200 text-orange-600 flex items-center justify-center shadow-xs">
-                      <Box size={18} />
-                    </div>
-                  </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
-                      Recurring
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Small Managed Hosting
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      High-speed cloud hosting with SSL, automated backups, and 99.9% uptime guarantee.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $9.99 <span className="text-[10px] font-normal text-slate-500">/mo</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3: Protect Package — Monthly */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-[#EDFDF5] relative flex items-center justify-center border-b border-emerald-100/60">
-                    <div className="w-10 h-10 rounded-full bg-white/90 border border-emerald-200 text-emerald-600 flex items-center justify-center shadow-xs">
-                      <Box size={18} />
-                    </div>
-                  </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
-                      Recurring
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Protect Package — Monthly
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      Enterprise-grade security, real-time WAF threat defense, and full uptime audits.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $299 <span className="text-[10px] font-normal text-slate-500">/mo</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 4: Essential Package — Monthly */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-[#FEF9ED] relative flex items-center justify-center border-b border-amber-100/60">
-                    <div className="w-10 h-10 rounded-full bg-white/90 border border-amber-200 text-amber-600 flex items-center justify-center shadow-xs">
-                      <Box size={18} />
-                    </div>
-                  </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
-                      Recurring
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Essential Package — Monthly
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      High-performance website care featuring daily backups and Core Web Vitals tune-ups.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $149 <span className="text-[10px] font-normal text-slate-500">/mo</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
+              {/* Gentle fade-out overlay at bottom giving authentic scrollable viewport peek */}
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
             </div>
           </BlendMockupCard>
         </div>
@@ -1079,140 +1054,107 @@ export default function BlendedFeaturePreview({
               </button>
             </div>
 
-            {/* Digital Products Grid (2x2 cards with standard taller cover images) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
-              {/* Product 1: Rank Math Pro + WP Rocket */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-gradient-to-r from-purple-900 to-rose-900 relative flex items-center justify-center p-3 text-white font-extrabold text-base tracking-tight overflow-hidden">
-                    <div className="flex items-center gap-1.5 z-10">
-                      <span>RankMath</span>
-                      <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-mono">PRO</span>
+            {/* Digital Products Grid (1.5 x 2 layout: 1 main row of 2 cards + subtle peek of next row) */}
+            <div className="relative overflow-hidden max-h-[380px] pb-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {/* Product 1: SEO & Performance Suite (dummy product) */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="h-24 bg-gradient-to-r from-purple-900 to-rose-900 relative flex items-center justify-center p-3 text-white font-extrabold text-base tracking-tight overflow-hidden">
+                      <div className="flex items-center gap-1.5 z-10">
+                        <span>ApexSEO</span>
+                        <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-mono">PRO</span>
+                      </div>
+                      <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span>Plugin Bundle</span>
+                      </div>
                     </div>
-                    <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>WordPress Plugin</span>
+                    <div className="p-3">
+                      <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
+                        Recurring
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                        ApexSEO Pro + Cache Suite
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                        Complete search rank optimization, automated schema markup & peak cache engine.
+                      </p>
                     </div>
                   </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
+                  <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
+                    <div className="text-xs font-extrabold text-slate-900">
+                      $12 <span className="text-[10px] font-normal text-slate-500">/mo</span>
+                    </div>
+                    <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
+                      <ArrowRight size={10} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product 2: Portal Theme (dummy product) */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="h-24 bg-yellow-400 relative flex items-center justify-center p-3 text-blue-900 font-black text-2xl tracking-tighter">
+                      <span className="z-10">CORE</span>
+                      <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span>Theme Kit</span>
+                      </div>
+                    </div>
+                    <div className="p-3">
+                      <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1 border border-emerald-100">
+                        One-Time
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                        CorePortal UI Framework
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                        Pre-built customer dashboard template with authenticated billing & ticket modules.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-3 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
+                    <div className="text-xs font-extrabold text-slate-900">
+                      $89
+                    </div>
+                    <div className="w-5 h-5 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
+                      <ArrowRight size={10} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Peek Card 3: Automation Hub */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs opacity-70">
+                  <div className="h-20 bg-slate-200 relative flex items-center justify-center p-2 text-slate-900 font-black text-lg">
+                    <span>FlowSync</span>
+                  </div>
+                  <div className="p-3">
+                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                       Recurring
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Rank Math Pro + WP Rocket
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      Rank Math + WP Rocket: Unlock SEO Excellence & Peak Performance.
-                    </p>
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">FlowSync Webhooks</h4>
                   </div>
                 </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $8.99 <span className="text-[10px] font-normal text-slate-500">/mo</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
 
-              {/* Product 2: Job Manager Pro Bundle */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-yellow-400 relative flex items-center justify-center p-3 text-blue-900 font-black text-2xl tracking-tighter">
-                    <span className="z-10">JM</span>
-                    <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>WordPress Plugin</span>
+                {/* Peek Card 4: Builder Kit */}
+                <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs opacity-70">
+                  <div className="h-20 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
+                    <div className="w-8 h-8 rounded-full bg-white/90 border border-blue-200 text-blue-600 flex items-center justify-center shadow-xs">
+                      <Box size={14} />
                     </div>
                   </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1.5 border border-blue-100">
-                      Recurring
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      Job Manager Pro Bundle
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      Complete WP job board solution with applicant tracking and candidate resumes.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $119 <span className="text-[10px] font-normal text-slate-500">/yr</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 3: The Hub Theme */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-[#EEF4FF] relative flex items-center justify-center border-b border-blue-100/60">
-                    <div className="w-10 h-10 rounded-full bg-white/90 border border-blue-200 text-blue-600 flex items-center justify-center shadow-xs">
-                      <Box size={18} />
-                    </div>
-                    <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>WordPress Plugin</span>
-                    </div>
-                  </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1.5 border border-emerald-100">
+                  <div className="p-3">
+                    <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1 border border-emerald-100">
                       One-Time
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      The Hub Theme
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      Premium multi-purpose WP theme with modern responsive components and builders.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $45
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
+                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Studio Builder Pack</h4>
                   </div>
                 </div>
               </div>
 
-              {/* Product 4: SureDash Lifetime */}
-              <div className="rounded-xl border border-slate-200/80 bg-white overflow-hidden shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between">
-                <div>
-                  <div className="h-28 bg-slate-200 relative flex items-center justify-center p-3 text-slate-900 font-black text-xl tracking-tighter">
-                    <span className="z-10">sureDash</span>
-                    <div className="absolute top-2 left-2 text-[10px] bg-white/90 text-slate-800 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>WordPress Plugin</span>
-                    </div>
-                  </div>
-                  <div className="p-3.5">
-                    <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1.5 border border-emerald-100">
-                      One-Time
-                    </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
-                      SureDash Lifetime
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      SureDash client portal — lifetime agency deal with custom domain support.
-                    </p>
-                  </div>
-                </div>
-                <div className="p-3.5 pt-0 flex items-center justify-between border-t border-slate-100/80 mt-1">
-                  <div className="text-xs font-extrabold text-slate-900">
-                    $199
-                  </div>
-                  <div className="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 shadow-2xs">
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              </div>
+              {/* Gentle fade-out overlay at bottom giving authentic scrollable viewport peek */}
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
             </div>
           </BlendMockupCard>
         </div>
