@@ -43,6 +43,13 @@ import {
   AlertTriangle,
   Heart,
   Hash,
+  Bell,
+  Mail,
+  Settings,
+  Moon,
+  ChevronUp,
+  CheckCheck,
+  CornerUpLeft,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -150,6 +157,599 @@ export default function BlendedFeaturePreview({
 
   // State for Messaging Feature 03 (AI Polish Tone)
   const [activeAiTone, setActiveAiTone] = useState<string>("Professional");
+
+  // State for Notifications Feature 01 (Tabs and Accordion)
+  const [notificationTab, setNotificationTab] = useState<"all" | "unread" | "for_you">("all");
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState<boolean>(true);
+
+  // State for Notifications Feature 02 (Settings toggles)
+  const [digestFreq, setDigestFreq] = useState<"instant" | "daily" | "weekly">("instant");
+  const [notifToggles, setNotifToggles] = useState<Record<string, { email: boolean; inApp: boolean }>>({
+    taskAssigned: { email: true, inApp: true },
+    taskStatus: { email: false, inApp: true },
+    commentMention: { email: true, inApp: true },
+    budgetAlert: { email: true, inApp: true },
+    approvals: { email: true, inApp: true },
+  });
+
+  const toggleSetting = (key: string, type: "email" | "inApp") => {
+    setNotifToggles((prev) => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        [type]: !prev[key][type],
+      },
+    }));
+  };
+
+  // Only apply custom Eidoncore focused cards on /notifications
+  if (moduleName.toLowerCase().includes("notif")) {
+    // =========================================================================
+    // FEATURE 01: Smart Notification Center (Popovers from Screenshot 1 & Screenshot 2)
+    // =========================================================================
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4">
+            {/* Top Bar with Search, AI Copilot, Settings, and Bell Icon */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-48 sm:w-56">
+                <Search size={13} className="text-slate-400 shrink-0" />
+                <span className="text-[11px] text-slate-400">Search...</span>
+                <span className="ml-auto font-mono text-[10px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-7 px-2.5 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[11px] font-medium flex items-center gap-1.5 shadow-2xs">
+                  <Sparkles size={12} className="text-[#3F72AF]" />
+                  <span>AI Copilot</span>
+                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
+                </div>
+                <div className="w-7 h-7 rounded-lg text-slate-500 hover:bg-slate-100 flex items-center justify-center cursor-pointer">
+                  <Settings size={14} />
+                </div>
+                {/* Active Bell with Badge */}
+                <div className="relative w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/60">
+                  <Bell size={14} />
+                  <span className="absolute -top-1 -right-1 bg-[#3F72AF] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                    9
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Notification Drawer Modal */}
+            <div className="bg-white rounded-xl border border-slate-200/90 shadow-xl overflow-hidden text-slate-800">
+              {/* Header */}
+              <div className="p-3.5 sm:p-4 border-b border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">Notifications</h3>
+                  <span className="bg-blue-50 text-[#3F72AF] font-semibold text-[11px] px-2 py-0.5 rounded-full border border-blue-200/50">
+                    9
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button type="button" className="text-[11px] font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1">
+                    <CheckCheck size={13} className="text-slate-500" />
+                    <span>Mark all read</span>
+                  </button>
+                  <button type="button" className="text-slate-400 hover:text-slate-700">
+                    <Settings size={13} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Tabs */}
+              <div className="px-3.5 sm:px-4 py-2 border-b border-slate-100 flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setNotificationTab("all")}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                    notificationTab === "all"
+                      ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                      : "text-slate-600 hover:bg-slate-50"
+                  }`}
+                >
+                  All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setNotificationTab("unread")}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                    notificationTab === "unread"
+                      ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                      : "text-slate-600 hover:bg-slate-50"
+                  }`}
+                >
+                  Unread
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setNotificationTab("for_you")}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                    notificationTab === "for_you"
+                      ? "bg-blue-50 text-[#3F72AF] border border-blue-200"
+                      : "text-slate-600 hover:bg-slate-50"
+                  }`}
+                >
+                  For you
+                </button>
+              </div>
+
+              {/* Notification Feed List */}
+              <div className="p-3 sm:p-4 flex flex-col gap-2.5 max-h-[440px] overflow-y-auto">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-1">
+                  Earlier
+                </div>
+
+                {/* Overdue Invoice Alert */}
+                <div className="relative flex items-start gap-3 p-3 rounded-xl bg-slate-50/70 border border-slate-200/60 hover:bg-slate-100/70 transition-colors">
+                  <div className="absolute left-0 top-3 bottom-3 w-1 bg-amber-500 rounded-r" />
+                  <div className="w-8 h-8 rounded-full bg-amber-50 border border-amber-200/60 text-amber-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <AlertTriangle size={15} />
+                  </div>
+                  <div className="flex-1 min-w-0 pr-4">
+                    <div className="flex items-center justify-between gap-1">
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">Invoice #INV-00052 is overdue</h4>
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
+                      Invoice INV-00052 passed its due date and is now overdue.
+                    </p>
+                    <span className="text-[10px] text-slate-400 mt-1 block font-mono">2d ago</span>
+                  </div>
+                </div>
+
+                {/* Member Mention */}
+                <div className="relative flex items-start gap-3 p-3 rounded-xl bg-white border border-slate-200/60 hover:bg-slate-50 transition-colors">
+                  <div className="absolute left-0 top-3 bottom-3 w-1 bg-blue-500 rounded-r" />
+                  <div className="relative shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
+                      AM
+                    </div>
+                    <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-slate-900 text-white rounded-full flex items-center justify-center text-[9px] border border-white">
+                      @
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0 pr-4">
+                    <div className="flex items-center justify-between gap-1">
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">
+                        Alex Morgan mentioned you in Internal Tasks
+                      </h4>
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-0.5">
+                      <span className="font-semibold text-slate-800">@Jordan Lee</span> please review the staging payload.
+                    </p>
+                    <span className="text-[10px] text-slate-400 mt-1 block font-mono">Alex Morgan · 3d ago</span>
+                  </div>
+                </div>
+
+                {/* Accordion Group: 2 Client replies on tickets */}
+                <div className="rounded-xl border border-slate-200/70 bg-slate-50/50 overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setIsAccordionExpanded((prev) => !prev)}
+                    className="w-full p-3 flex items-center justify-between hover:bg-slate-100/60 transition-colors text-left"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0">
+                        <CornerUpLeft size={14} />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 tracking-tight">
+                          2 client replies on tickets
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">9/25/2026</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
+                        2
+                      </span>
+                      {isAccordionExpanded ? (
+                        <ChevronUp size={15} className="text-slate-400" />
+                      ) : (
+                        <ChevronDown size={15} className="text-slate-400" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Accordion Nested Child Items */}
+                  {isAccordionExpanded && (
+                    <div className="pl-6 pr-3 pb-3 pt-1 flex flex-col gap-2 border-t border-slate-100 bg-white/60">
+                      {/* Sub-item 1 */}
+                      <div className="p-2.5 rounded-lg bg-white border border-slate-200/60 flex items-start gap-2.5 shadow-2xs">
+                        <div className="w-6 h-6 rounded-full bg-amber-50 text-amber-600 border border-amber-200/50 flex items-center justify-center shrink-0 mt-0.5">
+                          <CornerUpLeft size={12} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-slate-900">
+                              Client replied on TKT-29 (unassigned)
+                            </span>
+                            <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                          </div>
+                          <span className="text-[11px] text-slate-500 block">Acme Portal / Canadian Health</span>
+                          <span className="text-[10px] text-slate-400 font-mono block mt-0.5">9/25/2026</span>
+                        </div>
+                      </div>
+
+                      {/* Sub-item 2 */}
+                      <div className="p-2.5 rounded-lg bg-white border border-slate-200/60 flex items-start gap-2.5 shadow-2xs">
+                        <div className="w-6 h-6 rounded-full bg-amber-50 text-amber-600 border border-amber-200/50 flex items-center justify-center shrink-0 mt-0.5">
+                          <CornerUpLeft size={12} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-slate-900">
+                              Client replied on TKT-24 (unassigned)
+                            </span>
+                            <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                          </div>
+                          <span className="text-[11px] text-slate-500 block">Nexus App Team</span>
+                          <span className="text-[10px] text-slate-400 font-mono block mt-0.5">9/24/2026</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Team member completed task */}
+                <div className="relative flex items-start gap-3 p-3 rounded-xl bg-slate-50/70 border border-slate-200/60 hover:bg-slate-100/70 transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-blue-50 border border-blue-200/60 text-[#3F72AF] flex items-center justify-center shrink-0 mt-0.5">
+                    <CheckCircle2 size={16} />
+                  </div>
+                  <div className="flex-1 min-w-0 pr-4">
+                    <div className="flex items-center justify-between gap-1">
+                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">
+                        Team member completed task: Design System Sync
+                      </h4>
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
+                      &quot;Design System Sync&quot; marked as Done
+                    </p>
+                    <span className="text-[10px] text-slate-400 mt-1 block font-mono">9/21/2026</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-3 border-t border-slate-100 bg-slate-50/50 text-center">
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#3F72AF] hover:underline inline-flex items-center gap-1.5"
+                >
+                  <span>View all notifications</span>
+                  <ArrowRight size={13} />
+                </button>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // FEATURE 02: Granular Preferences (Settings Table, Digest Frequency & Quiet Hours)
+    // =========================================================================
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800">
+            {/* Box 1: Notification Categories Table (Screenshots 3 & 4) */}
+            <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden">
+              <div className="p-3.5 sm:p-4 border-b border-slate-100">
+                <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                  Notification Categories
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Toggle specific notification types. Some categories support scope filtering.
+                </p>
+              </div>
+
+              {/* Table Column Headers */}
+              <div className="bg-slate-50/70 px-3.5 sm:px-4 py-2 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <span className="w-5/12 sm:w-1/2">Category</span>
+                <span className="w-3/12 sm:w-1/4 text-center">Scope</span>
+                <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-3 sm:gap-4 pr-1">
+                  <span className="flex items-center gap-1">
+                    <Mail size={11} />
+                    <span>Email</span>
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Bell size={11} />
+                    <span>In-App</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Table Rows */}
+              <div className="divide-y divide-slate-100 text-xs">
+                {/* Row 1: Task assigned to me */}
+                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                  <div className="w-5/12 sm:w-1/2">
+                    <div className="font-semibold text-slate-900">Task assigned to me</div>
+                    <div className="text-[11px] text-slate-500">When a task is assigned to you</div>
+                  </div>
+                  <div className="w-3/12 sm:w-1/4 flex justify-center">
+                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                      <span>My projects</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                  </div>
+                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                    {/* Toggle Email */}
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("taskAssigned", "email")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.taskAssigned.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.taskAssigned.email ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                    {/* Toggle In-App */}
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("taskAssigned", "inApp")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.taskAssigned.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.taskAssigned.inApp ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Row 2: Task status changed */}
+                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                  <div className="w-5/12 sm:w-1/2">
+                    <div className="font-semibold text-slate-900">Task status changed</div>
+                    <div className="text-[11px] text-slate-500">When a task in your project changes status</div>
+                  </div>
+                  <div className="w-3/12 sm:w-1/4 flex justify-center">
+                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                      <span>My projects</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                  </div>
+                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("taskStatus", "email")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.taskStatus.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.taskStatus.email ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("taskStatus", "inApp")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.taskStatus.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.taskStatus.inApp ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Row 3: Budget alert */}
+                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                  <div className="w-5/12 sm:w-1/2">
+                    <div className="font-semibold text-slate-900">Budget alert</div>
+                    <div className="text-[11px] text-slate-500">When a project reaches 80%+ of its budget</div>
+                  </div>
+                  <div className="w-3/12 sm:w-1/4 flex justify-center">
+                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                      <span>My projects</span>
+                      <ChevronDown size={12} className="text-slate-400" />
+                    </div>
+                  </div>
+                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("budgetAlert", "email")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.budgetAlert.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.budgetAlert.email ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("budgetAlert", "inApp")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.budgetAlert.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.budgetAlert.inApp ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Row 4: Comment mentioned me */}
+                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                  <div className="w-5/12 sm:w-1/2">
+                    <div className="font-semibold text-slate-900">Comment mentioned me</div>
+                    <div className="text-[11px] text-slate-500">When someone mentions you in a comment</div>
+                  </div>
+                  <div className="w-3/12 sm:w-1/4 flex justify-center">
+                    <span className="text-slate-400 font-mono">—</span>
+                  </div>
+                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("commentMention", "email")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.commentMention.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.commentMention.email ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => toggleSetting("commentMention", "inApp")}
+                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                        notifToggles.commentMention.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                          notifToggles.commentMention.inApp ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Box 2: Digest Frequency (Screenshot 5) */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
+                  Digest Frequency
+                </h4>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  How often to receive notification summaries. Critical events always send instantly.
+                </p>
+              </div>
+              {/* Segmented Pill Selector */}
+              <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={() => setDigestFreq("instant")}
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                    digestFreq === "instant"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <Zap size={12} className={digestFreq === "instant" ? "text-amber-500 fill-amber-500" : ""} />
+                  <span>Instant</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDigestFreq("daily")}
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                    digestFreq === "daily"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <Calendar size={12} />
+                  <span>Daily</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDigestFreq("weekly")}
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                    digestFreq === "weekly"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <Calendar size={12} />
+                  <span>Weekly</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Box 3: Quiet Hours (Screenshot 5) */}
+            <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs flex flex-col gap-3">
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
+                  <Moon size={14} className="text-indigo-500" />
+                  <span>Quiet Hours</span>
+                </h4>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Mute non-critical notifications during specified hours (optional). Critical events bypass quiet hours.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div>
+                  <span className="text-[10px] font-medium text-slate-500 block mb-1">Start Time</span>
+                  <div className="h-8 px-2.5 bg-slate-50/50 border border-slate-200 rounded-lg text-xs text-slate-600 flex items-center justify-between">
+                    <span>22:00</span>
+                    <Clock size={12} className="text-slate-400" />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10px] font-medium text-slate-500 block mb-1">End Time</span>
+                  <div className="h-8 px-2.5 bg-slate-50/50 border border-slate-200 rounded-lg text-xs text-slate-600 flex items-center justify-between">
+                    <span>08:00</span>
+                    <Clock size={12} className="text-slate-400" />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10px] font-medium text-slate-500 block mb-1">Timezone</span>
+                  <div className="h-8 px-2.5 bg-slate-50/50 border border-slate-200 rounded-lg text-xs text-slate-700 flex items-center justify-between">
+                    <span className="truncate">UTC-05:00 Eastern</span>
+                    <ChevronDown size={12} className="text-slate-400 shrink-0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // FEATURE 03: Client Communication (White-Label Notifications placeholder)
+    // NOTE: Waiting for admin access screenshot from user. Currently rendering
+    // a clean white-label email preview placeholder.
+    // =========================================================================
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3">
+            <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/40 p-4 text-center">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold mb-2">
+                <Clock size={13} />
+                <span>Pending Admin Screenshot</span>
+              </div>
+              <h4 className="text-sm font-bold text-slate-900">White-Label Branding & Custom SMTP</h4>
+              <p className="text-xs text-slate-600 max-w-md mx-auto mt-1">
+                Custom SMTP configuration, email templates, and branded client portal notification preview will be updated with your admin screenshot.
+              </p>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
 
   // Only apply custom Eidoncore focused cards on /projects
   if (moduleName.toLowerCase() === "projects") {
