@@ -184,6 +184,11 @@ export default function BlendedFeaturePreview({
     }));
   };
 
+  // State for Notifications Feature 03 (SMTP Configuration)
+  const [smtpEnabled, setSmtpEnabled] = useState<boolean>(true);
+  const [smtpEncryption, setSmtpEncryption] = useState<"TLS" | "SSL">("SSL");
+  const [showApiKey, setShowApiKey] = useState<boolean>(false);
+
   // State for Offerings / Services Feature 01 & 03
   const [offeringsTab, setOfferingsTab] = useState<"services" | "digital">("services");
   const [serviceTagFilter, setServiceTagFilter] = useState<string>("all");
@@ -734,23 +739,172 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 03: Client Communication (White-Label Notifications placeholder)
-    // NOTE: Waiting for admin access screenshot from user. Currently rendering
-    // a clean white-label email preview placeholder.
+    // FEATURE 03: Client Communication (White-Label SMTP Configuration)
+    // Converted to light mode matching Eidoncore design system
     // =========================================================================
     if (featureIndex === "03") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3">
-            <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/40 p-4 text-center">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold mb-2">
-                <Clock size={13} />
-                <span>Pending Admin Screenshot</span>
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800">
+            {/* Header: Title and Enable Toggle */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-200/50">
+                  <Mail size={14} />
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                  SMTP Configuration
+                </h3>
               </div>
-              <h4 className="text-sm font-bold text-slate-900">White-Label Branding & Custom SMTP</h4>
-              <p className="text-xs text-slate-600 max-w-md mx-auto mt-1">
-                Custom SMTP configuration, email templates, and branded client portal notification preview will be updated with your admin screenshot.
-              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-slate-600">Enable</span>
+                <button
+                  type="button"
+                  onClick={() => setSmtpEnabled((prev) => !prev)}
+                  className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                    smtpEnabled ? "bg-[#3F72AF]" : "bg-slate-200"
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                      smtpEnabled ? "translate-x-4" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+
+            {/* Stepper Wizard / Status Pills */}
+            <div className="flex items-center flex-wrap gap-2 text-xs">
+              {/* Step 1: Draft */}
+              <div className="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-semibold flex items-center gap-1.5 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                <span>1. Draft (Unsaved draft)</span>
+              </div>
+              <ChevronRight size={13} className="text-slate-300" />
+              {/* Step 2: Saved */}
+              <div className="px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>2. Saved (No webhook configured)</span>
+              </div>
+              <ChevronRight size={13} className="text-slate-300 hidden sm:inline" />
+              {/* Step 3: Tested */}
+              <div className="px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-medium hidden sm:flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>3. Tested (Not tested)</span>
+              </div>
+            </div>
+
+            {/* Configuration Form in Clean Light Theme */}
+            <div className="flex flex-col gap-3 pt-1 text-xs">
+              {/* Row: Provider Dropdown */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">Provider</label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center justify-between shadow-2xs">
+                  <span className="font-medium">Resend</span>
+                  <ChevronDown size={14} className="text-slate-400" />
+                </div>
+              </div>
+
+              {/* Row: SMTP Host */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">
+                  SMTP Host <span className="text-rose-500">*</span>
+                </label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center font-mono text-[11px] shadow-2xs">
+                  <span>smtp.resend.com</span>
+                </div>
+              </div>
+
+              {/* Row: Port */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">
+                  Port <span className="text-rose-500">*</span>
+                </label>
+                <div className="sm:w-2/3">
+                  <div className="w-28 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center font-mono text-[11px] shadow-2xs">
+                    <span>465</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Row: Username */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">
+                  Username <span className="text-rose-500">*</span>
+                </label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center font-mono text-[11px] shadow-2xs">
+                  <span>resend</span>
+                </div>
+              </div>
+
+              {/* Row: API Key */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">
+                  Resend API Key <span className="text-rose-500">*</span>
+                </label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center justify-between shadow-2xs">
+                  <span className="font-mono text-xs tracking-widest text-slate-600">
+                    {showApiKey ? "re_1892_sample_key" : "••••••••••••••••••••••••"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowApiKey((prev) => !prev)}
+                    className="text-slate-400 hover:text-slate-600"
+                  >
+                    <Eye size={14} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Row: Encryption (TLS / SSL toggle) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">Encryption</label>
+                <div className="sm:w-2/3 flex items-center gap-1.5">
+                  <div className="inline-flex p-0.5 rounded-lg bg-slate-100 border border-slate-200">
+                    <button
+                      type="button"
+                      onClick={() => setSmtpEncryption("TLS")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                        smtpEncryption === "TLS"
+                          ? "bg-white text-slate-900 shadow-xs"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      TLS
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSmtpEncryption("SSL")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                        smtpEncryption === "SSL"
+                          ? "bg-white text-slate-900 shadow-xs"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      SSL
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Row: From Email */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">
+                  From Email <span className="text-rose-500">*</span>
+                </label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center font-mono text-[11px] shadow-2xs">
+                  <span>noreply@acme-agency.com</span>
+                </div>
+              </div>
+
+              {/* Row: Reply-to Email */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                <label className="sm:w-1/3 font-semibold text-slate-700">Reply-to Email</label>
+                <div className="sm:w-2/3 h-9 px-3 bg-slate-50/70 border border-slate-200 rounded-lg text-slate-800 flex items-center font-mono text-[11px] shadow-2xs">
+                  <span>support@acme-agency.com</span>
+                </div>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
