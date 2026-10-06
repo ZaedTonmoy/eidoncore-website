@@ -774,24 +774,18 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* Stepper Wizard / Status Pills */}
+            {/* Stepper Wizard / Status Pills - Showing Saved and Tested */}
             <div className="flex items-center flex-wrap gap-2 text-xs">
-              {/* Step 1: Draft */}
-              <div className="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-semibold flex items-center gap-1.5 shadow-2xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                <span>1. Draft (Unsaved draft)</span>
+              {/* Step 1: Saved */}
+              <div className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold flex items-center gap-1.5 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>1. Saved (Active webhook)</span>
               </div>
               <ChevronRight size={13} className="text-slate-300" />
-              {/* Step 2: Saved */}
-              <div className="px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                <span>2. Saved (No webhook configured)</span>
-              </div>
-              <ChevronRight size={13} className="text-slate-300 hidden sm:inline" />
-              {/* Step 3: Tested */}
-              <div className="px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-medium hidden sm:flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                <span>3. Tested (Not tested)</span>
+              {/* Step 2: Tested */}
+              <div className="px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#3F72AF] font-semibold flex items-center gap-1.5 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                <span>2. Tested (Verified & Connected)</span>
               </div>
             </div>
 
