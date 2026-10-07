@@ -467,36 +467,6 @@ export default function BlendedFeaturePreview({
           <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800">
             {/* Box 1: Animated Scrolling Viewport between Delivery Methods and Notification Categories */}
             <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden relative">
-              {/* Tab / View Indicator Pills at Top */}
-              <div className="px-3.5 sm:px-4 py-2 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => setActiveSettingsView("delivery")}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
-                      activeSettingsView === "delivery"
-                        ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
-                        : "text-slate-500 hover:text-slate-800"
-                    }`}
-                  >
-                    Delivery Methods
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveSettingsView("categories")}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
-                      activeSettingsView === "categories"
-                        ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
-                        : "text-slate-500 hover:text-slate-800"
-                    }`}
-                  >
-                    Notification Categories
-                  </button>
-                </div>
-                <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
-                  {activeSettingsView === "delivery" ? "1 of 2 · Auto-scrolling" : "2 of 2 · Auto-scrolling"}
-                </span>
-              </div>
 
               {/* Scroll Container with Smooth Transition */}
               <div className="relative min-h-[295px] overflow-hidden">
