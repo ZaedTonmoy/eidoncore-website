@@ -52,6 +52,8 @@ import {
   CornerUpLeft,
   Box,
   ShoppingBag,
+  Smartphone,
+  Laptop,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -164,8 +166,14 @@ export default function BlendedFeaturePreview({
   const [notificationTab, setNotificationTab] = useState<"all" | "unread" | "for_you">("all");
   const [isAccordionExpanded, setIsAccordionExpanded] = useState<boolean>(true);
 
-  // State for Notifications Feature 02 (Settings toggles)
+  // State for Notifications Feature 02 (Settings toggles & scrolling animation)
   const [digestFreq, setDigestFreq] = useState<"instant" | "daily" | "weekly">("instant");
+  const [activeSettingsView, setActiveSettingsView] = useState<"delivery" | "categories">("delivery");
+  const [deliveryMethods, setDeliveryMethods] = useState({
+    email: true,
+    inApp: true,
+    push: false,
+  });
   const [notifToggles, setNotifToggles] = useState<Record<string, { email: boolean; inApp: boolean }>>({
     taskAssigned: { email: true, inApp: true },
     taskStatus: { email: false, inApp: true },
@@ -173,6 +181,14 @@ export default function BlendedFeaturePreview({
     budgetAlert: { email: true, inApp: true },
     approvals: { email: true, inApp: true },
   });
+
+  // Automated scrolling animation between Delivery Methods and Notification Categories
+  useEffect(() => {
+    const scrollTimer = setInterval(() => {
+      setActiveSettingsView((prev) => (prev === "delivery" ? "categories" : "delivery"));
+    }, 4500);
+    return () => clearInterval(scrollTimer);
+  }, []);
 
   const toggleSetting = (key: string, type: "email" | "inApp") => {
     setNotifToggles((prev) => ({
@@ -449,199 +465,299 @@ export default function BlendedFeaturePreview({
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800">
-            {/* Box 1: Notification Categories Table (Screenshots 3 & 4) */}
-            <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden">
-              <div className="p-3.5 sm:p-4 border-b border-slate-100">
-                <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
-                  Notification Categories
-                </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Toggle specific notification types. Some categories support scope filtering.
-                </p>
+            {/* Box 1: Animated Scrolling Viewport between Delivery Methods and Notification Categories */}
+            <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs overflow-hidden relative">
+              {/* Tab / View Indicator Pills at Top */}
+              <div className="px-3.5 sm:px-4 py-2 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => setActiveSettingsView("delivery")}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                      activeSettingsView === "delivery"
+                        ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
+                        : "text-slate-500 hover:text-slate-800"
+                    }`}
+                  >
+                    Delivery Methods
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveSettingsView("categories")}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                      activeSettingsView === "categories"
+                        ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
+                        : "text-slate-500 hover:text-slate-800"
+                    }`}
+                  >
+                    Notification Categories
+                  </button>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
+                  {activeSettingsView === "delivery" ? "1 of 2 · Auto-scrolling" : "2 of 2 · Auto-scrolling"}
+                </span>
               </div>
 
-              {/* Table Column Headers */}
-              <div className="bg-slate-50/70 px-3.5 sm:px-4 py-2 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                <span className="w-5/12 sm:w-1/2">Category</span>
-                <span className="w-3/12 sm:w-1/4 text-center">Scope</span>
-                <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-3 sm:gap-4 pr-1">
-                  <span className="flex items-center gap-1">
-                    <Mail size={11} />
-                    <span>Email</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Bell size={11} />
-                    <span>In-App</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Table Rows */}
-              <div className="divide-y divide-slate-100 text-xs">
-                {/* Row 1: Task assigned to me */}
-                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
-                  <div className="w-5/12 sm:w-1/2">
-                    <div className="font-semibold text-slate-900">Task assigned to me</div>
-                    <div className="text-[11px] text-slate-500">When a task is assigned to you</div>
+              {/* Scroll Container with Smooth Transition */}
+              <div className="relative min-h-[295px] overflow-hidden">
+                {/* VIEW A: Delivery Methods (Screenshot from latest user message) */}
+                <div
+                  className={`transition-all duration-700 ease-in-out ${
+                    activeSettingsView === "delivery"
+                      ? "opacity-100 translate-y-0 relative z-10"
+                      : "opacity-0 -translate-y-6 pointer-events-none absolute inset-0 z-0"
+                  }`}
+                >
+                  <div className="p-3.5 sm:p-4 border-b border-slate-100">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                      Delivery Methods
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Choose how you want to be notified.
+                    </p>
                   </div>
-                  <div className="w-3/12 sm:w-1/4 flex justify-center">
-                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
-                      <span>My projects</span>
-                      <ChevronDown size={12} className="text-slate-400" />
+
+                  <div className="divide-y divide-slate-100 text-xs">
+                    {/* Delivery Row 1: Email Notifications */}
+                    <div className="p-3 sm:p-4 flex items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                          <Mail size={15} />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-slate-900 text-xs">Email Notifications</div>
+                          <div className="text-[11px] text-slate-500">Receive notifications via email</div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethods((prev) => ({ ...prev, email: !prev.email }))}
+                        className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                          deliveryMethods.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                        }`}
+                      >
+                        <div
+                          className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                            deliveryMethods.email ? "translate-x-4" : "translate-x-0"
+                          }`}
+                        />
+                      </button>
+                    </div>
+
+                    {/* Delivery Row 2: In-App Notifications */}
+                    <div className="p-3 sm:p-4 flex items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                          <Bell size={15} />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-slate-900 text-xs">In-App Notifications</div>
+                          <div className="text-[11px] text-slate-500">Show notifications within the app</div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethods((prev) => ({ ...prev, inApp: !prev.inApp }))}
+                        className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                          deliveryMethods.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                        }`}
+                      >
+                        <div
+                          className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                            deliveryMethods.inApp ? "translate-x-4" : "translate-x-0"
+                          }`}
+                        />
+                      </button>
+                    </div>
+
+                    {/* Delivery Row 3: Push Notifications */}
+                    <div className="p-3 sm:p-4 flex items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                          <Laptop size={15} />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-slate-900 text-xs">Push Notifications</div>
+                          <div className="text-[11px] text-slate-500">Get notified even when the app isn&apos;t open</div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethods((prev) => ({ ...prev, push: !prev.push }))}
+                        className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                          deliveryMethods.push ? "bg-[#3F72AF]" : "bg-slate-200"
+                        }`}
+                      >
+                        <div
+                          className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                            deliveryMethods.push ? "translate-x-4" : "translate-x-0"
+                          }`}
+                        />
+                      </button>
                     </div>
                   </div>
-                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
-                    {/* Toggle Email */}
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("taskAssigned", "email")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.taskAssigned.email ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.taskAssigned.email ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                    {/* Toggle In-App */}
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("taskAssigned", "inApp")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.taskAssigned.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.taskAssigned.inApp ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                  </div>
                 </div>
 
-                {/* Row 2: Task status changed */}
-                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
-                  <div className="w-5/12 sm:w-1/2">
-                    <div className="font-semibold text-slate-900">Task status changed</div>
-                    <div className="text-[11px] text-slate-500">When a task in your project changes status</div>
+                {/* VIEW B: Notification Categories Table */}
+                <div
+                  className={`transition-all duration-700 ease-in-out ${
+                    activeSettingsView === "categories"
+                      ? "opacity-100 translate-y-0 relative z-10"
+                      : "opacity-0 translate-y-6 pointer-events-none absolute inset-0 z-0"
+                  }`}
+                >
+                  <div className="p-3.5 sm:p-4 border-b border-slate-100">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                      Notification Categories
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Toggle specific notification types. Some categories support scope filtering.
+                    </p>
                   </div>
-                  <div className="w-3/12 sm:w-1/4 flex justify-center">
-                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
-                      <span>My projects</span>
-                      <ChevronDown size={12} className="text-slate-400" />
+
+                  {/* Table Column Headers */}
+                  <div className="bg-slate-50/70 px-3.5 sm:px-4 py-2 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="w-5/12 sm:w-1/2">Category</span>
+                    <span className="w-3/12 sm:w-1/4 text-center">Scope</span>
+                    <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-3 sm:gap-4 pr-1">
+                      <span className="flex items-center gap-1">
+                        <Mail size={11} />
+                        <span>Email</span>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Bell size={11} />
+                        <span>In-App</span>
+                      </span>
                     </div>
                   </div>
-                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("taskStatus", "email")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.taskStatus.email ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.taskStatus.email ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("taskStatus", "inApp")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.taskStatus.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.taskStatus.inApp ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                  </div>
-                </div>
 
-                {/* Row 3: Budget alert */}
-                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
-                  <div className="w-5/12 sm:w-1/2">
-                    <div className="font-semibold text-slate-900">Budget alert</div>
-                    <div className="text-[11px] text-slate-500">When a project reaches 80%+ of its budget</div>
-                  </div>
-                  <div className="w-3/12 sm:w-1/4 flex justify-center">
-                    <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
-                      <span>My projects</span>
-                      <ChevronDown size={12} className="text-slate-400" />
+                  {/* Table Rows */}
+                  <div className="divide-y divide-slate-100 text-xs">
+                    {/* Row 1: Task assigned to me */}
+                    <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                      <div className="w-5/12 sm:w-1/2">
+                        <div className="font-semibold text-slate-900">Task assigned to me</div>
+                        <div className="text-[11px] text-slate-500">When a task is assigned to you</div>
+                      </div>
+                      <div className="w-3/12 sm:w-1/4 flex justify-center">
+                        <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                          <span>My projects</span>
+                          <ChevronDown size={12} className="text-slate-400" />
+                        </div>
+                      </div>
+                      <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("taskAssigned", "email")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.taskAssigned.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.taskAssigned.email ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("taskAssigned", "inApp")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.taskAssigned.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.taskAssigned.inApp ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("budgetAlert", "email")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.budgetAlert.email ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.budgetAlert.email ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("budgetAlert", "inApp")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.budgetAlert.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.budgetAlert.inApp ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                  </div>
-                </div>
 
-                {/* Row 4: Comment mentioned me */}
-                <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
-                  <div className="w-5/12 sm:w-1/2">
-                    <div className="font-semibold text-slate-900">Comment mentioned me</div>
-                    <div className="text-[11px] text-slate-500">When someone mentions you in a comment</div>
-                  </div>
-                  <div className="w-3/12 sm:w-1/4 flex justify-center">
-                    <span className="text-slate-400 font-mono">—</span>
-                  </div>
-                  <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("commentMention", "email")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.commentMention.email ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.commentMention.email ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => toggleSetting("commentMention", "inApp")}
-                      className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
-                        notifToggles.commentMention.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                          notifToggles.commentMention.inApp ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
+                    {/* Row 2: Task status changed */}
+                    <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                      <div className="w-5/12 sm:w-1/2">
+                        <div className="font-semibold text-slate-900">Task status changed</div>
+                        <div className="text-[11px] text-slate-500">When a task changes status</div>
+                      </div>
+                      <div className="w-3/12 sm:w-1/4 flex justify-center">
+                        <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                          <span>My projects</span>
+                          <ChevronDown size={12} className="text-slate-400" />
+                        </div>
+                      </div>
+                      <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("taskStatus", "email")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.taskStatus.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.taskStatus.email ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("taskStatus", "inApp")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.taskStatus.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.taskStatus.inApp ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Row 3: Budget alert */}
+                    <div className="p-3 sm:px-4 flex items-center justify-between gap-2 hover:bg-slate-50/50 transition-colors">
+                      <div className="w-5/12 sm:w-1/2">
+                        <div className="font-semibold text-slate-900">Budget alert</div>
+                        <div className="text-[11px] text-slate-500">When reaching 80%+ budget</div>
+                      </div>
+                      <div className="w-3/12 sm:w-1/4 flex justify-center">
+                        <div className="h-7 px-2 bg-white border border-slate-200 rounded-lg text-[11px] text-slate-700 flex items-center justify-between gap-1 shadow-2xs">
+                          <span>My projects</span>
+                          <ChevronDown size={12} className="text-slate-400" />
+                        </div>
+                      </div>
+                      <div className="w-4/12 sm:w-1/4 flex items-center justify-end gap-4 sm:gap-5 pr-1">
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("budgetAlert", "email")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.budgetAlert.email ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.budgetAlert.email ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => toggleSetting("budgetAlert", "inApp")}
+                          className={`w-9 h-5 rounded-full p-0.5 transition-colors ${
+                            notifToggles.budgetAlert.inApp ? "bg-[#3F72AF]" : "bg-slate-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                              notifToggles.budgetAlert.inApp ? "translate-x-4" : "translate-x-0"
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
