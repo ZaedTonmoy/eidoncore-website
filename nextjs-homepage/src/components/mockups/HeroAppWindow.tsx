@@ -74,11 +74,11 @@ export default function HeroAppWindow() {
   const [activeTaskTab, setActiveTaskTab] = useState<"all" | "overdue" | "today" | "week">("all");
   const [activeProjectTab, setActiveProjectTab] = useState<"all" | "active" | "attention" | "delivered">("all");
 
-  const [cursorPos, setCursorPos] = useState({ x: 260, y: 180, visible: true });
+  const [cursorPos, setCursorPos] = useState({ x: 260, y: 180, visible: false });
   const [cursorClicked, setCursorClicked] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const isCancelledRef = useRef(false);
+  const isCancelledRef = useRef(true);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
   // Refs for virtual tour navigation
@@ -251,13 +251,12 @@ export default function HeroAppWindow() {
   }, [copilotOpen]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      startTour();
-    }, 800);
+    // Automated tour disabled for testing
+    isCancelledRef.current = true;
+    clearTimeouts();
 
     return () => {
       isCancelledRef.current = true;
-      clearTimeout(timer);
       clearTimeouts();
     };
   }, []);
@@ -285,9 +284,12 @@ export default function HeroAppWindow() {
             <button
               onClick={() => {
                 isCancelledRef.current = true;
-                setTimeout(startTour, 100);
+                clearTimeouts();
+                setCurrentView("dashboard");
+                setCopilotOpen(false);
+                setCommandPaletteOpen(false);
               }}
-              title="Restart automated tour"
+              title="Reset view"
               className="text-[#94A3B8] hover:text-[#0F172A] transition-colors ml-2 shrink-0"
             >
               <RotateCw size={11} />
