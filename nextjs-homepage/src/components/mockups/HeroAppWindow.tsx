@@ -51,6 +51,7 @@ import {
   LayoutGrid,
   Table,
   AlertTriangle,
+  Activity,
   Plus,
   RefreshCw,
   ExternalLink,
@@ -624,37 +625,37 @@ export default function HeroAppWindow() {
               {/* ========================================================= */}
               {/* 1. MISSION CONTROL: EXECUTIVE WORKSPACE COCKPIT (SCREENSHOT 1) */}
               {/* ========================================================= */}
-              <div className="bg-[#0A0E17] border border-[#1A2333] rounded-2xl p-3 sm:p-4 text-white shadow-xl relative overflow-hidden select-none">
-                {/* Header Status Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800/70 text-xs">
+              <div className="bg-[#0A0E17] border border-[#162030] rounded-[20px] p-4 text-white shadow-2xl relative overflow-hidden select-none">
+                {/* Header Status Bar (y=16 to y=66) */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-[#162030] text-xs">
                   {/* Left: Executive Workspace Path */}
-                  <div className="flex items-center gap-1.5 text-[9.5px] font-mono tracking-wider">
-                    <span className="text-[#38BDF8] font-bold">⚡</span>
+                  <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider">
+                    <Activity size={12} className="text-[#38BDF8] shrink-0" strokeWidth={2.5} />
                     <span className="text-[#38BDF8] font-bold uppercase">EXECUTIVE WORKSPACE</span>
-                    <span className="text-slate-600 font-semibold">/</span>
-                    <span className="text-slate-400 font-medium uppercase">AETHERIS CREATIVE STUDIO</span>
+                    <span className="text-[#475569] font-semibold">/</span>
+                    <span className="text-[#94A3B8] font-medium uppercase">AETHERIS CREATIVE STUDIO</span>
                   </div>
 
                   {/* Right: 3 Status Capsules */}
-                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
                     {/* Status Pill 1: Critical & Caution */}
-                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#241014] border border-[#3E181F] text-[9px] font-mono">
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#241014] border border-[#28141c] text-[9px] font-mono">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
                       <span className="text-[#F87171] font-bold">1 CRITICAL</span>
-                      <span className="text-slate-600">·</span>
+                      <span className="text-[#64748B]">·</span>
                       <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
                       <span className="text-[#FBBF24] font-bold">1 CAUTION</span>
-                      <span className="text-[#94A3B8] text-[8.5px] ml-0.5 font-normal">as of 11:18 PM</span>
+                      <span className="text-[#94A3B8] text-[8.5px] ml-1 font-normal">as of 11:18 PM</span>
                     </div>
 
                     {/* Status Pill 2: Live */}
-                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#0A1F18] border border-[#143B2C] text-[9px] text-[#34D399] font-mono">
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A1F18] border border-[#102823] text-[9.5px] text-[#34D399] font-mono">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                       <span className="font-semibold">Live</span>
                     </div>
 
                     {/* Status Pill 3: Motion on */}
-                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#121B2A] border border-[#1E2E44] text-[9px] text-slate-300 font-mono">
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#121B2A] border border-[#152031] text-[9.5px] text-slate-300 font-mono">
                       <span className="flex items-end gap-[2px] h-2.5 mr-0.5">
                         <span className="w-[2px] h-2.5 bg-slate-300 rounded-2xs" />
                         <span className="w-[2px] h-1.5 bg-slate-400 rounded-2xs" />
@@ -666,32 +667,32 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* Main Cockpit Hero Content (Mission Control & Clocks) */}
-                <div className="pt-3 pb-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                <div className="pt-4 pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
+                    <h3 className="text-[22px] sm:text-2xl font-bold tracking-tight text-white leading-tight">
                       Mission Control
                     </h3>
-                    <p className="mt-0.5 text-[10.5px] text-[#94A3B8] max-w-xl leading-normal">
+                    <p className="mt-1 text-[11px] text-[#94A3B8] max-w-xl leading-normal">
                       <strong className="text-white font-semibold">Good Evening, Julian.</strong> Revenue, delivery and priorities at a glance.
                     </p>
                   </div>
 
                   {/* Right Clocks & Window Progress */}
-                  <div className="flex items-center gap-3 sm:gap-4 font-mono text-slate-400 text-xs shrink-0 pt-1 lg:pt-0">
+                  <div className="flex items-center gap-4 sm:gap-5 font-mono text-slate-400 text-xs shrink-0 pt-1 lg:pt-0">
                     {/* Local Clock */}
                     <div className="flex flex-col">
                       <span className="text-[8px] uppercase tracking-wider text-[#64748B]">LOCAL · GMT+6</span>
-                      <span className="text-base sm:text-lg font-bold text-white tracking-wide mt-0.5">23:18:36</span>
+                      <span className="text-[17px] sm:text-[18px] font-bold text-white tracking-wide mt-0.5">23:18:36</span>
                     </div>
 
                     {/* UTC Clock */}
-                    <div className="flex flex-col border-l border-slate-800/80 pl-3 sm:pl-4">
+                    <div className="flex flex-col border-l border-[#1E293B] pl-4 sm:pl-5">
                       <span className="text-[8px] uppercase tracking-wider text-[#64748B]">UTC</span>
-                      <span className="text-base sm:text-lg font-bold text-slate-200 tracking-wide mt-0.5">17:18:36</span>
+                      <span className="text-[17px] sm:text-[18px] font-bold text-slate-200 tracking-wide mt-0.5">17:18:36</span>
                     </div>
 
                     {/* Window UTC Progress */}
-                    <div className="flex flex-col border-l border-slate-800/80 pl-3 sm:pl-4">
+                    <div className="flex flex-col border-l border-[#1E293B] pl-4 sm:pl-5">
                       <div className="flex items-center justify-between gap-3 text-[8px] uppercase tracking-wider">
                         <span className="text-[#64748B]">WINDOW · UTC</span>
                         <span className="text-[#94A3B8] font-semibold">Day 8 of 31</span>
@@ -700,12 +701,12 @@ export default function HeroAppWindow() {
                         <span className="text-[11px] font-bold text-white">This Month</span>
                         <span className="text-[9px] text-[#64748B]">Oct 1 – 31, 2026</span>
                       </div>
-                      {/* Segment progress bar */}
+                      {/* Segment progress bar: exactly 18 segments matching reference */}
                       <div className="flex gap-[2px] mt-1.5">
-                        {[...Array(20)].map((_, i) => (
+                        {[...Array(18)].map((_, i) => (
                           <div
                             key={i}
-                            className={`h-[3px] w-[5px] rounded-[1px] ${
+                            className={`h-[3px] w-[5.5px] rounded-[1px] ${
                               i < 4 ? "bg-[#F59E0B]" : "bg-[#1E293B]"
                             }`}
                           />
@@ -715,39 +716,39 @@ export default function HeroAppWindow() {
                   </div>
                 </div>
 
-                {/* 5 Cockpit Columns Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 pt-3 border-t border-slate-800/70 text-xs mt-1">
+                {/* 5 Cockpit Columns Grid: exact 8px gap, exact 185px height boxes */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 pt-4 border-t border-[#162030] text-xs">
                   
                   {/* Column 1: FINANCE (CRITICAL) */}
-                  <div className="bg-[#0E1420]/95 border border-[#3A181F] rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
+                  <div className="bg-[#0E1420] border border-[#29141c] rounded-xl p-3.5 flex flex-col justify-between min-w-0 shadow-sm h-[185px]">
                     <div>
-                      <div className="flex items-center justify-between pb-1">
-                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
                           FINANCE
                         </span>
-                        <span className="text-[7.5px] font-mono font-bold text-[#F87171] bg-[#2D1217] border border-[#481E26] px-1 py-0.2 rounded uppercase">
+                        <span className="text-[8px] font-mono font-bold text-[#F87171] bg-[#2D1217] border border-[#481E26] px-1.5 py-0.5 rounded uppercase">
                           CRITICAL
                         </span>
                       </div>
 
-                      <div className="flex items-baseline justify-between mt-1.5 gap-1">
+                      <div className="flex items-baseline justify-between mt-2.5 gap-1">
                         <div className="min-w-0">
-                          <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">$40,900</div>
-                          <div className="text-[8px] text-slate-400 flex items-center gap-1 mt-1 truncate">
+                          <div className="text-[20px] font-black text-white leading-none font-sans">$40,900</div>
+                          <div className="text-[8.5px] text-slate-400 flex items-center gap-1 mt-1 truncate">
                             <span className="text-[#34D399] font-semibold font-mono">↑ 529%</span>
-                            <span className="text-[#64748B] truncate">Revenue this period</span>
+                            <span className="text-[#64748B] truncate">Revenue this peri...</span>
                           </div>
                         </div>
                         <div className="text-right shrink-0">
-                          <div className="text-sm font-bold text-[#F87171] leading-none font-sans">$4,800</div>
+                          <div className="text-[13px] font-bold text-[#F87171] leading-none font-sans">$4,800</div>
                           <div className="text-[8px] text-[#64748B] mt-1">Overdue</div>
                         </div>
                       </div>
 
                       {/* Sparkline */}
-                      <div className="mt-2.5 pt-1">
-                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
+                      <div className="mt-2.5">
+                        <div className="flex items-center justify-between text-[8px] text-[#64748B] font-mono mb-1">
                           <span>Revenue trend</span>
                           <span>6 months</span>
                         </div>
@@ -764,120 +765,118 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    <div className="mt-2 pt-1 border-t border-slate-800/60">
-                      <div className="text-[8.5px] font-medium text-[#F87171] flex items-center gap-1 bg-[#241014] border border-[#3E181F] px-1.5 py-1 rounded-md">
-                        <AlertTriangle size={9} className="shrink-0 text-[#F87171]" />
+                    <div>
+                      <div className="text-[9px] font-medium text-[#F87171] flex items-center gap-1.5 bg-[#261115] border border-[#38181f] px-2 py-1 rounded-md">
+                        <AlertTriangle size={10} className="shrink-0 text-[#F87171]" />
                         <span className="truncate">1 Overdue Invoice</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Column 2: DELIVERY (CAUTION) */}
-                  <div className="bg-[#0E1420]/95 border border-[#382614] rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
+                  <div className="bg-[#0E1420] border border-[#231d1a] rounded-xl p-3.5 flex flex-col justify-between min-w-0 shadow-sm h-[185px]">
                     <div>
-                      <div className="flex items-center justify-between pb-1">
-                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
                           DELIVERY
                         </span>
-                        <span className="text-[7.5px] font-mono font-bold text-[#FBBF24] bg-[#2B1B0F] border border-[#452D16] px-1 py-0.2 rounded uppercase">
+                        <span className="text-[8px] font-mono font-bold text-[#FBBF24] bg-[#2B1B0F] border border-[#452D16] px-1.5 py-0.5 rounded uppercase">
                           CAUTION
                         </span>
                       </div>
 
-                      <div className="flex items-baseline justify-between mt-1.5 gap-1">
+                      <div className="flex items-baseline justify-between mt-2.5 gap-1">
                         <div>
-                          <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">3</div>
-                          <div className="text-[8px] text-[#64748B] mt-1 truncate">Active projects</div>
+                          <div className="text-[20px] font-black text-white leading-none font-sans">3</div>
+                          <div className="text-[8.5px] text-[#64748B] mt-1 truncate">Active projects</div>
                         </div>
                         <div className="text-right shrink-0">
-                          <div className="text-sm font-bold text-slate-200 leading-none font-sans">7</div>
+                          <div className="text-[14px] font-bold text-slate-200 leading-none font-sans">7</div>
                           <div className="text-[8px] text-[#64748B] mt-1 truncate">Tasks due this week</div>
                         </div>
                       </div>
 
                       {/* Completed 14 days histogram */}
-                      <div className="mt-2.5 pt-1">
-                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
+                      <div className="mt-2.5">
+                        <div className="flex items-center justify-between text-[8px] text-[#64748B] font-mono mb-1">
                           <span>Completed</span>
                           <span>14 days</span>
                         </div>
-                        <div className="flex items-end h-3.5 gap-[2px]">
+                        <div className="flex items-end h-5 gap-[2px]">
                           {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0].map((val, idx) => (
                             <div
                               key={idx}
                               className={`flex-1 rounded-[1px] ${
-                                val > 0 ? "bg-[#64748B]" : "bg-slate-800/60"
+                                val > 0 ? "bg-[#64748B]" : "bg-[#162030]"
                               }`}
-                              style={{ height: val > 0 ? "14px" : "2px" }}
+                              style={{ height: val > 0 ? "16px" : "2px" }}
                             />
                           ))}
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2 pt-1 border-t border-slate-800/60">
-                      <div className="text-[8.5px] font-medium text-[#FBBF24] flex items-center gap-1 bg-[#251A10] border border-[#422C16] px-1.5 py-1 rounded-md">
-                        <AlertTriangle size={9} className="shrink-0 text-[#FBBF24]" />
+                    <div>
+                      <div className="text-[9px] font-medium text-[#FBBF24] flex items-center gap-1.5 bg-[#271c10] border border-[#3a2616] px-2 py-1 rounded-md">
+                        <AlertTriangle size={10} className="shrink-0 text-[#FBBF24]" />
                         <span className="truncate">8 Tasks Due Within 72h</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Column 3: CLIENTS (NOMINAL) */}
-                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
+                  <div className="bg-[#0E1420] border border-[#141b29] rounded-xl p-3.5 flex flex-col justify-between min-w-0 shadow-sm h-[185px]">
                     <div>
-                      <div className="flex items-center justify-between pb-1">
-                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           CLIENTS
                         </span>
-                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
+                        <span className="text-[8px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1.5 py-0.5 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-1.5">
-                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">4</div>
-                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Active organizations</div>
+                      <div className="mt-2.5">
+                        <div className="text-[20px] font-black text-white leading-none font-sans">4</div>
+                        <div className="text-[8.5px] text-[#64748B] mt-1 truncate">Active organizations</div>
                       </div>
 
-                      <div className="mt-2.5 pt-1">
-                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
+                      <div className="mt-3">
+                        <div className="flex items-center justify-between text-[8px] text-[#64748B] font-mono mb-1.5">
                           <span>CRM stages</span>
                           <span className="text-slate-300">Lead → Active</span>
                         </div>
-                        <div className="w-full bg-[#1E293B] h-[3px] rounded-full overflow-hidden">
-                          <div className="bg-[#10B981] h-full w-full rounded-full" />
-                        </div>
+                        <div className="w-full bg-[#10B981] h-[2px] rounded-full" />
                       </div>
                     </div>
 
-                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate">
+                    <div className="text-[9px] text-[#64748B] truncate">
                       No open proposals
                     </div>
                   </div>
 
                   {/* Column 4: SUPPORT (NOMINAL) */}
-                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
+                  <div className="bg-[#0E1420] border border-[#141b29] rounded-xl p-3.5 flex flex-col justify-between min-w-0 shadow-sm h-[185px]">
                     <div>
-                      <div className="flex items-center justify-between pb-1">
-                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           SUPPORT
                         </span>
-                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
+                        <span className="text-[8px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1.5 py-0.5 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-1.5">
-                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">2</div>
-                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Open tickets</div>
+                      <div className="mt-2.5">
+                        <div className="text-[20px] font-black text-white leading-none font-sans">2</div>
+                        <div className="text-[8.5px] text-[#64748B] mt-1 truncate">Open tickets</div>
                       </div>
 
-                      <div className="mt-2.5 pt-1">
-                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
+                      <div className="mt-3">
+                        <div className="flex items-center justify-between text-[8px] text-[#64748B] font-mono mb-1.5">
                           <span className="flex items-center gap-1">
                             <span className="w-1.5 h-1.5 bg-[#475569] rounded-2xs inline-block" /> Opened
                           </span>
@@ -886,41 +885,41 @@ export default function HeroAppWindow() {
                           </span>
                           <span>14 days</span>
                         </div>
-                        <div className="flex items-end h-3.5 gap-1">
+                        <div className="flex items-end h-4 gap-1.5">
                           <div className="w-2 bg-[#475569] h-2.5 rounded-2xs" />
                           <div className="w-2 bg-[#94A3B8] h-1.5 rounded-2xs" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate">
+                    <div className="text-[9px] text-[#64748B] truncate">
                       No SLA breaches today
                     </div>
                   </div>
 
                   {/* Column 5: AUTOMATION (NOMINAL) */}
-                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
+                  <div className="bg-[#0E1420] border border-[#141b29] rounded-xl p-3.5 flex flex-col justify-between min-w-0 shadow-sm h-[185px]">
                     <div>
-                      <div className="flex items-center justify-between pb-1">
-                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           AUTOMATION
                         </span>
-                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
+                        <span className="text-[8px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1.5 py-0.5 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-1.5">
-                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">0</div>
-                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Failing automations</div>
+                      <div className="mt-2.5">
+                        <div className="text-[20px] font-black text-white leading-none font-sans">0</div>
+                        <div className="text-[8.5px] text-[#64748B] mt-1 truncate">Failing automations</div>
                       </div>
 
-                      <div className="mt-2.5 pt-1">
-                        <div className="text-[7.5px] font-mono text-[#64748B] mb-1">
+                      <div className="mt-3">
+                        <div className="text-[8px] font-mono text-[#64748B] mb-1.5">
                           Latest runs · last 7 days
                         </div>
-                        <div className="flex gap-1 h-[3px]">
+                        <div className="flex gap-1 h-[2.5px]">
                           {[...Array(7)].map((_, i) => (
                             <div key={i} className="flex-1 h-full bg-[#10B981] rounded-full" />
                           ))}
@@ -928,7 +927,7 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate font-mono">
+                    <div className="text-[9px] text-[#64748B] truncate font-mono">
                       Latest runs · last 7 days
                     </div>
                   </div>
