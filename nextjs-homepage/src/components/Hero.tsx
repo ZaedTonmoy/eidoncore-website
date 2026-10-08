@@ -16,7 +16,7 @@ export default function Hero() {
 
   return (
     <section className="pt-8 pb-12 sm:pt-12 sm:pb-16 md:pt-24 md:pb-24 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+      <div className="max-w-[1260px] xl:max-w-[1320px] mx-auto px-4 sm:px-6">
         {/* Top Centered Header Content */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           {/* Eyebrow badge */}

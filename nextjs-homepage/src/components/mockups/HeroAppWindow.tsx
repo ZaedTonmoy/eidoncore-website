@@ -624,78 +624,89 @@ export default function HeroAppWindow() {
               {/* ========================================================= */}
               {/* 1. MISSION CONTROL: EXECUTIVE WORKSPACE COCKPIT (SCREENSHOT 1) */}
               {/* ========================================================= */}
-              <div className="bg-[#0B111E] border border-[#1E293B] rounded-2xl p-4 sm:p-5 text-white shadow-xl relative overflow-hidden">
+              <div className="bg-[#0A0E17] border border-[#1A2333] rounded-2xl p-3 sm:p-4 text-white shadow-xl relative overflow-hidden select-none">
                 {/* Header Status Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3.5 border-b border-slate-800/80 text-xs">
-                  <div className="flex items-center gap-2 text-slate-300 text-[11px] font-mono tracking-wide">
-                    <span className="text-amber-400 font-bold">⚡</span>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300">EXECUTIVE WORKSPACE</span>
-                    <span className="text-slate-600">/</span>
-                    <span className="text-[10px] uppercase font-semibold text-slate-400">AETHERIS CREATIVE STUDIO</span>
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800/70 text-xs">
+                  {/* Left: Executive Workspace Path */}
+                  <div className="flex items-center gap-1.5 text-[9.5px] font-mono tracking-wider">
+                    <span className="text-[#38BDF8] font-bold">⚡</span>
+                    <span className="text-[#38BDF8] font-bold uppercase">EXECUTIVE WORKSPACE</span>
+                    <span className="text-slate-600 font-semibold">/</span>
+                    <span className="text-slate-400 font-medium uppercase">AETHERIS CREATIVE STUDIO</span>
                   </div>
 
-                  <div className="flex items-center gap-2.5 flex-wrap">
-                    {/* Status badges */}
-                    <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="text-red-400 font-bold">1 CRITICAL</span>
+                  {/* Right: 3 Status Capsules */}
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    {/* Status Pill 1: Critical & Caution */}
+                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#241014] border border-[#3E181F] text-[9px] font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+                      <span className="text-[#F87171] font-bold">1 CRITICAL</span>
                       <span className="text-slate-600">·</span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                      <span className="text-amber-300 font-bold">1 CAUTION</span>
-                      <span className="text-slate-500 ml-1">as of 11:18 PM</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+                      <span className="text-[#FBBF24] font-bold">1 CAUTION</span>
+                      <span className="text-[#94A3B8] text-[8.5px] ml-0.5 font-normal">as of 11:18 PM</span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] text-emerald-400 font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>Live</span>
+                    {/* Status Pill 2: Live */}
+                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#0A1F18] border border-[#143B2C] text-[9px] text-[#34D399] font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                      <span className="font-semibold">Live</span>
                     </div>
 
-                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 font-mono">
-                      <SlidersHorizontal size={10} className="text-slate-400" />
+                    {/* Status Pill 3: Motion on */}
+                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#121B2A] border border-[#1E2E44] text-[9px] text-slate-300 font-mono">
+                      <span className="flex items-end gap-[2px] h-2.5 mr-0.5">
+                        <span className="w-[2px] h-2.5 bg-slate-300 rounded-2xs" />
+                        <span className="w-[2px] h-1.5 bg-slate-400 rounded-2xs" />
+                        <span className="w-[2px] h-2 bg-slate-300 rounded-2xs" />
+                      </span>
                       <span>Motion on</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Main Cockpit Hero Content */}
-                <div className="pt-4 pb-3 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                {/* Main Cockpit Hero Content (Mission Control & Clocks) */}
+                <div className="pt-3 pb-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
                       Mission Control
                     </h3>
-                    <p className="mt-1 text-xs text-slate-400 max-w-xl">
-                      <b className="text-slate-200 font-semibold">Good Evening, Julian.</b> Revenue, delivery and priorities at a glance.
+                    <p className="mt-0.5 text-[10.5px] text-[#94A3B8] max-w-xl leading-normal">
+                      <strong className="text-white font-semibold">Good Evening, Julian.</strong> Revenue, delivery and priorities at a glance.
                     </p>
                   </div>
 
                   {/* Right Clocks & Window Progress */}
-                  <div className="flex items-center gap-5 font-mono text-slate-400 text-xs shrink-0 bg-slate-900/60 border border-slate-800/90 px-3.5 py-2 rounded-xl">
+                  <div className="flex items-center gap-3 sm:gap-4 font-mono text-slate-400 text-xs shrink-0 pt-1 lg:pt-0">
+                    {/* Local Clock */}
                     <div className="flex flex-col">
-                      <span className="text-[9px] uppercase tracking-wider text-slate-500">LOCAL · GMT+6</span>
-                      <span className="text-base font-bold text-slate-200">23:18:36</span>
+                      <span className="text-[8px] uppercase tracking-wider text-[#64748B]">LOCAL · GMT+6</span>
+                      <span className="text-base sm:text-lg font-bold text-white tracking-wide mt-0.5">23:18:36</span>
                     </div>
 
-                    <div className="flex flex-col border-l border-slate-800 pl-4">
-                      <span className="text-[9px] uppercase tracking-wider text-slate-500">UTC</span>
-                      <span className="text-base font-bold text-slate-200">17:18:36</span>
+                    {/* UTC Clock */}
+                    <div className="flex flex-col border-l border-slate-800/80 pl-3 sm:pl-4">
+                      <span className="text-[8px] uppercase tracking-wider text-[#64748B]">UTC</span>
+                      <span className="text-base sm:text-lg font-bold text-slate-200 tracking-wide mt-0.5">17:18:36</span>
                     </div>
 
-                    <div className="flex flex-col border-l border-slate-800 pl-4">
-                      <div className="flex items-center justify-between gap-3 text-[9px] uppercase tracking-wider text-slate-500">
-                        <span>WINDOW · UTC</span>
-                        <span className="text-slate-400 font-semibold">Day 8 of 31</span>
+                    {/* Window UTC Progress */}
+                    <div className="flex flex-col border-l border-slate-800/80 pl-3 sm:pl-4">
+                      <div className="flex items-center justify-between gap-3 text-[8px] uppercase tracking-wider">
+                        <span className="text-[#64748B]">WINDOW · UTC</span>
+                        <span className="text-[#94A3B8] font-semibold">Day 8 of 31</span>
                       </div>
                       <div className="flex items-center justify-between gap-2 mt-0.5">
-                        <span className="text-xs font-bold text-white">This Month</span>
-                        <span className="text-[10px] text-slate-400">Oct 1 – 31, 2026</span>
+                        <span className="text-[11px] font-bold text-white">This Month</span>
+                        <span className="text-[9px] text-[#64748B]">Oct 1 – 31, 2026</span>
                       </div>
                       {/* Segment progress bar */}
-                      <div className="flex gap-0.5 mt-1">
-                        {[...Array(14)].map((_, i) => (
+                      <div className="flex gap-[2px] mt-1.5">
+                        {[...Array(20)].map((_, i) => (
                           <div
                             key={i}
-                            className={`h-1 w-2 rounded-2xs ${
-                              i < 4 ? "bg-amber-500" : "bg-slate-800"
+                            className={`h-[3px] w-[5px] rounded-[1px] ${
+                              i < 4 ? "bg-[#F59E0B]" : "bg-[#1E293B]"
                             }`}
                           />
                         ))}
@@ -705,223 +716,220 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* 5 Cockpit Columns Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-3 border-t border-slate-800/80 text-xs mt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 pt-3 border-t border-slate-800/70 text-xs mt-1">
                   
                   {/* Column 1: FINANCE (CRITICAL) */}
-                  <div className="bg-[#121A2A]/90 border border-red-900/30 rounded-xl p-3 flex flex-col justify-between">
+                  <div className="bg-[#0E1420]/95 border border-[#3A181F] rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
                     <div>
                       <div className="flex items-center justify-between pb-1">
-                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
                           FINANCE
                         </span>
-                        <span className="text-[9px] font-mono font-bold text-red-400 bg-red-950/70 border border-red-800/80 px-1.5 py-0.2 rounded uppercase">
+                        <span className="text-[7.5px] font-mono font-bold text-[#F87171] bg-[#2D1217] border border-[#481E26] px-1 py-0.2 rounded uppercase">
                           CRITICAL
                         </span>
                       </div>
 
-                      <div className="flex items-baseline justify-between mt-2">
-                        <div>
-                          <div className="text-2xl font-black text-white leading-none">$40,900</div>
-                          <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-1">
-                            <span className="text-emerald-400 font-semibold font-mono">↑ 529%</span>
-                            <span>Revenue this period</span>
+                      <div className="flex items-baseline justify-between mt-1.5 gap-1">
+                        <div className="min-w-0">
+                          <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">$40,900</div>
+                          <div className="text-[8px] text-slate-400 flex items-center gap-1 mt-1 truncate">
+                            <span className="text-[#34D399] font-semibold font-mono">↑ 529%</span>
+                            <span className="text-[#64748B] truncate">Revenue this period</span>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-base font-bold text-red-400 leading-none">$4,800</div>
-                          <div className="text-[9.5px] text-slate-400 mt-1">Overdue</div>
+                        <div className="text-right shrink-0">
+                          <div className="text-sm font-bold text-[#F87171] leading-none font-sans">$4,800</div>
+                          <div className="text-[8px] text-[#64748B] mt-1">Overdue</div>
                         </div>
                       </div>
 
                       {/* Sparkline */}
-                      <div className="mt-3 pt-1">
-                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                      <div className="mt-2.5 pt-1">
+                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
                           <span>Revenue trend</span>
                           <span>6 months</span>
                         </div>
-                        <svg className="w-full h-4 overflow-visible" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <svg className="w-full h-3.5 overflow-visible" viewBox="0 0 100 16" preserveAspectRatio="none">
                           <path
-                            d="M 0,18 Q 30,17 60,14 T 100,2"
+                            d="M 0,13 Q 45,13 75,11 T 96,4"
                             fill="none"
-                            stroke="#EF4444"
-                            strokeWidth="2"
+                            stroke="#7F1D1D"
+                            strokeWidth="1.5"
                             strokeLinecap="round"
                           />
-                          <circle cx="100" cy="2" r="2.5" fill="#3B82F6" />
+                          <circle cx="96" cy="4" r="2" fill="#38BDF8" />
                         </svg>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80">
-                      <div className="text-[10px] font-medium text-amber-400 flex items-center gap-1.5 bg-amber-950/40 border border-amber-900/60 px-2 py-1 rounded-md">
-                        <AlertTriangle size={11} className="shrink-0 text-amber-400" />
+                    <div className="mt-2 pt-1 border-t border-slate-800/60">
+                      <div className="text-[8.5px] font-medium text-[#F87171] flex items-center gap-1 bg-[#241014] border border-[#3E181F] px-1.5 py-1 rounded-md">
+                        <AlertTriangle size={9} className="shrink-0 text-[#F87171]" />
                         <span className="truncate">1 Overdue Invoice</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Column 2: DELIVERY (CAUTION) */}
-                  <div className="bg-[#121A2A]/90 border border-amber-900/30 rounded-xl p-3 flex flex-col justify-between">
+                  <div className="bg-[#0E1420]/95 border border-[#382614] rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
                     <div>
                       <div className="flex items-center justify-between pb-1">
-                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
                           DELIVERY
                         </span>
-                        <span className="text-[9px] font-mono font-bold text-amber-400 bg-amber-950/70 border border-amber-800/80 px-1.5 py-0.2 rounded uppercase">
+                        <span className="text-[7.5px] font-mono font-bold text-[#FBBF24] bg-[#2B1B0F] border border-[#452D16] px-1 py-0.2 rounded uppercase">
                           CAUTION
                         </span>
                       </div>
 
-                      <div className="flex items-baseline justify-between mt-2">
+                      <div className="flex items-baseline justify-between mt-1.5 gap-1">
                         <div>
-                          <div className="text-2xl font-black text-white leading-none">3</div>
-                          <div className="text-[10px] text-slate-400 mt-1">Active projects</div>
+                          <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">3</div>
+                          <div className="text-[8px] text-[#64748B] mt-1 truncate">Active projects</div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-xl font-bold text-slate-200 leading-none">7</div>
-                          <div className="text-[9.5px] text-slate-400 mt-1">Tasks due this week</div>
+                        <div className="text-right shrink-0">
+                          <div className="text-sm font-bold text-slate-200 leading-none font-sans">7</div>
+                          <div className="text-[8px] text-[#64748B] mt-1 truncate">Tasks due this week</div>
                         </div>
                       </div>
 
                       {/* Completed 14 days histogram */}
-                      <div className="mt-3 pt-1">
-                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                      <div className="mt-2.5 pt-1">
+                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
                           <span>Completed</span>
                           <span>14 days</span>
                         </div>
-                        <div className="flex items-end h-4 gap-0.5">
-                          {[0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 6].map((val, idx) => (
+                        <div className="flex items-end h-3.5 gap-[2px]">
+                          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0].map((val, idx) => (
                             <div
                               key={idx}
-                              className={`flex-1 rounded-2xs ${
-                                val > 0 ? "bg-slate-400" : "bg-slate-800/50"
+                              className={`flex-1 rounded-[1px] ${
+                                val > 0 ? "bg-[#64748B]" : "bg-slate-800/60"
                               }`}
-                              style={{ height: val > 0 ? `${Math.min(val * 3 + 4, 16)}px` : "2px" }}
+                              style={{ height: val > 0 ? "14px" : "2px" }}
                             />
                           ))}
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80">
-                      <div className="text-[10px] font-medium text-amber-400 flex items-center gap-1.5 bg-amber-950/40 border border-amber-900/60 px-2 py-1 rounded-md">
-                        <AlertTriangle size={11} className="shrink-0 text-amber-400" />
+                    <div className="mt-2 pt-1 border-t border-slate-800/60">
+                      <div className="text-[8.5px] font-medium text-[#FBBF24] flex items-center gap-1 bg-[#251A10] border border-[#422C16] px-1.5 py-1 rounded-md">
+                        <AlertTriangle size={9} className="shrink-0 text-[#FBBF24]" />
                         <span className="truncate">8 Tasks Due Within 72h</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Column 3: CLIENTS (NOMINAL) */}
-                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
                     <div>
                       <div className="flex items-center justify-between pb-1">
-                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           CLIENTS
                         </span>
-                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-2">
-                        <div className="text-2xl font-black text-white leading-none">4</div>
-                        <div className="text-[10px] text-slate-400 mt-1">Active organizations</div>
+                      <div className="mt-1.5">
+                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">4</div>
+                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Active organizations</div>
                       </div>
 
-                      <div className="mt-3 pt-1">
-                        <div className="flex items-center justify-between text-[9px] text-slate-400 font-mono">
+                      <div className="mt-2.5 pt-1">
+                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
                           <span>CRM stages</span>
-                          <span className="text-slate-300 font-semibold">Lead → Active</span>
+                          <span className="text-slate-300">Lead → Active</span>
                         </div>
-                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
-                          <div className="bg-emerald-500 h-full w-full rounded-full" />
+                        <div className="w-full bg-[#1E293B] h-[3px] rounded-full overflow-hidden">
+                          <div className="bg-[#10B981] h-full w-full rounded-full" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
+                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate">
                       No open proposals
                     </div>
                   </div>
 
                   {/* Column 4: SUPPORT (NOMINAL) */}
-                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
                     <div>
                       <div className="flex items-center justify-between pb-1">
-                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           SUPPORT
                         </span>
-                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-2">
-                        <div className="text-2xl font-black text-white leading-none">2</div>
-                        <div className="text-[10px] text-slate-400 mt-1">Open tickets</div>
+                      <div className="mt-1.5">
+                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">2</div>
+                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Open tickets</div>
                       </div>
 
-                      <div className="mt-3 pt-1">
-                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                      <div className="mt-2.5 pt-1">
+                        <div className="flex items-center justify-between text-[7.5px] text-[#64748B] font-mono mb-1">
                           <span className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 bg-slate-400 rounded-2xs" /> Opened
+                            <span className="w-1.5 h-1.5 bg-[#475569] rounded-2xs inline-block" /> Opened
                           </span>
                           <span className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-2xs" /> Resolved
+                            <span className="w-1.5 h-1.5 bg-[#94A3B8] rounded-2xs inline-block" /> Resolved
                           </span>
                           <span>14 days</span>
                         </div>
-                        <div className="flex items-end h-4 gap-1">
-                          <div className="flex-1 bg-slate-800 h-1 rounded-2xs" />
-                          <div className="flex-1 bg-slate-400 h-3 rounded-2xs" />
-                          <div className="flex-1 bg-slate-800 h-1 rounded-2xs" />
-                          <div className="flex-1 bg-slate-400 h-2 rounded-2xs" />
+                        <div className="flex items-end h-3.5 gap-1">
+                          <div className="w-2 bg-[#475569] h-2.5 rounded-2xs" />
+                          <div className="w-2 bg-[#94A3B8] h-1.5 rounded-2xs" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
+                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate">
                       No SLA breaches today
                     </div>
                   </div>
 
                   {/* Column 5: AUTOMATION (NOMINAL) */}
-                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                  <div className="bg-[#0E1420]/95 border border-slate-800/80 rounded-xl p-2.5 sm:p-3 flex flex-col justify-between min-w-0 shadow-2xs">
                     <div>
                       <div className="flex items-center justify-between pb-1">
-                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="text-[8.5px] font-mono text-slate-200 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                           AUTOMATION
                         </span>
-                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                        <span className="text-[7.5px] font-mono font-bold text-[#34D399] bg-[#0E2319] border border-[#193F2E] px-1 py-0.2 rounded uppercase">
                           NOMINAL
                         </span>
                       </div>
 
-                      <div className="mt-2">
-                        <div className="text-2xl font-black text-white leading-none">0</div>
-                        <div className="text-[10px] text-slate-400 mt-1">Failing automations</div>
+                      <div className="mt-1.5">
+                        <div className="text-lg sm:text-xl font-black text-white leading-none font-sans">0</div>
+                        <div className="text-[8px] text-[#64748B] mt-1 truncate">Failing automations</div>
                       </div>
 
-                      <div className="mt-3 pt-1">
-                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1.5">
-                          <span>Latest runs</span>
-                          <span>last 7 days</span>
+                      <div className="mt-2.5 pt-1">
+                        <div className="text-[7.5px] font-mono text-[#64748B] mb-1">
+                          Latest runs · last 7 days
                         </div>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1 h-[3px]">
                           {[...Array(7)].map((_, i) => (
-                            <div key={i} className="flex-1 h-1 bg-emerald-500/80 rounded-full" />
+                            <div key={i} className="flex-1 h-full bg-[#10B981] rounded-full" />
                           ))}
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-emerald-400/90 font-mono">
-                      All systems operating normally
+                    <div className="mt-2 pt-1 border-t border-slate-800/60 text-[8.5px] text-[#64748B] truncate font-mono">
+                      Latest runs · last 7 days
                     </div>
                   </div>
 
