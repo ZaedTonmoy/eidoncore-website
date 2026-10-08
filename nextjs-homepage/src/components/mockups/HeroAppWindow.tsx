@@ -193,24 +193,8 @@ export default function HeroAppWindow() {
       setCopilotOpen(false);
       await sleep(3000);
 
-      // Step 6: In Dashboard -> Hover the urgent task row in priorities table
-      await moveTo(taskRowRef, 0.35, 0.5);
-      if (isCancelledRef.current) break;
-      await sleep(3500);
-
-      // Step 7: Filter by date (TODAY 4)
-      await moveTo(filterDateBtnRef, 0.5, 0.5);
-      if (isCancelledRef.current) break;
-      await click();
-      setIsDateFiltered(true);
-      await sleep(3500);
-
-      // Step 8: Clear date filter
-      await moveTo(clearFilterBtnRef, 0.5, 0.5);
-      if (isCancelledRef.current) break;
-      await click();
-      setIsDateFiltered(false);
-      await sleep(2500);
+      // Step 6: Pause and admire Mission Control Dashboard
+      await sleep(4000);
 
       // Step 9: Move to sidebar "Projects" and click
       await moveTo(navProjectsRef, 0.45, 0.5);
@@ -378,7 +362,7 @@ export default function HeroAppWindow() {
                   </svg>
                 </div>
                 <div className="flex items-center gap-1 min-w-0">
-                  <span className="text-xs font-bold text-[#0F172A] truncate">Creation Wave LLC</span>
+                  <span className="text-xs font-bold text-[#0F172A] truncate">Aetheris Creative St...</span>
                 </div>
               </div>
               <ChevronLeft size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer shrink-0" />
@@ -533,14 +517,12 @@ export default function HeroAppWindow() {
           {/* Bottom user badge (Screenshot 01) */}
           <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-2">
-              <img
-                src="/images/sakib-avatar.png"
-                alt="Sakib Tanoy"
-                className="w-6 h-6 rounded-full object-cover border border-slate-200"
-              />
+              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 text-white flex items-center justify-center font-bold text-[10px] shrink-0 border border-slate-200 shadow-2xs">
+                JV
+              </div>
               <div className="leading-tight">
-                <span className="font-semibold block text-[#0F172A]">Sakib Tanoy</span>
-                <span className="text-[9.5px] text-[#64748B]">Owner</span>
+                <span className="font-semibold block text-[#0F172A]">Julian Vance</span>
+                <span className="text-[9.5px] text-[#64748B]">Executive</span>
               </div>
             </div>
             <Settings size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" />
@@ -567,7 +549,7 @@ export default function HeroAppWindow() {
                 {currentView === "messages" && <MessageSquare size={13} />}
               </div>
               <h2 className="text-sm font-bold text-[#0F172A] tracking-tight capitalize">
-                {currentView === "dashboard" ? "My Day" : currentView}
+                {currentView === "dashboard" ? "Dashboard" : currentView}
               </h2>
             </div>
 
@@ -584,8 +566,17 @@ export default function HeroAppWindow() {
               </kbd>
             </div>
 
-            {/* Right Quick Actions */}
+            {/* Right Quick Actions (Matching Screenshot 1) */}
             <div className="flex items-center gap-2 shrink-0">
+              {/* Get started progress capsule */}
+              <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs">
+                <div className="w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center shrink-0">
+                  <Check size={9} className="text-emerald-600 stroke-[3]" />
+                </div>
+                <span className="text-[11.5px] font-semibold text-[#0F172A]">Get started</span>
+                <span className="text-[10.5px] font-mono text-[#64748B]">11/17</span>
+              </div>
+
               {/* AI Copilot Button */}
               <button
                 ref={copilotToggleRef}
@@ -612,596 +603,2211 @@ export default function HeroAppWindow() {
               <div className="relative p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
                 <Bell size={14} />
                 <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8.5px] flex items-center justify-center font-bold">
-                  9
+                  1
                 </span>
               </div>
 
               <div className="flex items-center gap-1.5 pl-1 border-l border-slate-200">
-                <img
-                  src="/images/sakib-avatar.png"
-                  alt="Sakib Tanoy"
-                  className="w-5 h-5 rounded-full object-cover border border-slate-200"
-                />
-                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Sakib Tanoy</span>
+                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 text-white flex items-center justify-center font-bold text-[9px] shrink-0 border border-slate-200">
+                  JV
+                </div>
+                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Julian Vance</span>
                 <ChevronDown size={11} className="text-[#94A3B8]" />
               </div>
             </div>
           </header>
 
-          {/* VIEW 1: MY DAY / FLIGHT DECK (100% IDENTICAL TO SCREENSHOT 01 & 03) */}
+          {/* VIEW 1: MISSION CONTROL EXECUTIVE DASHBOARD */}
           {currentView === "dashboard" && (
-            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
+            <div className="p-4 sm:p-5 flex flex-col gap-6 animate-fadeIn pb-12">
               
-              {/* DARK FLIGHT DECK HERO CONTAINER (Screenshot 01) */}
-              <div className="bg-[#0D1524] border border-[#1E293B] rounded-2xl p-4 sm:p-5 text-white shadow-md relative overflow-hidden">
-                {/* Header Line */}
-                <div className="flex items-center justify-between pb-3 text-xs border-b border-slate-800/80">
-                  <div className="flex items-center gap-2 text-slate-400 text-[11px] font-mono">
-                    <Moon size={12} className="text-slate-300" />
-                    <span className="uppercase tracking-wider font-semibold text-slate-300">YOUR FLIGHT DECK</span>
-                    <span>/</span>
-                    <span className="text-slate-400">SUNDAY, OCTOBER 4</span>
+              {/* ========================================================= */}
+              {/* 1. MISSION CONTROL: EXECUTIVE WORKSPACE COCKPIT (SCREENSHOT 1) */}
+              {/* ========================================================= */}
+              <div className="bg-[#0B111E] border border-[#1E293B] rounded-2xl p-4 sm:p-5 text-white shadow-xl relative overflow-hidden">
+                {/* Header Status Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3.5 border-b border-slate-800/80 text-xs">
+                  <div className="flex items-center gap-2 text-slate-300 text-[11px] font-mono tracking-wide">
+                    <span className="text-amber-400 font-bold">⚡</span>
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300">EXECUTIVE WORKSPACE</span>
+                    <span className="text-slate-600">/</span>
+                    <span className="text-[10px] uppercase font-semibold text-slate-400">AETHERIS CREATIVE STUDIO</span>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1.5 text-[11px] text-slate-300 bg-slate-900/80 border border-slate-800 px-2 py-0.5 rounded-full font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Live</span>
-                      <span className="text-slate-500">Synced 22:22</span>
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    {/* Status badges */}
+                    <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                      <span className="text-red-400 font-bold">1 CRITICAL</span>
+                      <span className="text-slate-600">·</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                      <span className="text-amber-300 font-bold">1 CAUTION</span>
+                      <span className="text-slate-500 ml-1">as of 11:18 PM</span>
                     </div>
-                    <button
-                      onClick={() => setCurrentView("tasks")}
-                      className="hidden sm:flex items-center gap-1 text-[11px] text-slate-300 hover:text-white transition-colors"
-                    >
-                      <CheckSquare size={11} />
-                      <span>Open task board</span>
-                    </button>
-                    <button
-                      onClick={() => setCurrentView("messages")}
-                      className="hidden md:flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors"
-                    >
-                      <MessageSquare size={11} />
-                      <span>Team messages</span>
-                    </button>
-                    <button
-                      onClick={() => setCurrentView("projects")}
-                      className="hidden lg:flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors"
-                    >
-                      <Layers size={11} />
-                      <span>Management overview</span>
-                    </button>
+
+                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] text-emerald-400 font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Live</span>
+                    </div>
+
+                    <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 font-mono">
+                      <SlidersHorizontal size={10} className="text-slate-400" />
+                      <span>Motion on</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Greeting */}
-                <div className="pt-4 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                {/* Main Cockpit Hero Content */}
+                <div className="pt-4 pb-3 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                      Good evening, Sakib
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                      Mission Control
                     </h3>
-                    <p className="mt-0.5 text-xs text-slate-400 max-w-xl">
-                      A clear view of what needs you next. Pick up your work, plan the week, and keep your team moving.
+                    <p className="mt-1 text-xs text-slate-400 max-w-xl">
+                      <b className="text-slate-200 font-semibold">Good Evening, Julian.</b> Revenue, delivery and priorities at a glance.
                     </p>
                   </div>
-                  <div className="hidden lg:flex flex-col items-end font-mono text-slate-400 text-xs">
-                    <span className="text-[9.5px] uppercase tracking-wider text-slate-500">LOCAL · GMT+6</span>
-                    <span className="text-sm font-bold text-slate-200">22:23:41</span>
-                  </div>
-                </div>
 
-                {/* Prime Focus Card */}
-                <div className="bg-[#131E32]/90 border border-[#243552] rounded-xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                  <div className="flex items-start sm:items-center gap-3 min-w-0">
-                    <span className="px-2 py-0.5 bg-[#1E293B] text-slate-300 font-mono text-[9px] rounded font-bold uppercase tracking-wider border border-slate-700/80 shrink-0">
-                      PRIME
-                    </span>
-                    <div className="min-w-0">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
-                        YOUR NEXT TASK
-                      </span>
-                      <h4 className="text-sm font-bold text-white tracking-tight truncate">
-                        Move Sdarr Site
-                      </h4>
+                  {/* Right Clocks & Window Progress */}
+                  <div className="flex items-center gap-5 font-mono text-slate-400 text-xs shrink-0 bg-slate-900/60 border border-slate-800/90 px-3.5 py-2 rounded-xl">
+                    <div className="flex flex-col">
+                      <span className="text-[9px] uppercase tracking-wider text-slate-500">LOCAL · GMT+6</span>
+                      <span className="text-base font-bold text-slate-200">23:18:36</span>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[11px] text-slate-300 flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/60">
-                      <FolderKanban size={11} className="text-slate-400" />
-                      <span>Internal Tasks</span>
-                    </span>
-                    <span className="text-[11px] text-slate-300 flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/60">
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                      <span>To do</span>
-                    </span>
-                    <span className="text-[11px] text-red-400 font-medium flex items-center gap-1 bg-red-950/60 px-2 py-1 rounded-md border border-red-900/60 font-mono font-bold">
-                      <Flag size={10} />
-                      <span>URGENT</span>
-                    </span>
-                    <button
-                      onClick={() => setCurrentView("tasks")}
-                      className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-xs transition-colors"
-                    >
-                      <span>Open task</span>
-                      <ArrowRight size={11} />
-                    </button>
-                  </div>
-                </div>
-
-                {/* 4 Bottom Metric Columns */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-slate-800/80 text-xs">
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                      DUE TODAY
-                    </span>
-                    <span className="text-2xl font-bold text-white">0</span>
-                    <span className="text-[10px] text-slate-400">On today&apos;s agenda</span>
-                  </div>
-
-                  <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        OVERDUE
-                      </span>
-                      <span className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                        NOMINAL
-                      </span>
+                    <div className="flex flex-col border-l border-slate-800 pl-4">
+                      <span className="text-[9px] uppercase tracking-wider text-slate-500">UTC</span>
+                      <span className="text-base font-bold text-slate-200">17:18:36</span>
                     </div>
-                    <span className="text-2xl font-bold text-white">0</span>
-                    <span className="text-[10px] text-slate-400">All on schedule</span>
-                  </div>
 
-                  <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
-                    <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                      NEXT 7 DAYS
-                    </span>
-                    <span className="text-2xl font-bold text-white">0</span>
-                    <span className="text-[10px] text-slate-400">Upcoming deadlines</span>
-                  </div>
-
-                  <div className="flex flex-col gap-0.5 border-l border-slate-800/80 pl-3">
-                    <span className="text-[10px] text-slate-400 flex items-center gap-1.5 font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-                      COMPLETED
-                    </span>
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-2xl font-bold text-white">1</span>
-                      <span className="text-[10px] text-slate-400">In the past 7 days</span>
-                    </div>
-                    {/* SVG Sparkline (Screenshot 01) */}
-                    <div className="pt-1.5 flex flex-col gap-1">
-                      <svg className="w-full h-3.5 overflow-visible" viewBox="0 0 100 16" preserveAspectRatio="none">
-                        <path
-                          d="M0,4 Q25,6 40,14 L100,14"
-                          fill="none"
-                          stroke="#60A5FA"
-                          strokeWidth="1.75"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <span className="text-[9px] text-slate-400 font-mono">4 in the last 14 days</span>
+                    <div className="flex flex-col border-l border-slate-800 pl-4">
+                      <div className="flex items-center justify-between gap-3 text-[9px] uppercase tracking-wider text-slate-500">
+                        <span>WINDOW · UTC</span>
+                        <span className="text-slate-400 font-semibold">Day 8 of 31</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 mt-0.5">
+                        <span className="text-xs font-bold text-white">This Month</span>
+                        <span className="text-[10px] text-slate-400">Oct 1 – 31, 2026</span>
+                      </div>
+                      {/* Segment progress bar */}
+                      <div className="flex gap-0.5 mt-1">
+                        {[...Array(14)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={`h-1 w-2 rounded-2xs ${
+                              i < 4 ? "bg-amber-500" : "bg-slate-800"
+                            }`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
+                {/* 5 Cockpit Columns Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-3 border-t border-slate-800/80 text-xs mt-2">
+                  
+                  {/* Column 1: FINANCE (CRITICAL) */}
+                  <div className="bg-[#121A2A]/90 border border-red-900/30 rounded-xl p-3 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                          FINANCE
+                        </span>
+                        <span className="text-[9px] font-mono font-bold text-red-400 bg-red-950/70 border border-red-800/80 px-1.5 py-0.2 rounded uppercase">
+                          CRITICAL
+                        </span>
+                      </div>
+
+                      <div className="flex items-baseline justify-between mt-2">
+                        <div>
+                          <div className="text-2xl font-black text-white leading-none">$40,900</div>
+                          <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-1">
+                            <span className="text-emerald-400 font-semibold font-mono">↑ 529%</span>
+                            <span>Revenue this period</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-base font-bold text-red-400 leading-none">$4,800</div>
+                          <div className="text-[9.5px] text-slate-400 mt-1">Overdue</div>
+                        </div>
+                      </div>
+
+                      {/* Sparkline */}
+                      <div className="mt-3 pt-1">
+                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                          <span>Revenue trend</span>
+                          <span>6 months</span>
+                        </div>
+                        <svg className="w-full h-4 overflow-visible" viewBox="0 0 100 20" preserveAspectRatio="none">
+                          <path
+                            d="M 0,18 Q 30,17 60,14 T 100,2"
+                            fill="none"
+                            stroke="#EF4444"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <circle cx="100" cy="2" r="2.5" fill="#3B82F6" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80">
+                      <div className="text-[10px] font-medium text-amber-400 flex items-center gap-1.5 bg-amber-950/40 border border-amber-900/60 px-2 py-1 rounded-md">
+                        <AlertTriangle size={11} className="shrink-0 text-amber-400" />
+                        <span className="truncate">1 Overdue Invoice</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Column 2: DELIVERY (CAUTION) */}
+                  <div className="bg-[#121A2A]/90 border border-amber-900/30 rounded-xl p-3 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          DELIVERY
+                        </span>
+                        <span className="text-[9px] font-mono font-bold text-amber-400 bg-amber-950/70 border border-amber-800/80 px-1.5 py-0.2 rounded uppercase">
+                          CAUTION
+                        </span>
+                      </div>
+
+                      <div className="flex items-baseline justify-between mt-2">
+                        <div>
+                          <div className="text-2xl font-black text-white leading-none">3</div>
+                          <div className="text-[10px] text-slate-400 mt-1">Active projects</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xl font-bold text-slate-200 leading-none">7</div>
+                          <div className="text-[9.5px] text-slate-400 mt-1">Tasks due this week</div>
+                        </div>
+                      </div>
+
+                      {/* Completed 14 days histogram */}
+                      <div className="mt-3 pt-1">
+                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                          <span>Completed</span>
+                          <span>14 days</span>
+                        </div>
+                        <div className="flex items-end h-4 gap-0.5">
+                          {[0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 6].map((val, idx) => (
+                            <div
+                              key={idx}
+                              className={`flex-1 rounded-2xs ${
+                                val > 0 ? "bg-slate-400" : "bg-slate-800/50"
+                              }`}
+                              style={{ height: val > 0 ? `${Math.min(val * 3 + 4, 16)}px` : "2px" }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80">
+                      <div className="text-[10px] font-medium text-amber-400 flex items-center gap-1.5 bg-amber-950/40 border border-amber-900/60 px-2 py-1 rounded-md">
+                        <AlertTriangle size={11} className="shrink-0 text-amber-400" />
+                        <span className="truncate">8 Tasks Due Within 72h</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Column 3: CLIENTS (NOMINAL) */}
+                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          CLIENTS
+                        </span>
+                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                          NOMINAL
+                        </span>
+                      </div>
+
+                      <div className="mt-2">
+                        <div className="text-2xl font-black text-white leading-none">4</div>
+                        <div className="text-[10px] text-slate-400 mt-1">Active organizations</div>
+                      </div>
+
+                      <div className="mt-3 pt-1">
+                        <div className="flex items-center justify-between text-[9px] text-slate-400 font-mono">
+                          <span>CRM stages</span>
+                          <span className="text-slate-300 font-semibold">Lead → Active</span>
+                        </div>
+                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
+                          <div className="bg-emerald-500 h-full w-full rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
+                      No open proposals
+                    </div>
+                  </div>
+
+                  {/* Column 4: SUPPORT (NOMINAL) */}
+                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          SUPPORT
+                        </span>
+                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                          NOMINAL
+                        </span>
+                      </div>
+
+                      <div className="mt-2">
+                        <div className="text-2xl font-black text-white leading-none">2</div>
+                        <div className="text-[10px] text-slate-400 mt-1">Open tickets</div>
+                      </div>
+
+                      <div className="mt-3 pt-1">
+                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1">
+                          <span className="flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-slate-400 rounded-2xs" /> Opened
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-2xs" /> Resolved
+                          </span>
+                          <span>14 days</span>
+                        </div>
+                        <div className="flex items-end h-4 gap-1">
+                          <div className="flex-1 bg-slate-800 h-1 rounded-2xs" />
+                          <div className="flex-1 bg-slate-400 h-3 rounded-2xs" />
+                          <div className="flex-1 bg-slate-800 h-1 rounded-2xs" />
+                          <div className="flex-1 bg-slate-400 h-2 rounded-2xs" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
+                      No SLA breaches today
+                    </div>
+                  </div>
+
+                  {/* Column 5: AUTOMATION (NOMINAL) */}
+                  <div className="bg-[#121A2A]/90 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="text-[10px] font-mono text-slate-300 flex items-center gap-1.5 font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          AUTOMATION
+                        </span>
+                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-1.5 py-0.2 rounded uppercase">
+                          NOMINAL
+                        </span>
+                      </div>
+
+                      <div className="mt-2">
+                        <div className="text-2xl font-black text-white leading-none">0</div>
+                        <div className="text-[10px] text-slate-400 mt-1">Failing automations</div>
+                      </div>
+
+                      <div className="mt-3 pt-1">
+                        <div className="flex items-center justify-between text-[9px] text-slate-500 font-mono mb-1.5">
+                          <span>Latest runs</span>
+                          <span>last 7 days</span>
+                        </div>
+                        <div className="flex gap-1">
+                          {[...Array(7)].map((_, i) => (
+                            <div key={i} className="flex-1 h-1 bg-emerald-500/80 rounded-full" />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 text-[10px] text-emerald-400/90 font-mono">
+                      All systems operating normally
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
-              {/* MAIN DASHBOARD SECTIONS (Screenshot 01 & 03: All sections one under another) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                {/* LEFT MAIN COLUMN (lg:col-span-8) */}
-                <div className="lg:col-span-8 flex flex-col gap-4">
+              {/* ========================================================= */}
+              {/* TIME WINDOW FILTER BAR (SCREENSHOT 1) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-white p-2.5 rounded-xl border border-[#E2E8F0] shadow-2xs">
+                {/* Left Tabs */}
+                <div className="flex items-center gap-1 bg-[#F1F5F9] p-0.5 rounded-lg border border-[#E2E8F0]">
+                  <button className="px-3 py-1 bg-white font-bold text-[#0F172A] rounded-md shadow-2xs">
+                    Overview
+                  </button>
+                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-md transition-colors">
+                    Delivery
+                  </button>
+                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-md transition-colors">
+                    Activity
+                  </button>
+                </div>
+
+                {/* Right Time Window Selector */}
+                <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+                  <button className="px-2.5 py-1 bg-[#0F172A] text-white font-semibold rounded-md shadow-2xs whitespace-nowrap">
+                    This Month
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    Last Month
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    Last 30 Days
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    This Quarter
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    This Year
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    Lifetime
+                  </button>
+                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                    Custom
+                  </button>
+                  <button className="p-1.5 text-[#64748B] hover:text-[#0F172A] rounded-md transition-colors ml-1">
+                    <RotateCw size={12} />
+                  </button>
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* 2. SECTION: FIN FINANCE (SCREENSHOT 1 & 2) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col gap-4">
+                {/* Section Header */}
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                    FIN
+                  </span>
+                  <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
+                    Finance
+                  </h3>
+                  <span className="text-xs text-[#64748B]">
+                    This Month · Oct 1 – 31, 2026
+                  </span>
+                </div>
+
+                {/* Top Finance Cards: Total Revenue + MRR */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                   
-                  {/* 1. 7-DAY LAUNCH WINDOW (Screenshot 01 & 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs">
-                    <div className="flex items-center justify-between pb-3.5">
-                      <div className="flex items-center gap-2">
-                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                          WIN
-                        </span>
-                        <div>
-                          <h4 className="text-xs font-bold text-[#0F172A]">7-day launch window</h4>
-                          <span className="text-[10px] text-[#64748B]">Select a day to focus · Asia/Dhaka</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-7 gap-1.5 sm:gap-2.5">
-                      {[
-                        { label: "TODAY", date: 4, tasks: 0 },
-                        { label: "MON", date: 5, tasks: 0 },
-                        { label: "TUE", date: 6, tasks: 0 },
-                        { label: "WED", date: 7, tasks: 0 },
-                        { label: "THU", date: 8, tasks: 0 },
-                        { label: "FRI", date: 9, tasks: 0 },
-                        { label: "SAT", date: 10, tasks: 0 },
-                      ].map((day) => {
-                        const isSelected = selectedDay === day.date;
-                        return (
-                          <button
-                            key={day.date}
-                            ref={day.date === 4 ? filterDateBtnRef : undefined}
-                            onClick={() => {
-                              setSelectedDay(day.date);
-                              setIsDateFiltered((prev) => !prev);
-                            }}
-                            className={`flex flex-col items-center justify-center p-2.5 rounded-xl border transition-all text-center ${
-                              isSelected
-                                ? "bg-white border-blue-500 ring-2 ring-blue-500/15 shadow-xs"
-                                : "bg-[#FAFAFA] border-[#E5E7EB] hover:bg-slate-50"
-                            }`}
-                          >
-                            <span className={`text-[9px] font-bold tracking-wider ${
-                              isSelected ? "text-blue-600 font-mono" : "text-[#64748B]"
-                            }`}>
-                              {day.label}
-                            </span>
-                            <span className="text-sm font-extrabold text-[#0F172A] mt-1">
-                              {day.date}
-                            </span>
-                            <div className="w-1 h-2 bg-slate-200 rounded-full mt-1.5" />
-                            <span className="text-[9.5px] text-[#94A3B8] mt-1 font-mono">
-                              {day.tasks}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* 2. YOUR PRIORITIES TABLE SECTION (Screenshot 01 & 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                    <div className="flex items-center justify-between flex-wrap gap-2">
-                      <div className="flex items-center gap-2">
-                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                          QUE
-                        </span>
-                        <div>
-                          <h4 className="text-xs font-bold text-[#0F172A]">Your priorities</h4>
-                          <span className="text-[10px] text-[#64748B]">Everything assigned to you, with space to focus on what matters now.</span>
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => setCurrentView("tasks")}
-                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
-                      >
-                        <span>Open task board</span>
-                        <ArrowRight size={12} />
-                      </button>
-                    </div>
-
-                    {/* Filter Pills + Search Input */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-100">
-                      <div className="flex items-center gap-1 text-[11px] font-medium flex-wrap">
-                        <button
-                          onClick={() => {
-                            setActiveWorkTab("all");
-                            setIsDateFiltered(false);
-                          }}
-                          className={`px-2.5 py-1 rounded-md transition-colors ${
-                            activeWorkTab === "all" && !isDateFiltered
-                              ? "bg-slate-100 text-[#0F172A] font-semibold"
-                              : "text-[#64748B] hover:bg-slate-50"
-                          }`}
-                        >
-                          All work <span className="text-[10px] font-mono ml-0.5">1</span>
-                        </button>
-                        <button
-                          onClick={() => setActiveWorkTab("today")}
-                          className={`px-2.5 py-1 rounded-md transition-colors ${
-                            activeWorkTab === "today"
-                              ? "bg-slate-100 text-[#0F172A] font-semibold"
-                              : "text-[#64748B] hover:bg-slate-50"
-                          }`}
-                        >
-                          Today <span className="text-[10px] font-mono ml-0.5">0</span>
-                        </button>
-                        <button
-                          onClick={() => setActiveWorkTab("overdue")}
-                          className={`px-2.5 py-1 rounded-md transition-colors ${
-                            activeWorkTab === "overdue"
-                              ? "bg-slate-100 text-[#0F172A] font-semibold"
-                              : "text-[#64748B] hover:bg-slate-50"
-                          }`}
-                        >
-                          Overdue <span className="text-[10px] font-mono ml-0.5">0</span>
-                        </button>
-                        <button
-                          onClick={() => setActiveWorkTab("review")}
-                          className={`px-2.5 py-1 rounded-md transition-colors ${
-                            activeWorkTab === "review"
-                              ? "bg-slate-100 text-[#0F172A] font-semibold"
-                              : "text-[#64748B] hover:bg-slate-50"
-                          }`}
-                        >
-                          In review <span className="text-[10px] font-mono ml-0.5">0</span>
-                        </button>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] max-w-[210px]">
-                        <Search size={11} className="text-[#94A3B8]" />
-                        <span className="text-[10.5px] text-[#94A3B8] truncate">Search assigned tasks...</span>
-                      </div>
-                    </div>
-
-                    {/* Filter Active Pill (Screenshot 03) */}
-                    {isDateFiltered && (
-                      <div className="flex items-center justify-between p-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs">
-                        <div className="flex items-center gap-1.5 text-[#0F172A] font-medium">
-                          <Calendar size={13} className="text-blue-600" />
-                          <span>Due Oct 4</span>
-                        </div>
-                        <button
-                          ref={clearFilterBtnRef}
-                          onClick={() => setIsDateFiltered(false)}
-                          className="text-[#64748B] hover:text-[#0F172A] flex items-center gap-1 text-[11px] font-medium transition-colors"
-                        >
-                          <X size={12} />
-                          <span>Clear filters</span>
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Priorities Body: Table View (Screenshot 01) OR Empty State (Screenshot 03) */}
-                    {!isDateFiltered ? (
-                      <>
-                        <div className="border border-[#E5E7EB] rounded-xl overflow-hidden mt-1">
-                          <table className="w-full text-left text-xs">
-                            <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
-                              <tr>
-                                <th className="py-2.5 px-3.5 font-semibold">TASK</th>
-                                <th className="py-2.5 px-3.5 font-semibold">PROJECT</th>
-                                <th className="py-2.5 px-3.5 font-semibold">STATUS</th>
-                                <th className="py-2.5 px-3.5 font-semibold text-right">DUE</th>
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
-                              <tr
-                                ref={taskRowRef}
-                                className="hover:bg-slate-50/80 transition-colors"
-                              >
-                                <td className="py-2.5 px-3.5 font-medium text-[#0F172A]">
-                                  <div className="flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
-                                    <span className="font-semibold text-[#0F172A]">Move Sdarr Site</span>
-                                    <span className="text-[9.5px] font-mono text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 font-bold flex items-center gap-1 shrink-0">
-                                      <Flag size={9} /> URGENT
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="py-2.5 px-3.5 text-[#475569]">
-                                  <div className="flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
-                                    <span>Internal Tasks</span>
-                                  </div>
-                                </td>
-                                <td className="py-2.5 px-3.5">
-                                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF0F6] text-[#334155] text-[11px] font-medium leading-none">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#64748B]" />
-                                    To do
-                                  </span>
-                                </td>
-                                <td className="py-2.5 px-3.5 text-right text-[#94A3B8] text-[11px] leading-tight">
-                                  No deadline
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                        <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-1">
-                          <span>1–1 of 1 tasks</span>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="py-10 flex flex-col items-center justify-center text-center gap-2.5 border border-[#E5E7EB] rounded-xl bg-white">
-                        <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
-                          <CheckCircle2 size={18} />
-                        </div>
-                        <h5 className="text-xs font-bold text-[#0F172A]">Nothing in this view</h5>
-                        <p className="text-[11px] text-[#64748B] max-w-xs">
-                          Switch to all assigned work to see your other priorities.
-                        </p>
-                        <button
-                          onClick={() => setIsDateFiltered(false)}
-                          className="mt-1 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:bg-slate-50 text-xs font-semibold text-[#0F172A] rounded-lg shadow-2xs transition-colors"
-                        >
-                          Show all my work
-                        </button>
-                        <span className="text-[10px] text-[#94A3B8] font-mono mt-2">0–0 of 0 tasks</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* 3. YOUR WORK ACROSS PROJECTS (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                          MSN
-                        </span>
-                        <div>
-                          <h4 className="text-xs font-bold text-[#0F172A]">Your work across projects</h4>
-                          <span className="text-[10px] text-[#64748B]">Your assignments and progress. Choose a project to focus your queue.</span>
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => setCurrentView("projects")}
-                        className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
-                      >
-                        <span>All projects</span>
-                        <ArrowRight size={12} />
-                      </button>
-                    </div>
-
-                    <div
-                      onClick={() => setCurrentView("projects")}
-                      className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-2 hover:bg-slate-50/70 transition-colors cursor-pointer shadow-2xs"
-                    >
-                      <div className="flex items-center justify-between">
+                  {/* Card 1: PFD 1 Total Revenue (Screenshot 1) */}
+                  <div className="lg:col-span-8 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
                         <div className="flex items-center gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
-                          <span className="text-xs font-bold text-[#0F172A]">Internal Tasks</span>
-                          <ArrowRight size={12} className="text-[#94A3B8]" />
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            PFD 1
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Total revenue</h4>
+                            <span className="text-[10px] text-[#64748B]">All recognized revenue channels</span>
+                          </div>
+                        </div>
+                        <button className="text-xs font-semibold text-[#0F172A] hover:text-blue-600 flex items-center gap-1 border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-2xs transition-colors">
+                          <span>View breakdown</span>
+                          <ArrowRight size={11} />
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2">
+                        {/* Left numbers */}
+                        <div className="md:col-span-5 flex flex-col gap-3">
+                          <div>
+                            <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block font-semibold">
+                              THIS MONTH · OCT 1 – 31, 2026
+                            </span>
+                            <div className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight mt-0.5">
+                              $40,900
+                            </div>
+                            <div className="flex items-center gap-1.5 mt-1 text-xs">
+                              <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded font-bold text-[10px] font-mono">
+                                ↑ 529%
+                              </span>
+                              <span className="text-[#64748B] text-[11px]">vs. previous period <b className="text-[#0F172A] font-semibold">$6,500</b></span>
+                            </div>
+                          </div>
+
+                          {/* Pacing vs prior period */}
+                          <div className="pt-2 border-t border-slate-100">
+                            <div className="flex items-center justify-between text-[10.5px]">
+                              <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">PACING VS PRIOR PERIOD</span>
+                              <span className="font-mono font-black text-[#0F172A] text-xs">6.3×</span>
+                            </div>
+                            {/* Dotted / filled progress bar */}
+                            <div className="relative w-full h-2 bg-blue-100/60 rounded-full mt-1.5 overflow-hidden">
+                              <div className="bg-blue-600 h-full w-[78%] rounded-full" />
+                            </div>
+                            <div className="flex items-center justify-between text-[9.5px] text-[#94A3B8] font-mono mt-1">
+                              <span>Prior $6,500</span>
+                              <span>Now $40,900</span>
+                            </div>
+                          </div>
+
+                          {/* Projection */}
+                          <div className="pt-2 border-t border-slate-100">
+                            <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-[#0F172A]">
+                              <span className="text-blue-600 font-mono">::</span>
+                              <span>PROJECTION</span>
+                            </div>
+                            <div className="text-xs font-bold text-[#0F172A] mt-0.5">
+                              At current pace ≈ $158,488 by Oct 31
+                            </div>
+                            <span className="text-[10px] text-[#64748B]">
+                              $40,900 over 8 of 31 days (UTC), linear pace
+                            </span>
+
+                            <div className="flex items-center justify-between text-[9.5px] text-[#94A3B8] font-mono mt-2">
+                              <span>WINDOW ELAPSED</span>
+                              <span className="font-bold text-[#0F172A]">Day 8 of 31</span>
+                            </div>
+                            {/* Segment tracker */}
+                            <div className="flex gap-0.5 mt-1">
+                              {[...Array(24)].map((_, i) => (
+                                <div
+                                  key={i}
+                                  className={`h-1.5 flex-1 rounded-2xs ${
+                                    i < 7 ? "bg-blue-600" : "bg-slate-200"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Area Chart with Interactive Projection Line */}
+                        <div className="md:col-span-7 flex flex-col justify-between pl-0 md:pl-2">
+                          <div className="flex items-center justify-between text-[11px] pb-1">
+                            <div className="flex items-center gap-3">
+                              <span className="flex items-center gap-1 text-[#0F172A] font-semibold">
+                                <span className="w-2.5 h-0.5 bg-blue-600" /> Revenue trend <span className="text-[10px] text-[#64748B] font-normal">Last 6 months</span>
+                              </span>
+                              <span className="flex items-center gap-1 text-blue-500 font-mono text-[10.5px]">
+                                <span className="w-2.5 h-0.5 border-t border-dashed border-blue-500" /> Projection
+                              </span>
+                            </div>
+                            <div className="flex items-center border border-[#E2E8F0] rounded-md overflow-hidden bg-slate-50">
+                              <button className="px-1.5 py-0.5 bg-white shadow-2xs text-[#0F172A]">
+                                <TrendingUp size={11} />
+                              </button>
+                              <button className="px-1.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
+                                <BarChart3 size={11} />
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Chart SVG */}
+                          <div className="relative h-44 w-full mt-2">
+                            {/* Horizontal guide lines */}
+                            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[9.5px] font-mono text-[#94A3B8]">
+                              <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
+                                <span>$200K</span>
+                              </div>
+                              <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
+                                <span>$150K</span>
+                                <span className="text-blue-600 font-bold bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
+                                  ≈ $158,488
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
+                                <span>$100K</span>
+                              </div>
+                              <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
+                                <span>$50K</span>
+                                <span className="text-[#0F172A] font-bold">$40,900</span>
+                              </div>
+                            </div>
+
+                            <svg className="w-full h-full overflow-visible relative z-10" viewBox="0 0 300 150">
+                              {/* Shaded Area under actual curve */}
+                              <polygon
+                                points="20,135 60,132 110,133 160,130 210,132 260,118 260,145 20,145"
+                                fill="url(#revGradient)"
+                                opacity="0.3"
+                              />
+                              <defs>
+                                <linearGradient id="revGradient" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="0%" stopColor="#2563EB" stopOpacity="0.5" />
+                                  <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+                                </linearGradient>
+                              </defs>
+
+                              {/* Historical curve */}
+                              <polyline
+                                fill="none"
+                                stroke="#2563EB"
+                                strokeWidth="2.5"
+                                points="20,135 60,132 110,133 160,130 210,132 260,118"
+                              />
+                              {/* Historical points */}
+                              <circle cx="20" cy="135" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="60" cy="132" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="110" cy="133" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="160" cy="130" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="210" cy="132" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="260" cy="118" r="3.5" fill="#2563EB" stroke="#FFFFFF" strokeWidth="2" />
+
+                              {/* Dashed projection line climbing to $158k */}
+                              <line
+                                x1="260"
+                                y1="118"
+                                x2="260"
+                                y2="40"
+                                stroke="#2563EB"
+                                strokeWidth="1.75"
+                                strokeDasharray="3 3"
+                              />
+                              <circle cx="260" cy="40" r="3" fill="#2563EB" />
+                            </svg>
+                          </div>
                         </div>
                       </div>
-                      <span className="text-[10.5px] text-[#64748B]">1 active task</span>
+                    </div>
 
-                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-1">
-                        <div className="bg-blue-600 h-full w-[91%] rounded-full" />
+                    <div className="flex items-center justify-between text-[10px] text-[#94A3B8] pt-3 border-t border-slate-100 font-mono mt-2">
+                      <span>REVENUE BY PERIOD</span>
+                      <span>AVERAGE CONVERSION 100%</span>
+                    </div>
+                  </div>
+
+                  {/* Card 2: PFD 2 Monthly recurring revenue (Screenshot 1) */}
+                  <div className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            PFD 2
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Monthly recurring revenue</h4>
+                            <span className="text-[10px] text-[#64748B]">Normalized monthly revenue</span>
+                          </div>
+                        </div>
+                        <ArrowRight size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" />
                       </div>
 
-                      <div className="flex items-center justify-between text-[11px] pt-1">
-                        <span className="text-[#64748B]">10 of 11 completed</span>
-                        <span className="font-mono font-bold text-[#0F172A]">91%</span>
+                      {/* Donut Meter & MRR headline */}
+                      <div className="flex items-center gap-4 py-3 border-y border-slate-100">
+                        {/* Radial Gauge Meter */}
+                        <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
+                          <svg className="w-full h-full" viewBox="0 0 100 100">
+                            {/* Radial tick marks */}
+                            {[...Array(20)].map((_, i) => {
+                              const angle = (i * 360) / 20;
+                              return (
+                                <line
+                                  key={i}
+                                  x1="50"
+                                  y1="6"
+                                  x2="50"
+                                  y2="10"
+                                  stroke="#CBD5E1"
+                                  strokeWidth="1.25"
+                                  transform={`rotate(${angle} 50 50)`}
+                                />
+                              );
+                            })}
+                            <circle cx="50" cy="50" r="32" fill="none" stroke="#E2E8F0" strokeWidth="6" />
+                            <circle
+                              cx="50"
+                              cy="50"
+                              r="32"
+                              fill="none"
+                              stroke="#2563EB"
+                              strokeWidth="6"
+                              strokeDasharray="201"
+                              strokeDashoffset="50"
+                              strokeLinecap="round"
+                              transform="rotate(-90 50 50)"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                            <span className="text-2xl font-black text-[#0F172A] leading-none">2</span>
+                            <span className="text-[8px] font-mono font-bold text-[#64748B] tracking-wider mt-0.5">
+                              STREAMS
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-mono text-[#64748B] font-semibold">MRR</span>
+                          <div className="text-2xl font-black text-[#0F172A] leading-none mt-0.5">
+                            $6,500<span className="text-xs font-normal text-[#64748B]">/mo</span>
+                          </div>
+                          <div className="mt-2 text-[10px] text-[#64748B]">
+                            <span className="block font-mono uppercase text-[9px] text-[#94A3B8]">ANNUALIZED RUN RATE</span>
+                            <span className="font-bold text-[#0F172A] text-sm font-mono">$78,000</span>
+                            <span className="text-[9px] text-[#94A3B8] ml-1">MRR × 12</span>
+                          </div>
+                        </div>
                       </div>
+
+                      {/* Stream Breakdown Rows */}
+                      <div className="flex flex-col gap-2 pt-3 text-xs">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600" />
+                            <span className="text-[#0F172A] font-medium">Monthly</span>
+                            <span className="text-[10px] text-[#64748B]">1 stream · billed monthly</span>
+                          </div>
+                          <div className="flex items-center gap-2 font-mono">
+                            <span className="font-bold text-[#0F172A]">$6,500</span>
+                            <span className="text-[10px] text-[#64748B]">100%</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[#64748B]">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-2xs bg-amber-500" />
+                            <span>Quarterly</span>
+                            <span className="text-[10px] text-[#94A3B8]">0 streams · ÷ 3</span>
+                          </div>
+                          <div className="flex items-center gap-2 font-mono">
+                            <span>$0</span>
+                            <span className="text-[10px]">0%</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[#64748B]">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-2xs bg-emerald-500" />
+                            <span>Yearly</span>
+                            <span className="text-[10px] text-[#94A3B8]">0 streams · ÷ 12</span>
+                          </div>
+                          <div className="flex items-center gap-2 font-mono">
+                            <span>$0</span>
+                            <span className="text-[10px]">0%</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[#64748B]">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-2xs bg-amber-600" />
+                            <span>Recurring invoices</span>
+                            <span className="text-[10px] text-[#94A3B8]">1 stream · normalized</span>
+                          </div>
+                          <div className="flex items-center gap-2 font-mono">
+                            <span>$0</span>
+                            <span className="text-[10px]">0%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[10px] text-[#94A3B8] pt-3 border-t border-slate-100 font-mono mt-3">
+                      <span>STREAMS · 1 CELL = 1 STREAM</span>
+                      <span>2 streams</span>
                     </div>
                   </div>
 
                 </div>
 
-                {/* RIGHT COLUMN (lg:col-span-4) - Work in Motion, Recently Finished, Latest Updates (Screenshot 03) */}
-                <div className="lg:col-span-4 flex flex-col gap-4">
-                  
-                  {/* 4. WORK IN MOTION (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                        LOAD
-                      </span>
-                      <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Work in motion</h4>
-                        <span className="text-[10px] text-[#64748B]">Your active assignments, by status.</span>
+                {/* Revenue by Source Table & Renewal Watch (Screenshot 2) */}
+                <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Left: Source Table */}
+                    <div className="lg:col-span-8">
+                      <div className="flex items-center justify-between pb-3">
+                        <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wide font-mono">
+                          REVENUE BY SOURCE
+                        </span>
+                        <span className="text-[10px] text-[#64748B] font-mono">
+                          This Month vs. previous period
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs">
+                          <thead className="bg-[#F8FAFC] border-y border-[#E2E8F0] text-[9.5px] font-mono uppercase text-[#64748B]">
+                            <tr>
+                              <th className="py-2 px-2.5 font-semibold">SOURCE</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">THIS PERIOD</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">PREVIOUS</th>
+                              <th className="py-2 px-2.5 font-semibold text-center">CHANGE</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">TXN</th>
+                              <th className="py-2 px-2.5 font-semibold">SHARE</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[#F1F5F9] text-xs">
+                            <tr>
+                              <td className="py-2.5 px-2.5 font-medium text-[#0F172A]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-blue-600" />
+                                  <span>Paid invoices</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 font-bold text-[#0F172A] font-mono text-right">$40,900</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$6,500</td>
+                              <td className="py-2.5 px-2.5 text-center">
+                                <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-mono font-bold">
+                                  ↑ 529%
+                                </span>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#0F172A] font-mono text-right">5</td>
+                              <td className="py-2.5 px-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div className="bg-blue-600 h-full w-full rounded-full" />
+                                  </div>
+                                  <span className="font-mono text-[10px] text-[#64748B]">100%</span>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-amber-500" />
+                                  <span>Subscription renewals</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-emerald-500" />
+                                  <span>Catalog & cart</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-amber-600" />
+                                  <span>Quota & add-on top-ups</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-around py-3 border-t border-slate-100">
-                      {/* Donut Chart with authentic radial ticks matching Screenshot 03 */}
-                      <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
-                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                          {/* Radial tick marks around perimeter */}
-                          {[...Array(24)].map((_, i) => {
-                            const angle = (i * 360) / 24;
-                            return (
-                              <line
-                                key={i}
-                                x1="50"
-                                y1="5"
-                                x2="50"
-                                y2="9"
-                                stroke="#CBD5E1"
-                                strokeWidth="1.25"
-                                transform={`rotate(${angle} 50 50)`}
+                    {/* Right: Renewal Watch */}
+                    <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-6 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between pb-3">
+                          <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wide font-mono">
+                            RENEWAL WATCH
+                          </span>
+                          <span className="text-[10px] text-blue-600 font-semibold cursor-pointer hover:underline">
+                            Next 30 days
+                          </span>
+                        </div>
+
+                        <div className="flex flex-col gap-2.5 text-xs">
+                          <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2 text-[10px] font-mono text-[#64748B]">
+                                <span className="font-bold text-[#0F172A]">Oct 31</span>
+                                <span>Nebula Health</span>
+                              </div>
+                              <div className="text-[11px] font-semibold text-[#0F172A] truncate mt-0.5">
+                                Dedicated Senior Product Design Retainer
+                              </div>
+                            </div>
+                            <span className="text-xs font-bold font-mono text-[#0F172A] shrink-0 ml-2">
+                              $6,500
+                            </span>
+                          </div>
+
+                          <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2 text-[10px] font-mono text-[#64748B]">
+                                <span className="font-bold text-[#0F172A]">Oct 31</span>
+                                <span>Nebula Health</span>
+                              </div>
+                              <div className="text-[11px] font-medium text-[#64748B] truncate mt-0.5">
+                                Monthly Design Retainer - Additional
+                              </div>
+                            </div>
+                            <span className="text-xs font-mono text-[#64748B] shrink-0 ml-2">
+                              $0
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs mt-3">
+                        <span className="text-[11px] text-[#64748B]">
+                          Avg. per stream <b className="text-[#0F172A] font-mono font-bold">$3,250</b>
+                        </span>
+                        <button className="text-[11px] font-semibold text-[#0F172A] hover:text-blue-600 border border-[#E2E8F0] px-2.5 py-1 rounded-lg transition-colors">
+                          Explore recurring revenue →
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Receivables & Cash Flow Row (Screenshot 2) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  
+                  {/* FIN 3 Receivables */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            FIN 3
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Receivables</h4>
+                            <span className="text-[10px] text-[#64748B]">Current balances, grouped by due date</span>
+                          </div>
+                        </div>
+                        <ArrowRight size={13} className="text-[#94A3B8]" />
+                      </div>
+
+                      {/* Outstanding & Overdue Cards */}
+                      <div className="grid grid-cols-2 gap-3 pt-2">
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">
+                            OUTSTANDING
+                          </span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-1">$23,500</div>
+                          <div className="flex items-center justify-between text-[10px] text-[#64748B] mt-1">
+                            <span>Invoices: 3</span>
+                            <ArrowRight size={10} />
+                          </div>
+                        </div>
+
+                        <div className="p-3 rounded-xl bg-red-50/60 border border-red-200/80 flex flex-col justify-between">
+                          <span className="text-[9.5px] font-mono uppercase text-red-600 font-bold tracking-wider">
+                            OVERDUE
+                          </span>
+                          <div className="text-2xl font-black text-red-600 mt-1">$4,800</div>
+                          <div className="flex items-center justify-between text-[10px] text-red-500 mt-1">
+                            <span>Invoices: 1</span>
+                            <ArrowRight size={10} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* AGING Bar */}
+                      <div className="mt-4 pt-3 border-t border-slate-100">
+                        <div className="flex items-center justify-between text-[10px] pb-1.5">
+                          <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">AGING</span>
+                          <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded text-[9.5px]">
+                            <span className="px-1.5 py-0.2 bg-white rounded font-bold text-[#0F172A] shadow-2xs">Outstanding</span>
+                            <span className="px-1.5 py-0.2 text-[#64748B]">Overdue</span>
+                          </div>
+                        </div>
+
+                        {/* Visual Aging Bar */}
+                        <div className="w-full bg-blue-600 h-2 rounded-full overflow-hidden mt-1" />
+
+                        <div className="flex flex-col gap-1.5 mt-2.5 text-xs">
+                          <div className="flex items-center justify-between text-[#64748B]">
+                            <span className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-2xs bg-amber-500" />
+                              <span>Due within 7 days</span>
+                            </span>
+                            <span className="font-mono text-[11px]">$0 <span className="text-[#94A3B8]">0%</span></span>
+                          </div>
+                          <div className="flex items-center justify-between text-[#0F172A] font-medium">
+                            <span className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-2xs bg-blue-600" />
+                              <span>Due later</span>
+                            </span>
+                            <span className="font-mono text-[11px] font-bold">$23,500 <span className="text-[#64748B]">100%</span></span>
+                          </div>
+                          <div className="flex items-center justify-between text-[#64748B]">
+                            <span className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-2xs bg-red-500" />
+                              <span>Open invoices past due</span>
+                            </span>
+                            <span className="font-mono text-[11px]">$0 <span className="text-[#94A3B8]">0%</span></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Incoming Next 14 Days */}
+                      <div className="mt-4 pt-3 border-t border-slate-100">
+                        <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold tracking-wider block mb-2">
+                          INCOMING · NEXT 14 DAYS
+                        </span>
+                        <div className="p-2.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between text-xs">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono font-bold text-[#0F172A]">INV-2026-0009</span>
+                            <span className="text-[#64748B]">Solari Logistics</span>
+                          </div>
+                          <div className="flex items-center gap-3 font-mono">
+                            <span className="text-[#64748B] text-[11px]">Oct 16</span>
+                            <span className="font-bold text-[#0F172A]">$14,500</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[11px] text-[#64748B] flex items-center justify-between mt-3">
+                      <span className="flex items-center gap-1.5 hover:text-[#0F172A] cursor-pointer">
+                        <FileText size={12} />
+                        <span>No drafts to review →</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* FIN 4 Cash Flow */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            FIN 4
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Cash flow</h4>
+                            <span className="text-[10px] text-[#64748B]">Invoiced vs collected · last 6 months</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Metrics 3 Columns */}
+                      <div className="grid grid-cols-3 gap-2 pt-2 border-b border-slate-100 pb-3">
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">COLLECTED</span>
+                          <div className="text-xl sm:text-2xl font-black text-[#0F172A] mt-0.5">$113,900</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">INVOICED</span>
+                          <div className="text-xl sm:text-2xl font-black text-[#0F172A] mt-0.5">$148,700</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">COLLECTION RATE</span>
+                          <div className="text-xl sm:text-2xl font-black text-[#0F172A] mt-0.5">77%</div>
+                        </div>
+                      </div>
+
+                      {/* Bar Chart comparing Invoiced vs Collected */}
+                      <div className="pt-3">
+                        <div className="flex items-center gap-4 text-[10px] font-mono text-[#64748B] mb-3">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-slate-300" /> Invoiced
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600" /> Collected
+                          </span>
+                        </div>
+
+                        {/* Chart Grid */}
+                        <div className="h-44 w-full flex items-end justify-between gap-2 pt-4 px-2">
+                          {[
+                            { m: "May", inv: 18500, col: 0, invH: 28, colH: 0 },
+                            { m: "Jun", inv: 18500, col: 18500, invH: 28, colH: 28 },
+                            { m: "Jul", inv: 21000, col: 18500, invH: 34, colH: 28 },
+                            { m: "Aug", inv: 19800, col: 21000, invH: 32, colH: 34 },
+                            { m: "Sep", inv: 27500, col: 21500, invH: 46, colH: 36 },
+                            { m: "Oct", inv: 43400, col: 34400, invH: 78, colH: 60, current: true },
+                          ].map((item) => (
+                            <div key={item.m} className="flex-1 flex flex-col items-center gap-1.5">
+                              <div className="w-full flex items-end justify-center gap-1 h-32">
+                                <div
+                                  className={`w-3.5 rounded-t-2xs ${
+                                    item.current ? "bg-slate-300" : "bg-slate-200"
+                                  }`}
+                                  style={{ height: `${item.invH}%` }}
+                                />
+                                <div
+                                  className={`w-3.5 rounded-t-2xs ${
+                                    item.current ? "bg-blue-600 shadow-xs" : "bg-blue-500"
+                                  }`}
+                                  style={{ height: `${item.colH}%` }}
+                                />
+                              </div>
+                              <span className={`text-[10px] font-mono ${
+                                item.current ? "font-bold text-[#0F172A]" : "text-[#64748B]"
+                              }`}>
+                                {item.m}
+                              </span>
+                              <div className="flex flex-col text-[8.5px] font-mono text-center text-[#94A3B8] leading-tight">
+                                <span className={item.current ? "font-bold text-blue-600" : ""}>${(item.col/1000).toFixed(0)}k</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] flex items-center gap-1 mt-3">
+                      <HelpCircle size={11} />
+                      <span>Invoiced by issue date (excluding draft, scheduled and void) · collected by payment date.</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* 3. SECTION: SYS CAUTIONS & INSTRUMENTS (SCREENSHOT 2 & 3) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col gap-4">
+                {/* Section Header */}
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                    SYS
+                  </span>
+                  <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
+                    Cautions & instruments
+                  </h3>
+                  <span className="text-xs text-[#64748B]">
+                    Live alerts and calibrated business ratios
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  
+                  {/* Master Caution (Screenshot 3) */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            CAUT
+                          </span>
+                          <h4 className="text-xs font-bold text-[#0F172A]">Master caution</h4>
+                          <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-blue-50 text-blue-600 border border-blue-200">
+                            4
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer">
+                            View all 4 priorities
+                          </span>
+                          <RotateCw size={11} className="text-[#94A3B8]" />
+                        </div>
+                      </div>
+
+                      {/* 3 Tabs: CRITICAL 1, CAUTION 1, ADVISORY 2 */}
+                      <div className="grid grid-cols-3 gap-2 pt-1 pb-3">
+                        <div className="p-2 rounded-xl bg-red-50 border border-red-200 text-center flex flex-col items-center">
+                          <span className="text-[9px] font-mono font-bold text-red-700 uppercase flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> CRITICAL
+                          </span>
+                          <span className="text-lg font-black text-red-600 leading-tight mt-0.5">1</span>
+                        </div>
+                        <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-center flex flex-col items-center">
+                          <span className="text-[9px] font-mono font-bold text-amber-700 uppercase flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> CAUTION
+                          </span>
+                          <span className="text-lg font-black text-amber-600 leading-tight mt-0.5">1</span>
+                        </div>
+                        <div className="p-2 rounded-xl bg-blue-50 border border-blue-200 text-center flex flex-col items-center">
+                          <span className="text-[9px] font-mono font-bold text-blue-700 uppercase flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> ADVISORY
+                          </span>
+                          <span className="text-lg font-black text-blue-600 leading-tight mt-0.5">2</span>
+                        </div>
+                      </div>
+
+                      {/* Alert Items List */}
+                      <div className="flex flex-col gap-2 pt-1">
+                        {/* Alert 1 */}
+                        <div className="p-3 bg-red-50/60 border border-red-200/80 rounded-xl flex items-center justify-between text-xs">
+                          <div className="flex items-start gap-2.5">
+                            <div className="w-6 h-6 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0 mt-0.5">
+                              <AlertTriangle size={13} />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono text-[9.5px] font-bold text-red-700 uppercase">FIN</span>
+                                <span className="font-bold text-[#0F172A]">1 Overdue Invoice</span>
+                              </div>
+                              <span className="text-[11px] text-[#64748B] block mt-0.5">$4,800 total overdue</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer">
+                              Review →
+                            </span>
+                            <X size={12} className="text-[#94A3B8] cursor-pointer" />
+                          </div>
+                        </div>
+
+                        {/* Alert 2 */}
+                        <div className="p-3 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-center justify-between text-xs">
+                          <div className="flex items-start gap-2.5">
+                            <div className="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+                              <Clock size={13} />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono text-[9.5px] font-bold text-amber-700 uppercase">DLV</span>
+                                <span className="font-bold text-[#0F172A]">8 Tasks Due Within 72h</span>
+                              </div>
+                              <span className="text-[11px] text-[#64748B] block mt-0.5">
+                                Sprint deliverables approaching deadlines this week.
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer">
+                              Review →
+                            </span>
+                            <X size={12} className="text-[#94A3B8] cursor-pointer" />
+                          </div>
+                        </div>
+
+                        {/* Alert 3 */}
+                        <div className="p-3 bg-blue-50/60 border border-blue-200/80 rounded-xl flex items-center justify-between text-xs">
+                          <div className="flex items-start gap-2.5">
+                            <div className="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                              <HelpCircle size={13} />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono text-[9.5px] font-bold text-blue-700 uppercase">SUP</span>
+                                <span className="font-bold text-[#0F172A]">2 Active Support Tickets</span>
+                              </div>
+                              <span className="text-[11px] text-[#64748B] block mt-0.5">
+                                Tickets currently awaiting review or replies from the team.
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer">
+                              Review →
+                            </span>
+                            <X size={12} className="text-[#94A3B8] cursor-pointer" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] mt-3">
+                      Alerts refresh every minute. Hidden items return after 24 hours.
+                    </div>
+                  </div>
+
+                  {/* Business Instruments (3 Gauges) (Screenshot 3) */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            INST
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Business instruments</h4>
+                            <span className="text-[10px] text-[#64748B]">
+                              Calibrated 0–100 ratios from real counts — never targets or forecasts
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 3 Semi-Circular Speedometer Gauges */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                        
+                        {/* Gauge 1: Balance not past due (83%) */}
+                        <div className="p-3 bg-slate-50/70 border border-slate-200/80 rounded-xl flex flex-col items-center justify-between text-center">
+                          <div className="w-full flex items-center justify-between text-[11px] font-semibold text-[#0F172A]">
+                            <span className="truncate">Balance not past due</span>
+                            <ArrowRight size={11} className="text-[#94A3B8]" />
+                          </div>
+
+                          {/* Semi-circle Gauge Meter */}
+                          <div className="relative w-32 h-20 flex items-center justify-center my-1">
+                            <svg className="w-full h-full" viewBox="0 0 100 60">
+                              {/* Background arc */}
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 85 50"
+                                fill="none"
+                                stroke="#E2E8F0"
+                                strokeWidth="6"
+                                strokeLinecap="round"
                               />
-                            );
-                          })}
-                          {/* Circular background track */}
-                          <circle cx="50" cy="50" r="32" fill="none" stroke="#E2E8F0" strokeWidth="6" />
-                          {/* Active arc */}
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="32"
-                            fill="none"
-                            stroke="#2563EB"
-                            strokeWidth="6"
-                            strokeDasharray="201"
-                            strokeDashoffset="60"
-                            strokeLinecap="round"
-                            transform="rotate(-90 50 50)"
-                          />
-                        </svg>
-                        <div className="flex flex-col items-center justify-center text-center">
-                          <span className="text-xl font-extrabold text-[#0F172A] leading-none">1</span>
-                          <span className="text-[8px] font-mono font-semibold text-[#64748B] tracking-wider mt-0.5">
-                            ACTIVE
+                              {/* Filled arc (83% of 180 deg) */}
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 80 32"
+                                fill="none"
+                                stroke="#3B82F6"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                              />
+                              {/* Needle */}
+                              <line
+                                x1="50"
+                                y1="50"
+                                x2="76"
+                                y2="34"
+                                stroke="#0F172A"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                              />
+                              <circle cx="50" cy="50" r="3.5" fill="#0F172A" />
+                              <text x="12" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">0</text>
+                              <text x="46" y="22" fontSize="6" fill="#94A3B8" fontFamily="monospace">50</text>
+                              <text x="80" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">100</text>
+                            </svg>
+                          </div>
+
+                          <div className="text-xl font-black text-[#0F172A] leading-none">83%</div>
+                          <span className="text-[9.5px] text-[#64748B] mt-1 leading-tight">
+                            Share of unpaid balance that is not past due.
+                          </span>
+                          <div className="mt-2 pt-2 border-t border-slate-200/80 w-full flex items-center justify-between text-[10px] text-[#64748B]">
+                            <span>Past-due balance</span>
+                            <span className="font-mono font-bold text-amber-600">$4,800</span>
+                          </div>
+                        </div>
+
+                        {/* Gauge 2: Projects on track (100%) */}
+                        <div className="p-3 bg-slate-50/70 border border-slate-200/80 rounded-xl flex flex-col items-center justify-between text-center">
+                          <div className="w-full flex items-center justify-between text-[11px] font-semibold text-[#0F172A]">
+                            <span className="truncate">Projects on track</span>
+                            <ArrowRight size={11} className="text-[#94A3B8]" />
+                          </div>
+
+                          {/* Semi-circle Gauge Meter */}
+                          <div className="relative w-32 h-20 flex items-center justify-center my-1">
+                            <svg className="w-full h-full" viewBox="0 0 100 60">
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 85 50"
+                                fill="none"
+                                stroke="#E2E8F0"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 85 50"
+                                fill="none"
+                                stroke="#3B82F6"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                              />
+                              <line
+                                x1="50"
+                                y1="50"
+                                x2="82"
+                                y2="50"
+                                stroke="#0F172A"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                              />
+                              <circle cx="50" cy="50" r="3.5" fill="#0F172A" />
+                              <text x="12" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">0</text>
+                              <text x="46" y="22" fontSize="6" fill="#94A3B8" fontFamily="monospace">50</text>
+                              <text x="80" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">100</text>
+                            </svg>
+                          </div>
+
+                          <div className="text-xl font-black text-[#0F172A] leading-none">100%</div>
+                          <span className="text-[9.5px] text-[#64748B] mt-1 leading-tight">
+                            3 of 3 projects are on <b className="text-emerald-600 font-semibold">track</b>.
+                          </span>
+                          <div className="mt-2 pt-2 border-t border-slate-200/80 w-full flex items-center justify-between text-[10px] text-[#64748B]">
+                            <span>At risk / Off track</span>
+                            <span className="font-mono font-bold text-[#0F172A]">0 / 0</span>
+                          </div>
+                        </div>
+
+                        {/* Gauge 3: Acceptance rate (100%) */}
+                        <div className="p-3 bg-slate-50/70 border border-slate-200/80 rounded-xl flex flex-col items-center justify-between text-center">
+                          <div className="w-full flex items-center justify-between text-[11px] font-semibold text-[#0F172A]">
+                            <span className="truncate">Acceptance rate</span>
+                            <ArrowRight size={11} className="text-[#94A3B8]" />
+                          </div>
+
+                          {/* Semi-circle Gauge Meter */}
+                          <div className="relative w-32 h-20 flex items-center justify-center my-1">
+                            <svg className="w-full h-full" viewBox="0 0 100 60">
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 85 50"
+                                fill="none"
+                                stroke="#E2E8F0"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M 15 50 A 35 35 0 0 1 85 50"
+                                fill="none"
+                                stroke="#3B82F6"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                              />
+                              <line
+                                x1="50"
+                                y1="50"
+                                x2="82"
+                                y2="50"
+                                stroke="#0F172A"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                              />
+                              <circle cx="50" cy="50" r="3.5" fill="#0F172A" />
+                              <text x="12" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">0</text>
+                              <text x="46" y="22" fontSize="6" fill="#94A3B8" fontFamily="monospace">50</text>
+                              <text x="80" y="58" fontSize="6" fill="#94A3B8" fontFamily="monospace">100</text>
+                            </svg>
+                          </div>
+
+                          <div className="text-xl font-black text-[#0F172A] leading-none">100%</div>
+                          <span className="text-[9.5px] text-[#64748B] mt-1 leading-tight">
+                            Accepted proposals as a share of accepted and declined proposals.
+                          </span>
+                          <div className="mt-2 pt-2 border-t border-slate-200/80 w-full flex items-center justify-between text-[10px] text-[#64748B]">
+                            <span>Awaiting decision</span>
+                            <span className="font-mono font-bold text-[#0F172A]">0</span>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] mt-3">
+                      Instruments reflect actual system performance in the designated cycle.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* 4. SECTION: DLV DELIVERY TELEMETRY (SCREENSHOT 3 & 4) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col gap-4">
+                {/* Section Header */}
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                    DLV
+                  </span>
+                  <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
+                    Delivery telemetry
+                  </h3>
+                  <span className="text-xs text-[#64748B]">
+                    Schedule, status and follow-up
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  
+                  {/* DLV 1 Flight Plan (Gantt Schedule) */}
+                  <div className="lg:col-span-8 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            DLV 1
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Flight plan</h4>
+                            <span className="text-[10px] text-[#64748B]">Active projects by schedule · bar fill = completed tasks</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center bg-slate-100 p-0.5 rounded-lg text-xs">
+                            <button className="px-2.5 py-0.5 bg-white font-semibold text-[#0F172A] rounded shadow-2xs">
+                              Schedule
+                            </button>
+                            <button className="px-2.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
+                              Risk
+                            </button>
+                          </div>
+
+                          <button className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                            <span>All projects</span>
+                            <ArrowRight size={11} />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Status Summary Bar */}
+                      <div className="flex items-center justify-between text-xs py-2 border-y border-slate-100">
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center gap-1.5 text-emerald-600 font-medium">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                            <span>On track <b className="font-mono">3</b></span>
+                          </span>
+                          <span className="flex items-center gap-1.5 text-amber-600 font-medium">
+                            <span className="w-2 h-2 rounded-full bg-amber-500" />
+                            <span>At risk <b className="font-mono">0</b></span>
+                          </span>
+                          <span className="flex items-center gap-1.5 text-red-600 font-medium">
+                            <span className="w-2 h-2 rounded-full bg-red-500" />
+                            <span>Off track <b className="font-mono">0</b></span>
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div className="w-32 bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div className="bg-emerald-500 h-full w-full rounded-full" />
+                          </div>
+                          <span className="text-[11px] text-[#64748B] font-mono">3 in progress</span>
+                        </div>
+                      </div>
+
+                      {/* Timeline Header with Today Marker */}
+                      <div className="relative pt-4">
+                        <div className="grid grid-cols-9 text-[9.5px] font-mono text-[#94A3B8] uppercase text-center pb-2 border-b border-slate-100">
+                          <span>MAY</span>
+                          <span>JUN</span>
+                          <span>JUL</span>
+                          <span>AUG</span>
+                          <span>SEP</span>
+                          <span className="font-bold text-[#0F172A] relative">
+                            OCT
+                            {/* Today Tag */}
+                            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[8px] font-bold px-1.5 py-0.2 rounded-full whitespace-nowrap shadow-2xs z-20">
+                              Today · Oct 8
+                            </div>
+                          </span>
+                          <span>NOV</span>
+                          <span>DEC</span>
+                          <span>JAN</span>
+                        </div>
+
+                        {/* Vertical Today line */}
+                        <div className="absolute top-8 bottom-0 left-[61.1%] w-[1.5px] bg-[#0F172A] z-10 pointer-events-none" />
+
+                        {/* Projects Gantt Rows */}
+                        <div className="flex flex-col gap-4 pt-3 text-xs">
+                          
+                          {/* Project 1 */}
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="w-48 shrink-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                                <span className="font-bold text-[#0F172A] truncate">Kroma Mobile SDK & Mercha...</span>
+                              </div>
+                              <span className="text-[10px] text-[#64748B] block ml-3.5">Kroma Fintech</span>
+                            </div>
+
+                            {/* Gantt Bar */}
+                            <div className="flex-1 relative h-4 bg-transparent flex items-center">
+                              <div className="absolute left-[33%] w-[33%] h-3.5 rounded-full bg-blue-100 flex overflow-hidden">
+                                <div className="bg-blue-600 h-full w-[45%] rounded-full" />
+                              </div>
+                            </div>
+
+                            <div className="text-right shrink-0 w-20 font-mono text-[11px]">
+                              <span className="font-bold text-[#0F172A]">45%</span>
+                              <span className="text-[9.5px] text-[#94A3B8] ml-1">Oct 26</span>
+                            </div>
+                          </div>
+
+                          {/* Project 2 */}
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="w-48 shrink-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                                <span className="font-bold text-[#0F172A] truncate">Nebula Telehealth 2.0 Core P...</span>
+                              </div>
+                              <div className="flex items-center gap-1 text-[10px] text-[#64748B] ml-3.5">
+                                <span>Nebula Health</span>
+                                <span>·</span>
+                                <span className="text-amber-600 font-medium">1 late</span>
+                              </div>
+                            </div>
+
+                            <div className="flex-1 relative h-4 bg-transparent flex items-center">
+                              <div className="absolute left-[11%] w-[55%] h-3.5 rounded-full bg-blue-100 flex overflow-hidden">
+                                <div className="bg-blue-600 h-full w-[38%] rounded-full" />
+                              </div>
+                            </div>
+
+                            <div className="text-right shrink-0 w-20 font-mono text-[11px]">
+                              <span className="font-bold text-[#0F172A]">38%</span>
+                              <span className="text-[9.5px] text-[#94A3B8] ml-1">Nov 20</span>
+                            </div>
+                          </div>
+
+                          {/* Project 3 */}
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="w-48 shrink-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                                <span className="font-bold text-[#0F172A] truncate">Solari Fleet Telematics Contr...</span>
+                              </div>
+                              <div className="flex items-center gap-1 text-[10px] text-[#64748B] ml-3.5">
+                                <span>Solari Logistics</span>
+                                <span>·</span>
+                                <span className="text-amber-600 font-medium">1 late</span>
+                              </div>
+                            </div>
+
+                            <div className="flex-1 relative h-4 bg-transparent flex items-center">
+                              <div className="absolute left-[33%] w-[44%] h-3.5 rounded-full bg-blue-100 flex overflow-hidden">
+                                <div className="bg-blue-600 h-full w-[33%] rounded-full" />
+                              </div>
+                            </div>
+
+                            <div className="text-right shrink-0 w-20 font-mono text-[11px]">
+                              <span className="font-bold text-[#0F172A]">33%</span>
+                              <span className="text-[9.5px] text-[#94A3B8] ml-1">Dec 5</span>
+                            </div>
+                          </div>
+
+                          {/* Project 4 */}
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="w-48 shrink-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-slate-300 shrink-0" />
+                                <span className="font-bold text-[#0F172A] truncate">Arcturus Brand Identity & We...</span>
+                              </div>
+                              <div className="flex items-center gap-1 text-[10px] text-[#64748B] ml-3.5">
+                                <span>Arcturus Robotics</span>
+                                <span>·</span>
+                                <span className="text-amber-600 font-medium">1 late</span>
+                              </div>
+                            </div>
+
+                            <div className="flex-1 relative h-4 bg-transparent flex items-center">
+                              <div className="absolute left-[55%] w-[33%] h-3.5 rounded-full bg-blue-100 flex overflow-hidden">
+                                <div className="bg-blue-600 h-full w-[14%] rounded-full" />
+                              </div>
+                            </div>
+
+                            <div className="text-right shrink-0 w-20 font-mono text-[11px]">
+                              <span className="font-bold text-[#0F172A]">14%</span>
+                              <span className="text-[9.5px] text-[#94A3B8] ml-1">Jan 4</span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10.5px] text-[#64748B] flex items-center gap-1.5 mt-3">
+                      <HelpCircle size={11} className="text-[#94A3B8]" />
+                      <span>1 project that is not in progress has no health score.</span>
+                    </div>
+                  </div>
+
+                  {/* DLV 2 Work in motion & Overdue follow-up */}
+                  <div className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            DLV 2
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Work in motion</h4>
+                            <span className="text-[10px] text-[#64748B]">To do, in progress and in review</span>
+                          </div>
+                        </div>
+                        <ArrowRight size={13} className="text-[#94A3B8]" />
+                      </div>
+
+                      {/* 28 Tracked Tasks Breakdown */}
+                      <div className="pt-2">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl font-black text-[#0F172A]">28</span>
+                          <span className="text-xs text-[#64748B]">Tracked tasks</span>
+                        </div>
+
+                        {/* 3 Status Columns Histogram */}
+                        <div className="flex items-end justify-between gap-3 h-28 pt-4 px-3 border-b border-slate-100 pb-2">
+                          <div className="flex-1 flex flex-col items-center gap-1">
+                            <span className="text-xs font-bold text-[#0F172A]">12</span>
+                            <div className="w-full bg-slate-300 h-16 rounded-t-md" />
+                            <span className="text-[10.5px] text-[#64748B] mt-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> To do
+                            </span>
+                          </div>
+
+                          <div className="flex-1 flex flex-col items-center gap-1">
+                            <span className="text-xs font-bold text-[#0F172A]">11</span>
+                            <div className="w-full bg-blue-600 h-14 rounded-t-md shadow-xs" />
+                            <span className="text-[10.5px] text-[#64748B] mt-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> In progress
+                            </span>
+                          </div>
+
+                          <div className="flex-1 flex flex-col items-center gap-1">
+                            <span className="text-xs font-bold text-[#0F172A]">5</span>
+                            <div className="w-full bg-indigo-900 h-8 rounded-t-md" />
+                            <span className="text-[10.5px] text-[#64748B] mt-1 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-indigo-900" /> In review
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* OVERDUE FOLLOW-UP */}
+                      <div className="pt-4">
+                        <div className="flex items-center justify-between pb-2">
+                          <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider font-semibold">
+                            OVERDUE FOLLOW-UP
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-mono text-[9.5px] font-bold border border-amber-200">
+                            ● 3 overdue
+                          </span>
+                        </div>
+
+                        <div className="flex flex-col gap-2 pt-1 text-xs">
+                          {/* Item 1 */}
+                          <div className="p-2.5 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-col gap-1">
+                            <div className="flex items-center justify-between">
+                              <span className="font-semibold text-[#0F172A] truncate text-[11.5px]">
+                                HIPAA compliance audit trail viewer for clinic adm...
+                              </span>
+                              <span className="text-[9.5px] font-mono font-bold text-red-600 shrink-0 ml-1">
+                                Oct 8
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-[10px] text-[#64748B]">
+                              <span>Nebula Telehealth 2.0 Core Platform</span>
+                              <span>·</span>
+                              <span className="text-[#0F172A] font-medium">Marcus Brody</span>
+                            </div>
+                          </div>
+
+                          {/* Item 2 */}
+                          <div className="p-2.5 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-col gap-1">
+                            <div className="flex items-center justify-between">
+                              <span className="font-semibold text-[#0F172A] truncate text-[11.5px]">
+                                Automated geofence exit push notification latenc...
+                              </span>
+                              <span className="text-[9.5px] font-mono font-bold text-red-600 shrink-0 ml-1">
+                                Oct 8
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-[10px] text-[#64748B]">
+                              <span>Solari Fleet Telematics Control Room</span>
+                              <span>·</span>
+                              <span className="text-[#0F172A] font-medium">Sophia Lin</span>
+                            </div>
+                          </div>
+
+                          {/* Item 3 */}
+                          <div className="p-2.5 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-col gap-1">
+                            <div className="flex items-center justify-between">
+                              <span className="font-semibold text-[#0F172A] truncate text-[11.5px]">
+                                Robot emergency stop (E-STOP) physical button ...
+                              </span>
+                              <span className="text-[9.5px] font-mono font-bold text-red-600 shrink-0 ml-1">
+                                Oct 8
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-[10px] text-[#64748B]">
+                              <span>Arcturus Brand Identity & Web Launch</span>
+                              <span>·</span>
+                              <span className="text-[#0F172A] font-medium">Liam Gallagher</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-right mt-3">
+                      <span className="text-xs text-blue-600 font-semibold cursor-pointer hover:underline">
+                        View all tasks →
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* 5. SECTION: CRW CREW & THROUGHPUT (SCREENSHOT 4 & 5) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col gap-4">
+                {/* Section Header */}
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                    CRW
+                  </span>
+                  <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
+                    Crew & throughput
+                  </h3>
+                  <span className="text-xs text-[#64748B]">
+                    Last 14 days · Sep 25 – Oct 8
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  
+                  {/* CRW 1 Crew load heatmap */}
+                  <div className="lg:col-span-8 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            CRW 1
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Crew load</h4>
+                            <span className="text-[10px] text-[#64748B]">Hours logged per person · last 14 days</span>
+                          </div>
+                        </div>
+
+                        {/* Legend */}
+                        <div className="flex items-center gap-1 text-[9.5px] font-mono text-[#64748B]">
+                          <span>0 h</span>
+                          <span className="w-2.5 h-2.5 bg-slate-100 rounded-2xs" />
+                          <span className="w-2.5 h-2.5 bg-blue-100 rounded-2xs" />
+                          <span className="w-2.5 h-2.5 bg-blue-300 rounded-2xs" />
+                          <span className="w-2.5 h-2.5 bg-blue-500 rounded-2xs" />
+                          <span className="w-2.5 h-2.5 bg-blue-700 rounded-2xs" />
+                          <span>8 h+</span>
+                        </div>
+                      </div>
+
+                      {/* Heatmap Matrix Table */}
+                      <div className="pt-2">
+                        {/* Days header */}
+                        <div className="flex items-center justify-between text-[9px] font-mono text-[#94A3B8] pb-1.5 border-b border-slate-100">
+                          <span className="w-32 uppercase">CREW</span>
+                          <div className="flex-1 flex justify-around max-w-sm px-2">
+                            <span>F<br />25</span>
+                            <span>S<br />26</span>
+                            <span>S<br />27</span>
+                            <span>M<br />28</span>
+                            <span>T<br />29</span>
+                            <span>W<br />30</span>
+                            <span>T<br />1</span>
+                            <span>F<br />2</span>
+                            <span>S<br />3</span>
+                            <span>S<br />4</span>
+                            <span className="text-[#0F172A] font-bold">M<br />5</span>
+                            <span>T<br />6</span>
+                            <span>W<br />7</span>
+                            <span className="text-white bg-[#0F172A] px-1 rounded font-bold">T<br />8</span>
+                          </div>
+                          <span className="w-16 text-right uppercase">HOURS</span>
+                          <span className="w-28 text-right uppercase">OPEN TASKS</span>
+                        </div>
+
+                        {/* Member Rows */}
+                        <div className="flex flex-col gap-3 pt-3 text-xs">
+                          
+                          {/* Amara Okafor */}
+                          <div className="flex items-center justify-between">
+                            <div className="w-32 flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-rose-500 to-amber-400 text-white font-bold text-[9px] flex items-center justify-center shrink-0">
+                                AO
+                              </div>
+                              <span className="font-semibold text-[#0F172A] truncate">Amara Okafor</span>
+                            </div>
+
+                            {/* Heatmap cells */}
+                            <div className="flex-1 flex justify-around max-w-sm px-2">
+                              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0].map((v, i) => (
+                                <div
+                                  key={i}
+                                  className={`w-3.5 h-5 rounded-2xs ${
+                                    v === 8 ? "bg-blue-600" : "bg-slate-100"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+
+                            <span className="w-16 text-right font-mono font-bold text-[#0F172A]">
+                              15<span className="text-[10px] text-[#64748B] font-normal">h</span>
+                            </span>
+
+                            <div className="w-28 text-right flex items-center justify-end gap-2 font-mono">
+                              <div className="w-10 bg-blue-600 h-1.5 rounded-full" />
+                              <span className="font-bold text-[#0F172A]">10</span>
+                            </div>
+                          </div>
+
+                          {/* Liam Gallagher */}
+                          <div className="flex items-center justify-between">
+                            <div className="w-32 flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 text-white font-bold text-[9px] flex items-center justify-center shrink-0">
+                                LG
+                              </div>
+                              <span className="font-semibold text-[#0F172A] truncate">Liam Gallagher</span>
+                            </div>
+
+                            <div className="flex-1 flex justify-around max-w-sm px-2">
+                              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0].map((v, i) => (
+                                <div
+                                  key={i}
+                                  className={`w-3.5 h-5 rounded-2xs ${
+                                    v === 8 ? "bg-blue-600" : "bg-slate-100"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+
+                            <span className="w-16 text-right font-mono font-bold text-[#0F172A]">
+                              14<span className="text-[10px] text-[#64748B] font-normal">h</span>
+                            </span>
+
+                            <div className="w-28 text-right flex items-center justify-end gap-2 font-mono">
+                              <div className="w-6 bg-blue-600 h-1.5 rounded-full" />
+                              <span className="font-bold text-[#0F172A]">6</span>
+                              <span className="text-[9px] px-1 bg-amber-50 text-amber-700 border border-amber-200 rounded font-bold">1 late</span>
+                            </div>
+                          </div>
+
+                          {/* Chloe Bennett */}
+                          <div className="flex items-center justify-between">
+                            <div className="w-32 flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white font-bold text-[9px] flex items-center justify-center shrink-0">
+                                CB
+                              </div>
+                              <span className="font-semibold text-[#0F172A] truncate">Chloe Bennett</span>
+                            </div>
+
+                            <div className="flex-1 flex justify-around max-w-sm px-2">
+                              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0].map((v, i) => (
+                                <div
+                                  key={i}
+                                  className={`w-3.5 h-5 rounded-2xs ${
+                                    v === 8 ? "bg-blue-600" : "bg-slate-100"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+
+                            <span className="w-16 text-right font-mono font-bold text-[#0F172A]">
+                              9.5<span className="text-[10px] text-[#64748B] font-normal">h</span>
+                            </span>
+
+                            <div className="w-28 text-right flex items-center justify-end gap-2 font-mono">
+                              <div className="w-6 bg-blue-600 h-1.5 rounded-full" />
+                              <span className="font-bold text-[#0F172A]">6</span>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        {/* ALL CREW Summary row */}
+                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+                          <span className="w-32 text-[10px] font-mono text-[#64748B] uppercase">ALL CREW</span>
+                          <div className="flex-1 flex justify-around max-w-sm px-2">
+                            <div className="w-3.5 h-5 bg-blue-400 rounded-2xs ml-auto mr-12" />
+                          </div>
+                          <span className="w-16 text-right font-mono font-black text-[#0F172A]">
+                            38.5<span className="text-[10px] text-[#64748B] font-normal">h</span>
+                          </span>
+                          <span className="w-28 text-right text-[10.5px] font-mono text-[#64748B]">
+                            28 tracked · 3 late
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] font-mono mt-3">
+                      CAPACITY ALLOCATION · BALANCED
+                    </div>
+                  </div>
+
+                  {/* CRW 2 Throughput bar chart */}
+                  <div className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            CRW 2
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Throughput</h4>
+                            <span className="text-[10px] text-[#64748B]">Tasks created vs completed · last 14 days</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 3 Metrics: Completed, Created, Net Backlog */}
+                      <div className="grid grid-cols-3 gap-2 pt-2 border-b border-slate-100 pb-3">
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">COMPLETED</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">10</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">CREATED</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">24</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">NET BACKLOG</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">+14</div>
+                          <span className="text-[8.5px] text-[#94A3B8] block">Created – completed</span>
+                        </div>
+                      </div>
+
+                      {/* Throughput 14-day Bar Chart */}
+                      <div className="pt-3">
+                        <div className="flex items-center gap-3 text-[10px] font-mono text-[#64748B] mb-2">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-slate-300" /> Created
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600" /> Completed
+                          </span>
+                        </div>
+
+                        {/* Chart Bars */}
+                        <div className="h-32 w-full flex items-end justify-between gap-1 pt-4 px-1">
+                          {[
+                            { d: "25", c: 0, comp: 0 },
+                            { d: "26", c: 0, comp: 0 },
+                            { d: "27", c: 0, comp: 0 },
+                            { d: "28", c: 1, comp: 0 },
+                            { d: "29", c: 0, comp: 0 },
+                            { d: "30", c: 1, comp: 0 },
+                            { d: "1", c: 2, comp: 0 },
+                            { d: "2", c: 3, comp: 0 },
+                            { d: "3", c: 4, comp: 0 },
+                            { d: "4", c: 4, comp: 0 },
+                            { d: "Today", c: 10, comp: 8, current: true },
+                          ].map((b, idx) => (
+                            <div key={idx} className="flex-1 flex flex-col items-center gap-1">
+                              <div className="w-full flex items-end justify-center h-24">
+                                <div
+                                  className={`w-2 rounded-t-2xs ${
+                                    b.current ? "bg-blue-600" : "bg-slate-300"
+                                  }`}
+                                  style={{ height: `${b.c * 9}%` }}
+                                />
+                              </div>
+                              <span className={`text-[8.5px] font-mono ${
+                                b.current ? "font-bold text-[#0F172A]" : "text-[#94A3B8]"
+                              }`}>
+                                {b.d}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] flex items-center gap-1 mt-3">
+                      <HelpCircle size={11} />
+                      <span>Weekends are included; zero days stay visible.</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* 6. SECTION: COM CLIENTS & SUPPORT (SCREENSHOT 5) */}
+              {/* ========================================================= */}
+              <div className="flex flex-col gap-4">
+                {/* Section Header */}
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                    COM
+                  </span>
+                  <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
+                    Clients & support
+                  </h3>
+                  <span className="text-xs text-[#64748B]">
+                    Tickets, proposals and relationship health
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  
+                  {/* COM 1 Support comms */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            COM 1
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Support comms</h4>
+                            <span className="text-[10px] text-[#64748B]">Ticket traffic · last 14 days</span>
+                          </div>
+                        </div>
+                        <ArrowRight size={13} className="text-[#94A3B8]" />
+                      </div>
+
+                      {/* 3 Metrics */}
+                      <div className="grid grid-cols-3 gap-2 pt-2 border-b border-slate-100 pb-3">
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">OPEN TICKETS</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">2</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">SLA BREACHES TODAY</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">0</div>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">OVERDUE TICKETS</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">0</div>
+                        </div>
+                      </div>
+
+                      {/* Support Traffic 14 days Bar Chart */}
+                      <div className="pt-3">
+                        <div className="flex items-center gap-4 text-[10px] font-mono text-[#64748B] mb-2">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-slate-300" /> Opened <b className="text-[#0F172A]">2</b>
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600" /> Resolved <b className="text-[#0F172A]">0</b>
+                          </span>
+                        </div>
+
+                        {/* Chart */}
+                        <div className="h-28 w-full flex items-end justify-between gap-1 pt-4 px-2">
+                          {[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0].map((v, i) => (
+                            <div key={i} className="flex-1 flex flex-col items-center">
+                              <div className="w-full flex items-end justify-center h-20">
+                                <div
+                                  className={`w-2.5 rounded-t-2xs ${
+                                    v > 0 ? "bg-slate-300" : "bg-slate-100"
+                                  }`}
+                                  style={{ height: v > 0 ? "45px" : "3px" }}
+                                />
+                              </div>
+                              <span className="text-[8px] font-mono text-[#94A3B8] mt-1">—</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-emerald-600 font-mono mt-3 flex items-center gap-1">
+                      <CheckCircle2 size={11} />
+                      <span>ALL OPEN TICKETS WITHIN TARGET RESPONSE WINDOW</span>
+                    </div>
+                  </div>
+
+                  {/* COM 2 Client pipeline */}
+                  <div className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between pb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                            COM 2
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#0F172A]">Client pipeline</h4>
+                            <span className="text-[10px] text-[#64748B]">Proposals awaiting decision, CRM stages and relationship health</span>
+                          </div>
+                        </div>
+
+                        <button className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                          <span>Organizations</span>
+                          <ArrowRight size={11} />
+                        </button>
+                      </div>
+
+                      {/* Top Metrics Row */}
+                      <div className="grid grid-cols-2 gap-3 pt-2 border-b border-slate-100 pb-3">
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">AWAITING DECISION</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">0</div>
+                          <span className="text-[10.5px] text-blue-600 hover:underline cursor-pointer block mt-0.5 font-medium">
+                            Proposals →
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold">PIPELINE VALUE</span>
+                          <div className="text-2xl font-black text-[#0F172A] mt-0.5">$0</div>
+                          <span className="text-[10px] text-[#64748B] block mt-0.5">
+                            Sent and viewed proposals
                           </span>
                         </div>
                       </div>
 
-                      <div className="flex flex-col gap-1.5 text-xs">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-blue-500" />
-                          <span className="text-[#475569]">To do</span>
-                          <span className="font-bold text-[#0F172A] ml-2">1</span>
-                          <span className="text-[10px] text-[#94A3B8] font-mono">100%</span>
+                      {/* CRM Stages & Acceptance Rate */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        {/* Left: Acceptance Rate Progress Bar */}
+                        <div>
+                          <div className="flex items-center justify-between text-[10.5px]">
+                            <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">
+                              ACCEPTANCE RATE
+                            </span>
+                            <span className="font-mono font-bold text-[#0F172A] text-sm">100%</span>
+                          </div>
+                          <div className="w-full bg-blue-600 h-2 rounded-full mt-2" />
+                          <div className="flex items-center justify-between text-[9px] font-mono text-[#94A3B8] mt-1.5">
+                            <span>0</span>
+                            <span>50</span>
+                            <span>100</span>
+                          </div>
+                          <span className="text-[10px] text-[#64748B] block mt-2">
+                            Accepted proposals as a share of accepted and declined proposals.
+                          </span>
+                        </div>
+
+                        {/* Right: CRM Stages */}
+                        <div>
+                          <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider font-semibold block mb-2">
+                            CRM STAGES
+                          </span>
+                          <div className="flex flex-col gap-1.5 text-xs">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[#64748B] text-[11px]">Lead</span>
+                              <div className="flex items-center gap-2">
+                                <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                <span className="font-mono font-bold text-[#0F172A]">0</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between">
+                              <span className="text-[#64748B] text-[11px]">Contacted</span>
+                              <div className="flex items-center gap-2">
+                                <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                <span className="font-mono font-bold text-[#0F172A]">0</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between">
+                              <span className="text-[#64748B] text-[11px]">Proposal Sent</span>
+                              <div className="flex items-center gap-2">
+                                <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                <span className="font-mono font-bold text-[#0F172A]">0</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between">
+                              <span className="text-[#0F172A] font-semibold text-[11px]">Active</span>
+                              <div className="flex items-center gap-2">
+                                <div className="w-20 bg-blue-600 h-1.5 rounded-full" />
+                                <span className="font-mono font-bold text-[#0F172A]">4</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span className="text-[#64748B] text-[11px]">Conversion rate</span>
+                            <span className="font-mono font-black text-emerald-600 text-sm">100%</span>
+                          </div>
+                          <span className="text-[9.5px] text-[#94A3B8] block mt-0.5">
+                            Active ÷ all organizations in a pipeline stage.
+                          </span>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* 5. RECENTLY FINISHED (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                        LOG
-                      </span>
-                      <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Recently finished</h4>
-                        <span className="text-[10px] text-[#64748B]">1 task completed in the past 7 days.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2.5 pt-2 border-t border-slate-100 text-xs">
-                      <div className="text-[10px] font-mono text-[#64748B] leading-tight">
-                        <span className="block font-bold text-[#0F172A]">16:37</span>
-                        <span>Sep 28</span>
-                      </div>
-                      <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shrink-0">
-                        <Check size={11} strokeWidth={2.5} />
-                      </div>
-                      <div className="min-w-0">
-                        <span className="font-semibold text-[#0F172A] block truncate">new</span>
-                        <span className="text-[10px] text-[#64748B]">Living With Lolo Website</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 6. LATEST UPDATES (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                        COM
-                      </span>
-                      <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Your latest updates</h4>
-                        <span className="text-[10px] text-[#64748B]">Unread updates from the past 7 days.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-center py-4 text-center border-t border-slate-100">
-                      <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mb-1.5">
-                        <Bell size={14} />
-                      </div>
-                      <span className="text-xs font-bold text-[#0F172A]">You&apos;re up to date</span>
-                      <span className="text-[10.5px] text-[#64748B] max-w-[200px] mt-0.5">
-                        Replies, mentions, and changes to your work will appear here.
-                      </span>
-                    </div>
-
-                    <div className="pt-2 border-t border-slate-100 text-right">
-                      <span className="text-[11px] text-blue-600 font-semibold cursor-pointer hover:underline">
-                        All notifications →
-                      </span>
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-[#94A3B8] font-mono mt-3">
+                      ORGANIZATIONS CRM PIPELINE · HEALTHY
                     </div>
                   </div>
 
                 </div>
-
               </div>
 
               {/* Bottom status line */}
-              <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-2">
+              <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-4 border-t border-slate-200/80">
                 <span className="flex items-center gap-1.5">
-                  <Clock size={11} /> Automatically refreshed every minute
+                  <Clock size={11} /> Automatically refreshed every minute · Mission Control live telemetry
                 </span>
                 <span className="flex items-center gap-1 cursor-pointer hover:text-slate-600">
-                  <RefreshCw size={11} /> Refresh
+                  <RotateCw size={11} /> Refresh
                 </span>
               </div>
 
@@ -2056,10 +3662,10 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Card 2: Move Sdarr Site */}
+                    {/* Card 2: Kroma Mobile SDK & Merchant Tools */}
                     <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
                       <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        Move Sdarr Site
+                        Kroma Mobile SDK & Merchant Tools
                       </h4>
                       <div className="flex items-center gap-1.5 text-[10.5px]">
                         <span className="text-red-600 font-medium flex items-center gap-1">
@@ -2473,7 +4079,7 @@ export default function HeroAppWindow() {
                   {/* Greeting & Scope (Screenshot 01) */}
                   <div>
                     <h3 className="text-sm font-bold text-[#0F172A]">
-                      Good evening, Sakib
+                      Good evening, Julian
                     </h3>
                     <p className="text-[11px] text-[#64748B] mt-0.5">
                       Ask about Dashboard or anything else you can access.
@@ -2597,7 +4203,7 @@ export default function HeroAppWindow() {
                       </div>
                       <span className="text-[10px] text-slate-700 leading-relaxed">
                         • 11 projects on schedule with 0 delivery risks flagged<br />
-                        • Next immediate priority: Move Sdarr Site (urgent)<br />
+                        • Priority: 1 overdue invoice ($4,800) and 8 tasks due within 72h<br />
                         • 0 overdue items requiring escalation
                       </span>
                     </div>
