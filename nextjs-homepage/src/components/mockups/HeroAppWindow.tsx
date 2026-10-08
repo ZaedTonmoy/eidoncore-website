@@ -796,8 +796,8 @@ export default function HeroAppWindow() {
                 <div className="lg:col-span-8 flex flex-col gap-4">
                   
                   {/* 1. 7-DAY LAUNCH WINDOW (Screenshot 01 & 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs">
-                    <div className="flex items-center justify-between pb-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs">
+                    <div className="flex items-center justify-between pb-3.5">
                       <div className="flex items-center gap-2">
                         <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                           WIN
@@ -809,7 +809,7 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
+                    <div className="grid grid-cols-7 gap-1.5 sm:gap-2.5">
                       {[
                         { label: "TODAY", date: 4, tasks: 0 },
                         { label: "MON", date: 5, tasks: 0 },
@@ -828,9 +828,9 @@ export default function HeroAppWindow() {
                               setSelectedDay(day.date);
                               setIsDateFiltered((prev) => !prev);
                             }}
-                            className={`flex flex-col items-center justify-center p-2 rounded-xl border transition-all text-center ${
+                            className={`flex flex-col items-center justify-center p-2.5 rounded-xl border transition-all text-center ${
                               isSelected
-                                ? "bg-white border-blue-500 ring-2 ring-blue-500/10 shadow-xs"
+                                ? "bg-white border-blue-500 ring-2 ring-blue-500/15 shadow-xs"
                                 : "bg-[#FAFAFA] border-[#E5E7EB] hover:bg-slate-50"
                             }`}
                           >
@@ -839,11 +839,11 @@ export default function HeroAppWindow() {
                             }`}>
                               {day.label}
                             </span>
-                            <span className="text-sm font-extrabold text-[#0F172A] mt-0.5">
+                            <span className="text-sm font-extrabold text-[#0F172A] mt-1">
                               {day.date}
                             </span>
-                            <div className="w-1 h-2.5 bg-slate-200 rounded-full mt-1" />
-                            <span className="text-[9.5px] text-[#94A3B8] mt-0.5 font-mono">
+                            <div className="w-1 h-2 bg-slate-200 rounded-full mt-1.5" />
+                            <span className="text-[9.5px] text-[#94A3B8] mt-1 font-mono">
                               {day.tasks}
                             </span>
                           </button>
@@ -853,7 +853,7 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* 2. YOUR PRIORITIES TABLE SECTION (Screenshot 01 & 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
                         <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
@@ -875,7 +875,7 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Filter Pills + Search Input */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-100">
                       <div className="flex items-center gap-1 text-[11px] font-medium flex-wrap">
                         <button
                           onClick={() => {
@@ -922,7 +922,7 @@ export default function HeroAppWindow() {
                         </button>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] max-w-[200px]">
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] max-w-[210px]">
                         <Search size={11} className="text-[#94A3B8]" />
                         <span className="text-[10.5px] text-[#94A3B8] truncate">Search assigned tasks...</span>
                       </div>
@@ -930,7 +930,7 @@ export default function HeroAppWindow() {
 
                     {/* Filter Active Pill (Screenshot 03) */}
                     {isDateFiltered && (
-                      <div className="flex items-center justify-between p-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs">
+                      <div className="flex items-center justify-between p-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs">
                         <div className="flex items-center gap-1.5 text-[#0F172A] font-medium">
                           <Calendar size={13} className="text-blue-600" />
                           <span>Due Oct 4</span>
@@ -953,10 +953,10 @@ export default function HeroAppWindow() {
                           <table className="w-full text-left text-xs">
                             <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
                               <tr>
-                                <th className="py-2.5 px-3 font-semibold">TASK</th>
-                                <th className="py-2.5 px-3 font-semibold">PROJECT</th>
-                                <th className="py-2.5 px-3 font-semibold">STATUS</th>
-                                <th className="py-2.5 px-3 font-semibold text-right">DUE</th>
+                                <th className="py-2.5 px-3.5 font-semibold">TASK</th>
+                                <th className="py-2.5 px-3.5 font-semibold">PROJECT</th>
+                                <th className="py-2.5 px-3.5 font-semibold">STATUS</th>
+                                <th className="py-2.5 px-3.5 font-semibold text-right">DUE</th>
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
@@ -964,7 +964,7 @@ export default function HeroAppWindow() {
                                 ref={taskRowRef}
                                 className="hover:bg-slate-50/80 transition-colors"
                               >
-                                <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                                <td className="py-2.5 px-3.5 font-medium text-[#0F172A]">
                                   <div className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
                                     <span className="font-semibold text-[#0F172A]">Move Sdarr Site</span>
@@ -973,19 +973,19 @@ export default function HeroAppWindow() {
                                     </span>
                                   </div>
                                 </td>
-                                <td className="py-2.5 px-3 text-[#475569]">
+                                <td className="py-2.5 px-3.5 text-[#475569]">
                                   <div className="flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                                    <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
                                     <span>Internal Tasks</span>
                                   </div>
                                 </td>
-                                <td className="py-2.5 px-3">
+                                <td className="py-2.5 px-3.5">
                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF0F6] text-[#334155] text-[11px] font-medium leading-none">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#64748B]" />
                                     To do
                                   </span>
                                 </td>
-                                <td className="py-2.5 px-3 text-right text-[#94A3B8] text-[11px] leading-tight">
+                                <td className="py-2.5 px-3.5 text-right text-[#94A3B8] text-[11px] leading-tight">
                                   No deadline
                                 </td>
                               </tr>
@@ -998,7 +998,7 @@ export default function HeroAppWindow() {
                         </div>
                       </>
                     ) : (
-                      <div className="py-8 flex flex-col items-center justify-center text-center gap-2 border border-[#E5E7EB] rounded-xl bg-white">
+                      <div className="py-10 flex flex-col items-center justify-center text-center gap-2.5 border border-[#E5E7EB] rounded-xl bg-white">
                         <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
                           <CheckCircle2 size={18} />
                         </div>
@@ -1018,7 +1018,7 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* 3. YOUR WORK ACROSS PROJECTS (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
@@ -1069,7 +1069,7 @@ export default function HeroAppWindow() {
                 <div className="lg:col-span-4 flex flex-col gap-4">
                   
                   {/* 4. WORK IN MOTION (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                         LOAD
@@ -1136,7 +1136,7 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* 5. RECENTLY FINISHED (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                         LOG
@@ -1163,7 +1163,7 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* 6. LATEST UPDATES (Screenshot 03) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
+                  <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                         COM
