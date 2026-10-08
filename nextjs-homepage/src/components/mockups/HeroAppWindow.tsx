@@ -62,6 +62,8 @@ export default function HeroAppWindow() {
     "dashboard" | "projects" | "tasks" | "tickets" | "messages"
   >("dashboard");
   const [copilotOpen, setCopilotOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [isDateFiltered, setIsDateFiltered] = useState(false);
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
   const [taskViewMode, setTaskViewMode] = useState<"list" | "board">("list");
@@ -83,11 +85,14 @@ export default function HeroAppWindow() {
   const navTasksRef = useRef<HTMLButtonElement>(null);
   const navTicketsRef = useRef<HTMLButtonElement>(null);
   const navDashboardRef = useRef<HTMLButtonElement>(null);
+  const searchBarRef = useRef<HTMLDivElement>(null);
   const copilotToggleRef = useRef<HTMLButtonElement>(null);
   const copilotChipRef = useRef<HTMLButtonElement>(null);
   const copilotSendRef = useRef<HTMLButtonElement>(null);
   const copilotCloseRef = useRef<HTMLButtonElement>(null);
   const taskRowRef = useRef<HTMLTableRowElement>(null);
+  const filterDateBtnRef = useRef<HTMLButtonElement>(null);
+  const clearFilterBtnRef = useRef<HTMLButtonElement>(null);
   const taskBoardToggleRef = useRef<HTMLButtonElement>(null);
   const taskCardRef = useRef<HTMLDivElement>(null);
   const projectCardRef = useRef<HTMLDivElement>(null);
@@ -137,6 +142,8 @@ export default function HeroAppWindow() {
     isCancelledRef.current = false;
     clearTimeouts();
     setCopilotOpen(false);
+    setCommandPaletteOpen(false);
+    setIsDateFiltered(false);
     setCopilotSubmitted(false);
     setCopilotQuery("");
     setTaskViewMode("list");
@@ -144,90 +151,107 @@ export default function HeroAppWindow() {
 
     setCursorPos({ x: 340, y: 160, visible: true });
     // Initial pause on Dashboard before first click
-    await sleep(5000);
+    await sleep(4000);
 
     while (!isCancelledRef.current) {
-      // Step 1: In Dashboard -> Move cursor to AI Copilot button in top bar
+      // Step 1: In Dashboard -> Move cursor to Search bar (Command Palette)
+      await moveTo(searchBarRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setCommandPaletteOpen(true);
+      await sleep(3500);
+
+      // Close Command Palette
+      setCommandPaletteOpen(false);
+      await sleep(800);
+
+      // Step 2: In Dashboard -> Move cursor to AI Copilot button in top bar
       await moveTo(copilotToggleRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotOpen(true);
-      // Wait at least 5s after opening copilot
-      await sleep(5000);
+      await sleep(4000);
 
-      // Step 2: Hover over suggested prompt chip inside the Copilot popup
+      // Step 3: Hover over suggested prompt chip inside the Copilot popup
       await moveTo(copilotChipRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotQuery("Find blockers, unfinished checklist items and the next tasks to prioritize.");
-      // Wait at least 5s after choosing prompt
-      await sleep(5000);
+      await sleep(3500);
 
-      // Step 3: Click Copilot send button
+      // Step 4: Click Copilot send button
       await moveTo(copilotSendRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotSubmitted(true);
-      // Wait at least 5s for user to read AI Copilot response
-      await sleep(5500);
+      await sleep(4500);
 
-      // Step 4: Close Copilot popup via 'X' close button
+      // Step 5: Close Copilot popup via 'X' close button
       await moveTo(copilotCloseRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCopilotOpen(false);
-      // Wait at least 5s after closing copilot to view Dashboard
-      await sleep(5000);
+      await sleep(3000);
 
-      // Step 5: In Dashboard -> Hover the urgent task row in priorities table
+      // Step 6: In Dashboard -> Hover the urgent task row in priorities table
       await moveTo(taskRowRef, 0.35, 0.5);
       if (isCancelledRef.current) break;
-      await sleep(5000);
+      await sleep(3500);
 
-      // Step 6: Move to sidebar "Projects" and click
+      // Step 7: Filter by date (TODAY 4)
+      await moveTo(filterDateBtnRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setIsDateFiltered(true);
+      await sleep(3500);
+
+      // Step 8: Clear date filter
+      await moveTo(clearFilterBtnRef, 0.5, 0.5);
+      if (isCancelledRef.current) break;
+      await click();
+      setIsDateFiltered(false);
+      await sleep(2500);
+
+      // Step 9: Move to sidebar "Projects" and click
       await moveTo(navProjectsRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("projects");
-      // Wait at least 5s on Projects view
-      await sleep(5000);
+      await sleep(4500);
 
-      // Step 7: Hover an active project card
+      // Step 10: Hover an active project card
       await moveTo(projectCardRef, 0.5, 0.4);
       if (isCancelledRef.current) break;
-      await sleep(5000);
+      await sleep(3500);
 
-      // Step 8: Move to sidebar "Tasks" and click
+      // Step 11: Move to sidebar "Tasks" and click
       await moveTo(navTasksRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("tasks");
       setTaskViewMode("list");
-      // Wait at least 5s on Tasks List view
-      await sleep(5000);
+      await sleep(4000);
 
-      // Step 9: In Tasks -> Click the "Board" view toggle
+      // Step 12: In Tasks -> Click the "Board" view toggle
       await moveTo(taskBoardToggleRef, 0.5, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setTaskViewMode("board");
-      // Wait at least 5s on Tasks Kanban Board view
-      await sleep(5000);
+      await sleep(4000);
 
-      // Step 10: In Board -> Hover active task card
+      // Step 13: In Board -> Hover active task card
       await moveTo(taskCardRef, 0.5, 0.4);
       if (isCancelledRef.current) break;
-      await sleep(5000);
+      await sleep(3500);
 
-      // Step 11: Switch back to Dashboard to loop
+      // Step 14: Switch back to Dashboard to loop
       await moveTo(navDashboardRef, 0.45, 0.5);
       if (isCancelledRef.current) break;
       await click();
       setCurrentView("dashboard");
       setCopilotSubmitted(false);
       setCopilotQuery("");
-      // Wait at least 5s on Dashboard before repeating cycle
-      await sleep(5000);
+      await sleep(4500);
     }
   };
 
@@ -345,15 +369,16 @@ export default function HeroAppWindow() {
         <aside className="w-[200px] shrink-0 border-r border-[#E2E8F0] bg-white p-3 hidden md:flex flex-col justify-between select-none">
           <div className="flex flex-col gap-4 overflow-y-auto no-scrollbar">
             
-            {/* Workspace Selector */}
+            {/* Workspace Selector (Screenshot 01) */}
             <div className="flex items-center justify-between pb-2 border-b border-[#F1F5F9]">
               <div className="flex items-center gap-2 min-w-0">
-                <div className="w-5 h-5 rounded bg-[#0F172A] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
-                  ⚡
+                <div className="w-5 h-5 rounded-md bg-[#0F172A] text-white flex items-center justify-center shrink-0">
+                  <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 12c3-4 6-4 9 0s6 4 9 0" />
+                  </svg>
                 </div>
                 <div className="flex items-center gap-1 min-w-0">
-                  <span className="text-xs font-bold text-[#0F172A] truncate">Creative Studio LLC</span>
-                  <ChevronDown size={12} className="text-[#94A3B8] shrink-0" />
+                  <span className="text-xs font-bold text-[#0F172A] truncate">Creation Wave LLC</span>
                 </div>
               </div>
               <ChevronLeft size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer shrink-0" />
@@ -505,14 +530,16 @@ export default function HeroAppWindow() {
 
           </div>
 
-          {/* Bottom user badge */}
+          {/* Bottom user badge (Screenshot 01) */}
           <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-[10px]">
-                AM
-              </div>
+              <img
+                src="/images/sakib-avatar.png"
+                alt="Sakib Tanoy"
+                className="w-6 h-6 rounded-full object-cover border border-slate-200"
+              />
               <div className="leading-tight">
-                <span className="font-semibold block text-[#0F172A]">Alex Miller</span>
+                <span className="font-semibold block text-[#0F172A]">Sakib Tanoy</span>
                 <span className="text-[9.5px] text-[#64748B]">Owner</span>
               </div>
             </div>
@@ -545,7 +572,11 @@ export default function HeroAppWindow() {
             </div>
 
             {/* Center Search Bar */}
-            <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[320px] shadow-2xs mx-2">
+            <div
+              ref={searchBarRef}
+              onClick={() => setCommandPaletteOpen(true)}
+              className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[320px] shadow-2xs mx-2 cursor-pointer hover:border-slate-300 transition-colors"
+            >
               <Search size={12} className="text-[#94A3B8]" />
               <span className="text-[11px] text-[#94A3B8] flex-1 truncate">Search or jump to...</span>
               <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#64748B] font-mono">
@@ -580,16 +611,18 @@ export default function HeroAppWindow() {
 
               <div className="relative p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
                 <Bell size={14} />
-                <span className="absolute top-0 right-0 w-3 h-3 bg-blue-600 text-white rounded-full text-[8px] flex items-center justify-center font-bold">
+                <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8.5px] flex items-center justify-center font-bold">
                   9
                 </span>
               </div>
 
               <div className="flex items-center gap-1.5 pl-1 border-l border-slate-200">
-                <div className="w-5 h-5 rounded-full bg-slate-800 text-white text-[9px] font-bold flex items-center justify-center">
-                  AM
-                </div>
-                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Alex Miller</span>
+                <img
+                  src="/images/sakib-avatar.png"
+                  alt="Sakib Tanoy"
+                  className="w-5 h-5 rounded-full object-cover border border-slate-200"
+                />
+                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Sakib Tanoy</span>
                 <ChevronDown size={11} className="text-[#94A3B8]" />
               </div>
             </div>
@@ -599,7 +632,7 @@ export default function HeroAppWindow() {
           {currentView === "dashboard" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
               
-              {/* DARK FLIGHT DECK HERO CONTAINER */}
+              {/* DARK FLIGHT DECK HERO CONTAINER (Screenshot 01) */}
               <div className="bg-[#0D1524] border border-[#1E293B] rounded-2xl p-4 sm:p-5 text-white shadow-md relative overflow-hidden">
                 {/* Header Line */}
                 <div className="flex items-center justify-between pb-3 text-xs border-b border-slate-800/80">
@@ -623,6 +656,20 @@ export default function HeroAppWindow() {
                       <CheckSquare size={11} />
                       <span>Open task board</span>
                     </button>
+                    <button
+                      onClick={() => setCurrentView("messages")}
+                      className="hidden md:flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors"
+                    >
+                      <MessageSquare size={11} />
+                      <span>Team messages</span>
+                    </button>
+                    <button
+                      onClick={() => setCurrentView("projects")}
+                      className="hidden lg:flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors"
+                    >
+                      <Layers size={11} />
+                      <span>Management overview</span>
+                    </button>
                   </div>
                 </div>
 
@@ -630,15 +677,15 @@ export default function HeroAppWindow() {
                 <div className="pt-4 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                      Good evening, Alex
+                      Good evening, Sakib
                     </h3>
                     <p className="mt-0.5 text-xs text-slate-400 max-w-xl">
                       A clear view of what needs you next. Pick up your work, plan the week, and keep your team moving.
                     </p>
                   </div>
                   <div className="hidden lg:flex flex-col items-end font-mono text-slate-400 text-xs">
-                    <span className="text-[9.5px] uppercase tracking-wider text-slate-500">LOCAL · GMT-4</span>
-                    <span className="text-sm font-bold text-slate-200">10:23:41</span>
+                    <span className="text-[9.5px] uppercase tracking-wider text-slate-500">LOCAL · GMT+6</span>
+                    <span className="text-sm font-bold text-slate-200">22:23:41</span>
                   </div>
                 </div>
 
@@ -653,7 +700,7 @@ export default function HeroAppWindow() {
                         YOUR NEXT TASK
                       </span>
                       <h4 className="text-sm font-bold text-white tracking-tight truncate">
-                        Deploy Client Portal Custom Domain SSL
+                        Move Sdarr Site
                       </h4>
                     </div>
                   </div>
@@ -661,7 +708,7 @@ export default function HeroAppWindow() {
                   <div className="flex items-center gap-2 shrink-0">
                     <span className="text-[11px] text-slate-300 flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/60">
                       <FolderKanban size={11} className="text-slate-400" />
-                      <span>Client Onboarding</span>
+                      <span>Internal Tasks</span>
                     </span>
                     <span className="text-[11px] text-slate-300 flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/60">
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
@@ -671,6 +718,13 @@ export default function HeroAppWindow() {
                       <Flag size={10} />
                       <span>URGENT</span>
                     </span>
+                    <button
+                      onClick={() => setCurrentView("tasks")}
+                      className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-xs transition-colors"
+                    >
+                      <span>Open task</span>
+                      <ArrowRight size={11} />
+                    </button>
                   </div>
                 </div>
 
@@ -717,24 +771,31 @@ export default function HeroAppWindow() {
                       <span className="text-2xl font-bold text-white">1</span>
                       <span className="text-[10px] text-slate-400">In the past 7 days</span>
                     </div>
-                    <div className="flex items-center gap-1 pt-1">
-                      <div className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-400 w-3/4 rounded-full" />
-                      </div>
-                      <span className="text-[9px] text-slate-400 font-mono">4 in last 14d</span>
+                    {/* SVG Sparkline (Screenshot 01) */}
+                    <div className="pt-1.5 flex flex-col gap-1">
+                      <svg className="w-full h-3.5 overflow-visible" viewBox="0 0 100 16" preserveAspectRatio="none">
+                        <path
+                          d="M0,4 Q25,6 40,14 L100,14"
+                          fill="none"
+                          stroke="#60A5FA"
+                          strokeWidth="1.75"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <span className="text-[9px] text-slate-400 font-mono">4 in the last 14 days</span>
                     </div>
                   </div>
                 </div>
 
               </div>
 
-              {/* 2-COLUMN MAIN DASHBOARD SECTION (Left: Launch Window + Priorities; Right: Work in Motion + Recent + Updates) */}
+              {/* MAIN DASHBOARD SECTIONS (Screenshot 01 & 03: All sections one under another) */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                 
-                {/* LEFT MAIN COLUMN (8 cols) */}
+                {/* LEFT MAIN COLUMN (lg:col-span-8) */}
                 <div className="lg:col-span-8 flex flex-col gap-4">
                   
-                  {/* 7-DAY LAUNCH WINDOW */}
+                  {/* 1. 7-DAY LAUNCH WINDOW (Screenshot 01 & 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs">
                     <div className="flex items-center justify-between pb-3">
                       <div className="flex items-center gap-2">
@@ -743,7 +804,7 @@ export default function HeroAppWindow() {
                         </span>
                         <div>
                           <h4 className="text-xs font-bold text-[#0F172A]">7-day launch window</h4>
-                          <span className="text-[10px] text-[#64748B]">Select a day to focus · America/New_York</span>
+                          <span className="text-[10px] text-[#64748B]">Select a day to focus · Asia/Dhaka</span>
                         </div>
                       </div>
                     </div>
@@ -762,7 +823,11 @@ export default function HeroAppWindow() {
                         return (
                           <button
                             key={day.date}
-                            onClick={() => setSelectedDay(day.date)}
+                            ref={day.date === 4 ? filterDateBtnRef : undefined}
+                            onClick={() => {
+                              setSelectedDay(day.date);
+                              setIsDateFiltered((prev) => !prev);
+                            }}
                             className={`flex flex-col items-center justify-center p-2 rounded-xl border transition-all text-center ${
                               isSelected
                                 ? "bg-white border-blue-500 ring-2 ring-blue-500/10 shadow-xs"
@@ -787,7 +852,7 @@ export default function HeroAppWindow() {
                     </div>
                   </div>
 
-                  {/* YOUR PRIORITIES TABLE SECTION */}
+                  {/* 2. YOUR PRIORITIES TABLE SECTION (Screenshot 01 & 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
@@ -811,11 +876,14 @@ export default function HeroAppWindow() {
 
                     {/* Filter Pills + Search Input */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-slate-100">
-                      <div className="flex items-center gap-1 text-[11px] font-medium">
+                      <div className="flex items-center gap-1 text-[11px] font-medium flex-wrap">
                         <button
-                          onClick={() => setActiveWorkTab("all")}
+                          onClick={() => {
+                            setActiveWorkTab("all");
+                            setIsDateFiltered(false);
+                          }}
                           className={`px-2.5 py-1 rounded-md transition-colors ${
-                            activeWorkTab === "all"
+                            activeWorkTab === "all" && !isDateFiltered
                               ? "bg-slate-100 text-[#0F172A] font-semibold"
                               : "text-[#64748B] hover:bg-slate-50"
                           }`}
@@ -860,58 +928,96 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Table */}
-                    <div className="border border-[#E5E7EB] rounded-xl overflow-hidden mt-1">
-                      <table className="w-full text-left text-xs">
-                        <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
-                          <tr>
-                            <th className="py-2.5 px-3 font-semibold">TASK</th>
-                            <th className="py-2.5 px-3 font-semibold">PROJECT</th>
-                            <th className="py-2.5 px-3 font-semibold">STATUS</th>
-                            <th className="py-2.5 px-3 font-semibold text-right">DUE</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
-                          <tr
-                            ref={taskRowRef}
-                            className="hover:bg-slate-50/80 transition-colors"
-                          >
-                            <td className="py-2.5 px-3 font-medium text-[#0F172A]">
-                              <div className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
-                                <span className="font-semibold text-[#0F172A]">Deploy Client Portal Custom Domain SSL</span>
-                                <span className="text-[9.5px] font-mono text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 font-bold flex items-center gap-1 shrink-0">
-                                  <Flag size={9} /> URGENT
-                                </span>
-                              </div>
-                            </td>
-                            <td className="py-2.5 px-3 text-[#475569]">
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-blue-500" />
-                                <span>Client Onboarding</span>
-                              </div>
-                            </td>
-                            <td className="py-2.5 px-3">
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF0F6] text-[#334155] text-[11px] font-medium leading-none">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#64748B]" />
-                                To do
-                              </span>
-                            </td>
-                            <td className="py-2.5 px-3 text-right text-[#94A3B8] text-[11px] leading-tight">
-                              <div>No</div>
-                              <div>deadline</div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                    {/* Filter Active Pill (Screenshot 03) */}
+                    {isDateFiltered && (
+                      <div className="flex items-center justify-between p-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs">
+                        <div className="flex items-center gap-1.5 text-[#0F172A] font-medium">
+                          <Calendar size={13} className="text-blue-600" />
+                          <span>Due Oct 4</span>
+                        </div>
+                        <button
+                          ref={clearFilterBtnRef}
+                          onClick={() => setIsDateFiltered(false)}
+                          className="text-[#64748B] hover:text-[#0F172A] flex items-center gap-1 text-[11px] font-medium transition-colors"
+                        >
+                          <X size={12} />
+                          <span>Clear filters</span>
+                        </button>
+                      </div>
+                    )}
 
-                    <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-1">
-                      <span>1–1 of 1 tasks</span>
-                    </div>
+                    {/* Priorities Body: Table View (Screenshot 01) OR Empty State (Screenshot 03) */}
+                    {!isDateFiltered ? (
+                      <>
+                        <div className="border border-[#E5E7EB] rounded-xl overflow-hidden mt-1">
+                          <table className="w-full text-left text-xs">
+                            <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-[10px] font-mono uppercase text-[#64748B] tracking-wider">
+                              <tr>
+                                <th className="py-2.5 px-3 font-semibold">TASK</th>
+                                <th className="py-2.5 px-3 font-semibold">PROJECT</th>
+                                <th className="py-2.5 px-3 font-semibold">STATUS</th>
+                                <th className="py-2.5 px-3 font-semibold text-right">DUE</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-[#E5E7EB] bg-white text-[11.5px]">
+                              <tr
+                                ref={taskRowRef}
+                                className="hover:bg-slate-50/80 transition-colors"
+                              >
+                                <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                                  <div className="flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                                    <span className="font-semibold text-[#0F172A]">Move Sdarr Site</span>
+                                    <span className="text-[9.5px] font-mono text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 font-bold flex items-center gap-1 shrink-0">
+                                      <Flag size={9} /> URGENT
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="py-2.5 px-3 text-[#475569]">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                                    <span>Internal Tasks</span>
+                                  </div>
+                                </td>
+                                <td className="py-2.5 px-3">
+                                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF0F6] text-[#334155] text-[11px] font-medium leading-none">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#64748B]" />
+                                    To do
+                                  </span>
+                                </td>
+                                <td className="py-2.5 px-3 text-right text-[#94A3B8] text-[11px] leading-tight">
+                                  No deadline
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[11px] text-[#94A3B8] pt-1">
+                          <span>1–1 of 1 tasks</span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="py-8 flex flex-col items-center justify-center text-center gap-2 border border-[#E5E7EB] rounded-xl bg-white">
+                        <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+                          <CheckCircle2 size={18} />
+                        </div>
+                        <h5 className="text-xs font-bold text-[#0F172A]">Nothing in this view</h5>
+                        <p className="text-[11px] text-[#64748B] max-w-xs">
+                          Switch to all assigned work to see your other priorities.
+                        </p>
+                        <button
+                          onClick={() => setIsDateFiltered(false)}
+                          className="mt-1 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:bg-slate-50 text-xs font-semibold text-[#0F172A] rounded-lg shadow-2xs transition-colors"
+                        >
+                          Show all my work
+                        </button>
+                        <span className="text-[10px] text-[#94A3B8] font-mono mt-2">0–0 of 0 tasks</span>
+                      </div>
+                    )}
                   </div>
 
-                  {/* YOUR WORK ACROSS PROJECTS */}
+                  {/* 3. YOUR WORK ACROSS PROJECTS (Screenshot 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
@@ -933,31 +1039,36 @@ export default function HeroAppWindow() {
                       </button>
                     </div>
 
-                    <div className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
-                        <div>
-                          <span className="text-xs font-bold text-[#0F172A] block">Internal Tasks</span>
-                          <span className="text-[10px] text-[#64748B]">1 active task</span>
+                    <div
+                      onClick={() => setCurrentView("projects")}
+                      className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl flex flex-col gap-2 hover:bg-slate-50/70 transition-colors cursor-pointer shadow-2xs"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
+                          <span className="text-xs font-bold text-[#0F172A]">Internal Tasks</span>
+                          <ArrowRight size={12} className="text-[#94A3B8]" />
                         </div>
                       </div>
+                      <span className="text-[10.5px] text-[#64748B]">1 active task</span>
 
-                      <div className="flex items-center gap-3">
-                        <div className="w-24 sm:w-32 bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                          <div className="bg-blue-600 h-full w-[91%] rounded-full" />
-                        </div>
-                        <span className="text-[11px] font-mono font-bold text-[#0F172A]">91%</span>
-                        <span className="text-[10px] text-[#64748B] hidden sm:inline">10 of 11 completed</span>
+                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-1">
+                        <div className="bg-blue-600 h-full w-[91%] rounded-full" />
+                      </div>
+
+                      <div className="flex items-center justify-between text-[11px] pt-1">
+                        <span className="text-[#64748B]">10 of 11 completed</span>
+                        <span className="font-mono font-bold text-[#0F172A]">91%</span>
                       </div>
                     </div>
                   </div>
 
                 </div>
 
-                {/* RIGHT COLUMN (4 cols) - Work in Motion, Recently Finished, Latest Updates */}
+                {/* RIGHT COLUMN (lg:col-span-4) - Work in Motion, Recently Finished, Latest Updates (Screenshot 03) */}
                 <div className="lg:col-span-4 flex flex-col gap-4">
                   
-                  {/* WORK IN MOTION (Radial Gauge Donut Chart) */}
+                  {/* 4. WORK IN MOTION (Screenshot 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
@@ -970,25 +1081,46 @@ export default function HeroAppWindow() {
                     </div>
 
                     <div className="flex items-center justify-around py-3 border-t border-slate-100">
-                      {/* Donut Chart representation */}
-                      <div className="relative w-20 h-20 flex items-center justify-center">
-                        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                          <circle cx="18" cy="18" r="14" fill="none" stroke="#E2E8F0" strokeWidth="3" />
+                      {/* Donut Chart with authentic radial ticks matching Screenshot 03 */}
+                      <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
+                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                          {/* Radial tick marks around perimeter */}
+                          {[...Array(24)].map((_, i) => {
+                            const angle = (i * 360) / 24;
+                            return (
+                              <line
+                                key={i}
+                                x1="50"
+                                y1="5"
+                                x2="50"
+                                y2="9"
+                                stroke="#CBD5E1"
+                                strokeWidth="1.25"
+                                transform={`rotate(${angle} 50 50)`}
+                              />
+                            );
+                          })}
+                          {/* Circular background track */}
+                          <circle cx="50" cy="50" r="32" fill="none" stroke="#E2E8F0" strokeWidth="6" />
+                          {/* Active arc */}
                           <circle
-                            cx="18"
-                            cy="18"
-                            r="14"
+                            cx="50"
+                            cy="50"
+                            r="32"
                             fill="none"
-                            stroke="#3B82F6"
-                            strokeWidth="3"
-                            strokeDasharray="88 88"
-                            strokeDashoffset="0"
+                            stroke="#2563EB"
+                            strokeWidth="6"
+                            strokeDasharray="201"
+                            strokeDashoffset="60"
                             strokeLinecap="round"
+                            transform="rotate(-90 50 50)"
                           />
                         </svg>
-                        <div className="absolute flex flex-col items-center justify-center text-center">
-                          <span className="text-base font-extrabold text-[#0F172A] leading-none">1</span>
-                          <span className="text-[8px] font-mono text-[#64748B] uppercase tracking-wider">ACTIVE</span>
+                        <div className="flex flex-col items-center justify-center text-center">
+                          <span className="text-xl font-extrabold text-[#0F172A] leading-none">1</span>
+                          <span className="text-[8px] font-mono font-semibold text-[#64748B] tracking-wider mt-0.5">
+                            ACTIVE
+                          </span>
                         </div>
                       </div>
 
@@ -1003,7 +1135,7 @@ export default function HeroAppWindow() {
                     </div>
                   </div>
 
-                  {/* RECENTLY FINISHED */}
+                  {/* 5. RECENTLY FINISHED (Screenshot 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
@@ -1017,20 +1149,20 @@ export default function HeroAppWindow() {
 
                     <div className="flex items-center gap-2.5 pt-2 border-t border-slate-100 text-xs">
                       <div className="text-[10px] font-mono text-[#64748B] leading-tight">
-                        <span className="block font-bold">16:37</span>
+                        <span className="block font-bold text-[#0F172A]">16:37</span>
                         <span>Sep 28</span>
                       </div>
                       <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shrink-0">
-                        <Check size={11} />
+                        <Check size={11} strokeWidth={2.5} />
                       </div>
                       <div className="min-w-0">
-                        <span className="font-semibold text-[#0F172A] block truncate">Client Portal Beta Review</span>
-                        <span className="text-[10px] text-[#64748B]">Apex Studio Website</span>
+                        <span className="font-semibold text-[#0F172A] block truncate">new</span>
+                        <span className="text-[10px] text-[#64748B]">Living With Lolo Website</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* LATEST UPDATES */}
+                  {/* 6. LATEST UPDATES (Screenshot 03) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
@@ -2338,10 +2470,10 @@ export default function HeroAppWindow() {
                     </div>
                   </div>
 
-                  {/* Greeting & Scope */}
+                  {/* Greeting & Scope (Screenshot 01) */}
                   <div>
                     <h3 className="text-sm font-bold text-[#0F172A]">
-                      Good evening, Alex
+                      Good evening, Sakib
                     </h3>
                     <p className="text-[11px] text-[#64748B] mt-0.5">
                       Ask about Dashboard or anything else you can access.
@@ -2465,7 +2597,7 @@ export default function HeroAppWindow() {
                       </div>
                       <span className="text-[10px] text-slate-700 leading-relaxed">
                         • 11 projects on schedule with 0 delivery risks flagged<br />
-                        • Next immediate priority: Deploy Client Portal SSL (urgent)<br />
+                        • Next immediate priority: Move Sdarr Site (urgent)<br />
                         • 0 overdue items requiring escalation
                       </span>
                     </div>
@@ -2500,6 +2632,98 @@ export default function HeroAppWindow() {
                   </span>
                 </div>
               </aside>
+            </>
+          )}
+
+          {/* 4. COMMAND PALETTE MODAL (Screenshot 02) */}
+          {commandPaletteOpen && (
+            <>
+              <div
+                onClick={() => setCommandPaletteOpen(false)}
+                className="absolute inset-0 bg-slate-900/30 backdrop-blur-[2px] z-40 transition-opacity animate-fadeIn"
+              />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[540px] bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] z-50 overflow-hidden flex flex-col animate-in zoom-in-95 duration-150 select-none">
+                {/* Search input header */}
+                <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#E2E8F0]">
+                  <Search size={16} className="text-[#94A3B8]" />
+                  <input
+                    type="text"
+                    autoFocus
+                    placeholder="Search or type a command..."
+                    className="flex-1 bg-transparent border-none outline-none text-sm text-[#0F172A] placeholder-[#94A3B8]"
+                  />
+                  <kbd className="text-[10px] bg-[#F1F5F9] text-[#64748B] px-1.5 py-0.5 rounded font-mono border border-slate-200">
+                    esc
+                  </kbd>
+                </div>
+
+                {/* Navigation Group */}
+                <div className="p-2 flex flex-col gap-0.5 max-h-[360px] overflow-y-auto no-scrollbar">
+                  <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-3 py-1.5">
+                    NAVIGATION
+                  </span>
+
+                  {[
+                    { label: "Dashboard", view: "dashboard" as const, icon: LayoutDashboard, active: true },
+                    { label: "Projects", view: "projects" as const, icon: FolderKanban },
+                    { label: "Tasks", view: "tasks" as const, icon: CheckSquare },
+                    { label: "Settings", icon: Settings },
+                    { label: "Organizations", icon: Building2 },
+                    { label: "Services", icon: Boxes },
+                    { label: "Digital Assets", icon: Boxes },
+                    { label: "Proposals", icon: FileText },
+                    { label: "Invoices", icon: Receipt },
+                    { label: "Team", icon: Users },
+                    { label: "Messages", view: "messages" as const, icon: MessageSquare },
+                    { label: "Reports", icon: BarChart3 },
+                    { label: "Intake Forms", icon: FileText },
+                    { label: "Bug Reports", icon: Bug },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.label}
+                        onClick={() => {
+                          if (item.view) {
+                            setCurrentView(item.view);
+                          }
+                          setCommandPaletteOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors text-left ${
+                          item.active
+                            ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
+                            : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Icon size={14} className={item.active ? "text-[#0F172A]" : "text-[#64748B]"} />
+                          <span>{item.label}</span>
+                        </div>
+                        {item.active && (
+                          <span className="text-[11px] text-[#94A3B8] font-mono">↵</span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Modal Footer */}
+                <div className="px-4 py-2.5 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center gap-4 text-[10.5px] text-[#64748B] font-mono">
+                  <span className="flex items-center gap-1">
+                    <span className="bg-white border border-slate-200 px-1 rounded shadow-2xs">↑</span>
+                    <span className="bg-white border border-slate-200 px-1 rounded shadow-2xs">↓</span>
+                    navigate
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="bg-white border border-slate-200 px-1.5 rounded shadow-2xs">↵</span>
+                    select
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="bg-white border border-slate-200 px-1.5 rounded shadow-2xs">esc</span>
+                    close
+                  </span>
+                </div>
+              </div>
             </>
           )}
 
