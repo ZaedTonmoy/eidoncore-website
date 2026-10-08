@@ -954,58 +954,58 @@ export default function HeroAppWindow() {
               </div>
 
               {/* ========================================================= */}
-              {/* TIME WINDOW FILTER BAR (SCREENSHOT 1) */}
+              {/* TIME WINDOW FILTER BAR (SCREENSHOT media_1791487671015.png) */}
               {/* ========================================================= */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-white p-2.5 rounded-xl border border-[#E2E8F0] shadow-2xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
                 {/* Left Tabs */}
-                <div className="flex items-center gap-1 bg-[#F1F5F9] p-0.5 rounded-lg border border-[#E2E8F0]">
-                  <button className="px-3 py-1 bg-white font-bold text-[#0F172A] rounded-md shadow-2xs">
+                <div className="flex items-center gap-1 bg-[#F1F5F9] p-1 rounded-xl border border-slate-200/70">
+                  <button className="px-3.5 py-1 bg-white font-bold text-[#0F172A] rounded-lg shadow-2xs border border-slate-200/40 text-xs">
                     Overview
                   </button>
-                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-md transition-colors">
+                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
                     Delivery
                   </button>
-                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-md transition-colors">
+                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
                     Activity
                   </button>
                 </div>
 
                 {/* Right Time Window Selector */}
                 <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
-                  <button className="px-2.5 py-1 bg-[#0F172A] text-white font-semibold rounded-md shadow-2xs whitespace-nowrap">
+                  <button className="px-3 py-1 bg-white border border-[#E2E8F0] font-bold text-[#0F172A] rounded-lg shadow-2xs whitespace-nowrap text-xs">
                     This Month
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Last Month
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Last 30 Days
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     This Quarter
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     This Year
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Lifetime
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-md transition-colors whitespace-nowrap">
+                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Custom
                   </button>
-                  <button className="p-1.5 text-[#64748B] hover:text-[#0F172A] rounded-md transition-colors ml-1">
+                  <button className="p-1.5 bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] rounded-lg shadow-2xs transition-colors ml-0.5">
                     <RotateCw size={12} />
                   </button>
                 </div>
               </div>
 
               {/* ========================================================= */}
-              {/* 2. SECTION: FIN FINANCE (SCREENSHOT 1 & 2) */}
+              {/* 2. SECTION: FIN FINANCE (SCREENSHOT media_1791487671015.png) */}
               {/* ========================================================= */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 {/* Section Header */}
                 <div className="flex items-center gap-2">
-                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
+                  <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase tracking-wider">
                     FIN
                   </span>
                   <h3 className="text-sm font-bold text-[#0F172A] tracking-tight">
@@ -1014,15 +1014,17 @@ export default function HeroAppWindow() {
                   <span className="text-xs text-[#64748B]">
                     This Month · Oct 1 – 31, 2026
                   </span>
+                  <div className="h-px bg-slate-200/80 flex-1 ml-1" />
                 </div>
 
-                {/* Top Finance Cards: Total Revenue + MRR */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                {/* 2 Side-by-Side Main Cards Layout matching screenshot media_1791487671015.png */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
                   
-                  {/* Card 1: PFD 1 Total Revenue (Screenshot 1) */}
+                  {/* LEFT CARD: PFD 1 Total Revenue + Chart + REVENUE BY SOURCE Table (lg:col-span-8) */}
                   <div className="lg:col-span-8 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between pb-3">
+                      {/* Card Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                         <div className="flex items-center gap-2">
                           <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                             PFD 1
@@ -1032,90 +1034,107 @@ export default function HeroAppWindow() {
                             <span className="text-[10px] text-[#64748B]">All recognized revenue channels</span>
                           </div>
                         </div>
-                        <button className="text-xs font-semibold text-[#0F172A] hover:text-blue-600 flex items-center gap-1 border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-2xs transition-colors">
+                        <button className="text-xs font-semibold text-[#0F172A] hover:text-blue-600 flex items-center gap-1.5 border border-[#E2E8F0] px-3 py-1 rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
                           <span>View breakdown</span>
                           <ArrowRight size={11} />
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2">
-                        {/* Left numbers */}
-                        <div className="md:col-span-5 flex flex-col gap-3">
+                      {/* Top Half: Left Numbers & Right Area Chart */}
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-3">
+                        
+                        {/* Left Numbers Column */}
+                        <div className="md:col-span-5 flex flex-col justify-between">
                           <div>
                             <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block font-semibold">
                               THIS MONTH · OCT 1 – 31, 2026
                             </span>
-                            <div className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight mt-0.5">
+                            <div className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight mt-0.5 font-sans">
                               $40,900
                             </div>
                             <div className="flex items-center gap-1.5 mt-1 text-xs">
-                              <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded font-bold text-[10px] font-mono">
+                              <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded font-bold text-[10px] font-mono">
                                 ↑ 529%
                               </span>
-                              <span className="text-[#64748B] text-[11px]">vs. previous period <b className="text-[#0F172A] font-semibold">$6,500</b></span>
+                              <span className="text-[#64748B] text-[11px]">vs. previous period <b className="text-[#0F172A] font-semibold font-mono">$6,500</b></span>
+                            </div>
+
+                            {/* Pacing vs prior period */}
+                            <div className="pt-2.5 mt-2.5 border-t border-slate-100">
+                              <div className="flex items-center justify-between text-[10px]">
+                                <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">PACING VS PRIOR PERIOD</span>
+                                <span className="font-mono font-black text-[#0F172A] text-xs">6.3×</span>
+                              </div>
+                              <div className="relative w-full h-2 bg-blue-50 border border-blue-200/60 rounded-full mt-1.5 overflow-hidden flex items-center px-0.5">
+                                <div className="bg-[#2563EB] h-1.5 w-[76%] rounded-full" />
+                              </div>
+                              <div className="flex items-center justify-between text-[9px] text-[#64748B] font-mono mt-1">
+                                <span>Prior $6,500</span>
+                                <span>Now $40,900</span>
+                              </div>
+                            </div>
+
+                            {/* Projection */}
+                            <div className="pt-2.5 mt-2.5 border-t border-slate-100">
+                              <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 font-mono">
+                                <span>::</span>
+                                <span>PROJECTION</span>
+                              </div>
+                              <div className="text-xs font-bold text-[#0F172A] mt-0.5">
+                                At current pace ≈ $158,488 by Oct 31
+                              </div>
+                              <span className="text-[10px] text-[#64748B] block mt-0.5 leading-snug">
+                                $40,900 over 8 of 31 days (UTC), linear pace
+                              </span>
+
+                              <div className="flex items-center justify-between text-[9px] text-[#64748B] font-mono mt-2">
+                                <span>WINDOW ELAPSED</span>
+                                <span className="font-bold text-[#0F172A]">Day 8 of 31</span>
+                              </div>
+                              {/* Segment tracker (31 segments for October: 8 blue, 23 light grey) */}
+                              <div className="flex gap-[1.5px] mt-1">
+                                {[...Array(31)].map((_, i) => (
+                                  <div
+                                    key={i}
+                                    className={`h-[4px] flex-1 rounded-[1px] ${
+                                      i < 8 ? "bg-[#2563EB]" : "bg-slate-200"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
                             </div>
                           </div>
 
-                          {/* Pacing vs prior period */}
-                          <div className="pt-2 border-t border-slate-100">
-                            <div className="flex items-center justify-between text-[10.5px]">
-                              <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">PACING VS PRIOR PERIOD</span>
-                              <span className="font-mono font-black text-[#0F172A] text-xs">6.3×</span>
+                          {/* Revenue Transactions & Average Transaction */}
+                          <div className="grid grid-cols-2 gap-3 pt-3 mt-3 border-t border-slate-100">
+                            <div>
+                              <span className="text-[8.5px] font-mono uppercase text-[#64748B] font-semibold tracking-wider block">
+                                REVENUE TRANSACTIONS
+                              </span>
+                              <span className="text-xl font-black text-[#0F172A] mt-0.5 block font-sans">5</span>
                             </div>
-                            {/* Dotted / filled progress bar */}
-                            <div className="relative w-full h-2 bg-blue-100/60 rounded-full mt-1.5 overflow-hidden">
-                              <div className="bg-blue-600 h-full w-[78%] rounded-full" />
-                            </div>
-                            <div className="flex items-center justify-between text-[9.5px] text-[#94A3B8] font-mono mt-1">
-                              <span>Prior $6,500</span>
-                              <span>Now $40,900</span>
-                            </div>
-                          </div>
-
-                          {/* Projection */}
-                          <div className="pt-2 border-t border-slate-100">
-                            <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-[#0F172A]">
-                              <span className="text-blue-600 font-mono">::</span>
-                              <span>PROJECTION</span>
-                            </div>
-                            <div className="text-xs font-bold text-[#0F172A] mt-0.5">
-                              At current pace ≈ $158,488 by Oct 31
-                            </div>
-                            <span className="text-[10px] text-[#64748B]">
-                              $40,900 over 8 of 31 days (UTC), linear pace
-                            </span>
-
-                            <div className="flex items-center justify-between text-[9.5px] text-[#94A3B8] font-mono mt-2">
-                              <span>WINDOW ELAPSED</span>
-                              <span className="font-bold text-[#0F172A]">Day 8 of 31</span>
-                            </div>
-                            {/* Segment tracker */}
-                            <div className="flex gap-0.5 mt-1">
-                              {[...Array(24)].map((_, i) => (
-                                <div
-                                  key={i}
-                                  className={`h-1.5 flex-1 rounded-2xs ${
-                                    i < 7 ? "bg-blue-600" : "bg-slate-200"
-                                  }`}
-                                />
-                              ))}
+                            <div>
+                              <span className="text-[8.5px] font-mono uppercase text-[#64748B] font-semibold tracking-wider block">
+                                AVERAGE TRANSACTION
+                              </span>
+                              <span className="text-xl font-black text-[#0F172A] mt-0.5 block font-mono font-bold">$8,180</span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Right Area Chart with Interactive Projection Line */}
+                        {/* Right Area Chart with Trajectory and Labels */}
                         <div className="md:col-span-7 flex flex-col justify-between pl-0 md:pl-2">
                           <div className="flex items-center justify-between text-[11px] pb-1">
-                            <div className="flex items-center gap-3">
-                              <span className="flex items-center gap-1 text-[#0F172A] font-semibold">
-                                <span className="w-2.5 h-0.5 bg-blue-600" /> Revenue trend <span className="text-[10px] text-[#64748B] font-normal">Last 6 months</span>
+                            <div className="flex items-center gap-2.5">
+                              <span className="flex items-center gap-1.5 text-[#0F172A] font-semibold text-xs">
+                                <span className="w-2.5 h-0.5 bg-blue-600 rounded-full" /> Revenue trend <span className="text-[10px] text-[#64748B] font-normal">Last 6 months</span>
                               </span>
-                              <span className="flex items-center gap-1 text-blue-500 font-mono text-[10.5px]">
-                                <span className="w-2.5 h-0.5 border-t border-dashed border-blue-500" /> Projection
+                              <span className="flex items-center gap-1.5 text-blue-600 font-mono text-[10.5px]">
+                                <span className="w-2.5 h-0.5 border-t border-dashed border-blue-600" /> Projection
                               </span>
                             </div>
-                            <div className="flex items-center border border-[#E2E8F0] rounded-md overflow-hidden bg-slate-50">
-                              <button className="px-1.5 py-0.5 bg-white shadow-2xs text-[#0F172A]">
+                            <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50">
+                              <button className="px-1.5 py-0.5 bg-white text-[#0F172A] rounded shadow-2xs">
                                 <TrendingUp size={11} />
                               </button>
                               <button className="px-1.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
@@ -1124,84 +1143,210 @@ export default function HeroAppWindow() {
                             </div>
                           </div>
 
-                          {/* Chart SVG */}
-                          <div className="relative h-44 w-full mt-2">
-                            {/* Horizontal guide lines */}
+                          {/* Interactive Area Chart SVG */}
+                          <div className="relative h-56 w-full mt-2">
+                            {/* Horizontal guide lines with labels */}
                             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[9.5px] font-mono text-[#94A3B8]">
                               <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
                                 <span>$200K</span>
                               </div>
                               <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
                                 <span>$150K</span>
-                                <span className="text-blue-600 font-bold bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
-                                  ≈ $158,488
-                                </span>
                               </div>
                               <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
                                 <span>$100K</span>
                               </div>
                               <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
                                 <span>$50K</span>
-                                <span className="text-[#0F172A] font-bold">$40,900</span>
+                              </div>
+                              <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
+                                <span>$0</span>
                               </div>
                             </div>
 
-                            <svg className="w-full h-full overflow-visible relative z-10" viewBox="0 0 300 150">
-                              {/* Shaded Area under actual curve */}
-                              <polygon
-                                points="20,135 60,132 110,133 160,130 210,132 260,118 260,145 20,145"
-                                fill="url(#revGradient)"
-                                opacity="0.3"
-                              />
+                            <svg className="w-full h-full overflow-visible relative z-10" viewBox="0 0 310 180">
                               <defs>
-                                <linearGradient id="revGradient" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="0%" stopColor="#2563EB" stopOpacity="0.5" />
-                                  <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+                                <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.30" />
+                                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.02" />
                                 </linearGradient>
                               </defs>
 
-                              {/* Historical curve */}
-                              <polyline
+                              {/* Smooth Filled Gradient Area */}
+                              <path
+                                d="M 24 154 C 45 154, 55 125, 74 125 C 95 125, 105 125, 124 125 C 145 125, 155 120, 174 120 C 195 120, 205 120, 224 120 C 245 120, 260 114, 280 114 L 280 154 L 24 154 Z"
+                                fill="url(#areaGradient)"
+                              />
+
+                              {/* Smooth Historical Curve Line */}
+                              <path
+                                d="M 24 154 C 45 154, 55 125, 74 125 C 95 125, 105 125, 124 125 C 145 125, 155 120, 174 120 C 195 120, 205 120, 224 120 C 245 120, 260 114, 280 114"
                                 fill="none"
                                 stroke="#2563EB"
                                 strokeWidth="2.5"
-                                points="20,135 60,132 110,133 160,130 210,132 260,118"
                               />
-                              {/* Historical points */}
-                              <circle cx="20" cy="135" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                              <circle cx="60" cy="132" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                              <circle cx="110" cy="133" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                              <circle cx="160" cy="130" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                              <circle cx="210" cy="132" r="2.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                              <circle cx="260" cy="118" r="3.5" fill="#2563EB" stroke="#FFFFFF" strokeWidth="2" />
 
-                              {/* Dashed projection line climbing to $158k */}
+                              {/* Historical Points */}
+                              <circle cx="24" cy="154" r="3.2" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="74" cy="125" r="3.2" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="124" cy="125" r="3.2" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="174" cy="120" r="3.2" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="224" cy="120" r="3.2" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+                              <circle cx="280" cy="114" r="4.5" fill="#2563EB" stroke="#FFFFFF" strokeWidth="2" />
+
+                              {/* Label above Oct ($40,900) */}
+                              <text x="280" y="104" textAnchor="end" fontSize="10.5" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">
+                                $40,900
+                              </text>
+
+                              {/* Dashed projection line straight up to $158,488 */}
                               <line
-                                x1="260"
-                                y1="118"
-                                x2="260"
-                                y2="40"
+                                x1="280"
+                                y1="114"
+                                x2="280"
+                                y2="35"
                                 stroke="#2563EB"
-                                strokeWidth="1.75"
+                                strokeWidth="1.5"
                                 strokeDasharray="3 3"
                               />
-                              <circle cx="260" cy="40" r="3" fill="#2563EB" />
+                              <circle cx="280" cy="35" r="3.5" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
+
+                              {/* Label above projection point: ≈ $158,488 */}
+                              <text x="275" y="30" textAnchor="end" fontSize="10.5" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">
+                                ≈ $158,488
+                              </text>
+
+                              {/* X Axis Month Labels */}
+                              <text x="24" y="174" textAnchor="middle" fontSize="9" fill="#64748B" fontFamily="sans-serif">May</text>
+                              <text x="74" y="174" textAnchor="middle" fontSize="9" fill="#64748B" fontFamily="sans-serif">Jun</text>
+                              <text x="124" y="174" textAnchor="middle" fontSize="9" fill="#64748B" fontFamily="sans-serif">Jul</text>
+                              <text x="174" y="174" textAnchor="middle" fontSize="9" fill="#64748B" fontFamily="sans-serif">Aug</text>
+                              <text x="224" y="174" textAnchor="middle" fontSize="9" fill="#64748B" fontFamily="sans-serif">Sep</text>
+                              <text x="280" y="174" textAnchor="middle" fontSize="9.5" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">Oct</text>
                             </svg>
                           </div>
                         </div>
+
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-[#94A3B8] pt-3 border-t border-slate-100 font-mono mt-2">
-                      <span>REVENUE BY PERIOD</span>
-                      <span>AVERAGE CONVERSION 100%</span>
+                    {/* Bottom Half of Left Card: REVENUE BY SOURCE Table */}
+                    <div className="pt-5 mt-5 border-t border-slate-100">
+                      <div className="flex items-center justify-between pb-2.5">
+                        <span className="text-[10px] font-mono uppercase text-[#64748B] font-bold tracking-wider">
+                          REVENUE BY SOURCE
+                        </span>
+                        <span className="text-[10px] font-mono text-[#64748B]">
+                          This Month vs. previous period
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs">
+                          <thead className="bg-[#F8FAFC] border-y border-[#E2E8F0] text-[9.5px] font-mono uppercase text-[#64748B]">
+                            <tr>
+                              <th className="py-2 px-2.5 font-semibold">SOURCE</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">THIS PERIOD</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">PREVIOUS</th>
+                              <th className="py-2 px-2.5 font-semibold text-center">CHANGE</th>
+                              <th className="py-2 px-2.5 font-semibold text-right">TXN</th>
+                              <th className="py-2 px-2.5 font-semibold">SHARE</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[#F1F5F9] text-xs">
+                            <tr>
+                              <td className="py-2.5 px-2.5 font-medium text-[#0F172A]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-blue-600 shrink-0" />
+                                  <span>Paid invoices</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 font-bold text-[#0F172A] font-mono text-right">$40,900</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$6,500</td>
+                              <td className="py-2.5 px-2.5 text-center">
+                                <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded text-[10px] font-mono font-bold">
+                                  ↑ 529%
+                                </span>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#0F172A] font-mono text-right">5</td>
+                              <td className="py-2.5 px-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div className="bg-blue-600 h-full w-full rounded-full" />
+                                  </div>
+                                  <span className="font-mono text-[10px] text-[#64748B]">100%</span>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-amber-500 shrink-0" />
+                                  <span>Subscription renewals</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                  <span className="text-[10px] font-mono text-[#94A3B8]">0%</span>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-emerald-500 shrink-0" />
+                                  <span>Catalog & cart</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                  <span className="text-[10px] font-mono text-[#94A3B8]">0%</span>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="py-2.5 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-2">
+                                  <span className="w-2 h-2 rounded-2xs bg-amber-600 shrink-0" />
+                                  <span>Quota & add-on top-ups</span>
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2.5 px-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 bg-slate-100 h-1.5 rounded-full" />
+                                  <span className="text-[10px] font-mono text-[#94A3B8]">0%</span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
+
                   </div>
 
-                  {/* Card 2: PFD 2 Monthly recurring revenue (Screenshot 1) */}
+                  {/* RIGHT CARD: PFD 2 Monthly Recurring Revenue + RENEWAL WATCH (lg:col-span-4) */}
                   <div className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between pb-3">
+                      {/* Card Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                         <div className="flex items-center gap-2">
                           <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
                             PFD 2
@@ -1214,8 +1359,8 @@ export default function HeroAppWindow() {
                         <ArrowRight size={13} className="text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" />
                       </div>
 
-                      {/* Donut Meter & MRR headline */}
-                      <div className="flex items-center gap-4 py-3 border-y border-slate-100">
+                      {/* Donut Meter & MRR Headline */}
+                      <div className="flex items-center gap-4 py-3 border-b border-slate-100">
                         {/* Radial Gauge Meter */}
                         <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
                           <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -1259,7 +1404,7 @@ export default function HeroAppWindow() {
 
                         <div className="flex flex-col">
                           <span className="text-[10px] font-mono text-[#64748B] font-semibold">MRR</span>
-                          <div className="text-2xl font-black text-[#0F172A] leading-none mt-0.5">
+                          <div className="text-2xl sm:text-3xl font-black text-[#0F172A] leading-none mt-0.5">
                             $6,500<span className="text-xs font-normal text-[#64748B]">/mo</span>
                           </div>
                           <div className="mt-2 text-[10px] text-[#64748B]">
@@ -1274,7 +1419,7 @@ export default function HeroAppWindow() {
                       <div className="flex flex-col gap-2 pt-3 text-xs">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-2xs bg-blue-600" />
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600 shrink-0" />
                             <span className="text-[#0F172A] font-medium">Monthly</span>
                             <span className="text-[10px] text-[#64748B]">1 stream · billed monthly</span>
                           </div>
@@ -1286,7 +1431,7 @@ export default function HeroAppWindow() {
 
                         <div className="flex items-center justify-between text-[#64748B]">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-2xs bg-amber-500" />
+                            <span className="w-2 h-2 rounded-2xs bg-orange-600 shrink-0" />
                             <span>Quarterly</span>
                             <span className="text-[10px] text-[#94A3B8]">0 streams · ÷ 3</span>
                           </div>
@@ -1298,7 +1443,7 @@ export default function HeroAppWindow() {
 
                         <div className="flex items-center justify-between text-[#64748B]">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-2xs bg-emerald-500" />
+                            <span className="w-2 h-2 rounded-2xs bg-emerald-500 shrink-0" />
                             <span>Yearly</span>
                             <span className="text-[10px] text-[#94A3B8]">0 streams · ÷ 12</span>
                           </div>
@@ -1310,7 +1455,7 @@ export default function HeroAppWindow() {
 
                         <div className="flex items-center justify-between text-[#64748B]">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-2xs bg-amber-600" />
+                            <span className="w-2 h-2 rounded-2xs bg-amber-600 shrink-0" />
                             <span>Recurring invoices</span>
                             <span className="text-[10px] text-[#94A3B8]">1 stream · normalized</span>
                           </div>
@@ -1320,172 +1465,83 @@ export default function HeroAppWindow() {
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-[#94A3B8] pt-3 border-t border-slate-100 font-mono mt-3">
-                      <span>STREAMS · 1 CELL = 1 STREAM</span>
-                      <span>2 streams</span>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Revenue by Source Table & Renewal Watch (Screenshot 2) */}
-                <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-2xs">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* Left: Source Table */}
-                    <div className="lg:col-span-8">
-                      <div className="flex items-center justify-between pb-3">
-                        <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wide font-mono">
-                          REVENUE BY SOURCE
-                        </span>
-                        <span className="text-[10px] text-[#64748B] font-mono">
-                          This Month vs. previous period
-                        </span>
+                      {/* Streams Cells Indicator */}
+                      <div className="pt-3 mt-3 border-t border-slate-100 flex flex-col gap-1.5">
+                        <div className="flex items-center justify-between text-[10px] text-[#64748B] font-mono">
+                          <span>STREAMS · 1 CELL = 1 STREAM</span>
+                          <span>2 streams</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="w-2.5 h-2.5 rounded-2xs bg-blue-600 inline-block" />
+                          <span className="w-2.5 h-2.5 rounded-2xs bg-orange-500 inline-block" />
+                        </div>
                       </div>
 
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs">
-                          <thead className="bg-[#F8FAFC] border-y border-[#E2E8F0] text-[9.5px] font-mono uppercase text-[#64748B]">
-                            <tr>
-                              <th className="py-2 px-2.5 font-semibold">SOURCE</th>
-                              <th className="py-2 px-2.5 font-semibold text-right">THIS PERIOD</th>
-                              <th className="py-2 px-2.5 font-semibold text-right">PREVIOUS</th>
-                              <th className="py-2 px-2.5 font-semibold text-center">CHANGE</th>
-                              <th className="py-2 px-2.5 font-semibold text-right">TXN</th>
-                              <th className="py-2 px-2.5 font-semibold">SHARE</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-[#F1F5F9] text-xs">
-                            <tr>
-                              <td className="py-2.5 px-2.5 font-medium text-[#0F172A]">
-                                <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-2xs bg-blue-600" />
-                                  <span>Paid invoices</span>
-                                </div>
-                              </td>
-                              <td className="py-2.5 px-2.5 font-bold text-[#0F172A] font-mono text-right">$40,900</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$6,500</td>
-                              <td className="py-2.5 px-2.5 text-center">
-                                <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-mono font-bold">
-                                  ↑ 529%
-                                </span>
-                              </td>
-                              <td className="py-2.5 px-2.5 text-[#0F172A] font-mono text-right">5</td>
-                              <td className="py-2.5 px-2.5">
-                                <div className="flex items-center gap-2">
-                                  <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                                    <div className="bg-blue-600 h-full w-full rounded-full" />
-                                  </div>
-                                  <span className="font-mono text-[10px] text-[#64748B]">100%</span>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td className="py-2.5 px-2.5 text-[#64748B]">
-                                <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-2xs bg-amber-500" />
-                                  <span>Subscription renewals</span>
-                                </div>
-                              </td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
-                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
-                            </tr>
-
-                            <tr>
-                              <td className="py-2.5 px-2.5 text-[#64748B]">
-                                <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-2xs bg-emerald-500" />
-                                  <span>Catalog & cart</span>
-                                </div>
-                              </td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
-                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
-                            </tr>
-
-                            <tr>
-                              <td className="py-2.5 px-2.5 text-[#64748B]">
-                                <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-2xs bg-amber-600" />
-                                  <span>Quota & add-on top-ups</span>
-                                </div>
-                              </td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">$0</td>
-                              <td className="py-2.5 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
-                              <td className="py-2.5 px-2.5 text-[#64748B] font-mono text-right">0</td>
-                              <td className="py-2.5 px-2.5 text-[10px] font-mono text-[#94A3B8]">0%</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-
-                    {/* Right: Renewal Watch */}
-                    <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-6 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center justify-between pb-3">
-                          <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wide font-mono">
+                      {/* RENEWAL WATCH (Inside Right Card) */}
+                      <div className="pt-4 mt-3 border-t border-slate-100">
+                        <div className="flex items-center justify-between pb-2.5">
+                          <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider font-bold">
                             RENEWAL WATCH
                           </span>
-                          <span className="text-[10px] text-blue-600 font-semibold cursor-pointer hover:underline">
-                            Next 30 days
+                          <span className="text-[10px] text-[#64748B] font-mono">
+                            Next renewal
                           </span>
                         </div>
 
                         <div className="flex flex-col gap-2.5 text-xs">
-                          <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-                            <div className="min-w-0">
-                              <div className="flex items-center gap-2 text-[10px] font-mono text-[#64748B]">
-                                <span className="font-bold text-[#0F172A]">Oct 31</span>
-                                <span>Nebula Health</span>
-                              </div>
-                              <div className="text-[11px] font-semibold text-[#0F172A] truncate mt-0.5">
-                                Dedicated Senior Product Design Retainer
+                          {/* Renewal Item 1 */}
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-baseline gap-2.5 min-w-0">
+                              <span className="text-xs font-bold text-[#0F172A] font-mono shrink-0">Oct 31</span>
+                              <div className="min-w-0">
+                                <span className="font-bold text-[#0F172A] block text-xs">Nebula Health</span>
+                                <span className="text-[10px] text-[#64748B] block truncate">
+                                  Dedicated Senior Product Design Reta...
+                                </span>
                               </div>
                             </div>
-                            <span className="text-xs font-bold font-mono text-[#0F172A] shrink-0 ml-2">
+                            <span className="text-xs font-bold font-mono text-[#0F172A] shrink-0">
                               $6,500
                             </span>
                           </div>
 
-                          <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-                            <div className="min-w-0">
-                              <div className="flex items-center gap-2 text-[10px] font-mono text-[#64748B]">
-                                <span className="font-bold text-[#0F172A]">Oct 31</span>
-                                <span>Nebula Health</span>
-                              </div>
-                              <div className="text-[11px] font-medium text-[#64748B] truncate mt-0.5">
-                                Monthly Design Retainer - Additional
+                          {/* Renewal Item 2 */}
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-baseline gap-2.5 min-w-0">
+                              <span className="text-xs font-bold text-[#0F172A] font-mono shrink-0">Oct 31</span>
+                              <div className="min-w-0">
+                                <span className="font-bold text-[#0F172A] block text-xs">Nebula Health</span>
+                                <span className="text-[10px] text-[#64748B] block truncate">
+                                  Nebula Health - Monthly Design Retainer - M...
+                                </span>
                               </div>
                             </div>
-                            <span className="text-xs font-mono text-[#64748B] shrink-0 ml-2">
+                            <span className="text-xs font-bold font-mono text-[#64748B] shrink-0">
                               $0
                             </span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs mt-3">
-                        <span className="text-[11px] text-[#64748B]">
-                          Avg. per stream <b className="text-[#0F172A] font-mono font-bold">$3,250</b>
-                        </span>
-                        <button className="text-[11px] font-semibold text-[#0F172A] hover:text-blue-600 border border-[#E2E8F0] px-2.5 py-1 rounded-lg transition-colors">
-                          Explore recurring revenue →
-                        </button>
-                      </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Receivables & Cash Flow Row (Screenshot 2) */}
+                    {/* Bottom Action Footer */}
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs mt-4">
+                      <span className="text-[11px] text-[#64748B]">
+                        Avg. per stream <b className="text-[#0F172A] font-mono font-bold">$3,250</b>
+                      </span>
+                      <button className="text-[11px] font-semibold text-[#0F172A] hover:text-blue-600 border border-[#E2E8F0] px-3 py-1.5 rounded-lg transition-colors shadow-2xs hover:bg-slate-50">
+                        Explore recurring revenue →
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Receivables & Cash Flow Row (Screenshot 2) */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                   
                   {/* FIN 3 Receivables */}
@@ -1681,7 +1737,6 @@ export default function HeroAppWindow() {
                   </div>
 
                 </div>
-              </div>
 
               {/* ========================================================= */}
               {/* 3. SECTION: SYS CAUTIONS & INSTRUMENTS (SCREENSHOT 2 & 3) */}
