@@ -24,6 +24,7 @@ import {
   X,
   History,
   CheckCircle2,
+  Circle,
   HelpCircle,
   Flag,
   Calendar,
@@ -3991,106 +3992,108 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* Toolbar & Filters (100% Matching Screenshot media_1791148622900.png) */}
-              <div className="flex items-center justify-between gap-2 pt-1 border-b border-[#E2E8F0] pb-2 text-xs overflow-x-auto no-scrollbar">
-                {/* Left Tabs */}
-                <div className="flex items-center gap-4 shrink-0">
-                  <button
-                    onClick={() => setActiveProjectTab("all")}
-                    className={`pb-1.5 -mb-2 font-semibold transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
-                      activeProjectTab === "all" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    <span>All Projects</span>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-[#EFF6FF] text-[#2563EB] font-semibold">21</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveProjectTab("active")}
-                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
-                      activeProjectTab === "active" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    <span>Active delivery</span>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">11</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveProjectTab("attention")}
-                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 whitespace-nowrap text-xs ${
-                      activeProjectTab === "attention" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    Needs Attention
-                  </button>
-                  <button
-                    onClick={() => setActiveProjectTab("delivered")}
-                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-xs ${
-                      activeProjectTab === "delivered" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    <span>Delivered</span>
-                  </button>
-                </div>
-
-                {/* Right Controls */}
-                <div className="flex items-center gap-2 shrink-0">
-                  {/* Search Capsule */}
-                  <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
-                    <Search size={12} className="text-[#94A3B8]" />
-                    <span className="text-[11px] text-[#94A3B8]">Search projects...</span>
-                    <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
-                  </div>
-
-                  {/* 3 Tool Icons in Capsule Border Container */}
-                  <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-slate-400">
-                    <button className="hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={13} />
+              {/* Toolbar & Filters (Fixed width tabs, horizontal scroll, fully visible right button) */}
+              <div className="w-full overflow-x-auto no-scrollbar">
+                <div className="flex items-center justify-between gap-4 min-w-[950px] pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+                  {/* Left Tabs - Fixed Width */}
+                  <div className="w-[370px] shrink-0 flex items-center gap-4">
+                    <button
+                      onClick={() => setActiveProjectTab("all")}
+                      className={`pb-1.5 -mb-2 font-semibold transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
+                        activeProjectTab === "all" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>All Projects</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-[#EFF6FF] text-[#2563EB] font-semibold">21</span>
                     </button>
-                    <button className="hover:text-slate-700 transition-colors">
-                      <Flag size={13} />
+                    <button
+                      onClick={() => setActiveProjectTab("active")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
+                        activeProjectTab === "active" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>Active delivery</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">11</span>
                     </button>
-                    <button className="hover:text-slate-700 transition-colors">
-                      <Users size={13} />
+                    <button
+                      onClick={() => setActiveProjectTab("attention")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 whitespace-nowrap text-xs ${
+                        activeProjectTab === "attention" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      Needs Attention
+                    </button>
+                    <button
+                      onClick={() => setActiveProjectTab("delivered")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1 whitespace-nowrap text-xs ${
+                        activeProjectTab === "delivered" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>Delivered</span>
                     </button>
                   </div>
 
-                  {/* Segmented View Mode: [Card view | Table view | Board] */}
-                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
-                    <button
-                      onClick={() => setProjectViewMode("cards")}
-                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
-                        projectViewMode === "cards" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
-                      }`}
-                      title="Card view"
-                    >
-                      <LayoutGrid size={13} />
-                      <span className="hidden sm:inline text-[11px]">Card view</span>
-                    </button>
-                    <button
-                      onClick={() => setProjectViewMode("table")}
-                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
-                        projectViewMode === "table" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
-                      }`}
-                      title="Table view"
-                    >
-                      <List size={13} />
-                      <span className="hidden sm:inline text-[11px]">Table view</span>
-                    </button>
-                    <button
-                      onClick={() => setProjectViewMode("board")}
-                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
-                        projectViewMode === "board" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
-                      }`}
-                      title="Board"
-                    >
-                      <Kanban size={13} />
-                      <span className="hidden sm:inline text-[11px]">Board</span>
+                  {/* Right Controls */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    {/* Search Capsule */}
+                    <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                      <Search size={12} className="text-[#94A3B8]" />
+                      <span className="text-[11px] text-[#94A3B8]">Search projects...</span>
+                      <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
+                    </div>
+
+                    {/* 3 Tool Icons in Capsule Border Container */}
+                    <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-slate-400">
+                      <button className="hover:text-slate-700 transition-colors">
+                        <CheckCircle2 size={13} />
+                      </button>
+                      <button className="hover:text-slate-700 transition-colors">
+                        <Flag size={13} />
+                      </button>
+                      <button className="hover:text-slate-700 transition-colors">
+                        <Users size={13} />
+                      </button>
+                    </div>
+
+                    {/* Segmented View Mode: [Card view | Table view | Board] */}
+                    <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
+                      <button
+                        onClick={() => setProjectViewMode("cards")}
+                        className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                          projectViewMode === "cards" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
+                        }`}
+                        title="Card view"
+                      >
+                        <LayoutGrid size={13} />
+                        <span className="hidden sm:inline text-[11px]">Card view</span>
+                      </button>
+                      <button
+                        onClick={() => setProjectViewMode("table")}
+                        className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                          projectViewMode === "table" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
+                        }`}
+                        title="Table view"
+                      >
+                        <List size={13} />
+                        <span className="hidden sm:inline text-[11px]">Table view</span>
+                      </button>
+                      <button
+                        onClick={() => setProjectViewMode("board")}
+                        className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                          projectViewMode === "board" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
+                        }`}
+                        title="Board"
+                      >
+                        <Kanban size={13} />
+                        <span className="hidden sm:inline text-[11px]">Board</span>
+                      </button>
+                    </div>
+
+                    {/* Primary CTA Button */}
+                    <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-semibold flex items-center gap-1 shadow-xs whitespace-nowrap shrink-0">
+                      <Plus size={13} /> New project <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-0.5 font-normal">n</kbd>
                     </button>
                   </div>
-
-                  {/* Primary CTA Button */}
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-semibold flex items-center gap-1 shadow-xs whitespace-nowrap">
-                    <Plus size={13} /> New project <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-0.5 font-normal">n</kbd>
-                  </button>
                 </div>
               </div>
 
@@ -4665,30 +4668,32 @@ export default function HeroAppWindow() {
           {currentView === "tasks" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
               
-              {/* Top 4 Metrics Cards - Continuous card container matching screenshot */}
+              {/* Top 4 Metrics Cards - 100% Matching Screenshot media_1791657660395_dad34b59.png */}
               <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-xs grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0] overflow-hidden">
-                {/* 1. Active Work - 4 open tasks with 96% green bar */}
+                {/* 1. Active Work - 28 open tasks */}
                 <div className="p-4 flex flex-col justify-between">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">ACTIVE WORK</span>
                     <div className="mt-2.5 flex items-baseline gap-1.5">
-                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">4</span>
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">28</span>
                       <span className="text-xs text-[#64748B]">open tasks</span>
                     </div>
-                    {/* Segmented bar: 4% grey (open) and 96% emerald green (completed) */}
+                    {/* Segmented bar: To Do (slate-400), In Progress (blue-600), In Review (amber-500), Done (emerald-500) */}
                     <div className="h-1.5 w-full bg-slate-100 rounded-full flex overflow-hidden mt-3">
-                      <div className="w-[4%] bg-slate-400" />
-                      <div className="w-[96%] bg-emerald-500" />
+                      <div className="w-[28%] bg-slate-400" />
+                      <div className="w-[26%] bg-blue-600" />
+                      <div className="w-[12%] bg-amber-500" />
+                      <div className="w-[34%] bg-emerald-500" />
                     </div>
                     <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[9px] text-[#64748B] mt-2.5 pt-1">
-                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#94A3B8]" /> To Do <b className="text-[#0F172A]">2</b></span>
-                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" /> In Progress <b className="text-[#0F172A]">0</b></span>
-                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" /> In Review <b className="text-[#0F172A]">0</b></span>
-                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Done <b className="text-[#0F172A]">101</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#94A3B8]" /> To Do <b className="text-[#0F172A]">12</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" /> In Progress <b className="text-[#0F172A]">11</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" /> In Review <b className="text-[#0F172A]">5</b></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Done <b className="text-[#0F172A]">15</b></span>
                     </div>
                   </div>
                   <div className="pt-2 text-[9px] text-[#64748B] border-t border-slate-100 mt-2 font-medium">
-                    <b>103 tasks in view</b> · 1 done this week · 96% completion rate · avg 627h to complete
+                    <b>43 tasks in view</b> · 10 done this week · 35% completion rate · avg 232h to complete
                   </div>
                 </div>
 
@@ -4696,15 +4701,17 @@ export default function HeroAppWindow() {
                 <div className="p-4 flex flex-col justify-between">
                   <div>
                     <span className="text-[10.5px] text-[#64748B] font-medium flex items-center gap-1.5">
-                      <AlertTriangle size={13} className="text-slate-400" /> Overdue
+                      <AlertTriangle size={13} className="text-rose-500" /> Overdue
                     </span>
                     <div className="mt-2.5">
-                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
+                      <span className="text-3xl font-extrabold text-rose-600 leading-none">7</span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                      <div className="h-full bg-rose-500 rounded-full w-[25%]" />
+                    </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
-                    Nothing past due
+                    Past due and still open
                   </div>
                 </div>
 
@@ -4715,9 +4722,11 @@ export default function HeroAppWindow() {
                       <Clock size={13} className="text-amber-500" /> Due Today
                     </span>
                     <div className="mt-2.5">
-                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">3</span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                      <div className="h-full bg-amber-500 rounded-full w-[15%]" />
+                    </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     Open and due today
@@ -4731,9 +4740,11 @@ export default function HeroAppWindow() {
                       <Calendar size={13} className="text-blue-500" /> Due This Week
                     </span>
                     <div className="mt-2.5">
-                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">0</span>
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">3</span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3" />
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
+                      <div className="h-full bg-blue-500 rounded-full w-[15%]" />
+                    </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
                     Open and due by the end of the week
@@ -4741,16 +4752,21 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* Task Copilot Banner matching screenshot */}
+              {/* Task Copilot Banner matching screenshot media_1791657660395_dad34b59.png */}
               <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
                     <Sparkles size={13} />
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-[#0F172A] block">Task Copilot</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-[#0F172A]">Task Copilot</span>
+                      <span className="px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 text-[10px] font-semibold flex items-center gap-1">
+                        ● Needs Attention
+                      </span>
+                    </div>
                     <span className="text-[10.5px] text-[#64748B]">
-                      <b>4 active tasks</b>: 0 overdue and 0 due today. 1 task completed this week.
+                      <b>28 active tasks</b>: 7 overdue and 3 due today. 10 tasks completed this week.
                     </span>
                   </div>
                 </div>
@@ -4771,124 +4787,135 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* Toolbar & Filters (100% Matching Screenshot media_1791148582154.png) */}
-              <div className="flex items-center justify-between gap-2 pt-1 border-b border-[#E2E8F0] pb-2 text-xs overflow-x-auto no-scrollbar">
-                {/* Left Tabs */}
-                <div className="flex items-center gap-4 shrink-0">
-                  <button
-                    onClick={() => setActiveTaskTab("all")}
-                    className={`pb-1.5 -mb-2 font-semibold transition-colors border-b-2 whitespace-nowrap text-xs ${
-                      activeTaskTab === "all" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    All tasks
-                  </button>
-                  <button
-                    onClick={() => setActiveTaskTab("overdue")}
-                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
-                      activeTaskTab === "overdue" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    <span>Overdue</span>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">0</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTaskTab("today")}
-                    className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
-                      activeTaskTab === "today" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
-                    }`}
-                  >
-                    <span>Due Today</span>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">0</span>
-                  </button>
-                </div>
-
-                {/* Right Controls */}
-                <div className="flex items-center gap-2 shrink-0">
-                  {/* Search Capsule */}
-                  <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
-                    <Search size={12} className="text-[#94A3B8]" />
-                    <span className="text-[11px] text-[#94A3B8]">Search tasks...</span>
-                    <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
-                  </div>
-
-                  {/* 4 Tool Icons in Capsule Border Container */}
-                  <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-slate-400">
-                    <button className="hover:text-slate-700 transition-colors">
-                      <CheckCircle2 size={13} />
+              {/* Toolbar & Filters (Fixed width tabs, horizontal scroll, fully visible right button) */}
+              <div className="w-full overflow-x-auto no-scrollbar">
+                <div className="flex items-center justify-between gap-4 min-w-[950px] pt-1 border-b border-[#E2E8F0] pb-2 text-xs">
+                  {/* Left Tabs */}
+                  <div className="flex items-center gap-4 shrink-0">
+                    <button
+                      onClick={() => setActiveTaskTab("all")}
+                      className={`pb-1.5 -mb-2 font-semibold transition-colors border-b-2 whitespace-nowrap text-xs ${
+                        activeTaskTab === "all" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      All tasks
                     </button>
-                    <button className="hover:text-slate-700 transition-colors">
-                      <Flag size={13} />
+                    <button
+                      onClick={() => setActiveTaskTab("overdue")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
+                        activeTaskTab === "overdue" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>Overdue</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">7</span>
                     </button>
-                    <button className="hover:text-slate-700 transition-colors">
-                      <AlertTriangle size={13} />
+                    <button
+                      onClick={() => setActiveTaskTab("today")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
+                        activeTaskTab === "today" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>Due Today</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">3</span>
                     </button>
-                    <button className="hover:text-slate-700 transition-colors">
-                      <FolderKanban size={13} />
+                    <button
+                      onClick={() => setActiveTaskTab("week")}
+                      className={`pb-1.5 -mb-2 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap text-xs ${
+                        activeTaskTab === "week" ? "border-blue-600 text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      <span>Due This Week</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">3</span>
                     </button>
                   </div>
 
-                  {/* My Tasks Switch */}
-                  <div className="flex items-center gap-1.5 text-xs text-[#64748B]">
-                    <div className="w-7 h-4 bg-slate-200 rounded-full p-0.5 cursor-pointer flex items-center">
-                      <div className="w-3 h-3 bg-white rounded-full shadow-xs" />
+                  {/* Right Controls */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    {/* Search Capsule */}
+                    <div className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] shadow-2xs">
+                      <Search size={12} className="text-[#94A3B8]" />
+                      <span className="text-[11px] text-[#94A3B8]">Search tasks...</span>
+                      <kbd className="text-[9px] font-mono bg-[#F1F5F9] text-slate-500 px-1 rounded">/</kbd>
                     </div>
-                    <span className="text-[11px] font-medium text-slate-700 whitespace-nowrap">My Tasks</span>
+
+                    {/* 4 Tool Icons in Capsule Border Container */}
+                    <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-slate-400">
+                      <button className="hover:text-slate-700 transition-colors">
+                        <CheckCircle2 size={13} />
+                      </button>
+                      <button className="hover:text-slate-700 transition-colors">
+                        <Flag size={13} />
+                      </button>
+                      <button className="hover:text-slate-700 transition-colors">
+                        <AlertTriangle size={13} />
+                      </button>
+                      <button className="hover:text-slate-700 transition-colors">
+                        <FolderKanban size={13} />
+                      </button>
+                    </div>
+
+                    {/* My Tasks Switch */}
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B]">
+                      <div className="w-7 h-4 bg-slate-200 rounded-full p-0.5 cursor-pointer flex items-center">
+                        <div className="w-3 h-3 bg-white rounded-full shadow-xs" />
+                      </div>
+                      <span className="text-[11px] font-medium text-slate-700 whitespace-nowrap">My Tasks</span>
+                    </div>
+
+                    {/* Filter Sliders Button */}
+                    <button className="p-1 text-slate-400 hover:text-slate-700 transition-colors">
+                      <SlidersHorizontal size={14} />
+                    </button>
+
+                    {/* Segmented View Mode: Icon-Only [List | Grid/Board | Users/Workload] */}
+                    <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
+                      <button
+                        onClick={() => setTaskViewMode("list")}
+                        className={`p-1 rounded-full transition-colors ${
+                          taskViewMode === "list" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                        }`}
+                        title="List View"
+                      >
+                        <List size={13} />
+                      </button>
+                      <button
+                        ref={taskBoardToggleRef}
+                        onClick={() => setTaskViewMode("board")}
+                        className={`p-1 rounded-full transition-colors ${
+                          taskViewMode === "board" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                        }`}
+                        title="Board View"
+                      >
+                        <LayoutGrid size={13} />
+                      </button>
+                      <button
+                        className="p-1 rounded-full transition-colors hover:text-slate-900"
+                        title="Workload View"
+                      >
+                        <Users size={13} />
+                      </button>
+                    </div>
+
+                    {/* Primary CTA Button */}
+                    <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-semibold flex items-center gap-1 shadow-xs whitespace-nowrap shrink-0">
+                      <Plus size={13} /> New task <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-0.5 font-normal">n</kbd>
+                    </button>
                   </div>
-
-                  {/* Filter Sliders Button */}
-                  <button className="p-1 text-slate-400 hover:text-slate-700 transition-colors">
-                    <SlidersHorizontal size={14} />
-                  </button>
-
-                  {/* Segmented View Mode: Icon-Only [List | Grid/Board | Users/Workload] */}
-                  <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
-                    <button
-                      onClick={() => setTaskViewMode("list")}
-                      className={`p-1 rounded-full transition-colors ${
-                        taskViewMode === "list" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
-                      }`}
-                      title="List View"
-                    >
-                      <List size={13} />
-                    </button>
-                    <button
-                      ref={taskBoardToggleRef}
-                      onClick={() => setTaskViewMode("board")}
-                      className={`p-1 rounded-full transition-colors ${
-                        taskViewMode === "board" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
-                      }`}
-                      title="Board View"
-                    >
-                      <LayoutGrid size={13} />
-                    </button>
-                    <button
-                      className="p-1 rounded-full transition-colors hover:text-slate-900"
-                      title="Workload View"
-                    >
-                      <Users size={13} />
-                    </button>
-                  </div>
-
-                  {/* Primary CTA Button */}
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-semibold flex items-center gap-1 shadow-xs whitespace-nowrap">
-                    <Plus size={13} /> New task <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-0.5 font-normal">n</kbd>
-                  </button>
                 </div>
               </div>
 
-              {/* TASK VIEW MODE: LIST (Screenshot 19) */}
+              {/* TASK VIEW MODE: LIST (NO EMOJIS - LUCIDE ICONS ONLY) */}
               {taskViewMode === "list" && (
                 <div className="flex flex-col gap-3">
-                  {/* GROUP: TO DO (2) */}
+                  {/* GROUP 1: TO DO (12) */}
                   <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
                     <div className="bg-[#F8FAFC] px-3 py-2 border-b border-[#E2E8F0] flex items-center justify-between text-xs font-semibold text-[#0F172A]">
                       <div className="flex items-center gap-2">
                         <ChevronDown size={14} className="text-[#64748B]" />
-                        <span className="px-2 py-0.5 bg-slate-200 text-slate-700 rounded-full font-mono text-[10px]">
-                          TO DO
+                        <span className="px-2 py-0.5 bg-slate-200 text-slate-700 rounded-full font-mono text-[10px] flex items-center gap-1">
+                          <Circle size={10} className="text-slate-500" /> TO DO
                         </span>
-                        <span className="text-[11px] font-mono text-[#64748B]">2</span>
+                        <span className="text-[11px] font-mono text-[#64748B]">12</span>
                       </div>
                     </div>
 
@@ -4908,14 +4935,11 @@ export default function HeroAppWindow() {
                           <td className="py-2.5 px-3 font-medium text-[#0F172A]">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
-                              <span className="font-semibold">Deploy Client Portal Custom Domain SSL</span>
-                              <span className="text-[10px] text-slate-400 flex items-center gap-0.5">
-                                <Paperclip size={10} /> 1
-                              </span>
+                              <span className="font-semibold">Driver hours of service (HOS) ELD remaining clock countdown</span>
                             </div>
                           </td>
                           <td className="py-2.5 px-3">
-                            <span className="text-red-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                            <span className="text-rose-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
                               <Flag size={10} /> Urgent
                             </span>
                           </td>
@@ -4926,16 +4950,16 @@ export default function HeroAppWindow() {
                           </td>
                           <td className="py-2.5 px-3">
                             <div className="flex items-center gap-1.5">
-                              <div className="w-4 h-4 rounded-full bg-slate-800 text-white text-[8px] font-bold flex items-center justify-center">
-                                AM
+                              <div className="w-4 h-4 rounded-full bg-amber-800 text-amber-100 text-[8px] font-bold flex items-center justify-center">
+                                MB
                               </div>
-                              <span className="text-[#475569]">Alex Miller</span>
+                              <span className="text-[#475569]">Marcus Brody</span>
                             </div>
                           </td>
-                          <td className="py-2.5 px-3 font-mono text-[#94A3B8]">—</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-600 font-semibold">Today</td>
                           <td className="py-2.5 px-3">
-                            <span className="text-blue-600 font-medium flex items-center gap-1">
-                              ● Client Onboarding
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Solari Fleet Telematics Control Room
                             </span>
                           </td>
                         </tr>
@@ -4944,7 +4968,7 @@ export default function HeroAppWindow() {
                           <td className="py-2.5 px-3 font-medium text-[#0F172A]">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
-                              <span className="font-semibold">Brand Identity Guidelines & Asset Library</span>
+                              <span className="font-semibold">Prescription PDF download formatting on mobile Safari</span>
                             </div>
                           </td>
                           <td className="py-2.5 px-3">
@@ -4957,9 +4981,53 @@ export default function HeroAppWindow() {
                               ● On Track
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 text-[#94A3B8]">Unassigned</td>
-                          <td className="py-2.5 px-3 font-mono text-[#94A3B8]">—</td>
-                          <td className="py-2.5 px-3 text-[#94A3B8]">—</td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-teal-800 text-teal-100 text-[8px] font-bold flex items-center justify-center">
+                                SL
+                              </div>
+                              <span className="text-[#475569]">Sarah Lin</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Oct 11</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Nebula Telehealth 2.0 Core Platform
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Dispute & chargeback upload documentation portal</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-amber-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Medium
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● On Track
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-blue-800 text-blue-100 text-[8px] font-bold flex items-center justify-center">
+                                DK
+                              </div>
+                              <span className="text-[#475569]">David Kim</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Oct 14</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Kroma Mobile SDK & Merchant Portal
+                            </span>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -4971,57 +5039,423 @@ export default function HeroAppWindow() {
                     </div>
                   </div>
 
-                  {/* GROUP: IN PROGRESS (0) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
-                    <div className="flex items-center gap-2">
-                      <ChevronRight size={14} className="text-[#94A3B8]" />
-                      <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-mono text-[10px]">
-                        🕒 IN PROGRESS
-                      </span>
-                      <span className="text-[11px] font-mono text-[#94A3B8]">0</span>
+                  {/* GROUP 2: IN PROGRESS (11) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                    <div className="bg-[#F8FAFC] px-3 py-2 border-b border-[#E2E8F0] flex items-center justify-between text-xs font-semibold text-[#0F172A]">
+                      <div className="flex items-center gap-2">
+                        <ChevronDown size={14} className="text-[#64748B]" />
+                        <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-mono text-[10px] flex items-center gap-1">
+                          <Clock size={10} className="text-blue-600" /> IN PROGRESS
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">11</span>
+                      </div>
                     </div>
-                    <span className="text-[11px] text-[#94A3B8]">No tasks</span>
+
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#FAFAFA] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                        <tr>
+                          <th className="py-2 px-3">TASK</th>
+                          <th className="py-2 px-3">PRIORITY</th>
+                          <th className="py-2 px-3">HEALTH</th>
+                          <th className="py-2 px-3">ASSIGNEE</th>
+                          <th className="py-2 px-3">DUE DATE</th>
+                          <th className="py-2 px-3">PROJECT</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Update WebRTC audio level visualizer with high-contrast accessibility mode</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-orange-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> High
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● At Risk
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-purple-800 text-purple-100 text-[8px] font-bold flex items-center justify-center">
+                                ER
+                              </div>
+                              <span className="text-[#475569]">Elena Rostova</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 9 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Nebula Telehealth 2.0 Core Platform
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Driver dispatch web app: offline map tiles caching with IndexedDB</span>
+                              <span className="text-[10px] text-slate-400 flex items-center gap-0.5">
+                                <Paperclip size={10} /> 1
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-orange-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> High
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● At Risk
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-amber-800 text-amber-100 text-[8px] font-bold flex items-center justify-center">
+                                MB
+                              </div>
+                              <span className="text-[#475569]">Marcus Brody</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 9 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Solari Fleet Telematics Control Room
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Kroma Mobile SDK: Stripe merchant authentication flow</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-rose-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Urgent
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● At Risk
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-indigo-800 text-indigo-100 text-[8px] font-bold flex items-center justify-center">
+                                JV
+                              </div>
+                              <span className="text-[#475569]">Julian Vance</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 10 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Kroma Mobile SDK & Merchant Portal
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div className="p-2 border-t border-slate-100 bg-[#FAFAFA]">
+                      <button className="text-[11px] font-medium text-[#64748B] hover:text-[#0F172A] flex items-center gap-1">
+                        <Plus size={11} /> Add task
+                      </button>
+                    </div>
                   </div>
 
-                  {/* GROUP: IN REVIEW (0) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
-                    <div className="flex items-center gap-2">
-                      <ChevronRight size={14} className="text-[#94A3B8]" />
-                      <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full font-mono text-[10px]">
-                        🕒 IN REVIEW
-                      </span>
-                      <span className="text-[11px] font-mono text-[#94A3B8]">0</span>
+                  {/* GROUP 3: IN REVIEW (5) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                    <div className="bg-[#F8FAFC] px-3 py-2 border-b border-[#E2E8F0] flex items-center justify-between text-xs font-semibold text-[#0F172A]">
+                      <div className="flex items-center gap-2">
+                        <ChevronDown size={14} className="text-[#64748B]" />
+                        <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full font-mono text-[10px] flex items-center gap-1">
+                          <Clock size={10} className="text-amber-600" /> IN REVIEW
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">5</span>
+                      </div>
                     </div>
-                    <span className="text-[11px] text-[#94A3B8]">No tasks</span>
+
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#FAFAFA] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                        <tr>
+                          <th className="py-2 px-3">TASK</th>
+                          <th className="py-2 px-3">PRIORITY</th>
+                          <th className="py-2 px-3">HEALTH</th>
+                          <th className="py-2 px-3">ASSIGNEE</th>
+                          <th className="py-2 px-3">DUE DATE</th>
+                          <th className="py-2 px-3">PROJECT</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">HIPAA compliance audit trail viewer for clinic administrators</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-rose-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Urgent
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● Needs Attention
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-teal-800 text-teal-100 text-[8px] font-bold flex items-center justify-center">
+                                SL
+                              </div>
+                              <span className="text-[#475569]">Sarah Lin</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 7 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Nebula Telehealth 2.0 Core Platform
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Automated geofence exit push notification latency audit</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-rose-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Urgent
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● Needs Attention
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-amber-800 text-amber-100 text-[8px] font-bold flex items-center justify-center">
+                                MB
+                              </div>
+                              <span className="text-[#475569]">Marcus Brody</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 7 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Solari Fleet Telematics Control Room
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Robot emergency stop (E-STOP) physical button telemetry integration</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-rose-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Urgent
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-medium">
+                              ● Needs Attention
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-slate-800 text-slate-100 text-[8px] font-bold flex items-center justify-center">
+                                TK
+                              </div>
+                              <span className="text-[#475569]">Tariq Khan</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-rose-600 font-semibold">Oct 8 (Overdue)</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Arcturus Autonomous AMR Platform
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div className="p-2 border-t border-slate-100 bg-[#FAFAFA]">
+                      <button className="text-[11px] font-medium text-[#64748B] hover:text-[#0F172A] flex items-center gap-1">
+                        <Plus size={11} /> Add task
+                      </button>
+                    </div>
                   </div>
 
-                  {/* GROUP: DONE (101) */}
-                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex items-center justify-between text-xs text-[#64748B]">
-                    <div className="flex items-center gap-2">
-                      <ChevronRight size={14} className="text-[#94A3B8]" />
-                      <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-mono text-[10px]">
-                        ✓ DONE
-                      </span>
-                      <span className="text-[11px] font-mono text-[#94A3B8]">101</span>
+                  {/* GROUP 4: DONE (15) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                    <div className="bg-[#F8FAFC] px-3 py-2 border-b border-[#E2E8F0] flex items-center justify-between text-xs font-semibold text-[#0F172A]">
+                      <div className="flex items-center gap-2">
+                        <ChevronDown size={14} className="text-[#64748B]" />
+                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-mono text-[10px] flex items-center gap-1">
+                          <CheckCircle2 size={10} className="text-emerald-600" /> DONE
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">15</span>
+                      </div>
                     </div>
-                    <span className="text-[11px] text-[#94A3B8]">101 completed tasks</span>
+
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#FAFAFA] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                        <tr>
+                          <th className="py-2 px-3">TASK</th>
+                          <th className="py-2 px-3">PRIORITY</th>
+                          <th className="py-2 px-3">HEALTH</th>
+                          <th className="py-2 px-3">ASSIGNEE</th>
+                          <th className="py-2 px-3">DUE DATE</th>
+                          <th className="py-2 px-3">PROJECT</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Merchant checkout dark theme component library export</span>
+                              <span className="text-[10px] text-slate-400 flex items-center gap-0.5">
+                                <Paperclip size={10} /> 2
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-amber-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Medium
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● Completed
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-blue-800 text-blue-100 text-[8px] font-bold flex items-center justify-center">
+                                DK
+                              </div>
+                              <span className="text-[#475569]">David Kim</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Sep 27</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Kroma Mobile SDK & Merchant Portal
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">High-contrast night mode color palette for truck in-cabin display</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-amber-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Medium
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● Completed
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-amber-800 text-amber-100 text-[8px] font-bold flex items-center justify-center">
+                                MB
+                              </div>
+                              <span className="text-[#475569]">Marcus Brody</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Sep 29</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Solari Fleet Telematics Control Room
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Design token audit: verify cross-platform typography hierarchy</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Low
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
+                              ● Completed
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-indigo-800 text-indigo-100 text-[8px] font-bold flex items-center justify-center">
+                                JV
+                              </div>
+                              <span className="text-[#475569]">Julian Vance</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Sep 25</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Kroma Mobile SDK & Merchant Portal
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div className="p-2 border-t border-slate-100 bg-[#FAFAFA]">
+                      <button className="text-[11px] font-medium text-[#64748B] hover:text-[#0F172A] flex items-center gap-1">
+                        <Plus size={11} /> Add task
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
 
-              {/* TASK VIEW MODE: KANBAN BOARD (100% IDENTICAL TO CROPPED SCREENSHOTS) */}
+              {/* TASK VIEW MODE: KANBAN BOARD (100% IDENTICAL TO SCREENSHOT media_1791657660395_dad34b59.png) */}
               {taskViewMode === "board" && (
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 animate-fadeIn">
-                  {/* Column 1: TO DO (2) */}
-                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-slate-300 rounded-2xl p-2.5 flex flex-col gap-2.5">
+                  {/* Column 1: TO DO (12) */}
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-slate-400 rounded-2xl p-2.5 flex flex-col gap-2.5">
                     {/* Header */}
                     <div className="flex items-center justify-between text-xs pb-1">
                       <div className="flex items-center gap-1.5">
                         <span className="px-2 py-0.5 rounded-full border border-slate-300 bg-white font-mono text-[10px] font-medium text-slate-700 flex items-center gap-1">
-                          <span className="w-2.5 h-2.5 rounded-full border border-slate-400" />
+                          <Circle size={10} className="text-slate-400" />
                           TO DO
                         </span>
-                        <span className="text-[11px] font-mono text-[#64748B]">2</span>
+                        <span className="text-[11px] font-mono text-[#64748B]">12</span>
                       </div>
                       <div className="flex items-center gap-1.5 text-slate-400">
                         <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
@@ -5029,69 +5463,237 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Card 1: Task Ultron */}
+                    {/* Card 1: Driver hours of service (HOS) ELD */}
                     <div
                       ref={taskCardRef}
-                      className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5"
+                      className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2"
                     >
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        Task Ultron
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Driver hours of service (HOS) ELD remaining clock...
                       </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">eld</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">compliance</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">timer</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-rose-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-amber-600" /> Today
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        <span className="truncate">Solari Fleet Telematics Control Room</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          MB
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    {/* Card 2: Prescription PDF download formatting */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Prescription PDF download formatting on mobile Safari
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">mobile</span>
+                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">safari</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">pdf</span>
+                      </div>
+                      {/* Priority & Due */}
                       <div className="flex items-center gap-2 text-[10.5px]">
                         <span className="text-amber-600 font-medium flex items-center gap-1">
                           <Flag size={11} /> Medium
                         </span>
                         <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Oct 15
+                          <Calendar size={10} className="text-slate-400" /> Oct 11
                         </span>
                       </div>
-                      {/* Subtask checklist progress bar */}
-                      <div className="flex items-center gap-2 text-slate-400 pt-0.5">
-                        <CheckSquare size={12} className="text-slate-500 shrink-0" />
-                        <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                          <div className="h-full bg-blue-600 rounded-full w-1/2" />
-                        </div>
-                        <span className="font-mono text-[10px] text-slate-500 shrink-0">1/2</span>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
                       </div>
-                      {/* Card footer: avatar, attachments/check count & arrow */}
+                      {/* Footer */}
                       <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          AM
+                        <div className="w-5 h-5 rounded-full bg-teal-800 text-teal-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          SL
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
-                            <CheckSquare size={11} className="text-slate-400" /> 3
-                          </span>
-                          <ArrowRight size={12} className="text-slate-400" />
-                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                       </div>
                     </div>
 
-                    {/* Card 2: Kroma Mobile SDK & Merchant Tools */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        Kroma Mobile SDK & Merchant Tools
+                    {/* Card 3: Dispute & chargeback upload */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Dispute & chargeback upload documentation portal
                       </h4>
-                      <div className="flex items-center gap-1.5 text-[10.5px]">
-                        <span className="text-red-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">disputes</span>
+                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">chargebacks</span>
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">stripe</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-amber-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Medium
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Oct 14
                         </span>
                       </div>
+                      {/* Project */}
                       <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                        <span>Internal Tasks</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
-                      {/* Card footer: avatar, attachments count & arrow */}
+                      {/* Footer */}
                       <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          AM
+                        <div className="w-5 h-5 rounded-full bg-blue-800 text-blue-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          DK
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
+                      <Plus size={12} /> Add task
+                    </button>
+                  </div>
+
+                  {/* Column 2: IN PROGRESS (11) */}
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-blue-500 rounded-2xl p-2.5 flex flex-col gap-2.5">
+                    {/* Header */}
+                    <div className="flex items-center justify-between text-xs pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="px-2 py-0.5 rounded-full border border-blue-200 bg-blue-50/80 font-mono text-[10px] font-medium text-blue-700 flex items-center gap-1">
+                          <Clock size={10} className="text-blue-600" />
+                          IN PROGRESS
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">11</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-400">
+                        <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                        <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
+                      </div>
+                    </div>
+
+                    {/* Card 1: Update WebRTC audio level visualizer */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Update WebRTC audio level visualizer with high-contrast...
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">webrtc</span>
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">frontend</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">accessibility</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-orange-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> High
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 9
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-purple-800 text-purple-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          ER
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    {/* Card 2: Driver dispatch web app: offline map tiles */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Driver dispatch web app: offline map tiles caching with...
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">pwa</span>
+                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">offline</span>
+                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">maps</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-orange-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> High
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 9
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="truncate">Solari Fleet Telematics Control Room</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          MB
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
                             <Paperclip size={11} className="text-slate-400" /> 1
                           </span>
-                          <ArrowRight size={12} className="text-slate-400" />
+                          <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Card 3: Kroma Mobile SDK: Stripe merchant auth */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Kroma Mobile SDK: Stripe merchant authentication flow
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">mobile</span>
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">stripe</span>
+                        <span className="px-1.5 py-0.2 bg-cyan-50 text-cyan-700 border border-cyan-100 rounded-full font-mono text-[9px] font-medium">sdk</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-rose-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 10
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-indigo-800 text-indigo-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          JV
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                       </div>
                     </div>
 
@@ -5100,26 +5702,122 @@ export default function HeroAppWindow() {
                     </button>
                   </div>
 
-                  {/* Column 2: IN PROGRESS (0) */}
-                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-blue-500 rounded-2xl p-2.5 flex flex-col justify-between min-h-[300px]">
-                    <div>
-                      {/* Header */}
-                      <div className="flex items-center justify-between text-xs pb-1">
-                        <div className="flex items-center gap-1.5">
-                          <span className="px-2 py-0.5 rounded-full border border-blue-200 bg-blue-50/80 font-mono text-[10px] font-medium text-blue-700 flex items-center gap-1">
-                            <Clock size={10} className="text-blue-600" />
-                            IN PROGRESS
-                          </span>
-                          <span className="text-[11px] font-mono text-[#64748B]">0</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-slate-400">
-                          <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
-                          <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
-                        </div>
+                  {/* Column 3: IN REVIEW (5) */}
+                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-amber-500 rounded-2xl p-2.5 flex flex-col gap-2.5">
+                    {/* Header */}
+                    <div className="flex items-center justify-between text-xs pb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="px-2 py-0.5 rounded-full border border-amber-200 bg-amber-50/80 font-mono text-[10px] font-medium text-amber-700 flex items-center gap-1">
+                          <Clock size={10} className="text-amber-600" />
+                          IN REVIEW
+                        </span>
+                        <span className="text-[11px] font-mono text-[#64748B]">5</span>
                       </div>
+                      <div className="flex items-center gap-1.5 text-slate-400">
+                        <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                        <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
+                      </div>
+                    </div>
 
-                      <div className="py-14 text-center text-xs text-slate-400">
-                        Drop tasks here
+                    {/* Card 1: HIPAA compliance audit trail viewer */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        HIPAA compliance audit trail viewer for clinic administrators
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">hipaa</span>
+                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">audit</span>
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">security</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-rose-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 7
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-teal-800 text-teal-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          SL
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    {/* Card 2: Automated geofence exit push notification */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Automated geofence exit push notification latency audit
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">geofence</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">push</span>
+                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">performance</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-rose-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 7
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="truncate">Solari Fleet Telematics Control Room</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          MB
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    {/* Card 3: Robot emergency stop (E-STOP) telemetry */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Robot emergency stop (E-STOP) physical button telemetry integration
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-slate-100 text-slate-700 border border-slate-200 rounded-full font-mono text-[9px] font-medium">hardware</span>
+                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">safety</span>
+                        <span className="px-1.5 py-0.2 bg-purple-50 text-purple-700 border border-purple-100 rounded-full font-mono text-[9px] font-medium">robotics</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-rose-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Urgent
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Clock size={10} className="text-rose-500" /> Oct 8
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span className="truncate">Arcturus Autonomous AMR Platform</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-slate-800 text-slate-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          TK
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                       </div>
                     </div>
 
@@ -5128,35 +5826,7 @@ export default function HeroAppWindow() {
                     </button>
                   </div>
 
-                  {/* Column 3: IN REVIEW (0) */}
-                  <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-amber-500 rounded-2xl p-2.5 flex flex-col justify-between min-h-[300px]">
-                    <div>
-                      {/* Header */}
-                      <div className="flex items-center justify-between text-xs pb-1">
-                        <div className="flex items-center gap-1.5">
-                          <span className="px-2 py-0.5 rounded-full border border-amber-200 bg-amber-50/80 font-mono text-[10px] font-medium text-amber-700 flex items-center gap-1">
-                            <Clock size={10} className="text-amber-600" />
-                            IN REVIEW
-                          </span>
-                          <span className="text-[11px] font-mono text-[#64748B]">0</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-slate-400">
-                          <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
-                          <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
-                        </div>
-                      </div>
-
-                      <div className="py-14 text-center text-xs text-slate-400">
-                        Drop tasks here
-                      </div>
-                    </div>
-
-                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
-                      <Plus size={12} /> Add task
-                    </button>
-                  </div>
-
-                  {/* Column 4: DONE (101) */}
+                  {/* Column 4: DONE (15) */}
                   <div className="bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 border-t-emerald-500 rounded-2xl p-2.5 flex flex-col gap-2.5">
                     {/* Header */}
                     <div className="flex items-center justify-between text-xs pb-1">
@@ -5165,7 +5835,7 @@ export default function HeroAppWindow() {
                           <CheckCircle2 size={10} className="text-emerald-600" />
                           DONE
                         </span>
-                        <span className="text-[11px] font-mono text-[#64748B]">101</span>
+                        <span className="text-[11px] font-mono text-[#64748B]">15</span>
                       </div>
                       <div className="flex items-center gap-1.5 text-slate-400">
                         <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
@@ -5173,88 +5843,114 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Card 1: TCT Task */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        TCT Task
+                    {/* Card 1: Merchant checkout dark theme component library export */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Merchant checkout dark theme component library export
                       </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-teal-50 text-teal-700 border border-teal-100 rounded-full font-mono text-[9px] font-medium">dark-mode</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">components</span>
+                      </div>
+                      {/* Priority & Due */}
                       <div className="flex items-center gap-2 text-[10.5px]">
                         <span className="text-amber-600 font-medium flex items-center gap-1">
                           <Flag size={11} /> Medium
                         </span>
                         <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Mar 25
+                          <Calendar size={10} className="text-slate-400" /> Sep 27
                         </span>
                       </div>
+                      {/* Project */}
                       <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                        <span>Internal Tasks</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
                       {/* Footer */}
                       <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          AM
+                        <div className="w-5 h-5 rounded-full bg-blue-800 text-blue-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          DK
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
-                            <Paperclip size={11} className="text-slate-400" /> 1
+                            <Paperclip size={11} className="text-slate-400" /> 2
                           </span>
-                          <ArrowRight size={12} className="text-slate-400" />
+                          <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Card 2: Maintenance March */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        Maintenance March
+                    {/* Card 2: High-contrast night mode color palette */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        High-contrast night mode color palette for truck in-cabin...
                       </h4>
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-red-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
-                        </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Mar 30
-                        </span>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">night-mode</span>
+                        <span className="px-1.5 py-0.2 bg-pink-50 text-pink-700 border border-pink-100 rounded-full font-mono text-[9px] font-medium">ui</span>
                       </div>
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
-                        <span>Website Maintenance</span>
-                      </div>
-                      {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          AM
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400" />
-                      </div>
-                    </div>
-
-                    {/* Card 3: AI connector Test */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2.5">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight">
-                        AI connector Test
-                      </h4>
+                      {/* Priority & Due */}
                       <div className="flex items-center gap-2 text-[10.5px]">
                         <span className="text-amber-600 font-medium flex items-center gap-1">
                           <Flag size={11} /> Medium
                         </span>
                         <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Apr 17
+                          <Calendar size={10} className="text-slate-400" /> Sep 29
                         </span>
                       </div>
+                      {/* Project */}
                       <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                        <span>Internal Tasks</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="truncate">Solari Fleet Telematics Control Room</span>
                       </div>
                       {/* Footer */}
                       <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          AM
+                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          MB
                         </div>
-                        <ArrowRight size={12} className="text-slate-400" />
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
                       </div>
                     </div>
+
+                    {/* Card 3: Design token audit: verify typography hierarchy */}
+                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
+                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                        Design token audit: verify cross-platform typography hierarchy
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">tokens</span>
+                        <span className="px-1.5 py-0.2 bg-purple-50 text-purple-700 border border-purple-100 rounded-full font-mono text-[9px] font-medium">figma</span>
+                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">ui</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[10.5px]">
+                        <span className="text-slate-600 font-medium flex items-center gap-1">
+                          <Flag size={11} /> Low
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
+                          <Calendar size={10} className="text-slate-400" /> Sep 25
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
+                      </div>
+                      {/* Footer */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <div className="w-5 h-5 rounded-full bg-indigo-800 text-indigo-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
+                          JV
+                        </div>
+                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      </div>
+                    </div>
+
+                    <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
+                      <Plus size={12} /> Add task
+                    </button>
                   </div>
                 </div>
               )}
