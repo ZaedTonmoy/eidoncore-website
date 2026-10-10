@@ -134,6 +134,9 @@ export default function HeroAppWindow() {
   const [activeWorkTab, setActiveWorkTab] = useState<"all" | "today" | "overdue" | "review">("all");
   const [activeTaskTab, setActiveTaskTab] = useState<"all" | "overdue" | "today" | "week">("all");
   const [activeProjectTab, setActiveProjectTab] = useState<"all" | "active" | "attention" | "delivered">("all");
+  const [ticketViewMode, setTicketViewMode] = useState<"list" | "board" | "sla">("board");
+  const [ticketStatusFilter, setTicketStatusFilter] = useState<string>("all");
+  const [ticketSearch, setTicketSearch] = useState<string>("");
 
   const [cursorPos, setCursorPos] = useState({ x: 260, y: 180, visible: false });
   const [cursorClicked, setCursorClicked] = useState(false);
@@ -7355,96 +7358,501 @@ export default function HeroAppWindow() {
             );
           })()}
 
-          {/* VIEW 4: TICKETS (100% IDENTICAL TO SCREENSHOT 27) */}
-          {currentView === "tickets" && (
-            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 flex-wrap text-xs">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">
-                    <Search size={11} className="text-[#94A3B8]" />
-                    <span className="text-[10.5px]">Search tickets... /</span>
+          {/* VIEW 4: TICKETS (100% IDENTICAL TO SCREENSHOT media_1791665430868_eab0b9be.png) */}
+          {currentView === "tickets" && (() => {
+            const allTickets = [
+              {
+                id: "TKT-105",
+                priority: "Medium",
+                title: "Assistance connecting Stripe Connect test account",
+                type: "Question" as const,
+                org: "Arcturus Robotics",
+                status: "Open" as const,
+                assigneeName: "Marcus Brody",
+                assigneeAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                replies: 1,
+                updated: "5d ago",
+              },
+              {
+                id: "TKT-104",
+                priority: "Medium",
+                title: "Driver GPS ping interval configuration in mobile view",
+                type: "Change Request" as const,
+                org: "Solari Logistics",
+                status: "In Progress" as const,
+                assigneeName: "Amara Okafor",
+                assigneeAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                replies: 1,
+                updated: "5d ago",
+              },
+              {
+                id: "TKT-29",
+                priority: "High",
+                title: "Apex Architecture DNS Propagation",
+                type: "Bug" as const,
+                org: "Apex Studio",
+                status: "Closed" as const,
+                assigneeName: "Dominic Sterling",
+                assigneeAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+                replies: 4,
+                updated: "5d ago",
+              },
+              {
+                id: "TKT-28",
+                priority: "High",
+                title: "Client Portal Login Authentication",
+                type: "Support" as const,
+                org: "Creative Core",
+                status: "Closed" as const,
+                assigneeName: "Elena Rostova",
+                assigneeAvatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                replies: 4,
+                updated: "6d ago",
+              },
+            ];
+
+            const boardColumns = [
+              { id: "Open", title: "Open", dotColor: "bg-[#3B82F6]" },
+              { id: "Triaged", title: "Triaged", dotColor: "bg-[#06B6D4]" },
+              { id: "In Progress", title: "In Progress", dotColor: "bg-[#F59E0B]" },
+              { id: "Waiting on Client", title: "Waiting on Client", dotColor: "bg-[#8B5CF6]" },
+              { id: "Resolved", title: "Resolved", dotColor: "bg-[#10B981]" },
+              { id: "Closed", title: "Closed", dotColor: "bg-[#64748B]" },
+            ];
+
+            const filteredTickets = allTickets.filter((tkt) => {
+              if (ticketStatusFilter !== "all" && tkt.status !== ticketStatusFilter) {
+                return false;
+              }
+              if (ticketSearch.trim()) {
+                const q = ticketSearch.toLowerCase();
+                return (
+                  tkt.id.toLowerCase().includes(q) ||
+                  tkt.title.toLowerCase().includes(q) ||
+                  tkt.org.toLowerCase().includes(q) ||
+                  tkt.assigneeName.toLowerCase().includes(q)
+                );
+              }
+              return true;
+            });
+
+            return (
+              <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn pb-12">
+                {/* 1. TOP TOOLBAR */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  {/* Left: Search input, Priority flag, Grid button */}
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs text-[#64748B] focus-within:border-indigo-400 focus-within:bg-white transition-colors w-52 sm:w-64 shadow-2xs">
+                      <Search size={13} className="text-[#94A3B8] shrink-0" />
+                      <input
+                        type="text"
+                        placeholder="Search tickets..."
+                        value={ticketSearch}
+                        onChange={(e) => setTicketSearch(e.target.value)}
+                        className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8]"
+                      />
+                      <kbd className="text-[10px] text-[#94A3B8] font-mono bg-white border border-[#E2E8F0] px-1.5 py-0.2 rounded shadow-2xs">
+                        /
+                      </kbd>
+                    </div>
+
+                    <button
+                      title="Filter by priority"
+                      className="p-2 bg-white border border-[#E2E8F0] hover:bg-slate-50 rounded-xl text-[#64748B] hover:text-[#0F172A] shadow-2xs transition-colors"
+                    >
+                      <Flag size={13} />
+                    </button>
+
+                    <button
+                      title="Group options"
+                      className="p-2 bg-white border border-[#E2E8F0] hover:bg-slate-50 rounded-xl text-[#64748B] hover:text-[#0F172A] shadow-2xs transition-colors"
+                    >
+                      <LayoutGrid size={13} />
+                    </button>
                   </div>
 
-                  <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-lg font-bold text-[#0F172A] shadow-xs">
-                    All statuses
-                  </span>
-                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
-                    ● Open
-                  </span>
-                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
-                    ● In Progress
-                  </span>
-                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
-                    ● Waiting on Client
-                  </span>
-                  <span className="px-2.5 py-1 text-[#64748B] hover:bg-slate-100 rounded-lg cursor-pointer">
-                    ● Closed
-                  </span>
+                  {/* Right: View switcher & New Ticket button */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex items-center bg-[#F1F5F9] p-0.5 rounded-xl border border-[#E2E8F0] text-xs shadow-2xs">
+                      <button
+                        onClick={() => setTicketViewMode("list")}
+                        className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs transition-all ${
+                          ticketViewMode === "list"
+                            ? "bg-white text-[#0F172A] font-bold shadow-2xs border border-[#E2E8F0]"
+                            : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <List size={13} /> List
+                      </button>
+                      <button
+                        onClick={() => setTicketViewMode("board")}
+                        className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs transition-all ${
+                          ticketViewMode === "board"
+                            ? "bg-white text-[#0F172A] font-bold shadow-2xs border border-[#E2E8F0]"
+                            : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <Kanban size={13} /> Board
+                      </button>
+                      <button
+                        onClick={() => setTicketViewMode("sla")}
+                        className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs transition-all ${
+                          ticketViewMode === "sla"
+                            ? "bg-white text-[#0F172A] font-bold shadow-2xs border border-[#E2E8F0]"
+                            : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <Clock size={13} /> SLA
+                      </button>
+                    </div>
+
+                    <button className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors">
+                      <Plus size={13} /> New Ticket{" "}
+                      <kbd className="text-[10px] bg-white/20 text-white font-mono px-1 py-0.2 rounded font-normal">
+                        n
+                      </kbd>
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg p-0.5 text-xs text-[#64748B]">
-                    <span className="px-2 py-1 rounded bg-slate-100 font-bold text-[#0F172A]">List</span>
-                    <span className="px-2 py-1 rounded">Board</span>
-                    <span className="px-2 py-1 rounded">SLA</span>
-                  </div>
-                  <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1">
-                    <Plus size={12} /> New Ticket <kbd className="text-[9px] bg-blue-700 px-1 rounded ml-1">n</kbd>
+                {/* 2. STATUS FILTER PILLS (Matching screenshot 100%) */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
+                  <button
+                    onClick={() => setTicketStatusFilter("all")}
+                    className={`px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "all"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    All statuses
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "Open" ? "all" : "Open")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "Open"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]" /> Open
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "Triaged" ? "all" : "Triaged")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "Triaged"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" /> Triaged
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "In Progress" ? "all" : "In Progress")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "In Progress"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" /> In Progress
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "Waiting on Client" ? "all" : "Waiting on Client")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "Waiting on Client"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]" /> Waiting on Client
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "Resolved" ? "all" : "Resolved")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "Resolved"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Resolved
+                  </button>
+
+                  <button
+                    onClick={() => setTicketStatusFilter(ticketStatusFilter === "Closed" ? "all" : "Closed")}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all shrink-0 ${
+                      ticketStatusFilter === "Closed"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] font-semibold border border-[#C7D2FE]"
+                        : "bg-white border border-[#E2E8F0] text-[#64748B] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#64748B]" /> Closed
                   </button>
                 </div>
-              </div>
 
-              {/* Tickets Data Table */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
-                    <tr>
-                      <th className="py-2.5 px-3">ID</th>
-                      <th className="py-2.5 px-3">TITLE</th>
-                      <th className="py-2.5 px-3">ORGANIZATIONS</th>
-                      <th className="py-2.5 px-3">STATUS</th>
-                      <th className="py-2.5 px-3">PRIORITY</th>
-                      <th className="py-2.5 px-3">ASSIGNEE</th>
-                      <th className="py-2.5 px-3">REPLIES</th>
-                      <th className="py-2.5 px-3 text-right">UPDATED</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
-                    {[
-                      { id: "TKT-29", title: "Apex Architecture DNS Propagation", org: "Apex Studio", status: "Closed", priority: "High", priorityColor: "text-orange-600", replies: 4, updated: "5d ago" },
-                      { id: "TKT-28", title: "Client Portal Login Authentication", org: "Creative Core", status: "Closed", priority: "High", priorityColor: "text-orange-600", replies: 4, updated: "6d ago" },
-                      { id: "TKT-24", title: "API Webhook Retry Failure Alert", org: "CloudScale", status: "In Progress", priority: "Critical", priorityColor: "text-red-600 font-bold", replies: 16, updated: "Sep 16" },
-                      { id: "TKT-22", title: "Design Assets Update Request", org: "Zenith Brand", status: "Waiting on Client", priority: "Low", priorityColor: "text-slate-500", replies: 2, updated: "Sep 9" },
-                      { id: "TKT-20", title: "Billing Cycle Invoice Adjustment", org: "Wave Media", status: "Closed", priority: "Urgent", priorityColor: "text-red-600 font-bold", replies: 2, updated: "Sep 9" },
-                    ].map((tkt) => (
-                      <tr key={tkt.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B]">{tkt.id}</td>
-                        <td className="py-2.5 px-3 font-semibold text-[#0F172A]">
-                          {tkt.title} <span className="text-[9.5px] font-normal text-[#64748B] bg-slate-100 px-1 py-0.2 rounded ml-1">Support</span>
-                        </td>
-                        <td className="py-2.5 px-3 text-[#475569]">{tkt.org}</td>
-                        <td className="py-2.5 px-3">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
-                            tkt.status === "Closed" ? "bg-slate-100 text-slate-600 border-slate-200" :
-                            tkt.status === "In Progress" ? "bg-amber-50 text-amber-700 border-amber-200" :
-                            "bg-purple-50 text-purple-700 border-purple-200"
-                          }`}>
-                            {tkt.status}
-                          </span>
-                        </td>
-                        <td className={`py-2.5 px-3 font-mono text-[10.5px] ${tkt.priorityColor}`}>
-                          <Flag size={9} className="inline mr-1" /> {tkt.priority}
-                        </td>
-                        <td className="py-2.5 px-3 text-[#94A3B8]">Unassigned</td>
-                        <td className="py-2.5 px-3 font-mono text-[#64748B]">💬 {tkt.replies}</td>
-                        <td className="py-2.5 px-3 text-right font-mono text-[#94A3B8]">{tkt.updated}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                {/* 3. BOARD VIEW (Matching screenshot 100%) */}
+                {ticketViewMode === "board" && (
+                  <div className="overflow-x-auto pb-4 pt-1 no-scrollbar -mx-4 sm:-mx-5 px-4 sm:px-5">
+                    <div className="flex gap-4 min-w-max items-start">
+                      {boardColumns.map((col) => {
+                        const colTickets = allTickets.filter((t) => {
+                          if (t.status !== col.id) return false;
+                          if (ticketSearch.trim()) {
+                            const q = ticketSearch.toLowerCase();
+                            return (
+                              t.id.toLowerCase().includes(q) ||
+                              t.title.toLowerCase().includes(q) ||
+                              t.org.toLowerCase().includes(q) ||
+                              t.assigneeName.toLowerCase().includes(q)
+                            );
+                          }
+                          return true;
+                        });
+
+                        return (
+                          <div
+                            key={col.id}
+                            className="w-[280px] shrink-0 bg-[#F1F5F9]/70 rounded-2xl p-3 flex flex-col gap-3 min-h-[540px] select-none"
+                          >
+                            {/* Column Header */}
+                            <div className="flex items-center gap-2 px-1 py-0.5">
+                              <span className={`w-2 h-2 rounded-full ${col.dotColor}`} />
+                              <span className="font-bold text-xs text-[#0F172A]">{col.title}</span>
+                              <span className="text-[11px] font-semibold text-[#64748B] bg-[#E2E8F0]/70 px-1.5 py-0.2 rounded-full leading-none">
+                                {colTickets.length}
+                              </span>
+                            </div>
+
+                            {/* Column Cards or Empty State */}
+                            {colTickets.length === 0 ? (
+                              <div className="flex-1 flex items-center justify-center text-xs text-[#94A3B8] font-normal py-20 select-none">
+                                No items yet
+                              </div>
+                            ) : (
+                              <div className="flex flex-col gap-2.5">
+                                {colTickets.map((tkt) => (
+                                  <div
+                                    key={tkt.id}
+                                    className="bg-white rounded-xl p-3.5 border border-[#E2E8F0] shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all cursor-pointer flex flex-col gap-2.5"
+                                  >
+                                    {/* Line 1: Ticket ID & Priority Flag */}
+                                    <div className="flex items-center justify-between text-xs">
+                                      <span className="font-mono text-[11px] text-[#64748B] font-semibold">
+                                        {tkt.id}
+                                      </span>
+                                      <span className="flex items-center gap-1 text-[11px] text-[#64748B] font-medium">
+                                        <Flag size={11} className="text-[#94A3B8]" /> {tkt.priority}
+                                      </span>
+                                    </div>
+
+                                    {/* Line 2: Ticket Title */}
+                                    <h4 className="font-bold text-xs sm:text-[13px] text-[#0F172A] leading-snug line-clamp-2">
+                                      {tkt.title}
+                                    </h4>
+
+                                    {/* Line 3: Type Tag & Organization */}
+                                    <div className="flex items-center gap-2 flex-wrap text-xs">
+                                      {tkt.type === "Question" && (
+                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0]">
+                                          <HelpCircle size={10} className="text-[#059669]" /> Question
+                                        </span>
+                                      )}
+                                      {tkt.type === "Change Request" && (
+                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#FFFBEB] text-[#D97706] border border-[#FDE68A]">
+                                          <RefreshCw size={10} className="text-[#D97706]" /> Change Request
+                                        </span>
+                                      )}
+                                      {tkt.type === "Bug" && (
+                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA]">
+                                          <Bug size={10} className="text-[#DC2626]" /> Bug
+                                        </span>
+                                      )}
+                                      {tkt.type === "Support" && (
+                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1]">
+                                          <HelpCircle size={10} className="text-[#475569]" /> Support
+                                        </span>
+                                      )}
+                                      <span className="text-xs text-[#64748B]">{tkt.org}</span>
+                                    </div>
+
+                                    {/* Line 4: Assignee Avatar + Replies & Date */}
+                                    <div className="flex items-center justify-between pt-1 border-t border-slate-50 text-xs text-[#64748B]">
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        {tkt.assigneeAvatar ? (
+                                          <img
+                                            src={tkt.assigneeAvatar}
+                                            alt={tkt.assigneeName}
+                                            className="w-5 h-5 rounded-full object-cover shrink-0 border border-slate-100"
+                                          />
+                                        ) : (
+                                          <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[9px] flex items-center justify-center font-bold shrink-0">
+                                            ?
+                                          </div>
+                                        )}
+                                        <span className="text-xs text-[#475569] font-medium truncate">
+                                          {tkt.assigneeName}
+                                        </span>
+                                      </div>
+
+                                      <div className="flex items-center gap-2 text-[11px] font-mono shrink-0">
+                                        <span className="flex items-center gap-1">
+                                          <MessageSquare size={11} className="text-[#94A3B8]" /> {tkt.replies}
+                                        </span>
+                                        <span>{tkt.updated}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. LIST VIEW */}
+                {ticketViewMode === "list" && (
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                        <tr>
+                          <th className="py-2.5 px-3">ID</th>
+                          <th className="py-2.5 px-3">TITLE</th>
+                          <th className="py-2.5 px-3">ORGANIZATION</th>
+                          <th className="py-2.5 px-3">STATUS</th>
+                          <th className="py-2.5 px-3">PRIORITY</th>
+                          <th className="py-2.5 px-3">ASSIGNEE</th>
+                          <th className="py-2.5 px-3">REPLIES</th>
+                          <th className="py-2.5 px-3 text-right">UPDATED</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
+                        {filteredTickets.map((tkt) => (
+                          <tr key={tkt.id} className="hover:bg-slate-50 transition-colors">
+                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B] font-semibold">
+                              {tkt.id}
+                            </td>
+                            <td className="py-2.5 px-3 font-semibold text-[#0F172A]">
+                              {tkt.title}{" "}
+                              <span className="text-[9.5px] font-normal text-[#64748B] bg-slate-100 px-1 py-0.2 rounded ml-1">
+                                {tkt.type}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3 text-[#475569]">{tkt.org}</td>
+                            <td className="py-2.5 px-3">
+                              <span
+                                className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                                  tkt.status === "Open"
+                                    ? "bg-blue-50 text-blue-700 border-blue-200"
+                                    : tkt.status === "In Progress"
+                                    ? "bg-amber-50 text-amber-700 border-amber-200"
+                                    : tkt.status === "Closed"
+                                    ? "bg-slate-100 text-slate-600 border-slate-200"
+                                    : "bg-purple-50 text-purple-700 border-purple-200"
+                                }`}
+                              >
+                                {tkt.status}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B]">
+                              <Flag size={9} className="inline mr-1 text-[#94A3B8]" /> {tkt.priority}
+                            </td>
+                            <td className="py-2.5 px-3 text-[#475569]">
+                              <div className="flex items-center gap-1.5">
+                                {tkt.assigneeAvatar ? (
+                                  <img
+                                    src={tkt.assigneeAvatar}
+                                    alt={tkt.assigneeName}
+                                    className="w-4 h-4 rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <div className="w-4 h-4 rounded-full bg-slate-100 text-slate-500 text-[8px] flex items-center justify-center font-bold">
+                                    ?
+                                  </div>
+                                )}
+                                <span>{tkt.assigneeName}</span>
+                              </div>
+                            </td>
+                            <td className="py-2.5 px-3 font-mono text-[#64748B]">💬 {tkt.replies}</td>
+                            <td className="py-2.5 px-3 text-right font-mono text-[#94A3B8]">{tkt.updated}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {/* 5. SLA VIEW */}
+                {ticketViewMode === "sla" && (
+                  <div className="flex flex-col gap-4 animate-fadeIn">
+                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
+                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">First Response SLA</span>
+                        <div className="text-xl font-bold text-[#0F172A] mt-1">98.8%</div>
+                        <span className="text-[10.5px] text-emerald-600 font-medium">Target: &lt; 2h</span>
+                      </div>
+                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
+                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">Resolution SLA</span>
+                        <div className="text-xl font-bold text-[#0F172A] mt-1">97.4%</div>
+                        <span className="text-[10.5px] text-emerald-600 font-medium">Target: &lt; 24h</span>
+                      </div>
+                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
+                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">On-Track Active</span>
+                        <div className="text-xl font-bold text-emerald-600 mt-1">2 / 2</div>
+                        <span className="text-[10.5px] text-[#64748B]">0 at risk</span>
+                      </div>
+                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
+                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">Breached SLAs</span>
+                        <div className="text-xl font-bold text-[#0F172A] mt-1">0</div>
+                        <span className="text-[10.5px] text-emerald-600 font-medium">100% compliant this cycle</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
+                      <h4 className="font-bold text-xs text-[#0F172A] mb-2">SLA Priority Tiers &amp; Deadlines</h4>
+                      <table className="w-full text-xs text-left">
+                        <thead className="bg-[#F8FAFC] border-b border-slate-100 text-[10px] font-mono text-[#64748B]">
+                          <tr>
+                            <th className="py-2 px-3">TIER</th>
+                            <th className="py-2 px-3">FIRST RESPONSE TARGET</th>
+                            <th className="py-2 px-3">RESOLUTION TARGET</th>
+                            <th className="py-2 px-3">CURRENT HEALTH</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                          <tr>
+                            <td className="py-2.5 px-3 font-semibold text-red-600">Critical / Urgent</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">30 minutes</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">4 hours</td>
+                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
+                          </tr>
+                          <tr>
+                            <td className="py-2.5 px-3 font-semibold text-orange-600">High</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">1 hour</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">8 hours</td>
+                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
+                          </tr>
+                          <tr>
+                            <td className="py-2.5 px-3 font-semibold text-blue-600">Medium</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">2 hours</td>
+                            <td className="py-2.5 px-3 font-mono text-[#475569]">24 hours</td>
+                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* VIEW 5: MESSAGING (100% IDENTICAL TO SCREENSHOTS da572d30, ef911eb6, d7f32c66) */}
           {currentView === "messages" && (() => {
