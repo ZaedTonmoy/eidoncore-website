@@ -65,15 +65,62 @@ import {
   Share2,
   Download,
   FileEdit,
+  Folder,
+  Pin,
+  CornerDownRight,
+  Info,
+  UserPlus,
+  Edit3,
 } from "lucide-react";
+
+export interface ChatMessageItem {
+  id: string;
+  senderName: string;
+  senderAvatar: string;
+  timestamp: string;
+  isEdited?: boolean;
+  isPinned?: boolean;
+  isInternalNote?: boolean;
+  replyTo?: {
+    senderName: string;
+    textSnippet: string;
+  };
+  text: string;
+  reactions?: { emoji: string; count: number }[];
+  readBy?: string[];
+  dateDivider?: string;
+}
+
+export interface ChatChannelItem {
+  id: string;
+  type: "project" | "org" | "dm";
+  title: string;
+  fullTitle: string;
+  subtitle: string;
+  snippet: string;
+  time: string;
+  membersCount?: number;
+  membersAvatars?: string[];
+  avatar?: string;
+  hasUnreadDot?: boolean;
+  messages: ChatMessageItem[];
+}
 
 export default function HeroAppWindow() {
   const [currentView, setCurrentView] = useState<
-    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "offerings-services" | "offerings-products" | "tickets" | "messages"
+    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "offerings-services" | "offerings-products" | "team" | "tickets" | "messages"
   >("dashboard");
   const [isOfferingsExpanded, setIsOfferingsExpanded] = useState(false);
   const [offeringsSearch, setOfferingsSearch] = useState("");
   const [offeringsFilter, setOfferingsFilter] = useState<"all" | "wp">("all");
+  const [teamSearch, setTeamSearch] = useState("");
+  const [activeTeamTab, setActiveTeamTab] = useState<"directory" | "workload" | "capacity" | "invitations">("directory");
+  const [teamViewMode, setTeamViewMode] = useState<"grid" | "list">("grid");
+  const [activeChatId, setActiveChatId] = useState<string>("arcturus-org");
+  const [chatSearch, setChatSearch] = useState("");
+  const [chatInputText, setChatInputText] = useState("");
+  const [isInternalNoteMode, setIsInternalNoteMode] = useState(false);
+  const [newChatMessages, setNewChatMessages] = useState<Record<string, ChatMessageItem[]>>({});
   const [activeOrgTab, setActiveOrgTab] = useState<"all" | "active" | "leads" | "at_risk">("all");
   const [activeProposalTab, setActiveProposalTab] = useState<"all" | "active" | "awaiting" | "won" | "attention">("all");
   const [copilotOpen, setCopilotOpen] = useState(false);
@@ -381,12 +428,12 @@ export default function HeroAppWindow() {
           Offerings
         </button>
         <button
-          onClick={() => setCurrentView("tickets")}
+          onClick={() => setCurrentView("team")}
           className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
-            currentView === "tickets" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
+            currentView === "team" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
           }`}
         >
-          Tickets
+          Team
         </button>
         <button
           onClick={() => setCurrentView("messages")}
@@ -395,6 +442,14 @@ export default function HeroAppWindow() {
           }`}
         >
           Messages
+        </button>
+        <button
+          onClick={() => setCurrentView("tickets")}
+          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
+            currentView === "tickets" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
+          }`}
+        >
+          Tickets
         </button>
       </div>
 
@@ -572,21 +627,33 @@ export default function HeroAppWindow() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <Users size={14} className="text-[#64748B]" />
-                  <span>Team</span>
-                </div>
+                <button
+                  onClick={() => setCurrentView("team")}
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                    currentView === "team"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
+                      : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Users size={14} className={currentView === "team" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Team</span>
+                  </div>
+                </button>
 
                 <button
                   onClick={() => setCurrentView("messages")}
-                  className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
                     currentView === "messages"
                       ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
                       : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
                   }`}
                 >
-                  <MessageSquare size={14} className={currentView === "messages" ? "text-[#0F172A]" : "text-[#64748B]"} />
-                  <span>Messages</span>
+                  <div className="flex items-center gap-2.5">
+                    <MessageSquare size={14} className={currentView === "messages" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Messages</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-white bg-[#3B82F6] px-1.5 py-0.2 rounded-full">2</span>
                 </button>
 
                 <button
@@ -682,6 +749,7 @@ export default function HeroAppWindow() {
                 {currentView === "projects" && <FolderKanban size={13} />}
                 {currentView === "tasks" && <CheckSquare size={13} />}
                 {(currentView === "offerings-services" || currentView === "offerings-products") && <Box size={13} />}
+                {currentView === "team" && <Users size={13} />}
                 {currentView === "tickets" && <Ticket size={13} />}
                 {currentView === "messages" && <MessageSquare size={13} />}
               </div>
@@ -690,6 +758,10 @@ export default function HeroAppWindow() {
                   ? "Dashboard"
                   : currentView === "offerings-services" || currentView === "offerings-products"
                   ? "Offerings"
+                  : currentView === "messages"
+                  ? "Messaging"
+                  : currentView === "team"
+                  ? "Team"
                   : currentView}
               </h2>
             </div>
@@ -6848,6 +6920,441 @@ export default function HeroAppWindow() {
             );
           })()}
 
+          {/* VIEW: TEAM DIRECTORY (100% IDENTICAL TO SCREENSHOT media_1791663752064_77641ea0.png) */}
+          {currentView === "team" && (() => {
+            const teamMembers = [
+              {
+                id: "tm-1",
+                name: "Amara Okafor",
+                role: "Agency Member",
+                email: "amara@aetheris.design",
+                department: "Engineering",
+                activeTasks: 10,
+                overdueTasks: 4,
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-2",
+                name: "Chloe Bennett",
+                role: "Agency Member",
+                email: "chloe@aetheris.design",
+                department: "Design",
+                activeTasks: 6,
+                overdueTasks: 0,
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-3",
+                name: "Dominic Sterling",
+                role: "Accountant",
+                email: "dominic@aetheris.desi...",
+                department: "Finance",
+                activeTasks: 0,
+                overdueTasks: 0,
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-4",
+                name: "Elena Rostova",
+                role: "Admin",
+                email: "elena@aetheris.design",
+                department: "Operations",
+                activeTasks: 0,
+                overdueTasks: 0,
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-5",
+                name: "Julian Vance",
+                isYou: true,
+                role: "Owner",
+                email: "julian@aetheris.design",
+                department: "Executive",
+                activeTasks: 0,
+                overdueTasks: 0,
+                avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-6",
+                name: "Liam Gallagher",
+                role: "Agency Member",
+                email: "liam@aetheris.design",
+                department: "Design",
+                activeTasks: 6,
+                overdueTasks: 2,
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-7",
+                name: "Marcus Brody",
+                role: "Project Manager",
+                email: "marcus@aetheris.design",
+                department: "Delivery",
+                activeTasks: 1,
+                overdueTasks: 1,
+                avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+              {
+                id: "tm-8",
+                name: "Sophia Lin",
+                role: "Project Manager",
+                email: "sophia@aetheris.design",
+                department: "Delivery",
+                activeTasks: 5,
+                overdueTasks: 1,
+                avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80",
+                status: "Active",
+              },
+            ];
+
+            const filteredTeam = teamMembers.filter((m) => {
+              if (teamSearch) {
+                return (
+                  m.name.toLowerCase().includes(teamSearch.toLowerCase()) ||
+                  m.role.toLowerCase().includes(teamSearch.toLowerCase()) ||
+                  m.department.toLowerCase().includes(teamSearch.toLowerCase())
+                );
+              }
+              return true;
+            });
+
+            return (
+              <div className="p-4 sm:p-6 flex flex-col gap-5 animate-fadeIn pb-12">
+                {/* Header Subtitle Eyebrow and Title */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#94A3B8] font-semibold tracking-wider">
+                      THE PEOPLE BEHIND THE WORK
+                    </span>
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mt-0.5 tracking-tight">
+                      Great work starts with your team.
+                    </h2>
+                    <p className="text-xs text-[#64748B] mt-1">
+                      Find the right person, make room for focused work, and keep everyone moving together.
+                    </p>
+                  </div>
+
+                  {/* Overlapping Team Avatars */}
+                  <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+                    <div className="flex -space-x-2">
+                      <img
+                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                        alt="Amara"
+                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
+                      />
+                      <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80"
+                        alt="Chloe"
+                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
+                      />
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
+                        alt="Liam"
+                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
+                      />
+                      <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80"
+                        alt="Dominic"
+                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
+                      />
+                    </div>
+                    <span className="text-[10.5px] font-semibold text-[#64748B] bg-slate-100 px-1.5 py-0.5 rounded-full">
+                      +4
+                    </span>
+                    <span className="text-xs font-semibold text-[#0F172A]">8 people</span>
+                  </div>
+                </div>
+
+                {/* Team Navigation Tabs */}
+                <div className="flex items-center justify-between border-b border-[#E2E8F0] gap-4">
+                  <div className="flex items-center gap-6 text-xs overflow-x-auto no-scrollbar">
+                    <button
+                      onClick={() => setActiveTeamTab("directory")}
+                      className={`pb-2.5 font-medium transition-colors whitespace-nowrap ${
+                        activeTeamTab === "directory"
+                          ? "font-semibold text-[#0F172A] border-b-2 border-[#0F172A] -mb-px"
+                          : "text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      Directory
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCurrentView("tasks");
+                        setTaskViewMode("workload");
+                      }}
+                      className="pb-2.5 font-medium text-[#64748B] hover:text-[#0F172A] transition-colors whitespace-nowrap"
+                    >
+                      Workload
+                    </button>
+                    <button
+                      onClick={() => setActiveTeamTab("capacity")}
+                      className={`pb-2.5 font-medium transition-colors whitespace-nowrap ${
+                        activeTeamTab === "capacity"
+                          ? "font-semibold text-[#0F172A] border-b-2 border-[#0F172A] -mb-px"
+                          : "text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      Capacity & Timeline
+                    </button>
+                    <button
+                      onClick={() => setActiveTeamTab("invitations")}
+                      className={`pb-2.5 font-medium transition-colors whitespace-nowrap ${
+                        activeTeamTab === "invitations"
+                          ? "font-semibold text-[#0F172A] border-b-2 border-[#0F172A] -mb-px"
+                          : "text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      Invitations
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-2 pb-2 shrink-0">
+                    <button className="p-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50 transition-colors shadow-2xs">
+                      <RotateCw size={13} />
+                    </button>
+                    <button className="px-3 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors">
+                      <UserPlus size={13} />
+                      <span>Invite member</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* 2-Column Main Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                  {/* Left Column: Your people + Filter Bar + Cards Grid */}
+                  <div className="lg:col-span-8 flex flex-col gap-4">
+                    {/* Subtitle & Grid/List Toggle */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-bold text-xs text-[#0F172A]">Your people</h3>
+                        <p className="text-[11px] text-[#94A3B8]">A little more connected. A lot more in sync.</p>
+                      </div>
+
+                      <div className="flex items-center gap-1 bg-white border border-[#E2E8F0] rounded-lg p-0.5">
+                        <button
+                          onClick={() => setTeamViewMode("grid")}
+                          className={`p-1 rounded ${teamViewMode === "grid" ? "bg-slate-100 text-[#0F172A]" : "text-[#94A3B8]"}`}
+                        >
+                          <LayoutGrid size={13} />
+                        </button>
+                        <button
+                          onClick={() => setTeamViewMode("list")}
+                          className={`p-1 rounded ${teamViewMode === "list" ? "bg-slate-100 text-[#0F172A]" : "text-[#94A3B8]"}`}
+                        >
+                          <List size={13} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Filter Controls Bar */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                      <div className="flex items-center gap-2 flex-1">
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#0F172A] flex-1 max-w-xs shadow-2xs focus-within:border-indigo-500 transition-colors">
+                          <Search size={13} className="text-[#94A3B8] shrink-0" />
+                          <input
+                            type="text"
+                            placeholder="Search people, roles, or departments..."
+                            value={teamSearch}
+                            onChange={(e) => setTeamSearch(e.target.value)}
+                            className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8]"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-1.5 text-xs text-[#475569]">
+                          <select className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#475569] outline-none shadow-2xs hover:bg-slate-50 cursor-pointer">
+                            <option>All departments</option>
+                            <option>Delivery</option>
+                            <option>Design</option>
+                            <option>Engineering</option>
+                            <option>Finance</option>
+                            <option>Operations</option>
+                          </select>
+                          <select className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#475569] outline-none shadow-2xs hover:bg-slate-50 cursor-pointer">
+                            <option>All roles</option>
+                            <option>Owner</option>
+                            <option>Admin</option>
+                            <option>Project Manager</option>
+                            <option>Agency Member</option>
+                            <option>Accountant</option>
+                          </select>
+                          <select className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#475569] outline-none shadow-2xs hover:bg-slate-50 cursor-pointer">
+                            <option>All statuses</option>
+                            <option>Active</option>
+                            <option>Invited</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between sm:justify-end gap-3 text-xs text-[#64748B]">
+                        <span>Showing {filteredTeam.length} of 8</span>
+                        <div className="flex items-center gap-1 font-medium text-[#0F172A] cursor-pointer">
+                          <span>Name A–Z</span>
+                          <ChevronDown size={11} className="text-[#94A3B8]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Member Cards Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+                      {filteredTeam.map((member) => (
+                        <div
+                          key={member.id}
+                          className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-2xs flex flex-col justify-between hover:shadow-md transition-shadow group"
+                        >
+                          <div>
+                            {/* Avatar & Header */}
+                            <div className="flex items-start justify-between gap-2">
+                              <img
+                                src={member.avatar}
+                                alt={member.name}
+                                className="w-11 h-11 rounded-full object-cover shrink-0 border border-slate-100"
+                              />
+                              <span className="text-[11px] text-[#059669] font-medium flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                                Active
+                              </span>
+                            </div>
+
+                            {/* Name & Role */}
+                            <div className="mt-2.5">
+                              <div className="flex items-center gap-1.5">
+                                <h4 className="font-bold text-[13px] text-[#0F172A] group-hover:text-indigo-600 transition-colors">
+                                  {member.name}
+                                </h4>
+                                {member.isYou && (
+                                  <span className="px-1.5 py-0.2 rounded bg-[#EEF2FF] text-[#4F46E5] text-[10px] font-semibold">
+                                    You
+                                  </span>
+                                )}
+                              </div>
+                              <span className="px-2 py-0.5 rounded-md bg-[#F1F5F9] text-[#475569] text-[10px] font-medium inline-block mt-1">
+                                {member.role}
+                              </span>
+                            </div>
+
+                            {/* Email & Department */}
+                            <div className="mt-2 text-[11px] leading-tight">
+                              <span className="text-[#94A3B8] block truncate">{member.email}</span>
+                              <span className="text-[#64748B] font-medium block mt-1">{member.department}</span>
+                            </div>
+                          </div>
+
+                          {/* Footer: Tasks count & overdue */}
+                          <div className="border-t border-[#F1F5F9] pt-2.5 mt-3.5 flex items-center justify-between text-xs">
+                            <span className="text-[#64748B]">
+                              <b className="font-bold text-[#0F172A]">{member.activeTasks}</b> Active tasks
+                            </span>
+                            {member.overdueTasks > 0 && (
+                              <span className="px-2 py-0.5 bg-[#FEF2F2] text-[#DC2626] border border-[#FEE2E2] rounded-md text-[10px] font-semibold flex items-center gap-1">
+                                <AlertTriangle size={10} /> {member.overdueTasks} overdue
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Widgets */}
+                  <div className="lg:col-span-4 flex flex-col gap-4">
+                    {/* Widget 1: TEAM COPILOT */}
+                    <div className="bg-white rounded-2xl border border-indigo-100 p-4 shadow-2xs">
+                      <div className="flex items-center gap-1.5">
+                        <Sparkles size={12} className="text-[#6366F1]" />
+                        <span className="text-[10px] font-mono text-[#6366F1] font-bold uppercase tracking-wider">
+                          TEAM COPILOT
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-xs text-[#0F172A] mt-1.5">
+                        A little help, a better handoff.
+                      </h4>
+                      <p className="text-[11.5px] text-[#64748B] mt-1 leading-relaxed">
+                        Use your team&apos;s available context to plan onboarding, clarify responsibilities, and prepare handoffs.
+                      </p>
+
+                      <div className="mt-3 flex flex-col gap-1.5">
+                        <button className="w-full p-2.5 bg-slate-50 hover:bg-indigo-50/50 border border-slate-100 hover:border-indigo-200 rounded-xl text-xs font-medium text-[#0F172A] flex items-center justify-between transition-colors text-left group">
+                          <span>Clarify team responsibilities</span>
+                          <ArrowRight size={12} className="text-[#94A3B8] group-hover:text-indigo-600 transition-colors" />
+                        </button>
+                        <button className="w-full p-2.5 bg-slate-50 hover:bg-indigo-50/50 border border-slate-100 hover:border-indigo-200 rounded-xl text-xs font-medium text-[#0F172A] flex items-center justify-between transition-colors text-left group">
+                          <span>Plan an onboarding checklist</span>
+                          <ArrowRight size={12} className="text-[#94A3B8] group-hover:text-indigo-600 transition-colors" />
+                        </button>
+                        <button className="w-full p-2.5 bg-slate-50 hover:bg-indigo-50/50 border border-slate-100 hover:border-indigo-200 rounded-xl text-xs font-medium text-[#0F172A] flex items-center justify-between transition-colors text-left group">
+                          <span>Prepare a handoff checklist</span>
+                          <ArrowRight size={12} className="text-[#94A3B8] group-hover:text-indigo-600 transition-colors" />
+                        </button>
+                      </div>
+
+                      <span className="text-[10px] text-[#94A3B8] mt-2.5 block">
+                        Uses only information your role can access.
+                      </span>
+                    </div>
+
+                    {/* Widget 2: WORTH A LOOK */}
+                    <div className="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-2xs">
+                      <span className="text-[10px] font-mono uppercase text-[#64748B] font-bold tracking-wider">
+                        WORTH A LOOK
+                      </span>
+                      <p className="text-xs text-[#64748B] mt-0.5">
+                        A few small check-ins can make a big difference.
+                      </p>
+
+                      <div className="mt-3 flex flex-col gap-1.5">
+                        <div className="p-2 rounded-xl hover:bg-slate-50 flex items-center justify-between text-xs text-[#0F172A] cursor-pointer group">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                            <span className="font-medium">4 people with overdue work</span>
+                          </div>
+                          <ArrowRight size={12} className="text-[#94A3B8] group-hover:text-[#0F172A]" />
+                        </div>
+
+                        <div className="p-2 rounded-xl hover:bg-slate-50 flex items-center justify-between text-xs text-[#0F172A] cursor-pointer group">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                            <span className="font-medium">1 person with 10+ tasks</span>
+                          </div>
+                          <ArrowRight size={12} className="text-[#94A3B8] group-hover:text-[#0F172A]" />
+                        </div>
+                      </div>
+
+                      <p className="text-[10px] text-[#94A3B8] leading-relaxed mt-3 pt-3 border-t border-[#F1F5F9]">
+                        Active task counts are benchmarked against a 10-task reference point across all active projects. It reflects open task count, not calendar availability or total estimated effort.
+                      </p>
+                    </div>
+
+                    {/* Widget 3: DEPARTMENTS */}
+                    <div className="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-2xs">
+                      <span className="text-[10px] font-mono uppercase text-[#64748B] font-bold tracking-wider">
+                        DEPARTMENTS
+                      </span>
+
+                      <div className="mt-3 flex flex-col gap-2 text-xs">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[#475569] font-medium">Delivery</span>
+                          <span className="text-[11px] font-bold text-[#0F172A] bg-slate-100 px-2 py-0.5 rounded-full">2</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[#475569] font-medium">Design</span>
+                          <span className="text-[11px] font-bold text-[#0F172A] bg-slate-100 px-2 py-0.5 rounded-full">2</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
           {/* VIEW 4: TICKETS (100% IDENTICAL TO SCREENSHOT 27) */}
           {currentView === "tickets" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
@@ -6939,79 +7446,701 @@ export default function HeroAppWindow() {
             </div>
           )}
 
-          {/* VIEW 5: MESSAGES (Screenshot 26) */}
-          {currentView === "messages" && (
-            <div className="flex-1 flex overflow-hidden animate-fadeIn bg-white border-t border-[#E2E8F0]">
-              {/* Channels Sidebar */}
-              <div className="w-[210px] border-r border-[#E2E8F0] p-3 flex flex-col gap-3 shrink-0 bg-[#F8FAFC]">
-                <div className="px-2 py-1 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#94A3B8]">
-                  Search channels...
-                </div>
-                <div className="flex flex-col gap-1 text-xs">
-                  <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold px-1">PROJECTS</span>
-                  <div className="p-1.5 rounded-lg bg-white border border-slate-200 font-bold text-[#0F172A] flex items-center justify-between">
-                    <span className="truncate"># Internal Tasks</span>
-                    <span className="text-[9px] font-mono text-blue-600">3d</span>
-                  </div>
-                  <div className="p-1.5 rounded-lg text-[#64748B] hover:bg-slate-100 truncate cursor-pointer">
-                    # Apex Studio Website
-                  </div>
-                  <div className="p-1.5 rounded-lg text-[#64748B] hover:bg-slate-100 truncate cursor-pointer">
-                    # Website Maintenance
-                  </div>
-                </div>
-              </div>
+          {/* VIEW 5: MESSAGING (100% IDENTICAL TO SCREENSHOTS da572d30, ef911eb6, d7f32c66) */}
+          {currentView === "messages" && (() => {
+            const channels: ChatChannelItem[] = [
+              {
+                id: "aetheris-design",
+                type: "project" as const,
+                title: "Aetheris Design System v3 Core Li...",
+                fullTitle: "Aetheris Design System v3 Core Library",
+                subtitle: "Project · 5 members",
+                snippet: "Next.js marketing portal and client portal co...",
+                time: "5d",
+                membersCount: 5,
+                membersAvatars: [
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+                ],
+                messages: [
+                  {
+                    id: "ad-1",
+                    senderName: "Liam Gallagher",
+                    senderAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "05:38 AM (edited)",
+                    isPinned: true,
+                    text: "Aetheris Design Tokens 2.0 release is locked. All Figma variables, JSON token transforms, and CSS custom properties are verified.",
+                    reactions: [
+                      { emoji: "🔥", count: 1 },
+                      { emoji: "🚀", count: 1 },
+                    ],
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "ad-2",
+                    senderName: "Amara Okafor",
+                    senderAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "09:38 AM (edited)",
+                    text: "Next.js marketing portal and client portal components updated with electric indigo (#6366F1) and cyan glow (#06B6D4) gradients.",
+                    reactions: [{ emoji: "❤️", count: 1 }],
+                  },
+                ],
+              },
+              {
+                id: "arcturus-brand",
+                type: "project" as const,
+                title: "Arcturus Brand Identity & Web Laun...",
+                fullTitle: "Arcturus Brand Identity & Web Launch",
+                subtitle: "Project · 4 members",
+                snippet: "Internal note: Evelyn confirmed 80 rovers de...",
+                time: "5d",
+                membersCount: 4,
+                membersAvatars: [
+                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                ],
+                messages: [
+                  {
+                    id: "ab-1",
+                    senderName: "Evelyn Thorne",
+                    senderAvatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "08:15 AM (edited)",
+                    isPinned: true,
+                    isInternalNote: true,
+                    text: "Internal note: Evelyn confirmed 80 rovers deployed on site for trial runs. Initial brand guidelines submitted to executive committee.",
+                    dateDivider: "September 29, 2026",
+                  },
+                ],
+              },
+              {
+                id: "arcturus-org",
+                type: "org" as const,
+                title: "Arcturus Robotics",
+                fullTitle: "Arcturus Robotics",
+                subtitle: "Organization · 3 members",
+                snippet: "Internal note: Travel expenses logged ($2,35...",
+                time: "5d",
+                membersCount: 3,
+                membersAvatars: [
+                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+                ],
+                messages: [
+                  {
+                    id: "ao-1",
+                    senderName: "Evelyn Thorne",
+                    senderAvatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "05:38 AM (edited)",
+                    isPinned: true,
+                    text: "We're setting up the hardware testbed rovers in Boston next Monday. Can Julian and Marcus join onsite for the live telemetry trials?",
+                    reactions: [{ emoji: "🚀", count: 1 }],
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "ao-2",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "06:08 AM (edited)",
+                    replyTo: {
+                      senderName: "Evelyn Thorne",
+                      textSnippet: "We're setting up the hardware testbed rovers in Boston next Monday. Can Julian a...",
+                    },
+                    text: "Flights booked! We will be onsite Monday morning with the full design and technical team.",
+                  },
+                  {
+                    id: "ao-3",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "10:08 AM (edited)",
+                    isInternalNote: true,
+                    text: "Internal note: Travel expenses logged ($2,350) under Arcturus project. Client will reimburse per contract section 4.2.",
+                    reactions: [{ emoji: "👍", count: 1 }],
+                    readBy: [
+                      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+                      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                    ],
+                  },
+                ],
+              },
+              {
+                id: "kroma-fintech",
+                type: "org" as const,
+                title: "Kroma Fintech",
+                fullTitle: "Kroma Fintech",
+                subtitle: "Organization · 4 members",
+                snippet: "Congratulations Tariq and Nadia! We are ...",
+                hasUnreadDot: true,
+                time: "5d",
+                membersCount: 4,
+                membersAvatars: [
+                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                ],
+                messages: [
+                  {
+                    id: "kf-1",
+                    senderName: "Tariq Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "09:12 AM",
+                    text: "Kroma wire of $14,000 for SDK release has cleared. Production cutover ready for review.",
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "kf-2",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "10:30 AM",
+                    text: "Congratulations Tariq and Nadia! We are locked for final phase deployment this Thursday.",
+                    reactions: [{ emoji: "🎉", count: 1 }],
+                  },
+                ],
+              },
+              {
+                id: "nebula-health",
+                type: "org" as const,
+                title: "Nebula Health",
+                fullTitle: "Nebula Health",
+                subtitle: "Organization · 3 members",
+                snippet: "The contrast fixes and booking flow look ...",
+                hasUnreadDot: true,
+                time: "5d",
+                membersCount: 3,
+                membersAvatars: [
+                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+                ],
+                messages: [
+                  {
+                    id: "nh-1",
+                    senderName: "Dr. Aris",
+                    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "08:45 AM",
+                    text: "The contrast fixes and booking flow look fantastic in the staging environment! Patients love the speed.",
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "nh-2",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "09:15 AM",
+                    text: "Thank you Dr. Aris! Production cutover is scheduled for Thursday evening.",
+                    reactions: [{ emoji: "❤️", count: 1 }],
+                  },
+                ],
+              },
+              {
+                id: "marcus-dm",
+                type: "dm" as const,
+                title: "Marcus Brody",
+                fullTitle: "Marcus Brody",
+                subtitle: "Direct Message",
+                snippet: "Thanks Julian! Amara and Liam crushed the ...",
+                time: "5d",
+                avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                messages: [
+                  {
+                    id: "mb-1",
+                    senderName: "Marcus Brody",
+                    senderAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "07:20 AM",
+                    text: "Thanks Julian! Amara and Liam crushed the design token sprint ahead of schedule.",
+                    reactions: [{ emoji: "🚀", count: 1 }],
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "mb-2",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "08:10 AM",
+                    text: "Awesome work Marcus! Let's make sure the client gets the demo build by 3 PM.",
+                    reactions: [{ emoji: "👍", count: 1 }],
+                  },
+                ],
+              },
+              {
+                id: "elena-dm",
+                type: "dm" as const,
+                title: "Elena Rostova",
+                fullTitle: "Elena Rostova",
+                subtitle: "Direct Message",
+                snippet: "Absolutely Julian. Dominic and I finished rec...",
+                time: "5d",
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                messages: [
+                  {
+                    id: "er-1",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "05:38 AM (edited)",
+                    isPinned: true,
+                    text: "Elena, October is shaping up to be our strongest month this year — over $148k total invoiced and $109k collected!",
+                    reactions: [
+                      { emoji: "🔥", count: 1 },
+                      { emoji: "🎉", count: 1 },
+                    ],
+                    dateDivider: "September 29, 2026",
+                  },
+                  {
+                    id: "er-2",
+                    senderName: "Elena Rostova",
+                    senderAvatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "09:38 AM (edited)",
+                    text: "Yes! Arcturus Robotics wire cleared ($15,200) and Kroma paid the $14,000 SDK release invoice. Dominic reconciled everything.",
+                    reactions: [{ emoji: "❤️", count: 1 }],
+                  },
+                  {
+                    id: "er-3",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "01:38 PM (edited)",
+                    isInternalNote: true,
+                    text: "Internal note: Let's discuss hiring another senior frontend engineer next Monday.",
+                    reactions: [{ emoji: "👍", count: 1 }],
+                  },
+                  {
+                    id: "er-4",
+                    senderName: "Julian Vance",
+                    senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "12:00 PM (edited)",
+                    text: "Elena, Q3 revenue figures look incredible ($100k+ mark crossed). Let's review the Arcturus proposal terms tomorrow.",
+                    readBy: [
+                      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                    ],
+                    dateDivider: "Sunday",
+                  },
+                  {
+                    id: "er-5",
+                    senderName: "Elena Rostova",
+                    senderAvatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+                    timestamp: "12:00 PM (edited)",
+                    text: "Absolutely Julian. Dominic and I finished reconciling all August invoice payments. Ready for review.",
+                    dateDivider: "Monday",
+                  },
+                ],
+              },
+            ];
 
-              {/* Chat Thread */}
-              <div className="flex-1 flex flex-col justify-between p-4 bg-white">
-                <div className="flex flex-col gap-3 overflow-y-auto">
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            const currentChannel = channels.find((c) => c.id === activeChatId) || channels[2];
+            const combinedMessages: ChatMessageItem[] = [
+              ...currentChannel.messages,
+              ...(newChatMessages[activeChatId] || []),
+            ];
+
+            const handleSend = () => {
+              if (!chatInputText.trim()) return;
+              const newMsg: ChatMessageItem = {
+                id: `new-${Date.now()}`,
+                senderName: "Julian Vance",
+                senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                timestamp: "Just now",
+                isInternalNote: isInternalNoteMode,
+                text: isInternalNoteMode ? `Internal note: ${chatInputText}` : chatInputText,
+                reactions: [],
+              };
+              setNewChatMessages((prev) => ({
+                ...prev,
+                [activeChatId]: [...(prev[activeChatId] || []), newMsg],
+              }));
+              setChatInputText("");
+            };
+
+            return (
+              <div className="flex-1 flex h-[680px] overflow-hidden bg-white animate-fadeIn border-t border-[#E2E8F0]">
+                {/* Left Channels & DMs Sidebar */}
+                <div className="w-[260px] sm:w-[280px] border-r border-[#E2E8F0] flex flex-col shrink-0 bg-white select-none">
+                  {/* Sidebar Header */}
+                  <div className="p-3.5 border-b border-[#F1F5F9] flex items-center justify-between">
+                    <h3 className="font-bold text-sm text-[#0F172A]">Messages</h3>
+                    <button className="text-[#64748B] hover:text-[#0F172A] p-1 rounded hover:bg-slate-50 transition-colors">
+                      <Edit3 size={15} />
+                    </button>
+                  </div>
+
+                  {/* Search input */}
+                  <div className="p-2.5 border-b border-[#F1F5F9]">
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs text-[#64748B] focus-within:border-indigo-400 focus-within:bg-white transition-colors">
+                      <Search size={12} className="text-[#94A3B8] shrink-0" />
+                      <input
+                        type="text"
+                        placeholder="Search or start a new DM..."
+                        value={chatSearch}
+                        onChange={(e) => setChatSearch(e.target.value)}
+                        className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Scrollable Channels List */}
+                  <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col gap-3 p-2">
+                    {/* 1. PROJECTS GROUP */}
                     <div>
-                      <h4 className="font-bold text-xs text-[#0F172A]"># Internal Tasks</h4>
-                      <span className="text-[10px] text-[#64748B]">Project · 2 members</span>
+                      <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold tracking-wider px-2 py-1 block">
+                        PROJECTS
+                      </span>
+                      <div className="flex flex-col gap-0.5 mt-0.5">
+                        {channels
+                          .filter((c) => c.type === "project")
+                          .map((ch) => {
+                            const isActive = activeChatId === ch.id;
+                            return (
+                              <button
+                                key={ch.id}
+                                onClick={() => setActiveChatId(ch.id)}
+                                className={`w-full p-2 rounded-xl text-left transition-all flex items-start gap-2.5 ${
+                                  isActive
+                                    ? "bg-[#F1F5F9] text-[#0F172A]"
+                                    : "hover:bg-slate-50 text-[#475569]"
+                                }`}
+                              >
+                                <div className="w-6 h-6 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 mt-0.5">
+                                  <Folder size={13} className="text-[#6366F1]" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center justify-between gap-1">
+                                    <span className={`text-xs truncate ${isActive ? "font-bold text-[#0F172A]" : "font-medium text-[#1E293B]"}`}>
+                                      {ch.title}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-[#94A3B8] shrink-0">{ch.time}</span>
+                                  </div>
+                                  <p className="text-[11px] text-[#64748B] truncate mt-0.5">{ch.snippet}</p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-start gap-2.5 pt-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
-                      AM
-                    </div>
-                    <div className="flex flex-col gap-0.5">
-                      <div className="flex items-center gap-2 text-[11px]">
-                        <span className="font-bold text-[#0F172A]">Alex Miller</span>
-                        <span className="text-[9.5px] text-[#94A3B8]">03:46 PM (pinned)</span>
+                    {/* 2. ORGANIZATIONS GROUP */}
+                    <div>
+                      <div className="flex items-center justify-between px-2 py-1">
+                        <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold tracking-wider">
+                          ORGANIZATIONS
+                        </span>
+                        <span className="text-[10px] font-bold text-white bg-[#3B82F6] px-1.5 py-0.2 rounded-full">
+                          2
+                        </span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-slate-100 text-xs text-[#0F172A] leading-relaxed max-w-md">
-                        Welcome to the workspace! Let&apos;s keep all client deliverable updates synced right here.
+                      <div className="flex flex-col gap-0.5 mt-0.5">
+                        {channels
+                          .filter((c) => c.type === "org")
+                          .map((ch) => {
+                            const isActive = activeChatId === ch.id;
+                            return (
+                              <button
+                                key={ch.id}
+                                onClick={() => setActiveChatId(ch.id)}
+                                className={`w-full p-2 rounded-xl text-left transition-all flex items-start gap-2.5 ${
+                                  isActive
+                                    ? "bg-[#F1F5F9] text-[#0F172A]"
+                                    : "hover:bg-slate-50 text-[#475569]"
+                                }`}
+                              >
+                                <div className="w-6 h-6 rounded-md bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0 mt-0.5">
+                                  <Users size={13} className="text-[#8B5CF6]" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center justify-between gap-1">
+                                    <span className={`text-xs truncate ${isActive ? "font-bold text-[#0F172A]" : "font-medium text-[#1E293B]"}`}>
+                                      {ch.title}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-[#94A3B8] shrink-0">{ch.time}</span>
+                                  </div>
+                                  <div className="flex items-center justify-between gap-1 mt-0.5">
+                                    <p className="text-[11px] text-[#64748B] truncate">{ch.snippet}</p>
+                                    {ch.hasUnreadDot && (
+                                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                                    )}
+                                  </div>
+                                </div>
+                              </button>
+                            );
+                          })}
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-start gap-2.5 pt-1">
-                    <div className="w-6 h-6 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
-                      JL
-                    </div>
-                    <div className="flex flex-col gap-0.5">
-                      <div className="flex items-center gap-2 text-[11px]">
-                        <span className="font-bold text-[#0F172A]">Jordan Lee</span>
-                        <span className="text-[9.5px] text-[#94A3B8]">04:12 PM</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-slate-100 text-xs text-[#0F172A] leading-relaxed max-w-md">
-                        Verified the custom domain SSL certificates. Everything is resolving correctly and ready for review.
+                    {/* 3. DIRECT MESSAGES GROUP */}
+                    <div>
+                      <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold tracking-wider px-2 py-1 block">
+                        DIRECT MESSAGES
+                      </span>
+                      <div className="flex flex-col gap-0.5 mt-0.5">
+                        {channels
+                          .filter((c) => c.type === "dm")
+                          .map((ch) => {
+                            const isActive = activeChatId === ch.id;
+                            return (
+                              <button
+                                key={ch.id}
+                                onClick={() => setActiveChatId(ch.id)}
+                                className={`w-full p-2 rounded-xl text-left transition-all flex items-start gap-2.5 ${
+                                  isActive
+                                    ? "bg-[#F1F5F9] text-[#0F172A]"
+                                    : "hover:bg-slate-50 text-[#475569]"
+                                }`}
+                              >
+                                <img
+                                  src={ch.avatar}
+                                  alt={ch.title}
+                                  className="w-6 h-6 rounded-full object-cover shrink-0 mt-0.5 border border-slate-100"
+                                />
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center justify-between gap-1">
+                                    <span className={`text-xs truncate ${isActive ? "font-bold text-[#0F172A]" : "font-medium text-[#1E293B]"}`}>
+                                      {ch.title}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-[#94A3B8] shrink-0">{ch.time}</span>
+                                  </div>
+                                  <p className="text-[11px] text-[#64748B] truncate mt-0.5">{ch.snippet}</p>
+                                </div>
+                              </button>
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-3 p-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl flex items-center justify-between">
-                  <span className="text-xs text-[#94A3B8]">Type a message... (@ to mention, / for tools)</span>
-                  <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center">
-                    <Send size={11} />
+                {/* Right Conversation Thread Pane */}
+                <div className="flex-1 flex flex-col justify-between bg-white h-full overflow-hidden">
+                  {/* Chat Top Header */}
+                  <div className="px-4 py-3 border-b border-[#E2E8F0] flex items-center justify-between bg-white shrink-0">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      {currentChannel.avatar ? (
+                        <img
+                          src={currentChannel.avatar}
+                          alt={currentChannel.fullTitle}
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                      ) : (
+                        <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0">
+                          {currentChannel.type === "project" ? (
+                            <Folder size={14} className="text-[#6366F1]" />
+                          ) : (
+                            <Users size={14} className="text-[#8B5CF6]" />
+                          )}
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-xs sm:text-sm text-[#0F172A] truncate">
+                          {currentChannel.fullTitle}
+                        </h4>
+                        <span className="text-[11px] text-[#64748B] block truncate">
+                          {currentChannel.subtitle}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 shrink-0">
+                      <button className="text-[#94A3B8] hover:text-[#0F172A] p-1 rounded hover:bg-slate-50 transition-colors">
+                        <Plus size={15} />
+                      </button>
+
+                      {currentChannel.membersAvatars && (
+                        <div className="flex items-center gap-1">
+                          <div className="flex -space-x-1.5">
+                            {currentChannel.membersAvatars.map((av, idx) => (
+                              <img
+                                key={idx}
+                                src={av}
+                                alt="member"
+                                className="w-5 h-5 rounded-full border-2 border-white object-cover"
+                              />
+                            ))}
+                          </div>
+                          {currentChannel.membersCount && currentChannel.membersCount > 3 && (
+                            <span className="text-[10px] font-semibold text-[#64748B] bg-slate-100 px-1 py-0.2 rounded-full">
+                              +{currentChannel.membersCount - 3}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      <button className="text-[#94A3B8] hover:text-[#0F172A] p-1 rounded hover:bg-slate-50 transition-colors">
+                        <Info size={15} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Messages Feed Area */}
+                  <div className="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col gap-4 no-scrollbar">
+                    {combinedMessages.map((msg) => (
+                      <React.Fragment key={msg.id}>
+                        {/* Date Divider */}
+                        {msg.dateDivider && (
+                          <div className="flex items-center gap-3 my-1">
+                            <div className="flex-1 h-px bg-slate-100" />
+                            <span className="px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-[10.5px] font-medium text-[#64748B] shadow-2xs">
+                              {msg.dateDivider}
+                            </span>
+                            <div className="flex-1 h-px bg-slate-100" />
+                          </div>
+                        )}
+
+                        {/* Message Row */}
+                        <div className="flex items-start gap-3 group">
+                          <img
+                            src={msg.senderAvatar}
+                            alt={msg.senderName}
+                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover shrink-0 border border-slate-100 mt-0.5"
+                          />
+
+                          <div className="flex-1 min-w-0">
+                            {/* Sender Info Line */}
+                            <div className="flex items-center gap-2 flex-wrap text-xs">
+                              <span className="font-bold text-[#0F172A]">{msg.senderName}</span>
+                              <span className="text-[10px] text-[#94A3B8] font-normal">{msg.timestamp}</span>
+
+                              {msg.isPinned && (
+                                <span className="flex items-center gap-1 text-[10px] text-[#6366F1] font-semibold bg-[#EEF2FF] px-1.5 py-0.2 rounded">
+                                  <Pin size={9} /> Pinned
+                                </span>
+                              )}
+
+                              {msg.isInternalNote && (
+                                <span className="flex items-center gap-1 text-[10px] text-[#B45309] font-medium bg-[#FFFBEB] border border-[#FDE68A] px-1.5 py-0.2 rounded">
+                                  <Lock size={9} /> Internal note
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Quoted reply if present */}
+                            {msg.replyTo && (
+                              <div className="mt-1.5 p-2 rounded-lg bg-slate-50 border-l-2 border-slate-300 text-[11.5px] flex flex-col gap-0.5 max-w-xl">
+                                <span className="font-semibold text-[#475569] flex items-center gap-1">
+                                  <CornerDownRight size={11} className="text-[#94A3B8]" />
+                                  {msg.replyTo.senderName}
+                                </span>
+                                <span className="text-[#64748B] truncate">{msg.replyTo.textSnippet}</span>
+                              </div>
+                            )}
+
+                            {/* Body Text */}
+                            <div className="mt-1">
+                              {msg.isInternalNote ? (
+                                <div className="p-2.5 rounded-r-xl bg-[#FFFBEB]/50 border-l-2 border-[#F59E0B] text-xs text-[#92400E] leading-relaxed max-w-2xl font-medium">
+                                  {msg.text}
+                                </div>
+                              ) : (
+                                <div className="text-xs text-[#0F172A] leading-relaxed max-w-2xl">
+                                  {msg.text}
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Reactions */}
+                            {msg.reactions && msg.reactions.length > 0 && (
+                              <div className="mt-2 flex items-center gap-1.5 flex-wrap">
+                                {msg.reactions.map((react, rIdx) => (
+                                  <button
+                                    key={rIdx}
+                                    onClick={() => {
+                                      react.count += 1;
+                                    }}
+                                    className="px-2 py-0.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs flex items-center gap-1 text-[#0F172A] transition-colors"
+                                  >
+                                    <span>{react.emoji}</span>
+                                    {react.count > 1 && (
+                                      <span className="text-[10.5px] font-medium text-[#64748B]">{react.count}</span>
+                                    )}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Read Receipts */}
+                            {msg.readBy && msg.readBy.length > 0 && (
+                              <div className="mt-1.5 flex justify-end">
+                                <div className="flex -space-x-1">
+                                  {msg.readBy.map((avUrl, aIdx) => (
+                                    <img
+                                      key={aIdx}
+                                      src={avUrl}
+                                      alt="read"
+                                      className="w-4 h-4 rounded-full border border-white object-cover shadow-2xs"
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+
+                  {/* Bottom Interactive Message Composer */}
+                  <div className="p-3 sm:p-4 bg-white border-t border-[#F1F5F9] shrink-0">
+                    <div
+                      className={`border rounded-2xl p-2.5 bg-white shadow-2xs transition-all ${
+                        isInternalNoteMode
+                          ? "border-[#F59E0B] bg-[#FFFBEB]/20"
+                          : "border-[#6366F1] focus-within:ring-2 ring-indigo-100"
+                      }`}
+                    >
+                      <input
+                        type="text"
+                        placeholder={
+                          isInternalNoteMode
+                            ? "Add an internal note (only team members can view)..."
+                            : "Type a message... (@ to mention, / to search)"
+                        }
+                        value={chatInputText}
+                        onChange={(e) => setChatInputText(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSend();
+                          }
+                        }}
+                        className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8] px-1 py-1"
+                      />
+
+                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100">
+                        <div className="flex items-center gap-2 text-[#94A3B8]">
+                          <button className="hover:text-[#0F172A] p-1 transition-colors">
+                            <Paperclip size={13} />
+                          </button>
+                          <button className="hover:text-[#0F172A] p-1 transition-colors">
+                            <Folder size={13} />
+                          </button>
+                          <button className="hover:text-[#0F172A] p-1 transition-colors">
+                            <Sparkles size={13} />
+                          </button>
+                          <button
+                            onClick={() => setIsInternalNoteMode(!isInternalNoteMode)}
+                            className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-medium transition-colors ${
+                              isInternalNoteMode
+                                ? "bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]"
+                                : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100"
+                            }`}
+                          >
+                            <Lock size={10} />
+                            <span>Internal note</span>
+                          </button>
+                        </div>
+
+                        <button
+                          onClick={handleSend}
+                          disabled={!chatInputText.trim()}
+                          className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
+                            chatInputText.trim()
+                              ? "bg-[#4F46E5] text-white shadow-2xs hover:bg-[#4338CA]"
+                              : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                          }`}
+                        >
+                          <Send size={12} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Floating bottom-right chat bubble icon (matching screenshot 03) */}
           <button
@@ -7270,7 +8399,7 @@ export default function HeroAppWindow() {
                     { label: "Digital Assets", view: "offerings-products" as const, icon: Package },
                     { label: "Proposals", view: "proposals" as const, icon: FileText },
                     { label: "Invoices", icon: Receipt },
-                    { label: "Team", icon: Users },
+                    { label: "Team", view: "team" as const, icon: Users },
                     { label: "Messages", view: "messages" as const, icon: MessageSquare },
                     { label: "Reports", icon: BarChart3 },
                     { label: "Intake Forms", icon: FileText },
