@@ -39,6 +39,8 @@ import {
   Check,
   LayoutDashboard,
   Boxes,
+  Box,
+  Package,
   Receipt,
   Wallet,
   BarChart3,
@@ -67,8 +69,11 @@ import {
 
 export default function HeroAppWindow() {
   const [currentView, setCurrentView] = useState<
-    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "tickets" | "messages"
+    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "offerings-services" | "offerings-products" | "tickets" | "messages"
   >("dashboard");
+  const [isOfferingsExpanded, setIsOfferingsExpanded] = useState(false);
+  const [offeringsSearch, setOfferingsSearch] = useState("");
+  const [offeringsFilter, setOfferingsFilter] = useState<"all" | "wp">("all");
   const [activeOrgTab, setActiveOrgTab] = useState<"all" | "active" | "leads" | "at_risk">("all");
   const [activeProposalTab, setActiveProposalTab] = useState<"all" | "active" | "awaiting" | "won" | "attention">("all");
   const [copilotOpen, setCopilotOpen] = useState(false);
@@ -289,7 +294,13 @@ export default function HeroAppWindow() {
           <div className="flex items-center justify-center gap-2 px-3 py-1 bg-[#F1F5F9] rounded-lg text-xs text-[#64748B] border border-[#E2E8F0]">
             <Lock size={11} className="text-emerald-500 shrink-0" />
             <span className="text-[#0F172A] font-medium shrink-0">app.eidoncore.com</span>
-            <span className="text-[#2563EB] shrink-0">/{currentView}</span>
+            <span className="text-[#2563EB] shrink-0">
+              {currentView === "offerings-services"
+                ? "/catalog/offerings/services"
+                : currentView === "offerings-products"
+                ? "/catalog/offerings/digital-products"
+                : `/${currentView}`}
+            </span>
             <button
               onClick={() => {
                 isCancelledRef.current = true;
@@ -355,6 +366,19 @@ export default function HeroAppWindow() {
           }`}
         >
           Tasks
+        </button>
+        <button
+          onClick={() => {
+            setIsOfferingsExpanded(true);
+            setCurrentView("offerings-services");
+          }}
+          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
+            currentView === "offerings-services" || currentView === "offerings-products"
+              ? "bg-[#0F172A] text-white"
+              : "text-[#64748B] hover:bg-slate-100"
+          }`}
+        >
+          Offerings
         </button>
         <button
           onClick={() => setCurrentView("tickets")}
@@ -478,12 +502,74 @@ export default function HeroAppWindow() {
                   <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">2</span>
                 </button>
 
-                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <div className="flex items-center gap-2.5">
-                    <Boxes size={14} className="text-[#64748B]" />
-                    <span>Offerings</span>
-                  </div>
-                  <ChevronRight size={11} className="text-[#94A3B8]" />
+                {/* OFFERINGS EXPANDABLE MENU */}
+                <div className="flex flex-col">
+                  <button
+                    onClick={() => {
+                      const nextExpanded = !isOfferingsExpanded;
+                      setIsOfferingsExpanded(nextExpanded);
+                      if (nextExpanded && currentView !== "offerings-services" && currentView !== "offerings-products") {
+                        setCurrentView("offerings-services");
+                      }
+                    }}
+                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                      currentView === "offerings-services" || currentView === "offerings-products"
+                        ? "text-[#0F172A] font-semibold"
+                        : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Boxes
+                        size={14}
+                        className={
+                          currentView === "offerings-services" || currentView === "offerings-products"
+                            ? "text-[#0F172A]"
+                            : "text-[#64748B]"
+                        }
+                      />
+                      <span>Offerings</span>
+                    </div>
+                    {isOfferingsExpanded ? (
+                      <ChevronDown size={11} className="text-[#94A3B8]" />
+                    ) : (
+                      <ChevronRight size={11} className="text-[#94A3B8]" />
+                    )}
+                  </button>
+
+                  {/* 2 SUBMENU ITEMS: SERVICES & PRODUCTS */}
+                  {isOfferingsExpanded && (
+                    <div className="flex flex-col gap-0.5 pl-6 pr-1 py-0.5 animate-fadeIn">
+                      <button
+                        onClick={() => setCurrentView("offerings-services")}
+                        className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all text-left ${
+                          currentView === "offerings-services"
+                            ? "bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] border border-[#E2E8F0] font-semibold text-[#0F172A]"
+                            : "text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <Box
+                          size={13}
+                          className={currentView === "offerings-services" ? "text-[#0F172A]" : "text-[#94A3B8]"}
+                        />
+                        <span>Services</span>
+                      </button>
+
+                      <button
+                        onClick={() => setCurrentView("offerings-products")}
+                        className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all text-left ${
+                          currentView === "offerings-products"
+                            ? "bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] border border-[#E2E8F0] font-semibold text-[#0F172A]"
+                            : "text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A]"
+                        }`}
+                      >
+                        <Package
+                          size={13}
+                          className={currentView === "offerings-products" ? "text-[#0F172A]" : "text-[#94A3B8]"}
+                        />
+                        <span>Products</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
@@ -595,11 +681,16 @@ export default function HeroAppWindow() {
                 {currentView === "proposals" && <FileText size={13} />}
                 {currentView === "projects" && <FolderKanban size={13} />}
                 {currentView === "tasks" && <CheckSquare size={13} />}
+                {(currentView === "offerings-services" || currentView === "offerings-products") && <Box size={13} />}
                 {currentView === "tickets" && <Ticket size={13} />}
                 {currentView === "messages" && <MessageSquare size={13} />}
               </div>
               <h2 className="text-sm font-bold text-[#0F172A] tracking-tight capitalize">
-                {currentView === "dashboard" ? "Dashboard" : currentView}
+                {currentView === "dashboard"
+                  ? "Dashboard"
+                  : currentView === "offerings-services" || currentView === "offerings-products"
+                  ? "Offerings"
+                  : currentView}
               </h2>
             </div>
 
@@ -6174,6 +6265,589 @@ export default function HeroAppWindow() {
             </div>
           )}
 
+          {/* VIEW: OFFERINGS - SERVICES (100% IDENTICAL TO SCREENSHOT 23) */}
+          {currentView === "offerings-services" && (() => {
+            const allServices = [
+              {
+                id: "srv-1",
+                title: "Business VPS Hosting",
+                description: "Dedicated cloud VPS resources, isolated environment, and enterprise performance.",
+                type: "Recurring",
+                price: "$40",
+                period: "/mo",
+                bg: "bg-[#EBF5FF]",
+                dotColor: "#BFDBFE",
+                iconColor: "text-[#2563EB]",
+                category: "all",
+              },
+              {
+                id: "srv-2",
+                title: "Small Managed Hosting",
+                description: "High-speed cloud hosting with SSL, automated backups, and 99.9% uptime guarantee.",
+                type: "Recurring",
+                price: "$9.99",
+                period: "/mo",
+                bg: "bg-[#FFF4ED]",
+                dotColor: "#FED7AA",
+                iconColor: "text-[#EA580C]",
+                category: "all",
+              },
+              {
+                id: "srv-3",
+                title: "Protect Package — Monthly",
+                description: "Enterprise-grade security, real-time WAF threat defense, e-commerce checkout audits, full AI...",
+                type: "Recurring",
+                price: "$299",
+                period: "/mo",
+                bg: "bg-[#ECFDF5]",
+                dotColor: "#A7F3D0",
+                iconColor: "text-[#059669]",
+                category: "all",
+              },
+              {
+                id: "srv-4",
+                title: "Essential Package — Monthly",
+                description: "High-performance website care featuring daily cloud backups, Core Web Vitals speed optimizatio...",
+                type: "Recurring",
+                price: "$199",
+                period: "/mo",
+                bg: "bg-[#FEFCE8]",
+                dotColor: "#FDE68A",
+                iconColor: "text-[#D97706]",
+                category: "all",
+              },
+              {
+                id: "srv-5",
+                title: "Maintain Package — Monthly",
+                description: "Essential 24/7 uptime monitoring, proactive security scans, weekly cloud backups, automated safe...",
+                type: "Recurring",
+                price: "$99",
+                period: "/mo",
+                bg: "bg-[#FDF2F8]",
+                dotColor: "#FBCFE8",
+                iconColor: "text-[#DB2777]",
+                category: "all",
+              },
+              {
+                id: "srv-6",
+                title: "test",
+                description: "No description",
+                isItalicDesc: true,
+                type: "Hourly",
+                price: "$0.50",
+                period: "/mo",
+                bg: "bg-[#F0FDF4]",
+                dotColor: "#BBF7D0",
+                iconColor: "text-[#16A34A]",
+                category: "all",
+              },
+              {
+                id: "srv-7",
+                title: "Regular VPS Hosting",
+                description: "Reliable shared VPS hosting with 2 vCPU, 4GB RAM, 80GB NVMe SSD, and 3TB bandwidth. Fully...",
+                type: "Recurring",
+                price: "$25",
+                period: "/mo",
+                isTechCube: true,
+                category: "all",
+              },
+            ];
+
+            const filteredServices = allServices.filter((s) => {
+              if (offeringsFilter === "wp") return false;
+              if (offeringsSearch) {
+                return (
+                  s.title.toLowerCase().includes(offeringsSearch.toLowerCase()) ||
+                  s.description.toLowerCase().includes(offeringsSearch.toLowerCase())
+                );
+              }
+              return true;
+            });
+
+            return (
+              <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn pb-12">
+                {/* Header Subtitle */}
+                <div>
+                  <p className="text-xs text-[#64748B]">
+                    Browse available services and digital products
+                  </p>
+                </div>
+
+                {/* Offerings Tabs: All, Services, Digital Products */}
+                <div className="flex items-center gap-6 border-b border-[#E2E8F0] text-xs">
+                  <button
+                    onClick={() => setCurrentView("offerings-services")}
+                    className="pb-2.5 font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
+                  >
+                    All
+                  </button>
+                  <button
+                    onClick={() => setCurrentView("offerings-services")}
+                    className="pb-2.5 font-semibold text-[#0F172A] border-b-2 border-[#0F172A] -mb-px transition-colors"
+                  >
+                    Services
+                  </button>
+                  <button
+                    onClick={() => setCurrentView("offerings-products")}
+                    className="pb-2.5 font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
+                  >
+                    Digital Products
+                  </button>
+                </div>
+
+                {/* Search & Layout Tools */}
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#0F172A] flex-1 max-w-sm shadow-2xs focus-within:border-blue-500 transition-colors">
+                    <Search size={14} className="text-[#94A3B8] shrink-0" />
+                    <input
+                      type="text"
+                      placeholder="Search services..."
+                      value={offeringsSearch}
+                      onChange={(e) => setOfferingsSearch(e.target.value)}
+                      className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8]"
+                    />
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-[#64748B]">
+                    <button className="p-2 bg-white border border-[#E2E8F0] rounded-lg hover:text-[#0F172A] hover:bg-slate-50 transition-colors shadow-2xs">
+                      <SlidersHorizontal size={13} />
+                    </button>
+                    <button className="p-2 bg-slate-50 border border-[#E2E8F0] rounded-lg text-[#0F172A] shadow-2xs">
+                      <LayoutGrid size={13} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Category Pills */}
+                <div className="flex items-center gap-2 text-xs">
+                  <button
+                    onClick={() => setOfferingsFilter("all")}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                      offeringsFilter === "all"
+                        ? "bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]"
+                        : "bg-white text-[#64748B] border border-[#E2E8F0] hover:bg-slate-50"
+                    }`}
+                  >
+                    All <span className="ml-1 font-semibold">{filteredServices.length}</span>
+                  </button>
+                  <button
+                    onClick={() => setOfferingsFilter("wp")}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                      offeringsFilter === "wp"
+                        ? "bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]"
+                        : "bg-white text-[#64748B] border border-[#E2E8F0] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    WordPress Plugin <span className="text-[#94A3B8]">0</span>
+                  </button>
+                </div>
+
+                {/* 4-Column Responsive Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {filteredServices.map((service) => (
+                    <div
+                      key={service.id}
+                      className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow group"
+                    >
+                      {/* Top Banner */}
+                      <div className="h-32 w-full relative overflow-hidden flex items-center justify-center">
+                        {service.isTechCube ? (
+                          <div className="w-full h-full bg-[#080E1E] relative overflow-hidden flex items-center justify-center">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.3)_0%,transparent_75%)]" />
+                            <svg className="w-full h-full opacity-60 absolute inset-0" viewBox="0 0 240 120" fill="none">
+                              <path d="M0 60h240M120 0v120M40 20l40 40M200 20l-40 40M40 100l40-40M200 100l-40-40" stroke="#0284C7" strokeWidth="0.5" strokeDasharray="3 3" />
+                            </svg>
+                            <div className="relative z-10 w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400/40 backdrop-blur-xs flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                              <Box size={28} className="text-cyan-400 animate-pulse" />
+                            </div>
+                          </div>
+                        ) : (
+                          <div
+                            className={`w-full h-full ${service.bg} relative flex items-center justify-center`}
+                            style={{
+                              backgroundImage: `radial-gradient(${service.dotColor} 1.5px, transparent 1.5px)`,
+                              backgroundSize: "14px 14px",
+                            }}
+                          >
+                            <div className="w-11 h-11 rounded-full bg-white/70 border border-slate-200/50 flex items-center justify-center shadow-2xs">
+                              <Box size={22} className={service.iconColor} />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content Body */}
+                      <div className="p-4 flex flex-col flex-1 justify-between">
+                        <div>
+                          <span
+                            className={`px-2 py-0.5 rounded-md text-[10.5px] font-semibold inline-block ${
+                              service.type === "Hourly"
+                                ? "bg-[#ECFDF5] text-[#059669]"
+                                : "bg-[#EFF6FF] text-[#2563EB]"
+                            }`}
+                          >
+                            {service.type}
+                          </span>
+                          <h3 className="font-bold text-[13.5px] text-[#0F172A] mt-2 mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                            {service.title}
+                          </h3>
+                          <p
+                            className={`text-xs text-[#64748B] leading-relaxed line-clamp-2 min-h-[34px] ${
+                              service.isItalicDesc ? "italic text-slate-400" : ""
+                            }`}
+                          >
+                            {service.description}
+                          </p>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-4 pt-3 border-t border-[#F1F5F9] flex items-center justify-between">
+                          <div className="flex items-baseline gap-0.5">
+                            <span className="text-base font-extrabold text-[#0F172A]">
+                              {service.price}
+                            </span>
+                            {service.period && (
+                              <span className="text-xs text-[#64748B] font-normal">
+                                {service.period}
+                              </span>
+                            )}
+                          </div>
+                          <button className="w-7 h-7 rounded-full border border-[#E2E8F0] bg-white flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:border-slate-400 transition-colors shadow-2xs">
+                            <ArrowRight size={13} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* VIEW: OFFERINGS - DIGITAL PRODUCTS (100% IDENTICAL TO SCREENSHOT 24) */}
+          {currentView === "offerings-products" && (() => {
+            const allProducts = [
+              {
+                id: "prod-1",
+                title: "Rank Math Pro + WP Rocket",
+                description: "Rank Math + WP Rocket:Unlock SEO Excellence & Peak Performance",
+                type: "Recurring",
+                price: "$8.99",
+                period: "/mo",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#38265E] relative overflow-hidden flex items-center justify-center p-4">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-end gap-1 h-9">
+                        <div className="w-2.5 h-4 bg-white/40 rounded-t-xs" />
+                        <div className="w-2.5 h-6 bg-white/70 rounded-t-xs" />
+                        <div className="w-2.5 h-8 bg-white rounded-t-xs relative">
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-white text-[10px]">▲</div>
+                        </div>
+                      </div>
+                      <span className="text-white font-extrabold text-xl tracking-tight">RankMath</span>
+                    </div>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-2",
+                title: "Job Manager Pro Bundle",
+                description: "Complete WP job board solution",
+                type: "Recurring",
+                price: "$119",
+                period: "/yr",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#FFDE31] relative overflow-hidden flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-[#1E1B4B] flex items-center justify-center shadow-md">
+                      <span className="text-[#38BDF8] font-black text-2xl tracking-tighter">JM</span>
+                    </div>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-3",
+                title: "The Hub Theme",
+                description: "Premium multi-purpose WP theme",
+                type: "One-Time",
+                price: "$45",
+                period: "",
+                category: "wp",
+                renderBanner: () => (
+                  <div
+                    className="w-full h-full bg-[#EBF5FF] relative overflow-hidden flex items-center justify-center"
+                    style={{
+                      backgroundImage: "radial-gradient(#CBD5E1 1.5px, transparent 1.5px)",
+                      backgroundSize: "14px 14px",
+                    }}
+                  >
+                    <div className="w-11 h-11 rounded-full bg-white/70 border border-blue-200/50 flex items-center justify-center text-[#2563EB] shadow-2xs">
+                      <Box size={20} />
+                    </div>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-4",
+                title: "SureDash Lifetime",
+                description: "SureDash client portal — lifetime deal",
+                type: "One-Time",
+                price: "$49",
+                period: "",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#F8FAFC] relative overflow-hidden flex items-center justify-center border-b border-slate-100">
+                    <span className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tighter">SureD</span>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs border border-slate-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-5",
+                title: "Sure Trigger",
+                description: "WordPress automation — 1000+ app integrations",
+                type: "Recurring",
+                price: "$20",
+                period: "/yr",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#F8FAFC] relative overflow-hidden flex items-center justify-center border-b border-slate-100">
+                    <span className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tighter">SureD</span>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs border border-slate-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-6",
+                title: "Elementor Advanced Plan",
+                description: "Elementor Pro — 3 site license",
+                type: "Recurring",
+                price: "$75",
+                period: "/yr",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#FAFAFA] relative overflow-hidden flex items-center justify-center gap-2 border-b border-slate-100">
+                    <div className="w-7 h-7 rounded-lg bg-[#92003B] flex items-center justify-center gap-0.5 p-1 shrink-0">
+                      <div className="w-1 h-3.5 bg-white rounded-xs" />
+                      <div className="w-1 h-3.5 bg-white rounded-xs" />
+                      <div className="w-1 h-3.5 bg-white rounded-xs" />
+                    </div>
+                    <span className="text-[#1E293B] font-bold text-xl tracking-tight">elementor</span>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs border border-slate-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-7",
+                title: "Essential Addons for Elementor (Lifetime)",
+                description: "Essential Addons — lifetime deal",
+                type: "One-Time",
+                price: "$49",
+                period: "",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-gradient-to-tr from-[#250E62] via-[#5B21B6] to-[#7C3AED] relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute top-2 left-6 w-3 h-3 rounded-full bg-amber-400 blur-[1px] opacity-80" />
+                    <div className="absolute bottom-4 right-8 w-4 h-4 rounded-full bg-orange-500 blur-[1px] opacity-80" />
+                    <div className="absolute top-3 right-10 w-2.5 h-2.5 rounded-full bg-cyan-400 blur-[1px] opacity-80" />
+                    <span className="text-white font-black text-3xl tracking-wider drop-shadow-md">EA.</span>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                id: "prod-8",
+                title: "Sure Member Lifetime",
+                description: "SureMember — lifetime deal",
+                type: "One-Time",
+                price: "$25",
+                period: "",
+                category: "wp",
+                renderBanner: () => (
+                  <div className="w-full h-full bg-[#1D4ED8] relative overflow-hidden flex items-center justify-center">
+                    <svg className="w-14 h-14 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round">
+                      <path d="M20 30 C 40 10, 60 10, 80 30 C 60 50, 40 50, 20 70 C 40 90, 60 90, 80 70" />
+                    </svg>
+                    <div className="absolute left-3 bottom-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-white/95 rounded-full text-[10px] font-medium text-[#0F172A] shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span>WordPress Plugin</span>
+                    </div>
+                  </div>
+                ),
+              },
+            ];
+
+            const filteredProducts = allProducts.filter((p) => {
+              if (offeringsSearch) {
+                return (
+                  p.title.toLowerCase().includes(offeringsSearch.toLowerCase()) ||
+                  p.description.toLowerCase().includes(offeringsSearch.toLowerCase())
+                );
+              }
+              return true;
+            });
+
+            return (
+              <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn pb-12">
+                {/* Header Subtitle */}
+                <div>
+                  <p className="text-xs text-[#64748B]">
+                    Browse available services and digital products
+                  </p>
+                </div>
+
+                {/* Offerings Tabs: All, Services, Digital Products */}
+                <div className="flex items-center gap-6 border-b border-[#E2E8F0] text-xs">
+                  <button
+                    onClick={() => setCurrentView("offerings-products")}
+                    className="pb-2.5 font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
+                  >
+                    All
+                  </button>
+                  <button
+                    onClick={() => setCurrentView("offerings-services")}
+                    className="pb-2.5 font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
+                  >
+                    Services
+                  </button>
+                  <button
+                    onClick={() => setCurrentView("offerings-products")}
+                    className="pb-2.5 font-semibold text-[#0F172A] border-b-2 border-[#0F172A] -mb-px transition-colors"
+                  >
+                    Digital Products
+                  </button>
+                </div>
+
+                {/* Search & Layout Tools */}
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#0F172A] flex-1 max-w-sm shadow-2xs focus-within:border-blue-500 transition-colors">
+                    <Search size={14} className="text-[#94A3B8]" />
+                    <input
+                      type="text"
+                      placeholder="Search services..."
+                      value={offeringsSearch}
+                      onChange={(e) => setOfferingsSearch(e.target.value)}
+                      className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-[#94A3B8]"
+                    />
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-[#64748B]">
+                    <button className="p-2 bg-white border border-[#E2E8F0] rounded-lg hover:text-[#0F172A] hover:bg-slate-50 transition-colors shadow-2xs">
+                      <SlidersHorizontal size={13} />
+                    </button>
+                    <button className="p-2 bg-slate-50 border border-[#E2E8F0] rounded-lg text-[#0F172A] shadow-2xs">
+                      <LayoutGrid size={13} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Category Pills */}
+                <div className="flex items-center gap-2 text-xs">
+                  <button
+                    onClick={() => setOfferingsFilter("all")}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                      offeringsFilter === "all"
+                        ? "bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]"
+                        : "bg-white text-[#64748B] border border-[#E2E8F0] hover:bg-slate-50"
+                    }`}
+                  >
+                    All <span className="ml-1 font-semibold">36</span>
+                  </button>
+                  <button
+                    onClick={() => setOfferingsFilter("wp")}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                      offeringsFilter === "wp"
+                        ? "bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]"
+                        : "bg-white text-[#64748B] border border-[#E2E8F0] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    WordPress Plugin <span className="text-[#94A3B8]">36</span>
+                  </button>
+                </div>
+
+                {/* 4-Column Responsive Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {filteredProducts.map((prod) => (
+                    <div
+                      key={prod.id}
+                      className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow group"
+                    >
+                      {/* Top Banner */}
+                      <div className="h-32 w-full relative overflow-hidden flex items-center justify-center">
+                        {prod.renderBanner()}
+                      </div>
+
+                      {/* Content Body */}
+                      <div className="p-4 flex flex-col flex-1 justify-between">
+                        <div>
+                          <span
+                            className={`px-2 py-0.5 rounded-md text-[10.5px] font-semibold inline-block ${
+                              prod.type === "One-Time"
+                                ? "bg-[#ECFDF5] text-[#059669]"
+                                : "bg-[#EFF6FF] text-[#2563EB]"
+                            }`}
+                          >
+                            {prod.type}
+                          </span>
+                          <h3 className="font-bold text-[13.5px] text-[#0F172A] mt-2 mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                            {prod.title}
+                          </h3>
+                          <p className="text-xs text-[#64748B] leading-relaxed line-clamp-2 min-h-[34px]">
+                            {prod.description}
+                          </p>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-4 pt-3 border-t border-[#F1F5F9] flex items-center justify-between">
+                          <div className="flex items-baseline gap-0.5">
+                            <span className="text-base font-extrabold text-[#0F172A]">
+                              {prod.price}
+                            </span>
+                            {prod.period && (
+                              <span className="text-xs text-[#64748B] font-normal">
+                                {prod.period}
+                              </span>
+                            )}
+                          </div>
+                          <button className="w-7 h-7 rounded-full border border-[#E2E8F0] bg-white flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:border-slate-400 transition-colors shadow-2xs">
+                            <ArrowRight size={13} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* VIEW 4: TICKETS (100% IDENTICAL TO SCREENSHOT 27) */}
           {currentView === "tickets" && (
             <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn">
@@ -6591,10 +7265,10 @@ export default function HeroAppWindow() {
                     { label: "Projects", view: "projects" as const, icon: FolderKanban },
                     { label: "Tasks", view: "tasks" as const, icon: CheckSquare },
                     { label: "Settings", icon: Settings },
-                    { label: "Organizations", icon: Building2 },
-                    { label: "Services", icon: Boxes },
-                    { label: "Digital Assets", icon: Boxes },
-                    { label: "Proposals", icon: FileText },
+                    { label: "Organizations", view: "organizations" as const, icon: Building2 },
+                    { label: "Services", view: "offerings-services" as const, icon: Box },
+                    { label: "Digital Assets", view: "offerings-products" as const, icon: Package },
+                    { label: "Proposals", view: "proposals" as const, icon: FileText },
                     { label: "Invoices", icon: Receipt },
                     { label: "Team", icon: Users },
                     { label: "Messages", view: "messages" as const, icon: MessageSquare },
