@@ -75,7 +75,7 @@ export default function HeroAppWindow() {
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
   const [taskViewMode, setTaskViewMode] = useState<"list" | "board">("list");
-  const [projectViewMode, setProjectViewMode] = useState<"cards" | "table">("cards");
+  const [projectViewMode, setProjectViewMode] = useState<"cards" | "table" | "board">("cards");
   const [selectedDay, setSelectedDay] = useState(4);
   const [activeWorkTab, setActiveWorkTab] = useState<"all" | "today" | "overdue" | "review">("all");
   const [activeTaskTab, setActiveTaskTab] = useState<"all" | "overdue" | "today" | "week">("all");
@@ -4053,31 +4053,37 @@ export default function HeroAppWindow() {
                     </button>
                   </div>
 
-                  {/* Segmented View Mode: Icon-Only [Cards/Grid | Table | Board] */}
+                  {/* Segmented View Mode: [Card view | Table view | Board] */}
                   <div className="flex items-center bg-[#F1F5F9] border border-[#E2E8F0] rounded-full p-0.5 text-xs text-[#64748B]">
                     <button
                       onClick={() => setProjectViewMode("cards")}
-                      className={`p-1 rounded-full transition-colors ${
-                        projectViewMode === "cards" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                        projectViewMode === "cards" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
                       }`}
-                      title="Cards View"
+                      title="Card view"
                     >
                       <LayoutGrid size={13} />
+                      <span className="hidden sm:inline text-[11px]">Card view</span>
                     </button>
                     <button
                       onClick={() => setProjectViewMode("table")}
-                      className={`p-1 rounded-full transition-colors ${
-                        projectViewMode === "table" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                        projectViewMode === "table" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
                       }`}
-                      title="Table View"
+                      title="Table view"
                     >
                       <List size={13} />
+                      <span className="hidden sm:inline text-[11px]">Table view</span>
                     </button>
                     <button
-                      className="p-1 rounded-full transition-colors hover:text-slate-900"
-                      title="Board View"
+                      onClick={() => setProjectViewMode("board")}
+                      className={`px-2.5 py-1 rounded-full transition-colors flex items-center gap-1.5 font-medium ${
+                        projectViewMode === "board" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900 text-[#64748B]"
+                      }`}
+                      title="Board"
                     >
-                      <Table size={13} />
+                      <Kanban size={13} />
+                      <span className="hidden sm:inline text-[11px]">Board</span>
                     </button>
                   </div>
 
@@ -4088,13 +4094,98 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* 8 Projects Cards Grid (4 cols x 2 rows) - Clean refined typography and weight */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                {[
+              {/* DYNAMIC PROJECTS VIEW CONTAINER (CARDS / TABLE / BOARD) */}
+              {(() => {
+                const allProjects = [
                   {
                     ref: projectCardRef,
-                    init: "SA",
+                    init: "KF",
                     color: "bg-blue-600 text-white",
+                    client: "Kroma Fintech",
+                    title: "Kroma Mobile SDK & Merchant Gateway",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasksLabel: "5/11 tasks",
+                    progress: 45,
+                    openTasks: 6,
+                    lateTasks: 0,
+                    activity: "Today",
+                    activityColor: "text-emerald-500",
+                    avatar: "MB",
+                    pmName: "Marcus Brody",
+                    date: "Oct 26, 2026",
+                  },
+                  {
+                    init: "NH",
+                    color: "bg-indigo-600 text-white",
+                    client: "Nebula Health",
+                    title: "Nebula Telehealth 2.0 Core Platform",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasksLabel: "8/21 tasks",
+                    progress: 38,
+                    openTasks: 13,
+                    lateTasks: 1,
+                    activity: "Yesterday",
+                    activityColor: "text-blue-500",
+                    avatar: "MB",
+                    pmName: "Marcus Brody",
+                    date: "Nov 20, 2026",
+                  },
+                  {
+                    init: "SL",
+                    color: "bg-teal-600 text-white",
+                    client: "Solari Logistics",
+                    title: "Solari Fleet Telematics Control Room",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasksLabel: "4/12 tasks",
+                    progress: 33,
+                    openTasks: 8,
+                    lateTasks: 1,
+                    activity: "2d ago",
+                    activityColor: "text-slate-400",
+                    avatar: "SL",
+                    pmName: "Sophia Lin",
+                    date: "Dec 5, 2026",
+                  },
+                  {
+                    init: "AR",
+                    color: "bg-purple-600 text-white",
+                    client: "Arcturus Robotics",
+                    title: "Arcturus Brand Identity & Web Launch",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasksLabel: "1/7 tasks",
+                    progress: 14,
+                    openTasks: 6,
+                    lateTasks: 1,
+                    activity: "3d ago",
+                    activityColor: "text-slate-400",
+                    avatar: "JV",
+                    pmName: "Julian Vance",
+                    date: "Jan 4, 2027",
+                  },
+                  {
+                    init: "SO",
+                    color: "bg-emerald-600 text-white",
+                    client: "Skyline Media",
+                    title: "Client Portal & Analytics Dashboard",
+                    status: "In Progress",
+                    health: "On Track",
+                    tasksLabel: "7/7 tasks",
+                    progress: 100,
+                    openTasks: 0,
+                    lateTasks: 0,
+                    activity: "Today",
+                    activityColor: "text-emerald-500",
+                    avatar: "TS",
+                    pmName: "Tanoy Sakib",
+                    date: "No deadline",
+                  },
+                  {
+                    init: "SA",
+                    color: "bg-sky-600 text-white",
                     client: "Apex Architecture",
                     title: "Apex Architecture — Custom Website & Portfolio",
                     status: "Not Started",
@@ -4106,6 +4197,7 @@ export default function HeroAppWindow() {
                     activity: "25d ago",
                     activityColor: "text-red-500",
                     avatar: "TS",
+                    pmName: "Tanoy Sakib",
                     date: "No deadline",
                   },
                   {
@@ -4122,11 +4214,12 @@ export default function HeroAppWindow() {
                     activity: "25d ago",
                     activityColor: "text-red-500",
                     avatar: "AM",
+                    pmName: "Amara Okafor",
                     date: "No deadline",
                   },
                   {
                     init: "CU",
-                    color: "bg-teal-600 text-white",
+                    color: "bg-cyan-600 text-white",
                     client: "CloudScale Unit",
                     title: "SaaS Infrastructure & Design System",
                     status: "Not Started",
@@ -4138,6 +4231,7 @@ export default function HeroAppWindow() {
                     activity: "25d ago",
                     activityColor: "text-red-500",
                     avatar: "AM",
+                    pmName: "Amara Okafor",
                     date: "No deadline",
                   },
                   {
@@ -4154,7 +4248,25 @@ export default function HeroAppWindow() {
                     activity: "13d ago",
                     activityColor: "text-red-500",
                     avatar: "TS",
-                    date: "Apr 29",
+                    pmName: "Tanoy Sakib",
+                    date: "Apr 29, 2026",
+                  },
+                  {
+                    init: "ZT",
+                    color: "bg-amber-600 text-white",
+                    client: "Zenith Tech",
+                    title: "Mobile Application QA & Testing Suite",
+                    status: "On Hold",
+                    health: "On Track",
+                    tasksLabel: "No tasks yet",
+                    progress: 0,
+                    openTasks: 0,
+                    lateTasks: 0,
+                    activity: "161d ago",
+                    activityColor: "text-red-500",
+                    avatar: "AM",
+                    pmName: "Amara Okafor",
+                    date: "No deadline",
                   },
                   {
                     init: "RH",
@@ -4170,6 +4282,7 @@ export default function HeroAppWindow() {
                     activity: "43d ago",
                     activityColor: "text-red-500",
                     avatar: "AM",
+                    pmName: "Amara Okafor",
                     date: "No deadline",
                   },
                   {
@@ -4186,122 +4299,364 @@ export default function HeroAppWindow() {
                     activity: "159d ago",
                     activityColor: "text-red-500",
                     avatar: "AM",
+                    pmName: "Amara Okafor",
                     date: "No deadline",
                   },
-                  {
-                    init: "SO",
-                    color: "bg-emerald-600 text-white",
-                    client: "Skyline Media",
-                    title: "Client Portal & Analytics Dashboard",
-                    status: "In Progress",
-                    health: "On Track",
-                    tasksLabel: "7/7 tasks",
-                    progress: 100,
-                    openTasks: 0,
-                    lateTasks: 0,
-                    activity: "Today",
-                    activityColor: "text-emerald-500",
-                    avatar: "TS",
-                    date: "No deadline",
-                  },
-                  {
-                    init: "ZT",
-                    color: "bg-amber-600 text-white",
-                    client: "Zenith Tech",
-                    title: "Mobile Application QA & Testing Suite",
-                    status: "On Hold",
-                    health: "On Track",
-                    tasksLabel: "No tasks yet",
-                    progress: 0,
-                    openTasks: 0,
-                    lateTasks: 0,
-                    activity: "161d ago",
-                    activityColor: "text-red-500",
-                    avatar: "AM",
-                    date: "No deadline",
-                  },
-                ].map((proj, idx) => (
-                  <div
-                    key={idx}
-                    ref={proj.ref}
-                    className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-2.5 min-h-[190px]"
-                  >
-                    <div className="flex flex-col gap-2">
-                      {/* Avatar + Client & Title */}
-                      <div className="flex items-start gap-2">
-                        <div className={`w-7 h-7 rounded-full ${proj.color} font-medium text-[11px] flex items-center justify-center shrink-0`}>
-                          {proj.init}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <span className="text-[10px] text-[#64748B] block truncate leading-tight">{proj.client}</span>
-                          <h4 className="text-[11.5px] font-semibold text-[#0F172A] leading-snug line-clamp-2 mt-0.5">
-                            {proj.title}
-                          </h4>
-                        </div>
-                      </div>
+                ];
 
-                      {/* Status + Health + Flag row */}
-                      <div className="flex items-center gap-1.5 text-[9px]">
-                        <span className={`px-1.5 py-0.5 rounded border font-medium ${
-                          proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
-                          proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                          proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
-                          "bg-slate-50 text-slate-600 border-slate-200"
-                        }`}>
-                          ● {proj.status}
+                const filteredProjects = allProjects.filter((p) => {
+                  if (activeProjectTab === "active") return p.status === "In Progress";
+                  if (activeProjectTab === "attention") return p.lateTasks > 0;
+                  if (activeProjectTab === "delivered") return p.status === "Completed";
+                  return true;
+                });
+
+                {/* 1. CARDS VIEW */}
+                if (projectViewMode === "cards") {
+                  return (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 animate-fadeIn">
+                      {filteredProjects.map((proj, idx) => (
+                        <div
+                          key={idx}
+                          ref={proj.ref}
+                          className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs hover:border-slate-300 transition-all flex flex-col justify-between gap-2.5 min-h-[190px]"
+                        >
+                          <div className="flex flex-col gap-2">
+                            {/* Avatar + Client & Title */}
+                            <div className="flex items-start gap-2">
+                              <div className={`w-7 h-7 rounded-full ${proj.color} font-medium text-[11px] flex items-center justify-center shrink-0`}>
+                                {proj.init}
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <span className="text-[10px] text-[#64748B] block truncate leading-tight">{proj.client}</span>
+                                <h4 className="text-[11.5px] font-semibold text-[#0F172A] leading-snug line-clamp-2 mt-0.5">
+                                  {proj.title}
+                                </h4>
+                              </div>
+                            </div>
+
+                            {/* Status + Health + Flag row */}
+                            <div className="flex items-center gap-1.5 text-[9px]">
+                              <span className={`px-1.5 py-0.5 rounded border font-medium ${
+                                proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                                proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                                proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                                "bg-slate-50 text-slate-600 border-slate-200"
+                              }`}>
+                                ● {proj.status}
+                              </span>
+                              <span className="px-1.5 py-0.5 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
+                                ● {proj.health}
+                              </span>
+                              <Flag size={10} className="text-slate-300 ml-auto" />
+                            </div>
+
+                            {/* Progress bar */}
+                            <div className="flex flex-col gap-0.5 pt-0.5">
+                              <div className="flex items-center justify-between text-[9.5px] text-[#64748B]">
+                                <span>{proj.tasksLabel}</span>
+                                <span className="font-mono text-[9.5px] font-medium text-[#0F172A]">{proj.progress}%</span>
+                              </div>
+                              <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${proj.progress === 100 ? "bg-[#16A34A]" : "bg-blue-600"}`}
+                                  style={{ width: `${proj.progress}%` }}
+                                />
+                              </div>
+                            </div>
+
+                            {/* Inner mini-metrics box */}
+                            <div className="p-1.5 bg-[#F8FAFC] border border-[#F1F5F9] rounded-lg grid grid-cols-3 gap-1 text-[8.5px] font-mono">
+                              <div>
+                                <span className="text-[#94A3B8] block text-[7.5px] uppercase">OPEN TASKS</span>
+                                <span className="font-medium text-[#0F172A]">{proj.openTasks}</span>
+                              </div>
+                              <div>
+                                <span className="text-[#94A3B8] block text-[7.5px] uppercase">LATE TASKS</span>
+                                <span className="font-medium text-[#0F172A]">{proj.lateTasks}</span>
+                              </div>
+                              <div>
+                                <span className="text-[#94A3B8] block text-[7.5px] uppercase">ACTIVITY</span>
+                                <span className="font-normal text-[#0F172A] flex items-center gap-0.5 truncate">
+                                  <span className={`text-[5px] ${proj.activityColor}`}>●</span>
+                                  <span>{proj.activity}</span>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Card Footer: Avatar + Due Date */}
+                          <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[9px] text-[#64748B]">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-slate-700 text-white text-[7.5px] font-semibold flex items-center justify-center">
+                                {proj.avatar}
+                              </div>
+                              <span className="text-[10px] text-slate-600 truncate max-w-[80px]">{proj.pmName}</span>
+                            </div>
+                            <span className="font-mono text-[8.5px] text-[#94A3B8] flex items-center gap-1">
+                              <Calendar size={9} /> {proj.date}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }
+
+                {/* 2. TABLE / LIST VIEW */}
+                if (projectViewMode === "table") {
+                  return (
+                    <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-xs overflow-hidden animate-fadeIn">
+                      <div className="overflow-x-auto no-scrollbar">
+                        <table className="w-full text-left border-collapse">
+                          <thead>
+                            <tr className="border-b border-[#E2E8F0] bg-[#F8FAFC] text-[10.5px] font-mono text-[#64748B] uppercase tracking-wider select-none">
+                              <th className="py-2.5 px-3 w-8">
+                                <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0 cursor-pointer" />
+                              </th>
+                              <th className="py-2.5 px-3">Project</th>
+                              <th className="py-2.5 px-3">Organization</th>
+                              <th className="py-2.5 px-3">Status</th>
+                              <th className="py-2.5 px-3">Health</th>
+                              <th className="py-2.5 px-3">Progress</th>
+                              <th className="py-2.5 px-3">Tasks</th>
+                              <th className="py-2.5 px-3">Due Date</th>
+                              <th className="py-2.5 px-3">Lead / PM</th>
+                              <th className="py-2.5 px-3 text-right">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[#E2E8F0] text-xs">
+                            {filteredProjects.map((proj, idx) => (
+                              <tr key={idx} className="hover:bg-[#F8FAFC]/80 transition-colors group">
+                                <td className="py-3 px-3">
+                                  <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0 cursor-pointer" />
+                                </td>
+                                <td className="py-3 px-3">
+                                  <div className="flex items-center gap-2.5 min-w-[220px]">
+                                    <div className={`w-7 h-7 rounded-md ${proj.color} font-semibold text-[11px] flex items-center justify-center shrink-0`}>
+                                      {proj.init}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <span className="font-semibold text-xs text-[#0F172A] hover:text-blue-600 cursor-pointer block truncate">
+                                        {proj.title}
+                                      </span>
+                                      <span className="text-[10px] text-[#64748B] block">{proj.client}</span>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className="text-xs text-[#475569] font-medium">{proj.client}</span>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className={`px-2 py-0.5 rounded-full border text-[10px] font-medium flex items-center gap-1 w-fit ${
+                                    proj.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                                    proj.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                                    proj.status === "On Hold" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                                    "bg-slate-50 text-slate-600 border-slate-200"
+                                  }`}>
+                                    <span className={`w-1.5 h-1.5 rounded-full ${
+                                      proj.status === "Completed" ? "bg-emerald-500" :
+                                      proj.status === "In Progress" ? "bg-blue-500" :
+                                      proj.status === "On Hold" ? "bg-amber-500" :
+                                      "bg-slate-400"
+                                    }`} />
+                                    {proj.status}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className="px-2 py-0.5 rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px] font-medium flex items-center gap-1 w-fit">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    {proj.health}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="flex items-center gap-2 min-w-[100px]">
+                                    <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                      <div
+                                        className={`h-full rounded-full ${proj.progress === 100 ? "bg-emerald-600" : "bg-blue-600"}`}
+                                        style={{ width: `${proj.progress}%` }}
+                                      />
+                                    </div>
+                                    <span className="font-mono text-[11px] font-semibold text-[#0F172A]">{proj.progress}%</span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className="text-[11px] font-mono text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                                    {proj.tasksLabel}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className="text-[11px] font-mono text-slate-500 flex items-center gap-1">
+                                    <Calendar size={11} className="text-slate-400" />
+                                    {proj.date}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[8.5px] font-semibold shrink-0">
+                                      {proj.avatar}
+                                    </div>
+                                    <span className="text-xs text-[#0F172A] font-medium">{proj.pmName}</span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-3 text-right whitespace-nowrap">
+                                  <button className="p-1 text-slate-400 hover:text-slate-700 rounded hover:bg-slate-100 transition-colors">
+                                    <MoreHorizontal size={14} />
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="px-4 py-2.5 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-between text-[11px] text-[#64748B] font-mono">
+                        <span>
+                          Showing <b className="text-[#0F172A]">{filteredProjects.length}</b> of <b className="text-[#0F172A]">21</b> projects
                         </span>
-                        <span className="px-1.5 py-0.5 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
-                          ● {proj.health}
-                        </span>
-                        <Flag size={10} className="text-slate-300 ml-auto" />
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="flex flex-col gap-0.5 pt-0.5">
-                        <div className="flex items-center justify-between text-[9.5px] text-[#64748B]">
-                          <span>{proj.tasksLabel}</span>
-                          <span className="font-mono text-[9.5px] font-medium text-[#0F172A]">{proj.progress}%</span>
-                        </div>
-                        <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full rounded-full ${proj.progress === 100 ? "bg-[#16A34A]" : "bg-blue-600"}`}
-                            style={{ width: `${proj.progress}%` }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Inner mini-metrics box */}
-                      <div className="p-1.5 bg-[#F8FAFC] border border-[#F1F5F9] rounded-lg grid grid-cols-3 gap-1 text-[8.5px] font-mono">
-                        <div>
-                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">OPEN TASKS</span>
-                          <span className="font-medium text-[#0F172A]">{proj.openTasks}</span>
-                        </div>
-                        <div>
-                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">LATE TASKS</span>
-                          <span className="font-medium text-[#0F172A]">{proj.lateTasks}</span>
-                        </div>
-                        <div>
-                          <span className="text-[#94A3B8] block text-[7.5px] uppercase">ACTIVITY</span>
-                          <span className="font-normal text-[#0F172A] flex items-center gap-0.5 truncate">
-                            <span className={`text-[5px] ${proj.activityColor}`}>●</span>
-                            <span>{proj.activity}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center gap-1 text-emerald-700">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> 100% on track
                           </span>
                         </div>
                       </div>
                     </div>
+                  );
+                }
 
-                    {/* Card Footer: Avatar + Due Date */}
-                    <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[9px] text-[#64748B]">
-                      <div className="w-4 h-4 rounded-full bg-slate-700 text-white text-[7.5px] font-semibold flex items-center justify-center">
-                        {proj.avatar}
-                      </div>
-                      <span className="font-mono text-[8.5px] text-[#94A3B8] flex items-center gap-1">
-                        <Calendar size={9} /> {proj.date}
-                      </span>
+                {/* 3. KANBAN BOARD VIEW */}
+                if (projectViewMode === "board") {
+                  const columns = [
+                    {
+                      id: "not_started",
+                      title: "NOT STARTED",
+                      count: 6,
+                      borderAccent: "border-t-slate-400",
+                      badgeStyle: "border-slate-300 bg-white text-slate-700",
+                      dotColor: "bg-slate-400",
+                      projects: allProjects.filter((p) => p.status === "Not Started"),
+                    },
+                    {
+                      id: "in_progress",
+                      title: "IN PROGRESS",
+                      count: 11,
+                      borderAccent: "border-t-blue-500",
+                      badgeStyle: "border-blue-200 bg-blue-50 text-blue-700",
+                      dotColor: "bg-blue-500",
+                      projects: allProjects.filter((p) => p.status === "In Progress"),
+                    },
+                    {
+                      id: "on_hold",
+                      title: "ON HOLD",
+                      count: 2,
+                      borderAccent: "border-t-amber-500",
+                      badgeStyle: "border-amber-200 bg-amber-50 text-amber-700",
+                      dotColor: "bg-amber-500",
+                      projects: allProjects.filter((p) => p.status === "On Hold"),
+                    },
+                    {
+                      id: "completed",
+                      title: "COMPLETED",
+                      count: 1,
+                      borderAccent: "border-t-emerald-500",
+                      badgeStyle: "border-emerald-200 bg-emerald-50 text-emerald-700",
+                      dotColor: "bg-emerald-500",
+                      projects: allProjects.filter((p) => p.status === "Completed"),
+                    },
+                  ];
+
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-3 animate-fadeIn">
+                      {columns.map((col) => (
+                        <div
+                          key={col.id}
+                          className={`bg-[#EEF2F6]/60 border border-[#E2E8F0] border-t-2 ${col.borderAccent} rounded-2xl p-2.5 flex flex-col justify-between min-h-[380px] gap-2.5`}
+                        >
+                          <div className="flex flex-col gap-2.5">
+                            {/* Column Header */}
+                            <div className="flex items-center justify-between text-xs pb-1">
+                              <div className="flex items-center gap-1.5">
+                                <span className={`px-2 py-0.5 rounded-full border font-mono text-[10px] font-medium flex items-center gap-1 ${col.badgeStyle}`}>
+                                  <span className={`w-2 h-2 rounded-full ${col.dotColor}`} />
+                                  {col.title}
+                                </span>
+                                <span className="text-[11px] font-mono text-[#64748B] font-semibold">{col.projects.length}</span>
+                              </div>
+                              <div className="flex items-center gap-1.5 text-slate-400">
+                                <MoreHorizontal size={13} className="hover:text-slate-600 cursor-pointer" />
+                                <Plus size={13} className="hover:text-slate-600 cursor-pointer" />
+                              </div>
+                            </div>
+
+                            {/* Cards in column */}
+                            <div className="flex flex-col gap-2">
+                              {col.projects.map((proj, idx) => (
+                                <div
+                                  key={idx}
+                                  className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs hover:shadow-xs hover:border-slate-300 transition-all flex flex-col gap-2 cursor-grab active:cursor-grabbing"
+                                >
+                                  {/* Client & Initial */}
+                                  <div className="flex items-center justify-between gap-1">
+                                    <div className="flex items-center gap-1.5 min-w-0">
+                                      <div className={`w-5 h-5 rounded ${proj.color} text-[9px] font-bold flex items-center justify-center shrink-0`}>
+                                        {proj.init}
+                                      </div>
+                                      <span className="text-[10px] font-medium text-slate-500 truncate">{proj.client}</span>
+                                    </div>
+                                    <Flag size={11} className="text-slate-300 shrink-0" />
+                                  </div>
+
+                                  {/* Title */}
+                                  <h4 className="font-semibold text-xs text-[#0F172A] leading-snug line-clamp-2">
+                                    {proj.title}
+                                  </h4>
+
+                                  {/* Health & Tasks */}
+                                  <div className="flex items-center justify-between text-[9px]">
+                                    <span className="px-1.5 py-0.2 rounded border bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">
+                                      ● {proj.health}
+                                    </span>
+                                    <span className="font-mono text-slate-500">{proj.tasksLabel}</span>
+                                  </div>
+
+                                  {/* Mini Progress */}
+                                  {proj.progress > 0 && (
+                                    <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                                      <div
+                                        className={`h-full rounded-full ${proj.progress === 100 ? "bg-emerald-600" : "bg-blue-600"}`}
+                                        style={{ width: `${proj.progress}%` }}
+                                      />
+                                    </div>
+                                  )}
+
+                                  {/* Footer: PM + Deadline */}
+                                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[9px] text-[#64748B]">
+                                    <div className="flex items-center gap-1">
+                                      <div className="w-4 h-4 rounded-full bg-slate-800 text-white text-[7.5px] font-semibold flex items-center justify-center">
+                                        {proj.avatar}
+                                      </div>
+                                      <span className="text-[9.5px] text-slate-600">{proj.pmName}</span>
+                                    </div>
+                                    <span className="font-mono text-[8.5px] text-[#94A3B8] flex items-center gap-1">
+                                      <Calendar size={9} /> {proj.date}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Column Footer */}
+                          <button className="py-1.5 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1 mt-1 transition-colors">
+                            <Plus size={12} /> Add project
+                          </button>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                ))}
-              </div>
+                  );
+                }
+
+                return null;
+              })()}
 
             </div>
           )}
