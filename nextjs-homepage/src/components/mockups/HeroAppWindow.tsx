@@ -25,6 +25,7 @@ import {
   History,
   CheckCircle2,
   Circle,
+  AlertCircle,
   HelpCircle,
   Flag,
   Calendar,
@@ -75,7 +76,7 @@ export default function HeroAppWindow() {
   const [isDateFiltered, setIsDateFiltered] = useState(false);
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
-  const [taskViewMode, setTaskViewMode] = useState<"list" | "board">("list");
+  const [taskViewMode, setTaskViewMode] = useState<"list" | "board" | "workload">("board");
   const [projectViewMode, setProjectViewMode] = useState<"cards" | "table" | "board">("cards");
   const [selectedDay, setSelectedDay] = useState(4);
   const [activeWorkTab, setActiveWorkTab] = useState<"all" | "today" | "overdue" | "review">("all");
@@ -4704,10 +4705,10 @@ export default function HeroAppWindow() {
                       <AlertTriangle size={13} className="text-rose-500" /> Overdue
                     </span>
                     <div className="mt-2.5">
-                      <span className="text-3xl font-extrabold text-rose-600 leading-none">7</span>
+                      <span className="text-3xl font-extrabold text-rose-600 leading-none">10</span>
                     </div>
                     <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
-                      <div className="h-full bg-rose-500 rounded-full w-[25%]" />
+                      <div className="h-full bg-rose-500 rounded-full w-[35%]" />
                     </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
@@ -4740,10 +4741,10 @@ export default function HeroAppWindow() {
                       <Calendar size={13} className="text-blue-500" /> Due This Week
                     </span>
                     <div className="mt-2.5">
-                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">3</span>
+                      <span className="text-3xl font-extrabold text-[#0F172A] leading-none">13</span>
                     </div>
                     <div className="h-1.5 w-full bg-slate-100 rounded-full mt-3 overflow-hidden">
-                      <div className="h-full bg-blue-500 rounded-full w-[15%]" />
+                      <div className="h-full bg-blue-500 rounded-full w-[45%]" />
                     </div>
                   </div>
                   <div className="pt-2 text-[9.5px] text-[#64748B] border-t border-slate-100 mt-2">
@@ -4752,7 +4753,7 @@ export default function HeroAppWindow() {
                 </div>
               </div>
 
-              {/* Task Copilot Banner matching screenshot media_1791657660395_dad34b59.png */}
+              {/* Task Copilot Banner matching screenshot media_1791659938090_15532233.png */}
               <div className="p-3 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
@@ -4766,7 +4767,7 @@ export default function HeroAppWindow() {
                       </span>
                     </div>
                     <span className="text-[10.5px] text-[#64748B]">
-                      <b>28 active tasks</b>: 7 overdue and 3 due today. 10 tasks completed this week.
+                      <b>28 active tasks</b>: 10 overdue and 3 due today. Nothing completed yet this week.
                     </span>
                   </div>
                 </div>
@@ -4807,7 +4808,7 @@ export default function HeroAppWindow() {
                       }`}
                     >
                       <span>Overdue</span>
-                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">7</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">10</span>
                     </button>
                     <button
                       onClick={() => setActiveTaskTab("today")}
@@ -4825,7 +4826,7 @@ export default function HeroAppWindow() {
                       }`}
                     >
                       <span>Due This Week</span>
-                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">3</span>
+                      <span className="font-mono text-[9.5px] px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 font-medium">13</span>
                     </button>
                   </div>
 
@@ -4889,7 +4890,10 @@ export default function HeroAppWindow() {
                         <LayoutGrid size={13} />
                       </button>
                       <button
-                        className="p-1 rounded-full transition-colors hover:text-slate-900"
+                        onClick={() => setTaskViewMode("workload")}
+                        className={`p-1 rounded-full transition-colors ${
+                          taskViewMode === "workload" ? "bg-white text-[#0F172A] shadow-xs" : "hover:text-slate-900"
+                        }`}
                         title="Workload View"
                       >
                         <Users size={13} />
@@ -5443,7 +5447,7 @@ export default function HeroAppWindow() {
                 </div>
               )}
 
-              {/* TASK VIEW MODE: KANBAN BOARD (100% IDENTICAL TO SCREENSHOT media_1791657660395_dad34b59.png) */}
+              {/* TASK VIEW MODE: KANBAN BOARD (100% IDENTICAL TO SCREENSHOT media_1791659862914_f71341ca.png & media_1791657660395_dad34b59.png) */}
               {taskViewMode === "board" && (
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 animate-fadeIn">
                   {/* Column 1: TO DO (12) */}
@@ -5466,105 +5470,119 @@ export default function HeroAppWindow() {
                     {/* Card 1: Driver hours of service (HOS) ELD */}
                     <div
                       ref={taskCardRef}
-                      className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2"
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5"
                     >
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                      {/* Left Accent Inset Stripe */}
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Driver hours of service (HOS) ELD remaining clock...
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">eld</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">compliance</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">timer</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">eld</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">compliance</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">timer</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-rose-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#DC2626] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#DC2626]" /> Urgent
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-amber-600" /> Today
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEF7E6] border border-[#FCD34D]/50 text-[#92400E] text-[11px] font-medium flex items-center gap-1">
+                          <Clock size={12} className="text-[#92400E]" /> Today
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Solari Fleet Telematics Control Room</span>
                       </div>
+                      {/* Divider */}
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          MB
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80"
+                          alt="Marcus Brody"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 2: Prescription PDF download formatting */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Prescription PDF download formatting on mobile Safari
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">mobile</span>
-                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">safari</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">pdf</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">mobile</span>
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">safari</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">pdf</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-amber-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Medium
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Oct 11
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Oct 11
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-teal-800 text-teal-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          SL
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80"
+                          alt="Sophia Lin"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 3: Dispute & chargeback upload */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Dispute & chargeback upload documentation portal
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">disputes</span>
-                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">chargebacks</span>
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">stripe</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">disputes</span>
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">chargebacks</span>
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">stripe</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-amber-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Medium
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Oct 14
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Oct 14
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
                         <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-blue-800 text-blue-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          DK
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80"
+                          alt="David Kim"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
@@ -5590,110 +5608,122 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Card 1: Update WebRTC audio level visualizer */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    {/* Card 1: Update WebRTC audio level visualizer (Exact Match to media_1791659862914_f71341ca.png) */}
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Update WebRTC audio level visualizer with high-contrast...
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">webrtc</span>
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">frontend</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">accessibility</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#FEF7E6] text-[#8C6B1F] rounded-lg text-[11px] font-medium">webrtc</span>
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">frontend</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">accessibility</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-orange-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> High
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#C2410C] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#C2410C]" /> High
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 9
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 9
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-purple-800 text-purple-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          ER
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                          alt="Amara Okafor"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 2: Driver dispatch web app: offline map tiles */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-amber-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Driver dispatch web app: offline map tiles caching with...
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">pwa</span>
-                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">offline</span>
-                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">maps</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">pwa</span>
+                        <span className="px-2.5 py-0.5 bg-[#FEF7E6] text-[#8C6B1F] rounded-lg text-[11px] font-medium">offline</span>
+                        <span className="px-2.5 py-0.5 bg-[#FEECEC] text-[#991B1B] rounded-lg text-[11px] font-medium">maps</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-orange-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> High
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#C2410C] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#C2410C]" /> High
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 9
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 9
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Solari Fleet Telematics Control Room</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          MB
-                        </div>
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80"
+                          alt="Marcus Brody"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
                         <div className="flex items-center gap-2">
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
-                            <Paperclip size={11} className="text-slate-400" /> 1
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-[#94A3B8]">
+                            <Paperclip size={12} /> 1
                           </span>
-                          <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                          <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                         </div>
                       </div>
                     </div>
 
                     {/* Card 3: Kroma Mobile SDK: Stripe merchant auth */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Kroma Mobile SDK: Stripe merchant authentication flow
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-violet-50 text-violet-700 border border-violet-100 rounded-full font-mono text-[9px] font-medium">mobile</span>
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">stripe</span>
-                        <span className="px-1.5 py-0.2 bg-cyan-50 text-cyan-700 border border-cyan-100 rounded-full font-mono text-[9px] font-medium">sdk</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">mobile</span>
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">stripe</span>
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">sdk</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-rose-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#DC2626] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#DC2626]" /> Urgent
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 10
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 10
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
                         <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-indigo-800 text-indigo-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          JV
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+                          alt="Julian Vance"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
@@ -5720,104 +5750,116 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 1: HIPAA compliance audit trail viewer */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         HIPAA compliance audit trail viewer for clinic administrators
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">hipaa</span>
-                        <span className="px-1.5 py-0.2 bg-amber-50 text-amber-700 border border-amber-100 rounded-full font-mono text-[9px] font-medium">audit</span>
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">security</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#FEECEC] text-[#991B1B] rounded-lg text-[11px] font-medium">hipaa</span>
+                        <span className="px-2.5 py-0.5 bg-[#FEF7E6] text-[#8C6B1F] rounded-lg text-[11px] font-medium">audit</span>
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">security</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-rose-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#DC2626] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#DC2626]" /> Urgent
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 7
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 7
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Nebula Telehealth 2.0 Core Platform</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-teal-800 text-teal-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          SL
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80"
+                          alt="Sophia Lin"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 2: Automated geofence exit push notification */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Automated geofence exit push notification latency audit
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">geofence</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">push</span>
-                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">performance</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">geofence</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">push</span>
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">performance</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-rose-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#DC2626] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#DC2626]" /> Urgent
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 7
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 7
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Solari Fleet Telematics Control Room</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          MB
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80"
+                          alt="Marcus Brody"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 3: Robot emergency stop (E-STOP) telemetry */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-rose-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Robot emergency stop (E-STOP) physical button telemetry integration
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-slate-100 text-slate-700 border border-slate-200 rounded-full font-mono text-[9px] font-medium">hardware</span>
-                        <span className="px-1.5 py-0.2 bg-rose-50 text-rose-700 border border-rose-100 rounded-full font-mono text-[9px] font-medium">safety</span>
-                        <span className="px-1.5 py-0.2 bg-purple-50 text-purple-700 border border-purple-100 rounded-full font-mono text-[9px] font-medium">robotics</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-medium">hardware</span>
+                        <span className="px-2.5 py-0.5 bg-[#FEECEC] text-[#991B1B] rounded-lg text-[11px] font-medium">safety</span>
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">robotics</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-rose-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Urgent
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#DC2626] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#DC2626]" /> Urgent
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-rose-200 bg-rose-50 text-rose-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Clock size={10} className="text-rose-500" /> Oct 8
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FEECEC] border border-[#FCA5A5]/40 text-[#991B1B] text-[11.5px] font-medium flex items-center gap-1">
+                          <AlertCircle size={12} strokeWidth={2.2} className="text-[#991B1B]" /> Oct 8
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#3B82F6] shrink-0" />
                         <span className="truncate">Arcturus Autonomous AMR Platform</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-slate-800 text-slate-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          TK
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80"
+                          alt="Tariq Khan"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
@@ -5843,114 +5885,288 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
-                    {/* Card 1: Merchant checkout dark theme component library export */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    {/* Card 1: Merchant checkout dark theme */}
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#10B981] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Merchant checkout dark theme component library export
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-teal-50 text-teal-700 border border-teal-100 rounded-full font-mono text-[9px] font-medium">dark-mode</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">components</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">dark-mode</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">components</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-amber-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Medium
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Sep 27
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Sep 27
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
                         <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-blue-800 text-blue-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          DK
-                        </div>
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80"
+                          alt="David Kim"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
                         <div className="flex items-center gap-2">
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
-                            <Paperclip size={11} className="text-slate-400" /> 2
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-[#94A3B8]">
+                            <Paperclip size={12} /> 2
                           </span>
-                          <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                          <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                         </div>
                       </div>
                     </div>
 
                     {/* Card 2: High-contrast night mode color palette */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#10B981] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         High-contrast night mode color palette for truck in-cabin...
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-mono text-[9px] font-medium">night-mode</span>
-                        <span className="px-1.5 py-0.2 bg-pink-50 text-pink-700 border border-pink-100 rounded-full font-mono text-[9px] font-medium">ui</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">night-mode</span>
+                        <span className="px-2.5 py-0.5 bg-[#FDF2F8] text-[#BE185D] rounded-lg text-[11px] font-medium">ui</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-amber-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Medium
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Sep 29
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Sep 29
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#EA580C] shrink-0" />
                         <span className="truncate">Solari Fleet Telematics Control Room</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          MB
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80"
+                          alt="Marcus Brody"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     {/* Card 3: Design token audit: verify typography hierarchy */}
-                    <div className="p-3 bg-white border border-[#E2E8F0] border-l-[3.5px] border-l-emerald-500 rounded-2xl shadow-xs hover:shadow-sm transition-shadow flex flex-col gap-2">
-                      <h4 className="font-semibold text-xs text-[#0F172A] leading-tight line-clamp-2">
+                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#10B981] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Design token audit: verify cross-platform typography hierarchy
                       </h4>
                       {/* Tags */}
-                      <div className="flex flex-wrap items-center gap-1">
-                        <span className="px-1.5 py-0.2 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full font-mono text-[9px] font-medium">tokens</span>
-                        <span className="px-1.5 py-0.2 bg-purple-50 text-purple-700 border border-purple-100 rounded-full font-mono text-[9px] font-medium">figma</span>
-                        <span className="px-1.5 py-0.2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-mono text-[9px] font-medium">ui</span>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">tokens</span>
+                        <span className="px-2.5 py-0.5 bg-[#FDF2F8] text-[#BE185D] rounded-lg text-[11px] font-medium">figma</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">ui</span>
                       </div>
                       {/* Priority & Due */}
-                      <div className="flex items-center gap-2 text-[10.5px]">
-                        <span className="text-slate-600 font-medium flex items-center gap-1">
-                          <Flag size={11} /> Low
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#475569] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#475569]" /> Low
                         </span>
-                        <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-mono text-[9.5px] flex items-center gap-1">
-                          <Calendar size={10} className="text-slate-400" /> Sep 25
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Sep 25
                         </span>
                       </div>
                       {/* Project */}
-                      <div className="flex items-center gap-1 text-[10px] text-slate-600 font-normal">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
                         <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
                       </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
                       {/* Footer */}
-                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <div className="w-5 h-5 rounded-full bg-indigo-800 text-indigo-100 flex items-center justify-center text-[8.5px] font-medium shrink-0">
-                          JV
-                        </div>
-                        <ArrowRight size={12} className="text-slate-400 hover:text-slate-600" />
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+                          alt="Julian Vance"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
                       </div>
                     </div>
 
                     <button className="py-2 text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 text-left px-1">
                       <Plus size={12} /> Add task
                     </button>
+                  </div>
+                </div>
+              )}
+
+              {/* TASK VIEW MODE: TEAM WORKLOAD (100% IDENTICAL TO SCREENSHOT media_1791659938090_15532233.png) */}
+              {taskViewMode === "workload" && (
+                <div className="flex flex-col gap-3.5 animate-fadeIn">
+                  {/* Subheader matching screenshot */}
+                  <div className="text-xs text-[#64748B]">
+                    <span className="font-semibold text-[#0F172A]">8 teammates</span> · none overloaded · capacity is time logged this week against each teammate&apos;s weekly hours
+                  </div>
+
+                  {/* 3-Column Teammate Workload Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    {[
+                      {
+                        name: "Chloe Bennett",
+                        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+                        active: 6,
+                        overdue: 0,
+                        est: "66h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Amara Okafor",
+                        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                        active: 10,
+                        overdue: 6,
+                        est: "135.6h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Liam Gallagher",
+                        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+                        active: 6,
+                        overdue: 2,
+                        est: "54.4h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Dominic Sterling",
+                        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+                        active: 0,
+                        overdue: 0,
+                        est: "0h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Sophia Lin",
+                        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+                        active: 5,
+                        overdue: 1,
+                        est: "73h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Marcus Brody",
+                        avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=120&auto=format&fit=crop&q=80",
+                        active: 1,
+                        overdue: 1,
+                        est: "20h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Julian Vance",
+                        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                        active: 0,
+                        overdue: 0,
+                        est: "0h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                      {
+                        name: "Elena Rostova",
+                        avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80",
+                        active: 0,
+                        overdue: 0,
+                        est: "0h",
+                        logged: "0h",
+                        capacityPct: 0,
+                        loggedWeek: "0h logged of a 40h week",
+                      },
+                    ].map((teammate) => (
+                      <div
+                        key={teammate.name}
+                        className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs hover:shadow-sm transition-shadow flex flex-col justify-between gap-3.5"
+                      >
+                        {/* Header: Avatar, Name/Active & Badge */}
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2.5">
+                            <img
+                              src={teammate.avatar}
+                              alt={teammate.name}
+                              className="w-9 h-9 rounded-full object-cover shrink-0 border border-slate-100"
+                            />
+                            <div>
+                              <h4 className="font-bold text-[13px] text-[#0F172A] leading-tight">
+                                {teammate.name}
+                              </h4>
+                              <span className="text-[11px] text-[#64748B]">
+                                {teammate.active} active · {teammate.overdue} overdue
+                              </span>
+                            </div>
+                          </div>
+                          <span className="px-2 py-0.5 rounded-full bg-[#EAFBF3] text-[#0D7A4D] border border-[#A7F3D0]/50 text-[10.5px] font-medium flex items-center gap-1.5 shrink-0">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0D7A4D]" /> Has capacity
+                          </span>
+                        </div>
+
+                        {/* Capacity Used Section */}
+                        <div>
+                          <div className="flex items-center justify-between text-xs text-[#64748B]">
+                            <span>Capacity used this week</span>
+                            <span className="font-bold text-[#0F172A]">{teammate.capacityPct}%</span>
+                          </div>
+                          <div className="h-1.5 w-full bg-[#F1F5F9] rounded-full overflow-hidden mt-1.5">
+                            <div
+                              className="h-full bg-blue-600 rounded-full"
+                              style={{ width: `${teammate.capacityPct}%` }}
+                            />
+                          </div>
+                          <div className="text-[11px] text-[#94A3B8] mt-1.5">
+                            {teammate.loggedWeek}
+                          </div>
+                        </div>
+
+                        {/* 4 Stat Boxes Grid */}
+                        <div className="grid grid-cols-4 border border-[#E2E8F0] rounded-xl overflow-hidden divide-x divide-[#E2E8F0] bg-[#FAFAFA]/40">
+                          <div className="p-2 text-center">
+                            <span className="text-[9.5px] font-mono font-semibold uppercase text-[#64748B] block">ACTIVE</span>
+                            <span className="text-sm font-bold text-[#0F172A] block mt-0.5">{teammate.active}</span>
+                          </div>
+                          <div className="p-2 text-center">
+                            <span className="text-[9.5px] font-mono font-semibold uppercase text-[#64748B] block">OVERDUE</span>
+                            <span className={`text-sm font-bold block mt-0.5 ${teammate.overdue > 0 ? "text-[#DC2626]" : "text-[#0F172A]"}`}>
+                              {teammate.overdue}
+                            </span>
+                          </div>
+                          <div className="p-2 text-center">
+                            <span className="text-[9.5px] font-mono font-semibold uppercase text-[#64748B] block">EST.</span>
+                            <span className="text-sm font-bold text-[#0F172A] block mt-0.5">{teammate.est}</span>
+                          </div>
+                          <div className="p-2 text-center">
+                            <span className="text-[9.5px] font-mono font-semibold uppercase text-[#64748B] block">LOGGED</span>
+                            <span className="text-sm font-bold text-[#0F172A] block mt-0.5">{teammate.logged}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
