@@ -56,12 +56,19 @@ import {
   RefreshCw,
   ExternalLink,
   MoreHorizontal,
+  Star,
+  Briefcase,
+  Share2,
+  Download,
+  FileEdit,
 } from "lucide-react";
 
 export default function HeroAppWindow() {
   const [currentView, setCurrentView] = useState<
-    "dashboard" | "projects" | "tasks" | "tickets" | "messages"
+    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "tickets" | "messages"
   >("dashboard");
+  const [activeOrgTab, setActiveOrgTab] = useState<"all" | "active" | "leads" | "at_risk">("all");
+  const [activeProposalTab, setActiveProposalTab] = useState<"all" | "active" | "awaiting" | "won" | "attention">("all");
   const [copilotOpen, setCopilotOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [isDateFiltered, setIsDateFiltered] = useState(false);
@@ -316,6 +323,22 @@ export default function HeroAppWindow() {
           Dashboard
         </button>
         <button
+          onClick={() => setCurrentView("organizations")}
+          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
+            currentView === "organizations" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
+          }`}
+        >
+          Organizations
+        </button>
+        <button
+          onClick={() => setCurrentView("proposals")}
+          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
+            currentView === "proposals" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
+          }`}
+        >
+          Proposals
+        </button>
+        <button
           onClick={() => setCurrentView("projects")}
           className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
             currentView === "projects" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
@@ -391,15 +414,35 @@ export default function HeroAppWindow() {
                   <span>Dashboard</span>
                 </button>
 
-                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <Building2 size={14} className="text-[#64748B]" />
-                  <span>Organizations</span>
-                </div>
+                <button
+                  onClick={() => setCurrentView("organizations")}
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                    currentView === "organizations"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
+                      : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Users size={14} className={currentView === "organizations" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Organizations</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">4</span>
+                </button>
 
-                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <FileText size={14} className="text-[#64748B]" />
-                  <span>Proposals</span>
-                </div>
+                <button
+                  onClick={() => setCurrentView("proposals")}
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                    currentView === "proposals"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
+                      : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <FileText size={14} className={currentView === "proposals" ? "text-[#0F172A]" : "text-[#64748B]"} />
+                    <span>Proposals</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">5</span>
+                </button>
 
                 <button
                   ref={navProjectsRef}
@@ -546,6 +589,8 @@ export default function HeroAppWindow() {
             <div className="flex items-center gap-2 min-w-0">
               <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
                 {currentView === "dashboard" && <LayoutDashboard size={13} />}
+                {currentView === "organizations" && <Users size={13} />}
+                {currentView === "proposals" && <FileText size={13} />}
                 {currentView === "projects" && <FolderKanban size={13} />}
                 {currentView === "tasks" && <CheckSquare size={13} />}
                 {currentView === "tickets" && <Ticket size={13} />}
@@ -606,7 +651,7 @@ export default function HeroAppWindow() {
               <div className="relative p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
                 <Bell size={14} />
                 <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8.5px] flex items-center justify-center font-bold">
-                  1
+                  3
                 </span>
               </div>
 
@@ -2893,6 +2938,929 @@ export default function HeroAppWindow() {
                 </span>
               </div>
 
+            </div>
+          )}
+
+          {/* VIEW: ORGANIZATIONS (100% IDENTICAL TO SCREENSHOT media_1791653417628_396ed35c.png) */}
+          {currentView === "organizations" && (
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn pb-12">
+              
+              {/* Top 4 Metrics Cards - Continuous card container with dividers */}
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-2xs grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0] overflow-hidden">
+                {/* 1. Total Accounts */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">
+                      TOTAL ACCOUNTS
+                    </span>
+                    <div className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight mt-1 font-sans">
+                      4
+                    </div>
+                    {/* Thick Green Bar */}
+                    <div className="w-full bg-[#E2E8F0] h-2 rounded-full overflow-hidden mt-3 mb-2 flex">
+                      <div className="bg-[#10B981] h-full rounded-full" style={{ width: "65%" }} />
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#0F172A] font-semibold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Active <span className="font-bold">4</span>
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    4 active clients · 100% conversion
+                  </div>
+                </div>
+
+                {/* 2. Pipeline leads */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <Tag size={13} className="text-blue-500" />
+                      <span>Pipeline leads</span>
+                    </div>
+                    <div className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight mt-1 font-sans">
+                      0
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2" />
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    0 contacted · 0 proposal sent
+                  </div>
+                </div>
+
+                {/* 3. Pipeline forecast */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <DollarSign size={13} className="text-indigo-500" />
+                      <span>Pipeline forecast</span>
+                    </div>
+                    <div className="flex items-baseline gap-1 mt-1 font-sans">
+                      <span className="text-sm font-semibold text-[#64748B]">$</span>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight">0</span>
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2" />
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    Expected value weighted by deal probability
+                  </div>
+                </div>
+
+                {/* 4. Attention needed */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <AlertTriangle size={13} className="text-slate-400" />
+                      <span>Attention needed</span>
+                    </div>
+                    <div className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight mt-1 font-sans">
+                      0
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2" />
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    No accounts flagged
+                  </div>
+                </div>
+              </div>
+
+              {/* CRM insight Banner */}
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:px-4 sm:py-3 shadow-2xs flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                <div className="flex items-start sm:items-center gap-3 min-w-0">
+                  <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                    <Sparkles size={13} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-bold text-[#0F172A]">CRM insight</span>
+                      <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10px] font-medium inline-flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy book
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#64748B] mt-0.5">
+                      4 accounts in your book, 4 active at a <strong className="text-[#0F172A] font-semibold">100% conversion rate</strong>. No account is flagged at risk right now.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-wrap shrink-0">
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <AlertTriangle size={11} className="text-[#64748B]" />
+                    <span>Scan churn signals</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <Clock size={11} className="text-[#64748B]" />
+                    <span>Re-engage inactive</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <Tag size={11} className="text-[#64748B]" />
+                    <span>Pipeline next steps</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-semibold text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <Sparkles size={11} className="text-[#2563EB]" />
+                    <span>CRM briefing</span>
+                    <ChevronDown size={11} className="text-[#94A3B8]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Filter & Action Toolbar */}
+              <div className="flex flex-col gap-2 pt-1">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                  {/* Left Tabs */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                    <button
+                      onClick={() => setActiveOrgTab("all")}
+                      className={`px-3 py-1 font-bold text-xs whitespace-nowrap transition-colors ${
+                        activeOrgTab === "all"
+                          ? "text-[#0F172A] border-b-2 border-blue-600 font-bold"
+                          : "text-[#64748B] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      All <span className="font-mono font-bold ml-0.5">4</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveOrgTab("active")}
+                      className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                        activeOrgTab === "active"
+                          ? "bg-slate-100 text-[#0F172A] font-semibold"
+                          : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                      }`}
+                    >
+                      <Star size={11} className="text-[#94A3B8]" />
+                      <span>Active</span>
+                      <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">4</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveOrgTab("leads")}
+                      className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                        activeOrgTab === "leads"
+                          ? "bg-slate-100 text-[#0F172A] font-semibold"
+                          : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                      }`}
+                    >
+                      <Tag size={11} className="text-[#94A3B8]" />
+                      <span>Leads</span>
+                      <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">0</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveOrgTab("at_risk")}
+                      className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                        activeOrgTab === "at_risk"
+                          ? "bg-slate-100 text-[#0F172A] font-semibold"
+                          : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                      }`}
+                    >
+                      <AlertTriangle size={11} className="text-[#94A3B8]" />
+                      <span>At Risk</span>
+                      <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">0</span>
+                    </button>
+                  </div>
+
+                  {/* Right Tools */}
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] shadow-2xs w-48 sm:w-56">
+                      <Search size={12} className="text-[#94A3B8]" />
+                      <input
+                        type="text"
+                        placeholder="Search organizations..."
+                        className="bg-transparent border-none outline-none text-xs text-[#0F172A] w-full placeholder:text-[#94A3B8]"
+                        readOnly
+                      />
+                      <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#94A3B8] font-mono">
+                        /
+                      </kbd>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-[#64748B]">
+                      <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                        <CheckCircle2 size={13} />
+                      </button>
+                      <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                        <Flag size={13} />
+                      </button>
+                      <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                        <Briefcase size={13} />
+                      </button>
+                      <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                        <LayoutGrid size={13} />
+                      </button>
+                      <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                        <SlidersHorizontal size={13} />
+                      </button>
+                    </div>
+
+                    {/* View Switchers */}
+                    <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50 shadow-2xs">
+                      <button className="p-1 bg-white text-[#0F172A] rounded shadow-2xs">
+                        <List size={12} />
+                      </button>
+                      <button className="p-1 text-[#64748B] hover:text-[#0F172A]">
+                        <Kanban size={12} />
+                      </button>
+                      <button className="p-1 text-[#64748B] hover:text-[#0F172A]">
+                        <LayoutGrid size={12} />
+                      </button>
+                    </div>
+
+                    {/* Primary New Action */}
+                    <button className="px-3 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors">
+                      <Plus size={13} />
+                      <span>Organization</span>
+                      <kbd className="text-[9px] bg-white/20 px-1 rounded font-mono">N</kbd>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Sub utilities under toolbar */}
+                <div className="flex items-center justify-end gap-3 text-[#94A3B8] text-xs pt-0.5 pb-1">
+                  <Download size={13} className="hover:text-[#0F172A] cursor-pointer transition-colors" />
+                  <Share2 size={13} className="hover:text-[#0F172A] cursor-pointer transition-colors" />
+                  <MoreHorizontal size={13} className="hover:text-[#0F172A] cursor-pointer transition-colors" />
+                  <Tag size={13} className="hover:text-[#0F172A] cursor-pointer transition-colors" />
+                </div>
+              </div>
+
+              {/* Organizations Table */}
+              <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                      <tr>
+                        <th className="py-2.5 px-3 w-10">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </th>
+                        <th className="py-2.5 px-3 font-semibold">ORGANIZATION</th>
+                        <th className="py-2.5 px-3 font-semibold">STATUS</th>
+                        <th className="py-2.5 px-3 font-semibold">HEALTH</th>
+                        <th className="py-2.5 px-3 font-semibold">ACCOUNT MANAGER</th>
+                        <th className="py-2.5 px-3 font-semibold text-right">AMOUNT</th>
+                        <th className="py-2.5 px-3 font-semibold text-right">UNPAID</th>
+                        <th className="py-2.5 px-3 font-semibold text-right">LAST ACTIVITY</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#F1F5F9]">
+                      {/* Row 1: Nebula Health */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              NH
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Nebula Health</div>
+                              <div className="text-[11px] text-[#64748B]">Dr. Alexander Hayes</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Active
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="inline-flex items-center gap-1 text-[11px] text-[#0F172A] font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              MB
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Marcus Brody</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">59,500.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-mono text-[#64748B] text-xs">0.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-[11px] text-[#94A3B8]">
+                          No activity
+                        </td>
+                      </tr>
+
+                      {/* Row 2: Kroma Fintech */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              KF
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Kroma Fintech</div>
+                              <div className="text-[11px] text-[#64748B]">Tariq Mansour</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Active
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="inline-flex items-center gap-1 text-[11px] text-[#0F172A] font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              MB
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Marcus Brody</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">21,700.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="inline-flex items-center gap-1 text-amber-700 font-bold font-mono text-xs">
+                            <AlertTriangle size={11} className="text-amber-600" />
+                            <span className="text-[10px] text-[#64748B] font-normal">USD</span>
+                            11,300.00
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-[11px] text-[#94A3B8]">
+                          No activity
+                        </td>
+                      </tr>
+
+                      {/* Row 3: Solari Logistics */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              SL
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Solari Logistics</div>
+                              <div className="text-[11px] text-[#64748B]">David Solari</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Active
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="inline-flex items-center gap-1 text-[11px] text-[#0F172A] font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              MB
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Marcus Brody</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">14,500.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">17,000.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-[11px] text-[#94A3B8]">
+                          No activity
+                        </td>
+                      </tr>
+
+                      {/* Row 4: Arcturus Robotics */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              AR
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Arcturus Robotics</div>
+                              <div className="text-[11px] text-[#64748B]">Evelyn Thorne</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Active
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="inline-flex items-center gap-1 text-[11px] text-[#0F172A] font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              MB
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Marcus Brody</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">24,700.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-mono text-[#64748B] text-xs">0.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-right text-[11px] text-[#94A3B8]">
+                          No activity
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Table Footer */}
+              <div className="text-[11px] text-[#64748B] font-mono pt-1">
+                <span className="font-bold text-[#0F172A]">4</span> of 4 organizations
+              </div>
+            </div>
+          )}
+
+          {/* VIEW: PROPOSALS (100% IDENTICAL TO SCREENSHOT media_1791653473044_ca986589.png) */}
+          {currentView === "proposals" && (
+            <div className="p-4 sm:p-5 flex flex-col gap-4 animate-fadeIn pb-12">
+              
+              {/* Top 4 Metrics Cards - Continuous card container with dividers */}
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-2xs grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0] overflow-hidden">
+                {/* 1. Pipeline Value */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#64748B] font-semibold tracking-wider">
+                      PIPELINE VALUE
+                    </span>
+                    <div className="flex items-baseline gap-1 mt-1 font-sans">
+                      <span className="text-sm font-semibold text-[#64748B]">$</span>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight">168,500</span>
+                      <span className="text-sm font-semibold text-[#64748B]">.00</span>
+                    </div>
+                    {/* Multi-segment / Filled progress bar */}
+                    <div className="w-full bg-[#E2E8F0] h-2 rounded-full overflow-hidden mt-3 mb-2 flex">
+                      <div className="bg-[#10B981] h-full rounded-full" style={{ width: "77%" }} />
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] font-medium text-[#64748B] mt-1">
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> Draft <b className="text-[#0F172A]">1</b>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Sent <b className="text-[#0F172A]">0</b>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" /> Accepted <b className="text-[#0F172A]">4</b>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> Declined <b className="text-[#0F172A]">0</b>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-700" /> Expired <b className="text-[#0F172A]">0</b>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-2">
+                    5 proposals · 1 in flight
+                  </div>
+                </div>
+
+                {/* 2. Won Revenue */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <CheckCircle2 size={13} className="text-emerald-500" />
+                      <span>Won Revenue</span>
+                    </div>
+                    <div className="flex items-baseline gap-1 mt-1 font-sans">
+                      <span className="text-sm font-semibold text-[#64748B]">$</span>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight">130,500</span>
+                      <span className="text-sm font-semibold text-[#64748B]">.00</span>
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2 overflow-hidden">
+                      <div className="bg-[#10B981] h-full w-full rounded-full" />
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    4 won · 100% win rate
+                  </div>
+                </div>
+
+                {/* 3. Awaiting decision */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <Clock size={13} className="text-blue-500" />
+                      <span>Awaiting decision</span>
+                    </div>
+                    <div className="text-3xl font-extrabold text-[#0F172A] leading-tight mt-1 font-sans">
+                      0
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2" />
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    Sent or viewed by the client
+                  </div>
+                </div>
+
+                {/* 4. Needs Attention */}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                      <AlertTriangle size={13} className="text-slate-400" />
+                      <span>Needs Attention</span>
+                    </div>
+                    <div className="text-3xl font-extrabold text-[#0F172A] leading-tight mt-1 font-sans">
+                      0
+                    </div>
+                    <div className="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-3 mb-2" />
+                  </div>
+                  <div className="text-[11px] text-[#64748B] mt-1">
+                    0 expired · 0 declined
+                  </div>
+                </div>
+              </div>
+
+              {/* Pipeline insight Banner */}
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:px-4 sm:py-3 shadow-2xs flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                <div className="flex items-start sm:items-center gap-3 min-w-0">
+                  <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                    <Sparkles size={13} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-bold text-[#0F172A]">Pipeline insight</span>
+                      <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10px] font-medium inline-flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Strong close rate
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#64748B] mt-0.5">
+                      5 proposals tracked, 4 won at a <strong className="text-[#0F172A] font-semibold">100% win rate</strong>. Nothing is waiting on a client right now.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-wrap shrink-0">
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <Send size={11} className="text-[#64748B]" />
+                    <span>Follow-up plan</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <TrendingUp size={11} className="text-[#64748B]" />
+                    <span>Improve win rate</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-medium text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <FileEdit size={11} className="text-[#64748B]" />
+                    <span>Draft a scope</span>
+                  </button>
+                  <button className="px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs font-semibold text-[#0F172A] hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs transition-colors">
+                    <Sparkles size={11} className="text-[#2563EB]" />
+                    <span>Pipeline briefing</span>
+                    <ChevronDown size={11} className="text-[#94A3B8]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Filter & Action Toolbar */}
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pt-1">
+                {/* Left Tabs */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                  <button
+                    onClick={() => setActiveProposalTab("all")}
+                    className={`px-3 py-1 font-bold text-xs whitespace-nowrap transition-colors ${
+                      activeProposalTab === "all"
+                        ? "text-[#0F172A] border-b-2 border-blue-600 font-bold"
+                        : "text-[#64748B] hover:text-[#0F172A]"
+                    }`}
+                  >
+                    All <span className="font-mono font-bold ml-0.5">5</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProposalTab("active")}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                      activeProposalTab === "active"
+                        ? "bg-slate-100 text-[#0F172A] font-semibold"
+                        : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>Active pipeline</span>
+                    <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">1</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProposalTab("awaiting")}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                      activeProposalTab === "awaiting"
+                        ? "bg-slate-100 text-[#0F172A] font-semibold"
+                        : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>Awaiting client</span>
+                    <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">0</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProposalTab("won")}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                      activeProposalTab === "won"
+                        ? "bg-slate-100 text-[#0F172A] font-semibold"
+                        : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>Won</span>
+                    <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">4</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveProposalTab("attention")}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                      activeProposalTab === "attention"
+                        ? "bg-slate-100 text-[#0F172A] font-semibold"
+                        : "text-[#64748B] hover:text-[#0F172A] hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>Needs Attention</span>
+                    <span className="font-mono text-[10px] bg-slate-100 text-[#64748B] px-1 rounded">0</span>
+                  </button>
+                </div>
+
+                {/* Right Tools */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] shadow-2xs w-48 sm:w-56">
+                    <Search size={12} className="text-[#94A3B8]" />
+                    <input
+                      type="text"
+                      placeholder="Search proposals..."
+                      className="bg-transparent border-none outline-none text-xs text-[#0F172A] w-full placeholder:text-[#94A3B8]"
+                      readOnly
+                    />
+                    <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#94A3B8] font-mono">
+                      /
+                    </kbd>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-[#64748B]">
+                    <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                      <CheckCircle2 size={13} />
+                    </button>
+                    <button className="p-1.5 hover:text-[#0F172A] border border-[#E2E8F0] bg-white rounded-lg shadow-2xs hover:bg-slate-50 transition-colors">
+                      <LayoutGrid size={13} />
+                    </button>
+                  </div>
+
+                  {/* View Switchers */}
+                  <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50 shadow-2xs">
+                    <button className="p-1 bg-white text-[#0F172A] rounded shadow-2xs">
+                      <List size={12} />
+                    </button>
+                    <button className="p-1 text-[#64748B] hover:text-[#0F172A]">
+                      <LayoutGrid size={12} />
+                    </button>
+                    <button className="p-1 text-[#64748B] hover:text-[#0F172A]">
+                      <Calendar size={12} />
+                    </button>
+                  </div>
+
+                  {/* Primary New Action */}
+                  <button className="px-3 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors">
+                    <Plus size={13} />
+                    <span>New Proposal</span>
+                    <kbd className="text-[9px] bg-white/20 px-1 rounded font-mono">N</kbd>
+                  </button>
+                </div>
+              </div>
+
+              {/* Proposals Table */}
+              <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                      <tr>
+                        <th className="py-2.5 px-3 w-10">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </th>
+                        <th className="py-2.5 px-3 font-semibold">PROPOSALS</th>
+                        <th className="py-2.5 px-3 font-semibold">STATUS</th>
+                        <th className="py-2.5 px-3 font-semibold text-right">TOTAL</th>
+                        <th className="py-2.5 px-3 font-semibold text-center">EXPIRY DATE</th>
+                        <th className="py-2.5 px-3 font-semibold">CREATED BY</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#F1F5F9]">
+                      {/* Row 1: AI-Driven Telemetry Analytics Engine */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              NH
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">AI-Driven Telemetry Analytics Engine</div>
+                              <div className="text-[11px] text-[#64748B] font-mono">PROP-2026-005 · Nebula Health</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400" /> Draft
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">38,000.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-center text-[11px] text-[#94A3B8] font-mono">
+                          —
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              JV
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Julian Vance</span>
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Row 2: Warehouse Fleet Orchestration Web Application */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              AR
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Warehouse Fleet Orchestration Web Application</div>
+                              <div className="text-[11px] text-[#64748B] font-mono">PROP-2026-004 · Arcturus Robotics</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Accepted
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">24,500.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-center text-[11px] text-[#94A3B8] font-mono">
+                          —
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              JV
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Julian Vance</span>
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Row 3: Logistics Telematics Control Room UI */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              SL
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Logistics Telematics Control Room UI</div>
+                              <div className="text-[11px] text-[#64748B] font-mono">PROP-2026-003 · Solari Logistics</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Accepted
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">29,000.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-center text-[11px] text-[#94A3B8] font-mono">
+                          —
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              JV
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Julian Vance</span>
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Row 4: Next-Gen Mobile SDK & Developer Experience */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              KF
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Next-Gen Mobile SDK & Developer Experience</div>
+                              <div className="text-[11px] text-[#64748B] font-mono">PROP-2026-002 · Kroma Fintech</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Accepted
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">32,000.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-center text-[11px] text-[#94A3B8] font-mono">
+                          —
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              JV
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Julian Vance</span>
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Row 5: Enterprise Design System & Platform Revamp */}
+                      <tr className="hover:bg-slate-50/70 transition-colors">
+                        <td className="py-3 px-3">
+                          <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-0" />
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+                              NH
+                            </div>
+                            <div>
+                              <div className="font-bold text-xs text-[#0F172A]">Enterprise Design System & Platform Revamp</div>
+                              <div className="text-[11px] text-[#64748B] font-mono">PROP-2026-001 · Nebula Health</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] text-[10.5px] font-medium inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Accepted
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-right">
+                          <span className="text-[10px] text-[#64748B] font-mono mr-1">USD</span>
+                          <span className="font-bold font-mono text-[#0F172A] text-xs">45,000.00</span>
+                        </td>
+                        <td className="py-3 px-3 text-center text-[11px] text-[#94A3B8] font-mono">
+                          —
+                        </td>
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center font-mono shrink-0">
+                              JV
+                            </div>
+                            <span className="text-xs text-[#0F172A] font-medium">Julian Vance</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Table Footer */}
+              <div className="text-[11px] text-[#64748B] font-mono pt-1">
+                <span className="font-bold text-[#0F172A]">5</span> in view · <span className="text-[10px] text-[#64748B]">USD</span> <span className="font-bold text-[#0F172A]">168,500.00</span>
+              </div>
             </div>
           )}
 
