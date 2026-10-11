@@ -86,6 +86,14 @@ import {
   BookOpen,
   LogOut,
   ShieldAlert,
+  Printer,
+  Copy,
+  Eye,
+  EyeOff,
+  Ban,
+  Pencil,
+  Mail,
+  CreditCard,
 } from "lucide-react";
 
 export interface SelectedTicketReply {
@@ -155,6 +163,33 @@ export interface NotificationItem {
   forYou?: boolean;
 }
 
+export interface InvoiceLineItem {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  qty: number;
+  rate: number;
+  tax: string;
+  total: number;
+}
+
+export interface InvoiceItem {
+  id: string;
+  client: string;
+  status: "Sent" | "Paid" | "Overdue" | "Draft" | "Viewed" | "Partial" | "Void" | "Bad Debt";
+  total: number;
+  amountDue: number;
+  dueDate: string;
+  issueDate?: string;
+  paymentTerms?: string;
+  organization?: string;
+  createdBy?: string;
+  createdByInitials?: string;
+  notes?: string;
+  lineItems?: InvoiceLineItem[];
+}
+
 export interface ChatMessageItem {
   id: string;
   senderName: string;
@@ -190,8 +225,299 @@ export interface ChatChannelItem {
 
 export default function HeroAppWindow() {
   const [currentView, setCurrentView] = useState<
-    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "offerings-services" | "offerings-products" | "team" | "tickets" | "messages"
+    "dashboard" | "organizations" | "proposals" | "projects" | "tasks" | "offerings-services" | "offerings-products" | "team" | "tickets" | "messages" | "invoices" | "invoice-detail"
   >("dashboard");
+  const [invoiceStatusFilter, setInvoiceStatusFilter] = useState<string>("all");
+  const [invoiceSubTab, setInvoiceSubTab] = useState<"all" | "recurring" | "analytics">("all");
+  const [invoiceSearch, setInvoiceSearch] = useState("");
+  const [reminderBannerDismissed, setReminderBannerDismissed] = useState(false);
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState<string>("INV-2026-0017");
+
+  const initialInvoices: InvoiceItem[] = [
+    {
+      id: "INV-2026-0017",
+      client: "Kroma Fintech",
+      status: "Sent",
+      total: 6500,
+      amountDue: 6500,
+      dueDate: "Nov 6, 2026",
+      issueDate: "Oct 6, 2026",
+      paymentTerms: "Net 30",
+      organization: "Kroma Fintech",
+      createdBy: "—",
+      notes: "Q4 Mobile Checkout SDK performance optimization & bridge updates.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Checkout SDK Sprint",
+          description: "Mobile Checkout SDK Q4 Maintenance Sprint",
+          type: "One-time",
+          qty: 1,
+          rate: 6500,
+          tax: "—",
+          total: 6500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0016",
+      client: "Arcturus Robotics",
+      status: "Paid",
+      total: 15200,
+      amountDue: 0,
+      dueDate: "Oct 5, 2026",
+      issueDate: "Sep 5, 2026",
+      paymentTerms: "Net 30",
+      organization: "Arcturus Robotics",
+      createdBy: "—",
+      notes: "Robotics fleet vision models integration and UI system tokens.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Robotics UI Framework",
+          description: "Core fleet visualization interface",
+          type: "One-time",
+          qty: 1,
+          rate: 15200,
+          tax: "—",
+          total: 15200,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0015",
+      client: "Solari Logistics",
+      status: "Sent",
+      total: 2500,
+      amountDue: 2500,
+      dueDate: "Oct 24, 2026",
+      issueDate: "Sep 24, 2026",
+      paymentTerms: "Net 30",
+      organization: "Solari Logistics",
+      createdBy: "—",
+      notes: "Dispatch dashboard real-time websocket pipeline setup.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Real-time Pipeline",
+          description: "Websocket and map tracking layer",
+          type: "One-time",
+          qty: 1,
+          rate: 2500,
+          tax: "—",
+          total: 2500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0014",
+      client: "Nebula Health",
+      status: "Paid",
+      total: 8500,
+      amountDue: 0,
+      dueDate: "Oct 3, 2026",
+      issueDate: "Sep 3, 2026",
+      paymentTerms: "Net 30",
+      organization: "Nebula Health",
+      createdBy: "—",
+      notes: "HIPAA telemedicine portal security review and compliance updates.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Telehealth Audit",
+          description: "HIPAA UX & portal hardening sprint",
+          type: "One-time",
+          qty: 1,
+          rate: 8500,
+          tax: "—",
+          total: 8500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0013",
+      client: "Kroma Fintech",
+      status: "Paid",
+      total: 1200,
+      amountDue: 0,
+      dueDate: "Oct 2, 2026",
+      issueDate: "Sep 2, 2026",
+      paymentTerms: "Net 30",
+      organization: "Kroma Fintech",
+      createdBy: "—",
+      notes: "Monthly payment gateway infrastructure maintenance.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Gateway Maintenance",
+          description: "Q3 regular maintenance and load testing",
+          type: "One-time",
+          qty: 1,
+          rate: 1200,
+          tax: "—",
+          total: 1200,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0012",
+      client: "Arcturus Robotics",
+      status: "Paid",
+      total: 9500,
+      amountDue: 0,
+      dueDate: "Nov 3, 2026",
+      issueDate: "Oct 3, 2026",
+      paymentTerms: "Net 30",
+      organization: "Arcturus Robotics",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Robotics dashboard sensor telemetry widget redesign.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Telemetry Widgets",
+          description: "High-frequency chart widgets",
+          type: "One-time",
+          qty: 1,
+          rate: 9500,
+          tax: "—",
+          total: 9500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0010",
+      client: "Nebula Health",
+      status: "Paid",
+      total: 6500,
+      amountDue: 0,
+      dueDate: "Oct 30, 2026",
+      issueDate: "Sep 30, 2026",
+      paymentTerms: "Net 30",
+      organization: "Nebula Health",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Patient intake flow design tokens and responsive testing.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Patient Flow",
+          description: "Multi-step onboarding form and tokens",
+          type: "One-time",
+          qty: 1,
+          rate: 6500,
+          tax: "—",
+          total: 6500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0009",
+      client: "Solari Logistics",
+      status: "Sent",
+      total: 14500,
+      amountDue: 14500,
+      dueDate: "Oct 16, 2026",
+      issueDate: "Sep 16, 2026",
+      paymentTerms: "Net 30",
+      organization: "Solari Logistics",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Driver companion mobile app design sprint and design system.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Mobile App Sprint",
+          description: "Driver interface v2 design and prototypes",
+          type: "One-time",
+          qty: 1,
+          rate: 14500,
+          tax: "—",
+          total: 14500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0008",
+      client: "Nebula Health",
+      status: "Paid",
+      total: 6500,
+      amountDue: 0,
+      dueDate: "Oct 1, 2026",
+      issueDate: "Sep 1, 2026",
+      paymentTerms: "Net 30",
+      organization: "Nebula Health",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Provider scheduling UX improvements and calendar sync.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Provider Scheduling",
+          description: "Scheduling calendar UX redesign",
+          type: "One-time",
+          qty: 1,
+          rate: 6500,
+          tax: "—",
+          total: 6500,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0011",
+      client: "Kroma Fintech",
+      status: "Overdue",
+      total: 4800,
+      amountDue: 4800,
+      dueDate: "Sep 21, 2026",
+      issueDate: "Aug 21, 2026",
+      paymentTerms: "Net 30",
+      organization: "Kroma Fintech",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Multi-currency checkout integration sprint 1.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Multi-currency Checkout",
+          description: "Sprint 1 deliverables and backend integration",
+          type: "One-time",
+          qty: 1,
+          rate: 4800,
+          tax: "—",
+          total: 4800,
+        },
+      ],
+    },
+    {
+      id: "INV-2026-0007",
+      client: "Kroma Fintech",
+      status: "Paid",
+      total: 8500,
+      amountDue: 0,
+      dueDate: "Sep 13, 2026",
+      issueDate: "Aug 13, 2026",
+      paymentTerms: "Net 30",
+      organization: "Kroma Fintech",
+      createdBy: "Dominic Sterling",
+      createdByInitials: "DS",
+      notes: "Brand guidelines and identity token delivery.",
+      lineItems: [
+        {
+          id: "item-1",
+          name: "Brand Guidelines",
+          description: "Visual identity and tokens delivery",
+          type: "One-time",
+          qty: 1,
+          rate: 8500,
+          tax: "—",
+          total: 8500,
+        },
+      ],
+    },
+  ];
+
+  const [invoices, setInvoices] = useState<InvoiceItem[]>(initialInvoices);
   const [isOfferingsExpanded, setIsOfferingsExpanded] = useState(false);
   const [offeringsSearch, setOfferingsSearch] = useState("");
   const [offeringsFilter, setOfferingsFilter] = useState<"all" | "wp">("all");
@@ -720,6 +1046,14 @@ export default function HeroAppWindow() {
         >
           Tickets
         </button>
+        <button
+          onClick={() => setCurrentView("invoices")}
+          className={`px-3 py-1 rounded-md shrink-0 transition-colors ${
+            currentView === "invoices" || currentView === "invoice-detail" ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:bg-slate-100"
+          }`}
+        >
+          Invoices
+        </button>
       </div>
 
       {/* 2. MAIN APPLICATION WORKSPACE (Sidebar + Content View) */}
@@ -946,10 +1280,17 @@ export default function HeroAppWindow() {
                 FINANCE
               </span>
               <nav className="flex flex-col gap-0.5">
-                <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
-                  <Receipt size={14} className="text-[#64748B]" />
+                <button
+                  onClick={() => setCurrentView("invoices")}
+                  className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors text-left ${
+                    currentView === "invoices" || currentView === "invoice-detail"
+                      ? "bg-[#F1F5F9] text-[#0F172A] font-semibold"
+                      : "text-[#475569] hover:bg-slate-50 hover:text-[#0F172A]"
+                  }`}
+                >
+                  <Receipt size={14} className={currentView === "invoices" || currentView === "invoice-detail" ? "text-[#0F172A]" : "text-[#64748B]"} />
                   <span>Invoices</span>
-                </div>
+                </button>
                 <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs text-[#475569] hover:bg-slate-50 cursor-pointer">
                   <Wallet size={14} className="text-[#64748B]" />
                   <span>Expenses</span>
@@ -1029,6 +1370,7 @@ export default function HeroAppWindow() {
                 {currentView === "team" && <Users size={13} />}
                 {currentView === "tickets" && <Ticket size={13} />}
                 {currentView === "messages" && <MessageSquare size={13} />}
+                {(currentView === "invoices" || currentView === "invoice-detail") && <Receipt size={13} />}
               </div>
               <h2 className="text-sm font-bold text-[#0F172A] tracking-tight capitalize">
                 {currentView === "dashboard"
@@ -1039,6 +1381,10 @@ export default function HeroAppWindow() {
                   ? "Messaging"
                   : currentView === "team"
                   ? "Team"
+                  : currentView === "invoices"
+                  ? "Invoices"
+                  : currentView === "invoice-detail"
+                  ? `Invoice #${selectedInvoiceId}`
                   : currentView}
               </h2>
             </div>
@@ -9462,6 +9808,725 @@ export default function HeroAppWindow() {
             );
           })()}
 
+          {/* ======================================================== */}
+          {/* 11. INVOICES VIEW (Matching media_1791742850996_7e231d9c.png) */}
+          {/* ======================================================== */}
+          {currentView === "invoices" && (() => {
+            const filteredInvoices = invoices.filter((inv) => {
+              if (invoiceStatusFilter !== "all") {
+                if (invoiceStatusFilter === "Outstanding") {
+                  if (inv.amountDue <= 0) return false;
+                } else if (invoiceStatusFilter === "Draft") {
+                  if (inv.status !== "Draft") return false;
+                } else if (invoiceStatusFilter === "Sent") {
+                  if (inv.status !== "Sent") return false;
+                } else if (invoiceStatusFilter === "Paid") {
+                  if (inv.status !== "Paid") return false;
+                } else if (invoiceStatusFilter === "Overdue") {
+                  if (inv.status !== "Overdue") return false;
+                } else if (invoiceStatusFilter === "Partial") {
+                  if (inv.status !== "Partial") return false;
+                } else if (invoiceStatusFilter === "Void") {
+                  if (inv.status !== "Void") return false;
+                } else if (invoiceStatusFilter === "Bad Debt") {
+                  if (inv.status !== "Bad Debt") return false;
+                }
+              }
+              if (invoiceSearch.trim()) {
+                const q = invoiceSearch.toLowerCase();
+                return (
+                  inv.id.toLowerCase().includes(q) ||
+                  inv.client.toLowerCase().includes(q) ||
+                  inv.status.toLowerCase().includes(q)
+                );
+              }
+              return true;
+            });
+
+            return (
+              <div className="p-4 sm:p-6 flex flex-col gap-5 animate-in fade-in duration-200">
+                {/* 6 Metric KPI Cards */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                  {/* Card 1: This Month */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[11px] text-[#64748B] font-medium">This Month</span>
+                      <div className="w-7 h-7 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                        <DollarSign size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">$40.9K</div>
+                      <div className="text-[10.5px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
+                        <span>↑ 90% vs last month</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Outstanding */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[11px] text-[#64748B] font-medium">Outstanding</span>
+                      <div className="w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
+                        <Clock size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">$28.3K</div>
+                      <button 
+                        onClick={() => setInvoiceStatusFilter("Outstanding")}
+                        className="text-[10.5px] text-amber-600 font-medium hover:underline flex items-center gap-0.5 mt-0.5 text-left"
+                      >
+                        <span>Pending collection</span>
+                        <ArrowRight size={10} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Overdue */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[11px] text-[#64748B] font-medium">Overdue</span>
+                      <div className="w-7 h-7 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100">
+                        <AlertTriangle size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">$4,800.00</div>
+                      <button 
+                        onClick={() => setInvoiceStatusFilter("Overdue")}
+                        className="text-[10.5px] text-rose-600 font-medium hover:underline flex items-center gap-0.5 mt-0.5 text-left"
+                      >
+                        <span>Requires follow-up</span>
+                        <ArrowRight size={10} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Collection Rate */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-1 text-[11px] text-[#64748B] font-medium">
+                        <span>Collection Rate</span>
+                        <Info size={11} className="text-[#94A3B8]" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                        <ShieldCheck size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">81%</div>
+                      <div className="text-[10.5px] text-[#64748B] mt-0.5">
+                        This month: 94%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 5: Avg Days to Pay */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[11px] text-[#64748B] font-medium">Avg Days to Pay</span>
+                      <div className="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center border border-slate-200">
+                        <Clock size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">19d</div>
+                      <div className="text-[10.5px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
+                        <span>5d early</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 6: MRR */}
+                  <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-1 text-[11px] text-[#64748B] font-medium">
+                        <span>MRR</span>
+                        <Info size={11} className="text-[#94A3B8]" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
+                        <TrendingUp size={14} />
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xl font-bold text-[#0F172A] tracking-tight">$0.00</div>
+                      <div className="text-[10.5px] text-[#64748B] mt-0.5">
+                        1 active subscriptions
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action & Search Bar */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {/* Search Input */}
+                    <div className="relative min-w-[220px]">
+                      <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
+                      <input
+                        type="text"
+                        placeholder="Search invoices..."
+                        value={invoiceSearch}
+                        onChange={(e) => setInvoiceSearch(e.target.value)}
+                        className="w-full pl-8 pr-8 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-indigo-500 shadow-2xs"
+                      />
+                      <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[9px] bg-slate-100 border border-slate-200 px-1 py-0.2 rounded text-[#64748B] font-mono pointer-events-none">
+                        /
+                      </kbd>
+                    </div>
+
+                    {/* View switcher buttons */}
+                    <div className="flex items-center border border-[#E2E8F0] bg-white rounded-lg p-0.5 shadow-2xs">
+                      <button className="p-1 rounded bg-slate-100 text-[#0F172A]">
+                        <List size={13} />
+                      </button>
+                      <button className="p-1 rounded text-[#94A3B8] hover:text-[#0F172A] transition-colors">
+                        <LayoutGrid size={13} />
+                      </button>
+                    </div>
+
+                    {/* Tabs: All Invoices | Recurring | Analytics */}
+                    <div className="flex items-center border border-[#E2E8F0] bg-white rounded-lg p-0.5 shadow-2xs text-xs font-medium">
+                      <button
+                        onClick={() => setInvoiceSubTab("all")}
+                        className={`px-2.5 py-1 rounded-md transition-colors ${
+                          invoiceSubTab === "all" ? "bg-slate-100 text-[#0F172A] font-semibold" : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        All Invoices
+                      </button>
+                      <button
+                        onClick={() => setInvoiceSubTab("recurring")}
+                        className={`px-2.5 py-1 rounded-md transition-colors ${
+                          invoiceSubTab === "recurring" ? "bg-slate-100 text-[#0F172A] font-semibold" : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        Recurring
+                      </button>
+                      <button
+                        onClick={() => setInvoiceSubTab("analytics")}
+                        className={`px-2.5 py-1 rounded-md transition-colors ${
+                          invoiceSubTab === "analytics" ? "bg-slate-100 text-[#0F172A] font-semibold" : "text-[#64748B] hover:text-[#0F172A]"
+                        }`}
+                      >
+                        Analytics
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Create Invoice Button */}
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-medium shadow-2xs transition-colors shrink-0">
+                    <Plus size={13} />
+                    <span>Create Invoice</span>
+                    <kbd className="ml-1 text-[9px] bg-indigo-700/60 px-1 py-0.2 rounded font-mono text-white/90">
+                      n
+                    </kbd>
+                  </button>
+                </div>
+
+                {/* Status Filter Pills */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs font-medium">
+                  {[
+                    { key: "all", label: "All statuses", count: 17, dot: null },
+                    { key: "Outstanding", label: "Outstanding", count: 4, dot: "bg-blue-500" },
+                    { key: "Draft", label: "Draft", count: 0, dot: "bg-slate-400" },
+                    { key: "Sent", label: "Sent", count: 3, dot: "bg-blue-500" },
+                    { key: "Viewed", label: "Viewed", count: 0, dot: "bg-sky-400" },
+                    { key: "Partial", label: "Partial", count: 0, dot: "bg-amber-500" },
+                    { key: "Paid", label: "Paid", count: 13, dot: "bg-emerald-500" },
+                    { key: "Overdue", label: "Overdue", count: 1, dot: "bg-rose-500" },
+                    { key: "Void", label: "Void", count: 0, dot: "bg-slate-400" },
+                    { key: "Bad Debt", label: "Bad Debt", count: 0, dot: "bg-purple-500" },
+                    { key: "Scheduled", label: "Scheduled", count: 0, dot: "bg-indigo-500" },
+                  ].map((filter) => {
+                    const isActive = invoiceStatusFilter === filter.key;
+                    return (
+                      <button
+                        key={filter.key}
+                        onClick={() => setInvoiceStatusFilter(filter.key)}
+                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shrink-0 transition-colors border ${
+                          isActive
+                            ? "bg-slate-100 text-[#0F172A] border-slate-300 font-semibold shadow-2xs"
+                            : "bg-white text-[#64748B] border-[#E2E8F0] hover:bg-slate-50 hover:text-[#0F172A]"
+                        }`}
+                      >
+                        {filter.dot && <span className={`w-1.5 h-1.5 rounded-full ${filter.dot}`} />}
+                        <span>{filter.label}</span>
+                        <span className="text-[#94A3B8] font-mono text-[11px]">{filter.count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Automated Reminders Banner */}
+                {!reminderBannerDismissed && (
+                  <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                        <Bell size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-semibold text-[#1E3A8A]">
+                          Turn on automatic reminders?
+                        </h4>
+                        <p className="text-[11px] text-[#3B82F6] mt-0.5">
+                          Automatic reminders get you paid sooner. Preview who would be emailed in the next 7 days.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                      <button className="px-3 py-1 rounded-md bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-medium shadow-2xs transition-colors">
+                        Preview
+                      </button>
+                      <button
+                        onClick={() => setReminderBannerDismissed(true)}
+                        className="px-2 py-1 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors"
+                      >
+                        Not now
+                      </button>
+                      <button
+                        onClick={() => setReminderBannerDismissed(true)}
+                        className="p-1 text-slate-400 hover:text-slate-600 rounded transition-colors"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Invoices Table Card */}
+                <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10.5px] font-mono uppercase tracking-wider text-[#64748B] font-semibold">
+                          <th className="px-4 py-2.5">INVOICE</th>
+                          <th className="px-4 py-2.5">CLIENT</th>
+                          <th className="px-4 py-2.5">STATUS</th>
+                          <th className="px-4 py-2.5">TOTAL</th>
+                          <th className="px-4 py-2.5">AMOUNT DUE</th>
+                          <th className="px-4 py-2.5">DUE DATE</th>
+                          <th className="px-4 py-2.5">CREATED BY</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#F1F5F9] text-xs">
+                        {filteredInvoices.map((inv) => (
+                          <tr
+                            key={inv.id}
+                            onClick={() => {
+                              setSelectedInvoiceId(inv.id);
+                              setCurrentView("invoice-detail");
+                            }}
+                            className="hover:bg-slate-50/80 cursor-pointer transition-colors group"
+                          >
+                            <td className="px-4 py-3 font-mono font-medium text-[#0F172A] group-hover:text-indigo-600 transition-colors">
+                              {inv.id}
+                            </td>
+                            <td className="px-4 py-3 font-medium text-[#0F172A]">
+                              {inv.client}
+                            </td>
+                            <td className="px-4 py-3">
+                              {inv.status === "Paid" && (
+                                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                  Paid
+                                </span>
+                              )}
+                              {inv.status === "Sent" && (
+                                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                  Sent
+                                </span>
+                              )}
+                              {inv.status === "Overdue" && (
+                                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-rose-50 text-rose-700 border border-rose-200">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                                  Overdue
+                                </span>
+                              )}
+                              {inv.status === "Draft" && (
+                                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-50 text-slate-700 border border-slate-200">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                                  Draft
+                                </span>
+                              )}
+                              {inv.status === "Partial" && (
+                                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                  Partial
+                                </span>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 font-semibold text-[#0F172A]">
+                              USD {inv.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                            </td>
+                            <td className="px-4 py-3 font-medium">
+                              {inv.amountDue > 0 ? (
+                                <span className="text-[#D97706] font-medium">
+                                  USD {inv.amountDue.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                                </span>
+                              ) : (
+                                <span className="text-emerald-600 font-medium">Paid</span>
+                              )}
+                            </td>
+                            <td className={`px-4 py-3 ${inv.status === "Overdue" ? "text-rose-600 font-medium" : "text-[#64748B]"}`}>
+                              {inv.dueDate}
+                            </td>
+                            <td className="px-4 py-3">
+                              {inv.createdByInitials ? (
+                                <div className="flex items-center gap-1.5">
+                                  <span className="w-5 h-5 rounded bg-blue-100 text-blue-700 font-bold text-[9px] flex items-center justify-center font-mono">
+                                    {inv.createdByInitials}
+                                  </span>
+                                  <span className="text-[#334155]">{inv.createdBy}</span>
+                                </div>
+                              ) : (
+                                <span className="text-[#94A3B8]">—</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* ======================================================== */}
+          {/* 12. INVOICE DETAIL VIEW (Matching media_1791742850974_39ce67ca.png) */}
+          {/* ======================================================== */}
+          {currentView === "invoice-detail" && (() => {
+            const currentInvoice = invoices.find((inv) => inv.id === selectedInvoiceId) || invoices[0];
+
+            return (
+              <div className="p-4 sm:p-6 flex flex-col gap-4 animate-in fade-in duration-200">
+                {/* Top Breadcrumb & Summary Header */}
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-xs text-[#64748B]">
+                      <button
+                        onClick={() => setCurrentView("invoices")}
+                        className="hover:text-[#0F172A] transition-colors"
+                      >
+                        Invoices
+                      </button>
+                      <ChevronRight size={12} className="text-[#94A3B8]" />
+                      <span className="font-mono text-[#0F172A] font-semibold">{currentInvoice.id}</span>
+                    </div>
+
+                    <div className="text-2xl font-bold text-[#0F172A] tracking-tight">
+                      USD {currentInvoice.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-0.5">
+                    {/* Status badge */}
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]" />
+                      Invoice {currentInvoice.status}
+                    </span>
+
+                    {/* Client pill */}
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-medium text-[#475569]">
+                      <Building2 size={13} className="text-[#64748B]" />
+                      <span>{currentInvoice.client}</span>
+                    </span>
+
+                    {/* Due date pill */}
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-medium text-[#475569]">
+                      <Calendar size={13} className="text-[#64748B]" />
+                      <span>Due {currentInvoice.dueDate}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Action Toolbar */}
+                <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-1">
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <Pencil size={12} />
+                      <span>Edit</span>
+                    </button>
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <Send size={12} />
+                      <span>Resend Email</span>
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setCopilotOpen(true);
+                        setCopilotQuery(`Review and explain invoice ${currentInvoice.id} for ${currentInvoice.client}`);
+                      }}
+                      className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors"
+                    >
+                      <Sparkles size={12} className="text-purple-600" />
+                      <span>Ask AI</span>
+                      <ChevronDown size={11} className="text-slate-400" />
+                    </button>
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <DollarSign size={12} />
+                      <span>Record Payment</span>
+                    </button>
+                    <button className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <DollarSign size={12} />
+                      <span>Credit Note</span>
+                      <HelpCircle size={10} className="text-slate-400" />
+                    </button>
+                    <button className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <DollarSign size={12} />
+                      <span>Apply Credit</span>
+                      <HelpCircle size={10} className="text-slate-400" />
+                    </button>
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <Copy size={12} />
+                      <span>Duplicate</span>
+                    </button>
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <Download size={12} />
+                      <span>Download PDF</span>
+                    </button>
+                    <button className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md border border-[#E2E8F0] bg-white text-[#475569] hover:bg-slate-50 shadow-2xs font-medium transition-colors">
+                      <Printer size={12} />
+                      <span>Print</span>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-md border border-[#FCA5A5] bg-[#FEF2F2] text-[#DC2626] hover:bg-red-100/60 shadow-2xs font-medium transition-colors">
+                      <AlertTriangle size={12} />
+                      <span>Bad Debt</span>
+                    </button>
+                    <button className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-md border border-[#FCA5A5] bg-[#FEF2F2] text-[#DC2626] hover:bg-red-100/60 shadow-2xs font-medium transition-colors">
+                      <Ban size={12} />
+                      <span>Void</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Warning Alert Banner */}
+                <div className="bg-[#FFFBEB] border border-[#FDE68A] rounded-xl p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+                  <div className="flex items-center gap-2.5">
+                    <AlertTriangle size={15} className="text-amber-600 shrink-0" />
+                    <span className="text-xs text-[#92400E]">
+                      {currentInvoice.client} has no way to pay this invoice online yet: add bank details for USD.
+                    </span>
+                  </div>
+                  <button className="px-3 py-1 text-xs font-medium text-[#0F172A] bg-white border border-[#E2E8F0] rounded-md shadow-2xs hover:bg-slate-50 transition-colors shrink-0 self-end sm:self-auto">
+                    Add bank details
+                  </button>
+                </div>
+
+                {/* Main 2-Column Content: Document + Sidebar */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+                  {/* Left Column: The Invoice Document */}
+                  <div className="lg:col-span-2 flex flex-col gap-4">
+                    {/* Primary Document Card */}
+                    <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs p-5 sm:p-7 flex flex-col gap-6">
+                      {/* Metadata Grid */}
+                      <div className="grid grid-cols-3 gap-6 text-xs">
+                        <div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold block mb-1">
+                            BILL TO
+                          </span>
+                          <span className="font-bold text-[#0F172A] text-xs">{currentInvoice.client}</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold block mb-1">
+                            ORGANIZATION
+                          </span>
+                          <span className="font-bold text-[#0F172A] text-xs">{currentInvoice.organization || currentInvoice.client}</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold block mb-1">
+                            ISSUE DATE
+                          </span>
+                          <span className="text-[#0F172A] font-medium text-xs">{currentInvoice.issueDate}</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold block mb-1">
+                            DUE DATE
+                          </span>
+                          <span className="font-bold text-[#0F172A] text-xs">{currentInvoice.dueDate}</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold block mb-1">
+                            PAYMENT TERMS
+                          </span>
+                          <span className="font-bold text-[#0F172A] text-xs">{currentInvoice.paymentTerms}</span>
+                        </div>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="border-t border-[#F1F5F9] my-0" />
+
+                      {/* Line Items Table */}
+                      <div className="flex flex-col gap-3">
+                        <h3 className="text-sm font-bold text-[#0F172A]">Line Items</h3>
+                        <div className="border border-[#E2E8F0] rounded-lg overflow-hidden">
+                          <table className="w-full text-left border-collapse text-xs">
+                            <thead>
+                              <tr className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase tracking-wider text-[#64748B] font-semibold">
+                                <th className="px-3.5 py-2.5 w-10">#</th>
+                                <th className="px-3.5 py-2.5">ITEM</th>
+                                <th className="px-3.5 py-2.5">TYPE</th>
+                                <th className="px-3.5 py-2.5 text-right">QTY</th>
+                                <th className="px-3.5 py-2.5 text-right">RATE</th>
+                                <th className="px-3.5 py-2.5 text-center">TAX</th>
+                                <th className="px-3.5 py-2.5 text-right">TOTAL</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-[#F1F5F9]">
+                              {(currentInvoice.lineItems || []).map((item, index) => (
+                                <tr key={item.id} className="hover:bg-slate-50/50">
+                                  <td className="px-3.5 py-3 font-mono text-[#94A3B8]">{index + 1}</td>
+                                  <td className="px-3.5 py-3">
+                                    <div className="font-bold text-[#0F172A]">{item.name}</div>
+                                    <div className="text-[11px] text-[#64748B] mt-0.5">{item.description}</div>
+                                  </td>
+                                  <td className="px-3.5 py-3">
+                                    <span className="bg-[#EFF6FF] text-[#2563EB] text-[10.5px] font-medium px-2 py-0.5 rounded-full border border-[#BFDBFE]">
+                                      {item.type}
+                                    </span>
+                                  </td>
+                                  <td className="px-3.5 py-3 text-right text-[#0F172A] font-medium">{item.qty}</td>
+                                  <td className="px-3.5 py-3 text-right text-[#0F172A] font-medium">
+                                    USD {item.rate.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                                  </td>
+                                  <td className="px-3.5 py-3 text-center text-[#94A3B8]">{item.tax}</td>
+                                  <td className="px-3.5 py-3 text-right text-[#0F172A] font-bold">
+                                    USD {item.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      {/* Totals Section */}
+                      <div className="flex justify-end pt-1">
+                        <div className="w-64 flex flex-col gap-2.5 text-xs">
+                          <div className="flex justify-between text-[#64748B]">
+                            <span>Subtotal</span>
+                            <span className="text-[#0F172A] font-medium">
+                              USD {currentInvoice.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                            </span>
+                          </div>
+                          <div className="flex justify-between text-[#0F172A] font-bold border-b border-[#F1F5F9] pb-2">
+                            <span>Total</span>
+                            <span>USD {currentInvoice.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
+                          </div>
+                          <div className="flex justify-between text-sm font-bold text-[#2563EB] pt-0.5">
+                            <span>Amount Due</span>
+                            <span>USD {currentInvoice.amountDue.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Notes Card */}
+                    {currentInvoice.notes && (
+                      <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs p-5 flex flex-col gap-1.5">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold">
+                          NOTES
+                        </span>
+                        <p className="text-xs text-[#0F172A] font-medium leading-relaxed">
+                          {currentInvoice.notes}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column: 3 Interactive Sidebar Widgets */}
+                  <div className="flex flex-col gap-4">
+                    {/* Widget 1: Payments (0) */}
+                    <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs p-4 flex flex-col gap-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xs font-bold text-[#0F172A]">Payments (0)</h3>
+                        <button className="text-xs font-medium text-[#0F172A] bg-white border border-[#E2E8F0] hover:bg-slate-50 px-2.5 py-1 rounded-md shadow-2xs transition-colors">
+                          + Record Payment
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-center gap-2 py-5 text-center text-[#94A3B8] text-xs">
+                        <div className="w-5 h-5 rounded-full border border-[#E2E8F0] flex items-center justify-center text-[11px] font-mono font-medium">
+                          $
+                        </div>
+                        <span>No payments recorded</span>
+                      </div>
+                    </div>
+
+                    {/* Widget 2: Reminders */}
+                    <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs p-4 flex flex-col gap-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center text-slate-600">
+                            <Bell size={13} />
+                          </div>
+                          <h3 className="text-xs font-bold text-[#0F172A]">Reminders</h3>
+                          <span className="bg-slate-100 text-slate-600 text-[10px] px-1.5 py-0.5 rounded font-medium">
+                            Standard
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-xs text-[#64748B]">
+                        Automatic reminders are off
+                      </div>
+
+                      <div>
+                        <button className="text-xs font-medium text-[#0F172A] bg-white border border-[#E2E8F0] hover:bg-slate-50 px-3 py-1 rounded-md shadow-2xs transition-colors">
+                          Turn on
+                        </button>
+                      </div>
+
+                      {/* Reminders Timeline */}
+                      <div className="relative pt-4 pb-2 px-1">
+                        <div className="absolute top-[24px] left-3 right-3 h-[1.5px] bg-slate-200" />
+                        <div className="relative z-10 flex items-center justify-between">
+                          {[
+                            { label: "-3", date: "Nov 3" },
+                            { label: "0", date: "Nov 6" },
+                            { label: "+3", date: "Nov 9" },
+                            { label: "+7", date: "Nov 13" },
+                            { label: "+14", date: "Nov 20" },
+                          ].map((step, idx) => (
+                            <div key={idx} className="flex flex-col items-center gap-1.5">
+                              <div className="w-4 h-4 rounded-full bg-white border border-slate-300 text-slate-600 flex items-center justify-center text-[8.5px] font-mono font-medium shadow-2xs">
+                                {step.label}
+                              </div>
+                              <span className="text-[9.5px] font-mono text-[#64748B]">{step.date}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button className="w-full py-1.5 px-3 rounded-md border border-[#E2E8F0] bg-white hover:bg-slate-50 text-xs font-medium text-[#0F172A] flex items-center justify-center gap-1.5 shadow-2xs transition-colors mt-1">
+                        <span>Send now</span>
+                      </button>
+                    </div>
+
+                    {/* Widget 3: Views */}
+                    <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-2xs p-4 flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <Eye size={14} className="text-[#64748B]" />
+                        <h3 className="text-xs font-bold text-[#0F172A]">Views</h3>
+                      </div>
+                      <div className="pt-1">
+                        <h4 className="text-xs font-bold text-[#0F172A]">Not viewed yet</h4>
+                        <p className="text-[11px] text-[#64748B] mt-1 leading-relaxed">
+                          Counts when the client opens the pay link, the client portal or the PDF. Link scanners and your team never count.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Floating bottom-right chat bubble icon (matching screenshot 03) */}
           <button
             onClick={() => setCopilotOpen(!copilotOpen)}
@@ -9718,7 +10783,7 @@ export default function HeroAppWindow() {
                     { label: "Services", view: "offerings-services" as const, icon: Box },
                     { label: "Digital Assets", view: "offerings-products" as const, icon: Package },
                     { label: "Proposals", view: "proposals" as const, icon: FileText },
-                    { label: "Invoices", icon: Receipt },
+                    { label: "Invoices", view: "invoices" as const, icon: Receipt },
                     { label: "Team", view: "team" as const, icon: Users },
                     { label: "Messages", view: "messages" as const, icon: MessageSquare },
                     { label: "Reports", icon: BarChart3 },
