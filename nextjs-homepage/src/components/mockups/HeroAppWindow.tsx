@@ -79,6 +79,13 @@ import {
   Underline,
   Code,
   RotateCcw,
+  Sun,
+  Globe,
+  Compass,
+  Keyboard,
+  BookOpen,
+  LogOut,
+  ShieldAlert,
 } from "lucide-react";
 
 export interface SelectedTicketReply {
@@ -138,6 +145,16 @@ export interface SelectedTaskData {
   comments?: SelectedTaskComment[];
 }
 
+export interface NotificationItem {
+  id: string;
+  type: "warning" | "due" | "security";
+  title: string;
+  description: string;
+  timestamp: string;
+  unread: boolean;
+  forYou?: boolean;
+}
+
 export interface ChatMessageItem {
   id: string;
   senderName: string;
@@ -190,6 +207,65 @@ export default function HeroAppWindow() {
   const [activeProposalTab, setActiveProposalTab] = useState<"all" | "active" | "awaiting" | "won" | "attention">("all");
   const [copilotOpen, setCopilotOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [notificationFilter, setNotificationFilter] = useState<"all" | "unread" | "for_you">("all");
+  const [notifications, setNotifications] = useState<NotificationItem[]>([
+    {
+      id: "notif-1",
+      type: "warning",
+      title: "Follow-up overdue: Executive follow-up call on warehouse fleet UI proposal",
+      description: 'Your follow-up "Executive follow-up call on warehouse fleet UI proposal" with Arcturus Robotics is 2 days overdue',
+      timestamp: "10h ago",
+      unread: true,
+      forYou: true,
+    },
+    {
+      id: "notif-2",
+      type: "warning",
+      title: "Follow-up overdue: Executive follow-up call on warehouse fleet UI proposal",
+      description: 'Your follow-up "Executive follow-up call on warehouse fleet UI proposal" with Arcturus Robotics is 1 day overdue',
+      timestamp: "1d ago",
+      unread: true,
+      forYou: true,
+    },
+    {
+      id: "notif-3",
+      type: "due",
+      title: "Follow-up due today: Executive follow-up call on warehouse fleet UI proposal",
+      description: 'Your follow-up "Executive follow-up call on warehouse fleet UI proposal" with Arcturus Robotics is due today',
+      timestamp: "2d ago",
+      unread: true,
+      forYou: true,
+    },
+    {
+      id: "notif-4",
+      type: "security",
+      title: "New sign-in to your account",
+      description: "Your account was just used to sign in from Chrome on macOS. If this wasn't you, change your password and sign out of all sessions.",
+      timestamp: "3d ago",
+      unread: true,
+      forYou: false,
+    },
+  ]);
+
+  const handleMarkAllNotificationsRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
+  };
+
+  const handleToggleNotificationRead = (id: string) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, unread: !n.unread } : n))
+    );
+  };
+
+  const filteredNotifications = notifications.filter((n) => {
+    if (notificationFilter === "unread") return n.unread;
+    if (notificationFilter === "for_you") return n.forYou;
+    return true;
+  });
+
+  const unreadNotificationCount = notifications.filter((n) => n.unread).length;
   const [isDateFiltered, setIsDateFiltered] = useState(false);
   const [copilotQuery, setCopilotQuery] = useState("");
   const [copilotSubmitted, setCopilotSubmitted] = useState(false);
@@ -909,11 +985,19 @@ export default function HeroAppWindow() {
           </div>
 
           {/* Bottom user badge (Screenshot 01) */}
-          <div className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[11px]">
+          <div
+            onClick={() => {
+              setProfileOpen(!profileOpen);
+              setNotificationOpen(false);
+            }}
+            className="pt-2 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] cursor-pointer hover:bg-slate-50/80 -mx-1 px-1 py-1 rounded-lg transition-colors select-none"
+          >
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 text-white flex items-center justify-center font-bold text-[10px] shrink-0 border border-slate-200 shadow-2xs">
-                JV
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                alt="Julian Vance"
+                className="w-6 h-6 rounded-full object-cover shrink-0 border border-slate-200 shadow-2xs"
+              />
               <div className="leading-tight">
                 <span className="font-semibold block text-[#0F172A]">Julian Vance</span>
                 <span className="text-[9.5px] text-[#64748B]">Executive</span>
@@ -1002,23 +1086,328 @@ export default function HeroAppWindow() {
                 </kbd>
               </button>
 
-              <div className="p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
-                <Settings size={14} />
+              <div className="p-1.5 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">
+                <Settings size={15} />
               </div>
 
-              <div className="relative p-1 text-[#64748B] hover:text-[#0F172A] cursor-pointer">
-                <Bell size={14} />
-                <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8.5px] flex items-center justify-center font-bold">
-                  3
-                </span>
+              {/* Notification Dropdown Trigger */}
+              <div className="relative">
+                <button
+                  onClick={() => {
+                    setNotificationOpen(!notificationOpen);
+                    setProfileOpen(false);
+                  }}
+                  className={`relative p-1.5 rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 transition-colors cursor-pointer ${
+                    notificationOpen ? "text-[#0F172A] bg-slate-100" : ""
+                  }`}
+                  title="Notifications"
+                >
+                  <Bell size={15} />
+                  {unreadNotificationCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#3B82F6] text-white rounded-full text-[9px] flex items-center justify-center font-bold shadow-2xs">
+                      {unreadNotificationCount}
+                    </span>
+                  )}
+                </button>
+
+                {/* NOTIFICATION DROPDOWN MODAL (Matching Screenshot media_1791742620783_96429e1f.png) */}
+                {notificationOpen && (
+                  <>
+                    <div
+                      onClick={() => setNotificationOpen(false)}
+                      className="fixed inset-0 z-40"
+                    />
+                    <div className="absolute right-0 top-full mt-2 w-[390px] max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] z-50 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150 select-none">
+                      {/* Header */}
+                      <div className="px-4 pt-3.5 pb-2.5 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-bold text-sm text-[#0F172A]">Notifications</h3>
+                          {unreadNotificationCount > 0 && (
+                            <span className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 text-[11px] font-bold flex items-center justify-center">
+                              {unreadNotificationCount}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={handleMarkAllNotificationsRead}
+                            className="text-xs text-slate-500 hover:text-slate-800 font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                          >
+                            <Check size={12} className="text-slate-500" />
+                            <span>Mark all read</span>
+                          </button>
+                          <button className="p-1 text-slate-400 hover:text-slate-700 transition-colors rounded">
+                            <Settings size={13} />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Filter Tabs */}
+                      <div className="px-4 pb-3 flex items-center gap-1.5 border-b border-slate-100">
+                        <button
+                          onClick={() => setNotificationFilter("all")}
+                          className={`px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
+                            notificationFilter === "all"
+                              ? "bg-indigo-50 text-indigo-600 font-semibold border border-indigo-200"
+                              : "text-slate-600 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          All
+                        </button>
+                        <button
+                          onClick={() => setNotificationFilter("unread")}
+                          className={`px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
+                            notificationFilter === "unread"
+                              ? "bg-indigo-50 text-indigo-600 font-semibold border border-indigo-200"
+                              : "text-slate-600 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          Unread
+                        </button>
+                        <button
+                          onClick={() => setNotificationFilter("for_you")}
+                          className={`px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
+                            notificationFilter === "for_you"
+                              ? "bg-indigo-50 text-indigo-600 font-semibold border border-indigo-200"
+                              : "text-slate-600 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          For you
+                        </button>
+                      </div>
+
+                      {/* Section label */}
+                      <div className="px-4 pt-3 pb-1 text-[10px] font-mono uppercase font-bold text-slate-400 tracking-wider">
+                        EARLIER
+                      </div>
+
+                      {/* Notification list */}
+                      <div className="max-h-[350px] overflow-y-auto divide-y divide-slate-100 no-scrollbar">
+                        {filteredNotifications.length === 0 ? (
+                          <div className="py-8 text-center text-xs text-slate-400">
+                            No notifications in this filter
+                          </div>
+                        ) : (
+                          filteredNotifications.map((n) => (
+                            <div
+                              key={n.id}
+                              onClick={() => handleToggleNotificationRead(n.id)}
+                              className={`flex items-start gap-3 p-3.5 hover:bg-slate-50/80 cursor-pointer transition-colors relative group ${
+                                n.unread ? "bg-white" : "bg-[#FAFAFA]/50"
+                              }`}
+                            >
+                              {/* Left colored vertical accent strip */}
+                              <div
+                                className={`w-1 self-stretch rounded-full shrink-0 ${
+                                  n.type === "warning"
+                                    ? "bg-amber-500"
+                                    : n.type === "due"
+                                    ? "bg-blue-600"
+                                    : "bg-red-500"
+                                }`}
+                              />
+
+                              {/* Icon or Avatar */}
+                              {n.type === "warning" ? (
+                                <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100 mt-0.5">
+                                  <AlertTriangle size={15} />
+                                </div>
+                              ) : n.type === "due" ? (
+                                <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100 mt-0.5">
+                                  <Clock size={15} />
+                                </div>
+                              ) : (
+                                <div className="relative shrink-0 mt-0.5">
+                                  <img
+                                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                                    alt="User"
+                                    className="w-8 h-8 rounded-xl object-cover"
+                                  />
+                                  <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-white flex items-center justify-center shadow-2xs">
+                                    <ShieldAlert size={10} className="text-red-500" />
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Content */}
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-xs font-bold text-[#0F172A] leading-snug group-hover:text-blue-600 transition-colors">
+                                  {n.title}
+                                </h4>
+                                <p className="text-[11px] text-slate-500 leading-snug mt-1">
+                                  {n.description}
+                                </p>
+                                <span className="text-[10px] text-slate-400 font-mono mt-1 block">
+                                  {n.timestamp}
+                                </span>
+                              </div>
+
+                              {/* Blue unread dot */}
+                              {n.unread && (
+                                <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0 mt-1.5" />
+                              )}
+                            </div>
+                          ))
+                        )}
+                      </div>
+
+                      {/* Footer */}
+                      <div className="border-t border-slate-100 bg-white">
+                        <button
+                          onClick={() => setNotificationOpen(false)}
+                          className="w-full py-2.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center justify-center gap-1.5 hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
+                          <span>View all notifications</span>
+                          <ArrowRight size={12} />
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
-              <div className="flex items-center gap-1.5 pl-1 border-l border-slate-200">
-                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 text-white flex items-center justify-center font-bold text-[9px] shrink-0 border border-slate-200">
-                  JV
-                </div>
-                <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Julian Vance</span>
-                <ChevronDown size={11} className="text-[#94A3B8]" />
+              {/* User Profile Chip & Profile Dropdown Trigger */}
+              <div className="relative">
+                <button
+                  onClick={() => {
+                    setProfileOpen(!profileOpen);
+                    setNotificationOpen(false);
+                  }}
+                  className={`flex items-center gap-2 pl-2 border-l border-slate-200 py-1 pr-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer ${
+                    profileOpen ? "bg-slate-100" : ""
+                  }`}
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                    alt="Julian Vance"
+                    className="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200"
+                  />
+                  <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Julian Vance</span>
+                  <ChevronDown size={11} className={`text-[#94A3B8] transition-transform duration-200 ${profileOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {/* PROFILE DROPDOWN MODAL (Matching Screenshot media_1791742749578_1c734492.png) */}
+                {profileOpen && (
+                  <>
+                    <div
+                      onClick={() => setProfileOpen(false)}
+                      className="fixed inset-0 z-40"
+                    />
+                    <div className="absolute right-0 top-full mt-2 w-[290px] bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] z-50 p-2 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150 select-none">
+                      {/* Top User Card */}
+                      <div className="p-3.5 rounded-xl border border-slate-100 bg-[#FAFAFA] flex items-center gap-3 mb-1">
+                        <img
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                          alt="Julian Vance"
+                          className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-200/60 shadow-xs shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-bold text-sm text-[#0F172A] leading-tight truncate">Julian Vance</h4>
+                          <p className="text-xs text-slate-500 leading-tight mt-0.5 truncate">julian@aetheris.design</p>
+                          <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold bg-indigo-50 text-indigo-600 border border-indigo-100">
+                            Agency Owner
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Menu Options */}
+                      <div className="space-y-0.5 text-xs text-slate-700">
+                        {/* Profile */}
+                        <div
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors"
+                        >
+                          <User size={15} className="text-slate-500" />
+                          <span className="font-medium text-slate-800">Profile</span>
+                        </div>
+
+                        <div className="my-1 border-t border-slate-100" />
+
+                        {/* Appearance */}
+                        <div className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors">
+                          <div className="flex items-center gap-3">
+                            <Sun size={15} className="text-slate-500" />
+                            <span className="font-medium text-slate-800">Appearance</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-slate-400 text-xs font-normal">
+                            <span>Light mode</span>
+                            <ChevronRight size={13} />
+                          </div>
+                        </div>
+
+                        {/* Language */}
+                        <div className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors">
+                          <div className="flex items-center gap-3">
+                            <Globe size={15} className="text-slate-500" />
+                            <span className="font-medium text-slate-800">Language</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-slate-400 text-xs font-normal">
+                            <span>English</span>
+                            <ChevronRight size={13} />
+                          </div>
+                        </div>
+
+                        <div className="my-1 border-t border-slate-100" />
+
+                        {/* Getting started */}
+                        <div
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors"
+                        >
+                          <Compass size={15} className="text-slate-500" />
+                          <span className="font-medium text-slate-800">Getting started</span>
+                        </div>
+
+                        {/* Keyboard shortcuts */}
+                        <div
+                          onClick={() => {
+                            setProfileOpen(false);
+                            setCommandPaletteOpen(true);
+                          }}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Keyboard size={15} className="text-slate-500" />
+                            <span className="font-medium text-slate-800">Keyboard shortcuts</span>
+                          </div>
+                          <kbd className="text-[10px] bg-slate-100 border border-slate-200 px-1.5 py-0.2 rounded text-slate-500 font-mono">
+                            ?
+                          </kbd>
+                        </div>
+
+                        {/* Documentation */}
+                        <div
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors"
+                        >
+                          <BookOpen size={15} className="text-slate-500" />
+                          <span className="font-medium text-slate-800">Documentation</span>
+                        </div>
+
+                        {/* Help */}
+                        <div
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100/70 cursor-pointer transition-colors"
+                        >
+                          <HelpCircle size={15} className="text-slate-500" />
+                          <span className="font-medium text-slate-800">Help</span>
+                        </div>
+
+                        <div className="my-1 border-t border-slate-100" />
+
+                        {/* Sign out */}
+                        <div
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-red-50/70 cursor-pointer transition-colors text-red-600 group"
+                        >
+                          <LogOut size={15} className="text-red-500 group-hover:text-red-600" />
+                          <span className="font-medium">Sign out</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </header>
