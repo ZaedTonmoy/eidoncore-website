@@ -7716,36 +7716,40 @@ export default function HeroAppWindow() {
 
                 {/* 4. LIST VIEW */}
                 {ticketViewMode === "list" && (
-                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-2xs">
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B]">
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-x-auto shadow-2xs no-scrollbar">
+                    <table className="w-full text-left text-xs min-w-[720px]">
+                      <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[10px] font-mono uppercase text-[#64748B] whitespace-nowrap">
                         <tr>
-                          <th className="py-2.5 px-3">ID</th>
-                          <th className="py-2.5 px-3">TITLE</th>
-                          <th className="py-2.5 px-3">ORGANIZATION</th>
-                          <th className="py-2.5 px-3">STATUS</th>
-                          <th className="py-2.5 px-3">PRIORITY</th>
-                          <th className="py-2.5 px-3">ASSIGNEE</th>
-                          <th className="py-2.5 px-3">REPLIES</th>
-                          <th className="py-2.5 px-3 text-right">UPDATED</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap w-[80px]">ID</th>
+                          <th className="py-2.5 px-3 min-w-[200px]">TITLE</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap">ORGANIZATION</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap text-center w-[110px]">STATUS</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap w-[90px]">PRIORITY</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap w-[115px]">ASSIGNEE</th>
+                          <th className="py-2.5 px-3 whitespace-nowrap w-[70px]">REPLIES</th>
+                          <th className="py-2.5 px-3 text-right whitespace-nowrap w-[80px]">UPDATED</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
                         {filteredTickets.map((tkt) => (
                           <tr key={tkt.id} className="hover:bg-slate-50 transition-colors">
-                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B] font-semibold">
+                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B] font-semibold whitespace-nowrap">
                               {tkt.id}
                             </td>
                             <td className="py-2.5 px-3 font-semibold text-[#0F172A]">
-                              {tkt.title}{" "}
-                              <span className="text-[9.5px] font-normal text-[#64748B] bg-slate-100 px-1 py-0.2 rounded ml-1">
-                                {tkt.type}
-                              </span>
+                              <div className="flex items-center gap-1.5 flex-wrap sm:flex-nowrap">
+                                <span className="truncate">{tkt.title}</span>
+                                <span className="text-[9.5px] font-normal text-[#64748B] bg-slate-100 px-1.5 py-0.2 rounded whitespace-nowrap shrink-0">
+                                  {tkt.type}
+                                </span>
+                              </div>
                             </td>
-                            <td className="py-2.5 px-3 text-[#475569]">{tkt.org}</td>
-                            <td className="py-2.5 px-3">
+                            <td className="py-2.5 px-3 text-[#475569] whitespace-nowrap">
+                              {tkt.org}
+                            </td>
+                            <td className="py-2.5 px-3 text-center whitespace-nowrap">
                               <span
-                                className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                                className={`inline-block whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-medium border ${
                                   tkt.status === "Open"
                                     ? "bg-blue-50 text-blue-700 border-blue-200"
                                     : tkt.status === "In Progress"
@@ -7758,27 +7762,27 @@ export default function HeroAppWindow() {
                                 {tkt.status}
                               </span>
                             </td>
-                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B]">
+                            <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B] whitespace-nowrap">
                               <Flag size={9} className="inline mr-1 text-[#94A3B8]" /> {tkt.priority}
                             </td>
-                            <td className="py-2.5 px-3 text-[#475569]">
-                              <div className="flex items-center gap-1.5">
+                            <td className="py-2.5 px-3 text-[#475569] whitespace-nowrap">
+                              <div className="flex items-center gap-1.5 min-w-0 max-w-[105px]">
                                 {tkt.assigneeAvatar ? (
                                   <img
                                     src={tkt.assigneeAvatar}
                                     alt={tkt.assigneeName}
-                                    className="w-4 h-4 rounded-full object-cover"
+                                    className="w-4 h-4 rounded-full object-cover shrink-0"
                                   />
                                 ) : (
-                                  <div className="w-4 h-4 rounded-full bg-slate-100 text-slate-500 text-[8px] flex items-center justify-center font-bold">
+                                  <div className="w-4 h-4 rounded-full bg-slate-100 text-slate-500 text-[8px] flex items-center justify-center font-bold shrink-0">
                                     ?
                                   </div>
                                 )}
-                                <span>{tkt.assigneeName}</span>
+                                <span className="truncate text-xs">{tkt.assigneeName}</span>
                               </div>
                             </td>
-                            <td className="py-2.5 px-3 font-mono text-[#64748B]">💬 {tkt.replies}</td>
-                            <td className="py-2.5 px-3 text-right font-mono text-[#94A3B8]">{tkt.updated}</td>
+                            <td className="py-2.5 px-3 font-mono text-[#64748B] whitespace-nowrap">💬 {tkt.replies}</td>
+                            <td className="py-2.5 px-3 text-right font-mono text-[#94A3B8] whitespace-nowrap">{tkt.updated}</td>
                           </tr>
                         ))}
                       </tbody>
