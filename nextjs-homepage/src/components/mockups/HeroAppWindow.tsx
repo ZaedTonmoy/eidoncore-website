@@ -134,7 +134,7 @@ export default function HeroAppWindow() {
   const [activeWorkTab, setActiveWorkTab] = useState<"all" | "today" | "overdue" | "review">("all");
   const [activeTaskTab, setActiveTaskTab] = useState<"all" | "overdue" | "today" | "week">("all");
   const [activeProjectTab, setActiveProjectTab] = useState<"all" | "active" | "attention" | "delivered">("all");
-  const [ticketViewMode, setTicketViewMode] = useState<"list" | "board" | "sla">("board");
+  const [ticketViewMode, setTicketViewMode] = useState<"list" | "board">("board");
   const [ticketStatusFilter, setTicketStatusFilter] = useState<string>("all");
   const [ticketSearch, setTicketSearch] = useState<string>("");
 
@@ -7494,17 +7494,14 @@ export default function HeroAppWindow() {
                       >
                         <Kanban size={13} /> Board
                       </button>
-                      <button
-                        onClick={() => setTicketViewMode("sla")}
-                        className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs transition-all ${
-                          ticketViewMode === "sla"
-                            ? "bg-white text-[#0F172A] font-bold shadow-2xs border border-[#E2E8F0]"
-                            : "text-[#64748B] hover:text-[#0F172A]"
-                        }`}
-                      >
-                        <Clock size={13} /> SLA
-                      </button>
                     </div>
+
+                    <button
+                      title="SLA Policies"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:bg-slate-50 rounded-xl text-xs text-[#64748B] shadow-2xs transition-colors"
+                    >
+                      <Clock size={13} /> SLA
+                    </button>
 
                     <button className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors">
                       <Plus size={13} /> New Ticket{" "}
@@ -7786,68 +7783,6 @@ export default function HeroAppWindow() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
-                )}
-
-                {/* 5. SLA VIEW */}
-                {ticketViewMode === "sla" && (
-                  <div className="flex flex-col gap-4 animate-fadeIn">
-                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
-                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">First Response SLA</span>
-                        <div className="text-xl font-bold text-[#0F172A] mt-1">98.8%</div>
-                        <span className="text-[10.5px] text-emerald-600 font-medium">Target: &lt; 2h</span>
-                      </div>
-                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
-                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">Resolution SLA</span>
-                        <div className="text-xl font-bold text-[#0F172A] mt-1">97.4%</div>
-                        <span className="text-[10.5px] text-emerald-600 font-medium">Target: &lt; 24h</span>
-                      </div>
-                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
-                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">On-Track Active</span>
-                        <div className="text-xl font-bold text-emerald-600 mt-1">2 / 2</div>
-                        <span className="text-[10.5px] text-[#64748B]">0 at risk</span>
-                      </div>
-                      <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
-                        <span className="text-[10px] font-mono text-[#94A3B8] uppercase">Breached SLAs</span>
-                        <div className="text-xl font-bold text-[#0F172A] mt-1">0</div>
-                        <span className="text-[10.5px] text-emerald-600 font-medium">100% compliant this cycle</span>
-                      </div>
-                    </div>
-
-                    <div className="p-4 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs">
-                      <h4 className="font-bold text-xs text-[#0F172A] mb-2">SLA Priority Tiers &amp; Deadlines</h4>
-                      <table className="w-full text-xs text-left">
-                        <thead className="bg-[#F8FAFC] border-b border-slate-100 text-[10px] font-mono text-[#64748B]">
-                          <tr>
-                            <th className="py-2 px-3">TIER</th>
-                            <th className="py-2 px-3">FIRST RESPONSE TARGET</th>
-                            <th className="py-2 px-3">RESOLUTION TARGET</th>
-                            <th className="py-2 px-3">CURRENT HEALTH</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100">
-                          <tr>
-                            <td className="py-2.5 px-3 font-semibold text-red-600">Critical / Urgent</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">30 minutes</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">4 hours</td>
-                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-3 font-semibold text-orange-600">High</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">1 hour</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">8 hours</td>
-                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-3 font-semibold text-blue-600">Medium</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">2 hours</td>
-                            <td className="py-2.5 px-3 font-mono text-[#475569]">24 hours</td>
-                            <td className="py-2.5 px-3 text-emerald-600 font-medium">✓ 100% On Time</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
                   </div>
                 )}
               </div>
