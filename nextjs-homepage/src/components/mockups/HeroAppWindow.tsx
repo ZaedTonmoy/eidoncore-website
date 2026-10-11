@@ -70,6 +70,7 @@ import {
   CornerDownRight,
   Info,
   UserPlus,
+  User,
   Edit3,
   Link2,
   Square,
@@ -9453,7 +9454,7 @@ export default function HeroAppWindow() {
               {/* Main Drawer Body: 2 Columns */}
               <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
                 {/* Left Column (Replies & Discussion & Composer) */}
-                <div className="flex-1 flex flex-col overflow-y-auto p-6 space-y-5 bg-white">
+                <div className="flex-1 min-w-0 flex flex-col overflow-y-auto p-6 space-y-5 bg-white">
                   {/* Card: Original Description */}
                   <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex flex-col gap-3">
                     <div className="flex items-center justify-between">
@@ -9660,11 +9661,11 @@ export default function HeroAppWindow() {
             />
 
             {/* Drawer Container */}
-            <div className="relative w-full sm:w-[90%] md:w-[84%] lg:w-[78%] max-w-[1020px] bg-white h-full shadow-2xl border-l border-[#E2E8F0] flex flex-col z-10 animate-in slide-in-from-right duration-200 overflow-hidden">
+            <div className="relative w-full sm:w-[92%] md:w-[88%] lg:w-[82%] max-w-[1050px] bg-white h-full shadow-2xl border-l border-[#E2E8F0] flex flex-col z-10 animate-in slide-in-from-right duration-200 overflow-hidden">
               {/* Top Header Bar */}
-              <div className="flex items-center justify-between px-6 py-3 border-b border-[#E2E8F0] bg-white shrink-0">
+              <div className="flex items-center justify-between px-6 py-2.5 border-b border-[#E2E8F0] bg-white shrink-0">
                 <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-rose-400 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                     {selectedTask.projectAvatar || "AB"}
                   </div>
                   <span className="text-xs font-semibold text-[#0F172A] truncate hover:underline cursor-pointer">
@@ -9688,92 +9689,135 @@ export default function HeroAppWindow() {
                       className="w-5 h-5 rounded-full border border-white object-cover"
                     />
                   </div>
-                  <button className="text-xs font-medium text-slate-600 hover:text-slate-900 px-2 py-1 rounded border border-slate-200 hover:bg-slate-50 transition-colors">
-                    Share
+                  <button className="flex items-center gap-1 text-xs font-medium text-emerald-700 hover:text-emerald-800 px-2.5 py-1 rounded-md border border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 transition-colors">
+                    <Users size={12} className="text-emerald-600" /> Share
                   </button>
                   <button className="p-1 text-slate-400 hover:text-slate-700"><Plus size={14} /></button>
                   <button className="p-1 text-slate-400 hover:text-slate-700"><Link2 size={14} /></button>
                   <button className="p-1 text-slate-400 hover:text-slate-700"><Maximize2 size={14} /></button>
                   <button className="p-1 text-slate-400 hover:text-slate-700"><MoreHorizontal size={14} /></button>
+                  <div className="h-4 w-px bg-slate-200 mx-0.5" />
                   <button
                     onClick={() => setSelectedTask(null)}
-                    className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors ml-1"
+                    className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors"
                   >
                     <X size={16} />
                   </button>
                 </div>
               </div>
 
-              {/* Status Bar */}
-              <div className="px-6 py-2.5 border-b border-[#E2E8F0] bg-white shrink-0 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-800 shadow-2xs">
-                    <span className="w-2 h-2 rounded-full bg-slate-400" />
-                    {selectedTask.status}
-                    <ChevronDown size={11} className="text-slate-400 ml-0.5" />
-                  </button>
+              {/* Main Drawer Body: 2 Columns Immediately Below Top Bar */}
+              <div className="flex-1 flex flex-row overflow-hidden min-h-0 bg-white">
+                {/* Left Column (Main Task Details & Content) */}
+                <div className="flex-1 min-w-0 flex flex-col overflow-y-auto p-6 space-y-6 bg-white">
+                  {/* Status Bar */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <button className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-2xs">
+                        <span className="w-2 h-2 rounded-full bg-slate-400" />
+                        {selectedTask.status}
+                        <ChevronDown size={11} className="text-slate-400 ml-0.5" />
+                      </button>
 
-                  <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs text-slate-600 transition-colors shadow-2xs">
-                    <Circle size={12} className="text-slate-400" />
-                    Mark complete
-                  </button>
-                </div>
+                      <button className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs text-slate-600 transition-colors shadow-2xs">
+                        <Circle size={12} className="text-slate-400" />
+                        Mark complete
+                      </button>
+                    </div>
 
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                  {selectedTask.health}
-                </span>
-              </div>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      {selectedTask.health}
+                    </span>
+                  </div>
 
-              {/* Task Title & Metadata Row */}
-              <div className="px-6 py-4 border-b border-[#E2E8F0] bg-[#FAFAFA]/40 shrink-0 flex flex-col gap-4">
-                <h1 className="text-lg sm:text-xl font-bold text-[#0F172A] leading-snug">
-                  {selectedTask.title}
-                </h1>
-
-                {/* 2-Column Metadata Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                  {/* Task Title */}
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">ASSIGNEE</span>
-                    <div className="flex items-center gap-1.5">
-                      {selectedTask.assigneeAvatar && (
-                        <img
-                          src={selectedTask.assigneeAvatar}
-                          alt={selectedTask.assigneeName}
-                          className="w-5 h-5 rounded-full object-cover shrink-0"
-                        />
-                      )}
-                      <span className="font-semibold text-slate-800 truncate">{selectedTask.assigneeName}</span>
+                    <h1 className="text-lg sm:text-xl font-bold text-[#0F172A] leading-snug">
+                      {selectedTask.title}
+                    </h1>
+                  </div>
+
+                  {/* 2-Column Metadata Grid */}
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-3 text-xs py-1">
+                    {/* Left Column of Properties */}
+                    <div className="space-y-3">
+                      {/* Assignee */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <User size={13} className="text-slate-400" /> Assignee
+                        </span>
+                        <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                          {selectedTask.assigneeAvatar && (
+                            <img
+                              src={selectedTask.assigneeAvatar}
+                              alt={selectedTask.assigneeName}
+                              className="w-4 h-4 rounded-full object-cover shrink-0"
+                            />
+                          )}
+                          <span className="font-medium text-slate-800 truncate">{selectedTask.assigneeName}</span>
+                        </div>
+                      </div>
+
+                      {/* Priority */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <Flag size={13} className="text-slate-400" /> Priority
+                        </span>
+                        <span className="font-medium text-slate-800 flex items-center gap-1 flex-1 min-w-0">
+                          <Flag size={11} className="text-amber-500 fill-amber-500" /> {selectedTask.priority}
+                        </span>
+                      </div>
+
+                      {/* Project */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <Folder size={13} className="text-slate-400" /> Project
+                        </span>
+                        <span className="font-medium text-slate-800 truncate flex-1 min-w-0">
+                          {selectedTask.project}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Right Column of Properties */}
+                    <div className="space-y-3">
+                      {/* Due Date */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <Calendar size={13} className="text-slate-400" /> Due Date
+                        </span>
+                        <span className="font-medium text-slate-800 flex items-center gap-1 font-mono flex-1 min-w-0">
+                          <Calendar size={11} className="text-slate-400" /> {selectedTask.dueDate}
+                        </span>
+                      </div>
+
+                      {/* Estimate */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <Clock size={13} className="text-slate-400" /> Estimate
+                        </span>
+                        <span className="font-medium text-slate-800 font-mono flex-1 min-w-0">
+                          {selectedTask.estimate}
+                        </span>
+                      </div>
+
+                      {/* Time */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-400 flex items-center gap-1.5 w-20 shrink-0 text-xs">
+                          <History size={13} className="text-slate-400" /> Time
+                        </span>
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <span className="font-medium text-slate-800 font-mono text-[11px] shrink-0">
+                            {selectedTask.timeLogged || "0m"} <span className="text-slate-400 font-normal">Logged</span>
+                          </span>
+                          <div className="w-12 bg-slate-100 h-1 rounded-full overflow-hidden shrink-0">
+                            <div className="bg-slate-300 h-full w-1 rounded-full" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">PRIORITY</span>
-                    <span className="font-semibold text-slate-800 flex items-center gap-1">
-                      <Flag size={12} className="text-amber-500" /> {selectedTask.priority}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">DUE DATE</span>
-                    <span className="font-semibold text-slate-800 flex items-center gap-1 font-mono">
-                      <Calendar size={12} className="text-slate-400" /> {selectedTask.dueDate}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">ESTIMATE / TIME</span>
-                    <span className="font-semibold text-slate-800 font-mono">
-                      {selectedTask.estimate} · <span className="text-slate-500 font-normal">{selectedTask.timeLogged}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Main Drawer Body: 2 Columns */}
-              <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-                {/* Left Column (Description, Checklist, Subtasks, Attachments) */}
-                <div className="flex-1 flex flex-col overflow-y-auto p-6 space-y-6 bg-white border-r border-[#E2E8F0]">
                   {/* Description */}
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between">
@@ -9896,21 +9940,16 @@ export default function HeroAppWindow() {
                         <Plus size={11} /> Upload
                       </button>
                     </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-[#F8FAFC]/50 hover:bg-slate-50 transition-colors">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">
-                          <FileText size={16} />
-                        </div>
-                        <div>
-                          <span className="text-xs font-semibold text-[#0F172A] block truncate max-w-[200px]">
-                            Warehouse_Sub_Met...
-                          </span>
-                          <span className="text-[10px] text-slate-400">Uploaded file · 2.4 MB</span>
-                        </div>
+                    <div className="w-36 border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs hover:border-slate-300 transition-colors cursor-pointer">
+                      <div className="h-20 bg-slate-100 flex items-center justify-center text-slate-400">
+                        <FileText size={24} className="text-slate-400" />
                       </div>
-                      <button className="text-xs text-slate-400 hover:text-slate-600 p-1">
-                        <Download size={14} />
-                      </button>
+                      <div className="p-2 border-t border-slate-100">
+                        <span className="text-[11px] font-semibold text-slate-800 block truncate">
+                          Warehouse_Sub_Met...
+                        </span>
+                        <span className="text-[10px] text-slate-400">Uploaded file</span>
+                      </div>
                     </div>
                   </div>
 
@@ -9925,88 +9964,107 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* Footer Metadata */}
-                  <div className="pt-4 border-t border-slate-100 text-[10.5px] text-slate-400 leading-normal">
-                    Created by Julian Vance · Created about 1 month ago · Updated 6 days ago
+                  <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-400">
+                    <img
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+                      alt="Julian Vance"
+                      className="w-4 h-4 rounded-full object-cover shrink-0"
+                    />
+                    <span>
+                      Created by <span className="font-semibold text-slate-700">Julian Vance</span> · Created about 1 month ago · Updated 6 days ago
+                    </span>
                   </div>
                 </div>
 
                 {/* Right Column (Comments & Activity) */}
-                <div className="w-full lg:w-88 border-t lg:border-t-0 lg:border-l border-[#E2E8F0] bg-[#F8FAFC] p-5 flex flex-col justify-between shrink-0 overflow-y-auto">
+                <div className="w-[340px] md:w-[360px] shrink-0 border-l border-[#E2E8F0] bg-white flex flex-col justify-between overflow-hidden h-full">
                   {/* Header tabs */}
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-4 text-xs font-semibold border-b border-slate-200 pb-2">
-                      <button className="text-blue-600 flex items-center gap-1.5 pb-1 border-b-2 border-blue-600 -mb-2.5">
-                        <MessageSquare size={12} /> Comments{" "}
-                        <span className="font-mono text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.2 rounded-full font-bold">
-                          {selectedTask.comments?.length || 1}
-                        </span>
-                      </button>
-                      <button className="text-slate-500 hover:text-slate-800 flex items-center gap-1.5">
-                        <Zap size={12} /> Activity
-                      </button>
-                    </div>
+                  <div className="flex items-center gap-4 px-5 pt-3.5 pb-2.5 border-b border-[#E2E8F0] bg-white shrink-0 text-xs font-semibold">
+                    <button className="text-blue-600 flex items-center gap-1.5 pb-2.5 border-b-2 border-blue-600 -mb-2.5 font-bold">
+                      <MessageSquare size={13} />
+                      Comments
+                      <span className="font-mono text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.2 rounded-full font-bold">
+                        {selectedTask.comments?.length || 1}
+                      </span>
+                    </button>
+                    <button className="text-slate-400 hover:text-slate-700 flex items-center gap-1.5 pb-2.5">
+                      <Zap size={13} />
+                      Activity
+                    </button>
+                  </div>
 
-                    {/* Comments List */}
-                    <div className="space-y-3.5">
-                      {(selectedTask.comments || []).map((cm) => (
-                        <div key={cm.id} className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex flex-col gap-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <img
-                                src={cm.senderAvatar}
-                                alt={cm.senderName}
-                                className="w-5 h-5 rounded-full object-cover"
-                              />
-                              <span className="text-xs font-semibold text-[#0F172A]">{cm.senderName}</span>
-                            </div>
-                            <span className="text-[10px] text-slate-400 font-mono">{cm.timestamp}</span>
+                  {/* Comments Feed */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAFAFA]/40">
+                    {(selectedTask.comments || [
+                      {
+                        id: "cm1",
+                        senderName: "Julian Vance",
+                        senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+                        timestamp: "6 days ago",
+                        text: "Great work so far. Client requested to verify compatibility with their mobile responsive breakpoint.",
+                      },
+                    ]).map((cm) => (
+                      <div key={cm.id} className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 shadow-2xs flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={cm.senderAvatar}
+                              alt={cm.senderName}
+                              className="w-5 h-5 rounded-full object-cover shrink-0"
+                            />
+                            <span className="text-xs font-semibold text-[#0F172A]">{cm.senderName}</span>
                           </div>
-                          <p className="text-xs text-slate-600 leading-relaxed pl-7">
-                            {cm.text}
-                          </p>
+                          <span className="text-[10px] text-slate-400 font-mono">{cm.timestamp}</span>
                         </div>
-                      ))}
-                    </div>
+                        <p className="text-xs text-slate-600 leading-relaxed pl-7">
+                          {cm.text}
+                        </p>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Comment composer at bottom */}
-                  <div className="pt-4 mt-6 border-t border-slate-200 flex flex-col gap-2">
+                  <div className="p-4 border-t border-[#E2E8F0] bg-white shrink-0 flex flex-col gap-2">
                     <div className="flex items-center justify-between text-xs">
                       <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
                         <input
                           type="checkbox"
                           checked={isTaskInternalNote}
                           onChange={(e) => setIsTaskInternalNote(e.target.checked)}
-                          className="rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                         />
-                        <span className="font-medium text-xs flex items-center gap-1">
-                          <Lock size={11} className="text-slate-500" /> Internal note
+                        <span className="font-medium text-xs flex items-center gap-1 text-slate-600">
+                          <Lock size={11} className="text-slate-400" /> Internal note
                         </span>
                       </label>
                     </div>
 
-                    <div className="border border-[#CBD5E1] rounded-xl p-2.5 bg-white flex flex-col gap-2 focus-within:border-blue-500 transition-colors">
+                    <div className="border border-slate-200 rounded-xl p-3 bg-white flex flex-col gap-2.5 focus-within:border-indigo-500 transition-colors shadow-2xs">
                       <textarea
                         value={taskCommentInput}
                         onChange={(e) => setTaskCommentInput(e.target.value)}
-                        placeholder="Write a comment or internal note..."
+                        placeholder="Write a comment..."
                         rows={2}
                         className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-slate-400 resize-none"
                       />
 
                       <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                         <div className="flex items-center gap-1 text-slate-400">
-                          <button className="p-1 hover:text-slate-600 rounded"><Bold size={12} /></button>
-                          <button className="p-1 hover:text-slate-600 rounded"><Italic size={12} /></button>
-                          <button className="p-1 hover:text-slate-600 rounded"><Link2 size={12} /></button>
-                          <button className="p-1 hover:text-slate-600 rounded"><Paperclip size={12} /></button>
+                          <button className="flex items-center gap-0.5 px-1 py-0.5 rounded hover:bg-slate-100 text-slate-500 text-[11px] font-semibold">
+                            ¶ <ChevronDown size={10} />
+                          </button>
+                          <button className="p-1 hover:text-slate-700 rounded"><Bold size={12} /></button>
+                          <button className="p-1 hover:text-slate-700 rounded"><Italic size={12} /></button>
+                          <button className="p-1 hover:text-slate-700 rounded"><Underline size={12} /></button>
+                          <button className="p-1 hover:text-slate-700 rounded"><Link2 size={12} /></button>
+                          <button className="p-1 hover:text-slate-700 rounded"><Paperclip size={12} /></button>
                         </div>
 
                         <button
                           onClick={handleSendTaskComment}
-                          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shadow-xs"
+                          className="px-3.5 py-1 bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-md text-xs font-semibold flex items-center gap-1 transition-colors shadow-xs"
                         >
-                          <Send size={11} /> Send
+                          Send
                         </button>
                       </div>
                     </div>
