@@ -1900,16 +1900,26 @@ export default function HeroAppWindow() {
                             <span>Revenue trend</span>
                             <span>6 months</span>
                           </div>
-                          <svg className="w-full h-4 overflow-visible" viewBox="0 0 100 16" preserveAspectRatio="none">
-                            <path
-                              d="M 0,13 Q 45,13 75,11 T 96,4"
-                              fill="none"
-                              stroke="#64748B"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
+                          <div className="relative h-6 w-full">
+                            <svg className="w-full h-full overflow-visible" viewBox="0 0 100 24" preserveAspectRatio="none">
+                              {/* Dark horizontal baseline */}
+                              <line x1="0" y1="23" x2="100" y2="23" stroke="#2B313A" strokeWidth="1" />
+                              {/* Smooth historical trend curve */}
+                              <path
+                                d="M 0,19 C 10,18.5 16,14 26,13 C 38,12.5 50,12.8 62,12 C 74,11.5 86,7 96,5"
+                                fill="none"
+                                stroke="#64748B"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                vectorEffect="non-scaling-stroke"
+                              />
+                            </svg>
+                            {/* Perfectly circular dot at (96%, 5px) */}
+                            <div
+                              className="absolute -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full bg-[#38BDF8] shadow-[0_0_8px_rgba(56,189,248,0.9)] ring-1 ring-[#38BDF8]/40 pointer-events-none"
+                              style={{ left: "96%", top: "calc(5 / 24 * 100%)" }}
                             />
-                            <circle cx="96" cy="4" r="2.5" fill="#38BDF8" />
-                          </svg>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1922,19 +1932,19 @@ export default function HeroAppWindow() {
                   </div>
 
                   {/* Column 2: DELIVERY (span 3) */}
-                  <div className="md:col-span-3 bg-[#28231D] flex flex-col justify-between relative">
+                  <div className="md:col-span-3 bg-[#311B21] flex flex-col justify-between relative">
                     {/* Top colored stripe */}
-                    <div className="h-[2px] w-full bg-[#F59E0B]" />
+                    <div className="h-[2px] w-full bg-[#EF4444]" />
                     <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
                       <div>
                         {/* Dot + Title */}
                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-200 font-bold uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
                           DELIVERY
                         </div>
                         {/* Stacked status text */}
-                        <div className="text-[9px] font-mono font-bold text-[#FBBF24] uppercase tracking-wider mt-0.5">
-                          CAUTION
+                        <div className="text-[9px] font-mono font-bold text-[#F87171] uppercase tracking-wider mt-0.5">
+                          CRITICAL
                         </div>
 
                         {/* Dual Stats */}
@@ -1944,25 +1954,26 @@ export default function HeroAppWindow() {
                             <div className="text-[9px] text-[#94A3B8] mt-1.5">Active projects</div>
                           </div>
                           <div className="text-right shrink-0">
-                            <div className="text-[22px] sm:text-[24px] font-black text-white leading-none font-sans">5</div>
+                            <div className="text-[22px] sm:text-[24px] font-black text-white leading-none font-sans">10</div>
                             <div className="text-[9px] text-[#94A3B8] mt-1.5">Tasks due this week</div>
                           </div>
                         </div>
 
                         {/* Completed 14 days histogram */}
-                        <div className="mt-4">
+                        <div className="mt-3">
                           <div className="flex items-center justify-between text-[8.5px] text-[#94A3B8] font-mono mb-1">
                             <span>Completed</span>
                             <span>14 days</span>
                           </div>
-                          <div className="flex items-end h-5 gap-[2px]">
-                            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0].map((val, idx) => (
+                          <div className="flex items-end h-6 gap-[3px]">
+                            {[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0].map((val, idx) => (
                               <div
                                 key={idx}
-                                className={`flex-1 rounded-[1.5px] ${
-                                  val > 0 ? "bg-[#64748B]" : "bg-[#1E232B]"
+                                className={`flex-1 ${
+                                  val > 0
+                                    ? "bg-[#64748B] rounded-[3px] h-[18px]"
+                                    : "bg-[#2E333B] rounded-[1px] h-[2px]"
                                 }`}
-                                style={{ height: val > 0 ? "18px" : "2px" }}
                               />
                             ))}
                           </div>
@@ -1971,9 +1982,9 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Bottom Alert Cell */}
-                    <div className="border-t border-[#282C32] px-3.5 py-2.5 text-[9.5px] font-medium text-[#FBBF24] flex items-center gap-1.5">
-                      <HelpCircle size={11} className="shrink-0 text-[#FBBF24]" />
-                      <span className="truncate">8 Tasks Due Within 72h</span>
+                    <div className="border-t border-[#282C32] px-3.5 py-2.5 text-[9.5px] font-medium text-[#F87171] flex items-center gap-1.5">
+                      <AlertTriangle size={11} className="shrink-0 text-[#F87171]" />
+                      <span className="truncate">1 Critical Project</span>
                     </div>
                   </div>
 
