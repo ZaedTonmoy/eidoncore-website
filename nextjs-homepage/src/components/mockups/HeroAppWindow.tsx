@@ -71,7 +71,71 @@ import {
   Info,
   UserPlus,
   Edit3,
+  Link2,
+  Square,
+  Bold,
+  Italic,
+  Underline,
+  Code,
+  RotateCcw,
 } from "lucide-react";
+
+export interface SelectedTicketReply {
+  id: string;
+  senderName: string;
+  senderAvatar: string;
+  badge: string;
+  badgeType: "org" | "team";
+  timestamp: string;
+  text: string;
+}
+
+export interface SelectedTicketData {
+  id: string;
+  title: string;
+  status: "Open" | "Triaged" | "In Progress" | "Waiting on Client" | "Resolved" | "Closed";
+  priority: string;
+  type: string;
+  org: string;
+  assigneeName: string;
+  assigneeAvatar?: string;
+  createdDate?: string;
+  description?: string;
+  replies?: SelectedTicketReply[];
+}
+
+export interface SelectedTaskChecklistItem {
+  id: string;
+  text: string;
+  done: boolean;
+}
+
+export interface SelectedTaskComment {
+  id: string;
+  senderName: string;
+  senderAvatar: string;
+  timestamp: string;
+  text: string;
+}
+
+export interface SelectedTaskData {
+  id: string;
+  title: string;
+  status: string;
+  priority: string;
+  project: string;
+  projectAvatar?: string;
+  org: string;
+  health?: string;
+  assigneeName: string;
+  assigneeAvatar?: string;
+  dueDate: string;
+  estimate?: string;
+  timeLogged?: string;
+  description?: string;
+  checklist?: SelectedTaskChecklistItem[];
+  comments?: SelectedTaskComment[];
+}
 
 export interface ChatMessageItem {
   id: string;
@@ -137,6 +201,131 @@ export default function HeroAppWindow() {
   const [ticketViewMode, setTicketViewMode] = useState<"list" | "board">("board");
   const [ticketStatusFilter, setTicketStatusFilter] = useState<string>("all");
   const [ticketSearch, setTicketSearch] = useState<string>("");
+  const [selectedTicket, setSelectedTicket] = useState<SelectedTicketData | null>(null);
+  const [selectedTask, setSelectedTask] = useState<SelectedTaskData | null>(null);
+  const [ticketReplyInput, setTicketReplyInput] = useState("");
+  const [taskCommentInput, setTaskCommentInput] = useState("");
+  const [isTicketInternalNote, setIsTicketInternalNote] = useState(false);
+  const [isTaskInternalNote, setIsTaskInternalNote] = useState(true);
+  const [newChecklistInput, setNewChecklistInput] = useState("");
+
+  const openTaskDetail = (taskInfo: any) => {
+    setSelectedTask({
+      id: taskInfo?.id || "tsk-brand-style",
+      title: taskInfo?.title || "Arcturus Robotics: Brand style guide and typography tokens",
+      status: taskInfo?.status || "TO DO",
+      priority: taskInfo?.priority || "Medium",
+      project: taskInfo?.project || "Arcturus Brand Identity & Web Launch",
+      projectAvatar: "AB",
+      org: taskInfo?.org || "Arcturus Robotics",
+      health: taskInfo?.health || "Stalled",
+      assigneeName: taskInfo?.assigneeName || "Chloe Bennett",
+      assigneeAvatar: taskInfo?.assigneeAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      dueDate: taskInfo?.dueDate || "Nov 5, 2026",
+      estimate: taskInfo?.estimate || "9.6 h",
+      timeLogged: taskInfo?.timeLogged || "0m Logged",
+      description: taskInfo?.description || "Select display typeface and define technical engineering iconography set.",
+      checklist: Array.isArray(taskInfo?.checklist) ? taskInfo.checklist : [
+        { id: "c1", text: "Review specification with PM & client contact", done: false },
+        { id: "c2", text: "Cross-browser testing (Chrome, Safari, iOS)", done: false },
+      ],
+      comments: Array.isArray(taskInfo?.comments) ? taskInfo.comments : [
+        {
+          id: "cm1",
+          senderName: "Julian Vance",
+          senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+          timestamp: "6 days ago",
+          text: "Great work so far. Client requested to verify compatibility with their mobile responsive breakpoint.",
+        },
+      ],
+    });
+  };
+
+  const openTicketDetail = (ticketInfo: any) => {
+    const defaultReplies: SelectedTicketReply[] = [
+      {
+        id: "rep-1",
+        senderName: ticketInfo?.assigneeName || "Chloe Bennett",
+        senderAvatar: ticketInfo?.assigneeAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+        badge: "Team",
+        badgeType: "team",
+        timestamp: "(edited) Sep 1",
+        text: "Hi Jordan, thanks for reporting this. I am investigating right away.",
+      },
+    ];
+
+    setSelectedTicket({
+      id: ticketInfo?.id || "TKT-103",
+      title: ticketInfo?.title || "Request for Figma asset export in SVG format with embedded fonts",
+      status: (ticketInfo?.status as any) || "Closed",
+      priority: ticketInfo?.priority || "Medium",
+      type: ticketInfo?.type || "Support",
+      org: ticketInfo?.org || "Nebula Health",
+      assigneeName: ticketInfo?.assigneeName || "Chloe Bennett",
+      assigneeAvatar: ticketInfo?.assigneeAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      createdDate: ticketInfo?.createdDate || "Sep 1, 2026",
+      description: ticketInfo?.description || "Our marketing agency needs SVG exports of all telehealth iconography for the upcoming launch campaign.",
+      replies: Array.isArray(ticketInfo?.replies) ? ticketInfo.replies : defaultReplies,
+    });
+  };
+
+  const handleSendTicketReply = () => {
+    if (!ticketReplyInput.trim() || !selectedTicket) return;
+    const newRep: SelectedTicketReply = {
+      id: `rep-${Date.now()}`,
+      senderName: "Julian Vance",
+      senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+      badge: isTicketInternalNote ? "Internal Note" : "Team",
+      badgeType: "team",
+      timestamp: "Just now",
+      text: ticketReplyInput.trim(),
+    };
+    setSelectedTicket({
+      ...selectedTicket,
+      replies: [...(selectedTicket.replies || []), newRep],
+    });
+    setTicketReplyInput("");
+  };
+
+  const handleSendTaskComment = () => {
+    if (!taskCommentInput.trim() || !selectedTask) return;
+    const newCm: SelectedTaskComment = {
+      id: `cm-${Date.now()}`,
+      senderName: "Julian Vance",
+      senderAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+      timestamp: "Just now",
+      text: taskCommentInput.trim(),
+    };
+    setSelectedTask({
+      ...selectedTask,
+      comments: [...(selectedTask.comments || []), newCm],
+    });
+    setTaskCommentInput("");
+  };
+
+  const handleAddChecklistItem = () => {
+    if (!newChecklistInput.trim() || !selectedTask) return;
+    const newItem: SelectedTaskChecklistItem = {
+      id: `chk-${Date.now()}`,
+      text: newChecklistInput.trim(),
+      done: false,
+    };
+    setSelectedTask({
+      ...selectedTask,
+      checklist: [...(selectedTask.checklist || []), newItem],
+    });
+    setNewChecklistInput("");
+  };
+
+  const handleToggleChecklistItem = (itemId: string) => {
+    if (!selectedTask) return;
+    setSelectedTask({
+      ...selectedTask,
+      checklist: (selectedTask.checklist || []).map((item) =>
+        item.id === itemId ? { ...item, done: !item.done } : item
+      ),
+    });
+  };
 
   const [cursorPos, setCursorPos] = useState({ x: 260, y: 180, visible: false });
   const [cursorClicked, setCursorClicked] = useState(false);
@@ -5101,7 +5290,74 @@ export default function HeroAppWindow() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
-                        <tr className="hover:bg-slate-50 transition-colors">
+                        <tr
+                          onClick={() => openTaskDetail({
+                            id: "tsk-brand-style",
+                            title: "Arcturus Robotics: Brand style guide and typography tokens",
+                            status: "TO DO",
+                            priority: "Medium",
+                            project: "Arcturus Brand Identity & Web Launch",
+                            org: "Arcturus Robotics",
+                            health: "Stalled",
+                            assigneeName: "Chloe Bennett",
+                            assigneeAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                            dueDate: "Nov 5, 2026",
+                            estimate: "9.6 h",
+                            timeLogged: "0m Logged",
+                          })}
+                          className="hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
+                          <td className="py-2.5 px-3 font-medium text-[#0F172A]">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
+                              <span className="font-semibold">Arcturus Robotics: Brand style guide and typography tokens</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-amber-600 font-medium flex items-center gap-1 font-mono text-[10.5px]">
+                              <Flag size={10} /> Medium
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-medium">
+                              ● Stalled
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-1.5">
+                              <img
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                                alt="Chloe Bennett"
+                                className="w-4 h-4 rounded-full object-cover shrink-0"
+                              />
+                              <span className="text-[#475569]">Chloe Bennett</span>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-600">Nov 5</td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-slate-700 font-medium flex items-center gap-1">
+                              ● Arcturus Brand Identity & Web Launch
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr
+                          onClick={() => openTaskDetail({
+                            id: "tsk-hos",
+                            title: "Driver hours of service (HOS) ELD remaining clock countdown",
+                            status: "TO DO",
+                            priority: "Urgent",
+                            project: "Solari Fleet Telematics Control Room",
+                            org: "Solari Logistics",
+                            health: "On Track",
+                            assigneeName: "Marcus Brody",
+                            assigneeAvatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=120&auto=format&fit=crop&q=80",
+                            dueDate: "Today",
+                            estimate: "4.5 h",
+                            timeLogged: "1.2 h Logged",
+                          })}
+                          className="hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
                           <td className="py-2.5 px-3 font-medium text-[#0F172A]">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
@@ -5134,7 +5390,23 @@ export default function HeroAppWindow() {
                           </td>
                         </tr>
 
-                        <tr className="hover:bg-slate-50 transition-colors">
+                        <tr
+                          onClick={() => openTaskDetail({
+                            id: "tsk-rx",
+                            title: "Prescription PDF download formatting on mobile Safari",
+                            status: "TO DO",
+                            priority: "Medium",
+                            project: "Nebula Telehealth 2.0 Core Platform",
+                            org: "Nebula Health",
+                            health: "On Track",
+                            assigneeName: "Sarah Lin",
+                            assigneeAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+                            dueDate: "Oct 11",
+                            estimate: "6.0 h",
+                            timeLogged: "0m Logged",
+                          })}
+                          className="hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
                           <td className="py-2.5 px-3 font-medium text-[#0F172A]">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
@@ -5167,7 +5439,23 @@ export default function HeroAppWindow() {
                           </td>
                         </tr>
 
-                        <tr className="hover:bg-slate-50 transition-colors">
+                        <tr
+                          onClick={() => openTaskDetail({
+                            id: "tsk-chargeback",
+                            title: "Dispute & chargeback upload documentation portal",
+                            status: "TO DO",
+                            priority: "Medium",
+                            project: "Kroma Mobile SDK & Merchant Portal",
+                            org: "Kroma Mobile",
+                            health: "On Track",
+                            assigneeName: "David Kim",
+                            assigneeAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+                            dueDate: "Oct 14",
+                            estimate: "8.0 h",
+                            timeLogged: "2.5 h Logged",
+                          })}
+                          className="hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
                           <td className="py-2.5 px-3 font-medium text-[#0F172A]">
                             <div className="flex items-center gap-2">
                               <div className="w-3.5 h-3.5 rounded-full border border-slate-300 hover:border-blue-500 cursor-pointer" />
@@ -5633,10 +5921,78 @@ export default function HeroAppWindow() {
                       </div>
                     </div>
 
+                    {/* Card 0: Arcturus Robotics Brand style guide (Matching Screenshot media_1791731599445_a9b0a657.png) */}
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-brand-style",
+                        title: "Arcturus Robotics: Brand style guide and typography tokens",
+                        status: "TO DO",
+                        priority: "Medium",
+                        project: "Arcturus Brand Identity & Web Launch",
+                        org: "Arcturus Robotics",
+                        health: "Stalled",
+                        assigneeName: "Chloe Bennett",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                        dueDate: "Nov 5, 2026",
+                        estimate: "9.6 h",
+                        timeLogged: "0m Logged",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
+                        Arcturus Robotics: Brand style guide and typography tokens
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#F0EFFE] text-[#4338CA] rounded-lg text-[11px] font-medium">brand</span>
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">typography</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">tokens</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Nov 5
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#2563EB] shrink-0" />
+                        <span className="truncate">Arcturus Brand Identity & Web Launch</span>
+                      </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
+                      {/* Footer */}
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                          alt="Chloe Bennett"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
+                      </div>
+                    </div>
+
                     {/* Card 1: Driver hours of service (HOS) ELD */}
                     <div
                       ref={taskCardRef}
-                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5"
+                      onClick={() => openTaskDetail({
+                        id: "tsk-hos",
+                        title: "Driver hours of service (HOS) ELD remaining clock countdown",
+                        status: "TO DO",
+                        priority: "Urgent",
+                        project: "Solari Fleet Telematics Control Room",
+                        org: "Solari Logistics",
+                        health: "On Track",
+                        assigneeName: "Marcus Brody",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Today",
+                        estimate: "4.5 h",
+                        timeLogged: "1.2 h Logged",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
                     >
                       {/* Left Accent Inset Stripe */}
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
@@ -5677,7 +6033,23 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 2: Prescription PDF download formatting */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-rx",
+                        title: "Prescription PDF download formatting on mobile Safari",
+                        status: "TO DO",
+                        priority: "Medium",
+                        project: "Nebula Telehealth 2.0 Core Platform",
+                        org: "Nebula Health",
+                        health: "On Track",
+                        assigneeName: "Sophia Lin",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 11",
+                        estimate: "6.0 h",
+                        timeLogged: "0m Logged",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Prescription PDF download formatting on mobile Safari
@@ -5715,7 +6087,23 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 3: Dispute & chargeback upload */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-chargeback",
+                        title: "Dispute & chargeback upload documentation portal",
+                        status: "TO DO",
+                        priority: "Medium",
+                        project: "Kroma Mobile SDK & Merchant Portal",
+                        org: "Kroma Mobile",
+                        health: "On Track",
+                        assigneeName: "David Kim",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 14",
+                        estimate: "8.0 h",
+                        timeLogged: "2.5 h Logged",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Dispute & chargeback upload documentation portal
@@ -5775,7 +6163,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 1: Update WebRTC audio level visualizer (Exact Match to media_1791659862914_f71341ca.png) */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-webrtc",
+                        title: "Update WebRTC audio level visualizer with high-contrast accessibility mode",
+                        status: "IN PROGRESS",
+                        priority: "High",
+                        project: "Nebula Telehealth 2.0 Core Platform",
+                        org: "Nebula Health",
+                        health: "At Risk",
+                        assigneeName: "Amara Okafor",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 9",
+                        estimate: "8.5 h",
+                        timeLogged: "5.0 h Logged",
+                        description: "Implement accessible high-contrast color scheme for live audio visualizer waveforms in telehealth consultation rooms.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Update WebRTC audio level visualizer with high-contrast...
@@ -5813,7 +6218,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 2: Driver dispatch web app: offline map tiles */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-offline-maps",
+                        title: "Driver dispatch web app: offline map tiles caching with service worker",
+                        status: "IN PROGRESS",
+                        priority: "High",
+                        project: "Solari Fleet Telematics Control Room",
+                        org: "Solari Logistics",
+                        health: "At Risk",
+                        assigneeName: "Marcus Brody",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 9",
+                        estimate: "12.0 h",
+                        timeLogged: "6.5 h Logged",
+                        description: "Cache vector map tiles using IndexedDB and Service Worker Cache API for rural routes without cellular signal.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#F59E0B] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Driver dispatch web app: offline map tiles caching with...
@@ -5856,7 +6278,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 3: Kroma Mobile SDK: Stripe merchant auth */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-stripe-auth",
+                        title: "Kroma Mobile SDK: Stripe merchant authentication flow",
+                        status: "IN PROGRESS",
+                        priority: "Urgent",
+                        project: "Kroma Mobile SDK & Merchant Portal",
+                        org: "Kroma Mobile",
+                        health: "At Risk",
+                        assigneeName: "Julian Vance",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 10",
+                        estimate: "10.0 h",
+                        timeLogged: "8.0 h Logged",
+                        description: "Complete OAuth2 PKCE token exchange for iOS and Android native SDK merchant account links.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Kroma Mobile SDK: Stripe merchant authentication flow
@@ -5916,7 +6355,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 1: HIPAA compliance audit trail viewer */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-hipaa",
+                        title: "HIPAA compliance audit trail viewer for clinic administrators",
+                        status: "IN REVIEW",
+                        priority: "Urgent",
+                        project: "Nebula Telehealth 2.0 Core Platform",
+                        org: "Nebula Health",
+                        health: "At Risk",
+                        assigneeName: "Sophia Lin",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 7",
+                        estimate: "14.0 h",
+                        timeLogged: "14.0 h Logged",
+                        description: "Audit trail log viewer with exportable PDF/CSV reports meeting HIPAA security rule §164.312(b).",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         HIPAA compliance audit trail viewer for clinic administrators
@@ -5954,7 +6410,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 2: Automated geofence exit push notification */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-geofence",
+                        title: "Automated geofence exit push notification latency audit",
+                        status: "IN REVIEW",
+                        priority: "Urgent",
+                        project: "Solari Fleet Telematics Control Room",
+                        org: "Solari Logistics",
+                        health: "At Risk",
+                        assigneeName: "Marcus Brody",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 7",
+                        estimate: "9.0 h",
+                        timeLogged: "8.5 h Logged",
+                        description: "Measure end-to-end notification delivery latency from vehicle GPS fix to dispatcher alert modal.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Automated geofence exit push notification latency audit
@@ -5992,7 +6465,24 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 3: Robot emergency stop (E-STOP) telemetry */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-estop",
+                        title: "Robot emergency stop (E-STOP) physical button telemetry integration",
+                        status: "IN REVIEW",
+                        priority: "Urgent",
+                        project: "Arcturus Autonomous AMR Platform",
+                        org: "Arcturus Robotics",
+                        health: "At Risk",
+                        assigneeName: "Tariq Khan",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Oct 8",
+                        estimate: "16.0 h",
+                        timeLogged: "15.2 h Logged",
+                        description: "Sub-millisecond CAN-bus telemetry broadcast when hardware physical E-STOP button is actuated.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#E05252] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Robot emergency stop (E-STOP) physical button telemetry integration
@@ -6052,7 +6542,83 @@ export default function HeroAppWindow() {
                     </div>
 
                     {/* Card 1: Merchant checkout dark theme */}
-                    <div className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5">
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-dark",
+                        title: "Merchant checkout dark theme component library export",
+                        status: "DONE",
+                        priority: "Medium",
+                        project: "Kroma Mobile SDK & Merchant Portal",
+                        org: "Kroma Mobile",
+                        health: "On Track",
+                        assigneeName: "David Kim",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Sep 27",
+                        estimate: "7.0 h",
+                        timeLogged: "7.0 h Logged",
+                        description: "Export Figma dark mode variables into React & Tailwind component tokens.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#10B981] rounded-r-md" />
+                      <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
+                        Merchant checkout dark theme component library export
+                      </h4>
+                      {/* Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 bg-[#E0F2FE] text-[#0369A1] rounded-lg text-[11px] font-medium">dark-mode</span>
+                        <span className="px-2.5 py-0.5 bg-[#EAFBF3] text-[#0D7A4D] rounded-lg text-[11px] font-medium">components</span>
+                      </div>
+                      {/* Priority & Due */}
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <span className="text-[#B45309] font-medium flex items-center gap-1.5">
+                          <Flag size={13} className="text-[#B45309]" /> Medium
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-[#475569] text-[11px] font-medium flex items-center gap-1">
+                          <Calendar size={12} className="text-slate-400" /> Sep 27
+                        </span>
+                      </div>
+                      {/* Project */}
+                      <div className="flex items-center gap-2 text-xs text-[#64748B] font-normal truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#10B981] shrink-0" />
+                        <span className="truncate">Kroma Mobile SDK & Merchant Portal</span>
+                      </div>
+                      <div className="border-t border-[#F1F5F9] my-0.5" />
+                      {/* Footer */}
+                      <div className="flex items-center justify-between">
+                        <img
+                          src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80"
+                          alt="David Kim"
+                          className="w-7 h-7 rounded-full object-cover shrink-0 border border-slate-100"
+                        />
+                        <div className="flex items-center gap-2">
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-[#94A3B8]">
+                            <Paperclip size={12} /> 2
+                          </span>
+                          <ArrowRight size={14} className="text-[#94A3B8] hover:text-slate-600 cursor-pointer" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 2: High-contrast night mode color palette */}
+                    <div
+                      onClick={() => openTaskDetail({
+                        id: "tsk-night",
+                        title: "High-contrast night mode color palette for truck in-cabin display",
+                        status: "DONE",
+                        priority: "Medium",
+                        project: "Solari Fleet Telematics Control Room",
+                        org: "Solari Logistics",
+                        health: "On Track",
+                        assigneeName: "Marcus Brody",
+                        assigneeAvatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80",
+                        dueDate: "Sep 29",
+                        estimate: "5.5 h",
+                        timeLogged: "5.5 h Logged",
+                        description: "Design low-glare amber and high-contrast dark palette for night driving conditions.",
+                      })}
+                      className="p-3.5 pl-4 bg-white border border-[#E2E8F0] rounded-2xl shadow-xs hover:shadow-sm transition-shadow relative overflow-hidden flex flex-col gap-2.5 cursor-pointer"
+                    >
                       <div className="absolute left-0 top-3.5 bottom-3.5 w-1 bg-[#10B981] rounded-r-md" />
                       <h4 className="font-bold text-[13px] text-[#0F172A] leading-snug line-clamp-2">
                         Merchant checkout dark theme component library export
@@ -7409,6 +7975,18 @@ export default function HeroAppWindow() {
                 replies: 4,
                 updated: "6d ago",
               },
+              {
+                id: "TKT-103",
+                priority: "Medium",
+                title: "Request for Figma asset export in SVG format with embedded fonts",
+                type: "Support" as const,
+                org: "Nebula Health",
+                status: "Closed" as const,
+                assigneeName: "Chloe Bennett",
+                assigneeAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+                replies: 1,
+                updated: "Sep 1",
+              },
             ];
 
             const boardColumns = [
@@ -7635,6 +8213,7 @@ export default function HeroAppWindow() {
                                 {colTickets.map((tkt) => (
                                   <div
                                     key={tkt.id}
+                                    onClick={() => openTicketDetail(tkt)}
                                     className="bg-white rounded-xl p-3.5 border border-[#E2E8F0] shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all cursor-pointer flex flex-col gap-2.5"
                                   >
                                     {/* Line 1: Ticket ID & Priority Flag */}
@@ -7732,7 +8311,11 @@ export default function HeroAppWindow() {
                       </thead>
                       <tbody className="divide-y divide-[#F1F5F9] text-[11.5px]">
                         {filteredTickets.map((tkt) => (
-                          <tr key={tkt.id} className="hover:bg-slate-50 transition-colors">
+                          <tr
+                            key={tkt.id}
+                            onClick={() => openTicketDetail(tkt)}
+                            className="hover:bg-slate-50 transition-colors cursor-pointer"
+                          >
                             <td className="py-2.5 px-3 font-mono text-[10.5px] text-[#64748B] font-semibold whitespace-nowrap">
                               {tkt.id}
                             </td>
@@ -8801,6 +9384,638 @@ export default function HeroAppWindow() {
           )}
 
         </main>
+
+        {/* TICKET DETAIL SLIDE-OVER DRAWER (Matching Screenshot media_1791731599443_09b135d0.png) */}
+        {selectedTicket && (
+          <div className="absolute inset-0 z-50 flex justify-end">
+            {/* Dark Backdrop */}
+            <div
+              onClick={() => setSelectedTicket(null)}
+              className="absolute inset-0 bg-slate-900/35 backdrop-blur-[1px] transition-opacity animate-fadeIn"
+            />
+
+            {/* Drawer Container */}
+            <div className="relative w-full sm:w-[88%] md:w-[80%] lg:w-[72%] max-w-[940px] bg-white h-full shadow-2xl border-l border-[#E2E8F0] flex flex-col z-10 animate-in slide-in-from-right duration-200 overflow-hidden">
+              {/* Top Header Bar */}
+              <div className="flex items-center justify-between px-6 py-3.5 border-b border-[#E2E8F0] bg-white shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-xs font-bold text-[#64748B] bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                    {selectedTicket.id}
+                  </span>
+                  <button className="text-slate-400 hover:text-slate-600 p-1 transition-colors">
+                    <Link2 size={13} />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setSelectedTicket(null)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Ticket Title & Status Action Bar */}
+              <div className="px-6 py-4 border-b border-[#E2E8F0] bg-[#FAFAFA]/70 shrink-0 flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-4">
+                  <h2 className="text-base sm:text-lg font-bold text-[#0F172A] leading-snug">
+                    {selectedTicket.title}
+                  </h2>
+                  <button className="flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50 transition-colors shrink-0">
+                    <Edit3 size={12} /> Edit
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-800">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-600" />
+                    {selectedTicket.status}
+                  </span>
+                  <button className="text-xs text-slate-600 hover:text-slate-900 px-2 py-0.5 rounded border border-slate-200 bg-white hover:bg-slate-50 font-medium transition-colors flex items-center gap-1">
+                    <RotateCcw size={11} /> Reopen
+                  </button>
+                </div>
+
+                {/* Navigation Tabs */}
+                <div className="flex items-center gap-6 text-xs font-semibold pt-1">
+                  <button className="pb-1 text-blue-600 border-b-2 border-blue-600 flex items-center gap-1.5">
+                    Replies <span className="font-mono text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.2 rounded-full font-bold">{selectedTicket.replies?.length || 1}</span>
+                  </button>
+                  <button className="pb-1 text-slate-500 hover:text-slate-900 border-b-2 border-transparent">
+                    Details
+                  </button>
+                  <button className="pb-1 text-slate-500 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-1.5">
+                    Time <span className="font-mono text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded-full font-normal">0</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Drawer Body: 2 Columns */}
+              <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                {/* Left Column (Replies & Discussion & Composer) */}
+                <div className="flex-1 flex flex-col overflow-y-auto p-6 space-y-5 bg-white">
+                  {/* Card: Original Description */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <img
+                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                          alt="Jordan Rivera"
+                          className="w-7 h-7 rounded-full object-cover shrink-0"
+                        />
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-semibold text-xs text-[#0F172A]">Jordan Rivera</span>
+                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-medium">Organization</span>
+                          <span className="text-[11px] text-[#94A3B8]">·</span>
+                          <span className="text-[11px] text-[#94A3B8]">{selectedTicket.createdDate}</span>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                        ORIGINAL DESCRIPTION
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#334155] leading-relaxed">
+                      {selectedTicket.description}
+                    </p>
+                  </div>
+
+                  {/* Divider with replies count */}
+                  <div className="relative flex items-center justify-center my-2">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-slate-200" />
+                    </div>
+                    <span className="relative bg-white px-3 text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold">
+                      {selectedTicket.replies?.length || 1} REPLY
+                    </span>
+                  </div>
+
+                  {/* Replies Thread */}
+                  <div className="space-y-4">
+                    {(selectedTicket.replies || []).map((rep) => (
+                      <div
+                        key={rep.id}
+                        className={`border rounded-xl p-4 shadow-2xs flex flex-col gap-2.5 ${
+                          rep.badge === "Internal Note"
+                            ? "bg-amber-50/60 border-amber-200"
+                            : "bg-white border-[#E2E8F0]"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2.5">
+                            {rep.senderAvatar ? (
+                              <img
+                                src={rep.senderAvatar}
+                                alt={rep.senderName}
+                                className="w-7 h-7 rounded-full object-cover shrink-0"
+                              />
+                            ) : (
+                              <div className="w-7 h-7 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center">
+                                {rep.senderName.charAt(0)}
+                              </div>
+                            )}
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-semibold text-xs text-[#0F172A]">{rep.senderName}</span>
+                              <span className={`text-[10px] px-1.5 py-0.2 rounded font-medium ${
+                                rep.badge === "Internal Note"
+                                  ? "bg-amber-100 text-amber-800"
+                                  : "bg-blue-50 text-blue-700 border border-blue-200"
+                              }`}>
+                                {rep.badge}
+                              </span>
+                              <span className="text-[11px] text-[#94A3B8]">·</span>
+                              <span className="text-[11px] text-[#94A3B8]">{rep.timestamp}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-[#334155] leading-relaxed pl-9">
+                          {rep.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Reply Composer at bottom */}
+                  <div className="mt-auto pt-4 border-t border-slate-200 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
+                        <input
+                          type="checkbox"
+                          checked={isTicketInternalNote}
+                          onChange={(e) => setIsTicketInternalNote(e.target.checked)}
+                          className="rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                        />
+                        <span className="font-medium text-xs flex items-center gap-1">
+                          Internal note <span className="text-slate-400">ⓘ</span>
+                        </span>
+                      </label>
+
+                      <div className="flex items-center gap-2">
+                        <button className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+                          <Sparkles size={12} /> AI Draft Reply
+                        </button>
+                        <button className="text-xs text-slate-500 hover:text-slate-700 font-medium flex items-center gap-1">
+                          Copilot <kbd className="text-[9px] bg-slate-100 border px-1 rounded">⌘J</kbd>
+                        </button>
+                        <button className="text-xs text-slate-500 hover:text-slate-700 font-medium">
+                          Templates
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={`border rounded-xl p-2.5 flex flex-col gap-2 transition-colors ${
+                      isTicketInternalNote ? "bg-amber-50/40 border-amber-200" : "bg-white border-[#CBD5E1]"
+                    }`}>
+                      <textarea
+                        value={ticketReplyInput}
+                        onChange={(e) => setTicketReplyInput(e.target.value)}
+                        placeholder={isTicketInternalNote ? "Write an internal note visible only to your team..." : "Write a reply to the customer..."}
+                        rows={3}
+                        className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-slate-400 resize-none"
+                      />
+
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <div className="flex items-center gap-1 text-slate-400">
+                          <button className="p-1 hover:text-slate-600 rounded"><Bold size={13} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Italic size={13} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Underline size={13} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><List size={13} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Link2 size={13} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Paperclip size={13} /></button>
+                        </div>
+
+                        <button
+                          onClick={handleSendTicketReply}
+                          className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs"
+                        >
+                          <Send size={12} /> Send
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Key-Value Properties Sidebar */}
+                <div className="w-full md:w-72 lg:w-80 border-t md:border-t-0 md:border-l border-[#E2E8F0] bg-[#F8FAFC] p-6 space-y-5 shrink-0 overflow-y-auto">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Status</span>
+                      <span className="font-medium text-slate-800">{selectedTicket.status}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Priority</span>
+                      <span className="font-medium text-slate-800 flex items-center gap-1">
+                        <Flag size={11} className="text-amber-500" /> {selectedTicket.priority}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Type</span>
+                      <span className="font-medium text-slate-800">{selectedTicket.type}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Assignee</span>
+                      <div className="flex items-center gap-1.5">
+                        {selectedTicket.assigneeAvatar && (
+                          <img
+                            src={selectedTicket.assigneeAvatar}
+                            alt={selectedTicket.assigneeName}
+                            className="w-5 h-5 rounded-full object-cover"
+                          />
+                        )}
+                        <span className="font-medium text-slate-800">{selectedTicket.assigneeName}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Organization</span>
+                      <span className="font-medium text-slate-800">{selectedTicket.org}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200">
+                      <span className="text-slate-500 font-medium">Created</span>
+                      <span className="font-medium text-slate-800">{selectedTicket.createdDate}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                      Details →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TASK DETAIL SLIDE-OVER DRAWER (Matching Screenshot media_1791731599445_a9b0a657.png & media_1791731599447_004c1460.png) */}
+        {selectedTask && (
+          <div className="absolute inset-0 z-50 flex justify-end">
+            {/* Dark Backdrop */}
+            <div
+              onClick={() => setSelectedTask(null)}
+              className="absolute inset-0 bg-slate-900/35 backdrop-blur-[1px] transition-opacity animate-fadeIn"
+            />
+
+            {/* Drawer Container */}
+            <div className="relative w-full sm:w-[90%] md:w-[84%] lg:w-[78%] max-w-[1020px] bg-white h-full shadow-2xl border-l border-[#E2E8F0] flex flex-col z-10 animate-in slide-in-from-right duration-200 overflow-hidden">
+              {/* Top Header Bar */}
+              <div className="flex items-center justify-between px-6 py-3 border-b border-[#E2E8F0] bg-white shrink-0">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                    {selectedTask.projectAvatar || "AB"}
+                  </div>
+                  <span className="text-xs font-semibold text-[#0F172A] truncate hover:underline cursor-pointer">
+                    {selectedTask.project}
+                  </span>
+                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0">
+                    {selectedTask.org}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex -space-x-1.5 items-center mr-1">
+                    <img
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                      alt="Member"
+                      className="w-5 h-5 rounded-full border border-white object-cover"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
+                      alt="Member"
+                      className="w-5 h-5 rounded-full border border-white object-cover"
+                    />
+                  </div>
+                  <button className="text-xs font-medium text-slate-600 hover:text-slate-900 px-2 py-1 rounded border border-slate-200 hover:bg-slate-50 transition-colors">
+                    Share
+                  </button>
+                  <button className="p-1 text-slate-400 hover:text-slate-700"><Plus size={14} /></button>
+                  <button className="p-1 text-slate-400 hover:text-slate-700"><Link2 size={14} /></button>
+                  <button className="p-1 text-slate-400 hover:text-slate-700"><Maximize2 size={14} /></button>
+                  <button className="p-1 text-slate-400 hover:text-slate-700"><MoreHorizontal size={14} /></button>
+                  <button
+                    onClick={() => setSelectedTask(null)}
+                    className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors ml-1"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Status Bar */}
+              <div className="px-6 py-2.5 border-b border-[#E2E8F0] bg-white shrink-0 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-800 shadow-2xs">
+                    <span className="w-2 h-2 rounded-full bg-slate-400" />
+                    {selectedTask.status}
+                    <ChevronDown size={11} className="text-slate-400 ml-0.5" />
+                  </button>
+
+                  <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs text-slate-600 transition-colors shadow-2xs">
+                    <Circle size={12} className="text-slate-400" />
+                    Mark complete
+                  </button>
+                </div>
+
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                  {selectedTask.health}
+                </span>
+              </div>
+
+              {/* Task Title & Metadata Row */}
+              <div className="px-6 py-4 border-b border-[#E2E8F0] bg-[#FAFAFA]/40 shrink-0 flex flex-col gap-4">
+                <h1 className="text-lg sm:text-xl font-bold text-[#0F172A] leading-snug">
+                  {selectedTask.title}
+                </h1>
+
+                {/* 2-Column Metadata Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">ASSIGNEE</span>
+                    <div className="flex items-center gap-1.5">
+                      {selectedTask.assigneeAvatar && (
+                        <img
+                          src={selectedTask.assigneeAvatar}
+                          alt={selectedTask.assigneeName}
+                          className="w-5 h-5 rounded-full object-cover shrink-0"
+                        />
+                      )}
+                      <span className="font-semibold text-slate-800 truncate">{selectedTask.assigneeName}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">PRIORITY</span>
+                    <span className="font-semibold text-slate-800 flex items-center gap-1">
+                      <Flag size={12} className="text-amber-500" /> {selectedTask.priority}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">DUE DATE</span>
+                    <span className="font-semibold text-slate-800 flex items-center gap-1 font-mono">
+                      <Calendar size={12} className="text-slate-400" /> {selectedTask.dueDate}
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">ESTIMATE / TIME</span>
+                    <span className="font-semibold text-slate-800 font-mono">
+                      {selectedTask.estimate} · <span className="text-slate-500 font-normal">{selectedTask.timeLogged}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Drawer Body: 2 Columns */}
+              <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+                {/* Left Column (Description, Checklist, Subtasks, Attachments) */}
+                <div className="flex-1 flex flex-col overflow-y-auto p-6 space-y-6 bg-white border-r border-[#E2E8F0]">
+                  {/* Description */}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xs text-[#0F172A] uppercase font-mono tracking-wider">
+                        DESCRIPTION
+                      </span>
+                      <div className="flex items-center gap-1 text-slate-400">
+                        <button className="p-1 hover:text-slate-600 rounded"><Bold size={12} /></button>
+                        <button className="p-1 hover:text-slate-600 rounded"><Italic size={12} /></button>
+                        <button className="p-1 hover:text-slate-600 rounded"><Underline size={12} /></button>
+                        <button className="p-1 hover:text-slate-600 rounded"><Code size={12} /></button>
+                        <button className="p-1 hover:text-slate-600 rounded"><List size={12} /></button>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl border border-slate-200 bg-[#F8FAFC]/50 text-xs text-slate-700 leading-relaxed">
+                      {selectedTask.description}
+                    </div>
+                  </div>
+
+                  {/* Checklist */}
+                  <div className="flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-xs text-[#0F172A] uppercase font-mono tracking-wider">
+                          CHECKLIST
+                        </span>
+                        <span className="text-[11px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.2 rounded">
+                          {(selectedTask.checklist || []).filter((i) => i.done).length}/{(selectedTask.checklist || []).length}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-slate-400">
+                        {(selectedTask.checklist || []).length > 0
+                          ? Math.round(((selectedTask.checklist || []).filter((i) => i.done).length / (selectedTask.checklist || []).length) * 100)
+                          : 0}
+                        %
+                      </span>
+                    </div>
+
+                    {/* Checklist progress bar */}
+                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                      <div
+                        className="bg-blue-600 h-full rounded-full transition-all"
+                        style={{
+                          width: `${
+                            (selectedTask.checklist || []).length > 0
+                              ? ((selectedTask.checklist || []).filter((i) => i.done).length / (selectedTask.checklist || []).length) * 100
+                              : 0
+                          }%`,
+                        }}
+                      />
+                    </div>
+
+                    {/* Checklist Items */}
+                    <div className="space-y-1.5 pt-1">
+                      {(selectedTask.checklist || []).map((item) => (
+                        <div
+                          key={item.id}
+                          onClick={() => handleToggleChecklistItem(item.id)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors group select-none text-xs"
+                        >
+                          <div
+                            className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
+                              item.done
+                                ? "bg-blue-600 border-blue-600 text-white"
+                                : "border-slate-300 group-hover:border-blue-500 bg-white"
+                            }`}
+                          >
+                            {item.done && <Check size={11} strokeWidth={3} />}
+                          </div>
+                          <span className={`flex-1 ${item.done ? "line-through text-slate-400" : "text-slate-700 font-medium"}`}>
+                            {item.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Add checklist item */}
+                    <div className="flex items-center gap-2 pt-1">
+                      <input
+                        type="text"
+                        value={newChecklistInput}
+                        onChange={(e) => setNewChecklistInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleAddChecklistItem();
+                        }}
+                        placeholder="+ Add an item to checklist..."
+                        className="flex-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs text-[#0F172A] placeholder:text-slate-400 outline-none focus:border-blue-500"
+                      />
+                      <button
+                        onClick={handleAddChecklistItem}
+                        className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors shrink-0"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Subtasks */}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xs text-[#0F172A] uppercase font-mono tracking-wider">
+                        SUBTASKS
+                      </span>
+                      <button className="text-xs text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1">
+                        <Sparkles size={11} /> AI breakdown
+                      </button>
+                    </div>
+                    <div className="p-3 rounded-xl border border-dashed border-slate-200 text-center text-xs text-slate-400">
+                      No subtasks yet. Click "AI breakdown" to generate automatically.
+                    </div>
+                  </div>
+
+                  {/* Attachments */}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xs text-[#0F172A] uppercase font-mono tracking-wider">
+                        ATTACHMENTS 1
+                      </span>
+                      <button className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+                        <Plus size={11} /> Upload
+                      </button>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-[#F8FAFC]/50 hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">
+                          <FileText size={16} />
+                        </div>
+                        <div>
+                          <span className="text-xs font-semibold text-[#0F172A] block truncate max-w-[200px]">
+                            Warehouse_Sub_Met...
+                          </span>
+                          <span className="text-[10px] text-slate-400">Uploaded file · 2.4 MB</span>
+                        </div>
+                      </div>
+                      <button className="text-xs text-slate-400 hover:text-slate-600 p-1">
+                        <Download size={14} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Dependencies */}
+                  <div className="flex flex-col gap-2">
+                    <span className="font-bold text-xs text-[#0F172A] uppercase font-mono tracking-wider">
+                      DEPENDENCIES
+                    </span>
+                    <button className="text-xs text-slate-500 hover:text-slate-800 font-medium flex items-center gap-1 self-start">
+                      <Plus size={12} /> Add dependency
+                    </button>
+                  </div>
+
+                  {/* Footer Metadata */}
+                  <div className="pt-4 border-t border-slate-100 text-[10.5px] text-slate-400 leading-normal">
+                    Created by Julian Vance · Created about 1 month ago · Updated 6 days ago
+                  </div>
+                </div>
+
+                {/* Right Column (Comments & Activity) */}
+                <div className="w-full lg:w-88 border-t lg:border-t-0 lg:border-l border-[#E2E8F0] bg-[#F8FAFC] p-5 flex flex-col justify-between shrink-0 overflow-y-auto">
+                  {/* Header tabs */}
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-4 text-xs font-semibold border-b border-slate-200 pb-2">
+                      <button className="text-blue-600 flex items-center gap-1.5 pb-1 border-b-2 border-blue-600 -mb-2.5">
+                        <MessageSquare size={12} /> Comments{" "}
+                        <span className="font-mono text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.2 rounded-full font-bold">
+                          {selectedTask.comments?.length || 1}
+                        </span>
+                      </button>
+                      <button className="text-slate-500 hover:text-slate-800 flex items-center gap-1.5">
+                        <Zap size={12} /> Activity
+                      </button>
+                    </div>
+
+                    {/* Comments List */}
+                    <div className="space-y-3.5">
+                      {(selectedTask.comments || []).map((cm) => (
+                        <div key={cm.id} className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex flex-col gap-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <img
+                                src={cm.senderAvatar}
+                                alt={cm.senderName}
+                                className="w-5 h-5 rounded-full object-cover"
+                              />
+                              <span className="text-xs font-semibold text-[#0F172A]">{cm.senderName}</span>
+                            </div>
+                            <span className="text-[10px] text-slate-400 font-mono">{cm.timestamp}</span>
+                          </div>
+                          <p className="text-xs text-slate-600 leading-relaxed pl-7">
+                            {cm.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Comment composer at bottom */}
+                  <div className="pt-4 mt-6 border-t border-slate-200 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
+                        <input
+                          type="checkbox"
+                          checked={isTaskInternalNote}
+                          onChange={(e) => setIsTaskInternalNote(e.target.checked)}
+                          className="rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                        />
+                        <span className="font-medium text-xs flex items-center gap-1">
+                          <Lock size={11} className="text-slate-500" /> Internal note
+                        </span>
+                      </label>
+                    </div>
+
+                    <div className="border border-[#CBD5E1] rounded-xl p-2.5 bg-white flex flex-col gap-2 focus-within:border-blue-500 transition-colors">
+                      <textarea
+                        value={taskCommentInput}
+                        onChange={(e) => setTaskCommentInput(e.target.value)}
+                        placeholder="Write a comment or internal note..."
+                        rows={2}
+                        className="w-full bg-transparent border-none outline-none text-xs text-[#0F172A] placeholder:text-slate-400 resize-none"
+                      />
+
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <div className="flex items-center gap-1 text-slate-400">
+                          <button className="p-1 hover:text-slate-600 rounded"><Bold size={12} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Italic size={12} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Link2 size={12} /></button>
+                          <button className="p-1 hover:text-slate-600 rounded"><Paperclip size={12} /></button>
+                        </div>
+
+                        <button
+                          onClick={handleSendTaskComment}
+                          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shadow-xs"
+                        >
+                          <Send size={11} /> Send
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 4. REALISTIC ANIMATED VIRTUAL CURSOR */}
