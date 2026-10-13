@@ -338,6 +338,9 @@ export default function BlendedFeaturePreview({
   const [signatureAgreed, setSignatureAgreed] = useState<boolean>(true);
   const [signatureCleared, setSignatureCleared] = useState<boolean>(false);
   const [proposalAccepted, setProposalAccepted] = useState<boolean>(false);
+  const [depositEnabled, setDepositEnabled] = useState<boolean>(true);
+  const [depositPercentage, setDepositPercentage] = useState<number>(50);
+  const [acceptanceAction, setAcceptanceAction] = useState<string>("Auto-create Project");
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -4152,75 +4155,210 @@ export default function BlendedFeaturePreview({
     }
 
     // -------------------------------------------------------------------------
-    // FEATURE 03: Automatically Trigger Deposit & Project
+    // FEATURE 03: Automatically Trigger Deposit & Project (Screenshot 14fa2aab)
     // -------------------------------------------------------------------------
     if (featureIndex === "03") {
+      const calculatedDepositAmount = depositEnabled
+        ? (31500 * (Number(depositPercentage) || 0)) / 100
+        : 0;
+
       return (
         <div className="relative w-full max-w-xl group min-w-0">
           <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
-            {/* Header */}
+            {/* Top Workspace Bar */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0">
-                  <Zap size={16} />
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-100 shrink-0 font-bold text-xs">
+                  <FileText size={15} />
                 </div>
                 <div>
-                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight">Instant Kickoff Automation</h3>
-                  <p className="text-[10px] text-[#64748B]">Automated deposit invoice &amp; project workspace trigger</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight truncate max-w-[200px] sm:max-w-xs">
+                    WEB DESIGN &amp; DEVELOPMENT PROPOSAL
+                  </h3>
+                  <p className="text-[10px] text-[#64748B]">Proposal Editor · Automated Triggers &amp; Settings</p>
                 </div>
               </div>
-              <span className="font-mono text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 font-bold">
-                Triggered on Signature
-              </span>
+
+              <div className="flex items-center gap-1.5">
+                <div className="h-6 px-2 rounded-md bg-purple-50 text-purple-700 text-[10px] font-semibold border border-purple-200/60 flex items-center gap-1">
+                  <Sparkles size={10} />
+                  <span>AI Copilot</span>
+                  <span className="font-mono text-[8.5px] bg-white px-1 rounded border border-purple-200">⌘J</span>
+                </div>
+                <div className="w-6 h-6 rounded-md text-slate-400 hover:bg-slate-100 flex items-center justify-center">
+                  <Settings size={12} />
+                </div>
+              </div>
             </div>
 
-            {/* Kickoff Automation Pipeline Cards */}
-            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs p-4 flex flex-col gap-3">
-              {/* Step 1: Upfront Deposit Invoice */}
-              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
-                    <Receipt size={14} />
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-900">Deposit Invoice #INV-042 Generated</h5>
-                    <p className="text-[10px] text-slate-500">50% upfront retainer ($16,600.00) · Stripe checkout link sent</p>
-                  </div>
-                </div>
-                <span className="text-[10px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0">
-                  Sent
+            {/* Proposal Header Bar matching screenshot */}
+            <div className="flex items-center justify-between flex-wrap gap-2 pt-0.5">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-medium text-slate-400 hover:text-slate-700 cursor-pointer">
+                  ← Proposals
+                </span>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600 border border-slate-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                  Draft
+                </span>
+                <span className="font-mono text-xs font-semibold text-slate-600">
+                  # PROP-001
+                </span>
+                <span className="font-mono text-xs sm:text-sm font-black text-slate-900">
+                  USD 31,500.00
+                </span>
+                <span className="text-[10px] font-medium text-emerald-600 hidden sm:inline">
+                  Saved ✓
                 </span>
               </div>
 
-              {/* Step 2: Project Board Initialized */}
-              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-                    <Briefcase size={14} />
+              {/* Action Buttons */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  className="px-2 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-[11px] font-semibold flex items-center gap-1 shadow-2xs"
+                >
+                  <Eye size={12} className="text-slate-500" />
+                  <span>Preview</span>
+                </button>
+                <button
+                  type="button"
+                  className="px-2.5 py-1 rounded-lg bg-[#4F46E5] hover:bg-indigo-700 text-white text-[11px] font-semibold flex items-center gap-1 shadow-xs"
+                >
+                  <Send size={11} />
+                  <span>Send</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Sub-Navigation Tabs */}
+            <div className="flex items-center gap-4 text-xs border-b border-slate-100 pb-2 text-slate-500">
+              <span className="cursor-pointer hover:text-slate-800">Content</span>
+              <span className="cursor-pointer hover:text-slate-800 flex items-center gap-1">
+                Line Items
+                <span className="font-mono text-[9.5px] bg-slate-100 text-slate-600 px-1 rounded-full">3</span>
+              </span>
+              <span className="font-bold text-[#4F46E5] border-b-2 border-[#4F46E5] pb-2 -mb-2 cursor-pointer">
+                Settings
+              </span>
+              <span className="cursor-pointer hover:text-slate-800 hidden sm:inline">Activity</span>
+              <span className="cursor-pointer hover:text-slate-800 hidden sm:inline">Analytics</span>
+            </div>
+
+            {/* SETTINGS CARDS CONTAINER */}
+            <div className="flex flex-col gap-3">
+              {/* CARD 1: Deposit (Matches media_1791915330918_14fa2aab.png) */}
+              <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-4.5 shadow-2xs flex flex-col gap-3">
+                {/* Header with Icon, Title, Subtitle, and Toggle Switch */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0 mt-0.5">
+                      <Shield size={16} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 leading-tight">Deposit</h4>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Collect upfront payment before starting work
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-900">Project Workspace Provisioned</h5>
-                    <p className="text-[10px] text-slate-500">7 Milestones, 24 Tasks created from proposal deliverables</p>
-                  </div>
+
+                  {/* Toggle Switch */}
+                  <button
+                    type="button"
+                    onClick={() => setDepositEnabled(!depositEnabled)}
+                    className={`w-11 h-6 rounded-full transition-colors relative p-0.5 shrink-0 cursor-pointer ${
+                      depositEnabled ? "bg-[#4F46E5]" : "bg-slate-200"
+                    }`}
+                  >
+                    <div
+                      className={`w-5 h-5 rounded-full bg-white shadow-xs transition-transform ${
+                        depositEnabled ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
+                  </button>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200 shrink-0">
-                  Ready
-                </span>
+
+                {/* Percentage & Calculated Amount */}
+                {depositEnabled && (
+                  <div className="grid grid-cols-2 gap-4 pt-1 items-end">
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-500 block mb-1">
+                        Percentage
+                      </label>
+                      <div className="flex items-center gap-1.5">
+                        <input
+                          type="number"
+                          value={depositPercentage}
+                          onChange={(e) => setDepositPercentage(Number(e.target.value) || 0)}
+                          className="w-16 px-2.5 py-1.5 border border-slate-200 rounded-lg text-sm font-bold text-center text-slate-900 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        />
+                        <span className="text-xs font-semibold text-slate-500">%</span>
+                      </div>
+                    </div>
+
+                    <div className="text-right sm:text-left">
+                      <label className="text-[11px] font-semibold text-slate-500 block mb-1">
+                        Calculated Amount
+                      </label>
+                      <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono tracking-tight leading-none">
+                        USD {calculatedDepositAmount.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Footnote */}
+                <div className="pt-2 border-t border-slate-100 text-[10.5px] text-slate-500 leading-relaxed">
+                  Auto-calculated from the proposal total. When converted to an invoice, a separate deposit invoice will be created.
+                </div>
               </div>
 
-              {/* Step 3: Team & Client Welcome */}
-              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                    <CheckCircle2 size={14} />
+              {/* CARD 2: On Acceptance (Auto-create Project) */}
+              <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-4.5 shadow-2xs flex flex-col gap-3">
+                {/* Header */}
+                <div className="flex items-start gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0 mt-0.5">
+                    <CheckSquare size={16} />
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-slate-900">Signatories Notified</h5>
-                    <p className="text-[10px] text-slate-500">Tamper-evident audit certificate &amp; executed PDF emailed</p>
+                    <h4 className="text-sm font-bold text-slate-900 leading-tight">On Acceptance</h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      What happens when the client accepts this proposal
+                    </p>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">
-                  Delivered
+
+                {/* Action Dropdown Field */}
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">
+                    Do this (Action) <span className="text-red-500">*</span>
+                  </label>
+                  <div className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm font-medium text-slate-800 flex items-center justify-between shadow-2xs">
+                    <span className="font-semibold text-slate-900">{acceptanceAction}</span>
+                    <ChevronDown size={14} className="text-slate-400" />
+                  </div>
+                </div>
+
+                {/* Footnote */}
+                <div className="pt-2 border-t border-slate-100 text-[10.5px] text-slate-500 leading-relaxed">
+                  A project will be created automatically when the client accepts.
+                </div>
+              </div>
+
+              {/* CARD 3: Validity (Peeking) */}
+              <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-3 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200/60 shrink-0">
+                    <Calendar size={13} />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-800 leading-tight">Validity</h5>
+                    <p className="text-[10px] text-slate-400">Proposal expires in 30 days if unsigned</p>
+                  </div>
+                </div>
+                <span className="font-mono text-[10px] text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded font-semibold">
+                  30 days
                 </span>
               </div>
             </div>
