@@ -63,6 +63,8 @@ import {
   TrendingUp,
   Building,
   LifeBuoy,
+  Copy,
+  ExternalLink,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -269,6 +271,27 @@ export default function BlendedFeaturePreview({
   const [aiWorkspaceMode, setAiWorkspaceMode] = useState<"actions" | "slash_tools" | "query_unbilled" | "query_health">("slash_tools");
   const [aiSlashSearch, setAiSlashSearch] = useState<string>("");
   const [aiExpandedSource, setAiExpandedSource] = useState<boolean>(false);
+
+  // State for AI Workspace Features (Feature 01: MCP Native Server)
+  const [mcpActiveTab, setMcpActiveTab] = useState<"overview" | "connection" | "tools" | "governance">("overview");
+  const [mcpCopied, setMcpCopied] = useState<boolean>(false);
+  const [mcpToolSearch, setMcpToolSearch] = useState<string>("");
+  const [mcpConnectorEnabled, setMcpConnectorEnabled] = useState<boolean>(true);
+  const [mcpRoleOwner, setMcpRoleOwner] = useState<boolean>(true);
+  const [mcpRoleAdmin, setMcpRoleAdmin] = useState<boolean>(false);
+  const [mcpRolePM, setMcpRolePM] = useState<boolean>(false);
+  const [mcpRoleAccountant, setMcpRoleAccountant] = useState<boolean>(false);
+  const [mcpRoleTeam, setMcpRoleTeam] = useState<boolean>(false);
+  const [mcpExposedModules, setMcpExposedModules] = useState<Record<string, boolean>>({
+    tasks: true,
+    projects: true,
+    invoices: true,
+    proposals: true,
+    clients: true,
+    tickets: true,
+    reports: true,
+    messaging: true,
+  });
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -2668,6 +2691,488 @@ export default function BlendedFeaturePreview({
   // CUSTOM EIDONCORE MODULE: AI WORKSPACE
   // =========================================================================
   if (moduleName.toLowerCase().includes("ai")) {
+    // -------------------------------------------------------------------------
+    // FEATURE 01: Model Context Protocol (MCP) Native (Screenshots 1-5)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "01") {
+      const MCP_MODULES_LIST = [
+        { name: "Tasks", desc: "Manage tasks, track time, toggle checklists, and comment", read: 9, write: 9 },
+        { name: "Projects", desc: "View project dashboards, track budgets and milestones", read: 6, write: 7 },
+        { name: "Invoices", desc: "View invoice history, create new invoices, check financial stats", read: 4, write: 6 },
+        { name: "Proposals", desc: "Manage proposals from drafts through sending and acceptance", read: 2, write: 3 },
+        { name: "Clients", desc: "CRM operations — view client organizations, add notes, schedule", read: 3, write: 7 },
+        { name: "Tickets", desc: "Manage support tickets — view, create, reply, and update", read: 4, write: 6 },
+        { name: "Reports", desc: "Agency-wide dashboards — project health, task velocity, analytics", read: 8, write: 0 },
+        { name: "Messaging", desc: "Access team and client chat — channels, messages, and threads", read: 3, write: 2 },
+        { name: "Services", desc: "Browse the service catalog and manage client offerings", read: 3, write: 2 },
+        { name: "Files", desc: "Browse file metadata, attachments, and cloud storage", read: 2, write: 1 },
+        { name: "Search", desc: "Universal search — find tasks, projects, contacts, and docs", read: 1, write: 0 },
+        { name: "Dashboard", desc: "Executive briefings — KPIs, project health, and activity", read: 3, write: 0 },
+        { name: "Team", desc: "Team management — member profiles, workloads, and roles", read: 4, write: 0 },
+        { name: "Automations", desc: "Workflow automation — view workflows, triggers, and runs", read: 3, write: 2 },
+        { name: "Client Reports", desc: "Generate and send professional client status summaries", read: 1, write: 2 },
+        { name: "Notifications", desc: "View and manage your in-app and delivery notifications", read: 2, write: 1 },
+        { name: "Templates", desc: "Browse project templates, document scopes, and presets", read: 2, write: 1 },
+        { name: "Recurring Invoices", desc: "View and create recurring retainer billing schedules", read: 1, write: 1 },
+        { name: "Settings", desc: "View workspace configuration — profile, security, branding", read: 1, write: 0 },
+        { name: "Email", desc: "Client email threads linked to workspaces and tickets", read: 3, write: 1 },
+      ];
+
+      const filteredMcpModules = MCP_MODULES_LIST.filter(
+        (m) =>
+          m.name.toLowerCase().includes(mcpToolSearch.toLowerCase()) ||
+          m.desc.toLowerCase().includes(mcpToolSearch.toLowerCase())
+      );
+
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Bar with MCP Architecture Header & Tab Switcher */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-[#3F72AF] flex items-center justify-center border border-indigo-100">
+                  <Shield size={17} className="text-[#3F72AF]" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-slate-900 leading-tight">MCP AI Connector</h3>
+                    <span className="text-[9px] font-mono font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                      OAuth 2.1 PKCE
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">Model Context Protocol Server & Security</p>
+                </div>
+              </div>
+
+              {/* Mode Switcher Tabs */}
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setMcpActiveTab("overview")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    mcpActiveTab === "overview"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Overview & Modules
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMcpActiveTab("connection")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    mcpActiveTab === "connection"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Server & Security
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMcpActiveTab("tools")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    mcpActiveTab === "tools"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  116 Tools
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMcpActiveTab("governance")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    mcpActiveTab === "governance"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Roles & Guardrails
+                </button>
+              </div>
+            </div>
+
+            {/* Container Body with Equalized Min-Height */}
+            <div className="bg-slate-50/50 rounded-xl border border-slate-200/70 overflow-hidden flex flex-col min-h-[440px]">
+              {/* TAB 1: OVERVIEW & EXPOSED MODULES (Screenshot 5: media_...8ada9222.png) */}
+              {mcpActiveTab === "overview" && (
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col gap-3 text-xs">
+                  {/* Top Header Card */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-indigo-50 text-[#3F72AF] flex items-center justify-center">
+                          <Sparkles size={13} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-slate-900 text-xs">AI Connector</span>
+                            <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.2 rounded-full border border-emerald-200 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                              Enabled
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 mt-0.5">
+                            Connect AI assistants like Claude and Cursor via Model Context Protocol (MCP).
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setMcpConnectorEnabled(!mcpConnectorEnabled)}
+                        className={`px-2.5 py-1 rounded-md text-[11px] font-semibold border transition-colors cursor-pointer ${
+                          mcpConnectorEnabled
+                            ? "border-rose-200 text-rose-600 bg-rose-50/50 hover:bg-rose-50"
+                            : "border-emerald-200 text-emerald-700 bg-emerald-50 hover:bg-emerald-100"
+                        }`}
+                      >
+                        {mcpConnectorEnabled ? "Disable" : "Enable"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* 3 Overview Stat Cards */}
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                      <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">Active Sessions</span>
+                      <span className="text-base font-extrabold text-slate-900 block mt-0.5">0</span>
+                    </div>
+                    <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                      <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">Actions (30d)</span>
+                      <span className="text-base font-extrabold text-slate-900 block mt-0.5">0</span>
+                    </div>
+                    <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                      <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">Plan</span>
+                      <span className="text-xs font-bold text-slate-900 block mt-1 tracking-tight truncate">ENTERPRISE_LTD</span>
+                    </div>
+                  </div>
+
+                  {/* Exposed Modules Section */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs flex-1 flex flex-col">
+                    <div className="pb-2 border-b border-slate-100">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-slate-900 text-xs">Exposed Modules</span>
+                        <span className="text-[10px] text-slate-400">8 of 8 enabled</span>
+                      </div>
+                      <p className="text-[10px] text-slate-500 mt-0.5">
+                        Control which data modules AI assistants can access. Unchecking a module hides its tools from connected sessions.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5 max-h-[175px] overflow-y-auto pr-1">
+                      {[
+                        { id: "tasks", name: "Tasks", desc: "Manage tasks, track time, toggle checklists, and comments" },
+                        { id: "projects", name: "Projects", desc: "View dashboards, track budgets, milestones, and updates" },
+                        { id: "invoices", name: "Invoices", desc: "View invoice history, create invoices, check stats" },
+                        { id: "proposals", name: "Proposals", desc: "Manage drafts, proposals, scope, timeline, and terms" },
+                        { id: "clients", name: "Clients", desc: "CRM operations — client orgs, notes, and communications" },
+                        { id: "tickets", name: "Tickets", desc: "Support tickets — view, reply, and update status" },
+                        { id: "reports", name: "Reports", desc: "Agency analytics, financial summaries, and velocity" },
+                        { id: "messaging", name: "Messaging", desc: "Access team and client chat — channels and messages" },
+                      ].map((mod) => {
+                        const isEnabled = mcpExposedModules[mod.id] ?? true;
+                        return (
+                          <div
+                            key={mod.id}
+                            onClick={() =>
+                              setMcpExposedModules({ ...mcpExposedModules, [mod.id]: !isEnabled })
+                            }
+                            className={`p-2 rounded-lg border transition-all cursor-pointer flex items-start gap-2 ${
+                              isEnabled
+                                ? "bg-slate-50/70 border-slate-200"
+                                : "bg-slate-50/30 border-slate-200/50 opacity-60"
+                            }`}
+                          >
+                            <div
+                              className={`w-7 h-4 rounded-full relative transition-colors shrink-0 mt-0.5 ${
+                                isEnabled ? "bg-[#3F72AF]" : "bg-slate-300"
+                              }`}
+                            >
+                              <div
+                                className={`w-3 h-3 rounded-full bg-white absolute top-0.5 transition-transform ${
+                                  isEnabled ? "left-3.5" : "left-0.5"
+                                }`}
+                              />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <span className="font-bold text-slate-900 text-[11px] block">{mod.name}</span>
+                              <span className="text-[10px] text-slate-500 line-clamp-1 leading-tight">{mod.desc}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 2: SERVER & SECURITY (Screenshots 1 & 4: media_...6565442a.png & media_...ea486fed.png) */}
+              {mcpActiveTab === "connection" && (
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col gap-3 text-xs">
+                  {/* Connection Details Card */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                    <span className="font-bold text-slate-900 text-xs block">Connection Details</span>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Use this URL in your MCP client configuration. Authentication is handled via OAuth — your AI tool will prompt you to sign in.
+                    </p>
+
+                    <div className="mt-2.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                        MCP SERVER URL
+                      </span>
+                      <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-mono text-[11px] text-slate-800">
+                        <span className="truncate">https://aetheris-studio.eidoncore.com/api/mcp</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMcpCopied(true);
+                            setTimeout(() => setMcpCopied(false), 2000);
+                          }}
+                          className="ml-2 px-2 py-0.5 bg-white border border-slate-200 rounded text-[10px] font-sans font-bold text-slate-700 hover:text-slate-900 flex items-center gap-1 shadow-2xs cursor-pointer shrink-0"
+                        >
+                          {mcpCopied ? (
+                            <>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={11} className="text-slate-400" />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Compatible AI Tools Grid */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                    <span className="font-bold text-slate-900 text-xs block mb-2">Compatible AI Tools</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200 flex flex-col">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-4 h-4 rounded bg-amber-100 text-amber-700 font-bold text-[9px] flex items-center justify-center">
+                            C
+                          </span>
+                          <span className="font-bold text-slate-900 text-[11px]">Claude</span>
+                        </div>
+                        <span className="text-[9px] text-slate-500">Anthropic AI Assistant</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200 flex flex-col">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-4 h-4 rounded bg-blue-100 text-blue-700 font-bold text-[9px] flex items-center justify-center">
+                            C
+                          </span>
+                          <span className="font-bold text-slate-900 text-[11px]">Cursor</span>
+                        </div>
+                        <span className="text-[9px] text-slate-500">AI Code Editor</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200 flex flex-col">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-4 h-4 rounded bg-emerald-100 text-emerald-700 font-bold text-[9px] flex items-center justify-center">
+                            W
+                          </span>
+                          <span className="font-bold text-slate-900 text-[11px]">Windsurf</span>
+                        </div>
+                        <span className="text-[9px] text-slate-500">Agentic IDE (Codeium)</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200 flex flex-col">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-4 h-4 rounded bg-purple-100 text-purple-700 font-bold text-[9px] flex items-center justify-center">
+                            A
+                          </span>
+                          <span className="font-bold text-slate-900 text-[11px]">Any MCP</span>
+                        </div>
+                        <span className="text-[9px] text-slate-500">Open Protocol Client</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Security Architecture 4-Pillars */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs flex-1">
+                    <span className="font-bold text-slate-900 text-xs block mb-2">Enterprise Security</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                      <div className="flex items-start gap-2 p-1.5 rounded-lg bg-slate-50/60 border border-slate-200/60">
+                        <Shield size={13} className="text-emerald-600 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900 block text-[11px]">OAuth 2.1 with PKCE</span>
+                          <span className="text-[10px] text-slate-500 leading-tight">No raw API keys stored in config files</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 p-1.5 rounded-lg bg-slate-50/60 border border-slate-200/60">
+                        <Shield size={13} className="text-emerald-600 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900 block text-[11px]">Live Permission Enforcement</span>
+                          <span className="text-[10px] text-slate-500 leading-tight">Revocations take effect instantly on every call</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 p-1.5 rounded-lg bg-slate-50/60 border border-slate-200/60">
+                        <Shield size={13} className="text-emerald-600 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900 block text-[11px]">Full Audit Trail</span>
+                          <span className="text-[10px] text-slate-500 leading-tight">Every tool call logged with action, user & input</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2 p-1.5 rounded-lg bg-slate-50/60 border border-slate-200/60">
+                        <Shield size={13} className="text-emerald-600 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-bold text-slate-900 block text-[11px]">Token Rotation</span>
+                          <span className="text-[10px] text-slate-500 leading-tight">Refresh tokens are single-use and auto-revoked</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 3: 116 MODULE TOOLS REFERENCE (Screenshot 3: media_...c4864046.png) */}
+              {mcpActiveTab === "tools" && (
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col gap-2.5 text-xs">
+                  {/* Header & Live Filter Input */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                    <div className="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-slate-900 text-xs">Module Reference</span>
+                        <span className="bg-blue-50 text-[#3F72AF] font-bold text-[10px] px-2 py-0.2 rounded-full border border-blue-200">
+                          116 tools
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-slate-400">Click any module to inspect tools</span>
+                    </div>
+
+                    <div className="mt-2.5 flex items-center bg-slate-50 rounded-lg border border-slate-200 px-2.5 py-1.5 text-slate-400 text-xs">
+                      <Search size={12} className="text-slate-400 mr-2 shrink-0" />
+                      <input
+                        type="text"
+                        value={mcpToolSearch}
+                        onChange={(e) => setMcpToolSearch(e.target.value)}
+                        placeholder="Search modules or tools..."
+                        className="bg-transparent border-none outline-none text-slate-800 text-[11px] placeholder:text-slate-400 w-full"
+                      />
+                      {mcpToolSearch && (
+                        <button
+                          type="button"
+                          onClick={() => setMcpToolSearch("")}
+                          className="text-slate-400 hover:text-slate-600 text-[10px] font-bold ml-1"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Modules Grid */}
+                  <div className="bg-white p-3 rounded-xl border border-slate-200/80 shadow-2xs flex-1 max-h-[300px] overflow-y-auto pr-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {filteredMcpModules.map((item) => (
+                        <div
+                          key={item.name}
+                          className="p-2.5 rounded-lg border border-slate-200/70 hover:border-[#3F72AF]/40 hover:bg-slate-50/70 transition-all flex items-center justify-between group cursor-pointer"
+                        >
+                          <div className="min-w-0 flex-1 pr-2">
+                            <span className="font-bold text-slate-900 text-[11px] group-hover:text-[#3F72AF] transition-colors block">
+                              {item.name}
+                            </span>
+                            <span className="text-[10px] text-slate-500 block truncate">{item.desc}</span>
+                          </div>
+
+                          <div className="flex items-center gap-1 shrink-0">
+                            <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                              {item.read}R
+                            </span>
+                            {item.write > 0 && (
+                              <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                                {item.write}W
+                              </span>
+                            )}
+                            <ChevronRight size={12} className="text-slate-300 group-hover:text-slate-600 transition-colors ml-0.5" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 4: ROLES & GUARDRAILS (Screenshot 2: media_...e70f5474.png) */}
+              {mcpActiveTab === "governance" && (
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col gap-3 text-xs">
+                  {/* Eligible Roles */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs">
+                    <div className="pb-1.5 border-b border-slate-100">
+                      <span className="font-bold text-slate-900 text-xs block">Eligible Roles</span>
+                      <p className="text-[10px] text-slate-500 mt-0.5 leading-relaxed">
+                        Choose which agency roles can connect AI assistants. Ineligible roles are refused at authorization. Client portal users can never connect.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2.5">
+                      {[
+                        { id: "owner", label: "Owner", val: mcpRoleOwner, setter: setMcpRoleOwner },
+                        { id: "admin", label: "Admin", val: mcpRoleAdmin, setter: setMcpRoleAdmin },
+                        { id: "pm", label: "Project Manager", val: mcpRolePM, setter: setMcpRolePM },
+                        { id: "accountant", label: "Accountant", val: mcpRoleAccountant, setter: setMcpRoleAccountant },
+                        { id: "team", label: "Team Member", val: mcpRoleTeam, setter: setMcpRoleTeam },
+                      ].map((role) => (
+                        <div
+                          key={role.id}
+                          onClick={() => role.setter(!role.val)}
+                          className="flex items-center gap-2 p-1.5 rounded-lg bg-slate-50 border border-slate-200/80 cursor-pointer"
+                        >
+                          <div
+                            className={`w-6 h-3.5 rounded-full relative transition-colors shrink-0 ${
+                              role.val ? "bg-[#3F72AF]" : "bg-slate-300"
+                            }`}
+                          >
+                            <div
+                              className={`w-2.5 h-2.5 rounded-full bg-white absolute top-0.5 transition-transform ${
+                                role.val ? "left-3" : "left-0.5"
+                              }`}
+                            />
+                          </div>
+                          <span className="font-semibold text-slate-800 text-[11px] truncate">{role.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* AI Instructions System Prompt */}
+                  <div className="p-3 bg-white rounded-xl border border-slate-200/80 shadow-2xs flex-1 flex flex-col">
+                    <span className="font-bold text-slate-900 text-xs block">AI Instructions (System Prompt)</span>
+                    <p className="text-[10px] text-slate-500 mt-0.5 mb-2 leading-relaxed">
+                      Provide workspace-level instructions for AI assistants. Included in every AI session to enforce tone and workflows.
+                    </p>
+
+                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200 font-sans text-[11px] text-slate-700 leading-relaxed flex-1">
+                      You are the AI copilot for Aetheris Creative Studio. Maintain enterprise-grade precision, adhere strictly to brand design systems, and assist with client delivery.
+                    </div>
+                    <div className="flex items-center justify-between mt-1 text-[10px] text-slate-400">
+                      <span>Injected via system prompt header</span>
+                      <span>163 / 2,000 characters</span>
+                    </div>
+                  </div>
+
+                  {/* Rate Limiting */}
+                  <div className="p-2.5 bg-white rounded-xl border border-slate-200/80 shadow-2xs flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-slate-900 text-xs block">Tool calls rate limit</span>
+                      <span className="text-[10px] text-slate-400">Lower values protect database load</span>
+                    </div>
+                    <div className="px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                      <span>10 / min</span>
+                      <ChevronDown size={11} className="text-slate-400" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
     // -------------------------------------------------------------------------
     // FEATURE 02: Full Workspace Actions (Screenshots 1, 2, 3, 4, 5)
     // -------------------------------------------------------------------------
