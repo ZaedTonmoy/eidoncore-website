@@ -265,7 +265,7 @@ export default function BlendedFeaturePreview({
   const [integrationFilter, setIntegrationFilter] = useState<string>("all");
 
   // State for Reports & Intelligence Features
-  const [reportsFinancialTab, setReportsFinancialTab] = useState<"revenue" | "mrr" | "cashflow">("revenue");
+  const [reportsFinancialTab, setReportsFinancialTab] = useState<"combined" | "revenue" | "cashflow">("combined");
   const [orgFilterTab, setOrgFilterTab] = useState<"all" | "active" | "leads" | "atrisk">("all");
   const [crewHeatmapFilter, setCrewHeatmapFilter] = useState<"14d" | "30d">("14d");
 
@@ -1974,8 +1974,8 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "01") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-3 sm:p-4 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800 border border-slate-200/80 shadow-xs">
-            {/* Top Dashboard Header */}
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Dashboard Header with View Switcher */}
             <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <span className="px-1.5 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] rounded font-bold uppercase">
@@ -1987,422 +1987,467 @@ export default function BlendedFeaturePreview({
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <span className="text-[9.5px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/70">
-                  PFD 1 · Total Revenue
-                </span>
-                <span className="text-[9.5px] font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
-                  FIN 4 · Cash Flow
-                </span>
+              {/* View Switcher Tabs: Combined, Total Revenue, Cash Flow */}
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("combined")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    reportsFinancialTab === "combined"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Combined
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("revenue")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    reportsFinancialTab === "revenue"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Revenue ($40.9K)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("cashflow")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    reportsFinancialTab === "cashflow"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Cash Flow ($113.9K)
+                </button>
               </div>
             </div>
 
-            {/* Container displaying both sections stacked and visible */}
-            <div className="flex flex-col gap-3.5 max-h-[620px] overflow-y-auto pr-1">
+            {/* Container without inner scrolling */}
+            <div className="flex flex-col gap-3 min-h-[440px]">
               {/* ========================================================================= */}
-              {/* SECTION 1: PFD 1 TOTAL REVENUE (Copied from Homepage HeroAppWindow)       */}
+              {/* VIEW 1: COMBINED NON-SCROLLABLE OVERVIEW (BOTH VISIBLE ON SCREEN)        */}
               {/* ========================================================================= */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
-                <div>
-                  {/* Card Header */}
-                  <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                        PFD 1
-                      </span>
-                      <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Total revenue</h4>
-                        <span className="text-[10px] text-[#64748B]">All recognized revenue channels</span>
+              {reportsFinancialTab === "combined" && (
+                <div className="flex flex-col gap-3 flex-1 justify-between">
+                  {/* TOP CARD: Total Revenue Summary (Spacious, No Right Graph) */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 shadow-2xs">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          PFD 1
+                        </span>
+                        <div>
+                          <h4 className="text-xs font-bold text-[#0F172A]">Total revenue</h4>
+                          <span className="text-[10px] text-[#64748B]">All recognized revenue channels</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <span>↑ 529%</span>
+                        <span className="text-slate-400 font-normal">vs prev $6.5K</span>
                       </div>
                     </div>
-                    <div className="text-[11px] font-semibold text-[#0F172A] flex items-center gap-1.5 border border-[#E2E8F0] px-2.5 py-0.5 rounded-lg shadow-2xs bg-white">
-                      <span>View breakdown</span>
-                      <ArrowRight size={10} />
-                    </div>
-                  </div>
 
-                  {/* Top Half: Numbers & Area Chart */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 pt-2.5">
-                    {/* Left Numbers Column */}
-                    <div className="md:col-span-5 flex flex-col justify-between">
+                    {/* Top Row: Big Number & Key Projections */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2.5 items-center">
                       <div>
-                        <span className="text-[9.5px] font-mono text-[#64748B] uppercase tracking-wider block font-semibold">
+                        <span className="text-[9px] font-mono text-[#64748B] uppercase tracking-wider block font-semibold">
                           THIS MONTH · OCT 1 – 31, 2026
                         </span>
                         <div className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight mt-0.5 font-sans">
                           $40,900
                         </div>
-                        <div className="flex items-center gap-1.5 mt-1 text-xs">
-                          <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded font-bold text-[9.5px] font-mono">
+                        <div className="flex items-center gap-2 mt-1 text-[10px] text-[#64748B]">
+                          <span>5 transactions</span>
+                          <span>·</span>
+                          <span>Avg: <strong className="text-[#0F172A] font-mono">$8,180</strong></span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 p-2 bg-slate-50/70 rounded-lg border border-slate-200/70 text-[10px]">
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-[#64748B] uppercase font-semibold">PACING MULTIPLIER</span>
+                          <span className="font-mono font-black text-[#0F172A] text-xs">6.3×</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-blue-100/60 rounded-full overflow-hidden">
+                          <div className="bg-[#2563EB] h-full w-[76%] rounded-full" />
+                        </div>
+                        <div className="flex items-center justify-between text-[9px] text-[#64748B]">
+                          <span>Projection: <strong className="text-[#0F172A] font-mono">≈ $97,531</strong></span>
+                          <span>Day 13 of 31</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Source Share Bar */}
+                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px]">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-2xs bg-blue-600 shrink-0" />
+                        <span className="font-medium text-[#0F172A]">Paid invoices:</span>
+                        <span className="font-mono font-bold text-[#0F172A]">$40,900</span>
+                      </div>
+                      <span className="font-mono text-blue-600 font-bold bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200/60">
+                        100% share
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* BOTTOM CARD: Cash Flow Summary */}
+                  <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 shadow-2xs">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          FIN 4
+                        </span>
+                        <div>
+                          <h4 className="text-xs font-bold text-[#0F172A]">Cash flow</h4>
+                          <span className="text-[10px] text-[#64748B]">Invoiced vs collected · last 6 months</span>
+                        </div>
+                      </div>
+                      <div className="text-[10px] font-mono font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">
+                        Collection Rate: <span className="text-blue-600 font-bold">77%</span>
+                      </div>
+                    </div>
+
+                    {/* 3 Metrics Row */}
+                    <div className="grid grid-cols-3 gap-2 pt-2 border-b border-slate-100 pb-2">
+                      <div>
+                        <span className="text-[8.5px] font-mono uppercase text-[#64748B] font-semibold">COLLECTED</span>
+                        <div className="text-base sm:text-lg font-black text-[#0F172A] mt-0.5 font-sans">$113,900</div>
+                      </div>
+                      <div>
+                        <span className="text-[8.5px] font-mono uppercase text-[#64748B] font-semibold">INVOICED</span>
+                        <div className="text-base sm:text-lg font-black text-[#0F172A] mt-0.5 font-sans">$148,700</div>
+                      </div>
+                      <div>
+                        <span className="text-[8.5px] font-mono uppercase text-[#64748B] font-semibold">OUTSTANDING</span>
+                        <div className="text-base sm:text-lg font-black text-slate-700 mt-0.5 font-sans">$23,500</div>
+                      </div>
+                    </div>
+
+                    {/* Compact 6-month Bar Chart */}
+                    <div className="pt-2">
+                      <div className="h-20 w-full flex items-end justify-between gap-2 px-1">
+                        {[
+                          { m: "May", invH: 26, colH: 0, col: "$0" },
+                          { m: "Jun", invH: 28, colH: 28, col: "$18.5k" },
+                          { m: "Jul", invH: 34, colH: 28, col: "$18.5k" },
+                          { m: "Aug", invH: 32, colH: 34, col: "$21.0k" },
+                          { m: "Sep", invH: 46, colH: 36, col: "$21.5k" },
+                          { m: "Oct", invH: 72, colH: 58, col: "$34.4k", current: true },
+                        ].map((item) => (
+                          <div key={item.m} className="flex-1 flex flex-col items-center gap-1">
+                            <div className="w-full flex items-end justify-center gap-1 h-12">
+                              <div
+                                className={`w-3 rounded-t-2xs ${
+                                  item.current ? "bg-slate-300" : "bg-slate-200"
+                                }`}
+                                style={{ height: `${item.invH}%` }}
+                              />
+                              <div
+                                className={`w-3 rounded-t-2xs ${
+                                  item.current ? "bg-blue-600 shadow-xs" : "bg-blue-500"
+                                }`}
+                                style={{ height: `${item.colH}%` }}
+                              />
+                            </div>
+                            <span
+                              className={`text-[9px] font-mono ${
+                                item.current ? "font-bold text-[#0F172A]" : "text-[#64748B]"
+                              }`}
+                            >
+                              {item.m}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-1.5 border-t border-slate-100 text-[9px] text-[#94A3B8] flex items-center justify-between mt-1">
+                      <span>Invoiced by issue date · collected by payment date.</span>
+                      <div className="flex items-center gap-2">
+                        <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-slate-300 rounded-xs"></span> Invoiced</span>
+                        <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-blue-600 rounded-xs"></span> Collected</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ========================================================================= */}
+              {/* VIEW 2: FULL TOTAL REVENUE (EXPANDED FULL WIDTH, NO SQUISHED GRAPH)       */}
+              {/* ========================================================================= */}
+              {reportsFinancialTab === "revenue" && (
+                <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          PFD 1
+                        </span>
+                        <div>
+                          <h4 className="text-sm font-bold text-[#0F172A]">Total revenue</h4>
+                          <span className="text-[11px] text-[#64748B]">All recognized revenue channels</span>
+                        </div>
+                      </div>
+                      <div className="text-xs font-semibold text-[#0F172A] flex items-center gap-1.5 border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-2xs bg-white">
+                        <span>View breakdown</span>
+                        <ArrowRight size={11} />
+                      </div>
+                    </div>
+
+                    {/* Big Numbers Top Banner (Full Width) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 pt-3.5 items-center">
+                      <div className="sm:col-span-6">
+                        <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block font-semibold">
+                          THIS MONTH · OCT 1 – 31, 2026
+                        </span>
+                        <div className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight mt-0.5 font-sans">
+                          $40,900
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-1.5 text-xs">
+                          <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded font-bold text-[10px] font-mono">
                             ↑ 529%
                           </span>
-                          <span className="text-[#64748B] text-[10.5px]">
+                          <span className="text-[#64748B] text-[11px]">
                             vs. previous period <b className="text-[#0F172A] font-semibold font-mono">$6,500</b>
                           </span>
                         </div>
-
-                        {/* Pacing vs prior period */}
-                        <div className="pt-2 mt-2 border-t border-slate-100">
-                          <div className="flex items-center justify-between text-[9.5px]">
-                            <span className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">PACING VS PRIOR PERIOD</span>
-                            <span className="font-mono font-black text-[#0F172A] text-xs">6.3×</span>
-                          </div>
-                          <div className="relative w-full h-1.5 bg-blue-50 border border-blue-200/60 rounded-full mt-1 overflow-hidden flex items-center px-0.5">
-                            <div className="bg-[#2563EB] h-1 w-[76%] rounded-full" />
-                          </div>
-                          <div className="flex items-center justify-between text-[8.5px] text-[#64748B] font-mono mt-1">
-                            <span>Prior $6,500</span>
-                            <span>Now $40,900</span>
-                          </div>
-                        </div>
-
-                        {/* Projection */}
-                        <div className="pt-2 mt-2 border-t border-slate-100">
-                          <div className="flex items-center gap-1 text-[9.5px] font-bold text-blue-600 font-mono">
-                            <span>::</span>
-                            <span>PROJECTION</span>
-                          </div>
-                          <div className="text-[11px] font-bold text-[#0F172A] mt-0.5">
-                            At current pace ≈ $97,531 by Oct 31
-                          </div>
-                          <span className="text-[9.5px] text-[#64748B] block mt-0.5 leading-snug">
-                            $40,900 over 13 of 31 days (UTC), linear pace
-                          </span>
-
-                          <div className="flex items-center justify-between text-[8.5px] text-[#64748B] font-mono mt-1.5">
-                            <span>WINDOW ELAPSED</span>
-                            <span className="font-bold text-[#0F172A]">Day 13 of 31</span>
-                          </div>
-                          {/* Segment tracker (31 segments for October: 13 blue, 18 light grey) */}
-                          <div className="flex gap-[1.5px] mt-1">
-                            {[...Array(31)].map((_, i) => (
-                              <div
-                                key={i}
-                                className={`h-[3px] flex-1 rounded-[1px] ${
-                                  i < 13 ? "bg-[#2563EB]" : "bg-slate-200"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </div>
                       </div>
 
-                      {/* Revenue Transactions & Average Transaction */}
-                      <div className="grid grid-cols-2 gap-2 pt-2 mt-2 border-t border-slate-100">
-                        <div>
-                          <span className="text-[8px] font-mono uppercase text-[#64748B] font-semibold tracking-wider block">
-                            REVENUE TRANSACTIONS
-                          </span>
-                          <span className="text-base font-black text-[#0F172A] mt-0.5 block font-sans">5</span>
+                      <div className="sm:col-span-6 space-y-2 p-3 bg-slate-50/80 rounded-xl border border-slate-200/80">
+                        <div className="flex items-center justify-between text-[11px]">
+                          <span className="font-mono text-[#64748B] uppercase font-semibold">PACING VS PRIOR PERIOD</span>
+                          <span className="font-mono font-black text-[#0F172A] text-sm">6.3×</span>
                         </div>
-                        <div>
-                          <span className="text-[8px] font-mono uppercase text-[#64748B] font-semibold tracking-wider block">
-                            AVERAGE TRANSACTION
-                          </span>
-                          <span className="text-base font-black text-[#0F172A] mt-0.5 block font-mono font-bold">$8,180</span>
+                        <div className="relative w-full h-2 bg-blue-100/60 rounded-full overflow-hidden">
+                          <div className="bg-[#2563EB] h-full w-[76%] rounded-full" />
+                        </div>
+                        <div className="flex items-center justify-between text-[9.5px] text-[#64748B] font-mono">
+                          <span>Prior $6,500</span>
+                          <span>Now $40,900</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Right Area Chart */}
-                    <div className="md:col-span-7 flex flex-col justify-between pl-0 md:pl-2">
-                      <div className="flex items-center justify-between text-[10px] pb-1">
-                        <div className="flex items-center gap-2">
-                          <span className="flex items-center gap-1 text-[#0F172A] font-semibold text-[11px]">
-                            <span className="w-2 h-0.5 bg-blue-600 rounded-full" /> Revenue trend <span className="text-[9.5px] text-[#64748B] font-normal">Last 6 mo</span>
-                          </span>
-                          <span className="flex items-center gap-1 text-blue-600 font-mono text-[9.5px]">
-                            <span className="w-2 h-0.5 border-t border-dashed border-blue-600" /> Projection
-                          </span>
-                        </div>
-                        <div className="flex items-center border border-[#E2E8F0] rounded p-0.5 bg-slate-50">
-                          <div className="px-1 py-0.5 bg-white text-[#0F172A] rounded shadow-2xs">
-                            <TrendingUp size={10} />
-                          </div>
-                          <div className="px-1 py-0.5 text-[#64748B]">
-                            <BarChart3 size={10} />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Area Chart SVG */}
-                      <div className="relative h-40 w-full mt-1">
-                        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[8.5px] font-mono text-[#94A3B8]">
-                          <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-                            <span>$100K</span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-                            <span>$75K</span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-                            <span>$50K</span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-                            <span>$25K</span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-                            <span>$0</span>
-                          </div>
-                        </div>
-
-                        <svg className="w-full h-full overflow-visible relative z-10" viewBox="0 0 310 160">
-                          <defs>
-                            <linearGradient id="areaGradientReports" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.30" />
-                              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.02" />
-                            </linearGradient>
-                          </defs>
-
-                          <path
-                            d="M 24 140 C 45 140, 55 125, 74 125 C 95 125, 105 125, 124 125 C 145 125, 155 120, 174 120 C 195 120, 205 120, 224 120 C 245 120, 260 100, 280 100 L 280 140 L 24 140 Z"
-                            fill="url(#areaGradientReports)"
-                          />
-
-                          <path
-                            d="M 24 140 C 45 140, 55 125, 74 125 C 95 125, 105 125, 124 125 C 145 125, 155 120, 174 120 C 195 120, 205 120, 224 120 C 245 120, 260 100, 280 100"
-                            fill="none"
-                            stroke="#2563EB"
-                            strokeWidth="2.5"
-                          />
-
-                          <circle cx="24" cy="140" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                          <circle cx="74" cy="125" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                          <circle cx="124" cy="125" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                          <circle cx="174" cy="120" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                          <circle cx="224" cy="120" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-                          <circle cx="280" cy="100" r="4" fill="#2563EB" stroke="#FFFFFF" strokeWidth="2" />
-
-                          <text x="280" y="90" textAnchor="end" fontSize="10" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">
-                            $40,900
-                          </text>
-
-                          <line
-                            x1="280"
-                            y1="100"
-                            x2="280"
-                            y2="30"
-                            stroke="#2563EB"
-                            strokeWidth="1.5"
-                            strokeDasharray="3 3"
-                          />
-                          <circle cx="280" cy="30" r="3" fill="#FFFFFF" stroke="#2563EB" strokeWidth="2" />
-
-                          <text x="275" y="24" textAnchor="end" fontSize="9.5" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">
-                            ≈ $97,531
-                          </text>
-
-                          <text x="24" y="155" textAnchor="middle" fontSize="8.5" fill="#64748B" fontFamily="sans-serif">May</text>
-                          <text x="74" y="155" textAnchor="middle" fontSize="8.5" fill="#64748B" fontFamily="sans-serif">Jun</text>
-                          <text x="124" y="155" textAnchor="middle" fontSize="8.5" fill="#64748B" fontFamily="sans-serif">Jul</text>
-                          <text x="174" y="155" textAnchor="middle" fontSize="8.5" fill="#64748B" fontFamily="sans-serif">Aug</text>
-                          <text x="224" y="155" textAnchor="middle" fontSize="8.5" fill="#64748B" fontFamily="sans-serif">Sep</text>
-                          <text x="280" y="155" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0F172A" fontFamily="sans-serif">Oct</text>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* REVENUE BY SOURCE Table */}
-                  <div className="pt-3 mt-3 border-t border-slate-100">
-                    <div className="flex items-center justify-between pb-1.5">
-                      <span className="text-[9px] font-mono uppercase text-[#64748B] font-bold tracking-wider">
-                        REVENUE BY SOURCE
-                      </span>
-                      <span className="text-[9px] font-mono text-[#64748B]">
-                        This Month vs. previous period
-                      </span>
-                    </div>
-
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left text-xs">
-                        <thead className="bg-[#F8FAFC] border-y border-[#E2E8F0] text-[8.5px] font-mono uppercase text-[#64748B]">
-                          <tr>
-                            <th className="py-1.5 px-2 font-semibold">SOURCE</th>
-                            <th className="py-1.5 px-2 font-semibold text-right">THIS PERIOD</th>
-                            <th className="py-1.5 px-2 font-semibold text-right">PREVIOUS</th>
-                            <th className="py-1.5 px-2 font-semibold text-center">CHANGE</th>
-                            <th className="py-1.5 px-2 font-semibold text-right">TXN</th>
-                            <th className="py-1.5 px-2 font-semibold">SHARE</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-[#F1F5F9] text-xs">
-                          <tr>
-                            <td className="py-2 px-2 font-medium text-[#0F172A]">
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-2xs bg-blue-600 shrink-0" />
-                                <span className="text-[11px]">Paid invoices</span>
-                              </div>
-                            </td>
-                            <td className="py-2 px-2 font-bold text-[#0F172A] font-mono text-right text-[11px]">$40,900</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$6,500</td>
-                            <td className="py-2 px-2 text-center">
-                              <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded text-[9.5px] font-mono font-bold">
-                                ↑ 529%
-                              </span>
-                            </td>
-                            <td className="py-2 px-2 text-[#0F172A] font-mono text-right text-[11px]">5</td>
-                            <td className="py-2 px-2">
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                                  <div className="bg-blue-600 h-full w-full rounded-full" />
-                                </div>
-                                <span className="font-mono text-[9.5px] text-[#64748B]">100%</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-2 text-[#64748B]">
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-2xs bg-amber-500 shrink-0" />
-                                <span className="text-[11px]">Subscription renewals</span>
-                              </div>
-                            </td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#94A3B8] text-center font-mono text-[11px]">—</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">0</td>
-                            <td className="py-2 px-2">
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden" />
-                                <span className="font-mono text-[9.5px] text-[#64748B]">0%</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-2 text-[#64748B]">
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-2xs bg-emerald-500 shrink-0" />
-                                <span className="text-[11px]">Catalog & cart</span>
-                              </div>
-                            </td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#94A3B8] text-center font-mono text-[11px]">—</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">0</td>
-                            <td className="py-2 px-2">
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden" />
-                                <span className="font-mono text-[9.5px] text-[#64748B]">0%</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-2 text-[#64748B]">
-                              <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-2xs bg-amber-600 shrink-0" />
-                                <span className="text-[11px]">Quota & add-on top-ups</span>
-                              </div>
-                            </td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">$0</td>
-                            <td className="py-2 px-2 text-[#94A3B8] text-center font-mono text-[11px]">—</td>
-                            <td className="py-2 px-2 text-[#64748B] font-mono text-right text-[11px]">0</td>
-                            <td className="py-2 px-2">
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden" />
-                                <span className="font-mono text-[9.5px] text-[#64748B]">0%</span>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ========================================================================= */}
-              {/* SECTION 2: FIN 4 CASH FLOW (Copied from Homepage HeroAppWindow)          */}
-              {/* ========================================================================= */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
-                        FIN 4
-                      </span>
+                    {/* Projection & Window Elapsed Tracker */}
+                    <div className="pt-3 mt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                       <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Cash flow</h4>
-                        <span className="text-[10px] text-[#64748B]">Invoiced vs collected · last 6 months</span>
+                        <span className="text-[10px] font-bold text-blue-600 font-mono block">PROJECTION</span>
+                        <div className="text-xs font-bold text-[#0F172A] mt-0.5">
+                          At current pace ≈ $97,531 by Oct 31
+                        </div>
+                        <span className="text-[10px] text-[#64748B] block mt-0.5">
+                          $40,900 over 13 of 31 days (UTC), linear pace
+                        </span>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between text-[10px] text-[#64748B] font-mono">
+                          <span>WINDOW ELAPSED</span>
+                          <span className="font-bold text-[#0F172A]">Day 13 of 31</span>
+                        </div>
+                        <div className="flex gap-[2px] mt-1.5">
+                          {[...Array(31)].map((_, i) => (
+                            <div
+                              key={i}
+                              className={`h-[4px] flex-1 rounded-[1px] ${
+                                i < 13 ? "bg-[#2563EB]" : "bg-slate-200"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between text-[9.5px] text-[#64748B] mt-1">
+                          <span>5 transactions</span>
+                          <span>Avg: <strong className="text-[#0F172A] font-mono">$8,180</strong></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* REVENUE BY SOURCE Full Table */}
+                    <div className="pt-3.5 mt-3.5 border-t border-slate-100">
+                      <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-bold tracking-wider block mb-2">
+                        REVENUE BY SOURCE · THIS MONTH VS PREVIOUS
+                      </span>
+
+                      <div className="border border-[#E2E8F0] rounded-lg overflow-hidden text-xs">
+                        <table className="w-full text-left">
+                          <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[9px] font-mono uppercase text-[#64748B]">
+                            <tr>
+                              <th className="py-1.5 px-2.5 font-semibold">SOURCE</th>
+                              <th className="py-1.5 px-2.5 font-semibold text-right">THIS PERIOD</th>
+                              <th className="py-1.5 px-2.5 font-semibold text-right">PREV</th>
+                              <th className="py-1.5 px-2.5 font-semibold text-center">CHANGE</th>
+                              <th className="py-1.5 px-2.5 font-semibold text-right">TXN</th>
+                              <th className="py-1.5 px-2.5 font-semibold">SHARE</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[#F1F5F9] text-xs">
+                            <tr>
+                              <td className="py-2 px-2.5 font-medium text-[#0F172A]">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="w-2 h-2 rounded-2xs bg-blue-600 shrink-0" />
+                                  <span>Paid invoices</span>
+                                </div>
+                              </td>
+                              <td className="py-2 px-2.5 font-bold text-[#0F172A] font-mono text-right">$40,900</td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">$6,500</td>
+                              <td className="py-2 px-2.5 text-center">
+                                <span className="px-1.5 py-0.5 bg-[#E8FAF0] text-emerald-700 border border-[#B7F4D0] rounded text-[9.5px] font-mono font-bold">
+                                  ↑ 529%
+                                </span>
+                              </td>
+                              <td className="py-2 px-2.5 text-[#0F172A] font-mono text-right">5</td>
+                              <td className="py-2 px-2.5">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div className="bg-blue-600 h-full w-full rounded-full" />
+                                  </div>
+                                  <span className="font-mono text-[9.5px] text-[#64748B]">100%</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="w-2 h-2 rounded-2xs bg-amber-500 shrink-0" />
+                                  <span>Subscription renewals</span>
+                                </div>
+                              </td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2 px-2.5">
+                                <span className="font-mono text-[9.5px] text-[#64748B]">0%</span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 px-2.5 text-[#64748B]">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="w-2 h-2 rounded-2xs bg-emerald-500 shrink-0" />
+                                  <span>Catalog & cart</span>
+                                </div>
+                              </td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">$0</td>
+                              <td className="py-2 px-2.5 text-[#94A3B8] text-center font-mono">—</td>
+                              <td className="py-2 px-2.5 text-[#64748B] font-mono text-right">0</td>
+                              <td className="py-2 px-2.5">
+                                <span className="font-mono text-[9.5px] text-[#64748B]">0%</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ========================================================================= */}
+              {/* VIEW 3: FULL CASH FLOW (EXPANDED BAR CHART & REVENUE RECOGNITION)         */}
+              {/* ========================================================================= */}
+              {reportsFinancialTab === "cashflow" && (
+                <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 font-mono text-[9px] rounded font-bold uppercase">
+                          FIN 4
+                        </span>
+                        <div>
+                          <h4 className="text-sm font-bold text-[#0F172A]">Cash flow</h4>
+                          <span className="text-[11px] text-[#64748B]">Invoiced vs collected · last 6 months</span>
+                        </div>
+                      </div>
+                      <div className="text-xs font-semibold text-[#0F172A] flex items-center gap-1.5 border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-2xs bg-white">
+                        <span>Receivables Aging</span>
+                        <ArrowRight size={11} />
+                      </div>
+                    </div>
+
+                    {/* 3 Large Metric Cards */}
+                    <div className="grid grid-cols-3 gap-3 pt-3 border-b border-slate-100 pb-3">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                        <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold block">COLLECTED</span>
+                        <div className="text-xl sm:text-2xl font-black text-[#0F172A] mt-0.5">$113,900</div>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                        <span className="text-[9.5px] font-mono uppercase text-[#64748B] font-semibold block">INVOICED</span>
+                        <div className="text-xl sm:text-2xl font-black text-[#0F172A] mt-0.5">$148,700</div>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-blue-50/60 border border-blue-200/70">
+                        <span className="text-[9.5px] font-mono uppercase text-blue-700 font-semibold block">COLLECTION RATE</span>
+                        <div className="text-xl sm:text-2xl font-black text-blue-700 mt-0.5">77%</div>
+                      </div>
+                    </div>
+
+                    {/* 6-Month Bar Chart */}
+                    <div className="pt-3">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-[#64748B] mb-2">
+                        <span className="font-semibold text-slate-800">Past 6 Months Performance</span>
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-slate-300" /> Invoiced
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-2xs bg-blue-600" /> Collected
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="h-40 w-full flex items-end justify-between gap-3 pt-3 px-2">
+                        {[
+                          { m: "May", inv: 18500, col: 0, invH: 30, colH: 0 },
+                          { m: "Jun", inv: 18500, col: 18500, invH: 30, colH: 30 },
+                          { m: "Jul", inv: 21000, col: 18500, invH: 36, colH: 30 },
+                          { m: "Aug", inv: 19800, col: 21000, invH: 34, colH: 36 },
+                          { m: "Sep", inv: 27500, col: 21500, invH: 48, colH: 38 },
+                          { m: "Oct", inv: 43400, col: 34400, invH: 82, colH: 64, current: true },
+                        ].map((item) => (
+                          <div key={item.m} className="flex-1 flex flex-col items-center gap-1.5">
+                            <div className="w-full flex items-end justify-center gap-1 h-28">
+                              <div
+                                className={`w-3.5 rounded-t-2xs ${
+                                  item.current ? "bg-slate-300" : "bg-slate-200"
+                                }`}
+                                style={{ height: `${item.invH}%` }}
+                              />
+                              <div
+                                className={`w-3.5 rounded-t-2xs ${
+                                  item.current ? "bg-blue-600 shadow-xs" : "bg-blue-500"
+                                }`}
+                                style={{ height: `${item.colH}%` }}
+                              />
+                            </div>
+                            <span
+                              className={`text-[10px] font-mono ${
+                                item.current ? "font-bold text-[#0F172A]" : "text-[#64748B]"
+                              }`}
+                            >
+                              {item.m}
+                            </span>
+                            <div className="flex flex-col text-[8.5px] font-mono text-center text-[#94A3B8] leading-tight">
+                              <span className={item.current ? "font-bold text-blue-600" : ""}>
+                                ${(item.col / 1000).toFixed(0)}k
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
 
-                  {/* Metrics 3 Columns */}
-                  <div className="grid grid-cols-3 gap-2 pt-2 border-b border-slate-100 pb-2.5">
-                    <div>
-                      <span className="text-[9px] font-mono uppercase text-[#64748B] font-semibold">COLLECTED</span>
-                      <div className="text-lg sm:text-xl font-black text-[#0F172A] mt-0.5">$113,900</div>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono uppercase text-[#64748B] font-semibold">INVOICED</span>
-                      <div className="text-lg sm:text-xl font-black text-[#0F172A] mt-0.5">$148,700</div>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono uppercase text-[#64748B] font-semibold">COLLECTION RATE</span>
-                      <div className="text-lg sm:text-xl font-black text-[#0F172A] mt-0.5">77%</div>
-                    </div>
-                  </div>
-
-                  {/* Bar Chart comparing Invoiced vs Collected */}
-                  <div className="pt-2.5">
-                    <div className="flex items-center gap-4 text-[9.5px] font-mono text-[#64748B] mb-2">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-2xs bg-slate-300" /> Invoiced
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-2xs bg-blue-600" /> Collected
-                      </span>
-                    </div>
-
-                    {/* Chart Grid */}
-                    <div className="h-36 w-full flex items-end justify-between gap-2 pt-2 px-1">
-                      {[
-                        { m: "May", inv: 18500, col: 0, invH: 28, colH: 0 },
-                        { m: "Jun", inv: 18500, col: 18500, invH: 28, colH: 28 },
-                        { m: "Jul", inv: 21000, col: 18500, invH: 34, colH: 28 },
-                        { m: "Aug", inv: 19800, col: 21000, invH: 32, colH: 34 },
-                        { m: "Sep", inv: 27500, col: 21500, invH: 46, colH: 36 },
-                        { m: "Oct", inv: 43400, col: 34400, invH: 78, colH: 60, current: true },
-                      ].map((item) => (
-                        <div key={item.m} className="flex-1 flex flex-col items-center gap-1">
-                          <div className="w-full flex items-end justify-center gap-1 h-24">
-                            <div
-                              className={`w-3 sm:w-3.5 rounded-t-2xs ${
-                                item.current ? "bg-slate-300" : "bg-slate-200"
-                              }`}
-                              style={{ height: `${item.invH}%` }}
-                            />
-                            <div
-                              className={`w-3 sm:w-3.5 rounded-t-2xs ${
-                                item.current ? "bg-blue-600 shadow-xs" : "bg-blue-500"
-                              }`}
-                              style={{ height: `${item.colH}%` }}
-                            />
-                          </div>
-                          <span
-                            className={`text-[9.5px] font-mono ${
-                              item.current ? "font-bold text-[#0F172A]" : "text-[#64748B]"
-                            }`}
-                          >
-                            {item.m}
-                          </span>
-                          <div className="flex flex-col text-[8px] font-mono text-center text-[#94A3B8] leading-tight">
-                            <span className={item.current ? "font-bold text-blue-600" : ""}>
-                              ${(item.col / 1000).toFixed(0)}k
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="pt-2.5 border-t border-slate-100 text-[10px] text-[#94A3B8] flex items-center gap-1.5 mt-2">
+                    <HelpCircle size={11} />
+                    <span>Invoiced by issue date (excluding draft, scheduled and void) · collected by payment date.</span>
                   </div>
                 </div>
-
-                <div className="pt-2 border-t border-slate-100 text-[9.5px] text-[#94A3B8] flex items-center gap-1 mt-2">
-                  <HelpCircle size={10} />
-                  <span>Invoiced by issue date (excluding draft, scheduled and void) · collected by payment date.</span>
-                </div>
-              </div>
+              )}
             </div>
           </BlendMockupCard>
         </div>
