@@ -3903,12 +3903,13 @@ export default function BlendedFeaturePreview({
                   </span>
                 </label>
 
-                {/* Button matching screenshot */}
+                {/* Action Button */}
                 <button
                   type="button"
-                  className="w-full py-2.5 rounded-xl bg-[#A5B4FC]/80 text-white font-semibold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-2 cursor-pointer hover:bg-[#818CF8] transition-colors"
+                  className="w-full py-2.5 rounded-xl bg-[#4F46E5] hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
-                  <span>Cannot Sign — Switch to Authorized Account</span>
+                  <PenTool size={13} />
+                  <span>Accept &amp; Sign Proposal · ${totalProposalPrice.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
                 </button>
 
                 {/* Security Footnote */}
@@ -4128,7 +4129,7 @@ export default function BlendedFeaturePreview({
                 className={`w-full py-2.5 rounded-xl font-semibold text-xs sm:text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer ${
                   proposalAccepted
                     ? "bg-emerald-600 hover:bg-emerald-700 text-white"
-                    : "bg-[#A5B4FC]/80 hover:bg-[#818CF8] text-white"
+                    : "bg-[#4F46E5] hover:bg-indigo-700 text-white"
                 }`}
               >
                 {proposalAccepted ? (
@@ -4137,7 +4138,10 @@ export default function BlendedFeaturePreview({
                     <span>Proposal Accepted &amp; Signed · $33,200.00</span>
                   </>
                 ) : (
-                  <span>Cannot Sign — Switch to Authorized Account</span>
+                  <>
+                    <PenTool size={13} />
+                    <span>Accept &amp; Sign Proposal · $33,200.00</span>
+                  </>
                 )}
               </button>
 
