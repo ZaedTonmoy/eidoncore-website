@@ -56,6 +56,8 @@ import {
   Laptop,
   CreditCard,
   Receipt,
+  FileText,
+  X,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -220,6 +222,10 @@ export default function BlendedFeaturePreview({
   const [invoiceStatusFilter, setInvoiceStatusFilter] = useState<string>("all");
   const [recurringRetainerActive, setRecurringRetainerActive] = useState<boolean>(true);
 
+  // State for Milestone & Time Billing Feature 02
+  const [timeInvoiceStep, setTimeInvoiceStep] = useState<"timesheet" | "modal" | "invoice">("modal");
+  const [timeDateRange, setTimeDateRange] = useState<"last" | "this" | "custom">("this");
+
   // Auto toggle between All Invoices and Recurring view every 5s if user hasn't manually interacted
   useEffect(() => {
     if (!moduleName.toLowerCase().includes("invoic")) return;
@@ -227,6 +233,19 @@ export default function BlendedFeaturePreview({
       setInvoiceDashboardTab((prev) => (prev === "all" ? "recurring" : "all"));
     }, 5500);
     return () => clearInterval(interval);
+  }, [moduleName]);
+
+  // Auto transition for Feature 02: Timesheet -> Modal -> Generated Invoice
+  useEffect(() => {
+    if (!moduleName.toLowerCase().includes("invoic")) return;
+    const stepInterval = setInterval(() => {
+      setTimeInvoiceStep((prev) => {
+        if (prev === "timesheet") return "modal";
+        if (prev === "modal") return "invoice";
+        return "timesheet";
+      });
+    }, 6000);
+    return () => clearInterval(stepInterval);
   }, [moduleName]);
 
   // =========================================================================
@@ -668,77 +687,409 @@ export default function BlendedFeaturePreview({
     if (featureIndex === "02") {
       return (
         <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
-            {/* Top Toolbar */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Navigation & Workflow Step Tabs */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
                   <Timer size={17} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Milestone & Time Billing</h3>
-                  <p className="text-[11px] text-slate-400">Convert billable hours & deliverables directly to invoices</p>
-                </div>
-              </div>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
-                Auto-Synced
-              </span>
-            </div>
-
-            {/* Billable Log Item Card */}
-            <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 flex flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Project / Scope</span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 mt-0.5">Fintech Mobile App Re-architecture</h4>
-                </div>
-                <span className="font-mono text-xs font-bold px-2 py-1 bg-white rounded-md border border-slate-200 text-slate-800 shadow-2xs">
-                  42.5 hrs logged
-                </span>
-              </div>
-
-              {/* Progress Bar of Milestone */}
-              <div>
-                <div className="flex justify-between text-[11px] text-slate-500 mb-1">
-                  <span>Milestone 2: Design System & Core API</span>
-                  <span className="font-bold text-slate-900">100% Complete</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden">
-                  <div className="h-full bg-linear-to-r from-[#3F72AF] to-indigo-600 w-full rounded-full" />
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Nebula Telehealth 2.0</h3>
+                  <p className="text-[11px] text-slate-400">Budget & Time Tracking</p>
                 </div>
               </div>
 
-              {/* Line items preview */}
-              <div className="bg-white rounded-lg border border-slate-200/80 divide-y divide-slate-100 text-xs mt-1">
-                <div className="p-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
-                    <span className="font-medium text-slate-700">UI Component Audit & Dark Mode tokens</span>
-                  </div>
-                  <span className="font-mono font-semibold text-slate-900">$2,400.00</span>
-                </div>
-                <div className="p-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
-                    <span className="font-medium text-slate-700">GraphQL Endpoint Integration & Security check</span>
-                  </div>
-                  <span className="font-mono font-semibold text-slate-900">$3,600.00</span>
-                </div>
-              </div>
-
-              {/* Convert action */}
-              <div className="flex items-center justify-between pt-1">
-                <div className="text-[11px] text-slate-500">
-                  Total Billable: <span className="font-bold font-mono text-slate-900 text-xs">$6,000.00</span>
-                </div>
+              {/* Step Switcher Tabs (Timesheet -> Generate Modal -> Invoice #INV-00018) */}
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
                 <button
                   type="button"
-                  className="px-3 py-1.5 rounded-lg bg-[#3F72AF] text-white text-xs font-bold hover:bg-[#325a8d] transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                  onClick={() => setTimeInvoiceStep("timesheet")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    timeInvoiceStep === "timesheet"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
                 >
-                  <Receipt size={13} />
-                  <span>Generate Invoice</span>
+                  1. Timesheet
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimeInvoiceStep("modal")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    timeInvoiceStep === "modal"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  2. Generate Modal
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimeInvoiceStep("invoice")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    timeInvoiceStep === "invoice"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  3. Invoice Draft
                 </button>
               </div>
+            </div>
+
+            {/* Container with Equalized Height for all 3 views */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs min-h-[385px] flex flex-col justify-between">
+              {timeInvoiceStep === "timesheet" && (
+                /* VIEW 1: Project Time Entries & Expenses (Exact match to Screenshot 1) */
+                <div className="divide-y divide-slate-100 text-xs flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Project Status Bar */}
+                    <div className="p-3 bg-slate-50/70 border-b border-slate-100 flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> In Progress
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+                          On Track
+                        </span>
+                        <span className="text-[11px] text-slate-400 font-mono hidden sm:inline">May 1 – Nov 20, 2026</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-semibold text-slate-600">Gross Profit:</span>
+                        <span className="font-mono font-bold text-emerald-600 text-xs">+$53,720.00</span>
+                      </div>
+                    </div>
+
+                    {/* Table Toolbar */}
+                    <div className="px-3 py-2 bg-white flex items-center justify-between border-b border-slate-100">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                        <Timer size={14} className="text-[#3F72AF]" />
+                        <span>Time Entries</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setTimeInvoiceStep("modal")}
+                          className="px-2.5 py-1 rounded-lg bg-[#3F72AF] text-white text-[11px] font-bold hover:bg-[#325a8d] transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
+                        >
+                          <Receipt size={12} />
+                          <span>Generate Invoice</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Time Table Header */}
+                    <div className="bg-slate-50/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                      <span className="col-span-3">Who</span>
+                      <span className="col-span-2">Duration</span>
+                      <span className="col-span-7">Description / Task</span>
+                    </div>
+
+                    {/* Row 1: Liam Gallagher */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-3 flex items-center gap-1.5">
+                        <div className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                          LG
+                        </div>
+                        <span className="font-semibold text-slate-800 truncate">Liam Gallagher</span>
+                      </div>
+                      <span className="col-span-2 font-mono font-bold text-slate-800">14h</span>
+                      <span className="col-span-7 text-slate-600 truncate">
+                        Interactive Appointment Booking Calendar with Timezone Auto-Detection
+                      </span>
+                    </div>
+
+                    {/* Row 2: Chloe Bennett */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-3 flex items-center gap-1.5">
+                        <div className="w-5 h-5 rounded-full bg-purple-100 text-purple-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                          CB
+                        </div>
+                        <span className="font-semibold text-slate-800 truncate">Chloe Bennett</span>
+                      </div>
+                      <span className="col-span-2 font-mono font-bold text-slate-800">9h 30m</span>
+                      <span className="col-span-7 text-slate-600 truncate">
+                        Patient Electronic Prescription (eRx) Signature Component
+                      </span>
+                    </div>
+
+                    {/* Row 3: Amara Okafor */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-3 flex items-center gap-1.5">
+                        <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold text-[9px] flex items-center justify-center shrink-0">
+                          AO
+                        </div>
+                        <span className="font-semibold text-slate-800 truncate">Amara Okafor</span>
+                      </div>
+                      <span className="col-span-2 font-mono font-bold text-slate-800">28h</span>
+                      <span className="col-span-7 text-slate-600 truncate">
+                        Implement encrypted WebRTC video consultation room UI
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Expenses Footer Callout from Screenshot 1 */}
+                  <div className="p-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-[11px] mt-auto">
+                    <div className="flex items-center gap-1.5 text-slate-600">
+                      <DollarSign size={13} className="text-emerald-600" />
+                      <span className="font-medium">Project Expenses:</span>
+                      <span className="text-slate-500">Total: $5,780.00 · Billable: <strong className="text-slate-900 font-mono">$6,422.00</strong></span>
+                    </div>
+                    <span className="text-[10px] font-mono text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50">
+                      Ready to Bill
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {timeInvoiceStep === "modal" && (
+                /* VIEW 2: Generate Invoice from Time Modal (Exact match to Screenshots 3 & 4) */
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-slate-50/30">
+                  <div className="flex flex-col gap-3">
+                    {/* Modal Header */}
+                    <div className="flex items-center justify-between pb-2.5 border-b border-slate-200">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded bg-blue-50 text-[#3F72AF] flex items-center justify-center">
+                          <Receipt size={14} />
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900">Generate Invoice from Time</h4>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setTimeInvoiceStep("timesheet")}
+                        className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+
+                    {/* Date Range Tabs (Last Month vs This Month vs Custom) */}
+                    <div>
+                      <label className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block mb-1">
+                        Date Range
+                      </label>
+                      <div className="grid grid-cols-3 gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                        <button
+                          type="button"
+                          onClick={() => setTimeDateRange("last")}
+                          className={`py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                            timeDateRange === "last"
+                              ? "bg-white text-slate-900 shadow-2xs"
+                              : "text-slate-500 hover:text-slate-900"
+                          }`}
+                        >
+                          Last Month
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTimeDateRange("this")}
+                          className={`py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                            timeDateRange === "this"
+                              ? "bg-white text-slate-900 shadow-2xs font-bold"
+                              : "text-slate-500 hover:text-slate-900"
+                          }`}
+                        >
+                          This Month
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTimeDateRange("custom")}
+                          className={`py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                            timeDateRange === "custom"
+                              ? "bg-white text-slate-900 shadow-2xs"
+                              : "text-slate-500 hover:text-slate-900"
+                          }`}
+                        >
+                          Custom
+                        </button>
+                      </div>
+
+                      {/* Date Pickers */}
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                        <div>
+                          <span className="text-[10px] text-slate-400 block mb-0.5">From</span>
+                          <div className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono text-slate-800 flex items-center justify-between">
+                            <span>{timeDateRange === "last" ? "Sep 1, 2026" : "Oct 1, 2026"}</span>
+                            <ChevronDown size={12} className="text-slate-400" />
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-slate-400 block mb-0.5">To</span>
+                          <div className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono text-slate-800 flex items-center justify-between">
+                            <span>{timeDateRange === "last" ? "Sep 30, 2026" : "Oct 31, 2026"}</span>
+                            <ChevronDown size={12} className="text-slate-400" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Group Line Items By */}
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block mb-1">
+                        Group Line Items By
+                      </span>
+                      <div className="grid grid-cols-3 gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                        <span className="py-1 rounded-md text-[11px] font-bold bg-white text-slate-900 text-center shadow-2xs">
+                          Per Task
+                        </span>
+                        <span className="py-1 rounded-md text-[11px] text-slate-500 text-center">
+                          Per Member
+                        </span>
+                        <span className="py-1 rounded-md text-[11px] text-slate-500 text-center">
+                          Single Line
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Include Unbilled Expenses Box (Checked by default) */}
+                    <div className="p-2.5 rounded-xl border border-blue-200 bg-blue-50/50 flex items-start gap-2">
+                      <div className="w-3.5 h-3.5 rounded bg-[#3F72AF] text-white flex items-center justify-center mt-0.5 shrink-0">
+                        <Check size={10} strokeWidth={3} />
+                      </div>
+                      <div className="text-[11px] leading-tight">
+                        <span className="font-bold text-slate-900 block">Include unbilled project expenses (2)</span>
+                        <span className="text-slate-500 text-[10px]">
+                          Adds 2 expense line items (est. $6,422.00 with billable markup applied).
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Calculated Summary Pill */}
+                    <div className="p-2 rounded-lg border border-slate-200 bg-white flex items-center justify-between text-xs">
+                      <span className="text-slate-600">2 expenses ($6,422.00) · est. total</span>
+                      <span className="font-bold font-mono text-slate-900">$6,422.00</span>
+                    </div>
+                  </div>
+
+                  {/* Modal Action Buttons */}
+                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 mt-2">
+                    <button
+                      type="button"
+                      onClick={() => setTimeInvoiceStep("timesheet")}
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTimeInvoiceStep("invoice")}
+                      className="px-3.5 py-1.5 rounded-lg bg-[#3F72AF] text-white text-xs font-bold hover:bg-[#325a8d] transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <Receipt size={13} />
+                      <span>Generate Draft — $6,422.00</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {timeInvoiceStep === "invoice" && (
+                /* VIEW 3: Final Generated Invoice #INV-00018 (Exact match to Screenshot 2) */
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between text-xs">
+                  <div>
+                    {/* Invoice Top Header */}
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-slate-900 font-mono">Invoice #INV-00018</span>
+                        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200/60 font-bold text-[10px]">
+                          Draft
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[11px] text-slate-500 font-medium">
+                        <span>Nebula Health</span>
+                        <span>›</span>
+                        <span className="font-mono text-slate-900 font-bold text-xs">USD 6,422.00</span>
+                      </div>
+                    </div>
+
+                    {/* Bill To & Details Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-3 border-b border-slate-100 text-[11px]">
+                      <div>
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Bill To</span>
+                        <span className="font-bold text-slate-800 block mt-0.5">Dr. Alexander Hayes</span>
+                        <span className="text-slate-400 text-[10px]">finance@nebulahealth.io</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Issue Date</span>
+                        <span className="font-mono text-slate-700 block mt-0.5">Oct 13, 2026</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Due Date</span>
+                        <span className="font-mono text-slate-700 block mt-0.5">Nov 12, 2026</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Payment Terms</span>
+                        <span className="font-semibold text-slate-700 block mt-0.5">Net 30</span>
+                      </div>
+                    </div>
+
+                    {/* Itemized Line Items Table */}
+                    <div className="mt-2 divide-y divide-slate-100 border border-slate-200/80 rounded-lg overflow-hidden">
+                      <div className="bg-slate-50/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                        <span className="col-span-6">Item</span>
+                        <span className="col-span-2 text-center">Type</span>
+                        <span className="col-span-2 text-right">Rate</span>
+                        <span className="col-span-2 text-right">Total</span>
+                      </div>
+
+                      {/* Line 1: Medical UX Compliance */}
+                      <div className="p-3 grid grid-cols-12 gap-2 items-center">
+                        <div className="col-span-6">
+                          <span className="font-bold text-slate-900 block">Medical UX Compliance Research Consultant</span>
+                          <span className="text-[10px] text-slate-400 line-clamp-1">Patient EHR comprehension study & HIPAA consent</span>
+                        </div>
+                        <div className="col-span-2 text-center">
+                          <span className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[9px] border border-blue-200/50">
+                            One-time
+                          </span>
+                        </div>
+                        <span className="col-span-2 text-right font-mono text-slate-600">$4,950.00</span>
+                        <span className="col-span-2 text-right font-mono font-bold text-slate-900">$4,950.00</span>
+                      </div>
+
+                      {/* Line 2: AWS GovCloud WebRTC */}
+                      <div className="p-3 grid grid-cols-12 gap-2 items-center">
+                        <div className="col-span-6">
+                          <span className="font-bold text-slate-900 block">AWS GovCloud WebRTC Relay Infrastructure</span>
+                          <span className="text-[10px] text-slate-400 line-clamp-1">HIPAA-compliant STUN/TURN dual-relay servers</span>
+                        </div>
+                        <div className="col-span-2 text-center">
+                          <span className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[9px] border border-blue-200/50">
+                            One-time
+                          </span>
+                        </div>
+                        <span className="col-span-2 text-right font-mono text-slate-600">$1,472.00</span>
+                        <span className="col-span-2 text-right font-mono font-bold text-slate-900">$1,472.00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Total & Action Bar */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between mt-3 flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-slate-500">Amount Due:</span>
+                      <span className="text-base font-bold font-mono text-[#3F72AF]">$6,422.00</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => setTimeInvoiceStep("timesheet")}
+                        className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
+                      >
+                        Back to Log
+                      </button>
+                      <button
+                        type="button"
+                        className="px-3.5 py-1.5 rounded-lg bg-[#3F72AF] hover:bg-[#325a8d] text-white text-xs font-bold transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <Send size={12} />
+                        <span>Send Invoice</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </BlendMockupCard>
         </div>
