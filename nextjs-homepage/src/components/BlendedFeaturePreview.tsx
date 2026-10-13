@@ -62,6 +62,7 @@ import {
   GitBranch,
   TrendingUp,
   Building,
+  LifeBuoy,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -263,6 +264,11 @@ export default function BlendedFeaturePreview({
   const [reportsFinancialTab, setReportsFinancialTab] = useState<"revenue" | "mrr" | "cashflow">("revenue");
   const [orgFilterTab, setOrgFilterTab] = useState<"all" | "active" | "leads" | "atrisk">("all");
   const [crewHeatmapFilter, setCrewHeatmapFilter] = useState<"14d" | "30d">("14d");
+
+  // State for AI Workspace Features (Feature 02: Full Workspace Actions)
+  const [aiWorkspaceMode, setAiWorkspaceMode] = useState<"actions" | "slash_tools" | "query_unbilled" | "query_health">("slash_tools");
+  const [aiSlashSearch, setAiSlashSearch] = useState<string>("");
+  const [aiExpandedSource, setAiExpandedSource] = useState<boolean>(false);
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -2651,6 +2657,474 @@ export default function BlendedFeaturePreview({
                 <span className="text-slate-600 font-medium">4 of 4 organizations shown</span>
                 <span className="font-mono text-[10px] text-[#3F72AF] font-bold">Portfolio Total: $120,400.00</span>
               </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: AI WORKSPACE
+  // =========================================================================
+  if (moduleName.toLowerCase().includes("ai")) {
+    // -------------------------------------------------------------------------
+    // FEATURE 02: Full Workspace Actions (Screenshots 1, 2, 3, 4, 5)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3 sm:gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Bar with AI Copilot Header & Mode Switcher */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-[#3F72AF] flex items-center justify-center border border-indigo-100">
+                  <Bot size={17} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-slate-900 leading-tight">AI Copilot</h3>
+                    <span className="text-[9px] font-mono font-bold text-slate-500 bg-slate-100 px-1.5 py-0.2 rounded border border-slate-200">
+                      Admin
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">Full Workspace Actions & Slash Commands</p>
+                </div>
+              </div>
+
+              {/* Mode Switcher Tabs matching screenshots */}
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setAiWorkspaceMode("slash_tools")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    aiWorkspaceMode === "slash_tools"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  / Slash Tools
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiWorkspaceMode("actions")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    aiWorkspaceMode === "actions"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Actions
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiWorkspaceMode("query_unbilled")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer hidden sm:inline-block ${
+                    aiWorkspaceMode === "query_unbilled"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Hours Audit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiWorkspaceMode("query_health")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer hidden sm:inline-block ${
+                    aiWorkspaceMode === "query_health"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Health
+                </button>
+              </div>
+            </div>
+
+            {/* Container with Equalized Height for all AI Views */}
+            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs overflow-hidden min-h-[385px] flex flex-col justify-between">
+              {aiWorkspaceMode === "slash_tools" && (
+                /* VIEW 1: SLASH TOOLS POPOVER MENU (Screenshot 1) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between bg-slate-50/20">
+                  <div className="flex flex-col gap-2.5">
+                    {/* Previous message context summary */}
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700 leading-relaxed">
+                      <p className="text-[11px] text-slate-600">
+                        Regarding overall project progress, three projects are currently in progress (<em>Nebula Telehealth 2.0</em>, <em>Solari Fleet Telematics</em>, and <em>Kroma Mobile SDK</em>), one is completed (<em>Aetheris Design System v3</em>), and one is not yet started (<em>Arcturus Brand Identity</em>).
+                      </p>
+                      <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+                        <span className="text-[9px] text-slate-400 font-mono">Sources (15 checked):</span>
+                        <span className="text-[9px] font-medium bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-600">Nebula Telehealth 2.0</span>
+                        <span className="text-[9px] font-medium bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-600">Kroma Mobile SDK</span>
+                        <span className="text-[9px] font-medium bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-600">Solari Fleet</span>
+                      </div>
+                    </div>
+
+                    {/* Slash Command / Tools Popover Menu (Exact match to Screenshot 1) */}
+                    <div className="border border-slate-200 rounded-xl bg-white shadow-lg overflow-hidden -mt-1">
+                      <div className="px-3 py-1.5 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        <span>Tools & Shortcuts</span>
+                        <span className="font-mono text-slate-500 font-normal">Press / to trigger</span>
+                      </div>
+
+                      <div className="divide-y divide-slate-100 text-xs">
+                        {/* Tool 1: Task breakdown */}
+                        <div
+                          onClick={() => setAiWorkspaceMode("actions")}
+                          className="px-3 py-2 flex items-center justify-between hover:bg-blue-50/40 cursor-pointer group transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <CheckSquare size={13} className="text-[#3F72AF]" />
+                            <div>
+                              <span className="font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Task breakdown
+                              </span>
+                              <span className="text-[10px] text-slate-400 ml-1.5 hidden sm:inline">
+                                Plan a task with a checklist
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded group-hover:bg-blue-100 group-hover:text-[#3F72AF]">
+                            /task
+                          </span>
+                        </div>
+
+                        {/* Tool 2: Ticket triage */}
+                        <div
+                          onClick={() => setAiWorkspaceMode("actions")}
+                          className="px-3 py-2 flex items-center justify-between hover:bg-blue-50/40 cursor-pointer group transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <LifeBuoy size={13} className="text-rose-500" />
+                            <div>
+                              <span className="font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Ticket triage
+                              </span>
+                              <span className="text-[10px] text-slate-400 ml-1.5 hidden sm:inline">
+                                Classify and draft a reply
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded group-hover:bg-blue-100 group-hover:text-[#3F72AF]">
+                            /triage
+                          </span>
+                        </div>
+
+                        {/* Tool 3: Polish message */}
+                        <div
+                          onClick={() => setAiWorkspaceMode("actions")}
+                          className="px-3 py-2 flex items-center justify-between hover:bg-blue-50/40 cursor-pointer group transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <MessageSquare size={13} className="text-emerald-500" />
+                            <div>
+                              <span className="font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Polish message
+                              </span>
+                              <span className="text-[10px] text-slate-400 ml-1.5 hidden sm:inline">
+                                Rewrite in the right tone
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded group-hover:bg-blue-100 group-hover:text-[#3F72AF]">
+                            /polish
+                          </span>
+                        </div>
+
+                        {/* Tool 4: Proposal draft */}
+                        <div
+                          onClick={() => setAiWorkspaceMode("actions")}
+                          className="px-3 py-2 flex items-center justify-between hover:bg-blue-50/40 cursor-pointer group transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <FileText size={13} className="text-indigo-500" />
+                            <div>
+                              <span className="font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Proposal draft
+                              </span>
+                              <span className="text-[10px] text-slate-400 ml-1.5 hidden sm:inline">
+                                Scope, deliverables and pricing
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded group-hover:bg-blue-100 group-hover:text-[#3F72AF]">
+                            /proposal
+                          </span>
+                        </div>
+
+                        {/* Tool 5: Invoice draft */}
+                        <div
+                          onClick={() => setAiWorkspaceMode("actions")}
+                          className="px-3 py-2 flex items-center justify-between hover:bg-blue-50/40 cursor-pointer group transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Receipt size={13} className="text-amber-500" />
+                            <div>
+                              <span className="font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Invoice draft
+                              </span>
+                              <span className="text-[10px] text-slate-400 ml-1.5 hidden sm:inline">
+                                Line items from unbilled work
+                              </span>
+                            </div>
+                          </div>
+                          <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded group-hover:bg-blue-100 group-hover:text-[#3F72AF]">
+                            /invoice
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input Box with active '/' trigger */}
+                  <div className="mt-3 pt-2 border-t border-slate-100">
+                    <div className="relative flex items-center bg-white rounded-xl border border-blue-400 ring-2 ring-blue-100 px-3 py-2">
+                      <span className="font-mono text-xs font-bold text-[#3F72AF]">/</span>
+                      <span className="inline-block w-0.5 h-3.5 bg-[#3F72AF] animate-pulse ml-0.5" />
+                      <span className="text-xs text-slate-400 ml-1.5">Type a command or ask anything...</span>
+                      <div className="ml-auto flex items-center gap-1.5 text-slate-400">
+                        <span className="font-mono text-[9px] bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                          Enter to select
+                        </span>
+                        <div className="w-6 h-6 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center">
+                          <Send size={11} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {aiWorkspaceMode === "actions" && (
+                /* VIEW 2: SUGGESTED ONE-CLICK ACTIONS (Screenshot 2) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                  <div className="flex flex-col gap-3">
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
+                      <p className="leading-relaxed">
+                        Workspace health audit complete. <strong>3 projects active</strong>, <strong>1 overdue invoice ($4,800)</strong>, and <strong>15 tasks require attention</strong>.
+                      </p>
+                    </div>
+
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                        Suggested Actions
+                      </span>
+                      <div className="flex flex-col gap-2">
+                        {/* Action 1: View All Projects */}
+                        <div className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between cursor-pointer group shadow-2xs">
+                          <div className="flex items-center gap-2.5">
+                            <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
+                            <div>
+                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                View All Projects
+                              </h4>
+                              <span className="text-[10px] text-slate-400">Opens project flightdeck</span>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-bold text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200/60">
+                            Open
+                          </span>
+                        </div>
+
+                        {/* Action 2: View Invoices & Billing */}
+                        <div className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between cursor-pointer group shadow-2xs">
+                          <div className="flex items-center gap-2.5">
+                            <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
+                            <div>
+                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                View Invoices & Billing
+                              </h4>
+                              <span className="text-[10px] text-slate-400">Inspect $4,800 overdue invoice</span>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-bold text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200/60">
+                            Open
+                          </span>
+                        </div>
+
+                        {/* Action 3: Review Overdue Tasks */}
+                        <div className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between cursor-pointer group shadow-2xs">
+                          <div className="flex items-center gap-2.5">
+                            <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
+                            <div>
+                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                                Update Arcturus Project Status
+                              </h4>
+                              <span className="text-[10px] text-slate-400">Review deliverables and timeline</span>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-bold text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200/60">
+                            Open
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick follow-up prompt chips */}
+                    <div className="flex flex-col gap-1.5 pt-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Ask Follow-up
+                      </span>
+                      <div className="flex flex-col gap-1 text-xs">
+                        <button
+                          type="button"
+                          onClick={() => setAiWorkspaceMode("query_unbilled")}
+                          className="text-left px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-between text-[11px]"
+                        >
+                          <span>What are the team members' unbilled hours?</span>
+                          <ArrowRight size={11} className="text-slate-400" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setAiWorkspaceMode("query_health")}
+                          className="text-left px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-between text-[11px]"
+                        >
+                          <span>Show me the budget and burn rate for Nebula Telehealth 2.0</span>
+                          <ArrowRight size={11} className="text-slate-400" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input Box */}
+                  <div className="mt-3 pt-2 border-t border-slate-100">
+                    <div className="flex items-center bg-slate-50 rounded-xl border border-slate-200 px-3 py-2 text-xs text-slate-400">
+                      <span>Ask a follow-up question or give an instruction...</span>
+                      <div className="ml-auto w-6 h-6 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center">
+                        <Send size={11} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {aiWorkspaceMode === "query_unbilled" && (
+                /* VIEW 3: UNBILLED HOURS AUDIT QUERY (Screenshot 3) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between text-xs">
+                  <div className="flex flex-col gap-3">
+                    {/* User Prompt Bubble */}
+                    <div className="flex justify-end">
+                      <div className="bg-[#3F72AF] text-white px-3 py-2 rounded-2xl rounded-tr-xs max-w-xs text-xs font-medium shadow-2xs">
+                        Can you show me the unbilled hours for Amara Okafor?
+                      </div>
+                    </div>
+
+                    {/* Copilot Response Bubble */}
+                    <div className="flex flex-col gap-2 p-3 bg-slate-50 rounded-2xl rounded-tl-xs border border-slate-200 text-slate-800">
+                      <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+                        <Sparkles size={12} className="text-[#3F72AF]" />
+                        <span className="font-bold text-slate-900">Copilot</span>
+                        <span>05:46 PM</span>
+                      </div>
+                      <p className="leading-relaxed text-[11px] text-slate-600">
+                        As an Admin, you have full access to team time tracking. Amara Okafor has logged a total of <strong>65.0 unbilled hours</strong> across the following tasks:
+                      </p>
+
+                      <div className="divide-y divide-slate-200/60 border border-slate-200 rounded-lg bg-white overflow-hidden text-[11px] mt-1">
+                        <div className="p-2 flex items-center justify-between">
+                          <div>
+                            <span className="font-bold text-slate-900">Nebula Telehealth 2.0 Core</span>
+                            <span className="text-[10px] text-slate-500 block">Encrypted WebRTC consultation room UI</span>
+                          </div>
+                          <span className="font-mono font-bold text-[#3F72AF]">28.0h</span>
+                        </div>
+                        <div className="p-2 flex items-center justify-between">
+                          <div>
+                            <span className="font-bold text-slate-900">Kroma Mobile SDK</span>
+                            <span className="text-[10px] text-slate-500 block">Realtime WebSocket transaction feed</span>
+                          </div>
+                          <span className="font-mono font-bold text-[#3F72AF]">22.0h</span>
+                        </div>
+                        <div className="p-2 flex items-center justify-between">
+                          <div>
+                            <span className="font-bold text-slate-900">Kroma Mobile SDK</span>
+                            <span className="text-[10px] text-slate-500 block">Stripe PaymentSheet & Apple Pay integration</span>
+                          </div>
+                          <span className="font-mono font-bold text-[#3F72AF]">15.0h</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-1">
+                        <span className="text-[10px] text-slate-400">Total Billable Amount: <strong className="text-slate-900 font-mono">$6,422.00</strong></span>
+                        <button
+                          type="button"
+                          className="px-2.5 py-1 rounded-md bg-[#3F72AF] text-white text-[10px] font-bold hover:bg-[#325a8d] flex items-center gap-1 shadow-2xs"
+                        >
+                          <Receipt size={10} /> Draft Invoice
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input Box */}
+                  <div className="mt-3 pt-2 border-t border-slate-100">
+                    <div className="flex items-center bg-slate-50 rounded-xl border border-slate-200 px-3 py-2 text-xs text-slate-400">
+                      <span>Ask a follow-up question or give an instruction...</span>
+                      <div className="ml-auto w-6 h-6 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center">
+                        <Send size={11} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {aiWorkspaceMode === "query_health" && (
+                /* VIEW 4: TASK HEALTH & OVERDUE WORKSPACE SCAN (Screenshots 4 & 5) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between text-xs">
+                  <div className="flex flex-col gap-2.5">
+                    <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-slate-800 flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-slate-900 text-xs">Milestones & Deliverables Health</span>
+                        <span className="text-[10px] font-mono text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 font-bold">
+                          15 Overdue Tasks
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2 text-[11px] my-1">
+                        <div className="p-2 rounded-lg bg-white border border-slate-200">
+                          <span className="text-[10px] text-slate-400 block font-medium">Completed Milestones</span>
+                          <span className="font-bold text-slate-900 block mt-0.5">Phase 1 Complete</span>
+                          <span className="text-[9px] text-emerald-600 font-semibold">Across all 5 projects</span>
+                        </div>
+                        <div className="p-2 rounded-lg bg-white border border-slate-200">
+                          <span className="text-[10px] text-slate-400 block font-medium">Task Health</span>
+                          <span className="font-bold text-slate-900 block mt-0.5">28 Open Tasks</span>
+                          <span className="text-[9px] text-amber-600 font-semibold">53% overdue items</span>
+                        </div>
+                      </div>
+
+                      <p className="text-[11px] text-slate-600 leading-relaxed">
+                        High volume of overdue tasks detected on <em>Kroma Mobile SDK</em> and <em>Nebula Telehealth 2.0</em>. Suggesting deadline adjustments or resource reallocation.
+                      </p>
+
+                      <div className="flex items-center gap-2 pt-1 border-t border-slate-200/80">
+                        <button
+                          type="button"
+                          className="px-2.5 py-1 rounded-md bg-[#3F72AF] text-white text-[10px] font-bold hover:bg-[#325a8d]"
+                        >
+                          Auto-reallocate Assignees
+                        </button>
+                        <button
+                          type="button"
+                          className="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 text-[10px] font-semibold hover:bg-slate-50"
+                        >
+                          Adjust Milestones +7d
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input Box */}
+                  <div className="mt-3 pt-2 border-t border-slate-100">
+                    <div className="flex items-center bg-slate-50 rounded-xl border border-slate-200 px-3 py-2 text-xs text-slate-400">
+                      <span>Ask a follow-up question or give an instruction...</span>
+                      <div className="ml-auto w-6 h-6 rounded-lg bg-[#3F72AF] text-white flex items-center justify-center">
+                        <Send size={11} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </BlendMockupCard>
         </div>
