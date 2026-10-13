@@ -60,6 +60,8 @@ import {
   X,
   Sliders,
   GitBranch,
+  TrendingUp,
+  Building,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -256,6 +258,11 @@ export default function BlendedFeaturePreview({
   const [actionCategoryTab, setActionCategoryTab] = useState<string>("all");
   const [actionSearchQuery, setActionSearchQuery] = useState<string>("");
   const [integrationFilter, setIntegrationFilter] = useState<string>("all");
+
+  // State for Reports & Intelligence Features
+  const [reportsFinancialTab, setReportsFinancialTab] = useState<"revenue" | "mrr" | "cashflow">("revenue");
+  const [orgFilterTab, setOrgFilterTab] = useState<"all" | "active" | "leads" | "atrisk">("all");
+  const [crewHeatmapFilter, setCrewHeatmapFilter] = useState<"14d" | "30d">("14d");
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -1918,6 +1925,731 @@ export default function BlendedFeaturePreview({
                     <span className="text-[9px] font-medium text-slate-400 bg-white px-1.5 py-0.5 rounded border border-slate-200">Coming Soon</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: REPORTS & INTELLIGENCE
+  // =========================================================================
+  if (moduleName.toLowerCase().includes("report")) {
+    // -------------------------------------------------------------------------
+    // FEATURE 01: Financial Intelligence / Revenue & MRR & Receivables (Screenshots 3 & 4)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                  <TrendingUp size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Finance Intelligence</h3>
+                  <p className="text-[11px] text-slate-400">This Month · Oct 1 – 31, 2026</p>
+                </div>
+              </div>
+
+              {/* View Selector Tabs */}
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("revenue")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    reportsFinancialTab === "revenue"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Total Revenue
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("mrr")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    reportsFinancialTab === "mrr"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  MRR & Retainers
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReportsFinancialTab("cashflow")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer hidden sm:inline-block ${
+                    reportsFinancialTab === "cashflow"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Cash Flow
+                </button>
+              </div>
+            </div>
+
+            {/* Container with Equalized Height for All Tabs */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs min-h-[385px] flex flex-col justify-between">
+              {reportsFinancialTab === "revenue" && (
+                /* TAB 1: TOTAL REVENUE & REVENUE BY SOURCE (Screenshot 4) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Big Metric Display */}
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                          Total Revenue · Oct 2026
+                        </span>
+                        <div className="flex items-baseline gap-2 mt-0.5">
+                          <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-mono">
+                            $40,900
+                          </span>
+                          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-0.5">
+                            ↑ 529% <span className="text-slate-400 font-normal">vs prev ($6,500)</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-right hidden sm:block">
+                        <span className="text-[10px] text-slate-400 block font-medium">Pacing Multiplier</span>
+                        <span className="font-mono text-base font-bold text-slate-800">6.3x</span>
+                      </div>
+                    </div>
+
+                    {/* Revenue Trend Visual Bar / SVG Curve */}
+                    <div className="my-3 p-3 bg-slate-50/70 rounded-xl border border-slate-200/70">
+                      <div className="flex items-center justify-between text-[11px] mb-1.5">
+                        <span className="text-slate-500 font-medium">Month-to-Date Projection</span>
+                        <span className="font-mono font-bold text-slate-900">At current pace ≈ $97,531 by Oct 31</span>
+                      </div>
+
+                      {/* SVG Line / Area Graph */}
+                      <div className="h-20 w-full relative">
+                        <svg className="w-full h-full overflow-visible" viewBox="0 0 300 70" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#3F72AF" stopOpacity="0.25" />
+                              <stop offset="100%" stopColor="#3F72AF" stopOpacity="0.0" />
+                            </linearGradient>
+                          </defs>
+                          {/* Background fill area */}
+                          <path
+                            d="M 0,65 L 50,65 L 100,60 L 150,55 L 200,52 L 250,50 L 300,10 L 300,70 L 0,70 Z"
+                            fill="url(#revGrad)"
+                          />
+                          {/* Main line */}
+                          <path
+                            d="M 0,65 L 50,65 L 100,60 L 150,55 L 200,52 L 250,50 L 300,10"
+                            fill="none"
+                            stroke="#3F72AF"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                          />
+                          {/* Points */}
+                          <circle cx="50" cy="65" r="3" fill="#3F72AF" />
+                          <circle cx="100" cy="60" r="3" fill="#3F72AF" />
+                          <circle cx="150" cy="55" r="3" fill="#3F72AF" />
+                          <circle cx="200" cy="52" r="3" fill="#3F72AF" />
+                          <circle cx="250" cy="50" r="3" fill="#3F72AF" />
+                          <circle cx="300" cy="10" r="4" fill="#3F72AF" stroke="#ffffff" strokeWidth="2" />
+                        </svg>
+                      </div>
+
+                      <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
+                        <span>May</span>
+                        <span>Jun</span>
+                        <span>Jul</span>
+                        <span>Aug</span>
+                        <span>Sep</span>
+                        <span className="font-bold text-[#3F72AF]">Oct ($40.9K)</span>
+                      </div>
+                    </div>
+
+                    {/* Revenue By Source Table (Exact match from Screenshot 4) */}
+                    <div className="divide-y divide-slate-100 border border-slate-200/80 rounded-lg overflow-hidden text-xs">
+                      <div className="bg-slate-50/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                        <span className="col-span-5">Source</span>
+                        <span className="col-span-3 text-right">This Period</span>
+                        <span className="col-span-2 text-right">Txn</span>
+                        <span className="col-span-2 text-right">Share</span>
+                      </div>
+
+                      <div className="p-2.5 grid grid-cols-12 gap-2 items-center">
+                        <div className="col-span-5 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-[#3F72AF]" />
+                          <span className="font-semibold text-slate-900">Paid invoices</span>
+                        </div>
+                        <span className="col-span-3 text-right font-mono font-bold text-slate-900">$40,900</span>
+                        <span className="col-span-2 text-right font-mono text-slate-600">5</span>
+                        <span className="col-span-2 text-right font-mono font-bold text-[#3F72AF]">100%</span>
+                      </div>
+
+                      <div className="p-2.5 grid grid-cols-12 gap-2 items-center bg-slate-50/30">
+                        <div className="col-span-5 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-amber-500" />
+                          <span className="font-medium text-slate-600">Subscription renewals</span>
+                        </div>
+                        <span className="col-span-3 text-right font-mono text-slate-500">$6,500</span>
+                        <span className="col-span-2 text-right font-mono text-slate-400">2</span>
+                        <span className="col-span-2 text-right font-mono text-slate-400">Scheduled</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-2">
+                    <span>5 transactions · Average: <strong className="text-slate-900 font-mono">$8,180</strong></span>
+                    <span className="font-mono text-[10px] text-[#3F72AF] font-bold">Window: Day 13 of 31</span>
+                  </div>
+                </div>
+              )}
+
+              {reportsFinancialTab === "mrr" && (
+                /* TAB 2: MONTHLY RECURRING REVENUE (MRR) BREAKDOWN (Screenshot 4 Right Panel) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                          Normalized MRR
+                        </span>
+                        <div className="flex items-baseline gap-1 mt-0.5">
+                          <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">$6,500</span>
+                          <span className="text-xs text-slate-400 font-medium">/mo</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] text-slate-400 block font-medium">Annualized Run Rate</span>
+                        <span className="font-mono text-sm font-bold text-slate-800">$78,000</span>
+                      </div>
+                    </div>
+
+                    {/* Donut and Streams Summary */}
+                    <div className="grid grid-cols-12 gap-3 my-3 p-3 bg-slate-50/70 rounded-xl border border-slate-200/70 items-center">
+                      <div className="col-span-4 flex flex-col items-center justify-center">
+                        <div className="w-16 h-16 rounded-full border-4 border-[#3F72AF] border-t-indigo-500 flex flex-col items-center justify-center bg-white shadow-2xs">
+                          <span className="text-xs font-bold text-slate-900">2</span>
+                          <span className="text-[8px] uppercase tracking-wider text-slate-400">Streams</span>
+                        </div>
+                      </div>
+
+                      <div className="col-span-8 flex flex-col gap-1.5 text-xs">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-[#3F72AF]" />
+                            <span className="text-slate-700 font-semibold">Monthly retainers</span>
+                          </div>
+                          <span className="font-mono font-bold text-slate-900">$6,500</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-purple-500" />
+                            <span className="text-slate-600">Quarterly plans</span>
+                          </div>
+                          <span className="font-mono text-slate-500">$0</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                            <span className="text-slate-600">Yearly renewals</span>
+                          </div>
+                          <span className="font-mono text-slate-500">$0</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Renewal Watch List */}
+                    <div className="divide-y divide-slate-100 border border-slate-200/80 rounded-lg overflow-hidden text-xs">
+                      <div className="bg-slate-50/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Renewal Watch · Next Invoicing
+                      </div>
+                      <div className="p-2.5 flex items-center justify-between hover:bg-slate-50/50">
+                        <div>
+                          <span className="font-bold text-slate-900 block">Nebula Health</span>
+                          <span className="text-[10px] text-slate-400">Dedicated Senior Product Design Retainer</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-mono font-bold text-slate-900 block">$6,500</span>
+                          <span className="text-[10px] text-slate-400">Oct 31</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-2">
+                    <span>Average per stream: <strong className="text-slate-900 font-mono">$3,250</strong></span>
+                    <span className="text-[10px] font-bold text-emerald-600">100% On-time Renewal</span>
+                  </div>
+                </div>
+              )}
+
+              {reportsFinancialTab === "cashflow" && (
+                /* TAB 3: RECEIVABLES & CASH FLOW (Screenshot 3) */
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between text-xs">
+                  <div>
+                    {/* Receivables Aging Stats */}
+                    <div className="grid grid-cols-2 gap-2 mb-3">
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Outstanding</span>
+                        <span className="text-lg font-bold text-slate-900 font-mono">$23,500</span>
+                        <span className="text-[10px] text-slate-500 block mt-0.5">3 invoices active</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-rose-50/50 border border-rose-200/60">
+                        <span className="text-[10px] text-rose-700 uppercase font-bold block">Overdue</span>
+                        <span className="text-lg font-bold text-rose-600 font-mono">$4,800</span>
+                        <span className="text-[10px] text-rose-500 block mt-0.5">1 invoice requires follow-up</span>
+                      </div>
+                    </div>
+
+                    {/* Aging Bar */}
+                    <div className="p-2.5 rounded-xl border border-slate-200/80 bg-white mb-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                        Aging Breakdown
+                      </span>
+                      <div className="w-full h-2 rounded-full bg-slate-100 flex overflow-hidden mb-2">
+                        <div className="bg-amber-500 h-full w-[62%]" />
+                        <div className="bg-[#3F72AF] h-full w-[38%]" />
+                      </div>
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-600">● Due within 7 days: <strong className="font-mono text-slate-900">$14,500 (62%)</strong></span>
+                        <span className="text-slate-600">● Due later: <strong className="font-mono text-slate-900">$9,000 (38%)</strong></span>
+                      </div>
+                    </div>
+
+                    {/* Incoming Next 14 Days */}
+                    <div className="divide-y divide-slate-100 border border-slate-200/80 rounded-lg overflow-hidden">
+                      <div className="bg-slate-50/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Incoming Expected · Next 14 Days
+                      </div>
+                      <div className="p-2.5 flex items-center justify-between">
+                        <div>
+                          <span className="font-mono font-bold text-slate-900">INV-2026-0009</span>
+                          <span className="text-slate-500 ml-2">Solari Logistics</span>
+                        </div>
+                        <span className="font-mono font-bold text-slate-900">$14,500</span>
+                      </div>
+                      <div className="p-2.5 flex items-center justify-between">
+                        <div>
+                          <span className="font-mono font-bold text-slate-900">INV-2026-0015</span>
+                          <span className="text-slate-500 ml-2">Solari Logistics</span>
+                        </div>
+                        <span className="font-mono font-bold text-slate-900">$2,500</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-2">
+                    <span>Cash collected past 6 mo: <strong className="text-slate-900 font-mono">$113,900</strong></span>
+                    <span className="text-emerald-600 font-bold">Collection Rate: 77%</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 02: Crew Load & Throughput Analytics (Exact match to Screenshot 1)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
+                  <Users size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Crew & throughput</h3>
+                  <p className="text-[11px] text-slate-400">Hours logged per person · Last 14 days (Sep 30 – Oct 13)</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                  38.5h logged
+                </span>
+                <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50 font-bold">
+                  28 tracked
+                </span>
+              </div>
+            </div>
+
+            {/* Crew Load Heatmap & Throughput Grid (Screenshot 1) */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs min-h-[385px] flex flex-col justify-between">
+              <div className="p-3.5 sm:p-4 flex flex-col gap-3">
+                {/* Heatmap Legend */}
+                <div className="flex items-center justify-between text-[11px] pb-1 border-b border-slate-100">
+                  <span className="font-bold text-slate-700">Team Billable Allocation</span>
+                  <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                    <span>0h</span>
+                    <div className="flex gap-0.5">
+                      <span className="w-2.5 h-2.5 rounded-xs bg-slate-100" />
+                      <span className="w-2.5 h-2.5 rounded-xs bg-blue-100" />
+                      <span className="w-2.5 h-2.5 rounded-xs bg-blue-300" />
+                      <span className="w-2.5 h-2.5 rounded-xs bg-[#3F72AF]" />
+                      <span className="w-2.5 h-2.5 rounded-xs bg-blue-900" />
+                    </div>
+                    <span>8h+</span>
+                  </div>
+                </div>
+
+                {/* Person 1: Amara Okafor */}
+                <div className="p-2.5 rounded-xl border border-slate-200/70 bg-slate-50/30 flex items-center justify-between gap-2 hover:bg-slate-50/70 transition-colors">
+                  <div className="flex items-center gap-2.5 min-w-[120px]">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center shrink-0">
+                      AO
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Amara Okafor</h4>
+                      <span className="text-[10px] text-slate-400">Frontend & WebRTC</span>
+                    </div>
+                  </div>
+
+                  {/* 14-day Activity Mini Blocks */}
+                  <div className="hidden sm:flex items-center gap-1">
+                    {[1, 2, 0, 3, 4, 1, 0, 2, 4, 3, 1, 0, 4, 4].map((intensity, i) => (
+                      <div
+                        key={i}
+                        className={`w-2.5 h-5 rounded-xs ${
+                          intensity === 4
+                            ? "bg-[#3F72AF]"
+                            : intensity === 3
+                            ? "bg-blue-300"
+                            : intensity === 2
+                            ? "bg-blue-200"
+                            : intensity === 1
+                            ? "bg-blue-100"
+                            : "bg-slate-200/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Hours & Late Tasks */}
+                  <div className="flex items-center gap-2 text-right">
+                    <div>
+                      <span className="font-mono font-bold text-xs text-slate-900 block">15h</span>
+                      <span className="text-[10px] text-amber-600 bg-amber-50 px-1 rounded font-semibold">10 tasks (7 late)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Person 2: Liam Gallagher */}
+                <div className="p-2.5 rounded-xl border border-slate-200/70 bg-slate-50/30 flex items-center justify-between gap-2 hover:bg-slate-50/70 transition-colors">
+                  <div className="flex items-center gap-2.5 min-w-[120px]">
+                    <div className="w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center shrink-0">
+                      LG
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Liam Gallagher</h4>
+                      <span className="text-[10px] text-slate-400">Backend & API Lead</span>
+                    </div>
+                  </div>
+
+                  {/* 14-day Activity Mini Blocks */}
+                  <div className="hidden sm:flex items-center gap-1">
+                    {[0, 1, 2, 4, 3, 2, 0, 1, 3, 4, 2, 0, 3, 4].map((intensity, i) => (
+                      <div
+                        key={i}
+                        className={`w-2.5 h-5 rounded-xs ${
+                          intensity === 4
+                            ? "bg-[#3F72AF]"
+                            : intensity === 3
+                            ? "bg-blue-300"
+                            : intensity === 2
+                            ? "bg-blue-200"
+                            : intensity === 1
+                            ? "bg-blue-100"
+                            : "bg-slate-200/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Hours & Late Tasks */}
+                  <div className="flex items-center gap-2 text-right">
+                    <div>
+                      <span className="font-mono font-bold text-xs text-slate-900 block">14h</span>
+                      <span className="text-[10px] text-amber-600 bg-amber-50 px-1 rounded font-semibold">6 tasks (3 late)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Person 3: Chloe Bennett */}
+                <div className="p-2.5 rounded-xl border border-slate-200/70 bg-slate-50/30 flex items-center justify-between gap-2 hover:bg-slate-50/70 transition-colors">
+                  <div className="flex items-center gap-2.5 min-w-[120px]">
+                    <div className="w-7 h-7 rounded-full bg-purple-100 text-purple-700 font-bold text-xs flex items-center justify-center shrink-0">
+                      CB
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Chloe Bennett</h4>
+                      <span className="text-[10px] text-slate-400">Design Systems & Tokens</span>
+                    </div>
+                  </div>
+
+                  {/* 14-day Activity Mini Blocks */}
+                  <div className="hidden sm:flex items-center gap-1">
+                    {[2, 3, 1, 0, 4, 3, 0, 1, 2, 3, 4, 0, 2, 3].map((intensity, i) => (
+                      <div
+                        key={i}
+                        className={`w-2.5 h-5 rounded-xs ${
+                          intensity === 4
+                            ? "bg-[#3F72AF]"
+                            : intensity === 3
+                            ? "bg-blue-300"
+                            : intensity === 2
+                            ? "bg-blue-200"
+                            : intensity === 1
+                            ? "bg-blue-100"
+                            : "bg-slate-200/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Hours & Late Tasks */}
+                  <div className="flex items-center gap-2 text-right">
+                    <div>
+                      <span className="font-mono font-bold text-xs text-slate-900 block">9.5h</span>
+                      <span className="text-[10px] text-amber-600 bg-amber-50 px-1 rounded font-semibold">6 tasks (2 late)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Throughput Summary Sub-card */}
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between mt-1">
+                  <div className="flex items-center gap-4 text-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase block">Completed</span>
+                      <span className="text-base font-bold text-slate-900 font-mono">10</span>
+                    </div>
+                    <div className="h-6 w-px bg-slate-200" />
+                    <div>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase block">Created</span>
+                      <span className="text-base font-bold text-slate-900 font-mono">19</span>
+                    </div>
+                    <div className="h-6 w-px bg-slate-200" />
+                    <div>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase block">Net Backlog</span>
+                      <span className="text-base font-bold text-blue-700 font-mono">+9</span>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
+                    Created vs completed trend
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom Summary Callout */}
+              <div className="px-3.5 py-2.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-auto">
+                <span className="text-slate-600 font-medium">All crew total: 38.5h logged</span>
+                <span className="text-[10px] font-mono text-[#3F72AF] font-bold">Weekends & zero days visible</span>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 03: Client Intelligence / Organizations Portfolio (Exact match to Screenshot 2)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Header: Organizations & Client Health */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-100">
+                  <Building size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Organizations</h3>
+                  <p className="text-[11px] text-slate-400">Client portfolio, LTV & account health</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-bold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" /> 100% Healthy
+                </span>
+              </div>
+            </div>
+
+            {/* Top Stat Summary Grid (Screenshot 2: Total Accounts 4, Pipeline leads 0, Pipeline forecast $0, Attention needed 0) */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200/70">
+                <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Total Accounts</span>
+                <span className="text-base font-bold text-slate-900 font-mono">4</span>
+                <span className="text-[9px] text-emerald-600 font-semibold block">4 active (100%)</span>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200/70">
+                <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Pipeline Leads</span>
+                <span className="text-base font-bold text-slate-900 font-mono">0</span>
+                <span className="text-[9px] text-slate-400 block">0 proposal sent</span>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200/70">
+                <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Forecast</span>
+                <span className="text-base font-bold text-slate-900 font-mono">$0</span>
+                <span className="text-[9px] text-slate-400 block">Weighted prob.</span>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-50/70 border border-slate-200/70">
+                <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Attention</span>
+                <span className="text-base font-bold text-slate-900 font-mono">0</span>
+                <span className="text-[9px] text-emerald-600 font-semibold block">No churn flags</span>
+              </div>
+            </div>
+
+            {/* CRM Insight Banner from Screenshot 2 */}
+            <div className="p-2.5 rounded-xl border border-blue-200/80 bg-blue-50/40 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <Sparkles size={13} className="text-[#3F72AF] shrink-0" />
+                <span className="text-slate-700 text-[11px]">
+                  <strong>CRM insight:</strong> 4 accounts in your book, 4 active at a <strong>100% conversion rate</strong>.
+                </span>
+              </div>
+              <span className="text-[10px] font-bold text-[#3F72AF] bg-white px-2 py-0.5 rounded border border-blue-200 hidden sm:inline">
+                Healthy book
+              </span>
+            </div>
+
+            {/* Organization Accounts Table (Screenshot 2) */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs min-h-[240px] flex flex-col justify-between">
+              <div className="divide-y divide-slate-100 text-xs">
+                {/* Header */}
+                <div className="bg-slate-50/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                  <span className="col-span-5 sm:col-span-4">Organization</span>
+                  <span className="col-span-2 text-center">Status</span>
+                  <span className="hidden sm:inline-block sm:col-span-2 text-center">Health</span>
+                  <span className="col-span-3 sm:col-span-2 text-right">Amount (LTV)</span>
+                  <span className="col-span-2 sm:col-span-2 text-right">Unpaid</span>
+                </div>
+
+                {/* Account 1: Nebula Health */}
+                <div className="p-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-5 sm:col-span-4 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded bg-blue-100 text-[#3F72AF] font-bold text-[10px] flex items-center justify-center shrink-0">
+                      NH
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-900 block truncate leading-tight">Nebula Health</span>
+                      <span className="text-[10px] text-slate-400 block truncate">Dr. Alexander Hayes</span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200/60">
+                      Active
+                    </span>
+                  </div>
+                  <div className="hidden sm:flex sm:col-span-2 justify-center items-center gap-1 text-[10px] text-emerald-600 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                  </div>
+                  <span className="col-span-3 sm:col-span-2 text-right font-mono font-bold text-slate-900">
+                    $59,500.00
+                  </span>
+                  <span className="col-span-2 sm:col-span-2 text-right font-mono text-slate-400">
+                    $0.00
+                  </span>
+                </div>
+
+                {/* Account 2: Kroma Fintech */}
+                <div className="p-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-5 sm:col-span-4 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded bg-purple-100 text-purple-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                      KF
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-900 block truncate leading-tight">Kroma Fintech</span>
+                      <span className="text-[10px] text-slate-400 block truncate">Tariq Mansour</span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200/60">
+                      Active
+                    </span>
+                  </div>
+                  <div className="hidden sm:flex sm:col-span-2 justify-center items-center gap-1 text-[10px] text-emerald-600 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                  </div>
+                  <span className="col-span-3 sm:col-span-2 text-right font-mono font-bold text-slate-900">
+                    $21,700.00
+                  </span>
+                  <span className="col-span-2 sm:col-span-2 text-right font-mono text-amber-600 font-bold">
+                    $11,300.00
+                  </span>
+                </div>
+
+                {/* Account 3: Solari Logistics */}
+                <div className="p-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-5 sm:col-span-4 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded bg-amber-100 text-amber-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                      SL
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-900 block truncate leading-tight">Solari Logistics</span>
+                      <span className="text-[10px] text-slate-400 block truncate">David Solari</span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200/60">
+                      Active
+                    </span>
+                  </div>
+                  <div className="hidden sm:flex sm:col-span-2 justify-center items-center gap-1 text-[10px] text-emerald-600 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                  </div>
+                  <span className="col-span-3 sm:col-span-2 text-right font-mono font-bold text-slate-900">
+                    $14,500.00
+                  </span>
+                  <span className="col-span-2 sm:col-span-2 text-right font-mono text-amber-600 font-bold">
+                    $17,000.00
+                  </span>
+                </div>
+
+                {/* Account 4: Arcturus Robotics */}
+                <div className="p-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                  <div className="col-span-5 sm:col-span-4 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                      AR
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-900 block truncate leading-tight">Arcturus Robotics</span>
+                      <span className="text-[10px] text-slate-400 block truncate">Evelyn Thorne</span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200/60">
+                      Active
+                    </span>
+                  </div>
+                  <div className="hidden sm:flex sm:col-span-2 justify-center items-center gap-1 text-[10px] text-emerald-600 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Healthy
+                  </div>
+                  <span className="col-span-3 sm:col-span-2 text-right font-mono font-bold text-slate-900">
+                    $24,700.00
+                  </span>
+                  <span className="col-span-2 sm:col-span-2 text-right font-mono text-slate-400">
+                    $0.00
+                  </span>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-3 py-2 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-auto">
+                <span className="text-slate-600 font-medium">4 of 4 organizations shown</span>
+                <span className="font-mono text-[10px] text-[#3F72AF] font-bold">Portfolio Total: $120,400.00</span>
               </div>
             </div>
           </BlendMockupCard>
