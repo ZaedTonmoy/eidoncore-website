@@ -67,12 +67,14 @@ const LEADERS = [
     role: "Founder & CEO",
     bio: "Engineer turned founder with 6+ years in tech. Designed, architected, and built Eidoncore end-to-end — from database schema to pixel-perfect UI. Also founded Creation Wave LLC.",
     image: "/images/team-zaed.webp",
+    highlights: ["Product Architecture", "UI / UX Systems", "Growth & Strategy", "Agency Ops"],
   },
   {
     name: "Md Sakib Shahariar Tanoy",
     role: "CTO & Head of Development",
     bio: "Leading Eidoncore's technical architecture and development. Expert in web systems, security protocols, high-concurrency databases, and building resilient infrastructure.",
     image: "/images/team-tanoy.webp",
+    highlights: ["Distributed Systems", "Database Security", "Real-time Infrastructure", "API Architecture"],
   },
 ];
 
@@ -251,26 +253,58 @@ export default function AboutPage() {
               {LEADERS.map((leader) => (
                 <div
                   key={leader.name}
-                  className="bg-white border border-[#E2E8F0] rounded-3xl p-7 sm:p-9 flex flex-col items-start shadow-2xs hover:shadow-xs transition-all duration-300"
+                  className="group relative bg-white border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-3xl p-7 sm:p-9 flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
-                  <AnimatedImage
-                    src={leader.image}
-                    alt={leader.name}
-                    origin="top-left"
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-[#E2E8F0] shadow-xs mb-6 shrink-0"
-                    imgClassName="w-full h-full object-cover object-top"
-                  />
+                  {/* Subtle ambient gradient highlight behind avatar */}
+                  <div className="absolute -top-16 -right-16 w-44 h-44 bg-gradient-to-br from-[#3F72AF]/10 via-indigo-500/5 to-transparent rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
-                  <h3 className="text-xl font-bold text-[#0F172A] tracking-tight">
-                    {leader.name}
-                  </h3>
-                  <span className="mt-1 text-xs font-mono font-semibold text-[#3F72AF] uppercase tracking-wider">
-                    {leader.role}
-                  </span>
+                  <div>
+                    {/* Header: Photo with status ring + Role capsule */}
+                    <div className="flex items-center justify-between gap-4 mb-6">
+                      <div className="relative">
+                        <AnimatedImage
+                          src={leader.image}
+                          alt={leader.name}
+                          origin="top-left"
+                          className="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl border-2 border-white shadow-md ring-1 ring-[#E2E8F0] shrink-0"
+                          imgClassName="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {/* Live active ring indicator */}
+                        <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                          <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white" />
+                        </span>
+                      </div>
 
-                  <p className="mt-4 text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                    {leader.bio}
-                  </p>
+                      {/* Role Pill */}
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0F4F8] text-[#3F72AF] text-[11px] font-mono font-semibold tracking-wide border border-[#D9E2EC] shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />
+                        {leader.role}
+                      </span>
+                    </div>
+
+                    {/* Name & Title */}
+                    <h3 className="text-xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors duration-200">
+                      {leader.name}
+                    </h3>
+
+                    {/* Bio */}
+                    <p className="mt-3.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
+                      {leader.bio}
+                    </p>
+                  </div>
+
+                  {/* Highlights / Specialization Tags */}
+                  <div className="mt-6 pt-5 border-t border-[#F1F5F9] flex flex-wrap items-center gap-2">
+                    {leader.highlights.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[10.5px] font-medium text-[#475569]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
