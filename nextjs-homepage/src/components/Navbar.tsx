@@ -29,11 +29,11 @@ export default function Navbar() {
   ];
 
   const useCaseLinks = [
-    { title: "Marketing Agencies", href: "/use-cases/" },
-    { title: "Design Studios", href: "/use-cases/" },
-    { title: "Development Agencies", href: "/use-cases/" },
-    { title: "Consulting Firms", href: "/use-cases/" },
-    { title: "Freelancers & Solo", href: "/use-cases/" },
+    { title: "Marketing Agencies", href: "/use-cases/#marketing" },
+    { title: "Design Studios", href: "/use-cases/#design" },
+    { title: "Development Agencies", href: "/use-cases/#development" },
+    { title: "Consulting Firms", href: "/use-cases/#consulting" },
+    { title: "Freelancers & Solo", href: "/use-cases/#freelancers" },
   ];
 
   return (
