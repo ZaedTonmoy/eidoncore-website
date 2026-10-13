@@ -269,81 +269,42 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* KPI Metric Cards Row (Matched from Screenshot: This Month, Outstanding, Overdue, Collection Rate, Avg Days, MRR) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            {/* KPI Metric Cards Row - Compacted/Cropped top numbers to focus on lists */}
+            <div className="grid grid-cols-3 gap-2">
               {/* Card 1: This Month */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium">This Month</span>
-                  <span className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center text-[11px] font-bold">$</span>
-                </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$40.9K</span>
-                  <div className="flex items-center gap-1 text-[10px] text-emerald-600 font-semibold mt-0.5">
-                    <span>↑ 90%</span>
-                    <span className="text-slate-400 font-normal">vs last mo</span>
+              <div className="px-2.5 py-1.5 rounded-lg bg-slate-50/70 border border-slate-200/70 flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-medium text-slate-400">This Month</span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">$40.9K</span>
+                    <span className="text-[10px] text-emerald-600 font-semibold hidden sm:inline">↑ 90%</span>
                   </div>
                 </div>
+                <span className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center text-[10px] font-bold shrink-0">$</span>
               </div>
 
               {/* Card 2: Outstanding */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium">Outstanding</span>
-                  <Clock size={12} className="text-amber-500" />
+              <div className="px-2.5 py-1.5 rounded-lg bg-slate-50/70 border border-slate-200/70 flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-medium text-slate-400">Outstanding</span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">$28.3K</span>
+                    <span className="text-[10px] text-amber-500 font-medium hidden sm:inline">Pending</span>
+                  </div>
                 </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$28.3K</span>
-                  <span className="text-[10px] text-slate-400 block mt-0.5">Pending collection</span>
-                </div>
+                <Clock size={13} className="text-amber-500 shrink-0" />
               </div>
 
               {/* Card 3: Overdue */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-rose-50/30 border border-rose-200/60 flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium text-rose-700">Overdue</span>
-                  <AlertTriangle size={12} className="text-rose-500" />
+              <div className="px-2.5 py-1.5 rounded-lg bg-rose-50/30 border border-rose-200/60 flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-medium text-rose-700">Overdue</span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-sm sm:text-base font-bold text-rose-600 tracking-tight">$4.8K</span>
+                    <span className="text-[10px] text-rose-500 font-medium hidden sm:inline">Follow-up</span>
+                  </div>
                 </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-rose-600 tracking-tight">$4,800.00</span>
-                  <span className="text-[10px] text-rose-500 font-medium block mt-0.5">Requires follow-up</span>
-                </div>
-              </div>
-
-              {/* Card 4: Collection Rate */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium">Collection Rate</span>
-                  <CheckCircle2 size={12} className="text-emerald-500" />
-                </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">81%</span>
-                  <span className="text-[10px] text-slate-400 block mt-0.5">This month: 94%</span>
-                </div>
-              </div>
-
-              {/* Card 5: Avg Days to Pay */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium">Avg Days to Pay</span>
-                  <Clock size={12} className="text-blue-500" />
-                </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">19d</span>
-                  <span className="text-[10px] text-emerald-600 font-semibold block mt-0.5">5d early</span>
-                </div>
-              </div>
-
-              {/* Card 6: MRR */}
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-[11px] font-medium">MRR</span>
-                  <Activity size={12} className="text-purple-500" />
-                </div>
-                <div className="mt-1">
-                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$3,500</span>
-                  <span className="text-[10px] text-slate-400 block mt-0.5">1 active subscription</span>
-                </div>
+                <AlertTriangle size={13} className="text-rose-500 shrink-0" />
               </div>
             </div>
 
@@ -398,206 +359,300 @@ export default function BlendedFeaturePreview({
               </div>
             </div>
 
-            {/* View Body: Animated Toggle between Recurring Tab View and All Invoices Table View */}
-            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs">
+            {/* View Body: Animated Toggle between Recurring Tab View and All Invoices Table View with Equalized Height */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs min-h-[295px] flex flex-col justify-between">
               {invoiceDashboardTab === "recurring" ? (
-                /* RECURRING INVOICES VIEW (Exact match to Screenshot 2) */
-                <div className="divide-y divide-slate-100 text-xs">
-                  <div className="bg-slate-50/70 px-3.5 py-2.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
-                    <span className="col-span-4 sm:col-span-4">Invoice</span>
-                    <span className="col-span-3 sm:col-span-2">Client</span>
-                    <span className="col-span-2 sm:col-span-2">Status</span>
-                    <span className="hidden sm:inline-block sm:col-span-2">Frequency</span>
-                    <span className="col-span-3 sm:col-span-2 text-right sm:text-left">Next Due</span>
-                  </div>
-
-                  <div className="px-3.5 py-3 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
-                    <div className="col-span-4 sm:col-span-4 flex flex-col">
-                      <span className="font-semibold text-slate-900 truncate">
-                        Nebula Health - Monthly Design Retainer
-                      </span>
-                      <span className="text-[10px] text-slate-400 sm:hidden">Monthly · Oct 31, 2026</span>
+                /* RECURRING INVOICES VIEW - Enhanced with Multiple Subscriptions */
+                <div className="divide-y divide-slate-100 text-xs flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="bg-slate-50/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                      <span className="col-span-4 sm:col-span-4">Invoice / Retainer</span>
+                      <span className="col-span-3 sm:col-span-2">Client</span>
+                      <span className="col-span-2 sm:col-span-2">Status</span>
+                      <span className="hidden sm:inline-block sm:col-span-2">Frequency</span>
+                      <span className="col-span-3 sm:col-span-2 text-right sm:text-left">Next Due</span>
                     </div>
 
-                    <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
-                      Nebula Health
-                    </div>
-
-                    <div className="col-span-2 sm:col-span-2 flex items-center">
-                      <button
-                        type="button"
-                        onClick={() => setRecurringRetainerActive(!recurringRetainerActive)}
-                        className="flex items-center gap-1.5 cursor-pointer group"
-                      >
-                        <div
-                          className={`w-7 h-4 rounded-full transition-colors relative flex items-center px-0.5 ${
-                            recurringRetainerActive ? "bg-[#3F72AF]" : "bg-slate-300"
-                          }`}
+                    {/* Subscription 1: Nebula Health */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-4 sm:col-span-4 flex flex-col">
+                        <span className="font-semibold text-slate-900 truncate">
+                          Nebula Health - Monthly Design Retainer
+                        </span>
+                        <span className="text-[10px] text-slate-400 sm:hidden">Monthly · Oct 31, 2026</span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
+                        Nebula Health
+                      </div>
+                      <div className="col-span-2 sm:col-span-2 flex items-center">
+                        <button
+                          type="button"
+                          onClick={() => setRecurringRetainerActive(!recurringRetainerActive)}
+                          className="flex items-center gap-1.5 cursor-pointer group"
                         >
                           <div
-                            className={`w-3 h-3 rounded-full bg-white transition-transform ${
-                              recurringRetainerActive ? "translate-x-3" : "translate-x-0"
+                            className={`w-7 h-4 rounded-full transition-colors relative flex items-center px-0.5 ${
+                              recurringRetainerActive ? "bg-[#3F72AF]" : "bg-slate-300"
                             }`}
-                          />
-                        </div>
-                        <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">
-                          {recurringRetainerActive ? "Active" : "Paused"}
+                          >
+                            <div
+                              className={`w-3 h-3 rounded-full bg-white transition-transform ${
+                                recurringRetainerActive ? "translate-x-3" : "translate-x-0"
+                              }`}
+                            />
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">
+                            {recurringRetainerActive ? "Active" : "Paused"}
+                          </span>
+                        </button>
+                      </div>
+                      <div className="hidden sm:inline-block sm:col-span-2">
+                        <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#3F72AF] text-[10px] font-bold border border-blue-200/60">
+                          Monthly
                         </span>
-                      </button>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
+                        Oct 31, 2026
+                      </div>
                     </div>
 
-                    <div className="hidden sm:inline-block sm:col-span-2">
-                      <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#3F72AF] text-[10px] font-bold border border-blue-200/60">
-                        Monthly
-                      </span>
+                    {/* Subscription 2: Kroma Fintech */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-4 sm:col-span-4 flex flex-col">
+                        <span className="font-semibold text-slate-900 truncate">
+                          Kroma Fintech - Core Engineering Support
+                        </span>
+                        <span className="text-[10px] text-slate-400 sm:hidden">Monthly · Nov 5, 2026</span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
+                        Kroma Fintech
+                      </div>
+                      <div className="col-span-2 sm:col-span-2 flex items-center">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-7 h-4 rounded-full bg-[#3F72AF] relative flex items-center px-0.5">
+                            <div className="w-3 h-3 rounded-full bg-white translate-x-3" />
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">Active</span>
+                        </div>
+                      </div>
+                      <div className="hidden sm:inline-block sm:col-span-2">
+                        <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#3F72AF] text-[10px] font-bold border border-blue-200/60">
+                          Monthly
+                        </span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
+                        Nov 5, 2026
+                      </div>
                     </div>
 
-                    <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
-                      Oct 31, 2026
+                    {/* Subscription 3: Arcturus Robotics */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-4 sm:col-span-4 flex flex-col">
+                        <span className="font-semibold text-slate-900 truncate">
+                          Arcturus - Cloud Maintenance & DevOps
+                        </span>
+                        <span className="text-[10px] text-slate-400 sm:hidden">Quarterly · Dec 15, 2026</span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
+                        Arcturus Robotics
+                      </div>
+                      <div className="col-span-2 sm:col-span-2 flex items-center">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-7 h-4 rounded-full bg-[#3F72AF] relative flex items-center px-0.5">
+                            <div className="w-3 h-3 rounded-full bg-white translate-x-3" />
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">Active</span>
+                        </div>
+                      </div>
+                      <div className="hidden sm:inline-block sm:col-span-2">
+                        <span className="px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 text-[10px] font-bold border border-purple-200/60">
+                          Quarterly
+                        </span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
+                        Dec 15, 2026
+                      </div>
+                    </div>
+
+                    {/* Subscription 4: Solari Logistics */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <div className="col-span-4 sm:col-span-4 flex flex-col">
+                        <span className="font-semibold text-slate-900 truncate">
+                          Solari Logistics - SEO & Growth Retainer
+                        </span>
+                        <span className="text-[10px] text-slate-400 sm:hidden">Monthly · Nov 1, 2026</span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
+                        Solari Logistics
+                      </div>
+                      <div className="col-span-2 sm:col-span-2 flex items-center">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-7 h-4 rounded-full bg-slate-300 relative flex items-center px-0.5">
+                            <div className="w-3 h-3 rounded-full bg-white translate-x-0" />
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-500 hidden sm:inline">Paused</span>
+                        </div>
+                      </div>
+                      <div className="hidden sm:inline-block sm:col-span-2">
+                        <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#3F72AF] text-[10px] font-bold border border-blue-200/60">
+                          Monthly
+                        </span>
+                      </div>
+                      <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
+                        Nov 1, 2026
+                      </div>
                     </div>
                   </div>
 
                   {/* Sub-item: Scheduled creation badge */}
-                  <div className="px-3.5 py-2.5 bg-slate-50/40 flex items-center justify-between text-[11px] text-slate-500">
+                  <div className="px-3.5 py-2 bg-slate-50/60 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-auto">
                     <div className="flex items-center gap-2">
                       <div className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 font-bold text-[9px] flex items-center justify-center">
                         DS
                       </div>
                       <span className="text-slate-600 font-medium">Created by Dominic Sterling</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-400">0 generated · Auto-charge enabled</span>
+                    <span className="text-[10px] font-mono text-slate-400">4 active retainers · Auto-charge enabled</span>
                   </div>
                 </div>
               ) : (
                 /* ALL INVOICES VIEW (Exact match to Screenshot 3) */
-                <div className="divide-y divide-slate-100 text-xs">
-                  {/* Status Pills Toolbar from Screenshot 3 */}
-                  <div className="px-3 py-2 bg-slate-50/40 border-b border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-                    <button
-                      type="button"
-                      onClick={() => setInvoiceStatusFilter("all")}
-                      className={`px-2 py-0.5 rounded-md text-[10px] font-bold shrink-0 transition-colors ${
-                        invoiceStatusFilter === "all"
-                          ? "bg-white text-slate-900 border border-slate-200 shadow-2xs"
-                          : "text-slate-500 hover:text-slate-800"
-                      }`}
-                    >
-                      All statuses <span className="text-slate-400 font-normal">17</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setInvoiceStatusFilter("outstanding")}
-                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-amber-700 bg-amber-50/80 border border-amber-200/50 shrink-0"
-                    >
-                      ● Outstanding 4
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setInvoiceStatusFilter("paid")}
-                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/50 shrink-0"
-                    >
-                      ● Paid 13
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setInvoiceStatusFilter("overdue")}
-                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-rose-700 bg-rose-50/80 border border-rose-200/50 shrink-0"
-                    >
-                      ● Overdue 1
-                    </button>
-                  </div>
+                <div className="divide-y divide-slate-100 text-xs flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Status Pills Toolbar from Screenshot 3 */}
+                    <div className="px-3 py-2 bg-slate-50/40 border-b border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceStatusFilter("all")}
+                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold shrink-0 transition-colors ${
+                          invoiceStatusFilter === "all"
+                            ? "bg-white text-slate-900 border border-slate-200 shadow-2xs"
+                            : "text-slate-500 hover:text-slate-800"
+                        }`}
+                      >
+                        All statuses <span className="text-slate-400 font-normal">17</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceStatusFilter("outstanding")}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-medium text-amber-700 bg-amber-50/80 border border-amber-200/50 shrink-0"
+                      >
+                        ● Outstanding 4
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceStatusFilter("paid")}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/50 shrink-0"
+                      >
+                        ● Paid 13
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceStatusFilter("overdue")}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-medium text-rose-700 bg-rose-50/80 border border-rose-200/50 shrink-0"
+                      >
+                        ● Overdue 1
+                      </button>
+                    </div>
 
-                  {/* Table Header */}
-                  <div className="bg-slate-50/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
-                    <span className="col-span-3 sm:col-span-3">Invoice</span>
-                    <span className="col-span-3 sm:col-span-3">Client</span>
-                    <span className="col-span-2 sm:col-span-2">Status</span>
-                    <span className="col-span-2 sm:col-span-2 text-right">Total</span>
-                    <span className="col-span-2 sm:col-span-2 text-right">Amount Due</span>
-                  </div>
+                    {/* Table Header */}
+                    <div className="bg-slate-50/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                      <span className="col-span-3 sm:col-span-3">Invoice</span>
+                      <span className="col-span-3 sm:col-span-3">Client</span>
+                      <span className="col-span-2 sm:col-span-2">Status</span>
+                      <span className="col-span-2 sm:col-span-2 text-right">Total</span>
+                      <span className="col-span-2 sm:col-span-2 text-right">Amount Due</span>
+                    </div>
 
-                  {/* Row 1: INV-2026-0017 (Sent / Due) */}
-                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
-                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
-                      INV-2026-0017
-                    </span>
-                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
-                      Kroma Fintech
-                    </span>
-                    <div className="col-span-2 sm:col-span-2">
-                      <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                    {/* Row 1: INV-2026-0017 (Sent / Due) */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                        INV-2026-0017
+                      </span>
+                      <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                        Kroma Fintech
+                      </span>
+                      <div className="col-span-2 sm:col-span-2">
+                        <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
+                          <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                        </span>
+                      </div>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                        $6,500.00
+                      </span>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
+                        $6,500.00
                       </span>
                     </div>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
-                      $6,500.00
-                    </span>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
-                      $6,500.00
-                    </span>
-                  </div>
 
-                  {/* Row 2: INV-2026-0016 (Paid) */}
-                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
-                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
-                      INV-2026-0016
-                    </span>
-                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
-                      Arcturus Robotics
-                    </span>
-                    <div className="col-span-2 sm:col-span-2">
-                      <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                    {/* Row 2: INV-2026-0016 (Paid) */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                        INV-2026-0016
+                      </span>
+                      <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                        Arcturus Robotics
+                      </span>
+                      <div className="col-span-2 sm:col-span-2">
+                        <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
+                          <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                        </span>
+                      </div>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                        $15,200.00
+                      </span>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
+                        Paid
                       </span>
                     </div>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
-                      $15,200.00
-                    </span>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
-                      Paid
-                    </span>
-                  </div>
 
-                  {/* Row 3: INV-2026-0015 (Sent / Due) */}
-                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
-                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
-                      INV-2026-0015
-                    </span>
-                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
-                      Solari Logistics
-                    </span>
-                    <div className="col-span-2 sm:col-span-2">
-                      <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                    {/* Row 3: INV-2026-0015 (Sent / Due) */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                        INV-2026-0015
+                      </span>
+                      <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                        Solari Logistics
+                      </span>
+                      <div className="col-span-2 sm:col-span-2">
+                        <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
+                          <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                        </span>
+                      </div>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                        $2,500.00
+                      </span>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
+                        $2,500.00
                       </span>
                     </div>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
-                      $2,500.00
-                    </span>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
-                      $2,500.00
-                    </span>
-                  </div>
 
-                  {/* Row 4: INV-2026-0014 (Paid) */}
-                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
-                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
-                      INV-2026-0014
-                    </span>
-                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
-                      Nebula Health
-                    </span>
-                    <div className="col-span-2 sm:col-span-2">
-                      <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                    {/* Row 4: INV-2026-0014 (Paid) */}
+                    <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                      <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                        INV-2026-0014
+                      </span>
+                      <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                        Nebula Health
+                      </span>
+                      <div className="col-span-2 sm:col-span-2">
+                        <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
+                          <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                        </span>
+                      </div>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                        $8,500.00
+                      </span>
+                      <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
+                        Paid
                       </span>
                     </div>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
-                      $8,500.00
-                    </span>
-                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
-                      Paid
-                    </span>
+                  </div>
+
+                  {/* Summary Footer */}
+                  <div className="px-3.5 py-2 bg-slate-50/60 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mt-auto">
+                    <span className="text-slate-600 font-medium">Showing 4 of 17 invoices</span>
+                    <span className="text-[10px] font-mono text-[#3F72AF] font-bold">Auto-sync with Stripe active</span>
                   </div>
                 </div>
               )}
