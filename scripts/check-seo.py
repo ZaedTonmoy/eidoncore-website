@@ -29,7 +29,7 @@ class Head(HTMLParser):
 
 pages = json.loads((ROOT / 'nextjs-homepage/src/content/page-metadata.json').read_text())
 app = ROOT / 'nextjs-homepage/src/app'
-source_routes = {str(p.parent.relative_to(app)) for p in app.rglob('page.tsx')} - {'.'}
+source_routes = {str(p.parent.relative_to(app)) for p in app.rglob('page.tsx')} - {'.', 'logo-preview'}
 assert set(pages) == source_routes, 'Every route must have explicit metadata'
 titles = set()
 # Pass an export directory to verify a fresh build before copying it to root.

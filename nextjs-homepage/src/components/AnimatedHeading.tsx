@@ -31,6 +31,7 @@ export default function AnimatedHeading({
 
   return (
     <Tag
+      key={text}
       className={className}
       style={{ display: "flex", flexWrap: "wrap" }}
       variants={staggerContainer(immediate ? 0.008 : TIMING.letterStagger, delay)}
@@ -41,12 +42,12 @@ export default function AnimatedHeading({
     >
       {words.map((word, wordIndex) => (
         <span
-          key={wordIndex}
+          key={`${word}-${wordIndex}`}
           style={{ display: "inline-flex", marginRight: "0.25em" }}
         >
           {word.split("").map((letter, letterIndex) => (
             <motion.span
-              key={letterIndex}
+              key={`${letter}-${letterIndex}`}
               variants={fadeUpBlurItem}
               style={{ display: "inline-block" }}
             >

@@ -192,8 +192,10 @@ export default function UseCasesPage() {
                 </div>
 
                 <AnimatedHeading
+                  key={current.id}
                   as="h2"
                   text={current.tagline}
+                  immediate={true}
                   className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] leading-tight"
                 />
 
