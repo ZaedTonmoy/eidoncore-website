@@ -67,6 +67,9 @@ import {
   ExternalLink,
   BarChart3,
   HelpCircle,
+  PenTool,
+  Printer,
+  Edit3,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -319,6 +322,22 @@ export default function BlendedFeaturePreview({
     reports: true,
     messaging: true,
   });
+
+  // State for Proposals Features
+  const [selectedAddons, setSelectedAddons] = useState<Record<string, boolean>>({
+    fintech: true,
+    webrtc: false,
+    qa_retainer: true,
+    robotics: false,
+    advisory: true,
+    starter_kit: false,
+    uikit: true,
+  });
+  const [proposalSignMode, setProposalSignMode] = useState<"draw" | "type">("draw");
+  const [legalNameInput, setLegalNameInput] = useState<string>("Alex Morgan");
+  const [signatureAgreed, setSignatureAgreed] = useState<boolean>(true);
+  const [signatureCleared, setSignatureCleared] = useState<boolean>(false);
+  const [proposalAccepted, setProposalAccepted] = useState<boolean>(false);
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -3665,6 +3684,545 @@ export default function BlendedFeaturePreview({
                   </div>
                 </div>
               )}
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: PROPOSALS
+  // =========================================================================
+  if (moduleName.toLowerCase().includes("proposal")) {
+    const addonsData = [
+      {
+        id: "fintech",
+        title: "Fintech Compliance & Payment Flow Audit",
+        h3: "Maximize payment success rates while ensuring rigorous financial compliance",
+        p: "Deep technical and UX audit covering card authorization rates, alternative payment methods, and fraud mitigation friction.",
+        price: 7500,
+      },
+      {
+        id: "webrtc",
+        title: "WebRTC Video Consultation Infrastructure",
+        h3: "Medical-grade, low-latency video and audio consultation architecture",
+        p: "Engineered for telehealth providers, financial client consultations, and secure enterprise communications.",
+        price: 18500,
+      },
+      {
+        id: "qa_retainer",
+        title: "Monthly Design QA & Accessibility Maintenance Retainer",
+        h3: "Continuous quality assurance to guarantee your product stays accessible and pixel-perfect",
+        p: "Prevent visual regressions and accessibility legal liabilities with continuous monthly audits by our specialized QA team.",
+        price: 3200,
+      },
+      {
+        id: "robotics",
+        title: "Autonomous Robotics Fleet Web Console UI",
+        h3: "Real-time mission control for autonomous warehouse rovers and robotics fleets",
+        p: "High-frequency WebGL telemetry visualization designed for industrial robotics operators and fleet safety engineers.",
+        price: 28000,
+      },
+      {
+        id: "starter_kit",
+        title: "Next.js SaaS Application Starter Kit",
+        h3: "Ship your B2B SaaS product in days instead of months",
+        p: "Pre-architected SaaS foundation with team collaboration, subscription tiering, and role-based permissions.",
+        price: 850,
+      },
+      {
+        id: "uikit",
+        title: "Aetheris Pro UI Kit & Tokens (Figma + Code)",
+        h3: "The definitive UI design system kit for modern SaaS applications",
+        p: "Instant download package includes Figma master files, React components, Tailwind configuration, and token JSONs.",
+        price: 1200,
+      },
+    ];
+
+    const baseProposalPrice = 32000;
+    const currentAddonsSum = addonsData.reduce((acc, item) => {
+      return selectedAddons[item.id] ? acc + item.price : acc;
+    }, 0);
+    const totalProposalPrice = baseProposalPrice + currentAddonsSum;
+
+    // -------------------------------------------------------------------------
+    // FEATURE 01: Let Clients Select Add-Ons Before Signing (Screenshots 2 & 3)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Workspace Header Bar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-[#4F46E5] flex items-center justify-center border border-indigo-100 shrink-0 font-bold text-xs">
+                  A
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight">Aetheris Creative Studio</h3>
+                    <span className="font-mono text-[9.5px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 font-semibold">
+                      #PROP-002
+                    </span>
+                  </div>
+                  <p className="text-[10.5px] text-[#64748B] flex items-center gap-1.5 mt-0.5">
+                    <Clock size={11} className="text-slate-400" />
+                    <span>Valid until Nov 12, 2026</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold border border-slate-200 rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-2xs transition-colors"
+                >
+                  <Printer size={12} className="text-slate-500" />
+                  <span>Print</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Accept & Sign Proposal Modal (Matches Screenshots 2 & 3) */}
+            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs p-4 sm:p-5 flex flex-col gap-3.5">
+              {/* Modal Header */}
+              <div className="flex items-start justify-between pb-3 border-b border-slate-100">
+                <div>
+                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
+                    Accept &amp; Sign Proposal
+                  </h4>
+                  <p className="text-[10.5px] font-mono text-[#64748B] mt-0.5">
+                    #PROP-002 — WEB DESIGN &amp; DEVELOPMENT PROPOSAL (Copy)
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="text-slate-400 hover:text-slate-700 transition-colors p-1"
+                >
+                  <X size={15} />
+                </button>
+              </div>
+
+              {/* Section Header */}
+              <div className="flex items-center justify-between">
+                <span className="text-xs sm:text-sm font-bold text-slate-900">
+                  Optional Add-ons &amp; Services
+                </span>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full border border-blue-200/60">
+                  Interactive Scope Selection
+                </span>
+              </div>
+
+              {/* Add-ons List */}
+              <div className="flex flex-col gap-2.5 max-h-[300px] sm:max-h-[320px] overflow-y-auto pr-1">
+                {addonsData.map((item) => {
+                  const isChecked = !!selectedAddons[item.id];
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() =>
+                        setSelectedAddons((prev) => ({
+                          ...prev,
+                          [item.id]: !prev[item.id],
+                        }))
+                      }
+                      className={`p-3 sm:p-3.5 rounded-xl border transition-all cursor-pointer select-none flex items-start gap-2.5 ${
+                        isChecked
+                          ? "border-[#6366F1] bg-[#F5F3FF]/40 ring-1 ring-[#6366F1]/20 shadow-2xs"
+                          : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50"
+                      }`}
+                    >
+                      {/* Checkbox */}
+                      <div
+                        className={`w-4 h-4 rounded-[4px] flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                          isChecked
+                            ? "bg-[#4F46E5] text-white"
+                            : "border border-slate-300 bg-white"
+                        }`}
+                      >
+                        {isChecked && <Check size={11} strokeWidth={3} />}
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <h5 className="text-xs sm:text-[13px] font-bold text-slate-900 leading-snug">
+                            {item.title}
+                          </h5>
+                          <span className="text-xs sm:text-[13px] font-black text-slate-900 font-mono shrink-0">
+                            +${item.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                          </span>
+                        </div>
+                        <p className="text-[11px] font-semibold text-slate-700 mt-1 leading-snug">
+                          {item.h3}
+                        </p>
+                        <p className="text-[10.5px] text-slate-500 mt-0.5 leading-relaxed">
+                          {item.p}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Live Recalculated Summary & Acceptance */}
+              <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+                <div className="flex items-center justify-between text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
+                  <div className="flex items-center gap-3 text-slate-600">
+                    <span>Base: <b className="text-slate-900 font-mono font-bold">$32,000.00</b></span>
+                    <span>Add-ons: <b className="text-indigo-600 font-mono font-bold">+${currentAddonsSum.toLocaleString("en-US", { minimumFractionDigits: 2 })}</b></span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] uppercase font-mono text-slate-400 font-bold block">Updated Total</span>
+                    <span className="text-sm sm:text-base font-black text-slate-900 font-mono leading-none">
+                      ${totalProposalPrice.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Agreement Checkbox */}
+                <label
+                  onClick={() => setSignatureAgreed(!signatureAgreed)}
+                  className="flex items-start gap-2.5 cursor-pointer select-none"
+                >
+                  <div
+                    className={`w-4 h-4 rounded-[4px] border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                      signatureAgreed
+                        ? "bg-[#4F46E5] border-[#4F46E5] text-white"
+                        : "border-slate-300 bg-white"
+                    }`}
+                  >
+                    {signatureAgreed && <Check size={11} strokeWidth={3} />}
+                  </div>
+                  <span className="text-[11px] text-slate-600 leading-snug">
+                    I confirm that I am legally authorized to sign on behalf of <strong className="font-semibold text-slate-900">Client</strong>, and agree to the terms of this proposal.
+                  </span>
+                </label>
+
+                {/* Button matching screenshot */}
+                <button
+                  type="button"
+                  className="w-full py-2.5 rounded-xl bg-[#A5B4FC]/80 text-white font-semibold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-2 cursor-pointer hover:bg-[#818CF8] transition-colors"
+                >
+                  <span>Cannot Sign — Switch to Authorized Account</span>
+                </button>
+
+                {/* Security Footnote */}
+                <div className="text-[10px] text-[#64748B] flex items-center gap-1.5">
+                  <Lock size={12} className="text-[#94A3B8] shrink-0" />
+                  <span>
+                    Your name, signature, account, IP address and the time are recorded with a fingerprint of this proposal as the record of your acceptance.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 02: Full ESIGN & UETA Compliance (Screenshot 1)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Workspace Header Bar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-[#4F46E5] flex items-center justify-center border border-indigo-100 shrink-0 font-bold text-xs">
+                  A
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight">Aetheris Creative Studio</h3>
+                    <span className="font-mono text-[9.5px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 font-semibold">
+                      #PROP-002
+                    </span>
+                  </div>
+                  <p className="text-[10.5px] text-[#64748B] flex items-center gap-1.5 mt-0.5">
+                    <Clock size={11} className="text-slate-400" />
+                    <span>Valid until Nov 12, 2026</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-mono">
+                  <Shield size={11} />
+                  <span>ESIGN &amp; UETA Compliant</span>
+                </span>
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold border border-slate-200 rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-2xs transition-colors"
+                >
+                  <Printer size={12} className="text-slate-500" />
+                  <span>Print</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Accept & Sign Proposal Modal (Matches Screenshot 1 media_...bca8c4da.png) */}
+            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs p-4 sm:p-5 flex flex-col gap-3.5">
+              {/* Modal Header */}
+              <div className="flex items-start justify-between pb-3 border-b border-slate-100">
+                <div>
+                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
+                    Accept &amp; Sign Proposal
+                  </h4>
+                  <p className="text-[10.5px] font-mono text-[#64748B] mt-0.5">
+                    #PROP-002 — WEB DESIGN &amp; DEVELOPMENT PROPOSAL (Copy)
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="text-slate-400 hover:text-slate-700 transition-colors p-1"
+                >
+                  <X size={15} />
+                </button>
+              </div>
+
+              {/* Selected Add-on Preview (From Screenshot 1) */}
+              <div className="p-3 sm:p-3.5 rounded-xl border border-[#6366F1] bg-[#F5F3FF]/40 ring-1 ring-[#6366F1]/20 flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-[4px] bg-[#4F46E5] text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <Check size={11} strokeWidth={3} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <h5 className="text-xs sm:text-[13px] font-bold text-slate-900 truncate">
+                      Aetheris Pro UI Kit &amp; Tokens (Figma + Code)
+                    </h5>
+                    <span className="text-xs sm:text-[13px] font-black text-slate-900 font-mono shrink-0">
+                      +$1,200.00
+                    </span>
+                  </div>
+                  <p className="text-[11px] font-semibold text-slate-700 mt-1 leading-snug">
+                    The definitive UI design system kit for modern SaaS applications
+                  </p>
+                  <p className="text-[10.5px] text-slate-500 mt-0.5 leading-relaxed">
+                    Instant download package includes Figma master files, React components, Tailwind configuration, and token JSONs.
+                  </p>
+                </div>
+              </div>
+
+              {/* Section Header: Electronic Signature */}
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-xs sm:text-sm font-bold text-slate-900">
+                  Electronic Signature <span className="text-red-500">*</span>
+                </span>
+                <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setProposalSignMode("type")}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                      proposalSignMode === "type"
+                        ? "bg-white text-slate-900 shadow-2xs font-bold"
+                        : "text-slate-500 hover:text-slate-900"
+                    }`}
+                  >
+                    <span className="font-serif font-bold text-xs">T</span>
+                    <span>Type Name</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setProposalSignMode("draw")}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
+                      proposalSignMode === "draw"
+                        ? "bg-white text-slate-900 shadow-2xs font-bold"
+                        : "text-slate-500 hover:text-slate-900"
+                    }`}
+                  >
+                    <PenTool size={11} className={proposalSignMode === "draw" ? "text-[#3F72AF]" : ""} />
+                    <span>Draw Ink</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Full legal name input */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-semibold text-slate-700">Full legal name</label>
+                <input
+                  type="text"
+                  value={legalNameInput}
+                  onChange={(e) => setLegalNameInput(e.target.value)}
+                  placeholder="Type your full legal name"
+                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-2xs"
+                />
+              </div>
+
+              {/* Signature Drawing Canvas Box */}
+              <div className="relative rounded-xl border border-slate-200 bg-slate-50/50 p-4 min-h-[140px] flex items-center justify-center overflow-hidden">
+                {/* Clear / Restore button */}
+                <button
+                  type="button"
+                  onClick={() => setSignatureCleared((prev) => !prev)}
+                  className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-white border border-slate-200/90 rounded text-[10.5px] font-semibold text-slate-600 hover:text-slate-900 shadow-2xs flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <X size={11} />
+                  <span>{signatureCleared ? "Restore" : "Clear"}</span>
+                </button>
+
+                {/* Signature rendered in canvas */}
+                {!signatureCleared ? (
+                  proposalSignMode === "draw" ? (
+                    <svg
+                      viewBox="0 0 280 80"
+                      className="w-56 sm:w-64 h-16 text-[#0F172A] drop-shadow-2xs select-none"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M 35 62 C 30 50, 32 30, 42 22 C 50 14, 58 24, 56 42 C 54 58, 48 68, 46 64 C 44 58, 62 38, 70 32 C 78 26, 84 34, 82 46 C 80 56, 92 36, 102 34 C 112 32, 114 44, 116 52 C 118 42, 130 38, 142 38 C 154 38, 162 48, 172 44 C 182 40, 204 36, 218 36" />
+                      <path d="M 68 46 Q 130 40, 215 42" strokeWidth="1.8" />
+                      <path d="M 172 44 Q 192 18, 222 30 Q 242 38, 258 34" strokeWidth="2.2" />
+                    </svg>
+                  ) : (
+                    <span className="font-serif italic text-3xl sm:text-4xl text-[#0F172A] select-none tracking-wide">
+                      {legalNameInput || "Alex Morgan"}
+                    </span>
+                  )
+                ) : (
+                  <div className="text-center text-slate-400 text-xs py-4 flex flex-col items-center gap-1">
+                    <PenTool size={18} className="text-slate-300" />
+                    <span>Click Clear button to restore signature</span>
+                  </div>
+                )}
+
+                {/* Baseline Guide with X symbol */}
+                <div className="absolute bottom-3 left-4 right-4 flex items-center gap-2 pointer-events-none">
+                  <span className="text-slate-400 font-mono text-xs select-none">✕</span>
+                  <div className="flex-1 border-b border-dashed border-slate-300" />
+                </div>
+              </div>
+
+              {/* Authorization agreement checkbox */}
+              <label
+                onClick={() => setSignatureAgreed(!signatureAgreed)}
+                className="flex items-start gap-2.5 cursor-pointer select-none"
+              >
+                <div
+                  className={`w-4 h-4 rounded-[4px] border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                    signatureAgreed
+                      ? "bg-[#4F46E5] border-[#4F46E5] text-white"
+                      : "border-slate-300 bg-white"
+                  }`}
+                >
+                  {signatureAgreed && <Check size={11} strokeWidth={3} />}
+                </div>
+                <span className="text-[11.5px] text-slate-600 leading-snug">
+                  I confirm that I am legally authorized to sign on behalf of <strong className="font-semibold text-slate-900">Client</strong>, and agree to the terms of this proposal.
+                </span>
+              </label>
+
+              {/* Action Button matching screenshot with toggle for interactive test */}
+              <button
+                type="button"
+                onClick={() => setProposalAccepted(!proposalAccepted)}
+                className={`w-full py-2.5 rounded-xl font-semibold text-xs sm:text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  proposalAccepted
+                    ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                    : "bg-[#A5B4FC]/80 hover:bg-[#818CF8] text-white"
+                }`}
+              >
+                {proposalAccepted ? (
+                  <>
+                    <Check size={14} strokeWidth={3} />
+                    <span>Proposal Accepted &amp; Signed · $33,200.00</span>
+                  </>
+                ) : (
+                  <span>Cannot Sign — Switch to Authorized Account</span>
+                )}
+              </button>
+
+              {/* Security Audit Footnote */}
+              <div className="text-[10px] text-[#64748B] flex items-center gap-1.5 pt-0.5">
+                <Lock size={12} className="text-[#94A3B8] shrink-0" />
+                <span>
+                  Your name, signature, account, IP address and the time are recorded with a fingerprint of this proposal as the record of your acceptance.
+                </span>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 03: Automatically Trigger Deposit & Project
+    // -------------------------------------------------------------------------
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0">
+                  <Zap size={16} />
+                </div>
+                <div>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight">Instant Kickoff Automation</h3>
+                  <p className="text-[10px] text-[#64748B]">Automated deposit invoice &amp; project workspace trigger</p>
+                </div>
+              </div>
+              <span className="font-mono text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 font-bold">
+                Triggered on Signature
+              </span>
+            </div>
+
+            {/* Kickoff Automation Pipeline Cards */}
+            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs p-4 flex flex-col gap-3">
+              {/* Step 1: Upfront Deposit Invoice */}
+              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                    <Receipt size={14} />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-900">Deposit Invoice #INV-042 Generated</h5>
+                    <p className="text-[10px] text-slate-500">50% upfront retainer ($16,600.00) · Stripe checkout link sent</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0">
+                  Sent
+                </span>
+              </div>
+
+              {/* Step 2: Project Board Initialized */}
+              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                    <Briefcase size={14} />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-900">Project Workspace Provisioned</h5>
+                    <p className="text-[10px] text-slate-500">7 Milestones, 24 Tasks created from proposal deliverables</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200 shrink-0">
+                  Ready
+                </span>
+              </div>
+
+              {/* Step 3: Team & Client Welcome */}
+              <div className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                    <CheckCircle2 size={14} />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-900">Signatories Notified</h5>
+                    <p className="text-[10px] text-slate-500">Tamper-evident audit certificate &amp; executed PDF emailed</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">
+                  Delivered
+                </span>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
