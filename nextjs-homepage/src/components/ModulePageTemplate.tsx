@@ -79,7 +79,8 @@ export default function ModulePageTemplate({
     name.toLowerCase().includes("messag") ||
     name.toLowerCase().includes("notif") ||
     name.toLowerCase().includes("offer") ||
-    name.toLowerCase().includes("service");
+    name.toLowerCase().includes("service") ||
+    name.toLowerCase().includes("invoic");
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />

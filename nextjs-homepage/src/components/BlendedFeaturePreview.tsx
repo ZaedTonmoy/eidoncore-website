@@ -54,6 +54,8 @@ import {
   ShoppingBag,
   Smartphone,
   Laptop,
+  CreditCard,
+  Receipt,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -209,6 +211,740 @@ export default function BlendedFeaturePreview({
   const [offeringsTab, setOfferingsTab] = useState<"services" | "digital">("services");
   const [serviceTagFilter, setServiceTagFilter] = useState<string>("all");
   const [digitalTagFilter, setDigitalTagFilter] = useState<string>("all");
+
+  // State for Invoicing Features
+  const [invoiceDashboardTab, setInvoiceDashboardTab] = useState<"all" | "recurring" | "analytics">("all");
+  const [invoiceCurrency, setInvoiceCurrency] = useState<"bdt" | "usd">("usd");
+  const [invoicePaymentMethod, setInvoicePaymentMethod] = useState<"card" | "cashapp">("card");
+  const [savePaymentInfo, setSavePaymentInfo] = useState<boolean>(true);
+  const [invoiceStatusFilter, setInvoiceStatusFilter] = useState<string>("all");
+  const [recurringRetainerActive, setRecurringRetainerActive] = useState<boolean>(true);
+
+  // Auto toggle between All Invoices and Recurring view every 5s if user hasn't manually interacted
+  useEffect(() => {
+    if (!moduleName.toLowerCase().includes("invoic")) return;
+    const interval = setInterval(() => {
+      setInvoiceDashboardTab((prev) => (prev === "all" ? "recurring" : "all"));
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [moduleName]);
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: INVOICING
+  // =========================================================================
+  if (moduleName.toLowerCase().includes("invoic")) {
+    // -------------------------------------------------------------------------
+    // FEATURE 01: Recurring / One-time Invoices Dashboard & KPIs (Screenshots 2 & 3)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Workspace Header Bar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-[#3F72AF] border border-blue-100">
+                  <Receipt size={17} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Invoices</h3>
+                  <p className="text-[11px] text-slate-400">aetheris-studio.eidoncore.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100/70 border border-slate-200/70 text-[11px] font-medium text-slate-600">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Onboarding 11/17</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50/70 border border-blue-200/60 text-[#3F72AF] text-[11px] font-medium shadow-2xs">
+                  <Sparkles size={12} className="text-[#3F72AF]" />
+                  <span>AI Copilot</span>
+                  <span className="font-mono text-[9px] bg-white/80 px-1 rounded text-[#3F72AF] border border-blue-200/50">⌘J</span>
+                </div>
+                {/* User avatar */}
+                <div className="w-7 h-7 rounded-full bg-linear-to-tr from-[#3F72AF] to-indigo-600 text-white text-[11px] font-bold flex items-center justify-center ring-2 ring-white shadow-2xs">
+                  JV
+                </div>
+              </div>
+            </div>
+
+            {/* KPI Metric Cards Row (Matched from Screenshot: This Month, Outstanding, Overdue, Collection Rate, Avg Days, MRR) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+              {/* Card 1: This Month */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium">This Month</span>
+                  <span className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center text-[11px] font-bold">$</span>
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$40.9K</span>
+                  <div className="flex items-center gap-1 text-[10px] text-emerald-600 font-semibold mt-0.5">
+                    <span>↑ 90%</span>
+                    <span className="text-slate-400 font-normal">vs last mo</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Outstanding */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium">Outstanding</span>
+                  <Clock size={12} className="text-amber-500" />
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$28.3K</span>
+                  <span className="text-[10px] text-slate-400 block mt-0.5">Pending collection</span>
+                </div>
+              </div>
+
+              {/* Card 3: Overdue */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-rose-50/30 border border-rose-200/60 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium text-rose-700">Overdue</span>
+                  <AlertTriangle size={12} className="text-rose-500" />
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-rose-600 tracking-tight">$4,800.00</span>
+                  <span className="text-[10px] text-rose-500 font-medium block mt-0.5">Requires follow-up</span>
+                </div>
+              </div>
+
+              {/* Card 4: Collection Rate */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium">Collection Rate</span>
+                  <CheckCircle2 size={12} className="text-emerald-500" />
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">81%</span>
+                  <span className="text-[10px] text-slate-400 block mt-0.5">This month: 94%</span>
+                </div>
+              </div>
+
+              {/* Card 5: Avg Days to Pay */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium">Avg Days to Pay</span>
+                  <Clock size={12} className="text-blue-500" />
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">19d</span>
+                  <span className="text-[10px] text-emerald-600 font-semibold block mt-0.5">5d early</span>
+                </div>
+              </div>
+
+              {/* Card 6: MRR */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50/70 border border-slate-200/70 hidden sm:flex flex-col justify-between">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="text-[11px] font-medium">MRR</span>
+                  <Activity size={12} className="text-purple-500" />
+                </div>
+                <div className="mt-1">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">$3,500</span>
+                  <span className="text-[10px] text-slate-400 block mt-0.5">1 active subscription</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Filter & View Switcher Bar (All Invoices vs Recurring vs Analytics + +Create Invoice button) */}
+            <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100 flex-wrap">
+              <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setInvoiceDashboardTab("all")}
+                  className={`px-3 py-1 rounded-md text-[11px] transition-all cursor-pointer ${
+                    invoiceDashboardTab === "all"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  All Invoices
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInvoiceDashboardTab("recurring")}
+                  className={`px-3 py-1 rounded-md text-[11px] transition-all cursor-pointer flex items-center gap-1.5 ${
+                    invoiceDashboardTab === "recurring"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  <span>Recurring</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInvoiceDashboardTab("analytics")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] transition-all cursor-pointer hidden sm:inline-block ${
+                    invoiceDashboardTab === "analytics"
+                      ? "bg-white text-slate-900 shadow-2xs font-bold"
+                      : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Analytics
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="h-7 px-3 rounded-lg bg-[#3F72AF] hover:bg-[#325a8d] text-white text-[11px] font-bold flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
+                >
+                  <Plus size={12} strokeWidth={2.5} />
+                  <span>Create Invoice</span>
+                  <span className="font-mono text-[9px] bg-white/20 px-1 rounded">N</span>
+                </button>
+              </div>
+            </div>
+
+            {/* View Body: Animated Toggle between Recurring Tab View and All Invoices Table View */}
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-white shadow-2xs">
+              {invoiceDashboardTab === "recurring" ? (
+                /* RECURRING INVOICES VIEW (Exact match to Screenshot 2) */
+                <div className="divide-y divide-slate-100 text-xs">
+                  <div className="bg-slate-50/70 px-3.5 py-2.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                    <span className="col-span-4 sm:col-span-4">Invoice</span>
+                    <span className="col-span-3 sm:col-span-2">Client</span>
+                    <span className="col-span-2 sm:col-span-2">Status</span>
+                    <span className="hidden sm:inline-block sm:col-span-2">Frequency</span>
+                    <span className="col-span-3 sm:col-span-2 text-right sm:text-left">Next Due</span>
+                  </div>
+
+                  <div className="px-3.5 py-3 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                    <div className="col-span-4 sm:col-span-4 flex flex-col">
+                      <span className="font-semibold text-slate-900 truncate">
+                        Nebula Health - Monthly Design Retainer
+                      </span>
+                      <span className="text-[10px] text-slate-400 sm:hidden">Monthly · Oct 31, 2026</span>
+                    </div>
+
+                    <div className="col-span-3 sm:col-span-2 text-slate-600 truncate font-medium">
+                      Nebula Health
+                    </div>
+
+                    <div className="col-span-2 sm:col-span-2 flex items-center">
+                      <button
+                        type="button"
+                        onClick={() => setRecurringRetainerActive(!recurringRetainerActive)}
+                        className="flex items-center gap-1.5 cursor-pointer group"
+                      >
+                        <div
+                          className={`w-7 h-4 rounded-full transition-colors relative flex items-center px-0.5 ${
+                            recurringRetainerActive ? "bg-[#3F72AF]" : "bg-slate-300"
+                          }`}
+                        >
+                          <div
+                            className={`w-3 h-3 rounded-full bg-white transition-transform ${
+                              recurringRetainerActive ? "translate-x-3" : "translate-x-0"
+                            }`}
+                          />
+                        </div>
+                        <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">
+                          {recurringRetainerActive ? "Active" : "Paused"}
+                        </span>
+                      </button>
+                    </div>
+
+                    <div className="hidden sm:inline-block sm:col-span-2">
+                      <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#3F72AF] text-[10px] font-bold border border-blue-200/60">
+                        Monthly
+                      </span>
+                    </div>
+
+                    <div className="col-span-3 sm:col-span-2 text-right sm:text-left font-mono text-[11px] text-slate-600">
+                      Oct 31, 2026
+                    </div>
+                  </div>
+
+                  {/* Sub-item: Scheduled creation badge */}
+                  <div className="px-3.5 py-2.5 bg-slate-50/40 flex items-center justify-between text-[11px] text-slate-500">
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 font-bold text-[9px] flex items-center justify-center">
+                        DS
+                      </div>
+                      <span className="text-slate-600 font-medium">Created by Dominic Sterling</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-400">0 generated · Auto-charge enabled</span>
+                  </div>
+                </div>
+              ) : (
+                /* ALL INVOICES VIEW (Exact match to Screenshot 3) */
+                <div className="divide-y divide-slate-100 text-xs">
+                  {/* Status Pills Toolbar from Screenshot 3 */}
+                  <div className="px-3 py-2 bg-slate-50/40 border-b border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                    <button
+                      type="button"
+                      onClick={() => setInvoiceStatusFilter("all")}
+                      className={`px-2 py-0.5 rounded-md text-[10px] font-bold shrink-0 transition-colors ${
+                        invoiceStatusFilter === "all"
+                          ? "bg-white text-slate-900 border border-slate-200 shadow-2xs"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      All statuses <span className="text-slate-400 font-normal">17</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setInvoiceStatusFilter("outstanding")}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-amber-700 bg-amber-50/80 border border-amber-200/50 shrink-0"
+                    >
+                      ● Outstanding 4
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setInvoiceStatusFilter("paid")}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-emerald-700 bg-emerald-50/80 border border-emerald-200/50 shrink-0"
+                    >
+                      ● Paid 13
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setInvoiceStatusFilter("overdue")}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium text-rose-700 bg-rose-50/80 border border-rose-200/50 shrink-0"
+                    >
+                      ● Overdue 1
+                    </button>
+                  </div>
+
+                  {/* Table Header */}
+                  <div className="bg-slate-50/70 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 grid grid-cols-12 gap-2">
+                    <span className="col-span-3 sm:col-span-3">Invoice</span>
+                    <span className="col-span-3 sm:col-span-3">Client</span>
+                    <span className="col-span-2 sm:col-span-2">Status</span>
+                    <span className="col-span-2 sm:col-span-2 text-right">Total</span>
+                    <span className="col-span-2 sm:col-span-2 text-right">Amount Due</span>
+                  </div>
+
+                  {/* Row 1: INV-2026-0017 (Sent / Due) */}
+                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                      INV-2026-0017
+                    </span>
+                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                      Kroma Fintech
+                    </span>
+                    <div className="col-span-2 sm:col-span-2">
+                      <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                      </span>
+                    </div>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                      $6,500.00
+                    </span>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
+                      $6,500.00
+                    </span>
+                  </div>
+
+                  {/* Row 2: INV-2026-0016 (Paid) */}
+                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                      INV-2026-0016
+                    </span>
+                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                      Arcturus Robotics
+                    </span>
+                    <div className="col-span-2 sm:col-span-2">
+                      <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                      </span>
+                    </div>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                      $15,200.00
+                    </span>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
+                      Paid
+                    </span>
+                  </div>
+
+                  {/* Row 3: INV-2026-0015 (Sent / Due) */}
+                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                      INV-2026-0015
+                    </span>
+                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                      Solari Logistics
+                    </span>
+                    <div className="col-span-2 sm:col-span-2">
+                      <span className="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-200/60 inline-flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-blue-600" /> Sent
+                      </span>
+                    </div>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                      $2,500.00
+                    </span>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-bold text-amber-700">
+                      $2,500.00
+                    </span>
+                  </div>
+
+                  {/* Row 4: INV-2026-0014 (Paid) */}
+                  <div className="px-3.5 py-2.5 grid grid-cols-12 gap-2 items-center hover:bg-slate-50/50 transition-colors">
+                    <span className="col-span-3 sm:col-span-3 font-bold text-slate-900 font-mono text-[11px]">
+                      INV-2026-0014
+                    </span>
+                    <span className="col-span-3 sm:col-span-3 text-slate-600 truncate font-medium">
+                      Nebula Health
+                    </span>
+                    <div className="col-span-2 sm:col-span-2">
+                      <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 inline-flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-emerald-600" /> Paid
+                      </span>
+                    </div>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-slate-800">
+                      $8,500.00
+                    </span>
+                    <span className="col-span-2 sm:col-span-2 text-right font-mono font-semibold text-emerald-600">
+                      Paid
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 02: Milestone & Time Billing (Interactive Time to Invoice generator preview)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Toolbar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
+                  <Timer size={17} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900">Milestone & Time Billing</h3>
+                  <p className="text-[11px] text-slate-400">Convert billable hours & deliverables directly to invoices</p>
+                </div>
+              </div>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+                Auto-Synced
+              </span>
+            </div>
+
+            {/* Billable Log Item Card */}
+            <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Project / Scope</span>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 mt-0.5">Fintech Mobile App Re-architecture</h4>
+                </div>
+                <span className="font-mono text-xs font-bold px-2 py-1 bg-white rounded-md border border-slate-200 text-slate-800 shadow-2xs">
+                  42.5 hrs logged
+                </span>
+              </div>
+
+              {/* Progress Bar of Milestone */}
+              <div>
+                <div className="flex justify-between text-[11px] text-slate-500 mb-1">
+                  <span>Milestone 2: Design System & Core API</span>
+                  <span className="font-bold text-slate-900">100% Complete</span>
+                </div>
+                <div className="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden">
+                  <div className="h-full bg-linear-to-r from-[#3F72AF] to-indigo-600 w-full rounded-full" />
+                </div>
+              </div>
+
+              {/* Line items preview */}
+              <div className="bg-white rounded-lg border border-slate-200/80 divide-y divide-slate-100 text-xs mt-1">
+                <div className="p-2.5 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
+                    <span className="font-medium text-slate-700">UI Component Audit & Dark Mode tokens</span>
+                  </div>
+                  <span className="font-mono font-semibold text-slate-900">$2,400.00</span>
+                </div>
+                <div className="p-2.5 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
+                    <span className="font-medium text-slate-700">GraphQL Endpoint Integration & Security check</span>
+                  </div>
+                  <span className="font-mono font-semibold text-slate-900">$3,600.00</span>
+                </div>
+              </div>
+
+              {/* Convert action */}
+              <div className="flex items-center justify-between pt-1">
+                <div className="text-[11px] text-slate-500">
+                  Total Billable: <span className="font-bold font-mono text-slate-900 text-xs">$6,000.00</span>
+                </div>
+                <button
+                  type="button"
+                  className="px-3 py-1.5 rounded-lg bg-[#3F72AF] text-white text-xs font-bold hover:bg-[#325a8d] transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Receipt size={13} />
+                  <span>Generate Invoice</span>
+                </button>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 03: Frictionless Client Payment Checkout (Exact match to Screenshot 1)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Split Checkout Mockup (Left Summary & Right Payment Form) */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+              {/* LEFT COLUMN: Agency Info, Currency Picker, and Invoice Item */}
+              <div className="md:col-span-5 flex flex-col justify-between pr-0 md:pr-3 md:border-r border-slate-100">
+                <div className="flex flex-col gap-3.5">
+                  {/* Agency Brand Name */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded bg-slate-100 text-slate-700 flex items-center justify-center text-xs">
+                      <Briefcase size={13} />
+                    </div>
+                    <span className="text-xs font-bold text-slate-800">Creation Wave LLC</span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 leading-tight">Pay Creation Wave LLC</h3>
+                    <p className="text-[11px] text-slate-400 mt-0.5">Invoice INV-00052</p>
+                  </div>
+
+                  {/* Currency Selection Switcher */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[11px] font-bold text-slate-600">Choose currency</label>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceCurrency("bdt")}
+                        className={`p-2 rounded-lg border text-left transition-all cursor-pointer ${
+                          invoiceCurrency === "bdt"
+                            ? "border-[#3F72AF] bg-blue-50/50 shadow-2xs ring-1 ring-[#3F72AF]"
+                            : "border-slate-200 bg-white hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs">🇧🇩</span>
+                          <span className="text-[11px] font-bold text-slate-900 truncate">BDT 20,504.63</span>
+                        </div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setInvoiceCurrency("usd")}
+                        className={`p-2 rounded-lg border text-left transition-all cursor-pointer ${
+                          invoiceCurrency === "usd"
+                            ? "border-[#3F72AF] bg-blue-50/50 shadow-2xs ring-1 ring-[#3F72AF]"
+                            : "border-slate-200 bg-white hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs">🇺🇸</span>
+                          <span className="text-[11px] font-bold text-slate-900 truncate">US$160.00</span>
+                        </div>
+                      </button>
+                    </div>
+                    <span className="text-[9px] text-slate-400">Exchange rate and fees of your bank may apply</span>
+                  </div>
+                </div>
+
+                {/* Bottom Total Line */}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between mt-3">
+                  <div>
+                    <span className="text-xs font-bold text-slate-900 block">Invoice INV-00052</span>
+                    <span className="text-[10px] text-slate-400">Payment to Creation Wave LLC</span>
+                  </div>
+                  <span className="text-sm font-bold font-mono text-slate-900">
+                    {invoiceCurrency === "usd" ? "US$160.00" : "BDT 20,504"}
+                  </span>
+                </div>
+              </div>
+
+              {/* RIGHT COLUMN: Express Pay (Apple Pay + Link), Contact Info, Payment Method (Card vs Cash App) */}
+              <div className="md:col-span-7 flex flex-col gap-3">
+                {/* Express Checkout Buttons: Apple Pay & Link (Screenshot 1) */}
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    className="h-9 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs hover:bg-zinc-800 transition-colors shadow-2xs cursor-pointer gap-1"
+                  >
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 170 170">
+                      <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.67-7.81-11.96-14.32-6.19-9.35-11.06-20.25-14.6-32.69-3.54-12.44-5.31-23.75-5.31-33.93 0-14.67 3.75-26.68 11.24-36.03 7.5-9.35 16.9-14.07 28.21-14.18 5.66 0 11.75 1.57 18.28 4.7 6.53 3.14 10.74 4.76 12.64 4.88 1.45 0 5.86-1.68 13.23-5.06 7.37-3.37 13.62-4.94 18.76-4.7 13.88.75 24.89 5.86 33.02 15.34-12.16 7.37-18.12 17.5-17.89 30.39.24 10.13 4.13 18.74 11.68 25.82 7.55 7.08 16.59 11.14 27.13 12.18-2.22 6.63-4.95 13.24-8.18 19.82zM119.22 33.15c0-7.25 2.65-14.06 7.95-20.43 5.3-6.38 11.83-10.47 19.6-12.28.36 1.8.54 3.48.54 5.06 0 7.24-2.67 14.18-8 20.83-5.34 6.64-11.99 10.77-19.96 12.39-.12-1.8-.13-3.66-.13-5.57z" />
+                    </svg>
+                    <span>Pay</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="h-9 rounded-lg bg-[#00D66F] text-slate-900 flex items-center justify-center font-bold text-xs hover:bg-[#00c264] transition-colors shadow-2xs cursor-pointer gap-1"
+                  >
+                    <span className="font-black text-sm">›</span>
+                    <span>link</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2 my-0.5">
+                  <div className="h-px bg-slate-200 flex-1" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">OR</span>
+                  <div className="h-px bg-slate-200 flex-1" />
+                </div>
+
+                {/* Contact Information */}
+                <div>
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">Contact information</label>
+                  <div className="relative">
+                    <span className="absolute left-2.5 top-2 text-[10px] font-medium text-slate-400">Email</span>
+                    <input
+                      type="email"
+                      readOnly
+                      value="billing@eidoncore.com"
+                      className="w-full pl-12 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-white font-medium text-slate-800"
+                    />
+                  </div>
+                </div>
+
+                {/* Payment Method Selector Box */}
+                <div className="border border-slate-200 rounded-xl overflow-hidden bg-white">
+                  {/* Card Option Header */}
+                  <div
+                    onClick={() => setInvoicePaymentMethod("card")}
+                    className={`p-2.5 flex items-center justify-between cursor-pointer transition-colors ${
+                      invoicePaymentMethod === "card" ? "bg-slate-50/60" : "hover:bg-slate-50/40"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-3.5 h-3.5 rounded-full border-2 border-[#3F72AF] flex items-center justify-center">
+                        {invoicePaymentMethod === "card" && <div className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />}
+                      </div>
+                      <CreditCard size={14} className="text-slate-700" />
+                      <span className="text-xs font-bold text-slate-800">Card</span>
+                    </div>
+                  </div>
+
+                  {/* Card Form Fields */}
+                  {invoicePaymentMethod === "card" && (
+                    <div className="p-2.5 border-t border-slate-100 flex flex-col gap-2 bg-slate-50/20">
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-bold text-slate-600">Card information</span>
+                          <div className="flex items-center gap-1">
+                            <span className="px-1 py-0.2 rounded bg-blue-100 text-[8px] font-bold text-blue-800">VISA</span>
+                            <span className="px-1 py-0.2 rounded bg-amber-100 text-[8px] font-bold text-amber-800">MC</span>
+                            <span className="px-1 py-0.2 rounded bg-blue-600 text-[8px] font-bold text-white">AMEX</span>
+                          </div>
+                        </div>
+                        <input
+                          type="text"
+                          readOnly
+                          value="4242 •••• •••• 4242"
+                          className="w-full px-2.5 py-1.5 text-xs rounded-t-lg border border-slate-200 bg-white font-mono text-slate-800"
+                        />
+                        <div className="grid grid-cols-2 -mt-px">
+                          <input
+                            type="text"
+                            readOnly
+                            value="MM / YY"
+                            className="w-full px-2.5 py-1.5 text-xs border border-slate-200 bg-white text-slate-400 rounded-bl-lg"
+                          />
+                          <input
+                            type="text"
+                            readOnly
+                            value="CVC"
+                            className="w-full px-2.5 py-1.5 text-xs border border-l-0 border-slate-200 bg-white text-slate-400 rounded-br-lg"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="text-[10px] font-bold text-slate-600 block mb-0.5">Cardholder name</span>
+                        <input
+                          type="text"
+                          readOnly
+                          value="Julian Vance"
+                          className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white text-slate-800"
+                        />
+                      </div>
+
+                      <div>
+                        <span className="text-[10px] font-bold text-slate-600 block mb-0.5">Country or region</span>
+                        <select
+                          disabled
+                          className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 bg-white text-slate-800"
+                        >
+                          <option>United States</option>
+                        </select>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cash App Pay Option Header */}
+                  <div
+                    onClick={() => setInvoicePaymentMethod("cashapp")}
+                    className={`p-2.5 border-t border-slate-100 flex items-center justify-between cursor-pointer transition-colors ${
+                      invoicePaymentMethod === "cashapp" ? "bg-slate-50/60" : "hover:bg-slate-50/40"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-300 flex items-center justify-center">
+                        {invoicePaymentMethod === "cashapp" && <div className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />}
+                      </div>
+                      <span className="w-4 h-4 rounded-md bg-emerald-500 text-white font-bold text-[10px] flex items-center justify-center">
+                        $
+                      </span>
+                      <span className="text-xs font-bold text-slate-800">Cash App Pay</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Save information checkbox */}
+                <div
+                  onClick={() => setSavePaymentInfo(!savePaymentInfo)}
+                  className="p-2.5 rounded-xl border border-slate-200 bg-slate-50/40 flex items-start gap-2 cursor-pointer"
+                >
+                  <div
+                    className={`w-3.5 h-3.5 rounded border mt-0.5 flex items-center justify-center transition-colors ${
+                      savePaymentInfo ? "bg-[#3F72AF] border-[#3F72AF] text-white" : "border-slate-300 bg-white"
+                    }`}
+                  >
+                    {savePaymentInfo && <Check size={10} strokeWidth={3} />}
+                  </div>
+                  <div className="text-[11px] leading-tight">
+                    <span className="font-bold text-slate-800 block">Save my information for faster checkout</span>
+                    <span className="text-slate-400 text-[10px]">
+                      Pay securely at Creation Wave LLC and everywhere Link is accepted.
+                    </span>
+                  </div>
+                </div>
+
+                {/* Submit Pay Button */}
+                <button
+                  type="button"
+                  className="w-full py-2.5 rounded-xl bg-[#3F72AF] hover:bg-[#325a8d] text-white font-bold text-xs shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <Lock size={12} />
+                  <span>Pay {invoiceCurrency === "usd" ? "US$160.00" : "BDT 20,504.63"}</span>
+                </button>
+
+                {/* Footer powered by Stripe */}
+                <div className="flex items-center justify-center gap-2 text-[10px] text-slate-400">
+                  <span>Powered by <strong className="text-slate-600">stripe</strong></span>
+                  <span>•</span>
+                  <span>Terms</span>
+                  <span>•</span>
+                  <span>Privacy</span>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
 
   // Only apply custom Eidoncore focused cards on /notifications
   if (moduleName.toLowerCase().includes("notif")) {
