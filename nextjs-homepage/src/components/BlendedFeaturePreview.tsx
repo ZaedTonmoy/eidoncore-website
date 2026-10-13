@@ -58,6 +58,8 @@ import {
   Receipt,
   FileText,
   X,
+  Sliders,
+  GitBranch,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
 
@@ -247,6 +249,13 @@ export default function BlendedFeaturePreview({
     }, 6000);
     return () => clearInterval(stepInterval);
   }, [moduleName]);
+
+  // State for Automations Features
+  const [automationActiveStep, setAutomationActiveStep] = useState<number>(1);
+  const [automationLive, setAutomationLive] = useState<boolean>(true);
+  const [actionCategoryTab, setActionCategoryTab] = useState<string>("all");
+  const [actionSearchQuery, setActionSearchQuery] = useState<string>("");
+  const [integrationFilter, setIntegrationFilter] = useState<string>("all");
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -1343,6 +1352,571 @@ export default function BlendedFeaturePreview({
                   <span>Terms</span>
                   <span>•</span>
                   <span>Privacy</span>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+  }
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: AUTOMATIONS
+  // =========================================================================
+  if (moduleName.toLowerCase().includes("automat")) {
+    // -------------------------------------------------------------------------
+    // FEATURE 01: Visual Rule Builder / Workflow Studio (Exact match to Screenshot 1)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "01") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3 sm:gap-3.5 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Workflow Studio Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center border border-blue-100">
+                  <Zap size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Workflow studio</h3>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="text-[10px] text-slate-400">Send a message to slack and email when a task is created</span>
+                    <span className="text-[9px] font-mono text-emerald-600 bg-emerald-50 px-1 rounded border border-emerald-200/50">Saved</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {/* Live toggle */}
+                <button
+                  type="button"
+                  onClick={() => setAutomationLive(!automationLive)}
+                  className="flex items-center gap-1.5 cursor-pointer bg-slate-50 px-2 py-1 rounded-lg border border-slate-200"
+                >
+                  <div
+                    className={`w-6 h-3.5 rounded-full transition-colors relative flex items-center px-0.5 ${
+                      automationLive ? "bg-[#3F72AF]" : "bg-slate-300"
+                    }`}
+                  >
+                    <div
+                      className={`w-2.5 h-2.5 rounded-full bg-white transition-transform ${
+                        automationLive ? "translate-x-2.5" : "translate-x-0"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-700">
+                    {automationLive ? "Live" : "Draft"}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  className="px-2.5 py-1 rounded-lg bg-[#3F72AF] text-white text-[11px] font-bold hover:bg-[#325a8d] transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
+                >
+                  <Check size={12} strokeWidth={2.5} />
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Split Visual Canvas: Left Steps List + Center Node Graph + Right Inspector */}
+            <div className="grid grid-cols-12 gap-3 bg-slate-50/40 p-2.5 rounded-xl border border-slate-200/70 min-h-[380px]">
+              {/* Left Column: Workflow Outline (Steps 1 to 4) */}
+              <div className="col-span-12 sm:col-span-4 flex flex-col gap-1.5 border-b sm:border-b-0 sm:border-r border-slate-200/70 pr-0 sm:pr-2.5 pb-2.5 sm:pb-0">
+                <div className="flex items-center justify-between pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <span>Workflow</span>
+                  <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-600">4 steps</span>
+                </div>
+
+                {/* Step 1: When task created */}
+                <div
+                  onClick={() => setAutomationActiveStep(1)}
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                    automationActiveStep === 1
+                      ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
+                      : "bg-white/80 border-slate-200 hover:bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
+                      <Zap size={11} />
+                    </div>
+                    <div>
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 1</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight">New task created</span>
+                    </div>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </div>
+
+                {/* Step 2: Every matching event */}
+                <div
+                  onClick={() => setAutomationActiveStep(2)}
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                    automationActiveStep === 2
+                      ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
+                      : "bg-white/80 border-slate-200 hover:bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                      <Sliders size={11} />
+                    </div>
+                    <div>
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 2 · Filter</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Matching events</span>
+                    </div>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </div>
+
+                {/* Step 3: Send email */}
+                <div
+                  onClick={() => setAutomationActiveStep(3)}
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                    automationActiveStep === 3
+                      ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
+                      : "bg-white/80 border-slate-200 hover:bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                      <Mail size={11} />
+                    </div>
+                    <div>
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 3</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Send email</span>
+                    </div>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </div>
+
+                {/* Step 4: Send Slack message */}
+                <div
+                  onClick={() => setAutomationActiveStep(4)}
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                    automationActiveStep === 4
+                      ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
+                      : "bg-white/80 border-slate-200 hover:bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                      <Hash size={11} />
+                    </div>
+                    <div>
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 4</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Send Slack msg</span>
+                    </div>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </div>
+              </div>
+
+              {/* Right Column: Visual Flow Cards on Dot Grid Canvas (Screenshot 1) */}
+              <div className="col-span-12 sm:col-span-8 flex flex-col items-center justify-center py-2 relative">
+                {/* Dot grid subtle background */}
+                <div
+                  className="absolute inset-0 opacity-25 pointer-events-none rounded-lg"
+                  style={{
+                    backgroundImage: "radial-gradient(#94A3B8 1px, transparent 1px)",
+                    backgroundSize: "14px 14px",
+                  }}
+                />
+
+                <div className="w-full max-w-xs flex flex-col items-center gap-2 relative z-10">
+                  {/* Card 1: Trigger */}
+                  <div className="w-full bg-white rounded-xl border border-blue-200 p-2.5 shadow-xs flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center">
+                        <Zap size={13} />
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-400 block font-medium">1. When this happens</span>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">New task created</h4>
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                      <Check size={10} /> Ready
+                    </span>
+                  </div>
+
+                  {/* Connecting Line 1 */}
+                  <div className="w-0.5 h-3 bg-slate-300" />
+
+                  {/* Card 2: Condition Filter */}
+                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                        <Sliders size={13} />
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-400 block font-medium">2. Only continue if</span>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Every matching event continues</h4>
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                      <Check size={10} /> Ready
+                    </span>
+                  </div>
+
+                  {/* Connecting Line 2 */}
+                  <div className="w-0.5 h-3 bg-slate-300" />
+
+                  {/* Card 3: Action - Send email */}
+                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                        <Mail size={13} />
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-400 block font-medium">3. Then do this</span>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Send email</h4>
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                      <Check size={10} /> Ready
+                    </span>
+                  </div>
+
+                  {/* Connecting Line 3 */}
+                  <div className="w-0.5 h-3 bg-slate-300" />
+
+                  {/* Card 4: Action - Send Slack message */}
+                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                        <Hash size={13} />
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-400 block font-medium">4. Then do this</span>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Send Slack message</h4>
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                      <Check size={10} /> Ready
+                    </span>
+                  </div>
+
+                  {/* Add action buttons */}
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <button
+                      type="button"
+                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 text-[10px] font-bold shadow-2xs hover:bg-slate-50 flex items-center gap-1"
+                    >
+                      <Plus size={10} /> Add action
+                    </button>
+                    <button
+                      type="button"
+                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 text-[10px] font-bold shadow-2xs hover:bg-slate-50 flex items-center gap-1"
+                    >
+                      <GitBranch size={10} /> Add if/else
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 02: Slack & Email Message / Action Picker Modal (Exact match to Screenshot 3)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "02") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Top Workspace Header Bar */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100">
+                  <Hash size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Choose an action</h3>
+                  <p className="text-[11px] text-slate-400">Choose what happens next. Actions execute in order.</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-semibold">
+                <span>Multi-Channel Dispatch</span>
+              </div>
+            </div>
+
+            {/* Action Picker Modal Card (Screenshot 3) */}
+            <div className="border border-slate-200/90 rounded-xl bg-white shadow-2xs overflow-hidden flex flex-col min-h-[380px]">
+              {/* Search Bar */}
+              <div className="p-3 border-b border-slate-100 bg-slate-50/50">
+                <div className="relative">
+                  <Search size={13} className="absolute left-2.5 top-2.5 text-slate-400" />
+                  <input
+                    type="text"
+                    value={actionSearchQuery}
+                    onChange={(e) => setActionSearchQuery(e.target.value)}
+                    placeholder="Search actions (e.g. email, slack, task)..."
+                    className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-white font-medium text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:ring-1 focus:ring-[#3F72AF]"
+                  />
+                </div>
+              </div>
+
+              {/* Two Column Layout: Module Filter Tabs (Left) + Actions List (Right) */}
+              <div className="grid grid-cols-12 flex-1 divide-x divide-slate-100 text-xs">
+                {/* Left Category Tabs */}
+                <div className="col-span-4 p-2 bg-slate-50/40 flex flex-col gap-1">
+                  {[
+                    { id: "all", label: "All modules" },
+                    { id: "messages", label: "Messages" },
+                    { id: "tasks", label: "Tasks" },
+                    { id: "orgs", label: "Organizations" },
+                    { id: "support", label: "Support" },
+                    { id: "flow", label: "Flow control" },
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActionCategoryTab(tab.id)}
+                      className={`px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium transition-colors cursor-pointer ${
+                        actionCategoryTab === tab.id
+                          ? "bg-blue-50/80 text-[#3F72AF] font-bold border border-blue-200/60"
+                          : "text-slate-600 hover:bg-slate-100/70"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Right Action Items List (Exact match to items in Screenshot 3) */}
+                <div className="col-span-8 p-2 flex flex-col gap-1.5 overflow-y-auto max-h-[320px]">
+                  {/* Action 1: Send notification */}
+                  <div className="p-2.5 rounded-lg border border-slate-200/70 hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between group cursor-pointer">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
+                        <Bell size={13} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                          Send notification
+                        </h4>
+                        <span className="text-[10px] text-slate-400">Messages · In-app push</span>
+                      </div>
+                    </div>
+                    <ChevronRight size={13} className="text-slate-400 group-hover:text-[#3F72AF]" />
+                  </div>
+
+                  {/* Action 2: Send email */}
+                  <div className="p-2.5 rounded-lg border border-indigo-200 bg-indigo-50/30 hover:border-indigo-400 transition-all flex items-center justify-between group cursor-pointer ring-1 ring-indigo-200/50">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                        <Mail size={13} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                          Send email
+                        </h4>
+                        <span className="text-[10px] text-slate-400">Messages · Branded templates & merge tags</span>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-bold text-indigo-600 bg-white px-1.5 py-0.5 rounded border border-indigo-200">
+                      Active
+                    </span>
+                  </div>
+
+                  {/* Action 3: Send Slack message */}
+                  <div className="p-2.5 rounded-lg border border-purple-200 bg-purple-50/30 hover:border-purple-400 transition-all flex items-center justify-between group cursor-pointer ring-1 ring-purple-200/50">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                        <Hash size={13} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
+                          Send Slack message
+                        </h4>
+                        <span className="text-[10px] text-slate-400">Slack · Dedicated channel alerts</span>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-bold text-purple-600 bg-white px-1.5 py-0.5 rounded border border-purple-200">
+                      Active
+                    </span>
+                  </div>
+
+                  {/* Action 4: Create a task */}
+                  <div className="p-2.5 rounded-lg border border-slate-200/70 hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between group cursor-pointer">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
+                        <CheckSquare size={13} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                          Create a task
+                        </h4>
+                        <span className="text-[10px] text-slate-400">Tasks · Auto-assign & schedule</span>
+                      </div>
+                    </div>
+                    <ChevronRight size={13} className="text-slate-400 group-hover:text-[#3F72AF]" />
+                  </div>
+
+                  {/* Action 5: Update task status */}
+                  <div className="p-2.5 rounded-lg border border-slate-200/70 hover:border-[#3F72AF] hover:bg-blue-50/20 transition-all flex items-center justify-between group cursor-pointer">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
+                        <Activity size={13} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                          Update task status
+                        </h4>
+                        <span className="text-[10px] text-slate-400">Tasks · Move across kanban</span>
+                      </div>
+                    </div>
+                    <ChevronRight size={13} className="text-slate-400 group-hover:text-[#3F72AF]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </BlendMockupCard>
+        </div>
+      );
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 03: Unlimited Integrations Directory (Exact match to Screenshot 2)
+    // -------------------------------------------------------------------------
+    if (featureIndex === "03") {
+      return (
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/80 shadow-xs">
+            {/* Header: Settings > Integrations */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                  <Globe size={16} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">Integrations</h3>
+                  <p className="text-[11px] text-slate-400">Connect third-party tools and services to your workspace.</p>
+                </div>
+              </div>
+
+              <span className="text-[10px] font-mono font-bold text-[#3F72AF] bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/50">
+                Unlimited Hub
+              </span>
+            </div>
+
+            {/* Integrations Directory Body */}
+            <div className="flex flex-col gap-3 min-h-[380px]">
+              {/* Category: AVAILABLE INTEGRATIONS (Screenshot 2) */}
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                  Available Integrations
+                </span>
+                <div className="flex flex-col gap-2">
+                  {/* Item 1: Stripe */}
+                  <div className="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50/50 transition-colors flex items-center justify-between shadow-2xs">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                        <CreditCard size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Stripe</h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">Accept payments for invoices, services, and subscriptions</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200">
+                      Not Connected
+                    </span>
+                  </div>
+
+                  {/* Item 2: Slack */}
+                  <div className="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50/50 transition-colors flex items-center justify-between shadow-2xs">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 font-bold text-sm">
+                        #
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Slack</h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">Send workspace notifications to your Slack channels</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200">
+                      Not Connected
+                    </span>
+                  </div>
+
+                  {/* Item 3: Gmail & email (Enabled) */}
+                  <div className="p-3 rounded-xl border border-emerald-200 bg-emerald-50/20 transition-colors flex items-center justify-between shadow-2xs ring-1 ring-emerald-200/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                        <Mail size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Gmail & email</h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">Turn emails into tasks and tickets from Gmail or by forwarding</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" /> Enabled
+                    </span>
+                  </div>
+
+                  {/* Item 4: AI Connector (Enabled) */}
+                  <div className="p-3 rounded-xl border border-emerald-200 bg-emerald-50/20 transition-colors flex items-center justify-between shadow-2xs ring-1 ring-emerald-200/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                        <Sparkles size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight">AI Connector</h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">Connect Claude, Cursor, and other AI assistants via MCP</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" /> Enabled
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Category: COMING SOON (Screenshot 2) */}
+              <div className="pt-2 border-t border-slate-100">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                  Coming Soon
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="p-2.5 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Mail size={13} className="text-slate-400" />
+                      <span className="text-xs font-medium text-slate-700">Outlook add-in</span>
+                    </div>
+                    <span className="text-[9px] font-medium text-slate-400 bg-white px-1.5 py-0.5 rounded border border-slate-200">Coming Soon</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={13} className="text-slate-400" />
+                      <span className="text-xs font-medium text-slate-700">Google Calendar</span>
+                    </div>
+                    <span className="text-[9px] font-medium text-slate-400 bg-white px-1.5 py-0.5 rounded border border-slate-200">Coming Soon</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Zap size={13} className="text-slate-400" />
+                      <span className="text-xs font-medium text-slate-700">Zapier (5,000+ apps)</span>
+                    </div>
+                    <span className="text-[9px] font-medium text-slate-400 bg-white px-1.5 py-0.5 rounded border border-slate-200">Coming Soon</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-lg border border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Folder size={13} className="text-slate-400" />
+                      <span className="text-xs font-medium text-slate-700">Google Drive</span>
+                    </div>
+                    <span className="text-[9px] font-medium text-slate-400 bg-white px-1.5 py-0.5 rounded border border-slate-200">Coming Soon</span>
+                  </div>
                 </div>
               </div>
             </div>
