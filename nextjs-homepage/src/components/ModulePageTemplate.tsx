@@ -84,7 +84,9 @@ export default function ModulePageTemplate({
     name.toLowerCase().includes("automat") ||
     name.toLowerCase().includes("report") ||
     name.toLowerCase().includes("ai") ||
-    name.toLowerCase().includes("proposal");
+    name.toLowerCase().includes("proposal") ||
+    name.toLowerCase().includes("portal") ||
+    name.toLowerCase().includes("white-label");
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />
