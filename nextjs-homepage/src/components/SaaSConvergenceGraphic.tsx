@@ -37,7 +37,7 @@ export default function SaaSConvergenceGraphic() {
       x: 250,
       y: 65,
       // Curved stream down into center (250, 250)
-      curvePath: "M 250 85 C 250 140, 250 180, 250 215",
+      curvePath: "M 250 85 C 254 130, 246 175, 250 215",
       icon: (
         <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
           <circle cx="12" cy="7" r="3.5" fill="#F06A6A" />
@@ -136,10 +136,18 @@ export default function SaaSConvergenceGraphic() {
       >
         <defs>
           {tools.map((t) => (
-            <linearGradient key={`grad-${t.id}`} id={`grad-${t.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={t.color} stopOpacity="0.8" />
-              <stop offset="60%" stopColor="#3F72AF" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#3F72AF" stopOpacity="0.9" />
+            <linearGradient
+              key={`grad-${t.id}`}
+              id={`grad-${t.id}`}
+              gradientUnits="userSpaceOnUse"
+              x1={t.x}
+              y1={t.y}
+              x2={250}
+              y2={250}
+            >
+              <stop offset="0%" stopColor={t.color} stopOpacity="0.85" />
+              <stop offset="60%" stopColor="#3F72AF" stopOpacity="0.75" />
+              <stop offset="100%" stopColor="#3F72AF" stopOpacity="0.95" />
             </linearGradient>
           ))}
           {/* Radial Core Glow Filter */}
@@ -159,8 +167,8 @@ export default function SaaSConvergenceGraphic() {
                 d={t.curvePath}
                 fill="none"
                 stroke={t.color}
-                strokeWidth={isHighlighted ? "2" : "1"}
-                strokeOpacity={isHighlighted ? "0.2" : "0.08"}
+                strokeWidth={isHighlighted ? "1.5" : "1"}
+                strokeOpacity={isHighlighted ? "0.12" : "0.05"}
                 strokeLinecap="round"
               />
 
