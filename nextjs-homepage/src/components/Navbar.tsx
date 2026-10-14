@@ -59,10 +59,13 @@ export default function Navbar() {
             onMouseEnter={() => setActiveDropdown("features")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <button className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2">
+            <Link
+              href="/features/"
+              className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2"
+            >
               <span>Features</span>
               <ChevronDown size={13} className={`transition-transform duration-200 ${activeDropdown === "features" ? "rotate-180" : ""}`} />
-            </button>
+            </Link>
 
             {activeDropdown === "features" && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-[520px] bg-white border border-[#E7E7EA] rounded-2xl p-4 shadow-lg grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-1 duration-150">
@@ -97,10 +100,13 @@ export default function Navbar() {
             onMouseEnter={() => setActiveDropdown("use-cases")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <button className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2">
+            <Link
+              href="/use-cases/"
+              className="flex items-center gap-1 text-[13.5px] text-[#4A4E57] hover:text-[#0B0B0F] font-medium transition-colors py-2"
+            >
               <span>Use Cases</span>
               <ChevronDown size={13} className={`transition-transform duration-200 ${activeDropdown === "use-cases" ? "rotate-180" : ""}`} />
-            </button>
+            </Link>
 
             {activeDropdown === "use-cases" && (
               <div className="absolute top-full left-0 w-[240px] bg-white border border-[#E7E7EA] rounded-2xl p-3 shadow-lg flex flex-col gap-1 animate-in fade-in slide-in-from-top-1 duration-150">
@@ -164,28 +170,39 @@ export default function Navbar() {
           
           {/* Features Accordion */}
           <div>
-            <button
-              onClick={() => setMobileFeaturesOpen(!mobileFeaturesOpen)}
-              className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]"
-            >
-              <span>Features (12 Modules)</span>
-              <ChevronDown
-                size={16}
-                className={`transition-transform duration-200 text-[#6B6F76] ${
-                  mobileFeaturesOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+            <div className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]">
+              <Link
+                href="/features/"
+                onClick={() => setMobileOpen(false)}
+                className="hover:text-[#3F72AF] transition-colors"
+              >
+                Features (12 Modules)
+              </Link>
+              <button
+                type="button"
+                onClick={() => setMobileFeaturesOpen(!mobileFeaturesOpen)}
+                className="p-1 text-[#6B6F76] hover:text-[#0B0B0F]"
+                aria-label="Toggle Features submenu"
+              >
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${
+                    mobileFeaturesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
             {mobileFeaturesOpen && (
               <div className="grid grid-cols-2 gap-2 pl-2 pt-1 pb-2">
                 {featureLinks.map((item) => (
-                  <a
+                  <Link
                     key={item.title}
                     href={item.href}
+                    onClick={() => setMobileOpen(false)}
                     className="text-xs text-[#334155] py-1 hover:text-[#3F72AF]"
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
@@ -193,28 +210,39 @@ export default function Navbar() {
 
           {/* Use Cases Accordion */}
           <div>
-            <button
-              onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
-              className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]"
-            >
-              <span>Use Cases</span>
-              <ChevronDown
-                size={16}
-                className={`transition-transform duration-200 text-[#6B6F76] ${
-                  mobileUseCasesOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+            <div className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#0B0B0F]">
+              <Link
+                href="/use-cases/"
+                onClick={() => setMobileOpen(false)}
+                className="hover:text-[#3F72AF] transition-colors"
+              >
+                Use Cases
+              </Link>
+              <button
+                type="button"
+                onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
+                className="p-1 text-[#6B6F76] hover:text-[#0B0B0F]"
+                aria-label="Toggle Use Cases submenu"
+              >
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${
+                    mobileUseCasesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
             {mobileUseCasesOpen && (
               <div className="flex flex-col gap-1 pl-2 pt-1 pb-2">
                 {useCaseLinks.map((item) => (
-                  <a
+                  <Link
                     key={item.title}
                     href={item.href}
+                    onClick={() => setMobileOpen(false)}
                     className="text-xs text-[#334155] py-1 hover:text-[#3F72AF]"
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
