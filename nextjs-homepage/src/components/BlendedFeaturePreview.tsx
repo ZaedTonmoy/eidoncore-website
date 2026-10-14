@@ -4407,499 +4407,404 @@ export default function BlendedFeaturePreview({
       };
 
       return (
-        <div className="relative w-full max-w-2xl group min-w-0">
-          <BlendMockupCard className="bg-white p-3.5 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 text-slate-800 border border-slate-200/90 shadow-xs relative">
-            {/* Top Workspace Header Bar matching screenshots */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700 border border-slate-200/70">
-                  <Settings size={15} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <h3 className="text-sm font-bold text-slate-900 leading-tight">Settings</h3>
-                    <ChevronRight size={12} className="text-slate-400" />
-                    <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
-                      Domains
-                    </span>
-                  </div>
-                </div>
-              </div>
+        <div className="relative w-full max-w-xl group min-w-0">
+          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800 border border-slate-200/90 shadow-sm">
+            {/* CARD 1: Add Domain */}
+            <div className="rounded-xl border border-slate-200/80 bg-white p-4 shadow-2xs">
+              <h4 className="text-sm font-bold text-slate-900 leading-tight">Add Domain</h4>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                Point your custom domain to your agency platform. You&apos;ll need to add a CNAME record in your DNS provider.
+              </p>
 
-              <div className="flex items-center gap-2">
-                {/* Search */}
-                <div className="hidden md:flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 rounded-lg px-2.5 py-1 text-slate-400 text-xs w-40">
-                  <Search size={12} className="text-slate-400 shrink-0" />
-                  <span className="text-[11px] text-slate-400">Search...</span>
-                  <span className="ml-auto font-mono text-[9px] bg-white px-1 rounded border border-slate-200 text-slate-400">⌘K</span>
-                </div>
-
-                {/* Onboarding Pill */}
-                <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/70 text-[10.5px] font-semibold text-emerald-700">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Get started 11/17</span>
-                </div>
-
-                {/* AI Copilot */}
-                <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-indigo-50 border border-indigo-200/60 text-indigo-700 text-[11px] font-semibold shadow-2xs">
-                  <Sparkles size={11} className="text-indigo-600" />
-                  <span className="hidden xs:inline">AI Copilot</span>
-                  <span className="font-mono text-[9px] bg-white px-1 rounded text-indigo-600 border border-indigo-200/50">⌘J</span>
-                </div>
-
-                {/* Bell with Badge */}
-                <div className="relative w-6 h-6 rounded-lg text-slate-500 hover:bg-slate-100 flex items-center justify-center cursor-pointer">
-                  <Bell size={13} />
-                  <span className="absolute -top-0.5 -right-0.5 bg-indigo-600 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
-                    6
-                  </span>
-                </div>
-
-                {/* Avatar */}
-                <div className="w-6 h-6 rounded-full bg-linear-to-tr from-indigo-600 to-sky-500 text-white text-[10px] font-bold flex items-center justify-center ring-1 ring-slate-200">
-                  JV
-                </div>
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  type="text"
+                  value={portalDomainInput}
+                  onChange={(e) => setPortalDomainInput(e.target.value)}
+                  placeholder="app.yourcompany.com or portal.youragency.com"
+                  className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-mono"
+                />
+                <button
+                  onClick={() => {
+                    if (portalDomainInput.trim()) {
+                      handleVerifyToggle();
+                    }
+                  }}
+                  className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors shrink-0 cursor-pointer"
+                >
+                  <Plus size={13} />
+                  <span>Add Domain</span>
+                </button>
               </div>
             </div>
 
-            {/* Main Layout: Sub-menu Sidebar + Main Content */}
-            <div className="flex gap-4 items-start">
-              {/* Optional Sub-menu Sidebar (Visible on lg+) */}
-              <div className="hidden lg:flex flex-col w-36 shrink-0 border-r border-slate-100 pr-3 text-[11px] select-none">
-                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 rounded-md px-2 py-1 text-slate-400 mb-3">
-                  <Search size={11} />
-                  <span className="text-[10px]">Search settings...</span>
+            {/* CARD 2: Active Domain Row */}
+            <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 sm:p-4 flex items-center justify-between gap-3 shadow-2xs">
+              <div className="flex items-center gap-3 min-w-0">
+                <div
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center border shrink-0 transition-colors ${
+                    portalDomainVerified
+                      ? "bg-emerald-50 text-emerald-600 border-emerald-200/80"
+                      : "bg-amber-50 text-amber-600 border-amber-200/80"
+                  }`}
+                >
+                  <Globe size={17} />
                 </div>
-
-                <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 mb-1">Account</span>
-                <div className="space-y-0.5 text-slate-600 mb-2.5">
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Profile</div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Security</div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Notifications</div>
-                </div>
-
-                <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 mb-1">Agency</span>
-                <div className="space-y-0.5 text-slate-600">
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Agency</div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Branding</div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Email (SMTP)</div>
-                  <div className="px-2 py-1 rounded-md bg-slate-900 text-white font-semibold flex items-center justify-between shadow-2xs">
-                    <span>Domains</span>
-                    <Globe size={11} className="text-slate-300" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-mono text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
+                      portal.youragency.com
+                    </span>
+                    {portalDomainVerified ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[10px] font-bold tracking-wider uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        ACTIVE & VERIFIED
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-[10px] font-bold tracking-wider uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                        PENDING VERIFICATION
+                      </span>
+                    )}
                   </div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Permissions</div>
-                  <div className="px-2 py-1 rounded hover:bg-slate-50 cursor-pointer">Audit Log</div>
                 </div>
               </div>
 
-              {/* Main Content Area */}
-              <div className="flex-1 min-w-0 space-y-3.5">
-                {/* CARD 1: Add Domain */}
-                <div className="rounded-xl border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-2xs">
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Add Domain</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
-                    Point your custom domain to your agency platform. You&apos;ll need to add a CNAME record in your DNS provider.
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={handleVerifyToggle}
+                  disabled={portalVerifying}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95 disabled:opacity-60"
+                  title="Click to toggle DNS verification check"
+                >
+                  {portalVerifying ? (
+                    <>
+                      <RefreshCw size={12} className="animate-spin text-indigo-600" />
+                      <span>Checking...</span>
+                    </>
+                  ) : portalDomainVerified ? (
+                    <>
+                      <Check size={12} className="text-emerald-600" />
+                      <span>Verified</span>
+                    </>
+                  ) : (
+                    <>
+                      <Check size={12} className="text-slate-500" />
+                      <span>Verify</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={() => setPortalDomainVerified(false)}
+                  className="px-2.5 py-1.5 rounded-lg border border-rose-200 bg-rose-50/60 hover:bg-rose-100/80 text-rose-600 text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                  title="Remove domain"
+                >
+                  <Trash2 size={12} />
+                  <span className="hidden sm:inline">Remove</span>
+                </button>
+              </div>
+            </div>
+
+            {/* CARD 3: DOMAIN SETUP & VERIFICATION CHECKLIST */}
+            <div>
+              <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                Domain Setup & Verification Checklist
+              </div>
+
+              <div className="rounded-xl border border-slate-200/90 bg-white overflow-hidden shadow-2xs divide-y divide-slate-100">
+                {/* Step 1: Add the DNS records */}
+                <div className="p-4">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200/60 shrink-0">
+                        <Globe size={13} />
+                      </div>
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">
+                        Step 1: Add the DNS records
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-slate-400">
+                      At your DNS provider (e.g. Cloudflare, GoDaddy, Route53)
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-slate-600 leading-relaxed mt-2">
+                    Add the CNAME record below. If your provider expects the full hostname (AWS Route53, Google Cloud DNS), use the <strong className="text-slate-800">Exact Hostname (FQDN)</strong>. If it manages the root zone (Cloudflare, GoDaddy, Namecheap), use the <strong className="text-slate-800">Host Record Name</strong>.
                   </p>
 
-                  <div className="mt-3 flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={portalDomainInput}
-                      onChange={(e) => setPortalDomainInput(e.target.value)}
-                      placeholder="app.yourcompany.com or app.eu.yourcompany.com"
-                      className="flex-1 min-w-0 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-mono"
-                    />
-                    <button
-                      onClick={() => {
-                        if (portalDomainInput.trim()) {
-                          handleVerifyToggle();
-                        }
-                      }}
-                      className="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors shrink-0"
-                    >
-                      <Plus size={13} />
-                      <span>Add Domain</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* CARD 2: Active Domain Row (aetheris-studio.com) */}
-                <div className="rounded-xl border border-slate-200/90 bg-white p-3 sm:p-3.5 flex items-center justify-between gap-2 shadow-2xs">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center border shrink-0 transition-colors ${
-                        portalDomainVerified
-                          ? "bg-emerald-50 text-emerald-600 border-emerald-200/80"
-                          : "bg-amber-50 text-amber-600 border-amber-200/80"
-                      }`}
-                    >
-                      <Globe size={15} />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-mono text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
-                          aetheris-studio.com
-                        </span>
-                        {portalDomainVerified ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[10px] font-bold tracking-wider uppercase">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                            ACTIVE & VERIFIED
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-[10px] font-bold tracking-wider uppercase">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                            PENDING VERIFICATION
-                          </span>
-                        )}
+                  {/* CNAME Record Table */}
+                  <div className="mt-3 rounded-lg border border-slate-200/80 overflow-hidden divide-y divide-slate-100 text-xs">
+                    <div className="flex items-center bg-slate-50/60">
+                      <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                        Record Type:
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <button
-                      onClick={handleVerifyToggle}
-                      disabled={portalVerifying}
-                      className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95 disabled:opacity-60"
-                      title="Click to toggle DNS verification check"
-                    >
-                      {portalVerifying ? (
-                        <>
-                          <RefreshCw size={12} className="animate-spin text-indigo-600" />
-                          <span className="hidden sm:inline">Checking...</span>
-                        </>
-                      ) : portalDomainVerified ? (
-                        <>
-                          <Check size={12} className="text-emerald-600" />
-                          <span>Verified</span>
-                        </>
-                      ) : (
-                        <>
-                          <Check size={12} className="text-slate-500" />
-                          <span>Verify</span>
-                        </>
-                      )}
-                    </button>
-                    <button
-                      onClick={() => setPortalDomainVerified(false)}
-                      className="px-2.5 py-1.5 rounded-lg border border-rose-200 bg-rose-50/60 hover:bg-rose-100/80 text-rose-600 text-xs font-semibold flex items-center gap-1 transition-colors"
-                      title="Remove domain"
-                    >
-                      <Trash2 size={12} />
-                      <span className="hidden sm:inline">Remove</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* CARD 3: DOMAIN SETUP & VERIFICATION CHECKLIST */}
-                <div>
-                  <div className="text-[10px] sm:text-[10.5px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Domain Setup & Verification Checklist
-                  </div>
-
-                  <div className="rounded-xl border border-slate-200/90 bg-white overflow-hidden shadow-2xs divide-y divide-slate-100">
-                    {/* Step 1: Add the DNS records */}
-                    <div className="p-3.5 sm:p-4">
-                      <div className="flex items-center justify-between gap-2 flex-wrap">
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-md bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200/60 shrink-0">
-                            <Globe size={13} />
-                          </div>
-                          <span className="text-xs sm:text-sm font-bold text-slate-900">
-                            Step 1: Add the DNS records
-                          </span>
-                        </div>
-                        <span className="text-[10px] text-slate-400">
-                          At your DNS provider (e.g. Cloudflare, GoDaddy, Route53)
-                        </span>
-                      </div>
-
-                      <p className="text-[11px] text-slate-600 leading-relaxed mt-2">
-                        Add the CNAME record below. If your provider expects the full hostname (AWS Route53, Google Cloud DNS), use the <strong className="text-slate-800">Exact Hostname (FQDN)</strong>. If it manages the root zone (Cloudflare, GoDaddy, Namecheap), use the <strong className="text-slate-800">Host Record Name</strong>.
-                      </p>
-
-                      {/* CNAME Record Table */}
-                      <div className="mt-3 rounded-lg border border-slate-200/80 overflow-hidden divide-y divide-slate-100 text-[11px]">
-                        <div className="flex items-center bg-slate-50/60">
-                          <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                            Record Type:
-                          </div>
-                          <div className="px-3 py-2 font-mono font-bold text-indigo-600">
-                            CNAME
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                          <div className="flex items-center flex-1 min-w-0">
-                            <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                              Exact Hostname (FQDN):
-                            </div>
-                            <div className="px-3 py-2 font-mono text-slate-800 truncate">
-                              aetheris-studio.com
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => handleCopyRecord("aetheris-studio.com", "cname-fqdn")}
-                            className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                          >
-                            {portalCopiedRecord === "cname-fqdn" ? (
-                              <>
-                                <Check size={11} className="text-emerald-600" />
-                                <span className="text-emerald-600">Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy size={11} />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-
-                        <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                          <div className="flex items-center flex-1 min-w-0">
-                            <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                              Host Record Name:
-                            </div>
-                            <div className="px-3 py-2 font-mono text-slate-800 truncate">
-                              <span className="font-bold text-indigo-600">@</span>{" "}
-                              <span className="text-slate-400 text-[10px]">(in zone: aetheris-studio.com)</span>
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => handleCopyRecord("@", "cname-host")}
-                            className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                          >
-                            {portalCopiedRecord === "cname-host" ? (
-                              <>
-                                <Check size={11} className="text-emerald-600" />
-                                <span className="text-emerald-600">Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy size={11} />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-
-                        <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                          <div className="flex items-center flex-1 min-w-0">
-                            <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                              Target / Value:
-                            </div>
-                            <div className="px-3 py-2 font-mono text-slate-800 truncate text-[10.5px]">
-                              e29e99730af32490.vercel-dns-017.com
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => handleCopyRecord("e29e99730af32490.vercel-dns-017.com", "cname-val")}
-                            className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                          >
-                            {portalCopiedRecord === "cname-val" ? (
-                              <>
-                                <Check size={11} className="text-emerald-600" />
-                                <span className="text-emerald-600">Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy size={11} />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Delegated Sub-Zone Link */}
-                      <div className="mt-2 text-[10.5px] text-slate-500">
-                        Managing a delegated sub-zone?{" "}
-                        <button className="text-indigo-600 hover:underline font-medium inline cursor-pointer">
-                          Change root zone (default: aetheris-studio.com)
-                        </button>
-                      </div>
-
-                      {/* Ownership Record (TXT) Sub-section */}
-                      <div className="mt-4 pt-3 border-t border-slate-100">
-                        <h5 className="text-xs font-bold text-slate-900">Ownership record (TXT)</h5>
-                        <p className="text-[11px] text-slate-600 leading-relaxed mt-0.5">
-                          Every workspace uses the same CNAME target, so this TXT record proves the domain is yours. Verification needs both records. Leave it in place after verification.
-                        </p>
-
-                        {/* TXT Record Table */}
-                        <div className="mt-2.5 rounded-lg border border-slate-200/80 overflow-hidden divide-y divide-slate-100 text-[11px]">
-                          <div className="flex items-center bg-slate-50/60">
-                            <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                              Record type
-                            </div>
-                            <div className="px-3 py-2 font-mono font-bold text-indigo-600">
-                              TXT
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                            <div className="flex items-center flex-1 min-w-0">
-                              <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                                Exact name (FQDN)
-                              </div>
-                              <div className="px-3 py-2 font-mono text-slate-800 truncate">
-                                _eidon-verify.aetheris-studio.com
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => handleCopyRecord("_eidon-verify.aetheris-studio.com", "txt-fqdn")}
-                              className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                            >
-                              {portalCopiedRecord === "txt-fqdn" ? (
-                                <>
-                                  <Check size={11} className="text-emerald-600" />
-                                  <span className="text-emerald-600">Copied</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy size={11} />
-                                  <span>Copy</span>
-                                </>
-                              )}
-                            </button>
-                          </div>
-
-                          <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                            <div className="flex items-center flex-1 min-w-0">
-                              <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                                Host record name
-                              </div>
-                              <div className="px-3 py-2 font-mono text-slate-800 truncate">
-                                <span className="font-bold text-indigo-600">_eidon-verify</span>{" "}
-                                <span className="text-slate-400 text-[10px]">(in zone: aetheris-studio.com)</span>
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => handleCopyRecord("_eidon-verify", "txt-host")}
-                              className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                            >
-                              {portalCopiedRecord === "txt-host" ? (
-                                <>
-                                  <Check size={11} className="text-emerald-600" />
-                                  <span className="text-emerald-600">Copied</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy size={11} />
-                                  <span>Copy</span>
-                                </>
-                              )}
-                            </button>
-                          </div>
-
-                          <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
-                            <div className="flex items-center flex-1 min-w-0">
-                              <div className="w-36 sm:w-44 px-3 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
-                                Value
-                              </div>
-                              <div className="px-3 py-2 font-mono font-bold text-indigo-600 truncate">
-                                716375dad5ee09043db8de16492a1355
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => handleCopyRecord("716375dad5ee09043db8de16492a1355", "txt-val")}
-                              className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
-                            >
-                              {portalCopiedRecord === "txt-val" ? (
-                                <>
-                                  <Check size={11} className="text-emerald-600" />
-                                  <span className="text-emerald-600">Copied</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy size={11} />
-                                  <span>Copy</span>
-                                </>
-                              )}
-                            </button>
-                          </div>
-                        </div>
+                      <div className="px-3.5 py-2 font-mono font-bold text-indigo-600">
+                        CNAME
                       </div>
                     </div>
 
-                    {/* Step 2: Awaiting DNS Verification */}
-                    <div className="p-3 sm:p-3.5 bg-slate-50/50 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div
-                          className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
-                            portalDomainVerified
-                              ? "bg-emerald-100 text-emerald-600"
-                              : "bg-amber-100 text-amber-600"
-                          }`}
-                        >
-                          {portalDomainVerified ? <CheckCircle2 size={13} /> : <Clock size={13} />}
+                    <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                      <div className="flex items-center flex-1 min-w-0">
+                        <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                          Exact Hostname (FQDN):
                         </div>
-                        <div className="min-w-0">
-                          <span className="text-xs sm:text-sm font-bold text-slate-900">
-                            {portalDomainVerified ? "Step 2: DNS Records Verified" : "Step 2: Awaiting DNS Verification"}
-                          </span>
-                          <span className="text-[10.5px] text-slate-400 hidden sm:inline ml-2">
-                            {portalDomainVerified
-                              ? "CNAME & TXT records active across all edge nodes"
-                              : "Changes may take a few minutes to propagate"}
-                          </span>
+                        <div className="px-3.5 py-2 font-mono text-slate-800 truncate">
+                          portal.youragency.com
                         </div>
                       </div>
-
                       <button
-                        onClick={handleVerifyToggle}
-                        disabled={portalVerifying}
-                        className="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold shadow-2xs transition-colors shrink-0 cursor-pointer disabled:opacity-60"
+                        onClick={() => handleCopyRecord("portal.youragency.com", "cname-fqdn")}
+                        className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
                       >
-                        {portalVerifying ? "Verifying..." : portalDomainVerified ? "Re-check" : "Verify"}
+                        {portalCopiedRecord === "cname-fqdn" ? (
+                          <>
+                            <Check size={11} className="text-emerald-600" />
+                            <span className="text-emerald-600">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={11} />
+                            <span>Copy</span>
+                          </>
+                        )}
                       </button>
                     </div>
 
-                    {/* Step 3: SSL Certificate Pending */}
-                    <div className="p-3 sm:p-3.5 bg-slate-50/30 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div
-                          className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
-                            portalDomainVerified
-                              ? "bg-emerald-100 text-emerald-600"
-                              : "bg-slate-100 text-slate-400"
-                          }`}
-                        >
-                          {portalDomainVerified ? <ShieldCheck size={13} /> : <Shield size={13} />}
+                    <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                      <div className="flex items-center flex-1 min-w-0">
+                        <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                          Host Record Name:
                         </div>
-                        <div className="min-w-0">
-                          <span
-                            className={`text-xs sm:text-sm font-bold ${
-                              portalDomainVerified ? "text-slate-900" : "text-slate-700"
-                            }`}
-                          >
-                            {portalDomainVerified ? "Step 3: SSL Certificate Active" : "Step 3: SSL Certificate Pending"}
-                          </span>
-                          <span className="text-[10.5px] text-slate-400 hidden sm:inline ml-2">
-                            {portalDomainVerified
-                              ? "Zero-config auto-renewing TLS certificate active"
-                              : "Issued automatically once DNS verification succeeds"}
-                          </span>
+                        <div className="px-3.5 py-2 font-mono text-slate-800 truncate">
+                          <span className="font-bold text-indigo-600">portal</span>{" "}
+                          <span className="text-slate-400 text-[10.5px]">(in zone: youragency.com)</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleCopyRecord("portal", "cname-host")}
+                        className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
+                      >
+                        {portalCopiedRecord === "cname-host" ? (
+                          <>
+                            <Check size={11} className="text-emerald-600" />
+                            <span className="text-emerald-600">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={11} />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                      <div className="flex items-center flex-1 min-w-0">
+                        <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                          Target / Value:
+                        </div>
+                        <div className="px-3.5 py-2 font-mono text-slate-700 truncate text-[11px]">
+                          cname.********************.eidon-dns.com
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleCopyRecord("cname.********************.eidon-dns.com", "cname-val")}
+                        className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
+                      >
+                        {portalCopiedRecord === "cname-val" ? (
+                          <>
+                            <Check size={11} className="text-emerald-600" />
+                            <span className="text-emerald-600">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={11} />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Delegated Sub-Zone Link */}
+                  <div className="mt-2.5 text-[10.5px] text-slate-500">
+                    Managing a delegated sub-zone?{" "}
+                    <button className="text-indigo-600 hover:underline font-medium inline cursor-pointer">
+                      Change root zone (default: youragency.com)
+                    </button>
+                  </div>
+
+                  {/* Ownership Record (TXT) Sub-section */}
+                  <div className="mt-4 pt-3.5 border-t border-slate-100">
+                    <h5 className="text-xs font-bold text-slate-900">Ownership record (TXT)</h5>
+                    <p className="text-[11px] text-slate-600 leading-relaxed mt-0.5">
+                      Every workspace uses the same CNAME target, so this TXT record proves the domain is yours. Verification needs both records. Leave it in place after verification.
+                    </p>
+
+                    {/* TXT Record Table */}
+                    <div className="mt-2.5 rounded-lg border border-slate-200/80 overflow-hidden divide-y divide-slate-100 text-xs">
+                      <div className="flex items-center bg-slate-50/60">
+                        <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                          Record type
+                        </div>
+                        <div className="px-3.5 py-2 font-mono font-bold text-indigo-600">
+                          TXT
                         </div>
                       </div>
 
-                      {portalDomainVerified && (
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Secure
-                        </span>
-                      )}
+                      <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                        <div className="flex items-center flex-1 min-w-0">
+                          <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                            Exact name (FQDN)
+                          </div>
+                          <div className="px-3.5 py-2 font-mono text-slate-800 truncate">
+                            _eidon-verify.portal.youragency.com
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCopyRecord("_eidon-verify.portal.youragency.com", "txt-fqdn")}
+                          className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
+                        >
+                          {portalCopiedRecord === "txt-fqdn" ? (
+                            <>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={11} />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                        <div className="flex items-center flex-1 min-w-0">
+                          <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                            Host record name
+                          </div>
+                          <div className="px-3.5 py-2 font-mono text-slate-800 truncate">
+                            <span className="font-bold text-indigo-600">_eidon-verify</span>{" "}
+                            <span className="text-slate-400 text-[10.5px]">(in zone: youragency.com)</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCopyRecord("_eidon-verify", "txt-host")}
+                          className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
+                        >
+                          {portalCopiedRecord === "txt-host" ? (
+                            <>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={11} />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      <div className="flex items-center justify-between hover:bg-slate-50/40 transition-colors">
+                        <div className="flex items-center flex-1 min-w-0">
+                          <div className="w-36 sm:w-44 px-3.5 py-2 text-slate-500 font-medium border-r border-slate-100 shrink-0">
+                            Value
+                          </div>
+                          <div className="px-3.5 py-2 font-mono font-bold text-indigo-600 truncate">
+                            7163************************1355
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCopyRecord("7163************************1355", "txt-val")}
+                          className="mr-2 px-2 py-1 rounded text-[10px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 flex items-center gap-1 transition-all shrink-0 cursor-pointer"
+                        >
+                          {portalCopiedRecord === "txt-val" ? (
+                            <>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={11} />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Floating Support Chat Trigger in bottom-right corner */}
-            <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-md ring-2 ring-white cursor-pointer transition-transform hover:scale-110">
-              <MessageSquare size={13} />
-              <span className="absolute -top-1 -right-1 bg-indigo-950 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-white">
-                2
-              </span>
+                {/* Step 2: Awaiting DNS Verification */}
+                <div className="p-3.5 sm:p-4 bg-slate-50/60 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                        portalDomainVerified
+                          ? "bg-emerald-100 text-emerald-600"
+                          : "bg-amber-100 text-amber-600"
+                      }`}
+                    >
+                      {portalDomainVerified ? <CheckCircle2 size={13} /> : <Clock size={13} />}
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">
+                        {portalDomainVerified ? "Step 2: DNS Records Verified" : "Step 2: Awaiting DNS Verification"}
+                      </span>
+                      <span className="text-[11px] text-slate-500 hidden sm:inline ml-2">
+                        {portalDomainVerified
+                          ? "CNAME & TXT records active across all edge nodes"
+                          : "Changes may take a few minutes to propagate"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleVerifyToggle}
+                    disabled={portalVerifying}
+                    className="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold shadow-2xs transition-colors shrink-0 cursor-pointer disabled:opacity-60"
+                  >
+                    {portalVerifying ? "Verifying..." : portalDomainVerified ? "Re-check" : "Verify"}
+                  </button>
+                </div>
+
+                {/* Step 3: SSL Certificate Pending */}
+                <div className="p-3.5 sm:p-4 bg-slate-50/30 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                        portalDomainVerified
+                          ? "bg-emerald-100 text-emerald-600"
+                          : "bg-slate-100 text-slate-400"
+                      }`}
+                    >
+                      {portalDomainVerified ? <ShieldCheck size={13} /> : <Shield size={13} />}
+                    </div>
+                    <div className="min-w-0">
+                      <span
+                        className={`text-xs sm:text-sm font-bold ${
+                          portalDomainVerified ? "text-slate-900" : "text-slate-700"
+                        }`}
+                      >
+                        {portalDomainVerified ? "Step 3: SSL Certificate Active" : "Step 3: SSL Certificate Pending"}
+                      </span>
+                      <span className="text-[11px] text-slate-400 hidden sm:inline ml-2">
+                        {portalDomainVerified
+                          ? "Zero-config auto-renewing TLS certificate active"
+                          : "Issued automatically once DNS verification succeeds"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {portalDomainVerified && (
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Secure
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           </BlendMockupCard>
         </div>
