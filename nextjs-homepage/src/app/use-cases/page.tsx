@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,13 +12,7 @@ import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
-import {
-  MarketingPreview,
-  DesignPreview,
-  DevelopmentPreview,
-  ConsultingPreview,
-  FreelancerPreview,
-} from "@/components/UseCasePreviews";
+import BlendedFeaturePreview from "@/components/BlendedFeaturePreview";
 import {
   Megaphone,
   Palette,
@@ -53,7 +47,8 @@ interface Vertical {
   modules: { name: string; href: string }[];
   featureHref: string;
   featureName: string;
-  Preview: React.ComponentType;
+  // Which live feature screen illustrates this section (same screens as the feature pages)
+  screen: { moduleName: string; featureIndex: string; title: string };
 }
 
 const VERTICALS: Vertical[] = [
@@ -62,62 +57,64 @@ const VERTICALS: Vertical[] = [
     name: "Marketing Agencies",
     Icon: Megaphone,
     iconClass: "bg-pink-50 text-pink-600 border-pink-100",
-    summary: "Retainers, campaigns and client approvals without the chaos.",
-    tagline: "Run campaigns and retainers without the chaos",
-    desc: "Coordinate campaigns, content calendars and deliverables across every client account. Track monthly retainers and send performance digests on autopilot.",
+    summary: "Recurring retainers, client portals and fast onboarding.",
+    tagline: "Run retainers and client accounts without the chaos",
+    desc: "Keep every client on a predictable monthly rhythm. Retainers bill themselves, deliverables stay on schedule, and clients check progress in their own portal.",
     points: [
-      "Campaign milestones with built-in asset reviews",
-      "Monthly retainer invoicing through Stripe",
+      "Recurring retainers that auto-charge through Stripe",
+      "Monthly, quarterly or custom billing for each client",
       "White-label client portal for live campaign reporting",
       "Intake forms that onboard new accounts fast",
     ],
     modules: [
-      { name: "CRM & Clients", href: "/crm/" },
-      { name: "Client Portal", href: "/portal/" },
       { name: "Invoicing", href: "/invoicing/" },
+      { name: "Client Portal", href: "/portal/" },
+      { name: "CRM & Clients", href: "/crm/" },
       { name: "Intake Forms", href: "/intake-forms/" },
     ],
-    featureHref: "/crm/",
-    featureName: "CRM",
-    Preview: MarketingPreview,
+    featureHref: "/invoicing/",
+    featureName: "Invoicing",
+    // Invoicing 01: recurring retainers dashboard (Monthly Design Retainer, SEO & Growth Retainer...)
+    screen: { moduleName: "Invoicing", featureIndex: "01", title: "Recurring retainers" },
   },
   {
     id: "design",
     name: "Design Studios",
     Icon: Palette,
     iconClass: "bg-purple-50 text-purple-600 border-purple-100",
-    summary: "Proofs, revision rounds and secure file hand-off.",
-    tagline: "Get proofs approved and files delivered, cleanly",
-    desc: "Share Figma links, brand assets and creative proofs in one place. Clients leave focused feedback and approve each milestone before final files are released.",
+    summary: "Milestones, client sign-off and secure file hand-off.",
+    tagline: "Break every project into milestones clients can sign off",
+    desc: "Split each design project into clear phases with due dates and linked tasks. Clients review the work and approve it before the next phase starts.",
     points: [
-      "Asset galleries with in-browser previews",
-      "Milestone approvals that gate the next phase and invoice",
+      "Milestones with due dates and linked tasks",
+      "Client review and sign-off before each phase moves on",
       "Productized design packages and one-click add-ons",
       "Expiring download links protect your source files",
     ],
     modules: [
-      { name: "Proposals & E-Sign", href: "/proposals/" },
-      { name: "Digital Products", href: "/digital-products/" },
       { name: "Projects", href: "/projects/" },
       { name: "Client Portal", href: "/portal/" },
+      { name: "Proposals & E-Sign", href: "/proposals/" },
+      { name: "Digital Products", href: "/digital-products/" },
     ],
     featureHref: "/projects/",
     featureName: "Projects",
-    Preview: DesignPreview,
+    // Projects 02: milestone management (design tokens, client review, handover)
+    screen: { moduleName: "Projects", featureIndex: "02", title: "Project milestones" },
   },
   {
     id: "development",
     name: "Software & Web Agencies",
     Icon: Code2,
     iconClass: "bg-blue-50 text-[#3F72AF] border-blue-100",
-    summary: "Sprints, budget burn-down and AI coding tools via MCP.",
-    tagline: "Ship sprints and keep every budget on track",
-    desc: "Run two-week sprints on Kanban boards, connect Claude and Cursor through MCP, track billable hours and stop scope creep with signed estimates.",
+    summary: "Sprint boards, subtasks, billable time and MCP.",
+    tagline: "Plan sprints on boards your whole team can follow",
+    desc: "Run sprints on Kanban boards or lists, set priorities and due dates, and break work into subtasks. Connect Claude and Cursor through MCP and track billable time on every task.",
     points: [
-      "MCP integration with Claude and Cursor",
-      "Kanban sprints with WIP limits and subtasks",
+      "Board and list views with priorities, assignees and due dates",
+      "Subtasks, checklists and live billable timers",
       "Budget alerts when hours pass the estimate",
-      "Signed webhooks to GitHub, Slack and your own APIs",
+      "Claude and Cursor access through MCP",
     ],
     modules: [
       { name: "Tasks", href: "/tasks/" },
@@ -127,21 +124,22 @@ const VERTICALS: Vertical[] = [
     ],
     featureHref: "/tasks/",
     featureName: "Tasks",
-    Preview: DevelopmentPreview,
+    // Tasks 01: Kanban board + list view
+    screen: { moduleName: "Tasks", featureIndex: "01", title: "Kanban and list views" },
   },
   {
     id: "consulting",
     name: "Consulting & Advisory Firms",
     Icon: Briefcase,
     iconClass: "bg-amber-50 text-amber-600 border-amber-100",
-    summary: "Engagements, confidential notes and utilization reports.",
-    tagline: "Track engagements, margins and utilization",
-    desc: "Follow every engagement through clear milestones, measure utilization across partners and associates, and keep internal notes away from clients.",
+    summary: "Revenue, cash flow and e-signed proposals.",
+    tagline: "See engagement revenue and cash flow at a glance",
+    desc: "Know how your engagements are performing without building a spreadsheet. Follow revenue pacing, invoiced versus collected cash, and keep internal notes away from clients.",
     points: [
+      "Revenue pacing with an end-of-month projection",
+      "Invoiced vs collected cash flow and collection rate",
       "Internal notes isolated from the client portal",
-      "Billable utilization by partner and associate",
       "Proposals with legally binding e-signatures",
-      "Itemized invoices with multi-currency billing",
     ],
     modules: [
       { name: "Reports", href: "/reports/" },
@@ -151,31 +149,33 @@ const VERTICALS: Vertical[] = [
     ],
     featureHref: "/reports/",
     featureName: "Reports",
-    Preview: ConsultingPreview,
+    // Reports 01: financial intelligence (revenue pacing + cash flow tabs)
+    screen: { moduleName: "Reports & Intelligence", featureIndex: "01", title: "Financial intelligence" },
   },
   {
     id: "freelancers",
     name: "Freelancers & Solo Studios",
     Icon: UserCheck,
     iconClass: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    summary: "One tool instead of five subscriptions.",
-    tagline: "Look like a 20-person agency, on your own",
-    desc: "Get a branded client portal, professional proposals, automatic invoice reminders and a service catalog clients can buy from, all without extra tools.",
+    summary: "Packaged services and one tool instead of five.",
+    tagline: "Sell packaged services and look like a full agency",
+    desc: "Turn what you do into clear, click-to-buy packages. Clients order online and pay you, while a custom-branded portal keeps everything professional, all from one tool.",
     points: [
-      "14-day free trial, no credit card needed",
+      "Service catalog with recurring and one-time pricing",
       "Replaces ClickUp, QuickBooks, PandaDoc and Typeform",
-      "Productized service catalog clients can buy online",
+      "14-day free trial, no credit card needed",
       "Flat pricing that never penalizes you for adding contractors",
     ],
     modules: [
-      { name: "Dashboard", href: "/dashboard/" },
       { name: "Services", href: "/services/" },
       { name: "Invoicing", href: "/invoicing/" },
       { name: "Proposals", href: "/proposals/" },
+      { name: "Dashboard", href: "/dashboard/" },
     ],
-    featureHref: "/dashboard/",
-    featureName: "Dashboard",
-    Preview: FreelancerPreview,
+    featureHref: "/services/",
+    featureName: "Services",
+    // Services 01: productized catalog (click-to-buy packages)
+    screen: { moduleName: "Offerings & Services", featureIndex: "01", title: "Productized service catalog" },
   },
 ];
 
@@ -243,6 +243,42 @@ const FOUNDATION: {
     iconClass: "text-indigo-600",
   },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* Mounts a heavy live screen only while it is near the viewport.             */
+/* Each feature screen runs its own timers, so this keeps 5 of them from      */
+/* running at the same time.                                                  */
+/* -------------------------------------------------------------------------- */
+
+function LazyScreen({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const lastHeight = useRef(480);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        } else {
+          lastHeight.current = el.offsetHeight || lastHeight.current;
+          setVisible(false);
+        }
+      },
+      { rootMargin: "400px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={visible ? undefined : { minHeight: lastHeight.current }}>
+      {visible && children}
+    </div>
+  );
+}
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
@@ -428,7 +464,13 @@ export default function UseCasesPage() {
 
                   {/* Visual side: one live preview, no toggle */}
                   <div className="flex-1 w-full max-w-xl min-w-0">
-                    <v.Preview />
+                    <LazyScreen>
+                      <BlendedFeaturePreview
+                        title={v.screen.title}
+                        moduleName={v.screen.moduleName}
+                        featureIndex={v.screen.featureIndex}
+                      />
+                    </LazyScreen>
                   </div>
                 </div>
               );
