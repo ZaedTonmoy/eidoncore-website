@@ -14,7 +14,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
-import StackConsolidationGraphic from "@/components/StackConsolidationGraphic";
+import SaaSConvergenceGraphic from "@/components/SaaSConvergenceGraphic";
 import {
   Compass,
   Cpu,
@@ -131,9 +131,9 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* 5 Disconnected Tools vs. 1 Unified Foundation Graphic */}
-              <div className="lg:col-span-6 w-full">
-                <StackConsolidationGraphic />
+              {/* Animated SaaS Convergence Graphic */}
+              <div className="lg:col-span-6 w-full flex items-center justify-center">
+                <SaaSConvergenceGraphic />
               </div>
 
             </div>
