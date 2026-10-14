@@ -1517,7 +1517,7 @@ export default function BlendedFeaturePreview({
             {/* Split Visual Canvas: Left Steps List + Center Node Graph + Right Inspector */}
             <div className="grid grid-cols-12 gap-3 bg-slate-50/40 p-2.5 rounded-xl border border-slate-200/70 min-h-[380px]">
               {/* Left Column: Workflow Outline (Steps 1 to 4) */}
-              <div className="col-span-12 sm:col-span-4 flex flex-col gap-1.5 border-b sm:border-b-0 sm:border-r border-slate-200/70 pr-0 sm:pr-2.5 pb-2.5 sm:pb-0">
+              <div className="col-span-12 sm:col-span-5 flex flex-col gap-1.5 border-b sm:border-b-0 sm:border-r border-slate-200/70 pr-0 sm:pr-2.5 pb-2.5 sm:pb-0">
                 <div className="flex items-center justify-between pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
                   <span>Workflow</span>
                   <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-600">4 steps</span>
@@ -1526,90 +1526,90 @@ export default function BlendedFeaturePreview({
                 {/* Step 1: When task created */}
                 <div
                   onClick={() => setAutomationActiveStep(1)}
-                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 ${
                     automationActiveStep === 1
                       ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
                       : "bg-white/80 border-slate-200 hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <div className="w-5 h-5 rounded bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
                       <Zap size={11} />
                     </div>
-                    <div>
-                      <span className="text-[9px] text-slate-400 font-mono block">Step 1</span>
-                      <span className="text-[11px] font-bold text-slate-900 leading-tight">New task created</span>
+                    <div className="min-w-0">
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 1 · Trigger</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight block whitespace-nowrap">New task created</span>
                     </div>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                 </div>
 
                 {/* Step 2: Every matching event */}
                 <div
                   onClick={() => setAutomationActiveStep(2)}
-                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 ${
                     automationActiveStep === 2
                       ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
                       : "bg-white/80 border-slate-200 hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <div className="w-5 h-5 rounded bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                       <Sliders size={11} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-[9px] text-slate-400 font-mono block">Step 2 · Filter</span>
-                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Matching events</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight block whitespace-nowrap">Matching events</span>
                     </div>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                 </div>
 
                 {/* Step 3: Send email */}
                 <div
                   onClick={() => setAutomationActiveStep(3)}
-                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 ${
                     automationActiveStep === 3
                       ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
                       : "bg-white/80 border-slate-200 hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <div className="w-5 h-5 rounded bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                       <Mail size={11} />
                     </div>
-                    <div>
-                      <span className="text-[9px] text-slate-400 font-mono block">Step 3</span>
-                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Send email</span>
+                    <div className="min-w-0">
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 3 · Action</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight block whitespace-nowrap">Send email</span>
                     </div>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                 </div>
 
                 {/* Step 4: Send Slack message */}
                 <div
                   onClick={() => setAutomationActiveStep(4)}
-                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-2 rounded-lg border text-left transition-all cursor-pointer flex items-center justify-between gap-1.5 ${
                     automationActiveStep === 4
                       ? "bg-white border-[#3F72AF] shadow-2xs ring-1 ring-[#3F72AF]/30"
                       : "bg-white/80 border-slate-200 hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <div className="w-5 h-5 rounded bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
                       <Hash size={11} />
                     </div>
-                    <div>
-                      <span className="text-[9px] text-slate-400 font-mono block">Step 4</span>
-                      <span className="text-[11px] font-bold text-slate-900 leading-tight">Send Slack msg</span>
+                    <div className="min-w-0">
+                      <span className="text-[9px] text-slate-400 font-mono block">Step 4 · Action</span>
+                      <span className="text-[11px] font-bold text-slate-900 leading-tight block whitespace-nowrap">Send Slack msg</span>
                     </div>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                 </div>
               </div>
 
               {/* Right Column: Visual Flow Cards on Dot Grid Canvas (Screenshot 1) */}
-              <div className="col-span-12 sm:col-span-8 flex flex-col items-center justify-center py-2 relative">
+              <div className="col-span-12 sm:col-span-7 flex flex-col items-center justify-center py-2 relative">
                 {/* Dot grid subtle background */}
                 <div
                   className="absolute inset-0 opacity-25 pointer-events-none rounded-lg"
@@ -1621,17 +1621,24 @@ export default function BlendedFeaturePreview({
 
                 <div className="w-full max-w-xs flex flex-col items-center gap-2 relative z-10">
                   {/* Card 1: Trigger */}
-                  <div className="w-full bg-white rounded-xl border border-blue-200 p-2.5 shadow-xs flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center">
+                  <div
+                    onClick={() => setAutomationActiveStep(1)}
+                    className={`w-full bg-white rounded-xl p-2.5 transition-all cursor-pointer flex items-center justify-between ${
+                      automationActiveStep === 1
+                        ? "border border-[#3F72AF] ring-1 ring-[#3F72AF]/30 shadow-xs"
+                        : "border border-slate-200/80 hover:border-slate-300 shadow-xs"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-6 h-6 rounded-lg bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
                         <Zap size={13} />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">1. When this happens</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">New task created</h4>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">New task created</h4>
                       </div>
                     </div>
-                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
                       <Check size={10} /> Ready
                     </span>
                   </div>
@@ -1640,17 +1647,24 @@ export default function BlendedFeaturePreview({
                   <div className="w-0.5 h-3 bg-slate-300" />
 
                   {/* Card 2: Condition Filter */}
-                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                  <div
+                    onClick={() => setAutomationActiveStep(2)}
+                    className={`w-full bg-white rounded-xl p-2.5 transition-all cursor-pointer flex items-center justify-between ${
+                      automationActiveStep === 2
+                        ? "border border-[#3F72AF] ring-1 ring-[#3F72AF]/30 shadow-xs"
+                        : "border border-slate-200/80 hover:border-slate-300 shadow-xs"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                         <Sliders size={13} />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">2. Only continue if</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Every matching event continues</h4>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Every matching event continues</h4>
                       </div>
                     </div>
-                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
                       <Check size={10} /> Ready
                     </span>
                   </div>
@@ -1659,17 +1673,24 @@ export default function BlendedFeaturePreview({
                   <div className="w-0.5 h-3 bg-slate-300" />
 
                   {/* Card 3: Action - Send email */}
-                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                  <div
+                    onClick={() => setAutomationActiveStep(3)}
+                    className={`w-full bg-white rounded-xl p-2.5 transition-all cursor-pointer flex items-center justify-between ${
+                      automationActiveStep === 3
+                        ? "border border-[#3F72AF] ring-1 ring-[#3F72AF]/30 shadow-xs"
+                        : "border border-slate-200/80 hover:border-slate-300 shadow-xs"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                         <Mail size={13} />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">3. Then do this</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Send email</h4>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Send email</h4>
                       </div>
                     </div>
-                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
                       <Check size={10} /> Ready
                     </span>
                   </div>
@@ -1678,17 +1699,24 @@ export default function BlendedFeaturePreview({
                   <div className="w-0.5 h-3 bg-slate-300" />
 
                   {/* Card 4: Action - Send Slack message */}
-                  <div className="w-full bg-white rounded-xl border border-slate-200/80 p-2.5 shadow-xs flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                  <div
+                    onClick={() => setAutomationActiveStep(4)}
+                    className={`w-full bg-white rounded-xl p-2.5 transition-all cursor-pointer flex items-center justify-between ${
+                      automationActiveStep === 4
+                        ? "border border-[#3F72AF] ring-1 ring-[#3F72AF]/30 shadow-xs"
+                        : "border border-slate-200/80 hover:border-slate-300 shadow-xs"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-6 h-6 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
                         <Hash size={13} />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">4. Then do this</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Send Slack message</h4>
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Send Slack message</h4>
                       </div>
                     </div>
-                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5">
+                    <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
                       <Check size={10} /> Ready
                     </span>
                   </div>
