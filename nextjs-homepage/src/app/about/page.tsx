@@ -256,14 +256,6 @@ export default function AboutPage() {
                       {/* Ambient Soft Studio Glow */}
                       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(255,255,255,0.95)_0%,rgba(241,245,249,0.3)_75%)]" />
 
-                      {/* Minimal Floating Role Pill */}
-                      <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3F72AF]" />
-                        <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-slate-800">
-                          {leader.role}
-                        </span>
-                      </div>
-
                       {/* High-Res Studio Portrait Image */}
                       <Image
                         src={leader.image}
@@ -280,10 +272,10 @@ export default function AboutPage() {
                       <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors duration-200">
                         {leader.name}
                       </h3>
-                      <span className="text-xs font-mono font-semibold text-[#3F72AF] tracking-wide block mt-1">
-                        {leader.title}
-                      </span>
-                      <p className="mt-3.5 text-xs sm:text-sm text-[#475569] leading-relaxed">
+                      <p className="text-sm font-semibold text-[#3F72AF] tracking-wide mt-1">
+                        {leader.role}
+                      </p>
+                      <p className="mt-3 text-xs sm:text-sm text-[#475569] leading-relaxed">
                         {leader.bio}
                       </p>
                     </div>
