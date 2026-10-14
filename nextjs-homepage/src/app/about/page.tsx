@@ -66,17 +66,15 @@ const LEADERS = [
   {
     name: "Zaed Bin Abedin Tonmoy",
     role: "Founder & CEO",
-    title: "Product Architecture & Agency Systems",
     bio: "Engineer turned founder with 6+ years in tech. Designed, architected, and built Eidoncore end-to-end — from database schema to pixel-perfect UI. Also founded Creation Wave LLC.",
-    image: "/images/team-zaed.webp",
+    image: "/images/team-zaed-modern.webp",
     highlights: ["Product Architecture", "UI / UX Systems", "Growth & Strategy", "Agency Ops"],
   },
   {
     name: "Md Sakib Shahariar Tanoy",
     role: "CTO & Head of Development",
-    title: "Core Infrastructure & Database Architecture",
     bio: "Leading Eidoncore's technical architecture and development. Expert in web systems, security protocols, high-concurrency databases, and building resilient infrastructure.",
-    image: "/images/team-tanoy.webp",
+    image: "/images/team-tanoy-modern.webp",
     highlights: ["Distributed Systems", "Database Security", "Real-time Infrastructure", "API Architecture"],
   },
 ];
@@ -252,18 +250,14 @@ export default function AboutPage() {
                 >
                   <div>
                     {/* Studio Portrait Showcase Container */}
-                    <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-b from-slate-100/90 via-slate-50 to-slate-200/50 border border-slate-200/50 flex items-end justify-center">
-                      {/* Ambient Soft Studio Glow */}
-                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(255,255,255,0.95)_0%,rgba(241,245,249,0.3)_75%)]" />
-
-                      {/* High-Res Studio Portrait Image */}
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 shadow-2xs">
                       <Image
                         src={leader.image}
                         alt={leader.name}
-                        width={500}
-                        height={667}
+                        width={600}
+                        height={750}
                         priority
-                        className="relative z-10 h-full w-auto max-w-none object-contain object-bottom group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                       />
                     </div>
 
