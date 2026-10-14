@@ -120,20 +120,10 @@ export default function SaaSConvergenceGraphic() {
   ];
 
   return (
-    <div className="relative w-full max-w-[540px] aspect-square mx-auto rounded-3xl bg-gradient-to-b from-slate-50/90 via-white to-blue-50/40 border border-[#E2E8F0] shadow-xl p-4 sm:p-6 overflow-hidden flex items-center justify-center select-none">
+    <div className="relative w-full max-w-[520px] aspect-square mx-auto flex items-center justify-center select-none">
       
-      {/* Background Radial Rings / Energy Grid */}
+      {/* Background Orbital Guide Rings */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        {/* Subtle grid pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage: "radial-gradient(#0F172A 1px, transparent 1px)",
-            backgroundSize: "20px 20px"
-          }}
-        />
-
-        {/* Concentric orbital guide rings */}
         <div className="w-[180px] h-[180px] rounded-full border border-slate-200/60 absolute" />
         <div className="w-[280px] h-[280px] rounded-full border border-dashed border-slate-200/70 absolute animate-[spin_60s_linear_infinite]" />
         <div className="w-[390px] h-[390px] rounded-full border border-slate-200/40 absolute" />
