@@ -12,6 +12,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
 import BlendMockupCard from "@/components/BlendMockupCard";
+import BlendedFeaturePreview from "@/components/BlendedFeaturePreview";
 import {
   Megaphone,
   Palette,
@@ -365,40 +366,53 @@ export default function UseCasesPage() {
                       </div>
                     </div>
 
-                    {/* Right / Visual Preview Side */}
-                    <div className="flex-1 w-full max-w-xl">
-                      <BlendMockupCard className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden p-3 sm:p-4">
-                        {/* Chrome bar */}
-                        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
-                          <div className="flex items-center gap-1.5">
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                          </div>
-                          <span className="text-[10px] font-mono text-slate-400">
-                            {vertical.url}
-                          </span>
-                          <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-semibold border border-emerald-200">
-                            Active
-                          </span>
-                        </div>
-
-                        {/* Screenshot */}
-                        <div className="rounded-xl border border-slate-200/80 overflow-hidden bg-slate-50">
-                          <AnimatedImage
-                            src={vertical.image}
-                            alt={vertical.name}
-                            origin={isReverse ? "top-left" : "top-right"}
-                            className="bg-white"
-                            imgClassName="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                          />
-                        </div>
-
-                        {/* Caption */}
-                        <p className="mt-3 text-[11.5px] text-slate-500 leading-snug px-1">
-                          {vertical.caption}
-                        </p>
-                      </BlendMockupCard>
+                    {/* Right / Visual Preview Side (Reusing rich interactive screens from features/homepage) */}
+                    <div className="flex-1 w-full max-w-xl min-w-0">
+                      {vertical.id === "marketing" && (
+                        <BlendedFeaturePreview
+                          moduleName="portal"
+                          featureIndex="01"
+                          title={vertical.tagline}
+                          image={vertical.image}
+                          isReverse={isReverse}
+                        />
+                      )}
+                      {vertical.id === "design" && (
+                        <BlendedFeaturePreview
+                          moduleName="proposal"
+                          featureIndex="01"
+                          title={vertical.tagline}
+                          image={vertical.image}
+                          isReverse={isReverse}
+                        />
+                      )}
+                      {vertical.id === "development" && (
+                        <BlendedFeaturePreview
+                          moduleName="tasks"
+                          featureIndex="01"
+                          title={vertical.tagline}
+                          image={vertical.image}
+                          isReverse={isReverse}
+                        />
+                      )}
+                      {vertical.id === "consulting" && (
+                        <BlendedFeaturePreview
+                          moduleName="report"
+                          featureIndex="01"
+                          title={vertical.tagline}
+                          image={vertical.image}
+                          isReverse={isReverse}
+                        />
+                      )}
+                      {vertical.id === "freelancers" && (
+                        <BlendedFeaturePreview
+                          moduleName="invoic"
+                          featureIndex="01"
+                          title={vertical.tagline}
+                          image={vertical.image}
+                          isReverse={isReverse}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
