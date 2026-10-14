@@ -14,6 +14,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
+import StackConsolidationGraphic from "@/components/StackConsolidationGraphic";
 import {
   Compass,
   Cpu,
@@ -128,17 +129,9 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Dashboard Preview Graphic */}
-              <div className="lg:col-span-6">
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-lg bg-[#0F172A]/5 p-2 sm:p-3">
-                  <AnimatedImage
-                    src="/images/01-dashboard-myday-flightdeck-overview.png"
-                    alt="Eidoncore unified dashboard"
-                    origin="top-right"
-                    className="rounded-xl border border-[#E2E8F0] bg-white shadow-2xs"
-                    imgClassName="w-full h-auto object-cover"
-                  />
-                </div>
+              {/* 5 Disconnected Tools vs. 1 Unified Foundation Graphic */}
+              <div className="lg:col-span-6 w-full">
+                <StackConsolidationGraphic />
               </div>
 
             </div>
