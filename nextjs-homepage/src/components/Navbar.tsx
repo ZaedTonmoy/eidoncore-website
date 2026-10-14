@@ -40,15 +40,12 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#E7E7EA] transition-colors">
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center group py-1">
           <img
-            src="/images/logo.png"
-            alt="Eidoncore Logo"
-            className="w-7 h-7 object-contain rounded-lg group-hover:scale-105 transition-transform duration-200 shadow-2xs"
+            src="/images/Eidoncore-Black.png"
+            alt="EidonCore"
+            className="h-6 sm:h-7 w-auto object-contain group-hover:opacity-85 transition-opacity duration-200"
           />
-          <span className="font-bold text-base tracking-tight text-[#0B0B0F]">
-            {logo.name}
-          </span>
         </Link>
 
         {/* Desktop Navigation Links with Multi-Page Submenus */}

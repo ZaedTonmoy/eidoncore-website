@@ -17,15 +17,12 @@ export default function Footer() {
           
           {/* Logo column */}
           <div className="col-span-2 sm:col-span-3 md:col-span-2 flex flex-col gap-3">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center">
               <img
-                src="/images/logo.png"
-                alt="Eidoncore Logo"
-                className="w-7 h-7 object-contain rounded-lg shadow-2xs"
+                src="/images/Eidoncore-Black.png"
+                alt="EidonCore"
+                className="h-7 w-auto object-contain"
               />
-              <span className="font-bold text-base tracking-tight text-[#0F172A]">
-                {logo.name}
-              </span>
             </div>
             <p className="text-[#64748B] text-xs leading-relaxed max-w-sm mt-1">
               {logo.tagline}
