@@ -250,12 +250,12 @@ export default function AboutPage() {
                 >
                   <div>
                     {/* Studio Portrait Showcase Container */}
-                    <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 shadow-2xs">
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 shadow-2xs">
                       <Image
                         src={leader.image}
                         alt={leader.name}
-                        width={896}
-                        height={1200}
+                        width={824}
+                        height={1024}
                         priority
                         className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                       />
