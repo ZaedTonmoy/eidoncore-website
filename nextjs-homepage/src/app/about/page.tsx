@@ -254,8 +254,8 @@ export default function AboutPage() {
                       <Image
                         src={leader.image}
                         alt={leader.name}
-                        width={824}
-                        height={1024}
+                        width={800}
+                        height={1000}
                         priority
                         className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                       />
