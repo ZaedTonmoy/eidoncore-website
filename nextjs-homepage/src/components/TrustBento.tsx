@@ -74,7 +74,7 @@ export default function TrustBento() {
                 <span className="text-base sm:text-lg text-[#64748B] font-semibold">agencies</span>
               </div>
               <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-[#64748B] leading-relaxed max-w-md">
-                500+ agencies run leads, projects, and invoicing on Eidoncore every day.
+                Agencies run their leads, projects, and invoicing on Eidoncore every day.
               </p>
             </div>
 
@@ -106,9 +106,9 @@ export default function TrustBento() {
                   {card.icon}
                 </div>
                 <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] group-hover:text-[#3F72AF] transition-colors">
+                  <h3 className="text-sm sm:text-base font-bold text-[#0F172A] group-hover:text-[#3F72AF] transition-colors">
                     {card.title}
-                  </h4>
+                  </h3>
                   <p className="mt-1 text-xs text-[#64748B] leading-relaxed">
                     {card.desc}
                   </p>

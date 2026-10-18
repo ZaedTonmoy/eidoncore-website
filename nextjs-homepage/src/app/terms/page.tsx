@@ -13,7 +13,7 @@ export default function TermsPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[

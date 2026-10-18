@@ -1349,7 +1349,7 @@ export default function HeroAppWindow() {
         </aside>
 
         {/* MAIN CONTENT PANE (Scrollable) */}
-        <main
+        <div
           className={`flex-1 min-w-0 flex flex-col bg-[#F8FAFC] no-scrollbar relative ${
             copilotOpen ? "overflow-hidden" : "overflow-y-auto"
           }`}
@@ -10849,7 +10849,7 @@ export default function HeroAppWindow() {
             </>
           )}
 
-        </main>
+        </div>
 
         {/* TICKET DETAIL SLIDE-OVER DRAWER (Matching Screenshot media_1791731599443_09b135d0.png) */}
         {selectedTicket && (

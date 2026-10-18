@@ -145,7 +145,7 @@ export default function PricingPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -233,7 +233,7 @@ export default function PricingPage() {
 
                       {/* Feature Bullet List */}
                       <div className="mt-7 flex flex-col gap-3">
-                        <span className="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8] font-bold">
+                        <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] font-bold">
                           Included in {plan.name}:
                         </span>
                         {plan.features.map((feat) => (

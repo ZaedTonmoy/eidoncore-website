@@ -79,7 +79,7 @@ export default function CustomersPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -219,7 +219,7 @@ export default function CustomersPage() {
                         <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                        <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
+                        <span className="text-[10px] font-mono text-[#64748B] ml-2">
                           app.eidoncore.com/case-study/{study.company.toLowerCase().replace(/\s+/g, "-")}
                         </span>
                       </div>

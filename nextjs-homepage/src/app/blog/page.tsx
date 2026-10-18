@@ -72,7 +72,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -98,7 +98,7 @@ export default function BlogPage() {
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded font-semibold bg-blue-50 text-[#3F72AF] border border-blue-200">
                         {post.tag}
                       </span>
-                      <div className="flex items-center gap-1.5 text-[11px] text-[#94A3B8] font-mono">
+                      <div className="flex items-center gap-1.5 text-[11px] text-[#64748B] font-mono">
                         <Clock size={11} />
                         <span>{post.readTime}</span>
                       </div>
@@ -113,7 +113,7 @@ export default function BlogPage() {
                   </div>
 
                   <div className="mt-6 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors">
-                    <span className="text-[11px] font-mono text-[#94A3B8]">{post.date}</span>
+                    <span className="text-[11px] font-mono text-[#64748B]">{post.date}</span>
                     <a
                       href={post.href}
                       className="font-medium text-[11px] inline-flex items-center gap-1 text-[#3F72AF] group-hover:underline"

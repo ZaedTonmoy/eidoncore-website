@@ -127,9 +127,14 @@ export default function LiveLoopSection() {
                     }`}
                     onMouseEnter={() => setActiveStage(i)}
                     onMouseLeave={() => setActiveStage(null)}
+                    onFocus={() => setActiveStage(i)}
+                    onBlur={() => setActiveStage(null)}
                   >
-                    <div
-                      className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border transition-all duration-300 cursor-pointer shadow-md select-none ${
+                    <button
+                      type="button"
+                      aria-describedby={`loop-tip-${i}`}
+                      onClick={() => setActiveStage((cur) => (cur === i ? null : i))}
+                      className={`flex items-center gap-2 px-3.5 py-2 rounded-full border transition-all duration-300 cursor-pointer shadow-md select-none ${
                         isHovered
                           ? "bg-[#182D4D] border-[#00ADB5] scale-105 shadow-[0_0_20px_rgba(0,173,181,0.4)] ring-2 ring-[#00ADB5]/30"
                           : "bg-[#122542] border-white/15 hover:border-[#00ADB5]/50 hover:bg-[#182D4D]"
@@ -141,10 +146,12 @@ export default function LiveLoopSection() {
                       <span className="text-xs md:text-[13px] font-semibold text-white whitespace-nowrap">
                         {st.name}
                       </span>
-                    </div>
+                    </button>
 
-                    {/* Tooltip on hover */}
+                    {/* Tooltip on hover / focus / tap */}
                     <div
+                      id={`loop-tip-${i}`}
+                      role="tooltip"
                       className={`absolute left-1/2 -translate-x-1/2 w-60 p-3 rounded-xl bg-[#182D4D] border border-[#00ADB5]/50 text-xs text-[#EDEFF4] text-center shadow-[0_16px_36px_rgba(0,0,0,0.7)] pointer-events-none transition-all duration-200 z-[9999] ${
                         isTopHalf
                           ? "top-[calc(100%+10px)]"

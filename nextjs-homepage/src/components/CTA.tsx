@@ -30,7 +30,7 @@ export default function CTA() {
               The agency playbook, monthly.
             </h3>
             <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
-              New workflows, fresh integrations, and what we shipped - one email, no fluff.
+              New workflows, fresh integrations, and what we shipped — one email, no fluff.
             </p>
           </div>
 
@@ -40,6 +40,9 @@ export default function CTA() {
                 <Mail size={16} className="text-[#94A3B8] shrink-0" />
                 <input
                   type="email"
+                  name="email"
+                  autoComplete="email"
+                  aria-label="Email address"
                   placeholder="you@agency.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +83,7 @@ export default function CTA() {
 
             {/* Subheading */}
             <p className="mt-3.5 sm:mt-5 text-[#94A3B8] text-sm sm:text-lg leading-relaxed max-w-xl">
-              Join thousands of agencies managing their entire workflow from a single platform. Start your 14-day free PRO trial - no credit card required.
+              Join 500+ agencies running their entire client workflow from a single platform. Start your 14-day free PRO trial — no credit card required.
             </p>
 
             {/* Action Buttons (100% width on phone for tap ergonomics, auto on desktop) */}
@@ -94,7 +97,7 @@ export default function CTA() {
               </a>
 
               <Link
-                href="/contact"
+                href="/contact/"
                 className="w-full sm:w-auto px-7 py-3 bg-transparent hover:bg-white/10 text-white border border-white/25 hover:border-white text-xs sm:text-sm font-semibold rounded-full transition-all text-center"
               >
                 Book a Demo
@@ -113,7 +116,7 @@ export default function CTA() {
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Check size={13} className="text-emerald-400" />
-                <span>SOC2-ready security</span>
+                <span>SOC 2-ready security</span>
               </span>
             </div>
 

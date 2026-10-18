@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import MotionProvider from "@/components/MotionProvider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -10,7 +11,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#f6f8fb",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -54,7 +55,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <body className="font-sans bg-white text-[#0B0B0F] antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
-        {children}
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

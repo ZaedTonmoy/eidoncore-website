@@ -6,6 +6,7 @@ import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import AnimatedButton from "./AnimatedButton";
 import SectionBadge from "./SectionBadge";
+import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
@@ -41,6 +42,31 @@ export default function InnerHero({
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center text-center">
+        {/* Breadcrumbs */}
+        {breadcrumbs && breadcrumbs.length > 1 && (
+          <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
+            <ol className="flex flex-wrap items-center justify-center gap-1 text-xs text-[#64748B]">
+              {breadcrumbs.map((crumb, i) => {
+                const isLast = i === breadcrumbs.length - 1;
+                return (
+                  <li key={`${crumb.label}-${i}`} className="inline-flex items-center gap-1">
+                    {crumb.href && !isLast ? (
+                      <Link href={crumb.href} className="rounded px-1 py-0.5 hover:text-[#0F172A] transition-colors">
+                        {crumb.label}
+                      </Link>
+                    ) : (
+                      <span aria-current={isLast ? "page" : undefined} className={isLast ? "px-1 py-0.5 font-medium text-[#0F172A]" : "px-1 py-0.5"}>
+                        {crumb.label}
+                      </span>
+                    )}
+                    {!isLast && <ChevronRight size={12} aria-hidden="true" className="text-[#CBD5E1]" />}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        )}
+
         {/* Eyebrow badge */}
         {eyebrow && <SectionBadge text={eyebrow} className="mb-3 sm:mb-4" />}
 

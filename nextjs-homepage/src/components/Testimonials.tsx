@@ -97,7 +97,8 @@ export default function Testimonials() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (isPaused) return;
+    // No auto-advance while hovered/focused, or for visitors who prefer reduced motion
+    if (isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % TESTIMONIALS.length);
     }, 6500);
@@ -107,16 +108,16 @@ export default function Testimonials() {
   const active = TESTIMONIALS[currentSlide];
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
+    <section id="testimonials" className="py-20 md:py-28 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
       <div className="max-w-[1200px] mx-auto px-6">
         
         {/* Section Head */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-14">
           <SectionBadge text="What Agencies Say" />
           <AnimatedHeading
             as="h2"
             text="Loved by 500+ Agencies Worldwide"
-            className="mt-3 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#0B0B0F] leading-[1.08] justify-center"
+            className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
           <AnimatedText
             text="Here's how Eidoncore replaces the tool stack for real agencies, every single day."
@@ -130,13 +131,15 @@ export default function Testimonials() {
           className="max-w-3xl mx-auto bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.05)] relative overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
         >
           {/* Subtle Decorative Quote Symbol */}
-          <div className="absolute right-6 top-4 text-neutral-100 font-serif text-8xl leading-none select-none pointer-events-none -z-0">
+          <div aria-hidden="true" className="absolute right-6 top-4 text-neutral-100 font-serif text-8xl leading-none select-none pointer-events-none -z-0">
             &ldquo;
           </div>
 
-          <div className="relative z-10">
+          <div key={currentSlide} className="relative z-10 animate-in fade-in slide-in-from-top-1 duration-250">
             {/* Replaced Tool Stack Badge */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-8 text-xs font-mono">
               <span className="text-[#64748B] font-medium mr-1 uppercase tracking-wider text-[11px]">
@@ -148,9 +151,9 @@ export default function Testimonials() {
                     {tool}
                   </span>
                   {idx < active.replaced.length - 1 ? (
-                    <span className="text-[#94A3B8] font-bold">+</span>
+                    <span className="text-[#64748B] font-bold">+</span>
                   ) : (
-                    <span className="text-[#3F72AF] font-bold">→</span>
+                    <span className="text-[#3F72AF] font-bold" aria-hidden="true">→</span>
                   )}
                 </React.Fragment>
               ))}
@@ -172,14 +175,14 @@ export default function Testimonials() {
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm relative shrink-0">
                   <Image
                     src={active.avatar}
-                    alt={active.name}
+                    alt=""
                     width={48}
                     height={48}
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-[#0F172A]">{active.name}</h4>
+                  <p className="text-base font-bold text-[#0F172A]">{active.name}</p>
                   <p className="text-xs text-[#64748B]">{active.role}</p>
                 </div>
               </div>
@@ -203,8 +206,10 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, idx) => (
             <button
               key={t.name}
+              type="button"
               onClick={() => setCurrentSlide(idx)}
               aria-label={`View testimonial by ${t.name}`}
+              aria-pressed={currentSlide === idx}
               className={`w-11 h-11 rounded-full overflow-hidden border-2 transition-all duration-300 relative ${
                 currentSlide === idx
                   ? "border-[#3F72AF] scale-110 shadow-md ring-2 ring-[#3F72AF]/20"
@@ -213,7 +218,7 @@ export default function Testimonials() {
             >
               <Image
                 src={t.avatar}
-                alt={t.name}
+                alt=""
                 width={44}
                 height={44}
                 className="object-cover w-full h-full"

@@ -23,8 +23,30 @@ export default function ContactPage() {
     message: "",
   });
 
+  const SUBJECT_LABELS: Record<string, string> = {
+    demo: "Request a Live Demo",
+    sales: "Sales & Pricing Inquiry",
+    enterprise: "Enterprise Custom Plan",
+    support: "Technical Support",
+    partnership: "Agency Partnership",
+    other: "Other Inquiry",
+  };
+
+  // This site is static (no form backend), so the inquiry is handed to the
+  // visitor's email app, pre-addressed to the team, instead of being dropped.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const subject = `[${SUBJECT_LABELS[formData.subject] ?? "Inquiry"}] ${formData.company || formData.name}`;
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.company ? `Agency: ${formData.company}` : null,
+      "",
+      formData.message,
+    ]
+      .filter((line) => line !== null)
+      .join("\n");
+    window.location.href = `mailto:hello@eidoncore.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setFormSubmitted(true);
   };
 
@@ -32,7 +54,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -57,12 +79,14 @@ export default function ContactPage() {
                       <CheckCircle2 size={28} />
                     </div>
                     <h3 className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                      Message Received!
+                      Almost there — send it from your email app
                     </h3>
                     <p className="mt-3 text-sm text-[#64748B] max-w-md leading-relaxed">
-                      Thank you for reaching out. One of our agency specialists will review your note and respond to <strong className="text-[#0F172A]">{formData.email || "your email"}</strong> within 24 hours.
+                      We&apos;ve opened a draft addressed to <strong className="text-[#0F172A]">hello@eidoncore.com</strong> with your details. Press send there and we&apos;ll reply to <strong className="text-[#0F172A]">{formData.email || "your email"}</strong>. Nothing opened? Email us directly at{" "}
+                      <a href="mailto:hello@eidoncore.com" className="font-semibold text-[#3F72AF] hover:underline">hello@eidoncore.com</a>.
                     </p>
                     <button
+                      type="button"
                       onClick={() => setFormSubmitted(false)}
                       className="mt-8 px-5 py-2.5 bg-white border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] rounded-full hover:border-[#3F72AF] shadow-2xs transition-colors"
                     >
@@ -82,53 +106,64 @@ export default function ContactPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-semibold text-[#334155]">
+                        <label htmlFor="contact-name" className="text-xs font-semibold text-[#334155]">
                           Full Name *
                         </label>
                         <input
+                          id="contact-name"
+                          name="name"
+                          autoComplete="name"
                           type="text"
                           required
-                          placeholder="Sarah Kim"
+                          placeholder="Your name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-semibold text-[#334155]">
+                        <label htmlFor="contact-email" className="text-xs font-semibold text-[#334155]">
                           Work Email *
                         </label>
                         <input
+                          id="contact-email"
+                          name="email"
+                          autoComplete="email"
                           type="email"
                           required
-                          placeholder="sarah@agency.com"
+                          placeholder="you@agency.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-semibold text-[#334155]">
+                        <label htmlFor="contact-company" className="text-xs font-semibold text-[#334155]">
                           Agency / Company Name
                         </label>
                         <input
+                          id="contact-company"
+                          name="company"
+                          autoComplete="organization"
                           type="text"
-                          placeholder="Spectra Digital"
+                          placeholder="Your agency"
                           value={formData.company}
                           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-semibold text-[#334155]">
+                        <label htmlFor="contact-subject" className="text-xs font-semibold text-[#334155]">
                           Inquiry Subject *
                         </label>
                         <select
+                          id="contact-subject"
+                          name="subject"
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                           className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs cursor-pointer"
@@ -144,16 +179,18 @@ export default function ContactPage() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#334155]">
+                      <label htmlFor="contact-message" className="text-xs font-semibold text-[#334155]">
                         Message *
                       </label>
                       <textarea
+                        id="contact-message"
+                        name="message"
                         rows={5}
                         required
                         placeholder="Tell us about your agency size, tools you want to replace, or any specific questions..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs resize-none"
+                        className="px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs resize-none"
                       />
                     </div>
 

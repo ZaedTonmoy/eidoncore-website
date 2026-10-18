@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import SectionBadge from "./SectionBadge";
@@ -49,7 +50,7 @@ export default function WhyEidoncore() {
   ];
 
   return (
-    <section id="why-eidoncore" className="py-20 md:py-32 bg-white border-b border-[#E7E7EA]">
+    <section id="why-eidoncore" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         
         {/* Split Grid: Left = Sticky Header & Highlights, Right = Stacking Cards */}
@@ -84,13 +85,13 @@ export default function WhyEidoncore() {
             </div>
 
             {/* Link to Features */}
-            <a
-              href="https://eidoncore.com/features/"
+            <Link
+              href="/features/"
               className="mt-6 sm:mt-8 inline-flex items-center gap-2 px-5 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs"
             >
               <span>Explore all platform modules</span>
-              <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-            </a>
+              <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
           </div>
 
           {/* Right Column: Cards (Stacking sticky on desktop, clean spaced cards on mobile) */}
@@ -123,7 +124,7 @@ export default function WhyEidoncore() {
               </div>
             ))}
             {/* Desktop spacer to ensure all 4 cards have ample scroll track to stack and remain visible */}
-            <div className="hidden lg:block h-72 xl:h-80" aria-hidden="true" />
+            <div className="hidden lg:block h-24" aria-hidden="true" />
           </div>
 
         </div>

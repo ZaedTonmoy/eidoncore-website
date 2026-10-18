@@ -2,34 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --accent: #5B5FEF;
-  --highlight: #E6F23A;
-  --bg-page: #FFFFFF;
-  --bg-card: #FAFAFA;
-  --border-color: #E7E7EA;
-  --text-main: #0B0B0F;
-  --text-muted: #6B6F76;
+@layer base {
+  :root {
+    /* Design tokens — single source of truth for the brand palette */
+    --brand: #3F72AF;
+    --brand-strong: #112D4E;
+    --accent: #3F72AF;
+    --ink: #0B0B0F;
+    --ink-soft: #0F172A;
+    --muted: #64748B;
+    --muted-strong: #475569;
+    --line: #E7E7EA;
+    --line-soft: #E2E8F0;
+    --surface: #F8FAFC;
+    --header-h: 64px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keep in-page anchors (e.g. /use-cases/#design) clear of the sticky header */
+    scroll-padding-top: calc(var(--header-h) + 16px);
+    width: 100%;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    color: var(--ink);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(63, 114, 175, 0.15);
+    color: var(--ink);
+  }
+
+  /* Visible keyboard focus everywhere, never on mouse click */
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible,
+  [data-theme="dark"] :focus-visible {
+    outline-color: #7DB3E8;
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-offset: 0;
+  }
+
+  /* Prevent iOS from zooming into inputs smaller than 16px */
+  @media (max-width: 767px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  width: 100%;
-  overflow-x: clip;
+/* Hide scrollbars on horizontally scrolling pill rows / mockup panes (class was used but never defined) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-body {
-  color: #0B0B0F;
-  background-color: #FFFFFF;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  overflow-x: clip;
+/* Skip link (first tab stop) */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 0.5rem 0.875rem;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  /* visually hidden until focused */
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.skip-link:focus {
+  clip-path: none;
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
-::selection {
-  background: rgba(91, 95, 239, 0.15);
-  color: #0B0B0F;
+/*
+ * Lightweight enter animations.
+ * The mockups and menus use `animate-in / fade-in / slide-in-from-* / zoom-in-95`
+ * utility names, but no animation plugin is installed, so they silently did
+ * nothing. These tiny equivalents make them work without a new dependency.
+ * They use the individual `translate` / `scale` properties so they never
+ * fight with Tailwind's `-translate-x-1/2` centering transforms.
+ */
+@keyframes ec-enter {
+  from {
+    opacity: var(--ec-o, 0);
+    translate: var(--ec-x, 0) var(--ec-y, 0);
+    scale: var(--ec-s, 1);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+.animate-in {
+  animation: ec-enter var(--ec-d, 0.2s) var(--ease-out) both;
+}
+.animate-in.duration-150 { --ec-d: 0.15s; }
+.animate-in.duration-200 { --ec-d: 0.2s; }
+.animate-in.duration-250 { --ec-d: 0.25s; }
+.slide-in-from-top-1 { --ec-y: -4px; }
+.slide-in-from-left { --ec-x: -100%; --ec-o: 1; }
+.slide-in-from-right { --ec-x: 100%; --ec-o: 1; }
+.zoom-in-95 { --ec-s: 0.95; }
+
+/* Progress bar used by the auto-advancing "How it works" steps */
+@keyframes progress {
+  from { transform: scaleX(0); transform-origin: left center; }
+  to { transform: scaleX(1); transform-origin: left center; }
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -220,7 +346,7 @@ body {
 }
 
 .docs-article-body blockquote {
-  border-left: 3px solid #3F72AF;
+  border-left: 3px solid var(--brand);
   background: #F8FAFC;
   padding: 1rem 1.25rem;
   border-radius: 0 0.75rem 0.75rem 0;
@@ -235,7 +361,7 @@ body {
 }
 
 .docs-article-body a {
-  color: #3F72AF;
+  color: var(--brand);
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.15s;

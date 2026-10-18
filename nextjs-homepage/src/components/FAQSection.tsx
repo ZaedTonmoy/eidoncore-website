@@ -5,7 +5,7 @@ import { siteContent } from "@/content/site-content";
 import AnimatedHeading from "./AnimatedHeading";
 import SectionBadge from "./SectionBadge";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
-import { ChevronDown, Plus, Minus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQSection() {
@@ -17,16 +17,16 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-32 bg-white border-b border-[#E7E7EA]">
+    <section id="faq" aria-labelledby="faq-heading" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <div className="max-w-[800px] mx-auto px-6">
         
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-14" id="faq-heading">
           <SectionBadge text={eyebrow} />
           <AnimatedHeading
             as="h2"
             text={title}
-            className="mt-3 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#0B0B0F] leading-[1.08] justify-center"
+            className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
         </div>
 
@@ -37,14 +37,20 @@ export default function FAQSection() {
 
             return (
               <div key={item.q} className="py-5">
+                <h3>
                 <button
+                  type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full flex items-center justify-between gap-4 text-left group transition-colors"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${idx}`}
+                  id={`faq-trigger-${idx}`}
+                  className="w-full flex items-center justify-between gap-4 text-left group transition-colors rounded-md"
                 >
-                  <span className="text-sm sm:text-base font-semibold text-[#0B0B0F] group-hover:text-[#3F72AF] transition-colors">
+                  <span className="text-[15px] sm:text-base font-semibold text-[#0B0B0F] group-hover:text-[#3F72AF] transition-colors">
                     {item.q}
                   </span>
-                  <div
+                  <span
+                    aria-hidden="true"
                     className={`w-6 h-6 rounded-full border border-[#E7E7EA] flex items-center justify-center transition-all duration-300 shrink-0 ${
                       isOpen
                         ? "rotate-180 bg-[#3F72AF] border-[#3F72AF] text-white shadow-2xs"
@@ -52,20 +58,24 @@ export default function FAQSection() {
                     }`}
                   >
                     <ChevronDown size={14} className={isOpen ? "text-white" : "text-[#6B6F76]"} />
-                  </div>
+                  </span>
                 </button>
+                </h3>
 
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       key="content"
+                      id={`faq-panel-${idx}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${idx}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="pt-3 pr-8 text-xs sm:text-sm text-[#64748B] leading-relaxed">
+                      <p className="pt-3 pr-8 text-sm sm:text-[15px] text-[#475569] leading-relaxed">
                         {item.a}
                       </p>
                     </motion.div>

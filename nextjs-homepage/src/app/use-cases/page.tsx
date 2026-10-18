@@ -305,7 +305,7 @@ export default function UseCasesPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />
 
-      <main className="flex-1 overflow-x-clip">
+      <main id="main-content" className="flex-1 overflow-x-clip">
         {/* Hero */}
         <InnerHero
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Use Cases" }]}
@@ -323,7 +323,7 @@ export default function UseCasesPage() {
               <SectionBadge text="Find Your Fit" />
               <AnimatedHeading
                 as="h2"
-                text="Pick the setup that matches your business"
+                text="Pick the Setup That Matches Your Business"
                 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A]"
               />
               <p className="mt-3 text-[#64748B] text-sm sm:text-base leading-relaxed">
@@ -401,7 +401,7 @@ export default function UseCasesPage() {
                   {/* Text side */}
                   <div className="flex-1 w-full max-w-xl min-w-0">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#3F72AF] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20 shrink-0">
+                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#2F5F96] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20 shrink-0">
                         {String(idx + 1).padStart(2, "0")}
                       </span>
                       <SectionBadge text={v.name} className="!mb-0" />
@@ -429,7 +429,7 @@ export default function UseCasesPage() {
                     </ul>
 
                     <div className="mt-7 flex items-center gap-1.5 flex-wrap">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8] mr-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] mr-1">
                         Modules
                       </span>
                       {v.modules.map((m) => (
@@ -502,7 +502,7 @@ export default function UseCasesPage() {
               <SectionBadge text="One Platform" />
               <AnimatedHeading
                 as="h2"
-                text="Every agency type runs on the same core"
+                text="Every Agency Type Runs on the Same Core"
                 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A]"
               />
               <p className="mt-3 text-[#64748B] text-sm sm:text-base leading-relaxed">

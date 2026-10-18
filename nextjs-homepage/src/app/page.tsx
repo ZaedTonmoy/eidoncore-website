@@ -21,7 +21,7 @@ export default function Home() {
       {/* 1. NAVBAR WITH MULTI-PAGE SUBMENUS */}
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* 2. HERO WITH INTERACTIVE DASHBOARD & CURSOR SIMULATION */}
         <Hero />
 

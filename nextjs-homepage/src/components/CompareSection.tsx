@@ -13,7 +13,7 @@ export default function CompareSection() {
   const { eyebrow, title, description, savingsNote, rows } = siteContent.compare;
 
   return (
-    <section id="compare" className="py-20 md:py-32 bg-[#FAFAFA] border-b border-[#E7E7EA]">
+    <section id="compare" className="py-20 md:py-28 bg-[#F8FAFC] border-b border-[#E7E7EA]">
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
@@ -21,7 +21,7 @@ export default function CompareSection() {
           <AnimatedHeading
             as="h2"
             text={title}
-            className="mt-3 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#0B0B0F] leading-[1.08] justify-center"
+            className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
           <AnimatedText
             text={description}

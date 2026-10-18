@@ -91,7 +91,7 @@ export default function ModulePageTemplate({
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
       <Navbar />
 
-      <main className="flex-1 overflow-x-clip">
+      <main id="main-content" className="flex-1 overflow-x-clip">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={breadcrumbs}
@@ -128,7 +128,7 @@ export default function ModulePageTemplate({
                   {/* Left / Text side */}
                   <div className="flex-1 w-full max-w-xl min-w-0">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#3F72AF] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20 shrink-0">
+                      <span className="w-7 h-7 rounded-lg bg-[#3F72AF]/10 text-[#2F5F96] font-mono text-xs font-bold flex items-center justify-center border border-[#3F72AF]/20 shrink-0">
                         {feat.idx}
                       </span>
                       <SectionBadge text={feat.eyebrow} className="!mb-0" />
@@ -186,7 +186,7 @@ export default function ModulePageTemplate({
                             <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                             <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                             <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                            <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
+                            <span className="text-[10px] font-mono text-[#64748B] ml-2">
                               app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
                             </span>
                           </div>
@@ -206,7 +206,7 @@ export default function ModulePageTemplate({
                           <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                           <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
                           <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                          <span className="text-[10px] font-mono text-[#94A3B8] ml-2">
+                          <span className="text-[10px] font-mono text-[#64748B] ml-2">
                             app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
                           </span>
                         </div>
@@ -300,15 +300,11 @@ export default function ModulePageTemplate({
                       <h3 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                         {card.title}
                       </h3>
-                      <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
+                      <p className="mt-2 text-[13px] text-[#64748B] leading-relaxed">
                         {card.description}
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors">
-                      <span className="font-medium text-[11px]">Learn more</span>
-                      <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
                   </StaggerItem>
                 ))}
               </StaggerGroup>

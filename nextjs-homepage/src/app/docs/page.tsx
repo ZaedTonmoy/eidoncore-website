@@ -411,7 +411,7 @@ export default function DocsPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Sticky Mobile Category Bar */}
         <div className="lg:hidden sticky top-[64px] z-30 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-4 py-2.5 flex items-center justify-between shadow-2xs">
           <div className="flex items-center gap-2 min-w-0">
@@ -444,19 +444,20 @@ export default function DocsPage() {
                 <div className="relative">
                   <Search
                     size={14}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]"
                   />
                   <input
                     type="text"
-                    placeholder="Search 22 guides..."
+                    placeholder="Search guides…"
+                    aria-label="Search guides"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-8 pr-7 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#3F72AF] focus:ring-1 focus:ring-[#3F72AF] transition-colors"
+                    className="w-full pl-8 pr-7 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#0F172A] placeholder-[#64748B] focus:outline-none focus:border-[#3F72AF] focus:ring-1 focus:ring-[#3F72AF] transition-colors"
                   />
                   {search && (
                     <button
                       onClick={() => setSearch("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#0F172A]"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
                     >
                       <X size={12} />
                     </button>
@@ -474,7 +475,7 @@ export default function DocsPage() {
               {/* Navigation Scrollable Area */}
               <div className="docs-sidebar-scroll overflow-y-auto flex-1 min-h-0 p-3 space-y-5">
                 {filteredGroups.length === 0 ? (
-                  <div className="py-8 text-center text-xs text-[#94A3B8]">
+                  <div className="py-8 text-center text-xs text-[#64748B]">
                     No guides match &ldquo;{search}&rdquo;
                   </div>
                 ) : (
@@ -500,7 +501,7 @@ export default function DocsPage() {
                                 <span
                                   className={`p-1 rounded-md transition-colors ${
                                     isActive
-                                      ? "bg-[#3F72AF]/10 text-[#3F72AF]"
+                                      ? "bg-[#3F72AF]/10 text-[#2F5F96]"
                                       : "bg-white text-[#64748B] border border-[#E2E8F0]"
                                   }`}
                                 >
@@ -568,7 +569,7 @@ export default function DocsPage() {
 
                 <div className="flex items-center gap-2">
                   <SectionBadge text={activeArticle.category} />
-                  <span className="text-[11px] font-mono text-[#94A3B8]">
+                  <span className="text-[11px] font-mono text-[#64748B]">
                     Guide {activeIndex + 1} of {docsData.length}
                   </span>
                 </div>
@@ -692,19 +693,20 @@ export default function DocsPage() {
                 <div className="relative">
                   <Search
                     size={14}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]"
                   />
                   <input
                     type="text"
-                    placeholder="Search 22 guides..."
+                    placeholder="Search guides…"
+                    aria-label="Search guides"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-8 pr-7 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#3F72AF]"
+                    className="w-full pl-8 pr-7 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#0F172A] placeholder-[#64748B] focus:outline-none focus:border-[#3F72AF]"
                   />
                   {search && (
                     <button
                       onClick={() => setSearch("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94A3B8]"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B]"
                     >
                       <X size={12} />
                     </button>
@@ -736,7 +738,7 @@ export default function DocsPage() {
                             <span
                               className={`p-1 rounded-md ${
                                 isActive
-                                  ? "bg-[#3F72AF]/10 text-[#3F72AF]"
+                                  ? "bg-[#3F72AF]/10 text-[#2F5F96]"
                                   : "bg-white text-[#64748B] border border-[#E2E8F0]"
                               }`}
                             >

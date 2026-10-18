@@ -79,7 +79,7 @@ export default function ChangelogPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -119,7 +119,7 @@ export default function ChangelogPage() {
                           <span className="font-mono text-xs font-bold text-[#3F72AF]">
                             {rel.version}
                           </span>
-                          <span className="text-xs text-[#94A3B8] ml-2 font-mono">
+                          <span className="text-xs text-[#64748B] ml-2 font-mono">
                             • {rel.date}
                           </span>
                         </div>

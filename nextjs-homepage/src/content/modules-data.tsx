@@ -51,7 +51,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
       { value: "111", suffix: "+", label: "Native AI Tools" },
       { value: "19", label: "Connected Modules" },
       { value: "OAuth 2.1", label: "PKCE Protocol Security" },
-      { value: "0", suffix: "ms", label: "Zero Data Leakage" },
+      { value: "Zero", label: "Cross-Tenant Data Access" },
     ],
     features: [
       {
@@ -1250,7 +1250,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
     stats: [
       { value: "AES-256", label: "Database Encryption" },
       { value: "SOC 2", label: "Ready Architecture" },
-      { value: "99.99", suffix: "%", label: "Platform Uptime SLA" },
+      { value: "99.9", suffix: "%", label: "Platform Uptime SLA" },
       { value: "2FA", label: "Hardware & App Auth" },
     ],
     features: [
@@ -1438,7 +1438,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
       { label: "Files" },
     ],
     stats: [
-      { value: "Unlimited", label: "Cloud File Storage" },
+      { value: "100", suffix: " GB", label: "Cloud Storage on Enterprise" },
       { value: "100", suffix: "%", label: "Secure Client Access" },
       { value: "Zero", label: "Expired WeTransfer Links" },
       { value: "Full", label: "Version History Tracking" },
@@ -1916,7 +1916,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
       { value: "50", suffix: "+", label: "Supported Integrations" },
       { value: "REST", label: "Comprehensive JSON API" },
       { value: "Webhooks", label: "Real-Time Event Streams" },
-      { value: "0", suffix: "ms", label: "Zero Webhook Latency" },
+      { value: "Real-Time", label: "Webhook Event Delivery" },
     ],
     features: [
       {

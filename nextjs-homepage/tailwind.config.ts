@@ -14,7 +14,8 @@ export default {
         border: "#E7E7EA",
         "text-main": "#0B0B0F",
         "text-muted": "#6B6F76",
-        accent: "var(--accent, #5B5FEF)",
+        brand: { DEFAULT: "#3F72AF", strong: "#112D4E" },
+        accent: "var(--accent, #3F72AF)",
         highlight: "var(--highlight, #E6F23A)",
       },
       fontFamily: {

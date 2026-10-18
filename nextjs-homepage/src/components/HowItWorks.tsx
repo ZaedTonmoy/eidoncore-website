@@ -48,14 +48,15 @@ export default function HowItWorks() {
   const [whiteLabelActive, setWhiteLabelActive] = useState(true);
   const [copiedLink, setCopiedLink] = useState(false);
 
-  // Auto cycle through tabs every 6 seconds if not paused
+  // Auto-advance through the steps every 5.5s unless hovered or reduced motion is requested
   useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
+    if (isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Restarts whenever the step changes so the progress bar and the switch stay in sync
+    const timer = setTimeout(() => {
       setActiveTab((prev) => (prev + 1) % STEPS.length);
     }, 5500);
-    return () => clearInterval(timer);
-  }, [isPaused]);
+    return () => clearTimeout(timer);
+  }, [isPaused, activeTab]);
 
   // Render the inner panel content for each step
   const renderPanelContent = (stepIndex: number) => {
@@ -296,7 +297,7 @@ export default function HowItWorks() {
   };
 
   return (
-    <section id="how-it-works" className="py-20 md:py-32 bg-[#FAFAFA] border-t border-b border-[#E7E7EA]">
+    <section id="how-it-works" className="py-20 md:py-28 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         
         {/* Section Head */}
@@ -304,8 +305,8 @@ export default function HowItWorks() {
           <SectionBadge text="How It Works" />
           <AnimatedHeading
             as="h2"
-            text="Up And Running in Minutes"
-            className="mt-3 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#0B0B0F] leading-[1.08] justify-center"
+            text="Up and Running in Minutes"
+            className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
           <AnimatedText
             text="Get your agency workspace live in four simple steps."
@@ -321,11 +322,13 @@ export default function HowItWorks() {
             return (
               <div key={`mobile-tab-${step.id}`} className="flex flex-col gap-2.5">
                 <button
+                  type="button"
+                  aria-expanded={isActive}
                   onClick={() => setActiveTab(step.id)}
                   className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-center ${
                     isActive
                       ? "bg-white border-[#3F72AF] shadow-sm"
-                      : "bg-[#F4F4F6] border-[#E7E7EA] hover:bg-white"
+                      : "bg-[#F1F5F9] border-[#E7E7EA] hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -333,8 +336,8 @@ export default function HowItWorks() {
                       <span
                         className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                           isActive
-                            ? "bg-[#3F72AF]/10 text-[#3F72AF]"
-                            : "bg-neutral-200/60 text-[#6B6F76]"
+                            ? "bg-[#3F72AF]/10 text-[#2F5F96]"
+                            : "bg-neutral-200/60 text-[#52565E]"
                         }`}
                       >
                         {step.num}
@@ -350,6 +353,7 @@ export default function HowItWorks() {
 
                     <ChevronDown
                       size={16}
+                      aria-hidden="true"
                       className={`text-[#6B6F76] transition-transform duration-300 ${
                         isActive ? "rotate-180 text-[#3F72AF]" : ""
                       }`}
@@ -397,19 +401,21 @@ export default function HowItWorks() {
               return (
                 <button
                   key={step.id}
+                  type="button"
+                  aria-pressed={isActive}
                   onClick={() => setActiveTab(step.id)}
                   className={`text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group flex-1 flex flex-col justify-center ${
                     isActive
                       ? "bg-white border-[#3F72AF] shadow-sm"
-                      : "bg-[#F4F4F6] border-[#E7E7EA] hover:bg-white hover:border-[#0B0B0F]/20"
+                      : "bg-[#F1F5F9] border-[#E7E7EA] hover:bg-white hover:border-[#0B0B0F]/20"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span
                       className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                         isActive
-                          ? "bg-[#3F72AF]/10 text-[#3F72AF]"
-                          : "bg-neutral-200/60 text-[#6B6F76]"
+                          ? "bg-[#3F72AF]/10 text-[#2F5F96]"
+                          : "bg-neutral-200/60 text-[#52565E]"
                       }`}
                     >
                       {step.num}
@@ -430,7 +436,7 @@ export default function HowItWorks() {
                   {/* Active Progress Bar at bottom */}
                   {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-100">
-                      <div className="h-full bg-[#3F72AF] animate-[progress_5.5s_linear]" />
+                      <div className={isPaused ? "h-full bg-[#3F72AF]/40" : "h-full bg-[#3F72AF] animate-[progress_5.5s_linear]"} />
                     </div>
                   )}
                 </button>

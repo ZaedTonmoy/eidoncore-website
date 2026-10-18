@@ -239,7 +239,7 @@ export default function FeaturesPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -257,14 +257,16 @@ export default function FeaturesPage() {
             <div className="relative w-full">
               <Search
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8]"
+                aria-hidden="true"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748B]"
               />
               <input
                 type="text"
-                placeholder="Search modules (e.g. AI, CRM, Invoicing)..."
+                placeholder="Search modules…"
+                aria-label="Search modules"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E2E8F0] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 rounded-full text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] outline-none transition-all shadow-2xs"
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E2E8F0] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 rounded-full text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] outline-none transition-all shadow-2xs"
               />
             </div>
           </div>
@@ -296,7 +298,7 @@ export default function FeaturesPage() {
               <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#64748B]">
                 Showing {filteredModules.length} Modules
               </span>
-              <span className="text-xs text-[#94A3B8]">
+              <span className="text-xs text-[#64748B]">
                 Click any module for specifications
               </span>
             </div>

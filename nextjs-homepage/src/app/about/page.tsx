@@ -84,7 +84,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -121,7 +121,7 @@ export default function AboutPage() {
                     <Compass size={18} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#0F172A]">Our Realization</h4>
+                    <p className="text-sm font-bold text-[#0F172A]">Our Realization</p>
                     <p className="mt-1 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                       Agencies don&apos;t need 6 disconnected point solutions. They need one foundational platform where client CRM, task execution, autonomous AI workflows, and financial billing share the exact same database.
                     </p>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 <h3 className="mt-2 text-3xl font-extrabold text-[#0F172A] tracking-tight">
                   Eidon
                 </h3>
-                <span className="inline-block mt-1 text-xs text-[#94A3B8] font-mono">
+                <span className="inline-block mt-1 text-xs text-[#64748B] font-mono">
                   Derived from εἶδος (Eidos)
                 </span>
                 <p className="mt-4 text-xs sm:text-sm text-[#64748B] leading-relaxed">
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 <h3 className="mt-2 text-3xl font-extrabold text-[#0F172A] tracking-tight">
                   Core
                 </h3>
-                <span className="inline-block mt-1 text-xs text-[#94A3B8] font-mono">
+                <span className="inline-block mt-1 text-xs text-[#64748B] font-mono">
                   The central, indispensable heart
                 </span>
                 <p className="mt-4 text-xs sm:text-sm text-[#64748B] leading-relaxed">

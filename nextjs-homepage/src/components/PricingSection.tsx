@@ -14,7 +14,7 @@ export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-white border-b border-[#E7E7EA]">
+    <section id="pricing" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-12">
@@ -22,7 +22,7 @@ export default function PricingSection() {
           <AnimatedHeading
             as="h2"
             text={title}
-            className="mt-3 text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#0B0B0F] leading-[1.08] justify-center"
+            className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
           <AnimatedText
             text={description}
@@ -33,6 +33,8 @@ export default function PricingSection() {
           {/* Billing Frequency Switch */}
           <div className="mt-8 inline-flex items-center gap-2 p-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full shadow-2xs">
             <button
+              type="button"
+              aria-pressed={!isAnnual}
               onClick={() => setIsAnnual(false)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                 !isAnnual
@@ -43,6 +45,8 @@ export default function PricingSection() {
               Monthly billing
             </button>
             <button
+              type="button"
+              aria-pressed={isAnnual}
               onClick={() => setIsAnnual(true)}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
                 isAnnual

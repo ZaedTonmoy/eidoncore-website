@@ -33,7 +33,7 @@ export default function FeaturesBento() {
   };
 
   return (
-    <section id="features" className="py-24 md:py-32 bg-white border-b border-[#E7E7EA]">
+    <section id="features" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -52,13 +52,13 @@ export default function FeaturesBento() {
           </div>
 
           <div className="shrink-0">
-            <a
-              href="https://eidoncore.com/features/"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs"
+            <Link
+              href="/features/"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs"
             >
               <span>View all 19 modules</span>
-              <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-            </a>
+              <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
           </div>
         </div>
 
@@ -67,7 +67,7 @@ export default function FeaturesBento() {
           {modules.map((mod) => (
             <StaggerItem
               key={mod.id}
-              className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
+              className="group relative bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
             >
               <div>
                 {/* Top Badge & Icon */}
@@ -96,15 +96,19 @@ export default function FeaturesBento() {
               </div>
 
               {/* Bottom Card Action */}
-              <div className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors">
+              <Link
+                href={mod.href}
+                aria-label={`Learn more about ${mod.title}`}
+                className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors after:absolute after:inset-0 after:rounded-2xl"
+              >
                 <span className="font-medium text-[11px]">Learn more</span>
-                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-              </div>
+                <ArrowRight size={12} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </StaggerItem>
           ))}
 
           {/* Special "Explore all modules" card */}
-          <StaggerItem className="group bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border border-[#1E293B] rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-[border-color,background-color,box-shadow] duration-200">
+          <StaggerItem className="group relative bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border border-[#1E293B] rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-[border-color,background-color,box-shadow] duration-200">
             <div>
               <div className="flex items-center justify-between mb-5">
                 <span className="text-[10.5px] font-mono bg-[#38BDF8]/20 text-[#38BDF8] border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full font-bold">
@@ -121,13 +125,13 @@ export default function FeaturesBento() {
               </p>
             </div>
 
-            <a
-              href="https://eidoncore.com/features/"
-              className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-[#38BDF8] font-semibold group-hover:text-white transition-colors"
+            <Link
+              href="/features/"
+              className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-[#38BDF8] font-semibold group-hover:text-white transition-colors after:absolute after:inset-0 after:rounded-2xl"
             >
               <span>Explore feature catalog</span>
-              <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+              <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </StaggerItem>
         </StaggerGroup>
       </div>

@@ -126,7 +126,7 @@ export default function SaaSConvergenceGraphic() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[180px] h-[180px] rounded-full border border-slate-200/60 absolute" />
         <div className="w-[280px] h-[280px] rounded-full border border-dashed border-slate-200/70 absolute animate-[spin_60s_linear_infinite]" />
-        <div className="w-[390px] h-[390px] rounded-full border border-slate-200/40 absolute" />
+        <div className="w-[min(390px,92vw)] aspect-square rounded-full border border-slate-200/40 absolute" />
       </div>
 
       {/* SVG Flow Streams & Energy Beams */}
@@ -233,7 +233,7 @@ export default function SaaSConvergenceGraphic() {
             />
           </div>
           <span className="text-xs sm:text-sm font-extrabold tracking-tight text-slate-900 group-hover:text-[#3F72AF] transition-colors">
-            EidonCore
+            Eidoncore
           </span>
           <span className="text-[9px] font-mono font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/60">
             Unified Core

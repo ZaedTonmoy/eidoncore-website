@@ -1,26 +1,8 @@
+/**
+ * Copy that is shared by more than one page. Section copy that only lives in a
+ * single component (testimonials, how-it-works, CTA...) stays in that component.
+ */
 export const siteContent = {
-  // 1. NAVBAR
-  navbar: {
-    logo: {
-      name: "Eidoncore",
-      symbol: "EC",
-      badge: "AI-Powered",
-    },
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "Modules", href: "#modules" },
-      { label: "How It Works", href: "#how-it-works" },
-      { label: "Why Eidoncore", href: "#why-eidoncore" },
-      { label: "Compare", href: "#compare" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "FAQ", href: "#faq" },
-    ],
-    actions: {
-      login: { label: "Log in", href: "https://app.eidoncore.com/login" },
-      signup: { label: "Start Free Trial →", href: "https://register.eidoncore.com" },
-    },
-  },
-
   // 2. HERO
   hero: {
     eyebrow: "AI-Powered Agency Platform",
@@ -41,50 +23,12 @@ export const siteContent = {
       "No credit card required",
       "Setup in 2 minutes",
     ],
-    announcement: {
-      text: "Explore 19 Modules & 111+ Tools →",
-      href: "#modules",
-    },
   },
-
-  // 3. METRICS / TRUST BENTO
-  metrics: [
-    {
-      value: "19",
-      label: "Modules",
-      desc: "Client portals to automated invoicing",
-    },
-    {
-      value: "111+",
-      label: "Native Tools",
-      desc: "Built-in AI agents & automations",
-    },
-    {
-      value: "99.9%",
-      label: "Uptime SLA",
-      desc: "Enterprise-grade cloud infrastructure",
-    },
-    {
-      value: "500+",
-      label: "Agencies Worldwide",
-      desc: "Scale client operations with ease",
-    },
-  ],
-
-  // 4. CLIENT LOGOS
-  clientLogos: [
-    "Pixel Forge",
-    "Mosaic Digital",
-    "Vanguard Creative",
-    "Nova Studio",
-    "Apex Agency",
-    "Clarity Co.",
-  ],
 
   // 5. CORE MODULES / FEATURES
   modulesHeading: {
     eyebrow: "Platform modules",
-    title: "Everything your agency needs — now with AI",
+    title: "Everything Your Agency Needs — Now With AI",
     description:
       "From first proposal to final invoice, run the complete client lifecycle seamlessly without stitching together disjointed apps.",
   },
@@ -95,7 +39,7 @@ export const siteContent = {
       title: "AI Workspace",
       description:
         "Connect AI assistants to manage tasks, invoices, and projects via MCP — with role-based access and OAuth 2.1 security.",
-      href: "#features",
+      href: "/ai-workspace/",
       color: "indigo",
     },
     {
@@ -104,7 +48,7 @@ export const siteContent = {
       title: "Proposals & Contracts",
       description:
         "Block-based builder, line item pricing, e-signatures, analytics, and one-click conversion to live projects.",
-      href: "#features",
+      href: "/proposals/",
       color: "blue",
     },
     {
@@ -113,7 +57,7 @@ export const siteContent = {
       title: "Projects & Health Scoring",
       description:
         "Budgets, milestones, real-time health scoring, team assignments, time tracking, and progress monitoring.",
-      href: "#features",
+      href: "/projects/",
       color: "blue",
     },
     {
@@ -122,7 +66,7 @@ export const siteContent = {
       title: "Tasks & Kanban Boards",
       description:
         "Interactive Kanban boards, list views, subtasks, checklists, dependencies, labels, and live timers.",
-      href: "#features",
+      href: "/tasks/",
       color: "emerald",
     },
     {
@@ -131,7 +75,7 @@ export const siteContent = {
       title: "CRM & Client Portals",
       description:
         "Full client lifecycle — deal pipelines, shared deliverables, contact directories, follow-ups, and health metrics.",
-      href: "#features",
+      href: "/crm/",
       color: "amber",
     },
     {
@@ -140,7 +84,7 @@ export const siteContent = {
       title: "Smart Invoicing & Billing",
       description:
         "Automated recurring subscriptions, Stripe sync, tax calculations, automatic reminders, and instant payments.",
-      href: "#features",
+      href: "/invoicing/",
       color: "violet",
     },
     {
@@ -149,77 +93,15 @@ export const siteContent = {
       title: "Branded Client Portal",
       description:
         "Dedicated self-serve portal for clients to view work deliverables, approve milestones, and self-serve.",
-      href: "https://eidoncore.com/portal/",
+      href: "/portal/",
       color: "sky",
     },
   ],
 
-  // 6. HOW IT WORKS
-  howItWorks: {
-    eyebrow: "How It Works",
-    title: "Up and running in minutes",
-    description: "Get your fully branded agency workspace live in four simple steps.",
-    steps: [
-      {
-        num: "01",
-        title: "Create your workspace",
-        desc: "Pick your agency name and claim your custom subdomain in under 60 seconds.",
-      },
-      {
-        num: "02",
-        title: "Customize & brand",
-        desc: "Upload logo, set custom colors, email templates, or map your own custom domain.",
-      },
-      {
-        num: "03",
-        title: "Invite your team",
-        desc: "Assign roles to project managers, developers, designers, and clients with granular permissions.",
-      },
-      {
-        num: "04",
-        title: "Start delivering",
-        desc: "Onboard clients, launch projects, track hours, and send automated invoices effortlessly.",
-      },
-    ],
-  },
-
-  // 7. WHY EIDONCORE
-  whyEidoncore: {
-    eyebrow: "Why Eidoncore",
-    title: "What makes us different",
-    description: "Other tools solve one problem. Eidoncore unites them all — without compromise.",
-    cards: [
-      {
-        index: "01 / 04",
-        title: "All-In-One Platform",
-        description:
-          "Projects, tasks, CRM, invoicing, services, automations, reporting, and a client portal — all in a single app. Eliminate context switching.",
-      },
-      {
-        index: "02 / 04",
-        title: "Full White-Label",
-        description:
-          "Custom logo, brand colors, fonts, email templates, and your own domain. Clients see only your brand, never Eidoncore.",
-      },
-      {
-        index: "03 / 04",
-        title: "Multi-Tenant by Design",
-        description:
-          "Built from day one for agencies managing multiple client organizations. Complete data isolation and strict role-based access.",
-      },
-      {
-        index: "04 / 04",
-        title: "AI-Native Architecture",
-        description:
-          "Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace with 111+ tools across 19 modules.",
-      },
-    ],
-  },
-
   // 8. COMPARE
   compare: {
     eyebrow: "Consolidate",
-    title: "Replace your entire tool stack",
+    title: "Replace Your Entire Tool Stack",
     description: "Stop paying for 6+ separate subscriptions. One Eidoncore plan covers everything.",
     savingsNote: "Estimated agency savings: $200+/month",
     rows: [
@@ -237,7 +119,7 @@ export const siteContent = {
   // 9. PRICING
   pricing: {
     eyebrow: "Pricing",
-    title: "Simple, transparent pricing",
+    title: "Simple, Transparent Pricing",
     description: "Start with a 14-day free PRO trial. No credit card required.",
     tiers: [
       {
@@ -302,31 +184,6 @@ export const siteContent = {
     ],
   },
 
-  // 10. TESTIMONIALS
-  testimonials: {
-    eyebrow: "What Agencies Say",
-    title: "Loved by 500+ agencies worldwide",
-    description: "Here's how Eidoncore replaces the tool stack for real agencies every single day.",
-    items: [
-      {
-        quote:
-          "We replaced Trello, HubSpot, and QuickBooks with just Eidoncore. Having our project budgets, client CRM, and invoicing connected in one platform saved us 15+ hours every week and eliminated all context switching.",
-        author: "Sarah Lindqvist",
-        role: "Managing Director at Studio Nine",
-        stats: "15 hrs saved / week",
-        replaced: "Trello + HubSpot + QuickBooks",
-      },
-      {
-        quote:
-          "The white-label client portal is what sold us. Our clients log into our own domain, see their project deliverables and invoices, and love the transparency. It elevated our agency's credibility overnight.",
-        author: "Marcus Vance",
-        role: "Founder at Apex Digital",
-        stats: "100% white-label",
-        replaced: "Notion + PandaDoc + ClickUp",
-      },
-    ],
-  },
-
   // 11. FAQ
   faq: {
     eyebrow: "FAQ",
@@ -356,27 +213,6 @@ export const siteContent = {
         q: "Does Eidoncore support AI assistants?",
         a: "Yes! The built-in AI Workspace lets you connect any MCP-compatible AI assistant — like Claude, Cursor, or Windsurf — to query and manage your projects, tasks, invoices, and more securely using OAuth 2.1.",
       },
-    ],
-  },
-
-  // 12. CTA
-  cta: {
-    eyebrow: "14-day free PRO trial",
-    heading: "Ready to streamline your agency?",
-    subheading:
-      "Join hundreds of agencies running their entire client workflow from a single platform. Start your 14-day free PRO trial — no credit card required.",
-    buttonPrimary: {
-      label: "Start Free Trial →",
-      href: "https://register.eidoncore.com/",
-    },
-    buttonSecondary: {
-      label: "Explore Live Demo",
-      href: "#how-it-works",
-    },
-    trustBadges: [
-      "No credit card required",
-      "Cancel anytime",
-      "SOC2-ready security",
     ],
   },
 

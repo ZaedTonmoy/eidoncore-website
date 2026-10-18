@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Inner Hero */}
         <InnerHero
           breadcrumbs={[
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
                 
                 <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">What we access</h3>
                 <p>
-                  When you use the EidonCore add-on for Gmail or the EidonCore browser extension, we read only the email that is open when you choose an EidonCore action — its subject, sender, recipients, date, body and the attachments you select. We never scan, index or sync your mailbox. If you connect your Google account to send replies from EidonCore, we use permission to send email on your behalf only when you press Send; we cannot read your mailbox with it. Email you forward, copy (BCC) or auto-forward to your personal EidonCore address is received by us like any other email.
+                  When you use the Eidoncore add-on for Gmail or the Eidoncore browser extension, we read only the email that is open when you choose an Eidoncore action — its subject, sender, recipients, date, body and the attachments you select. We never scan, index or sync your mailbox. If you connect your Google account to send replies from Eidoncore, we use permission to send email on your behalf only when you press Send; we cannot read your mailbox with it. Email you forward, copy (BCC) or auto-forward to your personal Eidoncore address is received by us like any other email.
                 </p>
 
                 <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">What we store</h3>
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
 
                 <h3 className="text-base font-semibold text-[#0F172A] mt-4 mb-2">Browser extension</h3>
                 <p>
-                  The extension stores its sign-in tokens in your browser, reads the current page only when you use &ldquo;Send to EidonCore&rdquo;, and sends data only to your EidonCore workspace. It contains no analytics or tracking. Disconnecting revokes its access.
+                  The extension stores its sign-in tokens in your browser, reads the current page only when you use &ldquo;Send to Eidoncore&rdquo;, and sends data only to your Eidoncore workspace. It contains no analytics or tracking. Disconnecting revokes its access.
                 </p>
 
                 <div className="mt-5 p-4 sm:p-5 bg-[#F8FAFC] border border-[#3F72AF]/30 rounded-xl">
@@ -125,7 +125,7 @@ export default function PrivacyPage() {
                     <span>Google API Services User Data Policy</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                    EidonCore&apos;s use and transfer to any other app of information received from Google APIs will adhere to the{" "}
+                    Eidoncore&apos;s use and transfer to any other app of information received from Google APIs will adhere to the{" "}
                     <a
                       href="https://developers.google.com/terms/api-services-user-data-policy"
                       target="_blank"
