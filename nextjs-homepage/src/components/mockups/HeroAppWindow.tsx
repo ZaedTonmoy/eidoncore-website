@@ -960,7 +960,7 @@ export default function HeroAppWindow() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 hidden sm:inline-flex items-center gap-1">
+          <span className="text-[10px] font-mono text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 hidden sm:inline-flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             LIVE WORKSPACE
           </span>
@@ -1080,7 +1080,7 @@ export default function HeroAppWindow() {
 
             {/* NAVIGATION GROUP */}
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
+              <span className="text-[9px] font-mono text-[#475569] uppercase tracking-wider font-semibold px-2">
                 NAVIGATION
               </span>
 
@@ -1110,7 +1110,7 @@ export default function HeroAppWindow() {
                     <Users size={14} className={currentView === "organizations" ? "text-[#0F172A]" : "text-[#64748B]"} />
                     <span>Organizations</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">4</span>
+                  <span className="text-[10px] font-mono text-[#475569] bg-slate-100 px-1 rounded">4</span>
                 </button>
 
                 <button
@@ -1125,7 +1125,7 @@ export default function HeroAppWindow() {
                     <FileText size={14} className={currentView === "proposals" ? "text-[#0F172A]" : "text-[#64748B]"} />
                     <span>Proposals</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">5</span>
+                  <span className="text-[10px] font-mono text-[#475569] bg-slate-100 px-1 rounded">5</span>
                 </button>
 
                 <button
@@ -1141,7 +1141,7 @@ export default function HeroAppWindow() {
                     <FolderKanban size={14} className={currentView === "projects" ? "text-[#0F172A]" : "text-[#64748B]"} />
                     <span>Projects</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">21</span>
+                  <span className="text-[10px] font-mono text-[#475569] bg-slate-100 px-1 rounded">21</span>
                 </button>
 
                 <button
@@ -1157,7 +1157,7 @@ export default function HeroAppWindow() {
                     <CheckSquare size={14} className={currentView === "tasks" ? "text-[#0F172A]" : "text-[#64748B]"} />
                     <span>Tasks</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#64748B] bg-slate-100 px-1 rounded">2</span>
+                  <span className="text-[10px] font-mono text-[#475569] bg-slate-100 px-1 rounded">2</span>
                 </button>
 
                 {/* OFFERINGS EXPANDABLE MENU */}
@@ -1256,7 +1256,7 @@ export default function HeroAppWindow() {
                     <MessageSquare size={14} className={currentView === "messages" ? "text-[#0F172A]" : "text-[#64748B]"} />
                     <span>Messages</span>
                   </div>
-                  <span className="text-[10px] font-bold text-white bg-[#3B82F6] px-1.5 py-0.2 rounded-full">2</span>
+                  <span className="text-[10px] font-bold text-white bg-[#1D4ED8] px-1.5 py-0.2 rounded-full">2</span>
                 </button>
 
                 <button
@@ -1276,7 +1276,7 @@ export default function HeroAppWindow() {
 
             {/* FINANCE GROUP */}
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
+              <span className="text-[9px] font-mono text-[#475569] uppercase tracking-wider font-semibold px-2">
                 FINANCE
               </span>
               <nav className="flex flex-col gap-0.5">
@@ -1304,7 +1304,7 @@ export default function HeroAppWindow() {
 
             {/* TOOLS GROUP */}
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] font-mono text-[#94A3B8] uppercase tracking-wider font-semibold px-2">
+              <span className="text-[9px] font-mono text-[#475569] uppercase tracking-wider font-semibold px-2">
                 TOOLS
               </span>
               <nav className="flex flex-col gap-0.5">
@@ -1396,8 +1396,8 @@ export default function HeroAppWindow() {
               className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[320px] shadow-2xs mx-2 cursor-pointer hover:border-slate-300 transition-colors"
             >
               <Search size={12} className="text-[#94A3B8]" />
-              <span className="text-[11px] text-[#94A3B8] flex-1 truncate">Search or jump to...</span>
-              <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#64748B] font-mono">
+              <span className="text-[11px] text-[#475569] flex-1 truncate">Search or jump to...</span>
+              <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#475569] font-mono">
                 ⌘K
               </kbd>
             </div>
@@ -1823,25 +1823,25 @@ export default function HeroAppWindow() {
                   <div className="flex items-center gap-5 sm:gap-6 font-mono text-slate-400 text-xs shrink-0 pt-1 lg:pt-0">
                     {/* Local Clock */}
                     <div className="flex flex-col">
-                      <span className="text-[8px] uppercase tracking-wider text-[#64748B]">LOCAL · GMT+6</span>
+                      <span className="text-[8px] uppercase tracking-wider text-[#94A3B8]">LOCAL · GMT+6</span>
                       <span className="text-[19px] sm:text-[20px] font-bold text-white tracking-wide mt-0.5">00:49:52</span>
                     </div>
 
                     {/* UTC Clock */}
                     <div className="flex flex-col border-l border-[#282C35] pl-5 sm:pl-6">
-                      <span className="text-[8px] uppercase tracking-wider text-[#64748B]">UTC</span>
+                      <span className="text-[8px] uppercase tracking-wider text-[#94A3B8]">UTC</span>
                       <span className="text-[19px] sm:text-[20px] font-bold text-slate-200 tracking-wide mt-0.5">18:49:52</span>
                     </div>
 
                     {/* Window UTC Progress */}
                     <div className="flex flex-col border-l border-[#282C35] pl-5 sm:pl-6">
                       <div className="flex items-center justify-between gap-3 text-[8px] uppercase tracking-wider">
-                        <span className="text-[#64748B]">WINDOW · UTC</span>
+                        <span className="text-[#94A3B8]">WINDOW · UTC</span>
                         <span className="text-[#94A3B8] font-semibold">Day 8 of 31</span>
                       </div>
                       <div className="flex items-center justify-between gap-2 mt-0.5">
                         <span className="text-[12px] font-bold text-white">This Month</span>
-                        <span className="text-[9.5px] text-[#64748B]">Oct 1 – 31, 2026</span>
+                        <span className="text-[9.5px] text-[#94A3B8]">Oct 1 – 31, 2026</span>
                       </div>
                       {/* Segment progress bar: exactly 31 day segments */}
                       <div className="flex gap-[2px] mt-1.5">
@@ -2055,7 +2055,7 @@ export default function HeroAppWindow() {
                               <span className="w-1.5 h-1.5 bg-[#94A3B8] rounded-2xs inline-block" /> Resolved
                             </span>
                           </div>
-                          <div className="text-[8px] text-[#64748B] font-mono mb-1">14 days</div>
+                          <div className="text-[8px] text-[#94A3B8] font-mono mb-1">14 days</div>
                           <div className="flex items-end h-3 gap-2">
                             <div className="w-2 bg-[#475569] h-2.5 rounded-2xs" />
                             <div className="w-2 bg-[#94A3B8] h-2.5 rounded-2xs" />
@@ -2113,10 +2113,10 @@ export default function HeroAppWindow() {
                   <button className="px-3.5 py-1 bg-white font-bold text-[#0F172A] rounded-lg shadow-2xs border border-slate-200/40 text-xs">
                     Overview
                   </button>
-                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
+                  <button className="px-3 py-1 text-[#475569] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
                     Delivery
                   </button>
-                  <button className="px-3 py-1 text-[#64748B] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
+                  <button className="px-3 py-1 text-[#475569] hover:text-[#0F172A] font-medium rounded-lg transition-colors text-xs">
                     Activity
                   </button>
                 </div>
@@ -2126,7 +2126,7 @@ export default function HeroAppWindow() {
                   <button className="px-3 py-1 bg-white border border-[#E2E8F0] font-bold text-[#0F172A] rounded-lg shadow-2xs whitespace-nowrap text-xs">
                     This Month
                   </button>
-                  <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
+                  <button className="px-2.5 py-1 text-[#475569] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Last Month
                   </button>
                   <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
@@ -2284,12 +2284,12 @@ export default function HeroAppWindow() {
                                 <span className="w-2.5 h-0.5 border-t border-dashed border-blue-600" /> Projection
                               </span>
                             </div>
-                            <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50">
-                              <button aria-label="Line trend chart view" className="px-1.5 py-0.5 bg-white text-[#0F172A] rounded shadow-2xs">
-                                <TrendingUp size={11} />
+                            <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50 gap-0.5">
+                              <button aria-label="Line trend chart view" className="w-6 h-6 min-w-[24px] min-h-[24px] flex items-center justify-center bg-white text-[#0F172A] rounded shadow-2xs">
+                                <TrendingUp size={12} />
                               </button>
-                              <button aria-label="Bar chart view" className="px-1.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
-                                <BarChart3 size={11} />
+                              <button aria-label="Bar chart view" className="w-6 h-6 min-w-[24px] min-h-[24px] flex items-center justify-center text-[#475569] hover:text-[#0F172A] rounded">
+                                <BarChart3 size={12} />
                               </button>
                             </div>
                           </div>
@@ -9497,7 +9497,7 @@ export default function HeroAppWindow() {
                         <span className="text-[9.5px] font-mono text-[#94A3B8] uppercase font-bold tracking-wider">
                           ORGANIZATIONS
                         </span>
-                        <span className="text-[10px] font-bold text-white bg-[#3B82F6] px-1.5 py-0.2 rounded-full">
+                        <span className="text-[10px] font-bold text-white bg-[#1D4ED8] px-1.5 py-0.2 rounded-full">
                           2
                         </span>
                       </div>
@@ -10541,6 +10541,7 @@ export default function HeroAppWindow() {
           {/* Floating bottom-right chat bubble icon (matching screenshot 03) */}
           <button
             onClick={() => setCopilotOpen(!copilotOpen)}
+            aria-label="Open AI Copilot assistant"
             className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center transition-transform hover:scale-105 z-20"
           >
             <MessageSquare size={16} />

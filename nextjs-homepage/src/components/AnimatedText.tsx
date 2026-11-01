@@ -37,7 +37,7 @@ export default function AnimatedText({
     <Tag
       className={className}
       variants={staggerContainer(immediate ? 0.015 : TIMING.wordStagger, immediate ? delay : 0)}
-      initial="hidden"
+      initial={immediate ? false : "hidden"}
       {...(immediate
         ? { animate: "show" }
         : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
@@ -46,6 +46,7 @@ export default function AnimatedText({
         <React.Fragment key={index}>
           <motion.span
             variants={fadeUpBlurItem}
+            initial={immediate ? false : undefined}
             style={{
               display: mode === "line" ? "block" : "inline-block",
             }}

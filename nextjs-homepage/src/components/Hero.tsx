@@ -30,21 +30,14 @@ export default function Hero() {
           </Link>
 
           {/* Heading */}
-          <AnimatedHeading
-            as="h1"
-            text={headline}
-            immediate={true}
-            className="text-3xl sm:text-5xl lg:text-[58px] font-bold tracking-tight text-[#0F172A] leading-[1.08] justify-center"
-          />
+          <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-bold tracking-tight text-[#0F172A] leading-[1.08] text-center">
+            {headline}
+          </h1>
 
           {/* Subheadline */}
-          <AnimatedText
-            text={subheadline}
-            mode="word"
-            immediate={true}
-            delay={0.06}
-            className="mt-4 sm:mt-5 text-[#6B6F76] text-base sm:text-xl leading-relaxed max-w-2xl"
-          />
+          <p className="mt-4 sm:mt-5 text-[#6B6F76] text-base sm:text-xl leading-relaxed max-w-2xl text-center">
+            {subheadline}
+          </p>
 
           {/* Action Buttons */}
           <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">

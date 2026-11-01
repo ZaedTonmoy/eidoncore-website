@@ -41,7 +41,7 @@ export default function AnimatedHeading({
         rowGap: "0.1em",
       }}
       variants={staggerContainer(immediate ? 0.008 : TIMING.letterStagger, delay)}
-      initial="hidden"
+      initial={immediate ? false : "hidden"}
       {...(immediate
         ? { animate: "show" }
         : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
@@ -50,6 +50,7 @@ export default function AnimatedHeading({
         <React.Fragment key={`${word}-${wordIndex}`}>
           <motion.span
             variants={fadeUpBlurItem}
+            initial={immediate ? false : undefined}
             className="inline-block whitespace-nowrap"
           >
             {word}

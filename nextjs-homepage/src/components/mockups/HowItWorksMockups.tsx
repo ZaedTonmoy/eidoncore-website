@@ -45,8 +45,8 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
         </div>
         <div className="h-5 w-px bg-[#E2E8F0] mx-0.5 shrink-0 hidden xl:block" />
 
-        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-xs text-[#94A3B8] w-44 xl:w-56 shrink min-w-0 shadow-2xs">
-          <Search size={13} className="text-[#94A3B8] shrink-0" />
+        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-xs text-[#475569] w-44 xl:w-56 shrink min-w-0 shadow-2xs">
+          <Search size={13} className="text-[#475569] shrink-0" />
           <span className="truncate text-[11px] sm:text-[12px]">Search or jump to...</span>
           <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#CBD5E1] rounded px-1.5 py-0.5 text-[#64748B] shadow-2xs shrink-0">
             ⌘K
@@ -100,7 +100,7 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
         {/* Notification bell badge */}
         <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] flex items-center justify-center shadow-2xs cursor-pointer shrink-0">
           <Bell size={14} />
-          <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8px] font-bold font-mono bg-[#3B82F6] text-white rounded-full shadow-2xs">
+          <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8px] font-bold font-mono bg-[#1D4ED8] text-white rounded-full shadow-2xs">
             49
           </span>
         </div>
@@ -1005,7 +1005,7 @@ export function MissionControlMockup() {
           {/* Notification bell badge */}
           <div className="relative w-7 h-7 rounded-lg border border-[#E2E8F0] text-slate-500 flex items-center justify-center hover:bg-slate-50 shrink-0">
             <Bell size={13} />
-            <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8.5px] font-bold font-mono bg-[#3B82F6] text-white rounded-full">
+            <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8.5px] font-bold font-mono bg-[#1D4ED8] text-white rounded-full">
               4
             </span>
           </div>

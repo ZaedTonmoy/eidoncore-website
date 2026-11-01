@@ -157,7 +157,7 @@ export default function Testimonials() {
                   )}
                 </React.Fragment>
               ))}
-              <span className="px-2.5 py-1 bg-[#3F72AF]/10 border border-[#3F72AF]/20 rounded-md text-[#3F72AF] font-bold">
+              <span className="px-2.5 py-1 bg-[#3F72AF]/10 border border-[#3F72AF]/20 rounded-md text-[#2F5F96] font-bold">
                 Eidoncore
               </span>
             </div>

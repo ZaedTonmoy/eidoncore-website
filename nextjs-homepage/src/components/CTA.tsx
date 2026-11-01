@@ -57,7 +57,7 @@ export default function CTA() {
                 {subscribed ? "Subscribed!" : "Subscribe"}
               </button>
             </div>
-            <span className="text-[10.5px] sm:text-[11px] text-[#94A3B8] sm:pl-5">
+            <span className="text-[10.5px] sm:text-[11px] text-[#475569] sm:pl-5">
               No spam. Unsubscribe anytime.
             </span>
           </form>

@@ -76,6 +76,15 @@ export function getSoftwareApplicationSchema() {
     author: {
       "@id": `${BASE_URL}/#organization`,
     },
+    publisher: {
+      "@id": `${BASE_URL}/#organization`,
+    },
+    provider: {
+      "@id": `${BASE_URL}/#organization`,
+    },
+    isPartOf: {
+      "@id": `${BASE_URL}/#website`,
+    },
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "USD",
@@ -213,6 +222,9 @@ export function getPricingProductSchema() {
     brand: {
       "@type": "Brand",
       name: "Eidoncore",
+    },
+    manufacturer: {
+      "@id": `${BASE_URL}/#organization`,
     },
     offers: {
       "@type": "AggregateOffer",
