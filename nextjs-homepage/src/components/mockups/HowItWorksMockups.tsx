@@ -28,6 +28,7 @@ import {
   X,
   Pipette,
   ChevronsUpDown,
+  Sun,
 } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
@@ -35,24 +36,18 @@ import {
 /* -------------------------------------------------------------------------- */
 export function AppTopBar({ activeModule = "settings" }: { activeModule?: "settings" | "team" | "dashboard" }) {
   return (
-    <div className="h-11 bg-white border-b border-[#E2E8F0] px-3 sm:px-5 flex items-center justify-between gap-2 shrink-0 select-none">
+    <div className="h-14 bg-white border-b border-[#E2E8F0] px-3 sm:px-5 flex items-center justify-between gap-2 shrink-0 select-none">
       {/* Left: module icon button + vertical separator + search */}
-      <div className="flex items-center gap-2.5 min-w-0">
-        <div className="w-7 h-7 rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-center text-[#64748B] shrink-0">
-          {activeModule === "team" ? (
-            <Users size={14} className="text-[#4F46E5]" />
-          ) : activeModule === "dashboard" ? (
-            <LayoutGrid size={14} className="text-[#4F46E5]" />
-          ) : (
-            <Settings size={14} className="text-[#4F46E5]" />
-          )}
+      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+        <div className="w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white flex items-center justify-center text-[#6366F1] shadow-2xs shrink-0">
+          <LayoutGrid size={16} />
         </div>
-        <div className="h-4 w-px bg-[#E2E8F0] shrink-0 hidden sm:block" />
+        <div className="h-5 w-px bg-[#E2E8F0] mx-1 shrink-0 hidden sm:block" />
 
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#94A3B8] w-48 lg:w-64">
-          <Search size={12} className="text-[#94A3B8] shrink-0" />
-          <span className="truncate text-[11px]">Search or jump to...</span>
-          <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#E2E8F0] rounded px-1 text-[#64748B]">
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-xs text-[#94A3B8] w-48 md:w-64 lg:w-80 shadow-2xs">
+          <Search size={14} className="text-[#94A3B8] shrink-0" />
+          <span className="truncate text-[12px]">Search or jump to...</span>
+          <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#CBD5E1] rounded px-1.5 py-0.5 text-[#64748B] shadow-2xs">
             ⌘K
           </kbd>
         </div>
@@ -61,7 +56,7 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
       {/* Right: 11/17 ring, Copilot, Settings, Notification, Profile */}
       <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Progress ring 11/17 */}
-        <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full text-[11px] font-medium text-[#0F172A]">
+        <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs">
           <svg className="w-3.5 h-3.5 -rotate-90" viewBox="0 0 36 36">
             <path
               className="text-[#E2E8F0]"
@@ -81,41 +76,46 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
             />
           </svg>
           <span className="font-semibold text-xs text-[#0F172A]">Get started</span>
-          <span className="text-[#64748B] text-[10px] font-mono">11/17</span>
+          <span className="text-[#64748B] text-[11px] font-mono">11/17</span>
         </div>
 
         {/* AI Copilot Button */}
         <button
           type="button"
-          className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 bg-[#EEF2FF] border border-[#E0E7FF] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-lg text-[11px] font-semibold"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-xl text-xs font-semibold shadow-2xs"
         >
-          <Sparkles size={11} className="shrink-0 text-[#6366F1]" />
+          <Sparkles size={13} className="shrink-0 text-[#6366F1]" />
           <span>AI Copilot</span>
-          <kbd className="hidden lg:inline text-[9px] font-mono px-1 py-0.2 bg-white/80 rounded border border-[#C7D2FE] text-[#4F46E5]">
+          <kbd className="hidden lg:inline text-[9.5px] font-mono px-1.5 py-0.2 bg-white/90 rounded border border-[#C7D2FE] text-[#4F46E5]">
             ⌘J
           </kbd>
         </button>
 
         {/* Gear icon */}
-        <div className="w-7 h-7 rounded-lg border border-[#E2E8F0] text-[#64748B] hidden sm:flex items-center justify-center hover:bg-[#F8FAFC]">
-          <Settings size={13} />
+        <div className="w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] hidden sm:flex items-center justify-center shadow-2xs cursor-pointer">
+          <Settings size={15} />
         </div>
 
         {/* Notification bell badge */}
-        <div className="relative w-7 h-7 rounded-lg border border-[#E2E8F0] text-[#64748B] flex items-center justify-center hover:bg-[#F8FAFC]">
-          <Bell size={13} />
-          <span className="absolute -top-1 -right-1 px-1 py-0.2 text-[8.5px] font-bold font-mono bg-[#3B82F6] text-white rounded-full">
+        <div className="relative w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] flex items-center justify-center shadow-2xs cursor-pointer">
+          <Bell size={15} />
+          <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8.5px] font-bold font-mono bg-[#3B82F6] text-white rounded-full shadow-2xs">
             49
           </span>
         </div>
 
         {/* User avatar & name */}
-        <div className="flex items-center gap-1.5 pl-1">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-sky-400 text-white font-bold text-[10px] flex items-center justify-center shadow-2xs">
-            JV
+        <div className="flex items-center gap-2 pl-1 cursor-pointer">
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-[#2563EB] border border-white shadow-2xs ring-1 ring-black/5 shrink-0 relative flex items-center justify-center text-white">
+            <svg viewBox="0 0 32 32" className="w-full h-full">
+              <rect width="32" height="32" fill="#3B82F6" />
+              <circle cx="16" cy="12" r="5.5" fill="#FDE68A" />
+              <path d="M7 29 C7 22 11 19 16 19 C21 19 25 22 25 29 Z" fill="#1E3A8A" />
+              <path d="M11 11 Q16 6 21 11 Q20 8 16 8 Q12 8 11 11" fill="#1E293B" />
+            </svg>
           </div>
-          <span className="text-xs font-semibold text-[#0F172A] hidden xl:inline">Julian Vance</span>
-          <ChevronDown size={11} className="text-[#94A3B8]" />
+          <span className="text-xs font-bold text-[#0F172A] hidden sm:inline">Julian Vance</span>
+          <ChevronDown size={13} className="text-[#94A3B8]" />
         </div>
       </div>
     </div>
@@ -926,206 +926,545 @@ export function TeamDirectoryMockup() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 3: MISSION CONTROL / DELIVERY TELEMETRY MOCKUP (Screenshot 5)         */
+/* STEP 3: MISSION CONTROL / DELIVERY TELEMETRY MOCKUP (Exact Match)          */
 /* -------------------------------------------------------------------------- */
 export function MissionControlMockup() {
+  const [activeTab, setActiveTab] = useState<"overview" | "delivery" | "activity">("delivery");
+  const [scheduleToggle, setScheduleToggle] = useState<"schedule" | "risk">("schedule");
+
   return (
-    <div className="flex flex-col h-full bg-[#0F172A] text-white select-none text-left">
+    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
       <AppTopBar activeModule="dashboard" />
 
-      <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar flex flex-col gap-4">
-        {/* Dark Hero Deck: Executive Workspace / Aetheris Creative Studio */}
-        <div className="bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col gap-4">
+      {/* Main Page Scrollable Body */}
+      <div className="flex-1 p-4 sm:p-5 lg:p-6 overflow-y-auto no-scrollbar flex flex-col gap-5 relative bg-[#F8FAFC]">
+        {/* ================================================================== */}
+        {/* DARK HERO DECK: Executive Workspace / Aetheris Creative Studio      */}
+        {/* ================================================================== */}
+        <div className="bg-[#090D16] border border-[#1E293B] rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col gap-4 text-white relative overflow-hidden">
           {/* Deck Top Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1E293B] pb-3">
-            <div className="flex items-center gap-2 text-indigo-400 font-mono text-[10px] sm:text-[11px] font-semibold tracking-wider">
-              <Zap size={13} className="text-indigo-400" />
-              <span>EXECUTIVE WORKSPACE / AETHERIS CREATIVE STUDIO</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-[#1E293B]/80 pb-3">
+            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold tracking-wider">
+              <Activity size={14} className="text-[#818CF8]" />
+              <span className="text-[#818CF8]">EXECUTIVE WORKSPACE</span>
+              <span className="text-[#475569]">/</span>
+              <span className="text-[#E2E8F0]">AETHERIS CREATIVE STUDIO</span>
             </div>
 
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="px-2.5 py-0.5 bg-red-950/80 text-red-400 border border-red-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                2 CRITICAL as of 5:15 PM
+            <div className="flex items-center gap-2 shrink-0 flex-wrap">
+              <span className="px-3 py-1 bg-[#2D0609] border border-[#7F1D1D]/70 rounded-full font-mono text-[9.5px] font-bold text-[#F87171] flex items-center gap-1.5 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] animate-pulse" />
+                <span>2 CRITICAL</span>
+                <span className="text-[#991B1B] font-normal">as of 5:15 PM</span>
               </span>
-              <span className="px-2.5 py-0.5 bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                Live
+
+              <span className="px-3 py-1 bg-[#052E16] border border-[#166534]/70 rounded-full font-mono text-[9.5px] font-bold text-white flex items-center gap-1.5 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+                <span>Live</span>
               </span>
-              <span className="px-2.5 py-0.5 bg-neutral-800 text-neutral-300 rounded font-mono text-[9px]">
-                Motion on
+
+              <span className="px-2.5 py-1 bg-[#1E293B]/70 border border-[#334155]/60 rounded-lg font-mono text-[9.5px] text-[#94A3B8] flex items-center gap-1.5">
+                <span className="flex items-center gap-0.5">
+                  <span className="w-0.5 h-2.5 bg-[#94A3B8] rounded-full" />
+                  <span className="w-0.5 h-2.5 bg-[#94A3B8] rounded-full" />
+                </span>
+                <span>Motion on</span>
               </span>
             </div>
           </div>
 
           {/* Headline + Clocks Row */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">Mission Control</h3>
-              <p className="text-xs text-neutral-400">
-                Good Evening, Julian. Revenue, delivery and priorities at a glance.
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Mission Control</h3>
+              <p className="text-xs sm:text-[13px] text-[#94A3B8] mt-0.5">
+                <strong className="text-white font-semibold">Good Evening, Julian.</strong> Revenue, delivery and priorities at a glance.
               </p>
             </div>
 
             {/* Clocks & Window */}
-            <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono shrink-0">
-              <div className="bg-[#111827] px-2.5 py-1.5 rounded-lg border border-[#1E293B]">
-                <span className="text-[9px] text-neutral-500 block uppercase">Local · GMT+6</span>
-                <span className="font-bold text-white text-xs">17:16:36</span>
+            <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono shrink-0 flex-wrap">
+              <div className="bg-[#111827] px-3 py-2 rounded-xl border border-[#1E293B]">
+                <span className="text-[9px] text-[#64748B] block uppercase tracking-wider font-semibold">Local · GMT+6</span>
+                <span className="font-bold text-white text-base sm:text-lg tracking-wider">17:16:36</span>
               </div>
-              <div className="bg-[#111827] px-2.5 py-1.5 rounded-lg border border-[#1E293B]">
-                <span className="text-[9px] text-neutral-500 block uppercase">UTC</span>
-                <span className="font-bold text-white text-xs">11:16:36</span>
+
+              <div className="bg-[#111827] px-3 py-2 rounded-xl border border-[#1E293B]">
+                <span className="text-[9px] text-[#64748B] block uppercase tracking-wider font-semibold">UTC</span>
+                <span className="font-bold text-white text-base sm:text-lg tracking-wider">11:16:36</span>
               </div>
-              <div className="bg-[#111827] px-2.5 py-1.5 rounded-lg border border-[#1E293B] hidden sm:block">
-                <span className="text-[9px] text-neutral-500 block uppercase">Window · UTC</span>
-                <span className="font-bold text-white text-xs">Nov 1 – 30, 2026</span>
+
+              <div className="bg-[#111827] px-3.5 py-2 rounded-xl border border-[#1E293B] flex flex-col justify-between min-w-[170px]">
+                <div className="flex items-center justify-between text-[9px] text-[#64748B] uppercase font-semibold">
+                  <span>Window · UTC</span>
+                  <span className="normal-case">Day 1 of 30</span>
+                </div>
+                <div className="flex items-center justify-between my-0.5">
+                  <span className="font-bold text-white text-xs sm:text-sm">This Month</span>
+                  <span className="text-[10px] text-[#94A3B8] font-mono">Nov 1 – 30, 2026</span>
+                </div>
+                {/* 30 discrete mini bars */}
+                <div className="flex items-center gap-0.5 pt-0.5">
+                  {Array.from({ length: 30 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`h-1.5 flex-1 rounded-xs ${
+                        i < 2 ? "bg-[#6366F1]" : "bg-[#1E293B]"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
           {/* 5 Telemetry Metrics Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 pt-1">
-            {/* Card 1: Finance */}
-            <div className="p-3 bg-[#111827] border border-red-900/40 rounded-xl flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase">Finance</span>
-                <span className="text-[9px] font-mono text-red-400 font-bold">• CRITICAL</span>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 pt-1">
+            {/* Card 1: Finance (Critical) */}
+            <div className="p-3.5 bg-[#190C10] border border-red-900/40 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+                    <span className="text-[10px] font-mono font-bold text-neutral-300 uppercase tracking-wider">Finance</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#EF4444] font-bold tracking-wider">CRITICAL</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 my-2.5">
+                  <div>
+                    <div className="text-xl sm:text-2xl font-bold text-white">$0</div>
+                    <div className="text-[9.5px] text-[#94A3B8] leading-tight">Revenue this period</div>
+                  </div>
+                  <div>
+                    <div className="text-xl sm:text-2xl font-bold text-white">$21,800</div>
+                    <div className="text-[9.5px] text-[#94A3B8] leading-tight">Overdue</div>
+                  </div>
+                </div>
               </div>
-              <div className="my-2">
-                <div className="text-lg font-bold text-white">$0</div>
-                <div className="text-xs font-bold text-red-400">$21,800 Overdue</div>
-              </div>
-              <div className="text-[9px] font-mono text-red-400 flex items-center gap-1">
-                <AlertTriangle size={9} />
-                <span>3 Overdue Invoices</span>
+
+              <div className="flex flex-col gap-2">
+                <div>
+                  <div className="flex items-center justify-between text-[9px] text-[#64748B]">
+                    <span>Revenue trend</span>
+                    <span>6 months</span>
+                  </div>
+                  <svg className="w-full h-4 mt-1" viewBox="0 0 120 16" fill="none">
+                    <path d="M 0 8 L 65 8 L 95 13 L 115 11" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="115" cy="11" r="2.5" fill="#38BDF8" />
+                  </svg>
+                </div>
+
+                <div className="bg-[#2D0B10] border border-[#7F1D1D]/70 text-[#F87171] px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-[10px] font-medium shadow-2xs">
+                  <AlertTriangle size={11} className="shrink-0" />
+                  <span className="truncate">3 Overdue Invoices</span>
+                </div>
               </div>
             </div>
 
-            {/* Card 2: Delivery */}
-            <div className="p-3 bg-[#111827] border border-red-900/40 rounded-xl flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase">Delivery</span>
-                <span className="text-[9px] font-mono text-red-400 font-bold">• CRITICAL</span>
+            {/* Card 2: Delivery (Critical) */}
+            <div className="p-3.5 bg-[#190C10] border border-red-900/40 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+                    <span className="text-[10px] font-mono font-bold text-neutral-300 uppercase tracking-wider">Delivery</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#EF4444] font-bold tracking-wider">CRITICAL</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 my-2.5">
+                  <div>
+                    <div className="text-xl sm:text-2xl font-bold text-white">3</div>
+                    <div className="text-[9.5px] text-[#94A3B8] leading-tight">Active projects</div>
+                  </div>
+                  <div>
+                    <div className="text-xl sm:text-2xl font-bold text-white">1</div>
+                    <div className="text-[9.5px] text-[#94A3B8] leading-tight">Tasks due this week</div>
+                  </div>
+                </div>
               </div>
-              <div className="my-2">
-                <div className="text-lg font-bold text-white">3</div>
-                <div className="text-[10px] text-neutral-400">Active projects</div>
-              </div>
-              <div className="text-[9px] font-mono text-red-400 flex items-center gap-1">
-                <AlertTriangle size={9} />
-                <span>3 Critical Projects</span>
+
+              <div className="flex flex-col gap-2">
+                <div>
+                  <div className="flex items-center justify-between text-[9px] text-[#64748B]">
+                    <span>Completed</span>
+                    <span>14 days</span>
+                  </div>
+                  <div className="flex items-center gap-1 my-1.5">
+                    <div className="h-0.5 w-full border-t border-dashed border-[#334155]" />
+                  </div>
+                </div>
+
+                <div className="bg-[#2D0B10] border border-[#7F1D1D]/70 text-[#F87171] px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-[10px] font-medium shadow-2xs">
+                  <AlertTriangle size={11} className="shrink-0" />
+                  <span className="truncate">3 Critical Projects</span>
+                </div>
               </div>
             </div>
 
-            {/* Card 3: Clients */}
-            <div className="p-3 bg-[#111827] border border-[#1E293B] rounded-xl flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase">Clients</span>
-                <span className="text-[9px] font-mono text-emerald-400 font-bold">• NOMINAL</span>
+            {/* Card 3: Clients (Nominal) */}
+            <div className="p-3.5 bg-[#0C121E] border border-[#1E293B]/60 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="text-[10px] font-mono font-bold text-neutral-300 uppercase tracking-wider">Clients</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#10B981] font-bold tracking-wider">NOMINAL</span>
+                </div>
+                <div className="my-2.5">
+                  <div className="text-xl sm:text-2xl font-bold text-white">4</div>
+                  <div className="text-[9.5px] text-[#94A3B8] leading-tight">Active organizations</div>
+                </div>
               </div>
-              <div className="my-2">
-                <div className="text-lg font-bold text-white">4</div>
-                <div className="text-[10px] text-neutral-400">Active orgs</div>
+
+              <div className="flex flex-col gap-2 pt-2">
+                <div>
+                  <div className="flex items-center justify-between text-[9px] text-[#64748B]">
+                    <span>CRM stages</span>
+                    <span>Lead → Active</span>
+                  </div>
+                  <div className="h-1 bg-[#1E293B] rounded-full overflow-hidden my-1">
+                    <div className="h-full bg-[#38BDF8] rounded-full w-3/5" />
+                  </div>
+                </div>
+                <div className="text-[10.5px] text-[#94A3B8] pt-1 border-t border-[#1E293B]/60">
+                  2 open proposals
+                </div>
               </div>
-              <div className="text-[9px] font-mono text-emerald-400">2 open proposals</div>
             </div>
 
-            {/* Card 4: Support */}
-            <div className="p-3 bg-[#111827] border border-[#1E293B] rounded-xl flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase">Support</span>
-                <span className="text-[9px] font-mono text-emerald-400 font-bold">• NOMINAL</span>
+            {/* Card 4: Support (Nominal) */}
+            <div className="p-3.5 bg-[#0C121E] border border-[#1E293B]/60 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="text-[10px] font-mono font-bold text-neutral-300 uppercase tracking-wider">Support</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#10B981] font-bold tracking-wider">NOMINAL</span>
+                </div>
+                <div className="my-2.5">
+                  <div className="text-xl sm:text-2xl font-bold text-white">2</div>
+                  <div className="text-[9.5px] text-[#94A3B8] leading-tight">Open tickets</div>
+                </div>
               </div>
-              <div className="my-2">
-                <div className="text-lg font-bold text-white">2</div>
-                <div className="text-[10px] text-neutral-400">Open tickets</div>
+
+              <div className="flex flex-col gap-2 pt-2">
+                <div className="flex items-center justify-between text-[9px] text-[#64748B]">
+                  <span className="flex items-center gap-1">
+                    <span>Opened</span>
+                    <span>Resolved</span>
+                  </span>
+                  <span>14 days</span>
+                </div>
+                <div className="text-[10.5px] text-[#94A3B8] pt-1 border-t border-[#1E293B]/60">
+                  No SLA breaches today
+                </div>
               </div>
-              <div className="text-[9px] font-mono text-emerald-400">No SLA breaches</div>
             </div>
 
-            {/* Card 5: Automation */}
-            <div className="p-3 bg-[#111827] border border-[#1E293B] rounded-xl flex flex-col justify-between col-span-2 md:col-span-1">
-              <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono font-bold text-neutral-400 uppercase">Automation</span>
-                <span className="text-[9px] font-mono text-emerald-400 font-bold">• NOMINAL</span>
+            {/* Card 5: Automation (Nominal) */}
+            <div className="p-3.5 bg-[#0C121E] border border-[#1E293B]/60 rounded-2xl flex flex-col justify-between col-span-2 md:col-span-1">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="text-[10px] font-mono font-bold text-neutral-300 uppercase tracking-wider">Automation</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#10B981] font-bold tracking-wider">NOMINAL</span>
+                </div>
+                <div className="my-2.5">
+                  <div className="text-xl sm:text-2xl font-bold text-white">0</div>
+                  <div className="text-[9.5px] text-[#94A3B8] leading-tight">Failing automations</div>
+                </div>
               </div>
-              <div className="my-2">
-                <div className="text-lg font-bold text-white">0</div>
-                <div className="text-[10px] text-neutral-400">Failing automations</div>
+
+              <div className="flex flex-col gap-2 pt-2">
+                <div className="h-3" />
+                <div className="text-[10.5px] text-[#94A3B8] pt-1 border-t border-[#1E293B]/60">
+                  Latest runs · last 7 days
+                </div>
               </div>
-              <div className="text-[9px] font-mono text-emerald-400">Last 7 days clear</div>
             </div>
           </div>
         </div>
 
-        {/* Sub-section: Delivery Telemetry / Flight Plan */}
-        <div className="bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-4 shadow-xl flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-300 font-mono text-[9px] font-bold">
-                DLV
+        {/* ================================================================== */}
+        {/* TABS & TIME WINDOW FILTER BAR (Matching Screenshot)                */}
+        {/* ================================================================== */}
+        <div className="flex items-center justify-between pt-1">
+          <div className="bg-[#E2E8F0]/70 p-1 rounded-xl flex items-center gap-1 text-xs">
+            <button
+              type="button"
+              onClick={() => setActiveTab("overview")}
+              className={`px-3.5 py-1.5 rounded-lg font-semibold transition-colors ${
+                activeTab === "overview"
+                  ? "bg-white text-[#0F172A] shadow-xs"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              Overview
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("delivery")}
+              className={`px-3.5 py-1.5 rounded-lg font-semibold transition-colors ${
+                activeTab === "delivery"
+                  ? "bg-white text-[#0F172A] shadow-xs"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              Delivery
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("activity")}
+              className={`px-3.5 py-1.5 rounded-lg font-semibold transition-colors ${
+                activeTab === "activity"
+                  ? "bg-white text-[#0F172A] shadow-xs"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              Activity
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="px-3.5 py-1.5 bg-white border border-[#CBD5E1] rounded-xl text-xs font-medium text-[#0F172A] flex items-center gap-2 shadow-2xs cursor-pointer hover:border-[#6366F1] transition-colors">
+              <span>This Month</span>
+              <ChevronDown size={13} className="text-[#94A3B8]" />
+            </div>
+            <button
+              type="button"
+              className="w-8 h-8 rounded-xl bg-white border border-[#CBD5E1] flex items-center justify-center text-[#64748B] hover:text-[#0F172A] shadow-2xs transition-colors"
+            >
+              <RotateCw size={13} />
+            </button>
+          </div>
+        </div>
+
+        {/* ================================================================== */}
+        {/* SUBHEADER: Delivery telemetry                                      */}
+        {/* ================================================================== */}
+        <div className="flex items-center gap-2.5">
+          <span className="px-2 py-0.5 bg-[#0F172A] text-white rounded-md font-mono text-[10px] font-bold">
+            DLV
+          </span>
+          <span className="text-sm sm:text-base font-bold text-[#0F172A]">Delivery telemetry</span>
+          <span className="text-xs text-[#64748B]">Schedule, status and follow-up</span>
+        </div>
+
+        {/* ================================================================== */}
+        {/* FLIGHT PLAN CARD (Exact Match to Screenshot)                       */}
+        {/* ================================================================== */}
+        <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col gap-4 text-left">
+          {/* Card Top Row */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="px-1.5 py-0.5 bg-white border border-[#CBD5E1] rounded text-[9.5px] font-mono text-[#64748B] font-semibold">
+                DLV 1
               </span>
               <div>
-                <span className="text-xs font-bold text-white">Delivery telemetry</span>
-                <span className="text-[10px] text-neutral-400 ml-2 hidden sm:inline">Schedule, status and follow-up</span>
+                <div className="text-sm sm:text-base font-bold text-[#0F172A]">Flight plan</div>
+                <div className="text-xs text-[#64748B]">
+                  Active projects by schedule • bar fill = completed tasks
+                </div>
               </div>
             </div>
 
-            <span className="text-[10px] font-mono text-indigo-400 font-semibold cursor-pointer hover:underline">
-              All projects →
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="bg-[#F1F5F9] p-0.5 rounded-lg flex items-center text-xs font-medium">
+                <button
+                  type="button"
+                  onClick={() => setScheduleToggle("schedule")}
+                  className={`px-3 py-1 rounded-md transition-colors ${
+                    scheduleToggle === "schedule"
+                      ? "bg-white text-[#0F172A] font-semibold shadow-2xs border border-slate-200/50"
+                      : "text-[#64748B] hover:text-[#0F172A]"
+                  }`}
+                >
+                  Schedule
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScheduleToggle("risk")}
+                  className={`px-3 py-1 rounded-md transition-colors ${
+                    scheduleToggle === "risk"
+                      ? "bg-white text-[#0F172A] font-semibold shadow-2xs border border-slate-200/50"
+                      : "text-[#64748B] hover:text-[#0F172A]"
+                  }`}
+                >
+                  Risk
+                </button>
+              </div>
+
+              <button
+                type="button"
+                className="text-xs font-semibold text-[#0F172A] flex items-center gap-1 hover:text-[#4F46E5] transition-colors"
+              >
+                <span>All projects</span>
+                <ArrowRight size={13} />
+              </button>
+            </div>
           </div>
 
-          {/* Gantt Timeline Container */}
-          <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-3 flex flex-col gap-3">
-            {/* Months Header */}
-            <div className="grid grid-cols-8 text-[9px] font-mono text-neutral-500 uppercase text-center border-b border-[#1E293B] pb-1.5">
-              <span>Jun</span>
-              <span>Jul</span>
-              <span>Aug</span>
-              <span>Sep</span>
-              <span>Oct</span>
-              <span className="text-indigo-400 font-bold">Nov</span>
-              <span>Dec</span>
-              <span>Jan</span>
+          {/* Status Metrics Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-2 border-y border-[#F1F5F9] text-xs">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+                <span className="text-[#64748B]">On track</span>
+                <strong className="text-[#0F172A]">0</strong>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
+                <span className="text-[#64748B]">At risk</span>
+                <strong className="text-[#0F172A]">0</strong>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#EF4444]" />
+                <span className="text-[#64748B]">Off track</span>
+                <strong className="text-[#0F172A]">3</strong>
+              </span>
             </div>
 
-            {/* Gantt Row 1: Kroma Mobile SDK */}
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center justify-between text-[10.5px]">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                  <span className="font-semibold text-white">Kroma Mobile SDK &amp; Merchant Suite</span>
-                  <span className="text-[9.5px] text-neutral-400">· Kroma Fintech (6 late)</span>
-                </div>
-                <span className="font-mono text-[10px] text-indigo-400 font-bold">45% · Oct 26</span>
-              </div>
-              {/* Progress bar track */}
-              <div className="h-3 w-full bg-[#1E293B] rounded-full overflow-hidden relative">
-                <div className="h-full bg-gradient-to-r from-indigo-500 to-sky-400 rounded-full w-[45%]" />
-                {/* Nov 1 today marker */}
-                <div className="absolute top-0 bottom-0 left-[62%] w-0.5 bg-white shadow-xs" />
-              </div>
+            <div className="flex-1 max-w-xl mx-2 sm:mx-4">
+              <div className="h-2 bg-[#EF4444] rounded-full w-full shadow-2xs" />
             </div>
 
-            {/* Gantt Row 2: Nebula Telehealth */}
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center justify-between text-[10.5px]">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                  <span className="font-semibold text-white">Nebula Telehealth 2.0 Core Platform</span>
-                  <span className="text-[9.5px] text-neutral-400">· Nebula Health (10 late)</span>
+            <div className="text-xs text-[#64748B] font-medium shrink-0">
+              3 in progress
+            </div>
+          </div>
+
+          {/* Gantt Calendar Table */}
+          <div className="overflow-x-auto no-scrollbar relative pt-2">
+            <div className="min-w-[620px] flex flex-col gap-3 relative">
+              {/* Table Column Headers */}
+              <div className="flex items-center text-[10px] font-mono text-[#64748B] uppercase font-semibold pb-2 border-b border-[#F1F5F9] relative">
+                <div className="w-[38%] shrink-0"></div>
+                <div className="w-[52%] grid grid-cols-8 text-center relative shrink-0">
+                  <span>JUN</span>
+                  <span>JUL</span>
+                  <span>AUG</span>
+                  <span>SEP</span>
+                  <span>OCT</span>
+                  {/* Today • Nov 1 marker tag positioned right between OCT and NOV */}
+                  <div className="absolute left-[62.5%] -top-3.5 -translate-x-1/2 z-20">
+                    <span className="px-2 py-0.5 bg-[#0F172A] text-white rounded-full font-mono text-[9px] font-bold shadow-xs whitespace-nowrap">
+                      Today · Nov 1
+                    </span>
+                  </div>
+                  <span>NOV</span>
+                  <span>DEC</span>
+                  <span>JAN</span>
                 </div>
-                <span className="font-mono text-[10px] text-indigo-400 font-bold">38% · Nov 24</span>
+                <div className="w-[10%] text-right font-mono text-[10px] text-[#64748B] uppercase shrink-0">
+                  Done · due
+                </div>
               </div>
-              {/* Progress bar track */}
-              <div className="h-3 w-full bg-[#1E293B] rounded-full overflow-hidden relative">
-                <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-400 rounded-full w-[38%]" />
-                <div className="absolute top-0 bottom-0 left-[62%] w-0.5 bg-white shadow-xs" />
+
+              {/* Vertical line through calendar at Today (62.5% of timeline section) */}
+              <div className="absolute top-6 bottom-0 left-[calc(38%+52%*0.625)] w-[1.5px] bg-[#0F172A] z-10 pointer-events-none" />
+
+              {/* Row 1: Kroma Mobile SDK & Merchant Suite */}
+              <div className="flex items-center py-1.5 relative">
+                {/* Left project details */}
+                <div className="w-[38%] pr-3 shrink-0">
+                  <div className="flex items-start gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0 mt-1" />
+                    <div>
+                      <div className="font-bold text-[#0F172A] text-xs sm:text-[13px] leading-snug">
+                        Kroma Mobile SDK &amp; Mercha...
+                      </div>
+                      <div className="text-xs text-[#64748B] mt-0.5">
+                        <span>Kroma Fintech • </span>
+                        <span className="text-[#B45309] font-bold">6 late</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline bar (JUN to NOV 1) */}
+                <div className="w-[52%] pr-3 relative shrink-0">
+                  <div className="h-4 w-full flex items-center">
+                    <div className="w-[62.5%] flex h-3.5">
+                      {/* Solid purple 45% */}
+                      <div className="bg-[#6366F1] h-full w-[70%] rounded-l-full shadow-2xs" />
+                      {/* Translucent purple outlined remaining */}
+                      <div className="bg-[#EEF2FF] border border-[#818CF8] h-full w-[30%] rounded-r-full" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right percentage & date */}
+                <div className="w-[10%] text-right shrink-0">
+                  <div className="font-bold text-[#0F172A] text-xs sm:text-sm">45%</div>
+                  <div className="text-xs text-[#64748B]">Oct 26</div>
+                </div>
+              </div>
+
+              {/* Row 2: Nebula Telehealth 2.0 Core Platform */}
+              <div className="flex items-center py-1.5 relative">
+                {/* Left project details */}
+                <div className="w-[38%] pr-3 shrink-0">
+                  <div className="flex items-start gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0 mt-1" />
+                    <div>
+                      <div className="font-bold text-[#0F172A] text-xs sm:text-[13px] leading-snug">
+                        Nebula Telehealth 2.0 Core P...
+                      </div>
+                      <div className="text-xs text-[#64748B] mt-0.5">
+                        <span>Nebula Health • </span>
+                        <span className="text-[#B45309] font-bold">10 late</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline bar (JUN past NOV 1 into NOV) */}
+                <div className="w-[52%] pr-3 relative shrink-0">
+                  <div className="h-4 w-full flex items-center">
+                    <div className="w-[75%] flex h-3.5">
+                      {/* Solid purple 38% */}
+                      <div className="bg-[#6366F1] h-full w-[52%] rounded-l-full shadow-2xs" />
+                      {/* Translucent purple extending past today marker */}
+                      <div className="bg-[#EEF2FF] border border-[#818CF8] h-full w-[48%] rounded-r-full" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right percentage & date */}
+                <div className="w-[10%] text-right shrink-0">
+                  <div className="font-bold text-[#0F172A] text-xs sm:text-sm">38%</div>
+                  <div className="text-xs text-[#64748B]">Nov 2</div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ================================================================== */}
+      {/* FLOATING ACCESSORIES (Chat bubble & Theme toggle)                  */}
+      {/* ================================================================== */}
+      {/* Blue Floating Chat Bubble */}
+      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30">
+        <button
+          type="button"
+          className="w-11 h-11 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 relative cursor-pointer"
+        >
+          <MessageSquare size={18} />
+          <span className="w-4 h-4 rounded-full bg-[#0F172A] text-white text-[9px] font-bold flex items-center justify-center border border-white absolute -top-1 -right-1 shadow-xs">
+            2
+          </span>
+        </button>
+      </div>
+
+      {/* Theme toggle pill icon on right edge */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden md:flex pointer-events-none">
+        <div className="w-5 h-9 bg-white border-l border-y border-[#CBD5E1] rounded-l-lg flex items-center justify-center text-[#64748B] shadow-2xs">
+          <Sun size={12} />
         </div>
       </div>
     </div>
