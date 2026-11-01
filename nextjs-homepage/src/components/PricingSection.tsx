@@ -6,6 +6,8 @@ import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import AnimatedButton from "./AnimatedButton";
 import SectionBadge from "./SectionBadge";
+import JsonLd from "./JsonLd";
+import { getPricingProductSchema } from "@/lib/schema";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
 import { Check } from "lucide-react";
 
@@ -15,6 +17,7 @@ export default function PricingSection() {
 
   return (
     <section id="pricing" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
+      <JsonLd schema={getPricingProductSchema()} />
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-12">

@@ -84,6 +84,8 @@ export default function AnimatedImage({
       <motion.img
         src={src}
         alt={alt}
+        loading={isHero ? "eager" : "lazy"}
+        decoding="async"
         className={`block w-full h-auto ${imgClassName}`}
         variants={fadeVariants}
       />

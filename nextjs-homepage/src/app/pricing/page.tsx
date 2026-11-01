@@ -13,6 +13,8 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
+import JsonLd from "@/components/JsonLd";
+import { getPricingProductSchema } from "@/lib/schema";
 import { Check, X, Shield, Lock, Users, Zap, HelpCircle, ChevronDown, ArrowRight } from "lucide-react";
 
 interface PlanTier {
@@ -143,6 +145,7 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
+      <JsonLd schema={getPricingProductSchema()} />
       <Navbar />
 
       <main id="main-content" className="flex-1">

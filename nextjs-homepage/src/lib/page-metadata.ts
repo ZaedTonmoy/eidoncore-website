@@ -11,8 +11,21 @@ export function pageMetadata(route: keyof typeof pages): Metadata {
     title,
     description,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
-      title, description, url,
+      title,
+      description,
+      url,
       siteName: "Eidoncore",
       type: "website",
       locale: "en_US",
@@ -20,7 +33,8 @@ export function pageMetadata(route: keyof typeof pages): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title, description,
+      title,
+      description,
       images: [image],
     },
   };

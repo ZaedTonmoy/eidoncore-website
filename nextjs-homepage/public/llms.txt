@@ -1,0 +1,64 @@
+# Eidoncore
+
+> Eidoncore is the unified, AI-native agency management platform and white-label client portal built for modern digital agencies, creative studios, software dev shops, and consulting practices.
+
+Eidoncore eliminates agency tool fragmentation by combining client portals, project milestone management, Kanban task boards, recurring retainer billing, CRM timelines, interactive proposals with e-signatures, intake forms, digital product sales, and native AI workspace agent orchestration into a single high-performance operating system.
+
+## Core Capabilities & Feature Modules
+
+- [AI Workspace](https://eidoncore.com/ai-workspace/): Model Context Protocol (MCP) server integration connecting Claude, Cursor, Windsurf, and custom AI agents with 111+ tool calls for autonomous agency operations.
+- [Projects](https://eidoncore.com/projects/): Agency project management featuring real-time budget burndowns, milestone tracking, health scoring telemetry, and automated billable hours calculation.
+- [Tasks](https://eidoncore.com/tasks/): Fluid Kanban task boards, subtask checklists, priority matrices, dense list views, and integrated live timer tracking.
+- [CRM & Clients](https://eidoncore.com/crm/): Account health score tracking, visual deal sales funnels, unified communication timelines, and client lifetime value analytics.
+- [Invoicing](https://eidoncore.com/invoicing/): Recurring monthly retainer billing, milestone disbursements, credit notes, refunds, and direct Stripe Connect payment processing.
+- [Offerings & Services](https://eidoncore.com/services/): Productized service catalog allowing agency clients to browse standardized packages and purchase online with one-click checkout.
+- [Proposals](https://eidoncore.com/proposals/): Interactive agency proposals with custom line-item toggles, scope add-on selectors, and legally binding digital e-signatures.
+- [Client Portal](https://eidoncore.com/portal/): 100% white-label client portal hosted on custom agency domains (e.g., portal.youragency.com) with automated SSL, deliverable approvals, and ticket tracking.
+- [Automations](https://eidoncore.com/automations/): Visual rule builder executing trigger-and-action workflows across project milestones, invoice payments, ticket alerts, and client notifications.
+- [Messaging & Chat](https://eidoncore.com/messaging/): Real-time client channels, direct messaging, internal team threads, and asset sharing without lost Slack or WhatsApp history.
+- [Reports & Intelligence](https://eidoncore.com/reports/): Agency financial analytics, billable team utilization, revenue concentration, and on-time deliverable scoring.
+- [Notifications](https://eidoncore.com/notifications/): Multi-channel notification center spanning in-app alerts, desktop banners, and email activity digests.
+- [Security & Compliance](https://eidoncore.com/security/): AES-256 encryption at rest, TLS 1.3 in transit, row-level tenant database isolation, and role-based access control.
+- [Team Management](https://eidoncore.com/team/): Team directory, hourly billing rates, contractor permissions, workload capacity tracking, and member onboarding.
+- [File Management](https://eidoncore.com/files/): Secure agency asset storage with client download tracking, password-protected expiring share links, and folder organization.
+- [Intake Forms](https://eidoncore.com/intake-forms/): Multi-step lead capture forms with conditional branching logic, file uploads, and auto-conversion into active CRM deals and task boards.
+- [White-Label & Domains](https://eidoncore.com/white-label/): Custom CNAME mapping, agency logo, custom color palette, bespoke favicon, and custom SMTP email routing.
+- [Digital Products](https://eidoncore.com/digital-products/): Storefront to sell Figma kits, code boilerplates, and design assets with zero platform fee and instant secure downloads.
+- [Dashboard](https://eidoncore.com/dashboard/): Executive daily command center showing active projects, overdue deliverables, monthly revenue run-rate, and recent client activity.
+- [Integrations](https://eidoncore.com/integrations/): Native integrations with Stripe, Slack, Zapier, Webhooks, Google Workspace, and GitHub.
+- [Support Tickets](https://eidoncore.com/tickets/): Client support ticketing system with SLA response timers, priority queues, and internal notes.
+
+## Agency Use Cases
+
+- [Design Studios](https://eidoncore.com/use-cases/design-studios/): Creative deliverable sharing, visual feedback approvals, revision round limits, and asset gallery delivery.
+- [Development Agencies](https://eidoncore.com/use-cases/development-agencies/): Sprint management, bug issue ticketing, milestone release invoicing, and GitHub/MCP webhook syncing.
+- [Marketing Agencies](https://eidoncore.com/use-cases/marketing-agencies/): Retainer budget burndown tracking, campaign deliverable schedules, and transparent client reporting.
+- [Consulting Firms](https://eidoncore.com/use-cases/consulting-firms/): Scope of work (SOW) proposals, multi-stakeholder billing, and executive client portals.
+- [Freelancers](https://eidoncore.com/use-cases/freelancers/): All-in-one business management replacing 5 separate apps with professional client-facing branding.
+
+## Plans & Pricing
+
+- **Starter Plan** ($29/month, or $24/month billed annually): Up to 5 team members, 15 active projects, custom agency branding, invoicing, and task boards.
+- **Pro Plan** ($79/month, or $64/month billed annually): Up to 25 team members, unlimited projects, custom CNAME domain, full AI Workspace, and priority support.
+- **Agency Plan** ($199/month, or $159/month billed annually): Unlimited team members, enterprise SLA, custom webhook integrations, and dedicated account manager.
+- **Trial**: 14-day fully featured free Pro trial with zero credit card required.
+- More details: [Eidoncore Pricing](https://eidoncore.com/pricing/)
+
+## Competitor Comparisons
+
+- [Eidoncore vs AgencyHandy](https://eidoncore.com/compare/agencyhandy/): Eidoncore includes a native AI Workspace (111+ tools), digital e-signature proposals, and transparent flat pricing without per-seat penalties.
+- [Eidoncore vs Bonsai](https://eidoncore.com/compare/bonsai/): Bonsai focuses on solo freelancers; Eidoncore is engineered for scaling multi-member agencies with team permissions, budget burndowns, and MCP agent orchestration.
+- [Eidoncore vs HoneyBook](https://eidoncore.com/compare/honeybook/): HoneyBook targets event planners and solo creative businesses; Eidoncore provides deep white-label CNAME portals, sprint boards, and developer-grade AI tools.
+- [Eidoncore vs Kitchen.co](https://eidoncore.com/compare/kitchen/): Eidoncore delivers complete end-to-end agency operations including milestone budgets, automated intake forms, and AI copilots.
+- [Eidoncore vs Moxie](https://eidoncore.com/compare/moxie/): Eidoncore offers native model context protocol agent tools, unlimited client portals, and superior scalability for scaling teams.
+
+## Documentation & Developer Resources
+
+- [Documentation Hub](https://eidoncore.com/docs/): Complete feature setup guides, workspace configuration, and best practice playbooks.
+- [Developer API & Webhooks](https://eidoncore.com/developers/): REST API endpoints, webhook subscriptions, and MCP server schemas.
+- [Product Changelog](https://eidoncore.com/changelog/): Release notes, continuous feature additions, and platform updates.
+- [Agency Playbook Blog](https://eidoncore.com/blog/): Operational strategies, automation blueprints, and agency growth playbooks.
+
+## Full Context Document
+
+- [Full LLM Context Sheet](https://eidoncore.com/llms-full.txt): Comprehensive technical specifications, entity schemas, and operational parameters for deep AI reasoning.

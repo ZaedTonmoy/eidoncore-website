@@ -1,0 +1,129 @@
+# ==============================================================================
+# Eidoncore (https://eidoncore.com) - Robots & AI Crawler Directives
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Primary Search Engine Crawlers
+# ------------------------------------------------------------------------------
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: Slurp
+User-agent: DuckDuckBot
+User-agent: Baiduspider
+User-agent: YandexBot
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# ------------------------------------------------------------------------------
+# 2. AI Search & Real-Time Discovery Bots (Search & User Browsing)
+# ------------------------------------------------------------------------------
+# OpenAI Search Bot (powers search in ChatGPT & OpenAI Search)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# ChatGPT User Browse (user-initiated web queries in ChatGPT)
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Perplexity Search & Citation Crawler
+User-agent: PerplexityBot
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Anthropic Claude Search & Discovery Bot
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Anthropic Claude User Fetcher (user-initiated browsing in Claude)
+User-agent: Claude-User
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Apple Intelligence & Siri Knowledge Crawlers
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Meta AI Search & Crawlers
+User-agent: Meta-ExternalAgent
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Cohere Discovery
+User-agent: cohere-ai
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# ------------------------------------------------------------------------------
+# 3. AI Training & Foundation Model Crawlers
+# ------------------------------------------------------------------------------
+# Public product documentation and landing pages are discoverable
+User-agent: GPTBot
+User-agent: ClaudeBot
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# ------------------------------------------------------------------------------
+# 4. Global Default for All Other Crawlers
+# ------------------------------------------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# ------------------------------------------------------------------------------
+# 5. Sitemaps & Machine Discovery Endpoints
+# ------------------------------------------------------------------------------
+Sitemap: https://eidoncore.com/sitemap.xml
+
+# AI Discovery & LLM Context Specification (https://llmstxt.org)
+# llms.txt: https://eidoncore.com/llms.txt
+# llms-full.txt: https://eidoncore.com/llms-full.txt

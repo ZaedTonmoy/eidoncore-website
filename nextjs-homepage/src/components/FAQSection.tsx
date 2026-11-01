@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { siteContent } from "@/content/site-content";
 import AnimatedHeading from "./AnimatedHeading";
 import SectionBadge from "./SectionBadge";
+import JsonLd from "./JsonLd";
+import { getFAQSchema } from "@/lib/schema";
 import { StaggerGroup, StaggerItem } from "./StaggerReveal";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +20,7 @@ export default function FAQSection() {
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
+      <JsonLd schema={getFAQSchema(items)} />
       <div className="max-w-[800px] mx-auto px-6">
         
         {/* Header */}

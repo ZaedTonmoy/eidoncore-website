@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionBadge from "@/components/SectionBadge";
+import JsonLd from "@/components/JsonLd";
 import docsDataRaw from "@/data/docs.json";
 import {
   PlayCircle,
@@ -409,6 +410,20 @@ export default function DocsPage() {
 
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
+      <JsonLd
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: activeArticle ? `${activeArticle.title} — Eidoncore Documentation` : "Eidoncore Documentation",
+          description: "Comprehensive guides and technical documentation for the Eidoncore agency operating system.",
+          url: `https://eidoncore.com/docs/${activeArticle ? `?article=${activeArticle.slug}` : ""}`,
+          publisher: {
+            "@type": "Organization",
+            name: "Eidoncore",
+            url: "https://eidoncore.com",
+          },
+        }}
+      />
       <Navbar />
 
       <main id="main-content" className="flex-1">

@@ -8,6 +8,8 @@ import CTA from "@/components/CTA";
 import FAQSection from "@/components/FAQSection";
 import { StaggerGroup, StaggerItem } from "@/components/StaggerReveal";
 import AnimatedHeading from "@/components/AnimatedHeading";
+import JsonLd from "@/components/JsonLd";
+import { getBlogPostingSchema } from "@/lib/schema";
 import { BookOpen, Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 
 const ARTICLES = [
@@ -68,8 +70,21 @@ const ARTICLES = [
 ];
 
 export default function BlogPage() {
+  const blogListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Agency Insights & Playbooks — Eidoncore",
+    description: "Actionable strategies, workflow automations, and operational best practices from agency operators who scaled past $1M ARR.",
+    itemListElement: ARTICLES.map((post, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      item: getBlogPostingSchema(post),
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
+      <JsonLd schema={blogListSchema} />
       <Navbar />
 
       <main id="main-content" className="flex-1">

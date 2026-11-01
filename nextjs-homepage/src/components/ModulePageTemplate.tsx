@@ -16,6 +16,8 @@ import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
 import BlendedFeaturePreview from "@/components/BlendedFeaturePreview";
 import ScreenshotComingSoon from "@/components/ScreenshotComingSoon";
+import JsonLd from "@/components/JsonLd";
+import { getServiceSchema } from "@/lib/schema";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 export interface ModuleFeature {
@@ -92,6 +94,7 @@ export default function ModulePageTemplate({
     name.toLowerCase().includes("white-label");
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
+      <JsonLd schema={getServiceSchema(name, description, name.toLowerCase().replace(/\s+/g, "-"))} />
       <Navbar />
 
       <main id="main-content" className="flex-1 overflow-x-clip">

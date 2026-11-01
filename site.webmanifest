@@ -1,0 +1,26 @@
+{
+  "name": "Eidoncore — AI-Powered Agency Management Platform",
+  "short_name": "Eidoncore",
+  "description": "The all-in-one system for client portals, projects, billing, CRM, and autonomous AI workflows.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3F72AF",
+  "icons": [
+    {
+      "src": "/images/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

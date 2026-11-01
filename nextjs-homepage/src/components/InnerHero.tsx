@@ -6,6 +6,8 @@ import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import AnimatedButton from "./AnimatedButton";
 import SectionBadge from "./SectionBadge";
+import JsonLd from "./JsonLd";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbItem {
@@ -42,9 +44,11 @@ export default function InnerHero({
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center text-center">
-        {/* Breadcrumbs */}
+        {/* Breadcrumb Schema & Visual Navigation */}
         {breadcrumbs && breadcrumbs.length > 1 && (
-          <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
+          <>
+            <JsonLd schema={getBreadcrumbSchema(breadcrumbs)} />
+            <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
             <ol className="flex flex-wrap items-center justify-center gap-1 text-xs text-[#64748B]">
               {breadcrumbs.map((crumb, i) => {
                 const isLast = i === breadcrumbs.length - 1;
@@ -65,7 +69,8 @@ export default function InnerHero({
               })}
             </ol>
           </nav>
-        )}
+        </>
+      )}
 
         {/* Eyebrow badge */}
         {eyebrow && <SectionBadge text={eyebrow} className="mb-3 sm:mb-4" />}
