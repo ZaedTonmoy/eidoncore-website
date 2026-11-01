@@ -98,10 +98,10 @@ export default function FeaturesBento() {
               {/* Bottom Card Action */}
               <Link
                 href={mod.href}
-                aria-label={`Learn more about ${mod.title}`}
+                aria-label={`Explore ${mod.title} module`}
                 className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors after:absolute after:inset-0 after:rounded-2xl"
               >
-                <span className="font-medium text-[11px]">Learn more</span>
+                <span className="font-medium text-[11px]">Explore {mod.title}</span>
                 <ArrowRight size={12} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </StaggerItem>

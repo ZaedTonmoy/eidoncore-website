@@ -533,7 +533,7 @@ export default function UseCasesPage() {
                     </div>
 
                     <div className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors">
-                      <span className="font-medium text-[11px]">Learn more</span>
+                      <span className="font-medium text-[11px]">Explore {f.title}</span>
                       <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>

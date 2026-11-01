@@ -1336,7 +1336,7 @@ export default function HeroAppWindow() {
             <div className="flex items-center gap-2">
               <img
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-                alt="Julian Vance"
+                alt=""
                 className="w-6 h-6 rounded-full object-cover shrink-0 border border-slate-200 shadow-2xs"
               />
               <div className="leading-tight">
@@ -1626,7 +1626,7 @@ export default function HeroAppWindow() {
                 >
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-                    alt="Julian Vance"
+                    alt=""
                     className="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200"
                   />
                   <span className="text-xs font-semibold text-[#0F172A] hidden sm:inline">Julian Vance</span>
@@ -1645,7 +1645,7 @@ export default function HeroAppWindow() {
                       <div className="p-3.5 rounded-xl border border-slate-100 bg-[#FAFAFA] flex items-center gap-3 mb-1">
                         <img
                           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-                          alt="Julian Vance"
+                          alt=""
                           className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-200/60 shadow-xs shrink-0"
                         />
                         <div className="flex-1 min-w-0">
@@ -2144,7 +2144,7 @@ export default function HeroAppWindow() {
                   <button className="px-2.5 py-1 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors whitespace-nowrap text-xs font-medium">
                     Custom
                   </button>
-                  <button className="p-1.5 bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] rounded-lg shadow-2xs transition-colors ml-0.5">
+                  <button aria-label="Refresh metrics" className="p-1.5 bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] rounded-lg shadow-2xs transition-colors ml-0.5">
                     <RotateCw size={12} />
                   </button>
                 </div>
@@ -2285,10 +2285,10 @@ export default function HeroAppWindow() {
                               </span>
                             </div>
                             <div className="flex items-center border border-[#E2E8F0] rounded-lg p-0.5 bg-slate-50">
-                              <button className="px-1.5 py-0.5 bg-white text-[#0F172A] rounded shadow-2xs">
+                              <button aria-label="Line trend chart view" className="px-1.5 py-0.5 bg-white text-[#0F172A] rounded shadow-2xs">
                                 <TrendingUp size={11} />
                               </button>
-                              <button className="px-1.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
+                              <button aria-label="Bar chart view" className="px-1.5 py-0.5 text-[#64748B] hover:text-[#0F172A]">
                                 <BarChart3 size={11} />
                               </button>
                             </div>
