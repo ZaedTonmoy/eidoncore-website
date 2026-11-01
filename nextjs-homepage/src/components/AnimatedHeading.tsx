@@ -33,8 +33,13 @@ export default function AnimatedHeading({
   return (
     <Tag
       key={text}
-      className={className}
-      style={{ display: "flex", flexWrap: "wrap" }}
+      className={`flex flex-wrap gap-x-[0.28em] gap-y-[0.1em] ${className}`}
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        columnGap: "0.28em",
+        rowGap: "0.1em",
+      }}
       variants={staggerContainer(immediate ? 0.008 : TIMING.letterStagger, delay)}
       initial="hidden"
       {...(immediate
