@@ -112,19 +112,19 @@ export default function HowItWorks() {
         {/* Panel Content Area */}
         <div
           className={`flex-1 flex flex-col bg-white relative overflow-hidden ${
-            isMobile ? "h-[450px]" : "min-h-[540px] lg:h-[590px]"
+            isMobile ? "h-[450px] sm:h-[490px]" : "min-h-[520px] lg:h-[580px] xl:h-[610px]"
           }`}
         >
           {isMobile ? (
             <div className="h-full flex flex-col">{renderPanelContent(stepIndex)}</div>
           ) : (
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={`tab-${stepIndex}`}
-                initial={{ opacity: 0, scale: 0.995 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.995 }}
-                transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="w-full h-full flex flex-col"
               >
                 {renderPanelContent(stepIndex)}
@@ -138,7 +138,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" className="py-20 md:py-28 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div className="max-w-[1280px] xl:max-w-[1340px] mx-auto px-4 sm:px-6">
         
         {/* Section Head */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
@@ -165,14 +165,14 @@ export default function HowItWorks() {
                   type="button"
                   aria-expanded={isActive}
                   onClick={() => setActiveTab(step.id)}
-                  className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-center ${
+                  className={`text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 relative overflow-hidden flex flex-col justify-center ${
                     isActive
-                      ? "bg-white border-[#3F72AF] shadow-sm"
+                      ? "bg-white border-[#3F72AF] shadow-xs"
                       : "bg-[#F1F5F9] border-[#E7E7EA] hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       <span
                         className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                           isActive
@@ -183,7 +183,7 @@ export default function HowItWorks() {
                         {step.num}
                       </span>
                       <h3
-                        className={`text-base font-semibold tracking-tight transition-colors ${
+                        className={`text-sm sm:text-base font-semibold tracking-tight transition-colors ${
                           isActive ? "text-[#0B0B0F]" : "text-[#6B6F76]"
                         }`}
                       >
@@ -200,7 +200,7 @@ export default function HowItWorks() {
                     />
                   </div>
 
-                  <p className="mt-2 text-xs sm:text-[13px] text-[#6B6F76] leading-relaxed pl-9">
+                  <p className="mt-1.5 text-xs sm:text-[13px] text-[#6B6F76] leading-relaxed pl-8">
                     {step.desc}
                   </p>
 
@@ -214,28 +214,23 @@ export default function HowItWorks() {
 
                 {/* Corresponding Dashboard Screen shown directly after the active tab on mobile */}
                 {isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="mb-2"
-                  >
+                  <div className="mb-2.5">
                     {renderDeviceWindow(step.id, true)}
-                  </motion.div>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
 
-        {/* DESKTOP VIEW (lg:): Tabs on Left, Full Mockup on Right */}
+        {/* DESKTOP VIEW (lg:): Compact Tabs on Left (col-span-4), Wide Mockup on Right (col-span-8) */}
         <div
-          className="hidden lg:grid lg:grid-cols-12 gap-8 items-stretch"
+          className="hidden lg:grid lg:grid-cols-12 gap-6 xl:gap-8 items-stretch"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left: 4 Interactive Step Tabs */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-3">
+          {/* Left: 4 Interactive Step Tabs (col-span-4 gives more room to the mockup) */}
+          <div className="lg:col-span-4 flex flex-col justify-between gap-2.5">
             {STEPS.map((step) => {
               const isActive = activeTab === step.id;
               return (
@@ -244,15 +239,15 @@ export default function HowItWorks() {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveTab(step.id)}
-                  className={`text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group flex-1 flex flex-col justify-center ${
+                  className={`text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 relative overflow-hidden group flex-1 flex flex-col justify-center ${
                     isActive
-                      ? "bg-white border-[#3F72AF] shadow-sm"
+                      ? "bg-white border-[#3F72AF] shadow-xs"
                       : "bg-[#F1F5F9] border-[#E7E7EA] hover:bg-white hover:border-[#0B0B0F]/20"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5">
                     <span
-                      className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                      className={`font-mono text-[11px] font-bold px-2 py-0.5 rounded ${
                         isActive
                           ? "bg-[#3F72AF]/10 text-[#2F5F96]"
                           : "bg-neutral-200/60 text-[#52565E]"
@@ -261,7 +256,7 @@ export default function HowItWorks() {
                       {step.num}
                     </span>
                     <h3
-                      className={`text-base font-semibold tracking-tight transition-colors ${
+                      className={`text-sm sm:text-[15px] font-semibold tracking-tight transition-colors ${
                         isActive ? "text-[#0B0B0F]" : "text-[#6B6F76] group-hover:text-[#0B0B0F]"
                       }`}
                     >
@@ -269,7 +264,7 @@ export default function HowItWorks() {
                     </h3>
                   </div>
 
-                  <p className="mt-2 text-xs sm:text-[13px] text-[#6B6F76] leading-relaxed pl-9">
+                  <p className="mt-1.5 text-xs text-[#6B6F76] leading-relaxed pl-8">
                     {step.desc}
                   </p>
 
@@ -290,8 +285,8 @@ export default function HowItWorks() {
             })}
           </div>
 
-          {/* Right: Mockup Browser Device Screen */}
-          <div className="lg:col-span-7 flex flex-col h-full min-h-[540px] lg:h-[590px]">
+          {/* Right: Mockup Browser Device Screen (col-span-8 gives spacious, immersive canvas) */}
+          <div className="lg:col-span-8 flex flex-col h-full min-h-[520px] lg:h-[580px] xl:h-[610px]">
             {renderDeviceWindow(activeTab, false)}
           </div>
         </div>

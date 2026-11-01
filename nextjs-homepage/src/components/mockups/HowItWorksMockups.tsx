@@ -9,13 +9,6 @@ import {
   ChevronDown,
   Globe,
   Palette,
-  Mail,
-  Shield,
-  Lock,
-  History,
-  Link as LinkIcon,
-  Ticket,
-  Folder,
   FileText,
   Copy,
   Check,
@@ -39,9 +32,9 @@ import {
 /* -------------------------------------------------------------------------- */
 export function AppTopBar({ activeModule = "settings" }: { activeModule?: "settings" | "team" | "dashboard" }) {
   return (
-    <div className="h-11 bg-white border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-2 shrink-0 select-none">
+    <div className="h-11 bg-white border-b border-[#E2E8F0] px-3 sm:px-5 flex items-center justify-between gap-2 shrink-0 select-none">
       {/* Left: module icon button + vertical separator + search */}
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-center gap-2.5 min-w-0">
         <div className="w-7 h-7 rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-center text-[#64748B] shrink-0">
           {activeModule === "team" ? (
             <Users size={14} className="text-[#4F46E5]" />
@@ -53,7 +46,7 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
         </div>
         <div className="h-4 w-px bg-[#E2E8F0] shrink-0 hidden sm:block" />
 
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#94A3B8] w-44 lg:w-56">
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#94A3B8] w-48 lg:w-64">
           <Search size={12} className="text-[#94A3B8] shrink-0" />
           <span className="truncate text-[11px]">Search or jump to...</span>
           <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#E2E8F0] rounded px-1 text-[#64748B]">
@@ -63,9 +56,9 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
       </div>
 
       {/* Right: 11/17 ring, Copilot, Settings, Notification, Profile */}
-      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Progress ring 11/17 */}
-        <div className="hidden md:flex items-center gap-1.5 px-2 py-0.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full text-[11px] font-medium text-[#0F172A]">
+        <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full text-[11px] font-medium text-[#0F172A]">
           <svg className="w-3.5 h-3.5 -rotate-90" viewBox="0 0 36 36">
             <path
               className="text-[#E2E8F0]"
@@ -91,7 +84,7 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
         {/* AI Copilot Button */}
         <button
           type="button"
-          className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 bg-[#EEF2FF] border border-[#E0E7FF] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-lg text-[11px] font-semibold"
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 bg-[#EEF2FF] border border-[#E0E7FF] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-lg text-[11px] font-semibold"
         >
           <Sparkles size={11} className="shrink-0 text-[#6366F1]" />
           <span>AI Copilot</span>
@@ -127,140 +120,61 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
 }
 
 /* -------------------------------------------------------------------------- */
-/* SETTINGS SIDEBAR (Used in Step 0 & Step 1)                                  */
-/* -------------------------------------------------------------------------- */
-function SettingsSidebar({ activeItem = "agency" }: { activeItem?: "agency" | "branding" | "domains" }) {
-  return (
-    <div className="w-40 sm:w-48 bg-[#FAFAFA] border-r border-[#E2E8F0] p-3 flex flex-col gap-3.5 shrink-0 select-none">
-      <div className="font-bold text-xs text-[#0F172A] tracking-tight">Settings</div>
-
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-white border border-[#E2E8F0] rounded-md text-[10.5px] text-[#94A3B8]">
-        <Search size={11} />
-        <span className="truncate">Search settings...</span>
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <span className="text-[9px] font-mono font-bold tracking-wider text-[#94A3B8] uppercase px-2 mb-0.5">
-          Account
-        </span>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md hover:bg-neutral-100">
-          <User size={12} />
-          <span>Profile</span>
-        </div>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md hover:bg-neutral-100">
-          <Lock size={12} />
-          <span>Security</span>
-        </div>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md hover:bg-neutral-100">
-          <Bell size={12} />
-          <span>Notifications</span>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <span className="text-[9px] font-mono font-bold tracking-wider text-[#94A3B8] uppercase px-2 mb-0.5">
-          Agency
-        </span>
-        <div
-          className={`flex items-center gap-2 px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${
-            activeItem === "agency"
-              ? "bg-white text-[#4F46E5] font-semibold shadow-2xs border border-[#E2E8F0]"
-              : "text-[#64748B] hover:bg-neutral-100"
-          }`}
-        >
-          <Building2 size={12} className={activeItem === "agency" ? "text-[#4F46E5]" : ""} />
-          <span>Agency</span>
-        </div>
-        <div
-          className={`flex items-center gap-2 px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${
-            activeItem === "branding"
-              ? "bg-white text-[#4F46E5] font-semibold shadow-2xs border border-[#E2E8F0]"
-              : "text-[#64748B] hover:bg-neutral-100"
-          }`}
-        >
-          <Palette size={12} className={activeItem === "branding" ? "text-[#4F46E5]" : ""} />
-          <span>Branding</span>
-        </div>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md hover:bg-neutral-100">
-          <Mail size={12} />
-          <span>Email (SMTP)</span>
-        </div>
-        <div
-          className={`flex items-center gap-2 px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${
-            activeItem === "domains"
-              ? "bg-white text-[#4F46E5] font-semibold shadow-2xs border border-[#E2E8F0]"
-              : "text-[#64748B] hover:bg-neutral-100"
-          }`}
-        >
-          <Globe size={12} className={activeItem === "domains" ? "text-[#4F46E5]" : ""} />
-          <span>Domains</span>
-        </div>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md hover:bg-neutral-100">
-          <Shield size={12} />
-          <span>Roles &amp; Permissions</span>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1 hidden sm:flex">
-        <span className="text-[9px] font-mono font-bold tracking-wider text-[#94A3B8] uppercase px-2 mb-0.5">
-          Integrations
-        </span>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md">
-          <LinkIcon size={12} />
-          <span>Integrations</span>
-        </div>
-        <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-[#64748B] rounded-md">
-          <Ticket size={12} />
-          <span>Tickets</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* STEP 0: AGENCY PROFILE MOCKUP (Image 1)                                     */
+/* STEP 0: AGENCY PROFILE MOCKUP (Full-width, No Sidebar)                     */
 /* -------------------------------------------------------------------------- */
 export function AgencyProfileMockup() {
   return (
-    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left">
+    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
       <AppTopBar activeModule="settings" />
 
-      <div className="flex flex-1 min-h-0 overflow-hidden">
-        {/* Left Settings Sidebar */}
-        <SettingsSidebar activeItem="agency" />
-
-        {/* Right Main Content */}
-        <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar bg-white">
-          <div className="max-w-2xl">
-            <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">Agency Profile</h3>
-            <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5 mb-4">
-              Manage your agency&apos;s information and defaults.
-            </p>
-
-            {/* General Information Card */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-5 shadow-2xs flex flex-col gap-3 sm:gap-4">
-              <div>
-                <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">General Information</h4>
-                <p className="text-[10px] sm:text-[11px] text-[#64748B]">Basic agency details.</p>
+      {/* Main Content (spans full width) */}
+      <div className="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto no-scrollbar bg-white">
+        <div className="max-w-3xl mx-auto">
+          {/* Header row with breadcrumb */}
+          <div className="flex items-center justify-between mb-4 border-b border-[#F1F5F9] pb-3">
+            <div>
+              <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#64748B] uppercase tracking-wider mb-0.5">
+                <span>Settings</span>
+                <span>/</span>
+                <span className="text-[#4F46E5] font-semibold">Agency Profile</span>
               </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">Agency Profile</h3>
+              <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
+                Manage your agency&apos;s information and defaults.
+              </p>
+            </div>
 
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-mono font-semibold rounded-full">
+              <CheckCircle2 size={11} className="text-emerald-600" />
+              Verified Workspace
+            </span>
+          </div>
+
+          {/* General Information Card */}
+          <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-6 shadow-2xs flex flex-col gap-4">
+            <div>
+              <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">General Information</h4>
+              <p className="text-[10px] sm:text-[11px] text-[#64748B]">Basic agency details.</p>
+            </div>
+
+            {/* Form rows in clean 2-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Agency Name */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                <label className="text-[11px] font-medium text-[#334155] sm:w-36 shrink-0">
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Agency Name <span className="text-red-500">*</span>
                 </label>
-                <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-semibold text-[#0F172A] shadow-2xs">
+                <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-semibold text-[#0F172A] shadow-2xs">
                   Aetheris Creative Studio
                 </div>
               </div>
 
               {/* Email (Reply-to) */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                <label className="text-[11px] font-medium text-[#334155] sm:w-36 shrink-0">
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Email (Reply-to)
                 </label>
-                <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between shadow-2xs">
+                <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between shadow-2xs">
                   <span className="font-mono text-[11px]">hello@aetheris.design</span>
                   <span className="w-4 h-4 rounded bg-red-50 text-red-600 font-mono text-[9px] flex items-center justify-center font-bold">
                     ...
@@ -269,74 +183,85 @@ export function AgencyProfileMockup() {
               </div>
 
               {/* Phone */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                <label className="text-[11px] font-medium text-[#334155] sm:w-36 shrink-0">Phone</label>
-                <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#0F172A] shadow-2xs">
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">Phone</label>
+                <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#0F172A] shadow-2xs">
                   +1 (415) 890-4200
                 </div>
               </div>
 
               {/* Address */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
-                <label className="text-[11px] font-medium text-[#334155] sm:w-36 shrink-0 sm:pt-1.5">
-                  Address
-                </label>
-                <div className="flex-1 px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] leading-relaxed shadow-2xs">
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">Address</label>
+                <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] leading-relaxed shadow-2xs truncate">
                   550 Montgomery St, Suite 700, San Francisco, CA 94111
-                </div>
-              </div>
-
-              {/* Agency Logo */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 pt-1">
-                <label className="text-[11px] font-medium text-[#334155] sm:w-36 shrink-0">
-                  Agency Logo
-                </label>
-                <div className="flex-1 p-2.5 sm:p-3 border border-dashed border-[#CBD5E1] rounded-xl bg-[#F8FAFC] flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded-lg bg-[#0F172A] text-white flex flex-col items-center justify-center px-1 font-bold text-[8px] tracking-widest shadow-2xs shrink-0">
-                      <span>AETHER</span>
-                      <span className="text-[6px] text-indigo-400 font-normal">STUDIO</span>
-                    </div>
-                    <div className="hidden sm:block">
-                      <div className="text-[11px] font-semibold text-[#0F172A]">logo-mark.svg</div>
-                      <div className="text-[9.5px] text-[#64748B]">SVG, PNG · Max 2MB</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10.5px] font-medium">
-                    <button type="button" className="px-2 py-1 bg-white border border-[#CBD5E1] rounded-md text-[#334155] hover:bg-neutral-50 shadow-2xs">
-                      Replace
-                    </button>
-                    <button type="button" className="px-2 py-1 bg-white border border-[#CBD5E1] rounded-md text-[#334155] hover:bg-neutral-50 shadow-2xs hidden sm:inline">
-                      Browse
-                    </button>
-                    <button type="button" className="px-2 py-1 text-red-600 hover:text-red-700">
-                      Remove
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Defaults Card (subtle preview) */}
-            <div className="mt-3.5 bg-white border border-[#E2E8F0] rounded-xl p-3.5 shadow-2xs flex items-center justify-between">
-              <div>
-                <h4 className="text-xs font-semibold text-[#0F172A]">Defaults</h4>
-                <p className="text-[10px] text-[#64748B]">Default currency and timezone for new records.</p>
+            {/* Agency Logo */}
+            <div className="pt-2 border-t border-[#F1F5F9]">
+              <label className="text-[11px] font-medium text-[#334155] block mb-1.5">
+                Agency Logo
+              </label>
+              <div className="p-3.5 sm:p-4 border border-dashed border-[#CBD5E1] rounded-xl bg-[#F8FAFC] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#0F172A] text-white flex flex-col items-center justify-center px-1 font-bold text-[9px] tracking-widest shadow-2xs shrink-0">
+                    <span>AETHER</span>
+                    <span className="text-[6.5px] text-indigo-400 font-normal">STUDIO</span>
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold text-[#0F172A]">aetheris-brand-mark.svg</div>
+                    <div className="text-[10px] text-[#64748B]">SVG, PNG, WebP · Max 2MB · 512×512px</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs font-medium">
+                  <button type="button" className="px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-[#334155] hover:bg-neutral-50 shadow-2xs">
+                    Replace
+                  </button>
+                  <button type="button" className="px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-[#334155] hover:bg-neutral-50 shadow-2xs hidden sm:inline">
+                    Browse
+                  </button>
+                  <button type="button" className="px-2.5 py-1.5 text-red-600 hover:text-red-700">
+                    Remove
+                  </button>
+                </div>
               </div>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 bg-neutral-100 rounded text-[#475569]">
-                USD ($) · America/Los_Angeles
+            </div>
+          </div>
+
+          {/* Defaults Card */}
+          <div className="mt-4 bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h4 className="text-xs font-semibold text-[#0F172A]">Workspace Defaults</h4>
+              <p className="text-[10px] text-[#64748B]">Default currency and timezone for all client records.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10.5px] font-mono font-medium px-2.5 py-1 bg-[#F1F5F9] rounded-md text-[#334155]">
+                USD ($)
+              </span>
+              <span className="text-[10.5px] font-mono font-medium px-2.5 py-1 bg-[#F1F5F9] rounded-md text-[#334155]">
+                America/Los_Angeles (GMT-7)
               </span>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Floating Chat Bubble Widget from Screenshot */}
+      <div className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-[#6366F1] text-white flex items-center justify-center shadow-lg cursor-pointer hover:bg-[#4F46E5] transition-colors">
+        <MessageSquare size={16} />
+        <span className="absolute -top-1 -right-1 px-1 py-0.2 text-[8px] font-bold font-mono bg-[#0F172A] text-white rounded-full">
+          2
+        </span>
       </div>
     </div>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 1: BRANDING & CUSTOM DOMAINS MOCKUP (Images 2 & 3)                    */
+/* STEP 1: BRANDING & CUSTOM DOMAINS MOCKUP (Full-width, No Sidebar)          */
 /* -------------------------------------------------------------------------- */
 export function BrandingDomainsMockup() {
   const [subTab, setSubTab] = useState<"branding" | "domains">("branding");
@@ -350,40 +275,37 @@ export function BrandingDomainsMockup() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left">
+    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
       <AppTopBar activeModule="settings" />
 
-      <div className="flex flex-1 min-h-0 overflow-hidden">
-        {/* Left Settings Sidebar */}
-        <SettingsSidebar activeItem={subTab === "branding" ? "branding" : "domains"} />
-
-        {/* Right Content */}
-        <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar bg-white flex flex-col">
+      {/* Main Content (spans full width) */}
+      <div className="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto no-scrollbar bg-white flex flex-col">
+        <div className="max-w-3xl mx-auto w-full">
           {/* Sub-tab pills to switch between Branding and Domains */}
           <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3 mb-4">
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setSubTab("branding")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                   subTab === "branding"
                     ? "bg-[#6366F1] text-white shadow-2xs"
                     : "text-[#64748B] hover:bg-neutral-100"
                 }`}
               >
-                <Palette size={12} />
+                <Palette size={13} />
                 <span>Colors &amp; Styling</span>
               </button>
               <button
                 type="button"
                 onClick={() => setSubTab("domains")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                   subTab === "domains"
                     ? "bg-[#6366F1] text-white shadow-2xs"
                     : "text-[#64748B] hover:bg-neutral-100"
                 }`}
               >
-                <Globe size={12} />
+                <Globe size={13} />
                 <span>Custom Domains</span>
               </button>
             </div>
@@ -394,10 +316,10 @@ export function BrandingDomainsMockup() {
           </div>
 
           {subTab === "branding" ? (
-            /* BRANDING VIEW (Image 2) */
-            <div className="max-w-2xl flex flex-col gap-4">
+            /* BRANDING VIEW (Screenshot 2) */
+            <div className="flex flex-col gap-4">
               {/* Colors Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-5 shadow-2xs flex flex-col gap-3.5">
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-6 shadow-2xs flex flex-col gap-4">
                 <div>
                   <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Colors</h4>
                   <p className="text-[10.5px] sm:text-[11px] text-[#64748B] mt-0.5">
@@ -406,33 +328,33 @@ export function BrandingDomainsMockup() {
                 </div>
 
                 {/* Primary & Secondary Color Inputs */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div>
                     <label className="text-[11px] font-medium text-[#334155] block mb-1.5">
                       Primary Color
                     </label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       <div
-                        className="w-8 h-8 rounded-lg shrink-0 shadow-2xs transition-colors cursor-pointer"
+                        className="w-9 h-9 rounded-lg shrink-0 shadow-2xs transition-colors cursor-pointer"
                         style={{ backgroundColor: primaryColor }}
                       />
                       <input
                         type="text"
                         readOnly
                         value={primaryColor}
-                        className="w-full px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                        className="flex-1 px-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
                       />
                     </div>
                     {/* Swatch options */}
-                    <div className="flex items-center gap-1.5 mt-2">
+                    <div className="flex items-center gap-2 mt-2.5">
                       {["#6366f1", "#3B82F6", "#0EA5E9", "#10B981", "#8B5CF6", "#0F172A"].map((c) => (
                         <button
                           key={c}
                           type="button"
                           onClick={() => setPrimaryColor(c)}
                           style={{ backgroundColor: c }}
-                          className={`w-4 h-4 rounded-full transition-transform ${
-                            primaryColor === c ? "scale-125 ring-2 ring-offset-1 ring-[#0F172A]" : "hover:scale-110"
+                          className={`w-5 h-5 rounded-full transition-transform ${
+                            primaryColor === c ? "scale-125 ring-2 ring-offset-2 ring-[#0F172A]" : "hover:scale-110"
                           }`}
                         />
                       ))}
@@ -443,100 +365,102 @@ export function BrandingDomainsMockup() {
                     <label className="text-[11px] font-medium text-[#334155] block mb-1.5">
                       Secondary Color
                     </label>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-[#06b6d4] shrink-0 shadow-2xs" />
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-lg bg-[#06b6d4] shrink-0 shadow-2xs" />
                       <input
                         type="text"
                         readOnly
                         value="#06b6d4"
-                        className="w-full px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                        className="flex-1 px-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Semantic status colors row */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-[#F1F5F9]">
+                <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[#F1F5F9]">
                   <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Success</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded bg-emerald-500 shrink-0" />
-                      <span className="text-[10px] font-mono text-[#334155] truncate">#10b981</span>
+                    <span className="text-[10px] text-[#64748B] block mb-1">Success Color</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-emerald-500 shrink-0" />
+                      <span className="text-[11px] font-mono text-[#334155]">#10b981</span>
                     </div>
                   </div>
                   <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Warning</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded bg-amber-500 shrink-0" />
-                      <span className="text-[10px] font-mono text-[#334155] truncate">#f59e0b</span>
+                    <span className="text-[10px] text-[#64748B] block mb-1">Warning Color</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-amber-500 shrink-0" />
+                      <span className="text-[11px] font-mono text-[#334155]">#f59e0b</span>
                     </div>
                   </div>
                   <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Danger</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded bg-rose-500 shrink-0" />
-                      <span className="text-[10px] font-mono text-[#334155] truncate">#ef4444</span>
+                    <span className="text-[10px] text-[#64748B] block mb-1">Danger Color</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-rose-500 shrink-0" />
+                      <span className="text-[11px] font-mono text-[#334155]">#ef4444</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Typography & Shape Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-5 shadow-2xs flex flex-col gap-3.5">
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-6 shadow-2xs flex flex-col gap-4">
                 <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Typography &amp; Shape</h4>
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                  <span className="text-[11px] font-medium text-[#334155] sm:w-32 shrink-0">
-                    Font Family
-                  </span>
-                  <div className="flex-1 px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between shadow-2xs">
-                    <span>System Default (Inter / Plus Jakarta Sans)</span>
-                    <ChevronDown size={12} className="text-[#94A3B8]" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                  <div>
+                    <span className="text-[11px] font-medium text-[#334155] block mb-1.5">
+                      Font Family
+                    </span>
+                    <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between shadow-2xs">
+                      <span>System Default (Inter / Plus Jakarta)</span>
+                      <ChevronDown size={13} className="text-[#94A3B8]" />
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 pt-1">
-                  <span className="text-[11px] font-medium text-[#334155] sm:w-32 shrink-0">
-                    Border Radius
-                  </span>
-                  <div className="flex items-center bg-[#F1F5F9] p-0.5 rounded-lg border border-[#E2E8F0] gap-1 text-[11px]">
-                    <button
-                      type="button"
-                      onClick={() => setBorderRadius("sharp")}
-                      className={`px-3 py-1 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-                        borderRadius === "sharp" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
-                      }`}
-                    >
-                      <Square size={10} />
-                      <span>Sharp</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBorderRadius("medium")}
-                      className={`px-3 py-1 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-                        borderRadius === "medium" ? "bg-white text-[#0F172A] shadow-2xs font-semibold" : "text-[#64748B]"
-                      }`}
-                    >
-                      <span className="w-2.5 h-2.5 rounded-xs border border-current" />
-                      <span>Medium</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBorderRadius("rounded")}
-                      className={`px-3 py-1 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-                        borderRadius === "rounded" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
-                      }`}
-                    >
-                      <span className="w-2.5 h-2.5 rounded-full border border-current" />
-                      <span>Rounded</span>
-                    </button>
+                  <div>
+                    <span className="text-[11px] font-medium text-[#334155] block mb-1.5">
+                      Border Radius
+                    </span>
+                    <div className="flex items-center bg-[#F1F5F9] p-1 rounded-lg border border-[#E2E8F0] gap-1 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setBorderRadius("sharp")}
+                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
+                          borderRadius === "sharp" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
+                        }`}
+                      >
+                        <Square size={11} />
+                        <span>Sharp</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setBorderRadius("medium")}
+                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
+                          borderRadius === "medium" ? "bg-white text-[#0F172A] shadow-2xs font-semibold" : "text-[#64748B]"
+                        }`}
+                      >
+                        <span className="w-2.5 h-2.5 rounded-xs border border-current" />
+                        <span>Medium</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setBorderRadius("rounded")}
+                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
+                          borderRadius === "rounded" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
+                        }`}
+                      >
+                        <span className="w-2.5 h-2.5 rounded-full border border-current" />
+                        <span>Rounded</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           ) : (
-            /* CUSTOM DOMAINS VIEW (Image 3) */
-            <div className="max-w-2xl flex flex-col gap-3.5">
+            /* CUSTOM DOMAINS VIEW (Screenshot 3) */
+            <div className="flex flex-col gap-4">
               <div>
                 <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">Custom Domains</h3>
                 <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
@@ -545,7 +469,7 @@ export function BrandingDomainsMockup() {
               </div>
 
               {/* Add Domain Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 sm:p-4 shadow-2xs flex flex-col gap-2.5">
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
                 <div>
                   <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Add Domain</h4>
                   <p className="text-[10px] sm:text-[11px] text-[#64748B]">
@@ -557,26 +481,26 @@ export function BrandingDomainsMockup() {
                     type="text"
                     readOnly
                     value="app.yourcompany.com or app.eu.yourcompany.com"
-                    className="flex-1 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs text-[#94A3B8] font-mono"
+                    className="flex-1 px-3.5 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs text-[#94A3B8] font-mono"
                   />
                   <button
                     type="button"
-                    className="px-3.5 py-1.5 bg-[#6366F1] text-white rounded-lg text-xs font-semibold flex items-center gap-1 hover:bg-[#4F46E5] transition-colors shrink-0 shadow-2xs"
+                    className="px-4 py-2 bg-[#6366F1] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-[#4F46E5] transition-colors shrink-0 shadow-2xs"
                   >
-                    <Plus size={12} />
+                    <Plus size={13} />
                     <span>Add Domain</span>
                   </button>
                 </div>
               </div>
 
               {/* Active Domain Row */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
-                    <Globe size={15} />
+              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
+                    <Globe size={17} />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       <span className="text-xs sm:text-sm font-semibold font-mono text-[#0F172A]">
                         aetheris-studio.com
                       </span>
@@ -584,35 +508,36 @@ export function BrandingDomainsMockup() {
                         • PENDING VERIFICATION
                       </span>
                     </div>
+                    <span className="text-[10px] text-[#64748B]">Primary agency client portal URL</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button type="button" className="px-3 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-semibold text-[#0F172A] hover:bg-neutral-50 shadow-2xs flex items-center gap-1">
-                    <Check size={12} className="text-emerald-600" />
+                  <button type="button" className="px-3.5 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs font-semibold text-[#0F172A] hover:bg-neutral-50 shadow-2xs flex items-center gap-1">
+                    <Check size={13} className="text-emerald-600" />
                     <span>Verify</span>
                   </button>
-                  <button type="button" className="px-3 py-1 bg-red-50 border border-red-200 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-100 shadow-2xs">
+                  <button type="button" className="px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-100 shadow-2xs">
                     Remove
                   </button>
                 </div>
               </div>
 
               {/* DNS Checklist */}
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3.5 flex flex-col gap-2.5">
+              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 flex flex-col gap-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase font-bold text-[#64748B] tracking-wider">
+                  <span className="text-[10.5px] font-mono uppercase font-bold text-[#64748B] tracking-wider">
                     Domain Setup &amp; Verification Checklist
                   </span>
                   <span className="text-[10px] text-[#64748B]">Cloudflare, GoDaddy, Route53</span>
                 </div>
 
-                <div className="bg-white border border-[#E2E8F0] rounded-lg p-2.5 text-xs flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-1.5">
+                <div className="bg-white border border-[#E2E8F0] rounded-lg p-3 text-xs flex flex-col gap-2.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-2">
                     <span className="text-[#64748B]">Record Type:</span>
                     <span className="font-bold text-[#4F46E5]">CNAME</span>
                   </div>
-                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-1.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-2">
                     <span className="text-[#64748B]">Exact Hostname (FQDN):</span>
                     <div className="flex items-center gap-1.5 font-semibold text-[#0F172A]">
                       <span>aetheris-studio.com</span>
@@ -621,12 +546,12 @@ export function BrandingDomainsMockup() {
                         onClick={() => copyToClipboard("aetheris-studio.com", "fqdn")}
                         className="text-[#64748B] hover:text-[#0F172A]"
                       >
-                        {copiedKey === "fqdn" ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                        {copiedKey === "fqdn" ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
                       </button>
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-[#64748B]">Target / Value:</span>
+                    <span className="text-[#64748B]">Target / Points to:</span>
                     <div className="flex items-center gap-1.5 font-semibold text-[#0F172A]">
                       <span>cname.eidoncore.com</span>
                       <button
@@ -634,7 +559,7 @@ export function BrandingDomainsMockup() {
                         onClick={() => copyToClipboard("cname.eidoncore.com", "target")}
                         className="text-[#64748B] hover:text-[#0F172A]"
                       >
-                        {copiedKey === "target" ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
+                        {copiedKey === "target" ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
                       </button>
                     </div>
                   </div>
@@ -649,14 +574,14 @@ export function BrandingDomainsMockup() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 2: TEAM DIRECTORY MOCKUP (Image 4)                                    */
+/* STEP 2: TEAM DIRECTORY MOCKUP (Screenshot 4)                               */
 /* -------------------------------------------------------------------------- */
 export function TeamDirectoryMockup() {
   return (
     <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left">
       <AppTopBar activeModule="team" />
 
-      <div className="flex-1 p-3.5 sm:p-5 overflow-y-auto no-scrollbar bg-white flex flex-col gap-4">
+      <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar bg-white flex flex-col gap-4">
         {/* Header: The People Behind the Work */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E2E8F0] pb-3.5">
           <div>
@@ -707,7 +632,7 @@ export function TeamDirectoryMockup() {
             </button>
             <button
               type="button"
-              className="px-3 py-1.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
+              className="px-3.5 py-1.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
             >
               <Plus size={12} />
               <span>Invite member</span>
@@ -721,20 +646,20 @@ export function TeamDirectoryMockup() {
           <div className="lg:col-span-8 flex flex-col gap-3">
             {/* Filter Bar */}
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-[#94A3B8] flex-1 max-w-xs">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-[#94A3B8] flex-1 max-w-xs">
                 <Search size={11} />
                 <span className="truncate text-[11px]">Search people, roles, departments...</span>
               </div>
               <div className="flex items-center gap-1.5 text-[11px] text-[#64748B]">
-                <span className="px-2 py-1 bg-white border border-[#E2E8F0] rounded-md font-medium">All depts ▾</span>
-                <span className="px-2 py-1 bg-white border border-[#E2E8F0] rounded-md font-medium">All roles ▾</span>
+                <span className="px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md font-medium">All depts ▾</span>
+                <span className="px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md font-medium">All roles ▾</span>
               </div>
             </div>
 
             {/* 2x2 Grid of Team Members */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Amara Okafor */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2">
+              <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2.5">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-400 text-white font-bold text-xs flex items-center justify-center shrink-0">
@@ -753,7 +678,7 @@ export function TeamDirectoryMockup() {
                   </span>
                 </div>
                 <div className="text-[10px] text-[#64748B] font-mono">amara@aetheris.design · Engineering</div>
-                <div className="flex items-center justify-between pt-1 border-t border-[#F1F5F9] text-[10px]">
+                <div className="flex items-center justify-between pt-1.5 border-t border-[#F1F5F9] text-[10.5px]">
                   <span className="font-semibold text-[#0F172A]">10 Active tasks</span>
                   <span className="px-1.5 py-0.2 bg-red-50 text-red-600 border border-red-200 rounded font-semibold font-mono">
                     ▲ 10 overdue
@@ -762,7 +687,7 @@ export function TeamDirectoryMockup() {
               </div>
 
               {/* Chloe Bennett */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2">
+              <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2.5">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-rose-500 to-pink-400 text-white font-bold text-xs flex items-center justify-center shrink-0">
@@ -781,7 +706,7 @@ export function TeamDirectoryMockup() {
                   </span>
                 </div>
                 <div className="text-[10px] text-[#64748B] font-mono">chloe@aetheris.design · Design</div>
-                <div className="flex items-center justify-between pt-1 border-t border-[#F1F5F9] text-[10px]">
+                <div className="flex items-center justify-between pt-1.5 border-t border-[#F1F5F9] text-[10.5px]">
                   <span className="font-semibold text-[#0F172A]">6 Active tasks</span>
                   <span className="px-1.5 py-0.2 bg-red-50 text-red-600 border border-red-200 rounded font-semibold font-mono">
                     ▲ 5 overdue
@@ -790,7 +715,7 @@ export function TeamDirectoryMockup() {
               </div>
 
               {/* Dominic Sterling */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2">
+              <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2.5">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-orange-400 text-white font-bold text-xs flex items-center justify-center shrink-0">
@@ -809,14 +734,14 @@ export function TeamDirectoryMockup() {
                   </span>
                 </div>
                 <div className="text-[10px] text-[#64748B] font-mono">dominic@aetheris.design · Finance</div>
-                <div className="flex items-center justify-between pt-1 border-t border-[#F1F5F9] text-[10px]">
+                <div className="flex items-center justify-between pt-1.5 border-t border-[#F1F5F9] text-[10.5px]">
                   <span className="font-semibold text-[#0F172A]">0 Active tasks</span>
                   <span className="text-emerald-600 font-medium font-mono">All clear</span>
                 </div>
               </div>
 
               {/* Liam Gallagher */}
-              <div className="p-3 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2">
+              <div className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl shadow-2xs flex flex-col justify-between gap-2.5">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-teal-500 to-emerald-400 text-white font-bold text-xs flex items-center justify-center shrink-0">
@@ -835,7 +760,7 @@ export function TeamDirectoryMockup() {
                   </span>
                 </div>
                 <div className="text-[10px] text-[#64748B] font-mono">liam@aetheris.design · Design</div>
-                <div className="flex items-center justify-between pt-1 border-t border-[#F1F5F9] text-[10px]">
+                <div className="flex items-center justify-between pt-1.5 border-t border-[#F1F5F9] text-[10.5px]">
                   <span className="font-semibold text-[#0F172A]">6 Active tasks</span>
                   <span className="px-1.5 py-0.2 bg-red-50 text-red-600 border border-red-200 rounded font-semibold font-mono">
                     ▲ 6 overdue
@@ -848,55 +773,55 @@ export function TeamDirectoryMockup() {
           {/* Right Column (Team Copilot & Worth a Look) */}
           <div className="lg:col-span-4 flex flex-col gap-3">
             {/* Team Copilot Widget */}
-            <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-3.5 flex flex-col gap-2">
+            <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-4 flex flex-col gap-2">
               <div className="flex items-center gap-1.5 text-[#4F46E5] font-bold text-xs">
                 <Sparkles size={13} />
                 <span>TEAM COPILOT</span>
               </div>
               <h4 className="text-xs font-bold text-[#1E1B4B]">A little help, a better handoff.</h4>
-              <p className="text-[10px] text-[#475569] leading-relaxed">
+              <p className="text-[10.5px] text-[#475569] leading-relaxed">
                 Use team context to plan onboarding, clarify responsibilities, and prepare handoffs.
               </p>
 
               <div className="flex flex-col gap-1.5 pt-1">
-                <button type="button" className="w-full px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
+                <button type="button" className="w-full px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
                   <span>Clarify team responsibilities</span>
                   <ArrowRight size={11} className="text-[#64748B]" />
                 </button>
-                <button type="button" className="w-full px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
+                <button type="button" className="w-full px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
                   <span>Plan an onboarding checklist</span>
                   <ArrowRight size={11} className="text-[#64748B]" />
                 </button>
-                <button type="button" className="w-full px-2.5 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
+                <button type="button" className="w-full px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-lg text-[10.5px] font-medium text-[#0F172A] flex items-center justify-between hover:border-[#6366F1] transition-colors shadow-2xs">
                   <span>Prepare a handoff checklist</span>
                   <ArrowRight size={11} className="text-[#64748B]" />
                 </button>
               </div>
 
-              <span className="text-[9px] text-[#64748B] pt-0.5">
+              <span className="text-[9.5px] text-[#64748B] pt-0.5">
                 Uses only information your role can access.
               </span>
             </div>
 
             {/* Worth a Look Widget */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 shadow-2xs flex flex-col gap-1.5">
-              <div className="text-[10.5px] font-bold text-[#0F172A]">WORTH A LOOK</div>
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3.5 shadow-2xs flex flex-col gap-2">
+              <div className="text-xs font-bold text-[#0F172A]">WORTH A LOOK</div>
               <p className="text-[10px] text-[#64748B]">A few small check-ins can make a big difference.</p>
 
-              <div className="flex flex-col gap-1 pt-0.5 text-[10.5px]">
+              <div className="flex flex-col gap-1.5 pt-0.5 text-[11px]">
                 <div className="flex items-center justify-between text-red-600 font-medium hover:underline cursor-pointer">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
                     5 people with overdue work
                   </span>
-                  <ArrowRight size={10} />
+                  <ArrowRight size={11} />
                 </div>
                 <div className="flex items-center justify-between text-amber-600 font-medium hover:underline cursor-pointer">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                     1 person with 10+ tasks
                   </span>
-                  <ArrowRight size={10} />
+                  <ArrowRight size={11} />
                 </div>
               </div>
             </div>
@@ -908,14 +833,14 @@ export function TeamDirectoryMockup() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 3: MISSION CONTROL / DELIVERY TELEMETRY MOCKUP (Image 5)              */
+/* STEP 3: MISSION CONTROL / DELIVERY TELEMETRY MOCKUP (Screenshot 5)         */
 /* -------------------------------------------------------------------------- */
 export function MissionControlMockup() {
   return (
     <div className="flex flex-col h-full bg-[#0F172A] text-white select-none text-left">
       <AppTopBar activeModule="dashboard" />
 
-      <div className="flex-1 p-3.5 sm:p-5 overflow-y-auto no-scrollbar flex flex-col gap-4">
+      <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar flex flex-col gap-4">
         {/* Dark Hero Deck: Executive Workspace / Aetheris Creative Studio */}
         <div className="bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col gap-4">
           {/* Deck Top Bar */}
@@ -926,15 +851,15 @@ export function MissionControlMockup() {
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <span className="px-2 py-0.5 bg-red-950/80 text-red-400 border border-red-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
+              <span className="px-2.5 py-0.5 bg-red-950/80 text-red-400 border border-red-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                 2 CRITICAL as of 5:15 PM
               </span>
-              <span className="px-2 py-0.5 bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
+              <span className="px-2.5 py-0.5 bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 rounded-full font-mono text-[9px] font-bold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 Live
               </span>
-              <span className="px-2 py-0.5 bg-neutral-800 text-neutral-300 rounded font-mono text-[9px]">
+              <span className="px-2.5 py-0.5 bg-neutral-800 text-neutral-300 rounded font-mono text-[9px]">
                 Motion on
               </span>
             </div>
@@ -950,7 +875,7 @@ export function MissionControlMockup() {
             </div>
 
             {/* Clocks & Window */}
-            <div className="flex items-center gap-4 text-xs font-mono shrink-0">
+            <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono shrink-0">
               <div className="bg-[#111827] px-2.5 py-1.5 rounded-lg border border-[#1E293B]">
                 <span className="text-[9px] text-neutral-500 block uppercase">Local · GMT+6</span>
                 <span className="font-bold text-white text-xs">17:16:36</span>
