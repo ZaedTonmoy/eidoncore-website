@@ -9,7 +9,6 @@ import {
   ChevronDown,
   Globe,
   Palette,
-  FileText,
   Copy,
   Check,
   AlertTriangle,
@@ -25,6 +24,10 @@ import {
   MessageSquare,
   Square,
   CheckCircle2,
+  UserPlus,
+  X,
+  Pipette,
+  ChevronsUpDown,
 } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
@@ -261,18 +264,12 @@ export function AgencyProfileMockup() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 1: BRANDING & CUSTOM DOMAINS MOCKUP (Full-width, No Sidebar)          */
+/* STEP 1: BRANDING MOCKUP (Exact Match to User Screenshot 1 & 2)             */
 /* -------------------------------------------------------------------------- */
 export function BrandingDomainsMockup() {
-  const [subTab, setSubTab] = useState<"branding" | "domains">("branding");
   const [primaryColor, setPrimaryColor] = useState("#6366f1");
   const [borderRadius, setBorderRadius] = useState<"sharp" | "medium" | "rounded">("medium");
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
-
-  const copyToClipboard = (val: string, key: string) => {
-    setCopiedKey(key);
-    setTimeout(() => setCopiedKey(null), 2000);
-  };
+  const [showColorPicker, setShowColorPicker] = useState(false);
 
   return (
     <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
@@ -280,293 +277,257 @@ export function BrandingDomainsMockup() {
 
       {/* Main Content (spans full width) */}
       <div className="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto no-scrollbar bg-white flex flex-col">
-        <div className="max-w-3xl mx-auto w-full">
-          {/* Sub-tab pills to switch between Branding and Domains */}
-          <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3 mb-4">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setSubTab("branding")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
-                  subTab === "branding"
-                    ? "bg-[#6366F1] text-white shadow-2xs"
-                    : "text-[#64748B] hover:bg-neutral-100"
-                }`}
-              >
-                <Palette size={13} />
-                <span>Colors &amp; Styling</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setSubTab("domains")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
-                  subTab === "domains"
-                    ? "bg-[#6366F1] text-white shadow-2xs"
-                    : "text-[#64748B] hover:bg-neutral-100"
-                }`}
-              >
-                <Globe size={13} />
-                <span>Custom Domains</span>
-              </button>
+        <div className="max-w-3xl mx-auto w-full flex flex-col gap-4">
+          
+          {/* Card 1: Colors (Matches media_1793536619030_81de624b.png exactly) */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col">
+            <div>
+              <h3 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">Colors</h3>
+              <p className="text-xs text-[#64748B] mt-0.5">
+                Primary and secondary colors are used across UI. Semantic colors override system defaults for status indicators.
+              </p>
             </div>
 
-            <span className="text-[10px] font-mono text-[#64748B] hidden sm:inline">
-              Interactive preview
-            </span>
-          </div>
+            <div className="border-b border-[#F1F5F9] my-4" />
 
-          {subTab === "branding" ? (
-            /* BRANDING VIEW (Screenshot 2) */
-            <div className="flex flex-col gap-4">
-              {/* Colors Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-6 shadow-2xs flex flex-col gap-4">
-                <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Colors</h4>
-                  <p className="text-[10.5px] sm:text-[11px] text-[#64748B] mt-0.5">
-                    Primary and secondary colors are used across UI. Semantic colors override system defaults for status indicators.
-                  </p>
-                </div>
-
-                {/* Primary & Secondary Color Inputs */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                  <div>
-                    <label className="text-[11px] font-medium text-[#334155] block mb-1.5">
-                      Primary Color
-                    </label>
-                    <div className="flex items-center gap-2.5">
-                      <div
-                        className="w-9 h-9 rounded-lg shrink-0 shadow-2xs transition-colors cursor-pointer"
-                        style={{ backgroundColor: primaryColor }}
-                      />
-                      <input
-                        type="text"
-                        readOnly
-                        value={primaryColor}
-                        className="flex-1 px-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
-                      />
-                    </div>
-                    {/* Swatch options */}
-                    <div className="flex items-center gap-2 mt-2.5">
-                      {["#6366f1", "#3B82F6", "#0EA5E9", "#10B981", "#8B5CF6", "#0F172A"].map((c) => (
-                        <button
-                          key={c}
-                          type="button"
-                          onClick={() => setPrimaryColor(c)}
-                          style={{ backgroundColor: c }}
-                          className={`w-5 h-5 rounded-full transition-transform ${
-                            primaryColor === c ? "scale-125 ring-2 ring-offset-2 ring-[#0F172A]" : "hover:scale-110"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-[11px] font-medium text-[#334155] block mb-1.5">
-                      Secondary Color
-                    </label>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-[#06b6d4] shrink-0 shadow-2xs" />
-                      <input
-                        type="text"
-                        readOnly
-                        value="#06b6d4"
-                        className="flex-1 px-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Semantic status colors row */}
-                <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[#F1F5F9]">
-                  <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Success Color</span>
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-emerald-500 shrink-0" />
-                      <span className="text-[11px] font-mono text-[#334155]">#10b981</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Warning Color</span>
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-amber-500 shrink-0" />
-                      <span className="text-[11px] font-mono text-[#334155]">#f59e0b</span>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-[#64748B] block mb-1">Danger Color</span>
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-rose-500 shrink-0" />
-                      <span className="text-[11px] font-mono text-[#334155]">#ef4444</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Typography & Shape Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-6 shadow-2xs flex flex-col gap-4">
-                <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Typography &amp; Shape</h4>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                  <div>
-                    <span className="text-[11px] font-medium text-[#334155] block mb-1.5">
-                      Font Family
-                    </span>
-                    <div className="px-3.5 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between shadow-2xs">
-                      <span>System Default (Inter / Plus Jakarta)</span>
-                      <ChevronDown size={13} className="text-[#94A3B8]" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-[11px] font-medium text-[#334155] block mb-1.5">
-                      Border Radius
-                    </span>
-                    <div className="flex items-center bg-[#F1F5F9] p-1 rounded-lg border border-[#E2E8F0] gap-1 text-xs">
-                      <button
-                        type="button"
-                        onClick={() => setBorderRadius("sharp")}
-                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
-                          borderRadius === "sharp" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
-                        }`}
-                      >
-                        <Square size={11} />
-                        <span>Sharp</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setBorderRadius("medium")}
-                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
-                          borderRadius === "medium" ? "bg-white text-[#0F172A] shadow-2xs font-semibold" : "text-[#64748B]"
-                        }`}
-                      >
-                        <span className="w-2.5 h-2.5 rounded-xs border border-current" />
-                        <span>Medium</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setBorderRadius("rounded")}
-                        className={`flex-1 py-1.5 rounded-md font-medium transition-colors flex items-center justify-center gap-1.5 ${
-                          borderRadius === "rounded" ? "bg-white text-[#0F172A] shadow-2xs" : "text-[#64748B]"
-                        }`}
-                      >
-                        <span className="w-2.5 h-2.5 rounded-full border border-current" />
-                        <span>Rounded</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* CUSTOM DOMAINS VIEW (Screenshot 3) */
-            <div className="flex flex-col gap-4">
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">Custom Domains</h3>
-                <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
-                  Configure custom domains for your agency portal.
-                </p>
-              </div>
-
-              {/* Add Domain Card */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
-                <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Add Domain</h4>
-                  <p className="text-[10px] sm:text-[11px] text-[#64748B]">
-                    Point your custom domain to your agency platform. You&apos;ll need to add a CNAME record in your DNS provider.
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 pt-1">
-                  <input
-                    type="text"
-                    readOnly
-                    value="app.yourcompany.com or app.eu.yourcompany.com"
-                    className="flex-1 px-3.5 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-xs text-[#94A3B8] font-mono"
-                  />
+            {/* Primary & Secondary Color Inputs Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 relative">
+              {/* Primary Color */}
+              <div className="relative">
+                <label className="text-xs font-medium text-[#334155] block mb-2">
+                  Primary Color
+                </label>
+                <div className="flex items-center gap-2.5">
                   <button
                     type="button"
-                    className="px-4 py-2 bg-[#6366F1] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-[#4F46E5] transition-colors shrink-0 shadow-2xs"
+                    onClick={() => setShowColorPicker(!showColorPicker)}
+                    className="w-12 h-10 rounded-xl bg-[#6366f1] shadow-2xs cursor-pointer shrink-0 transition-transform hover:scale-105 active:scale-95 relative"
+                    style={{ backgroundColor: primaryColor }}
+                    title="Click to open color picker"
+                  />
+                  <div
+                    onClick={() => setShowColorPicker(!showColorPicker)}
+                    className="flex-1 px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#0F172A] cursor-pointer hover:border-[#6366F1] shadow-2xs transition-colors flex items-center justify-between"
                   >
-                    <Plus size={13} />
-                    <span>Add Domain</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Active Domain Row */}
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
-                    <Globe size={17} />
+                    <span>{primaryColor}</span>
+                    <span className="text-[10px] font-sans text-[#6366F1] font-semibold hidden sm:inline">
+                      {showColorPicker ? "Close picker" : "Edit color"}
+                    </span>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-xs sm:text-sm font-semibold font-mono text-[#0F172A]">
-                        aetheris-studio.com
-                      </span>
-                      <span className="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 rounded-full font-mono text-[9px] font-bold">
-                        • PENDING VERIFICATION
-                      </span>
+                </div>
+
+                {/* Color Picker Popover (Matches media_1793536828272_2628878c.png) */}
+                {showColorPicker && (
+                  <div className="absolute top-full left-0 mt-2 w-64 sm:w-72 bg-white border border-[#CBD5E1] rounded-2xl shadow-2xl p-3.5 z-40 flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-150">
+                    {/* 2D Gradient Area */}
+                    <div
+                      className="h-36 rounded-xl relative overflow-hidden cursor-crosshair shadow-inner"
+                      style={{
+                        background:
+                          "linear-gradient(to bottom, transparent, #000000), linear-gradient(to right, #ffffff, #1d00ff)",
+                      }}
+                      onClick={(e) => {
+                        // Quick interactive click on gradient box
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        if (x > rect.width * 0.7) setPrimaryColor("#4338ca");
+                        else if (x > rect.width * 0.4) setPrimaryColor("#6366f1");
+                        else setPrimaryColor("#818cf8");
+                      }}
+                    >
+                      {/* Selection Knob */}
+                      <div
+                        className="w-4 h-4 rounded-full border-2 border-white shadow-md ring-2 ring-black/40 absolute pointer-events-none"
+                        style={{ top: "12%", left: "55%", transform: "translate(-50%, -50%)" }}
+                      />
                     </div>
-                    <span className="text-[10px] text-[#64748B]">Primary agency client portal URL</span>
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-2">
-                  <button type="button" className="px-3.5 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs font-semibold text-[#0F172A] hover:bg-neutral-50 shadow-2xs flex items-center gap-1">
-                    <Check size={13} className="text-emerald-600" />
-                    <span>Verify</span>
-                  </button>
-                  <button type="button" className="px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-100 shadow-2xs">
-                    Remove
-                  </button>
-                </div>
-              </div>
-
-              {/* DNS Checklist */}
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 flex flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10.5px] font-mono uppercase font-bold text-[#64748B] tracking-wider">
-                    Domain Setup &amp; Verification Checklist
-                  </span>
-                  <span className="text-[10px] text-[#64748B]">Cloudflare, GoDaddy, Route53</span>
-                </div>
-
-                <div className="bg-white border border-[#E2E8F0] rounded-lg p-3 text-xs flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-2">
-                    <span className="text-[#64748B]">Record Type:</span>
-                    <span className="font-bold text-[#4F46E5]">CNAME</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[11px] font-mono border-b border-[#F1F5F9] pb-2">
-                    <span className="text-[#64748B]">Exact Hostname (FQDN):</span>
-                    <div className="flex items-center gap-1.5 font-semibold text-[#0F172A]">
-                      <span>aetheris-studio.com</span>
+                    {/* Controls Row: Pipette, Swatch, Rainbow Hue Slider */}
+                    <div className="flex items-center gap-2.5 pt-0.5">
+                      {/* Pipette */}
                       <button
                         type="button"
-                        onClick={() => copyToClipboard("aetheris-studio.com", "fqdn")}
-                        className="text-[#64748B] hover:text-[#0F172A]"
+                        className="w-7 h-7 flex items-center justify-center text-[#0F172A] hover:bg-neutral-100 rounded-lg shrink-0"
                       >
-                        {copiedKey === "fqdn" ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
+                        <Pipette size={14} />
+                      </button>
+
+                      {/* Color Circle Swatch */}
+                      <div
+                        className="w-7 h-7 rounded-full shadow-inner border border-black/10 shrink-0"
+                        style={{ backgroundColor: primaryColor }}
+                      />
+
+                      {/* Rainbow Hue Slider */}
+                      <div className="flex-1 h-3 rounded-full relative flex items-center overflow-visible bg-gradient-to-r from-[#ff00ff] via-[#0000ff] via-[#00ffff] via-[#00ff00] via-[#ffff00] to-[#ff0000]">
+                        <div
+                          className="w-4 h-4 rounded-full border-2 border-white shadow-md absolute"
+                          style={{ left: "45%", backgroundColor: "#1e40af", transform: "translateX(-50%)" }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* RGB Input Row */}
+                    <div className="flex items-center gap-2 pt-0.5 text-center">
+                      <div className="flex-1 flex flex-col items-center">
+                        <input
+                          type="text"
+                          readOnly
+                          value="99"
+                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                        />
+                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">R</span>
+                      </div>
+                      <div className="flex-1 flex flex-col items-center">
+                        <input
+                          type="text"
+                          readOnly
+                          value="102"
+                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                        />
+                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">G</span>
+                      </div>
+                      <div className="flex-1 flex flex-col items-center">
+                        <input
+                          type="text"
+                          readOnly
+                          value="241"
+                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                        />
+                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">B</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="p-1 text-[#64748B] hover:text-[#0F172A] shrink-0"
+                      >
+                        <ChevronsUpDown size={14} />
                       </button>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-[#64748B]">Target / Points to:</span>
-                    <div className="flex items-center gap-1.5 font-semibold text-[#0F172A]">
-                      <span>cname.eidoncore.com</span>
-                      <button
-                        type="button"
-                        onClick={() => copyToClipboard("cname.eidoncore.com", "target")}
-                        className="text-[#64748B] hover:text-[#0F172A]"
-                      >
-                        {copiedKey === "target" ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
-                      </button>
-                    </div>
+                )}
+              </div>
+
+              {/* Secondary Color */}
+              <div>
+                <label className="text-xs font-medium text-[#334155] block mb-2">
+                  Secondary Color
+                </label>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-12 h-10 rounded-xl bg-[#06b6d4] shadow-2xs shrink-0" />
+                  <div className="flex-1 px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#0F172A] shadow-2xs">
+                    #06b6d4
                   </div>
                 </div>
               </div>
             </div>
-          )}
+
+            <div className="border-b border-[#F1F5F9] my-4" />
+
+            {/* Semantic Status Colors (Success, Warning, Danger) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="text-xs font-medium text-[#334155] block mb-2">
+                  Success Color
+                </label>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                    #6366f1
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-[#334155] block mb-2">
+                  Warning Color
+                </label>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                    #6366f1
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-[#334155] block mb-2">
+                  Danger Color
+                </label>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                    #6366f1
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Typography & Shape (Matches media_1793536619030_81de624b.png exactly) */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col">
+            <h3 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">Typography &amp; Shape</h3>
+
+            <div className="border-b border-[#F1F5F9] my-4" />
+
+            {/* Font Family Row */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs sm:text-sm font-medium text-[#0F172A]">
+                Font Family
+              </span>
+              <div className="px-4 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm text-[#0F172A] flex items-center justify-between w-full sm:w-72 shadow-2xs cursor-pointer hover:border-[#6366F1] transition-colors">
+                <span>System Default</span>
+                <ChevronDown size={14} className="text-[#94A3B8]" />
+              </div>
+            </div>
+
+            <div className="border-b border-[#F1F5F9] my-4" />
+
+            {/* Border Radius Row */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs sm:text-sm font-medium text-[#0F172A]">
+                Border Radius
+              </span>
+              <div className="flex items-center bg-[#E2E8F0]/60 p-1 rounded-xl gap-1 text-xs sm:text-sm">
+                <button
+                  type="button"
+                  onClick={() => setBorderRadius("sharp")}
+                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                    borderRadius === "sharp"
+                      ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
+                      : "text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current" />
+                  <span>Sharp</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBorderRadius("medium")}
+                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                    borderRadius === "medium"
+                      ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
+                      : "text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current rounded-tl-sm" />
+                  <span>Medium</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBorderRadius("rounded")}
+                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                    borderRadius === "rounded"
+                      ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
+                      : "text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current rounded-full" />
+                  <span>Rounded</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -574,11 +535,14 @@ export function BrandingDomainsMockup() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* STEP 2: TEAM DIRECTORY MOCKUP (Screenshot 4)                               */
+/* STEP 2: TEAM DIRECTORY MOCKUP WITH INTERACTIVE INVITE MODAL                */
+/* (Matches Screenshot 4 & media_1793536882722_f22eab42.png)                  */
 /* -------------------------------------------------------------------------- */
 export function TeamDirectoryMockup() {
+  const [isInviteOpen, setIsInviteOpen] = useState(false);
+
   return (
-    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left">
+    <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
       <AppTopBar activeModule="team" />
 
       <div className="flex-1 p-4 sm:p-6 overflow-y-auto no-scrollbar bg-white flex flex-col gap-4">
@@ -632,7 +596,8 @@ export function TeamDirectoryMockup() {
             </button>
             <button
               type="button"
-              className="px-3.5 py-1.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
+              onClick={() => setIsInviteOpen(true)}
+              className="px-3.5 py-1.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-all hover:shadow cursor-pointer active:scale-98"
             >
               <Plus size={12} />
               <span>Invite member</span>
@@ -828,6 +793,134 @@ export function TeamDirectoryMockup() {
           </div>
         </div>
       </div>
+
+      {/* ---------------------------------------------------------------------- */}
+      {/* INVITE MEMBER POPUP MODAL (Matches media_1793536882722_f22eab42.png)    */}
+      {/* ---------------------------------------------------------------------- */}
+      {isInviteOpen && (
+        <div
+          className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+          onClick={() => setIsInviteOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] w-full max-w-[460px] p-5 sm:p-6 relative flex flex-col gap-4 text-left animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Top Close Button X */}
+            <button
+              type="button"
+              onClick={() => setIsInviteOpen(false)}
+              className="absolute top-4 right-4 text-[#94A3B8] hover:text-[#0F172A] p-1 rounded-lg transition-colors"
+            >
+              <X size={16} />
+            </button>
+
+            {/* Modal Header */}
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] text-[#6366F1] flex items-center justify-center mb-2.5">
+                <UserPlus size={18} />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">
+                Bring someone into the team
+              </h3>
+              <p className="text-xs text-[#64748B] mt-0.5">
+                They&apos;ll receive a secure email invitation to your agency workspace.
+              </p>
+            </div>
+
+            {/* Form Fields */}
+            <div className="flex flex-col gap-3.5 pt-0.5">
+              {/* First name & Last name */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-[11px] font-medium text-[#334155] block mb-1">
+                    First name
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder=""
+                      defaultValue=""
+                      className="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs text-[#0F172A] shadow-2xs focus:outline-none focus:ring-1 focus:ring-[#6366F1]"
+                    />
+                    <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded bg-red-50 text-red-600 font-mono text-[9px] flex items-center justify-center font-bold">
+                      ...
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-medium text-[#334155] block mb-1">
+                    Last name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    defaultValue=""
+                    className="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs text-[#0F172A] shadow-2xs focus:outline-none focus:ring-1 focus:ring-[#6366F1]"
+                  />
+                </div>
+              </div>
+
+              {/* Work email */}
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
+                  Work email
+                </label>
+                <input
+                  type="email"
+                  placeholder=""
+                  defaultValue=""
+                  className="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs text-[#0F172A] shadow-2xs focus:outline-none focus:ring-1 focus:ring-[#6366F1]"
+                />
+              </div>
+
+              {/* Workspace role */}
+              <div>
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
+                  Workspace role
+                </label>
+                <div className="w-full px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs text-[#0F172A] shadow-2xs flex items-center justify-between cursor-pointer hover:border-[#6366F1] transition-colors">
+                  <span>Choose a role</span>
+                  <ChevronDown size={14} className="text-[#94A3B8]" />
+                </div>
+              </div>
+
+              {/* Department */}
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-[11px] font-medium text-[#334155]">Department</label>
+                  <span className="text-[11px] text-[#94A3B8]">Optional</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder=""
+                  defaultValue=""
+                  className="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs text-[#0F172A] shadow-2xs focus:outline-none focus:ring-1 focus:ring-[#6366F1]"
+                />
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#F1F5F9]">
+              <button
+                type="button"
+                onClick={() => setIsInviteOpen(false)}
+                className="px-4 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs font-semibold text-[#334155] hover:bg-neutral-50 shadow-2xs transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsInviteOpen(false)}
+                className="px-4 py-2 bg-[#A5B4FC] hover:bg-[#818CF8] text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+              >
+                Send invitation
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
