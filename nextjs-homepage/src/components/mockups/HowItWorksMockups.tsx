@@ -37,28 +37,28 @@ import {
 /* -------------------------------------------------------------------------- */
 export function AppTopBar({ activeModule = "settings" }: { activeModule?: "settings" | "team" | "dashboard" }) {
   return (
-    <div className="h-14 bg-white border-b border-[#E2E8F0] px-3 sm:px-5 flex items-center justify-between gap-2 shrink-0 select-none">
+    <div className="h-14 bg-white border-b border-[#E2E8F0] px-3 sm:px-5 flex items-center justify-between gap-2 shrink-0 select-none overflow-hidden">
       {/* Left: module icon button + vertical separator + search */}
-      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-        <div className="w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white flex items-center justify-center text-[#6366F1] shadow-2xs shrink-0">
-          <LayoutGrid size={16} />
+      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 shrink">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-[#CBD5E1] bg-white flex items-center justify-center text-[#6366F1] shadow-2xs shrink-0">
+          <LayoutGrid size={15} />
         </div>
-        <div className="h-5 w-px bg-[#E2E8F0] mx-1 shrink-0 hidden sm:block" />
+        <div className="h-5 w-px bg-[#E2E8F0] mx-0.5 shrink-0 hidden xl:block" />
 
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-xs text-[#94A3B8] w-48 md:w-64 lg:w-80 shadow-2xs">
-          <Search size={14} className="text-[#94A3B8] shrink-0" />
-          <span className="truncate text-[12px]">Search or jump to...</span>
-          <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#CBD5E1] rounded px-1.5 py-0.5 text-[#64748B] shadow-2xs">
+        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl text-xs text-[#94A3B8] w-44 xl:w-56 shrink min-w-0 shadow-2xs">
+          <Search size={13} className="text-[#94A3B8] shrink-0" />
+          <span className="truncate text-[11px] sm:text-[12px]">Search or jump to...</span>
+          <kbd className="ml-auto text-[10px] font-mono bg-white border border-[#CBD5E1] rounded px-1.5 py-0.5 text-[#64748B] shadow-2xs shrink-0">
             ⌘K
           </kbd>
         </div>
       </div>
 
       {/* Right: 11/17 ring, Copilot, Settings, Notification, Profile */}
-      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
         {/* Progress ring 11/17 */}
-        <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs">
-          <svg className="w-3.5 h-3.5 -rotate-90" viewBox="0 0 36 36">
+        <div className="hidden xl:flex items-center gap-2 px-2.5 py-1.5 bg-white border border-[#CBD5E1] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs shrink-0">
+          <svg className="w-3.5 h-3.5 -rotate-90 shrink-0" viewBox="0 0 36 36">
             <path
               className="text-[#E2E8F0]"
               strokeWidth="4"
@@ -83,31 +83,31 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
         {/* AI Copilot Button */}
         <button
           type="button"
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-xl text-xs font-semibold shadow-2xs"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] hover:bg-[#E0E7FF] transition-colors rounded-xl text-xs font-semibold shadow-2xs shrink-0"
         >
           <Sparkles size={13} className="shrink-0 text-[#6366F1]" />
           <span>AI Copilot</span>
-          <kbd className="hidden lg:inline text-[9.5px] font-mono px-1.5 py-0.2 bg-white/90 rounded border border-[#C7D2FE] text-[#4F46E5]">
+          <kbd className="hidden xl:inline text-[9.5px] font-mono px-1.5 py-0.2 bg-white/90 rounded border border-[#C7D2FE] text-[#4F46E5]">
             ⌘J
           </kbd>
         </button>
 
         {/* Gear icon */}
-        <div className="w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] hidden sm:flex items-center justify-center shadow-2xs cursor-pointer">
-          <Settings size={15} />
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] hidden sm:flex items-center justify-center shadow-2xs cursor-pointer shrink-0">
+          <Settings size={14} />
         </div>
 
         {/* Notification bell badge */}
-        <div className="relative w-9 h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] flex items-center justify-center shadow-2xs cursor-pointer">
-          <Bell size={15} />
-          <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8.5px] font-bold font-mono bg-[#3B82F6] text-white rounded-full shadow-2xs">
+        <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-[#CBD5E1] bg-white text-[#64748B] hover:text-[#0F172A] flex items-center justify-center shadow-2xs cursor-pointer shrink-0">
+          <Bell size={14} />
+          <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8px] font-bold font-mono bg-[#3B82F6] text-white rounded-full shadow-2xs">
             49
           </span>
         </div>
 
         {/* User avatar & name */}
-        <div className="flex items-center gap-2 pl-1 cursor-pointer">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-[#2563EB] border border-white shadow-2xs ring-1 ring-black/5 shrink-0 relative flex items-center justify-center text-white">
+        <div className="flex items-center gap-1.5 sm:gap-2 pl-0.5 sm:pl-1 cursor-pointer shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden bg-[#2563EB] border border-white shadow-2xs ring-1 ring-black/5 shrink-0 relative flex items-center justify-center text-white">
             <svg viewBox="0 0 32 32" className="w-full h-full">
               <rect width="32" height="32" fill="#3B82F6" />
               <circle cx="16" cy="12" r="5.5" fill="#FDE68A" />
@@ -115,8 +115,8 @@ export function AppTopBar({ activeModule = "settings" }: { activeModule?: "setti
               <path d="M11 11 Q16 6 21 11 Q20 8 16 8 Q12 8 11 11" fill="#1E293B" />
             </svg>
           </div>
-          <span className="text-xs font-bold text-[#0F172A] hidden sm:inline">Julian Vance</span>
-          <ChevronDown size={13} className="text-[#94A3B8]" />
+          <span className="text-xs font-bold text-[#0F172A] hidden md:inline truncate max-w-[85px] xl:max-w-none">Julian Vance</span>
+          <ChevronDown size={13} className="text-[#94A3B8] shrink-0" />
         </div>
       </div>
     </div>
@@ -278,57 +278,76 @@ export function BrandingDomainsMockup() {
 
       {/* Main Content (spans full width) */}
       <div className="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto no-scrollbar bg-white flex flex-col">
-        <div className="max-w-3xl mx-auto w-full flex flex-col gap-4">
+        <div className="max-w-3xl mx-auto w-full flex flex-col gap-3.5 sm:gap-4">
           
-          {/* Card 1: Colors (Matches media_1793536619030_81de624b.png exactly) */}
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col">
+          {/* Header row with breadcrumb matching AgencyProfileMockup */}
+          <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-3">
             <div>
-              <h3 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">Colors</h3>
-              <p className="text-xs text-[#64748B] mt-0.5">
+              <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#64748B] uppercase tracking-wider mb-0.5">
+                <span>Settings</span>
+                <span>/</span>
+                <span className="text-[#4F46E5] font-semibold">Branding</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">Branding &amp; Theme</h3>
+              <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
+                Configure your agency colors, typography, and theme styling.
+              </p>
+            </div>
+
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-mono font-semibold rounded-full">
+              <CheckCircle2 size={11} className="text-indigo-600" />
+              Theme Active
+            </span>
+          </div>
+
+          {/* Card 1: Colors (Matches media_1793536619030_81de624b.png & consistent with AgencyProfile) */}
+          <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
+            <div>
+              <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Colors</h4>
+              <p className="text-[10px] sm:text-[11px] text-[#64748B] mt-0.5">
                 Primary and secondary colors are used across UI. Semantic colors override system defaults for status indicators.
               </p>
             </div>
 
-            <div className="border-b border-[#F1F5F9] my-4" />
+            <div className="border-b border-[#F1F5F9]" />
 
             {/* Primary & Secondary Color Inputs Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 relative">
               {/* Primary Color */}
               <div className="relative">
-                <label className="text-xs font-medium text-[#334155] block mb-2">
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Primary Color
                 </label>
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setShowColorPicker(!showColorPicker)}
-                    className="w-12 h-10 rounded-xl bg-[#6366f1] shadow-2xs cursor-pointer shrink-0 transition-transform hover:scale-105 active:scale-95 relative"
+                    className="w-9 h-8 sm:w-10 sm:h-8.5 rounded-lg bg-[#6366f1] shadow-2xs cursor-pointer shrink-0 transition-transform hover:scale-105 active:scale-95 relative border border-black/5"
                     style={{ backgroundColor: primaryColor }}
                     title="Click to open color picker"
                   />
                   <div
                     onClick={() => setShowColorPicker(!showColorPicker)}
-                    className="flex-1 px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#0F172A] cursor-pointer hover:border-[#6366F1] shadow-2xs transition-colors flex items-center justify-between"
+                    className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#0F172A] cursor-pointer hover:border-[#6366F1] shadow-2xs transition-colors flex items-center justify-between"
                   >
                     <span>{primaryColor}</span>
                     <span className="text-[10px] font-sans text-[#6366F1] font-semibold hidden sm:inline">
-                      {showColorPicker ? "Close picker" : "Edit color"}
+                      {showColorPicker ? "Close" : "Edit color"}
                     </span>
                   </div>
                 </div>
 
                 {/* Color Picker Popover (Matches media_1793536828272_2628878c.png) */}
                 {showColorPicker && (
-                  <div className="absolute top-full left-0 mt-2 w-64 sm:w-72 bg-white border border-[#CBD5E1] rounded-2xl shadow-2xl p-3.5 z-40 flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="absolute top-full left-0 mt-2 w-60 sm:w-64 bg-white border border-[#CBD5E1] rounded-xl shadow-2xl p-3 z-40 flex flex-col gap-2.5 animate-in fade-in zoom-in-95 duration-150">
                     {/* 2D Gradient Area */}
                     <div
-                      className="h-36 rounded-xl relative overflow-hidden cursor-crosshair shadow-inner"
+                      className="h-28 sm:h-32 rounded-lg relative overflow-hidden cursor-crosshair shadow-inner"
                       style={{
                         background:
                           "linear-gradient(to bottom, transparent, #000000), linear-gradient(to right, #ffffff, #1d00ff)",
                       }}
                       onClick={(e) => {
-                        // Quick interactive click on gradient box
                         const rect = e.currentTarget.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         if (x > rect.width * 0.7) setPrimaryColor("#4338ca");
@@ -338,70 +357,70 @@ export function BrandingDomainsMockup() {
                     >
                       {/* Selection Knob */}
                       <div
-                        className="w-4 h-4 rounded-full border-2 border-white shadow-md ring-2 ring-black/40 absolute pointer-events-none"
+                        className="w-3.5 h-3.5 rounded-full border-2 border-white shadow-md ring-2 ring-black/40 absolute pointer-events-none"
                         style={{ top: "12%", left: "55%", transform: "translate(-50%, -50%)" }}
                       />
                     </div>
 
                     {/* Controls Row: Pipette, Swatch, Rainbow Hue Slider */}
-                    <div className="flex items-center gap-2.5 pt-0.5">
+                    <div className="flex items-center gap-2 pt-0.5">
                       {/* Pipette */}
                       <button
                         type="button"
-                        className="w-7 h-7 flex items-center justify-center text-[#0F172A] hover:bg-neutral-100 rounded-lg shrink-0"
+                        className="w-6 h-6 flex items-center justify-center text-[#0F172A] hover:bg-neutral-100 rounded-md shrink-0"
                       >
-                        <Pipette size={14} />
+                        <Pipette size={13} />
                       </button>
 
                       {/* Color Circle Swatch */}
                       <div
-                        className="w-7 h-7 rounded-full shadow-inner border border-black/10 shrink-0"
+                        className="w-6 h-6 rounded-full shadow-inner border border-black/10 shrink-0"
                         style={{ backgroundColor: primaryColor }}
                       />
 
                       {/* Rainbow Hue Slider */}
-                      <div className="flex-1 h-3 rounded-full relative flex items-center overflow-visible bg-gradient-to-r from-[#ff00ff] via-[#0000ff] via-[#00ffff] via-[#00ff00] via-[#ffff00] to-[#ff0000]">
+                      <div className="flex-1 h-2.5 rounded-full relative flex items-center overflow-visible bg-gradient-to-r from-[#ff00ff] via-[#0000ff] via-[#00ffff] via-[#00ff00] via-[#ffff00] to-[#ff0000]">
                         <div
-                          className="w-4 h-4 rounded-full border-2 border-white shadow-md absolute"
+                          className="w-3.5 h-3.5 rounded-full border-2 border-white shadow-md absolute"
                           style={{ left: "45%", backgroundColor: "#1e40af", transform: "translateX(-50%)" }}
                         />
                       </div>
                     </div>
 
                     {/* RGB Input Row */}
-                    <div className="flex items-center gap-2 pt-0.5 text-center">
+                    <div className="flex items-center gap-1.5 pt-0.5 text-center">
                       <div className="flex-1 flex flex-col items-center">
                         <input
                           type="text"
                           readOnly
                           value="99"
-                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                          className="w-full text-center px-1 py-0.5 bg-white border border-[#CBD5E1] rounded-md text-[11px] font-mono font-medium text-[#0F172A]"
                         />
-                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">R</span>
+                        <span className="text-[9.5px] text-[#64748B] font-mono mt-0.5">R</span>
                       </div>
                       <div className="flex-1 flex flex-col items-center">
                         <input
                           type="text"
                           readOnly
                           value="102"
-                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                          className="w-full text-center px-1 py-0.5 bg-white border border-[#CBD5E1] rounded-md text-[11px] font-mono font-medium text-[#0F172A]"
                         />
-                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">G</span>
+                        <span className="text-[9.5px] text-[#64748B] font-mono mt-0.5">G</span>
                       </div>
                       <div className="flex-1 flex flex-col items-center">
                         <input
                           type="text"
                           readOnly
                           value="241"
-                          className="w-full text-center px-1 py-1 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono font-medium text-[#0F172A]"
+                          className="w-full text-center px-1 py-0.5 bg-white border border-[#CBD5E1] rounded-md text-[11px] font-mono font-medium text-[#0F172A]"
                         />
-                        <span className="text-[10px] text-[#64748B] font-mono mt-0.5">B</span>
+                        <span className="text-[9.5px] text-[#64748B] font-mono mt-0.5">B</span>
                       </div>
                       <button
                         type="button"
                         className="p-1 text-[#64748B] hover:text-[#0F172A] shrink-0"
                       >
-                        <ChevronsUpDown size={14} />
+                        <ChevronsUpDown size={13} />
                       </button>
                     </div>
                   </div>
@@ -410,53 +429,53 @@ export function BrandingDomainsMockup() {
 
               {/* Secondary Color */}
               <div>
-                <label className="text-xs font-medium text-[#334155] block mb-2">
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Secondary Color
                 </label>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-12 h-10 rounded-xl bg-[#06b6d4] shadow-2xs shrink-0" />
-                  <div className="flex-1 px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#0F172A] shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-9 h-8 sm:w-10 sm:h-8.5 rounded-lg bg-[#06b6d4] shadow-2xs shrink-0 border border-black/5" />
+                  <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#0F172A] shadow-2xs">
                     #06b6d4
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="border-b border-[#F1F5F9] my-4" />
+            <div className="border-b border-[#F1F5F9] my-1" />
 
             {/* Semantic Status Colors (Success, Warning, Danger) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-xs font-medium text-[#334155] block mb-2">
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Success Color
                 </label>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
-                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-7 sm:w-9 sm:h-8 rounded-lg bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#475569] shadow-2xs">
                     #6366f1
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-medium text-[#334155] block mb-2">
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Warning Color
                 </label>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
-                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-7 sm:w-9 sm:h-8 rounded-lg bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#475569] shadow-2xs">
                     #6366f1
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-medium text-[#334155] block mb-2">
+                <label className="text-[11px] font-medium text-[#334155] block mb-1">
                   Danger Color
                 </label>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-12 h-10 rounded-xl bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
-                  <div className="flex-1 px-3.5 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm font-mono text-[#475569] shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-7 sm:w-9 sm:h-8 rounded-lg bg-[#E2E8F0]/70 border border-[#CBD5E1]/60 shadow-2xs shrink-0" />
+                  <div className="flex-1 px-3 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs font-mono text-[#475569] shadow-2xs">
                     #6366f1
                   </div>
                 </div>
@@ -464,65 +483,70 @@ export function BrandingDomainsMockup() {
             </div>
           </div>
 
-          {/* Card 2: Typography & Shape (Matches media_1793536619030_81de624b.png exactly) */}
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col">
-            <h3 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">Typography &amp; Shape</h3>
+          {/* Card 2: Typography & Shape (Matches media_1793536619030_81de624b.png & consistent with AgencyProfile) */}
+          <div className="bg-white border border-[#E2E8F0] rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col gap-3">
+            <div>
+              <h4 className="text-xs sm:text-sm font-semibold text-[#0F172A]">Typography &amp; Shape</h4>
+              <p className="text-[10px] sm:text-[11px] text-[#64748B] mt-0.5">
+                Font choice and corner rounding applied across all client portals and dashboard widgets.
+              </p>
+            </div>
 
-            <div className="border-b border-[#F1F5F9] my-4" />
+            <div className="border-b border-[#F1F5F9]" />
 
             {/* Font Family Row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span className="text-xs sm:text-sm font-medium text-[#0F172A]">
+              <span className="text-[11px] font-medium text-[#334155]">
                 Font Family
               </span>
-              <div className="px-4 py-2 bg-white border border-[#CBD5E1] rounded-xl text-xs sm:text-sm text-[#0F172A] flex items-center justify-between w-full sm:w-72 shadow-2xs cursor-pointer hover:border-[#6366F1] transition-colors">
+              <div className="px-3.5 py-1.5 sm:py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#0F172A] flex items-center justify-between w-full sm:w-60 shadow-2xs cursor-pointer hover:border-[#6366F1] transition-colors">
                 <span>System Default</span>
-                <ChevronDown size={14} className="text-[#94A3B8]" />
+                <ChevronDown size={13} className="text-[#94A3B8]" />
               </div>
             </div>
 
-            <div className="border-b border-[#F1F5F9] my-4" />
+            <div className="border-b border-[#F1F5F9]" />
 
             {/* Border Radius Row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span className="text-xs sm:text-sm font-medium text-[#0F172A]">
+              <span className="text-[11px] font-medium text-[#334155]">
                 Border Radius
               </span>
-              <div className="flex items-center bg-[#E2E8F0]/60 p-1 rounded-xl gap-1 text-xs sm:text-sm">
+              <div className="flex items-center bg-[#F1F5F9] p-0.5 sm:p-1 rounded-lg gap-1 text-xs">
                 <button
                   type="button"
                   onClick={() => setBorderRadius("sharp")}
-                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1.5 ${
                     borderRadius === "sharp"
                       ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
                       : "text-[#475569] hover:text-[#0F172A]"
                   }`}
                 >
-                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current" />
+                  <span className="w-2 h-2 border-l-2 border-t-2 border-current" />
                   <span>Sharp</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setBorderRadius("medium")}
-                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1.5 ${
                     borderRadius === "medium"
                       ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
                       : "text-[#475569] hover:text-[#0F172A]"
                   }`}
                 >
-                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current rounded-tl-sm" />
+                  <span className="w-2 h-2 border-l-2 border-t-2 border-current rounded-tl-sm" />
                   <span>Medium</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setBorderRadius("rounded")}
-                  className={`px-4 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1.5 ${
                     borderRadius === "rounded"
                       ? "bg-white text-[#0F172A] shadow-xs font-semibold border border-slate-200/50"
                       : "text-[#475569] hover:text-[#0F172A]"
                   }`}
                 >
-                  <span className="w-2.5 h-2.5 border-l-2 border-t-2 border-current rounded-full" />
+                  <span className="w-2 h-2 border-l-2 border-t-2 border-current rounded-full" />
                   <span>Rounded</span>
                 </button>
               </div>
@@ -933,9 +957,9 @@ export function MissionControlMockup() {
   return (
     <div className="flex flex-col h-full bg-[#F8FAFC] select-none text-left relative">
       {/* Top Header Bar matching Hero Section Dashboard */}
-      <header className="sticky top-0 z-20 flex items-center justify-between px-3 sm:px-5 py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0] shrink-0">
+      <header className="sticky top-0 z-20 flex items-center justify-between px-3 sm:px-5 py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0] shrink-0 gap-2 overflow-hidden">
         {/* Left: View Title with Dashboard Icon */}
-        <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-center gap-2 min-w-0 shrink-0">
           <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
             <LayoutDashboard size={13} />
           </div>
@@ -944,11 +968,11 @@ export function MissionControlMockup() {
           </h2>
         </div>
 
-        {/* Center Search Bar */}
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[280px] md:max-w-[320px] shadow-2xs mx-2">
-          <Search size={12} className="text-[#94A3B8]" />
-          <span className="text-[11px] text-[#94A3B8] flex-1 truncate">Search or jump to...</span>
-          <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#64748B] font-mono">
+        {/* Center Search Bar - safely hidden until xl so it never collides */}
+        <div className="hidden xl:flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs max-w-[220px] shrink min-w-0 shadow-2xs">
+          <Search size={12} className="text-[#94A3B8] shrink-0" />
+          <span className="text-[11px] text-[#94A3B8] truncate">Search or jump to...</span>
+          <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#64748B] font-mono shrink-0">
             ⌘K
           </kbd>
         </div>
@@ -956,7 +980,7 @@ export function MissionControlMockup() {
         {/* Right Quick Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Get started progress capsule */}
-          <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs">
+          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs font-medium text-[#0F172A] shadow-2xs shrink-0">
             <div className="w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center shrink-0">
               <Check size={9} className="text-emerald-600 stroke-[3]" />
             </div>
@@ -965,21 +989,21 @@ export function MissionControlMockup() {
           </div>
 
           {/* AI Copilot Button */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE] shadow-2xs">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE] shadow-2xs shrink-0">
             <Sparkles size={12} className="text-[#2563EB]" />
             <span className="hidden sm:inline">AI Copilot</span>
-            <kbd className="text-[9px] px-1 rounded font-mono bg-white text-[#2563EB] border border-blue-200">
+            <kbd className="hidden xl:inline text-[9px] px-1 rounded font-mono bg-white text-[#2563EB] border border-blue-200">
               ⌘J
             </kbd>
           </div>
 
           {/* Settings */}
-          <div className="w-7 h-7 rounded-lg border border-[#E2E8F0] text-slate-500 hidden sm:flex items-center justify-center hover:bg-slate-50">
+          <div className="w-7 h-7 rounded-lg border border-[#E2E8F0] text-slate-500 hidden sm:flex items-center justify-center hover:bg-slate-50 shrink-0">
             <Settings size={13} />
           </div>
 
           {/* Notification bell badge */}
-          <div className="relative w-7 h-7 rounded-lg border border-[#E2E8F0] text-slate-500 flex items-center justify-center hover:bg-slate-50">
+          <div className="relative w-7 h-7 rounded-lg border border-[#E2E8F0] text-slate-500 flex items-center justify-center hover:bg-slate-50 shrink-0">
             <Bell size={13} />
             <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[8.5px] font-bold font-mono bg-[#3B82F6] text-white rounded-full">
               4
@@ -987,8 +1011,8 @@ export function MissionControlMockup() {
           </div>
 
           {/* User profile */}
-          <div className="flex items-center gap-1.5 pl-1">
-            <div className="w-7 h-7 rounded-full bg-[#2563EB] text-white font-bold text-[10px] flex items-center justify-center shadow-2xs overflow-hidden">
+          <div className="flex items-center gap-1.5 pl-1 shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#2563EB] text-white font-bold text-[10px] flex items-center justify-center shadow-2xs overflow-hidden shrink-0">
               <svg viewBox="0 0 32 32" className="w-full h-full">
                 <rect width="32" height="32" fill="#3B82F6" />
                 <circle cx="16" cy="12" r="5.5" fill="#FDE68A" />
@@ -997,7 +1021,7 @@ export function MissionControlMockup() {
               </svg>
             </div>
             <span className="text-xs font-semibold text-[#0F172A] hidden xl:inline">Julian Vance</span>
-            <ChevronDown size={11} className="text-[#94A3B8]" />
+            <ChevronDown size={11} className="text-[#94A3B8] shrink-0" />
           </div>
         </div>
       </header>
