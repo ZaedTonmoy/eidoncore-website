@@ -6,6 +6,7 @@
 // Use "word" mode for short paragraphs, "line" mode for long blocks
 // of text (fewer animated pieces = feels faster, less busy).
 
+import React from "react";
 import { motion } from "framer-motion";
 import { fadeUpBlurItem, staggerContainer, TIMING } from "../lib/animations";
 
@@ -42,16 +43,17 @@ export default function AnimatedText({
         : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
     >
       {pieces.map((piece, index) => (
-        <motion.span
-          key={index}
-          variants={fadeUpBlurItem}
-          style={{
-            display: mode === "line" ? "block" : "inline-block",
-            marginRight: mode === "word" ? "0.28em" : 0,
-          }}
-        >
-          {piece}
-        </motion.span>
+        <React.Fragment key={index}>
+          <motion.span
+            variants={fadeUpBlurItem}
+            style={{
+              display: mode === "line" ? "block" : "inline-block",
+            }}
+          >
+            {piece}
+          </motion.span>
+          {mode === "word" && index < pieces.length - 1 ? " " : null}
+        </React.Fragment>
       ))}
     </Tag>
   );

@@ -4,14 +4,21 @@ import React, { useState, useEffect } from "react";
 import AnimatedHeading from "./AnimatedHeading";
 import AnimatedText from "./AnimatedText";
 import SectionBadge from "./SectionBadge";
-import { Check, Copy, ArrowRight, UserPlus, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  AgencyProfileMockup,
+  BrandingDomainsMockup,
+  TeamDirectoryMockup,
+  MissionControlMockup,
+} from "./mockups/HowItWorksMockups";
 
 interface StepTab {
   id: number;
   num: string;
   title: string;
   desc: string;
+  url: string;
 }
 
 const STEPS: StepTab[] = [
@@ -20,239 +27,67 @@ const STEPS: StepTab[] = [
     num: "01",
     title: "Create your workspace",
     desc: "Pick your agency name and get a live URL in under a minute.",
+    url: "aetheris.eidoncore.com/settings/agency",
   },
   {
     id: 1,
     num: "02",
     title: "Customize & brand",
     desc: "Logo, colors, email, and payments - or go full white-label.",
+    url: "aetheris.eidoncore.com/settings/branding",
   },
   {
     id: 2,
     num: "03",
     title: "Invite your team",
     desc: "Owners, admins, project managers - role-based, from day one.",
+    url: "aetheris.eidoncore.com/team/directory",
   },
   {
     id: 3,
     num: "04",
     title: "Start delivering",
     desc: "Add a client, spin up a project, send the first invoice.",
+    url: "aetheris.eidoncore.com/workspace/mission-control",
   },
 ];
 
 export default function HowItWorks() {
   const [activeTab, setActiveTab] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("#3F72AF");
-  const [whiteLabelActive, setWhiteLabelActive] = useState(true);
-  const [copiedLink, setCopiedLink] = useState(false);
 
-  // Auto-advance through the steps every 5.5s unless hovered or reduced motion is requested
+  // Auto-advance through the steps every 6s unless hovered or reduced motion is requested
   useEffect(() => {
     if (isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Restarts whenever the step changes so the progress bar and the switch stay in sync
     const timer = setTimeout(() => {
       setActiveTab((prev) => (prev + 1) % STEPS.length);
-    }, 5500);
+    }, 6000);
     return () => clearTimeout(timer);
   }, [isPaused, activeTab]);
 
-  // Render the inner panel content for each step
+  // Render the inner panel content for each step matching the authentic platform screens
   const renderPanelContent = (stepIndex: number) => {
     switch (stepIndex) {
       case 0:
-        return (
-          <div className="flex flex-col gap-3.5 max-w-md mx-auto w-full">
-            <div>
-              <label className="text-[11px] font-mono uppercase tracking-wider text-[#6B6F76] font-medium block mb-1">
-                Agency Name
-              </label>
-              <div className="w-full px-3.5 py-2.5 bg-[#FAFAFA] border border-[#E7E7EA] rounded-lg text-sm font-medium text-[#0B0B0F]">
-                Studio Nine
-              </div>
-            </div>
-
-            <div>
-              <label className="text-[11px] font-mono uppercase tracking-wider text-[#6B6F76] font-medium block mb-1">
-                Workspace URL
-              </label>
-              <div className="w-full px-3.5 py-2.5 bg-[#FAFAFA] border border-[#E7E7EA] rounded-lg text-sm text-[#0B0B0F] flex items-center justify-between font-mono">
-                <span className="font-semibold text-[#3F72AF]">studio-nine</span>
-                <span className="text-[#6B6F76]">.eidoncore.com</span>
-              </div>
-            </div>
-
-            <div className="mt-1 w-full py-2.5 bg-[#0F172A] text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2 shadow-xs cursor-pointer hover:bg-[#1E293B] transition-colors">
-              <span>Start 14-day free trial</span>
-              <ArrowRight size={13} />
-            </div>
-
-            <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-600 font-medium pt-0.5">
-              <Check size={14} />
-              <span>Workspace created instantly</span>
-            </div>
-          </div>
-        );
-
+        return <AgencyProfileMockup />;
       case 1:
-        return (
-          <div className="flex flex-col gap-4 max-w-md mx-auto w-full">
-            <div className="flex items-center gap-3.5">
-              <div
-                className="w-11 h-11 rounded-xl text-white font-bold flex items-center justify-center text-sm shadow-xs transition-colors shrink-0"
-                style={{ backgroundColor: selectedColor }}
-              >
-                SN
-              </div>
-              <div>
-                <span className="text-xs font-semibold text-[#0B0B0F] block">Agency Logo</span>
-                <span className="text-[11px] text-[#6B6F76]">Custom favicon &amp; white-label badge</span>
-              </div>
-            </div>
-
-            <div>
-              <label className="text-[11px] font-mono uppercase tracking-wider text-[#6B6F76] font-medium block mb-2">
-                Brand Color
-              </label>
-              <div className="flex items-center gap-2.5">
-                {["#3F72AF", "#7C86FF", "#6BCF9A", "#FF6B6B", "#2B2F3A"].map((color) => (
-                  <button
-                    key={color}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedColor(color);
-                    }}
-                    style={{ backgroundColor: color }}
-                    className={`w-7 h-7 rounded-full transition-transform ${
-                      selectedColor === color ? "scale-125 ring-2 ring-offset-2 ring-[#0B0B0F]" : "hover:scale-110"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl">
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-[#0B0B0F]">White-label domain</span>
-                <span className="text-[10.5px] text-[#6B6F76]">Remove all Eidoncore references</span>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setWhiteLabelActive(!whiteLabelActive);
-                }}
-                className={`w-10 h-5 rounded-full transition-colors relative ${
-                  whiteLabelActive ? "bg-emerald-500" : "bg-neutral-300"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-                    whiteLabelActive ? "left-5" : "left-0.5"
-                  }`}
-                />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-600 font-medium">
-              <Check size={14} />
-              <span>Brand applied across all client views</span>
-            </div>
-          </div>
-        );
-
+        return <BrandingDomainsMockup />;
       case 2:
-        return (
-          <div className="flex flex-col gap-3 max-w-md mx-auto w-full">
-            <div className="p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-xs">
-                  S
-                </div>
-                <div>
-                  <span className="text-xs font-semibold text-[#0B0B0F] block">Sara K.</span>
-                  <span className="text-[10px] text-[#6B6F76]">Admin • Full Access</span>
-                </div>
-              </div>
-              <span className="px-2 py-0.5 bg-emerald-50 border border-emerald-200/60 rounded text-[10px] font-mono font-medium text-emerald-700">
-                Active
-              </span>
-            </div>
-
-            <div className="p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs">
-                  O
-                </div>
-                <div>
-                  <span className="text-xs font-semibold text-[#0B0B0F] block">Owen R.</span>
-                  <span className="text-[10px] text-[#6B6F76]">Project Manager</span>
-                </div>
-              </div>
-              <span className="px-2 py-0.5 bg-blue-50 border border-blue-200/60 rounded text-[10px] font-mono font-medium text-blue-700">
-                Invited
-              </span>
-            </div>
-
-            <div className="p-2.5 border border-dashed border-[#3F72AF]/40 rounded-xl text-center text-xs font-semibold text-[#3F72AF] bg-[#3F72AF]/5 hover:bg-[#3F72AF]/10 transition-colors cursor-pointer flex items-center justify-center gap-1.5">
-              <UserPlus size={13} />
-              <span>+ Invite teammate with role-based permissions</span>
-            </div>
-          </div>
-        );
-
+        return <TeamDirectoryMockup />;
       case 3:
       default:
-        return (
-          <div className="flex flex-col gap-3.5 max-w-md mx-auto w-full">
-            <div className="grid grid-cols-3 gap-2.5">
-              <div className="p-2.5 sm:p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl text-center">
-                <span className="text-lg sm:text-xl font-bold text-[#0B0B0F] block">6</span>
-                <span className="text-[9.5px] text-[#6B6F76] uppercase tracking-wider font-mono">Clients</span>
-              </div>
-              <div className="p-2.5 sm:p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl text-center">
-                <span className="text-lg sm:text-xl font-bold text-[#0B0B0F] block">11</span>
-                <span className="text-[9.5px] text-[#6B6F76] uppercase tracking-wider font-mono">Projects</span>
-              </div>
-              <div className="p-2.5 sm:p-3 bg-[#FAFAFA] border border-[#E7E7EA] rounded-xl text-center">
-                <span className="text-lg sm:text-xl font-bold text-emerald-600 block">$18.4k</span>
-                <span className="text-[9.5px] text-[#6B6F76] uppercase tracking-wider font-mono">Invoiced</span>
-              </div>
-            </div>
-
-            <div className="p-2.5 sm:p-3 bg-white border border-[#E7E7EA] rounded-xl flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#0B0B0F] truncate min-w-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-                <span className="truncate">nimbus.studio-nine.com</span>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCopiedLink(true);
-                  setTimeout(() => setCopiedLink(false), 2000);
-                }}
-                className="px-2.5 py-1 bg-neutral-100 hover:bg-neutral-200 rounded text-[10px] font-mono font-medium text-[#0B0B0F] transition-colors flex items-center gap-1 shrink-0"
-              >
-                <Copy size={11} />
-                <span>{copiedLink ? "COPIED" : "COPY LINK"}</span>
-              </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-600 font-medium">
-              <Check size={14} />
-              <span>Ready for live client onboarding</span>
-            </div>
-          </div>
-        );
+        return <MissionControlMockup />;
     }
   };
 
-  // Reusable Browser Device Window mockup with single-line phone address bar
+  // Reusable Browser Device Window mockup with authentic macOS styling
   const renderDeviceWindow = (stepIndex: number, isMobile = false) => {
+    const currentUrl = STEPS[stepIndex]?.url || STEPS[0].url;
+
     return (
-      <div className="bg-white border border-[#E7E7EA] rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col h-full">
+      <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-[0_16px_45px_rgba(15,23,42,0.08)] overflow-hidden flex flex-col h-full ring-1 ring-black/5">
         {/* Device Topbar: 3 dots + single line responsive URL bar */}
-        <div className="h-10 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-2 shrink-0">
+        <div className="h-10 bg-[#F8FAFC] border-b border-[#E2E8F0] px-3 sm:px-4 flex items-center justify-between gap-2 shrink-0 select-none">
           {/* 3 dots */}
           <div className="flex items-center gap-1.5 shrink-0">
             <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]/40" />
@@ -260,32 +95,37 @@ export default function HowItWorks() {
             <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]/40" />
           </div>
 
-          {/* Single-line address bar (never breaks or wraps on phone) */}
-          <div className="flex-1 min-w-0 max-w-[240px] sm:max-w-[280px] mx-1 sm:mx-auto">
-            <div className="px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md text-[10px] sm:text-[11px] font-mono text-[#64748B] shadow-2xs text-center whitespace-nowrap overflow-x-auto no-scrollbar truncate">
-              studio-nine.eidoncore.com
+          {/* Single-line address bar */}
+          <div className="flex-1 min-w-0 max-w-[260px] sm:max-w-[340px] mx-1 sm:mx-auto">
+            <div className="px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md text-[10px] sm:text-[11px] font-mono text-[#64748B] shadow-2xs flex items-center justify-center gap-1.5 whitespace-nowrap overflow-hidden">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+              <span className="truncate">{currentUrl}</span>
             </div>
           </div>
 
           {/* Step indicator */}
-          <span className="shrink-0 text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full font-medium">
+          <span className="shrink-0 text-[10px] font-mono text-[#4F46E5] bg-[#EEF2FF] border border-[#E0E7FF] px-2 py-0.5 rounded-full font-semibold">
             Step {stepIndex + 1}/4
           </span>
         </div>
 
         {/* Panel Content Area */}
-        <div className={`p-5 sm:p-8 flex-1 flex flex-col justify-center bg-white relative overflow-hidden ${isMobile ? "min-h-[220px]" : ""}`}>
+        <div
+          className={`flex-1 flex flex-col bg-white relative overflow-hidden ${
+            isMobile ? "h-[450px]" : "min-h-[540px] lg:h-[590px]"
+          }`}
+        >
           {isMobile ? (
-            renderPanelContent(stepIndex)
+            <div className="h-full flex flex-col">{renderPanelContent(stepIndex)}</div>
           ) : (
             <AnimatePresence mode="wait">
               <motion.div
                 key={`tab-${stepIndex}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
-                className="w-full"
+                initial={{ opacity: 0, scale: 0.995 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.995 }}
+                transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
+                className="w-full h-full flex flex-col"
               >
                 {renderPanelContent(stepIndex)}
               </motion.div>
@@ -298,7 +138,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" className="py-20 md:py-28 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         
         {/* Section Head */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
@@ -367,7 +207,7 @@ export default function HowItWorks() {
                   {/* Active Progress Bar at bottom */}
                   {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-100">
-                      <div className="h-full bg-[#3F72AF] animate-[progress_5.5s_linear]" />
+                      <div className="h-full bg-[#3F72AF] animate-[progress_6s_linear]" />
                     </div>
                   )}
                 </button>
@@ -436,7 +276,13 @@ export default function HowItWorks() {
                   {/* Active Progress Bar at bottom */}
                   {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-100">
-                      <div className={isPaused ? "h-full bg-[#3F72AF]/40" : "h-full bg-[#3F72AF] animate-[progress_5.5s_linear]"} />
+                      <div
+                        className={
+                          isPaused
+                            ? "h-full bg-[#3F72AF]/40"
+                            : "h-full bg-[#3F72AF] animate-[progress_6s_linear]"
+                        }
+                      />
                     </div>
                   )}
                 </button>
@@ -445,7 +291,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Right: Mockup Browser Device Screen */}
-          <div className="lg:col-span-7 flex flex-col h-full">
+          <div className="lg:col-span-7 flex flex-col h-full min-h-[540px] lg:h-[590px]">
             {renderDeviceWindow(activeTab, false)}
           </div>
         </div>

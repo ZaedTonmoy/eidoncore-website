@@ -5,6 +5,7 @@
 // bottom -> top, blurred -> sharp, faded -> visible.
 // Plays only once, when the heading is enough inside the viewport.
 
+import React from "react";
 import { motion } from "framer-motion";
 import { fadeUpBlurItem, staggerContainer, TIMING } from "../lib/animations";
 
@@ -41,21 +42,15 @@ export default function AnimatedHeading({
         : { whileInView: "show", viewport: { once: true, amount: TIMING.viewportAmount } })}
     >
       {words.map((word, wordIndex) => (
-        <span
-          key={`${word}-${wordIndex}`}
-          style={{ display: "inline-flex", marginRight: "0.25em" }}
-        >
-          {word.split("").map((letter, letterIndex) => (
-            <motion.span
-              key={`${letter}-${letterIndex}`}
-              variants={fadeUpBlurItem}
-              style={{ display: "inline-block" }}
-            >
-              {letter}
-            </motion.span>
-          ))}
+        <React.Fragment key={`${word}-${wordIndex}`}>
+          <motion.span
+            variants={fadeUpBlurItem}
+            className="inline-block whitespace-nowrap"
+          >
+            {word}
+          </motion.span>
           {wordIndex < words.length - 1 ? " " : null}
-        </span>
+        </React.Fragment>
       ))}
     </Tag>
   );
