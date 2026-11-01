@@ -75,6 +75,7 @@ import {
   Trash2,
 } from "lucide-react";
 import BlendMockupCard from "@/components/BlendMockupCard";
+import ScreenshotComingSoon from "@/components/ScreenshotComingSoon";
 
 interface BlendedFeaturePreviewProps {
   image?: string;
@@ -350,6 +351,22 @@ export default function BlendedFeaturePreview({
   const [portalDomainVerified, setPortalDomainVerified] = useState<boolean>(false);
   const [portalVerifying, setPortalVerifying] = useState<boolean>(false);
   const [portalCopiedRecord, setPortalCopiedRecord] = useState<string | null>(null);
+
+  // =========================================================================
+  // CUSTOM EIDONCORE MODULE: CRM & CLIENTS
+  // =========================================================================
+  if (
+    moduleName.toLowerCase().includes("crm") ||
+    (moduleName.toLowerCase().includes("client") && !moduleName.toLowerCase().includes("portal"))
+  ) {
+    return (
+      <ScreenshotComingSoon
+        moduleName="CRM & Clients"
+        featureTitle={title}
+        featureIndex={featureIndex}
+      />
+    );
+  }
 
   // =========================================================================
   // CUSTOM EIDONCORE MODULE: INVOICING
@@ -3729,6 +3746,14 @@ export default function BlendedFeaturePreview({
         </div>
       );
     }
+
+    return (
+      <ScreenshotComingSoon
+        moduleName="AI Workspace"
+        featureTitle={title}
+        featureIndex={featureIndex}
+      />
+    );
   }
 
   // =========================================================================
@@ -4838,6 +4863,14 @@ export default function BlendedFeaturePreview({
         </div>
       );
     }
+
+    return (
+      <ScreenshotComingSoon
+        moduleName="Client Portal"
+        featureTitle={title}
+        featureIndex={featureIndex}
+      />
+    );
   }
 
   if (moduleName.toLowerCase().includes("notif")) {
@@ -5811,24 +5844,15 @@ export default function BlendedFeaturePreview({
     }
 
     // =========================================================================
-    // FEATURE 02: Automated Onboarding (Pending automated task creation screenshot)
+    // FEATURE 02: Automated Onboarding (Screenshots to be Added)
     // =========================================================================
     if (featureIndex === "02") {
       return (
-        <div className="relative w-full max-w-xl group min-w-0">
-          <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-3">
-            <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/40 p-4 text-center">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold mb-2">
-                <Clock size={13} />
-                <span>Pending Task Creation Screenshot</span>
-              </div>
-              <h4 className="text-sm font-bold text-slate-900">Instant Automated Task Creation</h4>
-              <p className="text-xs text-slate-600 max-w-md mx-auto mt-1">
-                Automated task creation, intake forms, and kickoff workflow previews will be updated with your upcoming screenshot.
-              </p>
-            </div>
-          </BlendMockupCard>
-        </div>
+        <ScreenshotComingSoon
+          moduleName="Offerings"
+          featureTitle={title}
+          featureIndex={featureIndex}
+        />
       );
     }
 

@@ -15,6 +15,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import SectionBadge from "@/components/SectionBadge";
 import AnimatedImage from "@/components/AnimatedImage";
 import BlendedFeaturePreview from "@/components/BlendedFeaturePreview";
+import ScreenshotComingSoon from "@/components/ScreenshotComingSoon";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 
 export interface ModuleFeature {
@@ -76,6 +77,8 @@ export default function ModulePageTemplate({
     useBlendedImages ||
     name.toLowerCase() === "projects" ||
     name.toLowerCase() === "tasks" ||
+    name.toLowerCase().includes("crm") ||
+    name.toLowerCase().includes("client") ||
     name.toLowerCase().includes("messag") ||
     name.toLowerCase().includes("notif") ||
     name.toLowerCase().includes("offer") ||
@@ -201,37 +204,11 @@ export default function ModulePageTemplate({
                         </div>
                       )
                     ) : (
-                      <div className="relative rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-5 shadow-xs overflow-hidden group">
-                        <div className="flex items-center gap-1.5 pb-3 border-b border-[#E2E8F0] mb-3">
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-                          <span className="text-[10px] font-mono text-[#64748B] ml-2">
-                            app.eidoncore.com/{name.toLowerCase().replace(/\s+/g, "-")}
-                          </span>
-                        </div>
-                        <div className="rounded-xl p-6 bg-white border border-[#E2E8F0] flex flex-col gap-4">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-[#0F172A]">{feat.title}</span>
-                            <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-semibold border border-emerald-200">
-                              Active
-                            </span>
-                          </div>
-                          <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-[#3F72AF] rounded-full w-4/5" />
-                          </div>
-                          <div className="grid grid-cols-2 gap-3 pt-2">
-                            <div className="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
-                              <span className="text-[10px] text-[#64748B] block font-mono">Sync Status</span>
-                              <span className="text-xs font-bold text-[#0F172A] mt-0.5 block">Automated</span>
-                            </div>
-                            <div className="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
-                              <span className="text-[10px] text-[#64748B] block font-mono">Security</span>
-                              <span className="text-xs font-bold text-[#0F172A] mt-0.5 block">Isolated</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <ScreenshotComingSoon
+                        moduleName={name}
+                        featureTitle={feat.title}
+                        featureIndex={feat.idx}
+                      />
                     )}
                   </div>
                 </div>
