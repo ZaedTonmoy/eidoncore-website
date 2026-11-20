@@ -294,9 +294,9 @@ export default function FeaturesPage() {
         {/* 19 Modules Grid */}
         <section className="py-16 md:py-24 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#64748B]">
-                Showing {filteredModules.length} Modules
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 mb-6 sm:mb-8">
+              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#64748B] whitespace-nowrap">
+                Showing {filteredModules.length} {filteredModules.length === 1 ? "Module" : "Modules"}
               </span>
               <span className="text-xs text-[#64748B]">
                 Click any module for specifications
@@ -316,7 +316,7 @@ export default function FeaturesPage() {
                         {mod.icon}
                       </div>
                       {mod.tag && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-white border border-[#E2E8F0] text-[#3F72AF] shadow-2xs">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-white border border-[#E2E8F0] text-[#3F72AF] shadow-2xs whitespace-nowrap shrink-0">
                           {mod.tag}
                         </span>
                       )}
