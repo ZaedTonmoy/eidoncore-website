@@ -77,13 +77,16 @@ export default function Navbar() {
     };
   }, []);
 
-  // Lock page scroll behind the mobile drawer
+  // Lock page scroll behind the mobile drawer without shifting fixed positioning
   useEffect(() => {
     if (!mobileOpen) return;
-    const prev = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = prev;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
     };
   }, [mobileOpen]);
 
@@ -102,10 +105,11 @@ export default function Navbar() {
     isActive(href) ? { "aria-current": "page" as const, "data-active": "true" } : {};
 
   return (
-    <header
-      ref={headerRef}
-      className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#E7E7EA]"
-    >
+    <>
+      <header
+        ref={headerRef}
+        className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#E7E7EA]"
+      >
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center group py-1 rounded-md" aria-label="Eidoncore home">
@@ -228,16 +232,22 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile backdrop + drawer */}
       {mobileOpen && (
-        <nav
-          id="mobile-nav"
-          aria-label="Mobile"
-          onClick={(e) => {
-            if ((e.target as HTMLElement).closest("a")) setMobileOpen(false);
-          }}
-          className="lg:hidden border-t border-[#E7E7EA] bg-white px-4 sm:px-6 py-3 flex flex-col max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain shadow-lg animate-in fade-in slide-in-from-top-1 duration-200"
-        >
+        <>
+          <div
+            className="lg:hidden fixed inset-0 top-16 bg-black/20 backdrop-blur-[1px] z-40"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+          <nav
+            id="mobile-nav"
+            aria-label="Mobile"
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest("a")) setMobileOpen(false);
+            }}
+            className="lg:hidden fixed top-16 left-0 right-0 z-50 border-t border-[#E7E7EA] bg-white px-4 sm:px-6 py-3 flex flex-col max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain shadow-lg animate-in fade-in slide-in-from-top-1 duration-200"
+          >
           {/* Features accordion */}
           <div className="border-b border-[#F1F5F9]">
             <div className="flex items-center justify-between">
@@ -337,8 +347,12 @@ export default function Navbar() {
               Start Free Trial
             </AnimatedButton>
           </div>
-        </nav>
+          </nav>
+        </>
       )}
     </header>
+    {/* Spacer to preserve 64px header height in document flow */}
+    <div className="h-16 w-full shrink-0" aria-hidden="true" />
+    </>
   );
 }
