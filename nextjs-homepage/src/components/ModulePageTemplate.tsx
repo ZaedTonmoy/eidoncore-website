@@ -224,16 +224,16 @@ export default function ModulePageTemplate({
         {stats && stats.length > 0 && (
           <section className="py-14 bg-[#F8FAFC] border-b border-[#E7E7EA]">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8">
                 {stats.map((st) => (
-                  <div key={st.label} className="text-center p-4">
-                    <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A]">
+                  <div key={st.label} className="text-center px-1 py-2.5 sm:p-4 min-w-0">
+                    <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] whitespace-nowrap">
                       {st.value}
                       {st.suffix && (
                         <span className="text-[#3F72AF]">{st.suffix}</span>
                       )}
                     </div>
-                    <div className="mt-2 text-xs sm:text-sm font-medium text-[#64748B]">
+                    <div className="mt-1.5 sm:mt-2 text-[10.5px] sm:text-sm font-medium text-[#64748B] whitespace-nowrap">
                       {st.label}
                     </div>
                   </div>
