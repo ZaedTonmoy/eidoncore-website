@@ -920,23 +920,22 @@ export default function HeroAppWindow() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] shadow-xl overflow-hidden font-sans select-none text-[#0F172A]"
-      style={{ minHeight: "780px" }}
+      className="relative w-full rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] shadow-xl overflow-hidden font-sans select-none text-[#0F172A] md:min-h-[780px]"
     >
       {/* 1. TOP BROWSER / OS CHROME BAR */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-white border-b border-[#E2E8F0] shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#EF4444]/80 border border-[#DC2626]/40" />
-          <div className="w-3 h-3 rounded-full bg-[#F59E0B]/80 border border-[#D97706]/40" />
-          <div className="w-3 h-3 rounded-full bg-[#10B981]/80 border border-[#059669]/40" />
+      <div className="flex items-center justify-between gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-white border-b border-[#E2E8F0] shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#EF4444]/80 border border-[#DC2626]/40" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#F59E0B]/80 border border-[#D97706]/40" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#10B981]/80 border border-[#059669]/40" />
         </div>
 
         {/* Address Bar */}
-        <div className="flex-1 max-w-sm sm:max-w-md mx-4">
-          <div className="flex items-center justify-center gap-2 px-3 py-1 bg-[#F1F5F9] rounded-lg text-xs text-[#64748B] border border-[#E2E8F0]">
-            <Lock size={11} className="text-emerald-500 shrink-0" />
+        <div className="flex-1 min-w-0 max-w-sm sm:max-w-md mx-1 sm:mx-4">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-[#F1F5F9] rounded-lg text-[11px] sm:text-xs text-[#64748B] border border-[#E2E8F0] min-w-0">
+            <Lock size={10} className="text-emerald-500 shrink-0" />
             <span className="text-[#0F172A] font-medium shrink-0">app.eidoncore.com</span>
-            <span className="text-[#2563EB] shrink-0">
+            <span className="text-[#2563EB] truncate">
               {currentView === "offerings-services"
                 ? "/catalog/offerings/services"
                 : currentView === "offerings-products"
@@ -1057,7 +1056,7 @@ export default function HeroAppWindow() {
       </div>
 
       {/* 2. MAIN APPLICATION WORKSPACE (Sidebar + Content View) */}
-      <div className="flex h-[740px] relative overflow-hidden bg-[#F8FAFC]">
+      <div className="flex h-[440px] sm:h-[560px] md:h-[740px] relative overflow-hidden bg-[#F8FAFC]">
         
         {/* LEFT AUTHENTIC SIDEBAR (Matching screenshots 01, 03, 11, 19, 27) */}
         <aside className="w-[200px] shrink-0 border-r border-[#E2E8F0] bg-white p-3 hidden md:flex flex-col justify-between select-none">
@@ -1356,7 +1355,7 @@ export default function HeroAppWindow() {
         >
           
           {/* TOP APP HEADER (Matching screenshots 01, 03, 11, 19, 27) */}
-          <header className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
+          <header className="sticky top-0 z-20 flex items-center justify-between gap-2 px-3 sm:px-6 py-2 sm:py-2.5 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
             
             {/* View Title */}
             <div className="flex items-center gap-2 min-w-0">
@@ -1372,7 +1371,7 @@ export default function HeroAppWindow() {
                 {currentView === "messages" && <MessageSquare size={13} />}
                 {(currentView === "invoices" || currentView === "invoice-detail") && <Receipt size={13} />}
               </div>
-              <h2 className="text-sm font-bold text-[#0F172A] tracking-tight capitalize">
+              <h2 className="hidden sm:block text-sm font-bold text-[#0F172A] tracking-tight capitalize truncate">
                 {currentView === "dashboard"
                   ? "Dashboard"
                   : currentView === "offerings-services" || currentView === "offerings-products"
@@ -1393,11 +1392,11 @@ export default function HeroAppWindow() {
             <div
               ref={searchBarRef}
               onClick={() => setCommandPaletteOpen(true)}
-              className="flex items-center gap-2 px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 max-w-[320px] shadow-2xs mx-2 cursor-pointer hover:border-slate-300 transition-colors"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B] text-xs flex-1 min-w-0 max-w-[320px] shadow-2xs mx-0.5 sm:mx-2 cursor-pointer hover:border-slate-300 transition-colors"
             >
-              <Search size={12} className="text-[#94A3B8]" />
+              <Search size={12} className="text-[#94A3B8] shrink-0" />
               <span className="text-[11px] text-[#475569] flex-1 truncate">Search or jump to...</span>
-              <kbd className="text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#475569] font-mono">
+              <kbd className="hidden sm:inline text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-[#475569] font-mono shrink-0">
                 ⌘K
               </kbd>
             </div>
@@ -1425,14 +1424,14 @@ export default function HeroAppWindow() {
               >
                 <Sparkles size={12} className={copilotOpen ? "text-amber-400" : "text-[#2563EB]"} />
                 <span className="hidden sm:inline">AI Copilot</span>
-                <kbd className={`text-[9px] px-1 rounded font-mono ${
+                <kbd className={`hidden sm:inline text-[9px] px-1 rounded font-mono ${
                   copilotOpen ? "bg-white/20 text-white" : "bg-white text-[#2563EB] border border-blue-200"
                 }`}>
                   ⌘J
                 </kbd>
               </button>
 
-              <div className="p-1.5 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">
+              <div className="hidden sm:block p-1.5 text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">
                 <Settings size={15} />
               </div>
 
@@ -1765,40 +1764,40 @@ export default function HeroAppWindow() {
               {/* ========================================================= */}
               {/* 1. MISSION CONTROL: EXECUTIVE WORKSPACE COCKPIT (ORIGINAL DASHBOARD) */}
               {/* ========================================================= */}
-              <div className="bg-[#0E1118] border border-[#232733] rounded-[22px] p-5 text-white shadow-2xl relative overflow-hidden select-none">
+              <div className="bg-[#0E1118] border border-[#232733] rounded-2xl sm:rounded-[22px] p-3.5 sm:p-5 text-white shadow-2xl relative overflow-hidden select-none">
                 {/* Row 1: Header Breadcrumb & Status Pill */}
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs">
                   {/* Left: Executive Workspace Path */}
-                  <div className="flex items-center gap-2 text-[10.5px] font-mono tracking-wider">
-                    <Activity size={13} className="text-[#38BDF8] shrink-0" strokeWidth={2.5} />
-                    <span className="text-[#38BDF8] font-bold uppercase">EXECUTIVE WORKSPACE</span>
-                    <span className="text-[#64748B] font-semibold">/</span>
-                    <span className="text-[#94A3B8] font-medium uppercase">AETHERIS CREATIVE STUDIO</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[9.5px] sm:text-[10.5px] font-mono tracking-wider min-w-0">
+                    <Activity size={12} className="text-[#38BDF8] shrink-0" strokeWidth={2.5} />
+                    <span className="text-[#38BDF8] font-bold uppercase whitespace-nowrap">EXECUTIVE WORKSPACE</span>
+                    <span className="text-[#64748B] font-semibold hidden sm:inline">/</span>
+                    <span className="text-[#94A3B8] font-medium uppercase truncate hidden sm:inline">AETHERIS CREATIVE STUDIO</span>
                   </div>
 
                   {/* Right: Consolidated Alert Pill */}
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2B1419] border border-[#482028] text-[10px] font-mono shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+                  <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#2B1419] border border-[#482028] text-[9.5px] sm:text-[10px] font-mono shadow-xs whitespace-nowrap">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] shrink-0" />
                     <span className="text-[#F87171] font-bold">1 CRITICAL</span>
                     <span className="text-[#64748B]">·</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] shrink-0" />
                     <span className="text-[#FBBF24] font-bold">1 CAUTION</span>
-                    <span className="text-[#94A3B8] text-[9.5px] ml-1 font-normal">as of 12:49 AM</span>
-                    <span className="text-[#64748B]">·</span>
-                    <span className="text-[#94A3B8] text-[9.5px] font-normal">changed 12:48 AM</span>
+                    <span className="text-[#94A3B8] text-[9.5px] ml-1 font-normal hidden sm:inline">as of 12:49 AM</span>
+                    <span className="text-[#64748B] hidden sm:inline">·</span>
+                    <span className="text-[#94A3B8] text-[9.5px] font-normal hidden sm:inline">changed 12:48 AM</span>
                   </div>
                 </div>
 
                 {/* Row 2: Secondary Controls (Live & Motion on) */}
-                <div className="flex items-center gap-2 pt-3">
+                <div className="flex items-center gap-2 pt-2.5 sm:pt-3">
                   {/* Live Pill */}
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A1F18] border border-[#143B2C] text-[10px] text-[#34D399] font-mono">
+                  <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#0A1F18] border border-[#143B2C] text-[9.5px] sm:text-[10px] text-[#34D399] font-mono whitespace-nowrap">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                     <span className="font-semibold">Live</span>
                   </div>
 
                   {/* Motion on Pill */}
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#121B2A] border border-[#1E2E44] text-[10px] text-slate-300 font-mono">
+                  <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#121B2A] border border-[#1E2E44] text-[9.5px] sm:text-[10px] text-slate-300 font-mono whitespace-nowrap">
                     <span className="flex items-end gap-[2px] h-2.5 mr-0.5">
                       <span className="w-[2px] h-2.5 bg-slate-300 rounded-2xs" />
                       <span className="w-[2px] h-1.5 bg-slate-400 rounded-2xs" />
@@ -1809,32 +1808,32 @@ export default function HeroAppWindow() {
                 </div>
 
                 {/* Row 3: Cockpit Heading & Clocks */}
-                <div className="pt-3 pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div className="pt-2.5 sm:pt-3 pb-3 sm:pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4">
                   <div>
-                    <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
+                    <h3 className="text-lg sm:text-2xl font-bold tracking-tight text-white leading-tight">
                       Mission Control
                     </h3>
-                    <p className="mt-1 text-[11px] text-[#94A3B8] max-w-xl leading-normal">
+                    <p className="mt-1 text-[10.5px] sm:text-[11px] text-[#94A3B8] max-w-xl leading-normal">
                       <strong className="text-white font-semibold">Good Morning, Julian.</strong> Revenue, delivery and priorities at a glance.
                     </p>
                   </div>
 
                   {/* Right Clocks & Window Progress */}
-                  <div className="flex items-center gap-5 sm:gap-6 font-mono text-slate-400 text-xs shrink-0 pt-1 lg:pt-0">
+                  <div className="flex items-center gap-3.5 sm:gap-6 font-mono text-slate-400 text-xs shrink-0 pt-0.5 lg:pt-0">
                     {/* Local Clock */}
                     <div className="flex flex-col">
-                      <span className="text-[8px] uppercase tracking-wider text-[#94A3B8]">LOCAL · GMT+6</span>
-                      <span className="text-[19px] sm:text-[20px] font-bold text-white tracking-wide mt-0.5">00:49:52</span>
+                      <span className="text-[7.5px] sm:text-[8px] uppercase tracking-wider text-[#94A3B8]">LOCAL · GMT+6</span>
+                      <span className="text-sm sm:text-[20px] font-bold text-white tracking-wide mt-0.5">00:49:52</span>
                     </div>
 
                     {/* UTC Clock */}
-                    <div className="flex flex-col border-l border-[#282C35] pl-5 sm:pl-6">
-                      <span className="text-[8px] uppercase tracking-wider text-[#94A3B8]">UTC</span>
-                      <span className="text-[19px] sm:text-[20px] font-bold text-slate-200 tracking-wide mt-0.5">18:49:52</span>
+                    <div className="flex flex-col border-l border-[#282C35] pl-3.5 sm:pl-6">
+                      <span className="text-[7.5px] sm:text-[8px] uppercase tracking-wider text-[#94A3B8]">UTC</span>
+                      <span className="text-sm sm:text-[20px] font-bold text-slate-200 tracking-wide mt-0.5">18:49:52</span>
                     </div>
 
                     {/* Window UTC Progress */}
-                    <div className="flex flex-col border-l border-[#282C35] pl-5 sm:pl-6">
+                    <div className="hidden sm:flex flex-col border-l border-[#282C35] pl-5 sm:pl-6">
                       <div className="flex items-center justify-between gap-3 text-[8px] uppercase tracking-wider">
                         <span className="text-[#94A3B8]">WINDOW · UTC</span>
                         <span className="text-[#94A3B8] font-semibold">Day 8 of 31</span>
