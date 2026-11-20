@@ -124,8 +124,8 @@ export default function SaaSConvergenceGraphic() {
       
       {/* Background Orbital Guide Rings */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[180px] h-[180px] rounded-full border border-slate-200/60 absolute" />
-        <div className="w-[280px] h-[280px] rounded-full border border-dashed border-slate-200/70 absolute animate-[spin_60s_linear_infinite]" />
+        <div className="w-[130px] h-[130px] sm:w-[180px] sm:h-[180px] rounded-full border border-slate-200/60 absolute" />
+        <div className="w-[210px] h-[210px] sm:w-[280px] sm:h-[280px] rounded-full border border-dashed border-slate-200/70 absolute animate-[spin_60s_linear_infinite]" />
         <div className="w-[min(390px,92vw)] aspect-square rounded-full border border-slate-200/40 absolute" />
       </div>
 
@@ -215,15 +215,15 @@ export default function SaaSConvergenceGraphic() {
         {/* Expanding Transformation Shockwave */}
         <div
           key={`pulse-${pulseCount}`}
-          className="absolute w-32 h-32 rounded-full border-2 border-blue-400/50 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_forwards] pointer-events-none"
+          className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-blue-400/50 animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_forwards] pointer-events-none"
         />
 
         {/* Ambient Halo Glow */}
-        <div className="absolute w-36 h-36 rounded-full bg-gradient-to-tr from-blue-500/20 via-indigo-500/15 to-sky-400/20 blur-2xl pointer-events-none animate-pulse" />
+        <div className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-blue-500/20 via-indigo-500/15 to-sky-400/20 blur-2xl pointer-events-none animate-pulse" />
 
         {/* Center Glass Core */}
-        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-slate-200/90 shadow-2xl p-3.5 flex flex-col items-center justify-center gap-1 hover:border-[#3F72AF] hover:scale-105 transition-all duration-300 group cursor-default">
-          <div className="relative w-12 h-12 sm:w-14 sm:h-14">
+        <div className="relative w-[92px] h-[92px] sm:w-32 sm:h-32 rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-md border-2 border-slate-200/90 shadow-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center gap-0.5 sm:gap-1 hover:border-[#3F72AF] hover:scale-105 transition-all duration-300 group cursor-default">
+          <div className="relative w-8 h-8 sm:w-14 sm:h-14">
             <Image
               src="/images/logo.png"
               alt="Eidoncore Logo Mark"
@@ -232,10 +232,10 @@ export default function SaaSConvergenceGraphic() {
               priority
             />
           </div>
-          <span className="text-xs sm:text-sm font-extrabold tracking-tight text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+          <span className="text-[11px] sm:text-sm font-extrabold tracking-tight text-slate-900 group-hover:text-[#3F72AF] transition-colors whitespace-nowrap">
             Eidoncore
           </span>
-          <span className="text-[9px] font-mono font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/60">
+          <span className="text-[7.5px] sm:text-[9px] font-mono font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-1.5 sm:px-2 py-0.5 rounded-full border border-blue-200/60 whitespace-nowrap">
             Unified Core
           </span>
         </div>
@@ -257,18 +257,18 @@ export default function SaaSConvergenceGraphic() {
             onMouseLeave={() => setActiveTool(null)}
           >
             <div
-              className={`flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/95 backdrop-blur-md border shadow-md transition-all duration-300 cursor-pointer ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl bg-white/95 backdrop-blur-md border shadow-md transition-all duration-300 cursor-pointer ${
                 isSelected
                   ? "scale-110 shadow-xl border-slate-400 ring-2 ring-blue-500/20"
                   : "border-slate-200/90 hover:scale-105 hover:shadow-lg"
               }`}
             >
-              <div className="shrink-0">{t.icon}</div>
+              <div className="w-4 h-4 sm:w-5 sm:h-5 [&>svg]:w-full [&>svg]:h-full shrink-0">{t.icon}</div>
               <div className="flex flex-col text-left">
-                <span className="text-xs font-bold text-slate-900 leading-tight">
+                <span className="text-[10.5px] sm:text-xs font-bold text-slate-900 leading-tight whitespace-nowrap">
                   {t.name}
                 </span>
-                <span className="text-[10px] font-mono text-slate-500 leading-tight">
+                <span className="text-[8.5px] sm:text-[10px] font-mono text-slate-500 leading-tight whitespace-nowrap">
                   {t.category}
                 </span>
               </div>
@@ -278,9 +278,9 @@ export default function SaaSConvergenceGraphic() {
       })}
 
       {/* Floating Bottom Status Indicator */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs text-[11px] text-slate-700 font-medium whitespace-nowrap">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+      <div className="absolute bottom-1 sm:bottom-3 left-1/2 -translate-x-1/2 z-30 w-max max-w-[calc(100%-16px)]">
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs text-[9.5px] sm:text-[11px] text-slate-700 font-medium whitespace-nowrap">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
           <span>
             {activeTool ? (
               <span>
