@@ -109,11 +109,11 @@ export default function BlogPage() {
                   className="group bg-white border border-[#E2E8F0] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded font-semibold bg-blue-50 text-[#3F72AF] border border-blue-200">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded font-semibold bg-blue-50 text-[#2F5F96] border border-blue-200 whitespace-nowrap shrink-0">
                         {post.tag}
                       </span>
-                      <div className="flex items-center gap-1.5 text-[11px] text-[#64748B] font-mono">
+                      <div className="flex items-center gap-1.5 text-[11px] text-[#64748B] font-mono whitespace-nowrap">
                         <Clock size={11} />
                         <span>{post.readTime}</span>
                       </div>

@@ -72,7 +72,7 @@ export default function CTA() {
 
           <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
             {/* Eyebrow */}
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-semibold tracking-wider uppercase text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/25 mb-5 sm:mb-6">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-semibold tracking-wider uppercase text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/25 mb-5 sm:mb-6 whitespace-nowrap">
               14-day free PRO trial
             </span>
 

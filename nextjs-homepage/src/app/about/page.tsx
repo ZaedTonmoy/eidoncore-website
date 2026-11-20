@@ -280,7 +280,7 @@ export default function AboutPage() {
                     {leader.highlights.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-medium text-slate-600 bg-slate-50/80 px-2.5 py-1 rounded-md border border-slate-200/60 transition-colors group-hover:border-slate-300"
+                        className="text-[11px] font-medium text-slate-600 bg-slate-50/80 px-2.5 py-1 rounded-md border border-slate-200/60 transition-colors group-hover:border-slate-300 whitespace-nowrap"
                       >
                         {tag}
                       </span>

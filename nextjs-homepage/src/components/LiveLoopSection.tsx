@@ -37,7 +37,7 @@ export default function LiveLoopSection() {
           {/* Left Column: Copy */}
           <div className="lg:col-span-5 flex flex-col items-start">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-mono tracking-wider uppercase text-white mb-5 sm:mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-mono tracking-wider uppercase text-white mb-5 sm:mb-6 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00ADB5] animate-ping" />
               <span>LIVE LOOP</span>
             </div>

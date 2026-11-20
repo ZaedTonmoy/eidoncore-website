@@ -125,7 +125,7 @@ export default function ChangelogPage() {
                         </div>
                       </div>
 
-                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 whitespace-nowrap shrink-0">
                         {rel.badge}
                       </span>
                     </div>

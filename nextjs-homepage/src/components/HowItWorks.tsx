@@ -104,7 +104,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Step indicator */}
-          <span className="shrink-0 text-[10px] font-mono text-[#4F46E5] bg-[#EEF2FF] border border-[#E0E7FF] px-2 py-0.5 rounded-full font-semibold">
+          <span className="shrink-0 whitespace-nowrap text-[10px] font-mono text-[#4F46E5] bg-[#EEF2FF] border border-[#E0E7FF] px-2 py-0.5 rounded-full font-semibold">
             Step {stepIndex + 1}/4
           </span>
         </div>

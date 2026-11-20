@@ -54,7 +54,7 @@ export default function FeaturesBento() {
           <div className="shrink-0">
             <Link
               href="/features/"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs whitespace-nowrap"
             >
               <span>View all 19 modules</span>
               <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform" />
@@ -111,7 +111,7 @@ export default function FeaturesBento() {
           <StaggerItem className="group relative bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border border-[#1E293B] rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-[border-color,background-color,box-shadow] duration-200">
             <div>
               <div className="flex items-center justify-between mb-5">
-                <span className="text-[10.5px] font-mono bg-[#38BDF8]/20 text-[#38BDF8] border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full font-bold">
+                <span className="text-[10.5px] font-mono bg-[#38BDF8]/20 text-[#38BDF8] border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">
                   +11 MORE
                 </span>
                 <Sparkles size={16} className="text-[#38BDF8]" />

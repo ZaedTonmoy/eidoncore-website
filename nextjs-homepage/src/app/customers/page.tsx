@@ -154,8 +154,8 @@ export default function CustomersPage() {
                 >
                   {/* Left / Text Side */}
                   <div className="flex-1 max-w-xl">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs font-mono font-bold text-[#3F72AF] bg-[#3F72AF]/10 px-2.5 py-0.5 rounded-full border border-[#3F72AF]/20">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
+                      <span className="text-xs font-mono font-bold text-[#2F5F96] bg-[#3F72AF]/10 px-2.5 py-0.5 rounded-full border border-[#3F72AF]/20 whitespace-nowrap shrink-0">
                         {study.company}
                       </span>
                       <span className="text-xs font-mono text-[#64748B]">

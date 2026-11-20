@@ -142,11 +142,11 @@ export default function ComparePage() {
                   className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[11px] font-mono font-bold text-[#64748B] uppercase tracking-wider bg-white border border-[#E2E8F0] px-2.5 py-1 rounded shadow-2xs">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                      <span className="text-[11px] font-mono font-bold text-[#64748B] uppercase tracking-wider bg-white border border-[#E2E8F0] px-2.5 py-1 rounded shadow-2xs whitespace-nowrap">
                         {comp.category}
                       </span>
-                      <span className="text-xs font-bold text-[#DC2626] bg-rose-50 px-2 py-0.5 rounded font-mono">
+                      <span className="text-xs font-bold text-[#DC2626] bg-rose-50 px-2 py-0.5 rounded font-mono whitespace-nowrap shrink-0">
                         {comp.price}
                       </span>
                     </div>

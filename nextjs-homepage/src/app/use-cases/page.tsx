@@ -436,7 +436,7 @@ export default function UseCasesPage() {
                         <Link
                           key={m.name}
                           href={m.href}
-                          className="px-2.5 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-medium text-[#334155] hover:border-[#3F72AF]/40 hover:text-[#3F72AF] transition-colors"
+                          className="px-2.5 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-medium text-[#334155] hover:border-[#3F72AF]/40 hover:text-[#3F72AF] transition-colors whitespace-nowrap"
                         >
                           {m.name}
                         </Link>

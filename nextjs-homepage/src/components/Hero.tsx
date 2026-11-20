@@ -22,11 +22,11 @@ export default function Hero() {
           {/* Eyebrow badge */}
           <Link
             href={eyebrowHref}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E7E7EA] rounded-full text-xs font-medium text-[#0B0B0F] hover:border-[#3F72AF]/40 transition-colors mb-4 sm:mb-6 shadow-2xs group"
+            className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E7E7EA] rounded-full text-xs font-medium text-[#0B0B0F] hover:border-[#3F72AF]/40 transition-colors mb-4 sm:mb-6 shadow-2xs group whitespace-nowrap max-w-full"
           >
-            <span className="w-2 h-2 rounded-full bg-[#3F72AF] animate-pulse" />
-            <span>{eyebrow}</span>
-            <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+            <span className="w-2 h-2 rounded-full bg-[#3F72AF] animate-pulse shrink-0" />
+            <span className="truncate">{eyebrow}</span>
+            <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform shrink-0" />
           </Link>
 
           {/* Heading */}

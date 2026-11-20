@@ -155,7 +155,7 @@ export default function DemoPage() {
                 <button
                   key={s.step}
                   onClick={() => setActiveStep(idx)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
                     activeStep === idx
                       ? "bg-[#0F172A] text-white shadow-xs"
                       : "bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] hover:border-[#3F72AF]/40"

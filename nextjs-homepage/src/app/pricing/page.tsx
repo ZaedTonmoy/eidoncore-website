@@ -208,7 +208,7 @@ export default function PricingPage() {
                     }`}
                   >
                     {plan.popular && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#3F72AF] text-white font-mono text-[10.5px] font-bold uppercase tracking-wider rounded-full shadow-xs">
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#3F72AF] text-white font-mono text-[10.5px] font-bold uppercase tracking-wider rounded-full shadow-xs whitespace-nowrap">
                         Most Popular
                       </div>
                     )}

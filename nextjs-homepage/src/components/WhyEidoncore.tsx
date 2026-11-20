@@ -87,7 +87,7 @@ export default function WhyEidoncore() {
             {/* Link to Features */}
             <Link
               href="/features/"
-              className="mt-6 sm:mt-8 inline-flex items-center gap-2 px-5 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs"
+              className="mt-6 sm:mt-8 inline-flex items-center gap-2 px-5 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs whitespace-nowrap"
             >
               <span>Explore all platform modules</span>
               <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform" />

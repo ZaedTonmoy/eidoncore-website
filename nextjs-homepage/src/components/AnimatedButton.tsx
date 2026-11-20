@@ -28,7 +28,7 @@ export default function AnimatedButton({
   const baseClasses = `
     group relative inline-flex items-center justify-center
     overflow-hidden rounded-full px-6 py-2.5
-    font-medium text-sm
+    font-medium text-sm whitespace-nowrap
     transition-all duration-300 ease-out
     hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]
     ${

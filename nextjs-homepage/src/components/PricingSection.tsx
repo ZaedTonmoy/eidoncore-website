@@ -81,7 +81,7 @@ export default function PricingSection() {
               >
                 <div>
                   {tier.popularBadge && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#3F72AF] text-white text-[10px] font-mono px-3 py-0.5 rounded-full uppercase tracking-wider font-semibold shadow-xs">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#3F72AF] text-white text-[10px] font-mono px-3 py-0.5 rounded-full uppercase tracking-wider font-semibold shadow-xs whitespace-nowrap">
                       {tier.popularBadge}
                     </span>
                   )}

@@ -35,7 +35,7 @@ export default function Footer() {
               {legal.badges.map((badge) => (
                 <span
                   key={badge}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md text-[11px] font-mono text-[#475569] shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-md text-[11px] font-mono text-[#475569] shadow-2xs whitespace-nowrap"
                 >
                   <ShieldCheck size={12} className="text-emerald-600" />
                   <span>{badge}</span>

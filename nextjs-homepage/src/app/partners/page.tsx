@@ -99,7 +99,7 @@ export default function PartnersPage() {
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform duration-200">
                       <TrendingUp size={20} className="text-[#3F72AF]" />
                     </div>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full font-bold bg-blue-50 text-[#3F72AF] border border-blue-200">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full font-bold bg-blue-50 text-[#2F5F96] border border-blue-200 whitespace-nowrap shrink-0">
                       20% RECURRING
                     </span>
                   </div>
@@ -145,7 +145,7 @@ export default function PartnersPage() {
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform duration-200">
                       <Handshake size={20} className="text-purple-600" />
                     </div>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full font-bold bg-purple-50 text-purple-700 border border-purple-200">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full font-bold bg-purple-50 text-purple-700 border border-purple-200 whitespace-nowrap shrink-0">
                       30% RECURRING
                     </span>
                   </div>

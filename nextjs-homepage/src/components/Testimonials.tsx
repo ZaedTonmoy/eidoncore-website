@@ -147,7 +147,7 @@ export default function Testimonials() {
               </span>
               {active.replaced.map((tool, idx) => (
                 <React.Fragment key={tool}>
-                  <span className="px-2.5 py-1 bg-[#F1F5F9] border border-[#E2E8F0] rounded-md text-[#475569] font-medium">
+                  <span className="px-2.5 py-1 bg-[#F1F5F9] border border-[#E2E8F0] rounded-md text-[#475569] font-medium whitespace-nowrap">
                     {tool}
                   </span>
                   {idx < active.replaced.length - 1 ? (
@@ -157,7 +157,7 @@ export default function Testimonials() {
                   )}
                 </React.Fragment>
               ))}
-              <span className="px-2.5 py-1 bg-[#3F72AF]/10 border border-[#3F72AF]/20 rounded-md text-[#2F5F96] font-bold">
+              <span className="px-2.5 py-1 bg-[#3F72AF]/10 border border-[#3F72AF]/20 rounded-md text-[#2F5F96] font-bold whitespace-nowrap">
                 Eidoncore
               </span>
             </div>

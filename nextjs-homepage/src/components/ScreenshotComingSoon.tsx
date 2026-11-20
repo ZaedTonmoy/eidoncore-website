@@ -24,19 +24,19 @@ export default function ScreenshotComingSoon({
       {/* Outer App Window Shell */}
       <div className="relative rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 sm:p-5 shadow-xs overflow-hidden flex flex-col">
         {/* Top App Window Bar */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] mb-3 shrink-0">
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]" />
-            <div className="flex items-center gap-1.5 ml-2 px-2.5 py-0.5 bg-white border border-[#CBD5E1] rounded-md text-[10px] font-mono text-[#64748B] shadow-2xs">
-              <Lock size={10} className="text-[#94A3B8]" />
-              <span>app.eidoncore.com/{slug}</span>
+        <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#E2E8F0] mb-3 shrink-0">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0] shrink-0" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0] shrink-0" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E2E8F0] shrink-0" />
+            <div className="flex items-center gap-1.5 ml-1 sm:ml-2 px-2 sm:px-2.5 py-0.5 bg-white border border-[#CBD5E1] rounded-md text-[10px] font-mono text-[#64748B] shadow-2xs min-w-0 whitespace-nowrap">
+              <Lock size={10} className="text-[#94A3B8] shrink-0" />
+              <span className="truncate">app.eidoncore.com/{slug}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50/90 border border-amber-200/80 rounded-full text-[10.5px] font-mono font-semibold text-amber-700 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50/90 border border-amber-200/80 rounded-full text-[10px] sm:text-[10.5px] font-mono font-semibold text-amber-700 shadow-2xs whitespace-nowrap shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
             <span>Screenshot Staging</span>
           </div>
         </div>
@@ -101,8 +101,8 @@ export default function ScreenshotComingSoon({
             </div>
 
             {/* Status Pill Badge */}
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] text-[10px] font-mono font-bold tracking-wider uppercase shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1]" />
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] text-[10px] font-mono font-bold tracking-wider uppercase shadow-2xs whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] shrink-0" />
               <span>Screenshots to be Added</span>
             </div>
 
@@ -121,7 +121,7 @@ export default function ScreenshotComingSoon({
 
             {/* Meta Information & Live Walkthrough Link */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 w-full text-[11px]">
-              <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md font-mono text-[10px] font-semibold">
+              <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md font-mono text-[10px] font-semibold whitespace-nowrap">
                 <CheckCircle2 size={11} className="text-emerald-600" />
                 <span>Feature Active in v2.4</span>
               </div>
