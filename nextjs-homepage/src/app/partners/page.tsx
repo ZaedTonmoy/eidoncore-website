@@ -93,7 +93,7 @@ export default function PartnersPage() {
             </div>
 
             <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <StaggerItem className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200">
+              <StaggerItem className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5 sm:p-8 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200">
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform duration-200">
@@ -139,7 +139,7 @@ export default function PartnersPage() {
                 </div>
               </StaggerItem>
 
-              <StaggerItem className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200">
+              <StaggerItem className="group bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5 sm:p-8 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200">
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform duration-200">

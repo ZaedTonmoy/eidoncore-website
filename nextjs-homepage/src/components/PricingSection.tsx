@@ -18,7 +18,7 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <JsonLd schema={getPricingProductSchema()} />
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-12">
           <SectionBadge text={eyebrow} />
@@ -73,7 +73,7 @@ export default function PricingSection() {
             return (
               <StaggerItem
                 key={tier.name}
-                className={`relative bg-white border rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 ${
+                className={`relative bg-white border rounded-2xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                   tier.featured
                     ? "border-[#3F72AF] shadow-md ring-1 ring-[#3F72AF]/30"
                     : "border-[#E7E7EA] hover:border-[#0B0B0F]/20 hover:shadow-xs"

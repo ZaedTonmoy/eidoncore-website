@@ -64,7 +64,7 @@ export default function CTA() {
         </div>
 
         {/* 2. Big Obsidian Gradient CTA Card with Glow Blobs */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#0D1527] to-[#0A0F1D] border border-white/10 p-7 sm:p-16 text-center shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#0D1527] to-[#0A0F1D] border border-white/10 p-5 sm:p-16 text-center shadow-2xl">
           
           {/* Glowing Ambient Blobs */}
           <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#3F72AF]/20 blur-3xl pointer-events-none" />

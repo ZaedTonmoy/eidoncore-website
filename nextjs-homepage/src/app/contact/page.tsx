@@ -72,7 +72,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
               
               {/* Left Column: Form Card */}
-              <div className="lg:col-span-7 bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl p-7 sm:p-10 shadow-xs">
+              <div className="lg:col-span-7 bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl p-5 sm:p-10 shadow-xs">
                 {formSubmitted ? (
                   <div className="py-12 flex flex-col items-center text-center">
                     <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5 shadow-xs">

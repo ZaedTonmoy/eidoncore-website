@@ -364,7 +364,7 @@ export default function FeaturesPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between shadow-2xs">
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 flex flex-col justify-between shadow-2xs">
                 <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
                   <DollarSign size={20} />
                 </div>
@@ -376,7 +376,7 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between shadow-2xs">
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 flex flex-col justify-between shadow-2xs">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#3F72AF] flex items-center justify-center mb-5">
                   <Layers size={20} />
                 </div>
@@ -388,7 +388,7 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between shadow-2xs">
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 flex flex-col justify-between shadow-2xs">
                 <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-5">
                   <Clock size={20} />
                 </div>

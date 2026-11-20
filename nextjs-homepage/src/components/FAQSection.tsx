@@ -21,7 +21,7 @@ export default function FAQSection() {
   return (
     <section id="faq" aria-labelledby="faq-heading" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
       <JsonLd schema={getFAQSchema(items)} />
-      <div className="max-w-[800px] mx-auto px-6">
+      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
         
         {/* Header */}
         <div className="text-center mb-12 sm:mb-14" id="faq-heading">

@@ -201,7 +201,7 @@ export default function PricingPage() {
                 return (
                   <StaggerItem
                     key={plan.id}
-                    className={`relative rounded-3xl p-7 sm:p-9 flex flex-col justify-between transition-[border-color,background-color,box-shadow] duration-200 ${
+                    className={`relative rounded-3xl p-5 sm:p-9 flex flex-col justify-between transition-[border-color,background-color,box-shadow] duration-200 ${
                       plan.popular
                         ? "bg-[#F8FAFC] border-2 border-[#3F72AF] shadow-lg shadow-[#3F72AF]/5"
                         : "bg-white border border-[#E2E8F0] hover:border-[#3F72AF]/40 hover:shadow-xs shadow-2xs"

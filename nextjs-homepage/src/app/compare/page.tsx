@@ -139,7 +139,7 @@ export default function ComparePage() {
               {COMPETITORS.map((comp) => (
                 <StaggerItem
                   key={comp.id}
-                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
+                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
                 >
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-4">

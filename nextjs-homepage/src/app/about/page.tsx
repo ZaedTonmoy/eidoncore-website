@@ -154,7 +154,7 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-              <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-2xs hover:shadow-xs transition-shadow">
+              <div className="bg-white border border-[#E2E8F0] rounded-3xl p-5 sm:p-10 shadow-2xs hover:shadow-xs transition-shadow">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#3F72AF] font-bold">
                   From the Greek
                 </span>
@@ -169,7 +169,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-2xs hover:shadow-xs transition-shadow">
+              <div className="bg-white border border-[#E2E8F0] rounded-3xl p-5 sm:p-10 shadow-2xs hover:shadow-xs transition-shadow">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#3F72AF] font-bold">
                   The Foundation
                 </span>
@@ -208,7 +208,7 @@ export default function AboutPage() {
               {VALUES.map((val) => (
                 <StaggerItem
                   key={val.title}
-                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-7 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
+                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 flex flex-col justify-between hover:border-[#3F72AF]/40 hover:bg-white hover:shadow-xs transition-[border-color,background-color,box-shadow] duration-200"
                 >
                   <div>
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center mb-5 shadow-2xs">

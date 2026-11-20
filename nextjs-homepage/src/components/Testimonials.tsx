@@ -109,7 +109,7 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-20 md:py-28 bg-[#F8FAFC] border-t border-b border-[#E7E7EA]">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         
         {/* Section Head */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-14">
@@ -128,7 +128,7 @@ export default function Testimonials() {
 
         {/* Carousel Card */}
         <div
-          className="max-w-3xl mx-auto bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.05)] relative overflow-hidden"
+          className="max-w-3xl mx-auto bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-10 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.05)] relative overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onFocus={() => setIsPaused(true)}

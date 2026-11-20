@@ -34,7 +34,7 @@ export default function FeaturesBento() {
 
   return (
     <section id="features" className="py-20 md:py-28 bg-white border-b border-[#E7E7EA]">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">

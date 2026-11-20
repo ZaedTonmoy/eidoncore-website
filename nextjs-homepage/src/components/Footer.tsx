@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#F8FAFC] border-t border-[#E2E8F0] pt-16 sm:pt-20 pb-10 text-[13px]">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         
         {/* Top: Logo + 4 Link Columns */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-10 mb-12 sm:mb-16">
