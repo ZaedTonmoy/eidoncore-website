@@ -112,7 +112,7 @@ export default function HowItWorks() {
         {/* Panel Content Area */}
         <div
           className={`flex-1 flex flex-col bg-white relative overflow-hidden ${
-            isMobile ? "h-[520px] sm:h-[560px]" : "min-h-[560px] lg:h-[680px] xl:h-[730px]"
+            isMobile ? "h-[400px] sm:h-[520px]" : "min-h-[560px] lg:h-[680px] xl:h-[730px]"
           }`}
         >
           {isMobile ? (
