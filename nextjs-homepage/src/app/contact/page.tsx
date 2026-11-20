@@ -118,7 +118,7 @@ export default function ContactPage() {
                           placeholder="Your name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-3.5 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
 
@@ -135,7 +135,7 @@ export default function ContactPage() {
                           placeholder="you@agency.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-3.5 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
                     </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                           placeholder="Your agency"
                           value={formData.company}
                           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
+                          className="px-3.5 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs"
                         />
                       </div>
 
@@ -166,7 +166,7 @@ export default function ContactPage() {
                           name="subject"
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs cursor-pointer"
+                          className="px-3.5 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-sm text-[#0F172A] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs cursor-pointer"
                         >
                           <option value="demo">Request a Live Demo</option>
                           <option value="sales">Sales & Pricing Inquiry</option>
@@ -190,7 +190,7 @@ export default function ContactPage() {
                         placeholder="Tell us about your agency size, tools you want to replace, or any specific questions..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs resize-none"
+                        className="px-3.5 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-[13px] sm:text-sm text-[#0F172A] placeholder-[#64748B] focus:border-[#3F72AF] focus:ring-2 focus:ring-[#3F72AF]/20 outline-none transition-all shadow-2xs resize-none"
                       />
                     </div>
 
