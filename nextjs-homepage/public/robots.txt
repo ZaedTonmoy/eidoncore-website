@@ -42,6 +42,26 @@ Disallow: /404/
 
 # Perplexity Search & Citation Crawler
 User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# Google Gemini & AI Overviews
+User-agent: Google-Extended
+Allow: /
+Disallow: /_next/
+Disallow: /scratch/
+Disallow: /Single-items/
+Disallow: /404.html
+Disallow: /404/
+
+# DuckDuckGo AI Assist & Amazon AI
+User-agent: DuckAssistBot
+User-agent: Amazonbot
 Allow: /
 Disallow: /_next/
 Disallow: /scratch/

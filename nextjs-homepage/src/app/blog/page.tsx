@@ -18,6 +18,7 @@ const ARTICLES = [
     tag: "Guide",
     readTime: "4 min read",
     date: "Feb 2026",
+    isoDate: "2026-02-15",
     summary:
       "If you're still tracking projects in Excel and invoicing in Word, you're losing billable hours and margin. Here is the blueprint for modern agency consolidation.",
     href: "/features/",
@@ -27,6 +28,7 @@ const ARTICLES = [
     tag: "Best Practice",
     readTime: "5 min read",
     date: "Feb 2026",
+    isoDate: "2026-02-01",
     summary:
       "Retainer billing shouldn't be manual. Learn how to automate monthly credit card charging via Stripe Connect — set it once, and collect funds on autopilot.",
     href: "/invoicing/",
@@ -36,6 +38,7 @@ const ARTICLES = [
     tag: "Strategy",
     readTime: "6 min read",
     date: "Jan 2026",
+    isoDate: "2026-01-22",
     summary:
       "A branded portal under your own domain isn't a vanity luxury — it's a massive competitive differentiator that cuts 'status check' emails by over 40%.",
     href: "/portal/",
@@ -45,6 +48,7 @@ const ARTICLES = [
     tag: "Security",
     readTime: "5 min read",
     date: "Jan 2026",
+    isoDate: "2026-01-12",
     summary:
       "Your clients trust you with confidential code, brand assets, and customer lists. Here is how modern agencies enforce 2FA, tenant isolation, and audit logs.",
     href: "/security/",
@@ -54,6 +58,7 @@ const ARTICLES = [
     tag: "Productivity",
     readTime: "7 min read",
     date: "Jan 2026",
+    isoDate: "2026-01-05",
     summary:
       "Manual task reassignments and overdue invoice chasing drain agency momentum. Discover high-converting trigger-and-action rules that save 10+ hours weekly.",
     href: "/automations/",
@@ -63,6 +68,7 @@ const ARTICLES = [
     tag: "AI Tech",
     readTime: "6 min read",
     date: "Dec 2025",
+    isoDate: "2025-12-18",
     summary:
       "A deep dive into how standard MCP protocols enable modern AI models to inspect project states, draft estimates, and resolve tickets securely.",
     href: "/ai-workspace/",
@@ -78,7 +84,12 @@ export default function BlogPage() {
     itemListElement: ARTICLES.map((post, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
-      item: getBlogPostingSchema(post),
+      item: getBlogPostingSchema({
+        title: post.title,
+        summary: post.summary,
+        date: post.isoDate,
+        href: post.href,
+      }),
     })),
   };
 

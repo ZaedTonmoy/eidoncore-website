@@ -38,10 +38,10 @@ Eidoncore eliminates agency tool fragmentation by combining client portals, proj
 
 ## Plans & Pricing
 
-- **Starter Plan** ($29/month, or $24/month billed annually): Up to 5 team members, 15 active projects, custom agency branding, invoicing, and task boards.
-- **Pro Plan** ($79/month, or $64/month billed annually): Up to 25 team members, unlimited projects, custom CNAME domain, full AI Workspace, and priority support.
-- **Agency Plan** ($199/month, or $159/month billed annually): Unlimited team members, enterprise SLA, custom webhook integrations, and dedicated account manager.
-- **Trial**: 14-day fully featured free Pro trial with zero credit card required.
+- **Free Plan** ($0/month forever): 2 team members, 3 client organizations, 5 active projects, 3 productized services, 1 intake form, and 500 MB secure storage.
+- **Pro Plan** ($29/month, or $23/month billed annually): 15 team members, 50 client organizations, 100 active projects, 30 productized services, 20 workflow automations, 100% white-label client portal, and full AI Workspace.
+- **Enterprise Plan** ($79/month, or $63/month billed annually): Unlimited team members, unlimited client organizations, unlimited projects, custom CNAME domains, custom SMTP gateway, 100 GB storage, and priority 24/7 SLA support.
+- **Trial**: 14-day free Pro trial with zero credit card required. Flat transparent pricing with no per-seat fees.
 - More details: [Eidoncore Pricing](https://eidoncore.com/pricing/)
 
 ## Competitor Comparisons

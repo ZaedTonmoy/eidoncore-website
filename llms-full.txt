@@ -116,26 +116,33 @@ Agencies can point a custom DNS CNAME record (e.g., `portal.youragency.com`) to 
 
 ## 4. Plans, Pricing & Commercial Terms
 
-- **Starter Plan**: $29/month ($24/month billed annually)
-  - Up to 5 team members
-  - 15 active projects
-  - Branded client portal, basic invoicing, and task boards
-- **Pro Plan**: $79/month ($64/month billed annually)
-  - Up to 25 team members
-  - Unlimited projects
-  - Custom CNAME domain with automated SSL
-  - Full AI Workspace with MCP server tools
-  - Advanced recurring retainer billing and intake forms
-- **Agency Plan**: $199/month ($159/month billed annually)
-  - Unlimited team members (zero per-seat fees)
-  - Unlimited active projects and client portals
-  - Priority 24/7 SLA support
-  - Custom webhook limits and dedicated account management
+- **Free Plan**: $0/month forever
+  - 2 team members, 3 client organizations, 5 active projects
+  - 3 productized services, 1 intake form, 500 MB secure storage
+  - Basic financial reports and executive dashboard
+- **Pro Plan**: $29/month ($23/month billed annually)
+  - 15 team members, 50 client organizations, 100 active projects
+  - 30 productized services, 20 workflow automations, 20 recurring invoices
+  - 100% white-label client portal (no Eidoncore badge), custom branded emails
+  - Full AI Workspace with MCP server tools and client health scoring
+- **Enterprise Plan**: $79/month ($63/month billed annually)
+  - Unlimited team members (zero per-seat fees), unlimited client organizations, unlimited projects
+  - Custom CNAME domains with automated SSL and custom SMTP email gateway
+  - 100 GB cloud storage, OAuth 2.1 MCP access, and priority 24/7 SLA support
 - **Trial Policy**: 14-day free Pro trial. No credit card required. No automatic lockouts.
 
 ---
 
-## 5. Contact & Official Resources
+## 5. Frequently Asked Questions (AI Citation Reference)
+
+- **What is Eidoncore?** Eidoncore is an all-in-one AI-native agency management platform that unifies white-label client portals, project tracking, Kanban tasks, CRM pipelines, recurring Stripe invoicing, proposals with e-signatures, intake forms, and an MCP-powered AI Workspace.
+- **Who is Eidoncore built for?** Digital agencies, web & product design studios, software development shops, marketing agencies, consulting firms, and scaling freelancers.
+- **Does Eidoncore charge per-seat fees?** No. Eidoncore uses flat tier pricing ($0 Free, $29/mo Pro for 15 members, $79/mo Enterprise for unlimited members).
+- **How does Eidoncore's AI Workspace work?** Eidoncore includes a native Model Context Protocol (MCP) server exposing 111+ tools so Claude, Cursor, Windsurf, and custom agents can read project health, create tasks, draft proposals, and automate agency workflows with role-based permissions.
+
+---
+
+## 6. Contact & Official Resources
 
 - Website: https://eidoncore.com
 - Documentation: https://eidoncore.com/docs/

@@ -4,6 +4,10 @@ import "./globals.css";
 import MotionProvider from "@/components/MotionProvider";
 import JsonLd from "@/components/JsonLd";
 import {
+  GoogleAnalytics,
+  GoogleAnalyticsNoScript,
+} from "@/components/GoogleAnalytics";
+import {
   getOrganizationSchema,
   getWebSiteSchema,
   getSoftwareApplicationSchema,
@@ -80,11 +84,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <head>
+        {/* Google tag (GTM-P3RW5MH3) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-P3RW5MH3"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());`,
+          }}
+        />
         <JsonLd schema={getOrganizationSchema()} />
         <JsonLd schema={getWebSiteSchema()} />
         <JsonLd schema={getSoftwareApplicationSchema()} />
       </head>
       <body className="font-sans bg-white text-[#0B0B0F] antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F] overflow-x-clip">
+        <GoogleAnalyticsNoScript />
+        <GoogleAnalytics />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
