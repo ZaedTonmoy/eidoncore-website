@@ -94,6 +94,16 @@ export default function RootLayout({
             __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());`,
           }}
         />
+        {/* PeepChat Chatbot Widget */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.PeepChatConfig = { chatbotId: "cmwtkenjg00099220762bi0iv" };`,
+          }}
+        />
+        <script
+          async
+          src="https://peepchat.peepez.com/widget.js"
+        />
         <JsonLd schema={getOrganizationSchema()} />
         <JsonLd schema={getWebSiteSchema()} />
         <JsonLd schema={getSoftwareApplicationSchema()} />
