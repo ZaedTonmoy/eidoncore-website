@@ -73,6 +73,36 @@ const ARTICLES = [
       "A deep dive into how standard MCP protocols enable Claude, Cursor, and Windsurf to inspect project states, draft estimates, and resolve tickets securely.",
     href: "/blog/mcp-ai-workflows-for-digital-agencies/",
   },
+  {
+    title: "How to Scale a Digital Agency Without Tool Sprawl",
+    tag: "Agency Management",
+    readTime: "6 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
+    summary:
+      "Why tool fragmentation slows growing digital agencies, how per-seat SaaS pricing erodes margins, and how to unify projects, CRM, portals, and billing.",
+    href: "/blog/how-to-scale-a-digital-agency-without-tool-sprawl/",
+  },
+  {
+    title: "How to Build Automated Agency Onboarding Workflows",
+    tag: "Agency Operations",
+    readTime: "5 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
+    summary:
+      "Automate client onboarding from signed proposal and conditional intake form to instant project spinup, portal access, and kickoff invoicing.",
+    href: "/blog/automated-agency-onboarding-workflows/",
+  },
+  {
+    title: "Important Agency KPIs: Utilization, Margin & On-Time Delivery",
+    tag: "Agency Intelligence",
+    readTime: "6 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
+    summary:
+      "Track billable utilization, project budget burndown, client health scores, and on-time milestone delivery in one live executive view.",
+    href: "/blog/important-agency-kpis-utilization-margin/",
+  },
 ];
 
 export default function BlogPage() {

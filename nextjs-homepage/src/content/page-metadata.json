@@ -159,6 +159,18 @@
     "title": "Eidoncore vs Moxie — Agency Platform Comparison",
     "description": "Compare Eidoncore and Moxie across agency management features, client portals, project workflows, invoicing, and pricing."
   },
+  "compare/productive": {
+    "title": "Eidoncore vs Productive — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Productive across flat vs per-seat pricing, white-label client portals, proposals, project budgets, and MCP AI workflows."
+  },
+  "compare/scoro": {
+    "title": "Eidoncore vs Scoro — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Scoro across flat agency pricing vs 5-seat minimums, client portals, project delivery, CRM, and AI automation."
+  },
+  "compare/teamwork": {
+    "title": "Eidoncore vs Teamwork.com — Agency Platform Comparison",
+    "description": "Compare Eidoncore and Teamwork.com across flat team pricing, white-label client portals, CRM, proposals, project tracking, and MCP AI."
+  },
   "docs": {
     "title": "Help Center & Feature Documentation — Eidoncore Docs",
     "description": "Comprehensive guides and tutorials for every Eidoncore feature: client portals, AI workspace, automations, billing, and team permissions."
@@ -174,5 +186,17 @@
   "blog/mcp-ai-workflows-for-digital-agencies": {
     "title": "MCP AI Workflows for Digital Agencies — Eidoncore",
     "description": "Learn how Model Context Protocol (MCP) connects AI assistants like Claude and Cursor to agency projects, tasks, CRM records, and tickets with role security."
+  },
+  "blog/how-to-scale-a-digital-agency-without-tool-sprawl": {
+    "title": "Scale a Digital Agency Without Tool Sprawl — Eidoncore",
+    "description": "Learn why tool fragmentation slows growing digital agencies, how per-seat pricing erodes margins, and how to unify projects, CRM, portals, and billing."
+  },
+  "blog/automated-agency-onboarding-workflows": {
+    "title": "Automated Agency Onboarding Workflows Guide — Eidoncore",
+    "description": "Step-by-step blueprint for automating client onboarding from signed proposal and intake form to instant project creation, portal access, and kickoff billing."
+  },
+  "blog/important-agency-kpis-utilization-margin": {
+    "title": "Important Agency KPIs: Utilization & Margin — Eidoncore",
+    "description": "Learn the core KPIs every digital agency owner should monitor—including billable utilization, project budget burndown, client health, and on-time delivery."
   }
 }

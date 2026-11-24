@@ -51,6 +51,9 @@ Eidoncore eliminates agency tool fragmentation by combining client portals, proj
 - [Eidoncore vs HoneyBook](https://eidoncore.com/compare/honeybook/): HoneyBook targets event planners and solo creative businesses; Eidoncore provides deep white-label CNAME portals, sprint boards, and developer-grade AI tools.
 - [Eidoncore vs Kitchen.co](https://eidoncore.com/compare/kitchen/): Eidoncore delivers complete end-to-end agency operations including milestone budgets, automated intake forms, and AI copilots.
 - [Eidoncore vs Moxie](https://eidoncore.com/compare/moxie/): Eidoncore offers native model context protocol agent tools, unlimited client portals, and superior scalability for scaling teams.
+- [Eidoncore vs Productive](https://eidoncore.com/compare/productive/): Eidoncore offers flat pricing ($0/$29/$79) without per-seat fees, native white-label client portals, and 111+ MCP AI tools.
+- [Eidoncore vs Scoro](https://eidoncore.com/compare/scoro/): Eidoncore removes Scoro's 5-seat minimum and adds a custom-domain client portal and MCP AI Workspace.
+- [Eidoncore vs Teamwork.com](https://eidoncore.com/compare/teamwork/): Eidoncore pairs project delivery with native CRM, e-signature proposals, and flat team pricing.
 
 ## Documentation & Developer Resources
 
@@ -61,6 +64,9 @@ Eidoncore eliminates agency tool fragmentation by combining client portals, proj
 - [What Is Agency Management Software?](https://eidoncore.com/blog/what-is-agency-management-software/): Complete guide to unifying agency projects, teams, CRM, portals, and billing.
 - [White-Label Client Portal Guide](https://eidoncore.com/blog/white-label-client-portal-for-agencies/): How custom-domain portals centralize deliverables, approvals, files, and tickets.
 - [MCP AI Workflows for Digital Agencies](https://eidoncore.com/blog/mcp-ai-workflows-for-digital-agencies/): How Model Context Protocol connects Claude and Cursor to live agency operations.
+- [Scale a Digital Agency Without Tool Sprawl](https://eidoncore.com/blog/how-to-scale-a-digital-agency-without-tool-sprawl/): How consolidating projects, CRM, portals, and billing protects agency margins.
+- [Automated Agency Onboarding Workflows](https://eidoncore.com/blog/automated-agency-onboarding-workflows/): Blueprint for automating proposals, intake forms, project spinup, and kickoff invoices.
+- [Important Agency KPIs: Utilization & Margin](https://eidoncore.com/blog/important-agency-kpis-utilization-margin/): How agency owners track billable utilization, budget burndowns, and on-time delivery.
 
 ## Full Context Document
 

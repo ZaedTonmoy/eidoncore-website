@@ -304,6 +304,38 @@ export default function ComparePage() {
               </div>
             </div>
           </div>
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 mt-10">
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-base font-bold text-[#0F172A]">
+                  Comparing Enterprise PSA &amp; Project Platforms?
+                </h3>
+                <p className="text-xs text-[#64748B] mt-1">
+                  See detailed breakdowns of flat agency pricing vs. per-seat minimums.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs font-semibold">
+                <Link
+                  href="/compare/productive/"
+                  className="px-3.5 py-2 rounded-lg border border-[#E2E8F0] text-[#0F172A] hover:border-[#3F72AF] hover:text-[#3F72AF] transition-colors inline-flex items-center gap-1"
+                >
+                  Eidoncore vs Productive <ArrowRight size={12} />
+                </Link>
+                <Link
+                  href="/compare/scoro/"
+                  className="px-3.5 py-2 rounded-lg border border-[#E2E8F0] text-[#0F172A] hover:border-[#3F72AF] hover:text-[#3F72AF] transition-colors inline-flex items-center gap-1"
+                >
+                  Eidoncore vs Scoro <ArrowRight size={12} />
+                </Link>
+                <Link
+                  href="/compare/teamwork/"
+                  className="px-3.5 py-2 rounded-lg border border-[#E2E8F0] text-[#0F172A] hover:border-[#3F72AF] hover:text-[#3F72AF] transition-colors inline-flex items-center gap-1"
+                >
+                  Eidoncore vs Teamwork.com <ArrowRight size={12} />
+                </Link>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Testimonials */}
