@@ -973,7 +973,7 @@ export default function BlendedFeaturePreview({
                         <div className="w-6 h-6 rounded bg-blue-50 text-[#3F72AF] flex items-center justify-center">
                           <Receipt size={14} />
                         </div>
-                        <h4 className="text-xs sm:text-sm font-bold text-slate-900">Generate Invoice from Time</h4>
+                        <div className="text-xs sm:text-sm font-bold text-slate-900">Generate Invoice from Time</div>
                       </div>
                       <button
                         type="button"
@@ -1652,7 +1652,7 @@ export default function BlendedFeaturePreview({
                       </div>
                       <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">1. When this happens</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">New task created</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight truncate">New task created</div>
                       </div>
                     </div>
                     <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
@@ -1678,7 +1678,7 @@ export default function BlendedFeaturePreview({
                       </div>
                       <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">2. Only continue if</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Every matching event continues</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight truncate">Every matching event continues</div>
                       </div>
                     </div>
                     <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
@@ -1704,7 +1704,7 @@ export default function BlendedFeaturePreview({
                       </div>
                       <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">3. Then do this</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Send email</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight truncate">Send email</div>
                       </div>
                     </div>
                     <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
@@ -1730,7 +1730,7 @@ export default function BlendedFeaturePreview({
                       </div>
                       <div className="min-w-0">
                         <span className="text-[9px] text-slate-400 block font-medium">4. Then do this</span>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">Send Slack message</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight truncate">Send Slack message</div>
                       </div>
                     </div>
                     <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 shrink-0 ml-2">
@@ -1837,9 +1837,9 @@ export default function BlendedFeaturePreview({
                         <Bell size={13} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                           Send notification
-                        </h4>
+                        </div>
                         <span className="text-[10px] text-slate-400">Messages · In-app push</span>
                       </div>
                     </div>
@@ -1853,9 +1853,9 @@ export default function BlendedFeaturePreview({
                         <Mail size={13} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
                           Send email
-                        </h4>
+                        </div>
                         <span className="text-[10px] text-slate-400">Messages · Branded templates & merge tags</span>
                       </div>
                     </div>
@@ -1871,9 +1871,9 @@ export default function BlendedFeaturePreview({
                         <Hash size={13} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
                           Send Slack message
-                        </h4>
+                        </div>
                         <span className="text-[10px] text-slate-400">Slack · Dedicated channel alerts</span>
                       </div>
                     </div>
@@ -1889,9 +1889,9 @@ export default function BlendedFeaturePreview({
                         <CheckSquare size={13} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                           Create a task
-                        </h4>
+                        </div>
                         <span className="text-[10px] text-slate-400">Tasks · Auto-assign & schedule</span>
                       </div>
                     </div>
@@ -1905,9 +1905,9 @@ export default function BlendedFeaturePreview({
                         <Activity size={13} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                           Update task status
-                        </h4>
+                        </div>
                         <span className="text-[10px] text-slate-400">Tasks · Move across kanban</span>
                       </div>
                     </div>
@@ -1960,7 +1960,7 @@ export default function BlendedFeaturePreview({
                         <CreditCard size={16} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Stripe</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight">Stripe</div>
                         <p className="text-[11px] text-slate-500 mt-0.5">Accept payments for invoices, services, and subscriptions</p>
                       </div>
                     </div>
@@ -1976,7 +1976,7 @@ export default function BlendedFeaturePreview({
                         #
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Slack</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight">Slack</div>
                         <p className="text-[11px] text-slate-500 mt-0.5">Send workspace notifications to your Slack channels</p>
                       </div>
                     </div>
@@ -1992,7 +1992,7 @@ export default function BlendedFeaturePreview({
                         <Mail size={16} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">Gmail & email</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight">Gmail & email</div>
                         <p className="text-[11px] text-slate-500 mt-0.5">Turn emails into tasks and tickets from Gmail or by forwarding</p>
                       </div>
                     </div>
@@ -2008,7 +2008,7 @@ export default function BlendedFeaturePreview({
                         <Sparkles size={16} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">AI Connector</h4>
+                        <div className="text-xs font-bold text-slate-900 leading-tight">AI Connector</div>
                         <p className="text-[11px] text-slate-500 mt-0.5">Connect Claude, Cursor, and other AI assistants via MCP</p>
                       </div>
                     </div>
@@ -2159,7 +2159,7 @@ export default function BlendedFeaturePreview({
                         PFD 1
                       </span>
                       <div>
-                        <h4 className="text-base font-bold text-[#0F172A] leading-tight">Total revenue</h4>
+                        <div className="text-base font-bold text-[#0F172A] leading-tight">Total revenue</div>
                         <span className="text-xs text-[#64748B] block mt-0.5">All recognized revenue channels</span>
                       </div>
                     </div>
@@ -2288,7 +2288,7 @@ export default function BlendedFeaturePreview({
                         FIN 4
                       </span>
                       <div>
-                        <h4 className="text-base font-bold text-[#0F172A] leading-tight">Cash flow</h4>
+                        <div className="text-base font-bold text-[#0F172A] leading-tight">Cash flow</div>
                         <span className="text-xs text-[#64748B] block mt-0.5">Invoiced vs collected · last 6 months</span>
                       </div>
                     </div>
@@ -2451,7 +2451,7 @@ export default function BlendedFeaturePreview({
                       AO
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Amara Okafor</h4>
+                      <div className="text-xs font-bold text-slate-900 leading-tight">Amara Okafor</div>
                       <span className="text-[10px] text-slate-400">Frontend & WebRTC</span>
                     </div>
                   </div>
@@ -2492,7 +2492,7 @@ export default function BlendedFeaturePreview({
                       LG
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Liam Gallagher</h4>
+                      <div className="text-xs font-bold text-slate-900 leading-tight">Liam Gallagher</div>
                       <span className="text-[10px] text-slate-400">Backend & API Lead</span>
                     </div>
                   </div>
@@ -2533,7 +2533,7 @@ export default function BlendedFeaturePreview({
                       CB
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 leading-tight">Chloe Bennett</h4>
+                      <div className="text-xs font-bold text-slate-900 leading-tight">Chloe Bennett</div>
                       <span className="text-[10px] text-slate-400">Design Systems & Tokens</span>
                     </div>
                   </div>
@@ -3531,9 +3531,9 @@ export default function BlendedFeaturePreview({
                           <div className="flex items-center gap-2.5">
                             <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
                             <div>
-                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                              <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                                 View All Projects
-                              </h4>
+                              </div>
                               <span className="text-[10px] text-slate-400">Opens project flightdeck</span>
                             </div>
                           </div>
@@ -3547,9 +3547,9 @@ export default function BlendedFeaturePreview({
                           <div className="flex items-center gap-2.5">
                             <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
                             <div>
-                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                              <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                                 View Invoices & Billing
-                              </h4>
+                              </div>
                               <span className="text-[10px] text-slate-400">Inspect $4,800 overdue invoice</span>
                             </div>
                           </div>
@@ -3563,9 +3563,9 @@ export default function BlendedFeaturePreview({
                           <div className="flex items-center gap-2.5">
                             <ArrowRight size={14} className="text-[#3F72AF] group-hover:translate-x-0.5 transition-transform" />
                             <div>
-                              <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
+                              <div className="text-xs font-bold text-slate-900 group-hover:text-[#3F72AF] transition-colors">
                                 Update Arcturus Project Status
-                              </h4>
+                              </div>
                               <span className="text-[10px] text-slate-400">Review deliverables and timeline</span>
                             </div>
                           </div>
@@ -3854,9 +3854,9 @@ export default function BlendedFeaturePreview({
               {/* Modal Header */}
               <div className="flex items-start justify-between pb-3 border-b border-slate-100">
                 <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
+                  <div className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
                     Accept &amp; Sign Proposal
-                  </h4>
+                  </div>
                   <p className="text-[10.5px] font-mono text-[#64748B] mt-0.5">
                     #PROP-002 — WEB DESIGN &amp; DEVELOPMENT PROPOSAL (Copy)
                   </p>
@@ -3912,9 +3912,9 @@ export default function BlendedFeaturePreview({
                       {/* Content */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <h5 className="text-xs sm:text-[13px] font-bold text-slate-900 leading-snug">
+                          <div className="text-xs sm:text-[13px] font-bold text-slate-900 leading-snug">
                             {item.title}
-                          </h5>
+                          </div>
                           <span className="text-xs sm:text-[13px] font-black text-slate-900 font-mono shrink-0">
                             +${item.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
                           </span>
@@ -4035,9 +4035,9 @@ export default function BlendedFeaturePreview({
               {/* Modal Header */}
               <div className="flex items-start justify-between pb-3 border-b border-slate-100">
                 <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
+                  <div className="text-sm sm:text-base font-bold text-[#0F172A] leading-tight">
                     Accept &amp; Sign Proposal
-                  </h4>
+                  </div>
                   <p className="text-[10.5px] font-mono text-[#64748B] mt-0.5">
                     #PROP-002 — WEB DESIGN &amp; DEVELOPMENT PROPOSAL (Copy)
                   </p>
@@ -4057,9 +4057,9 @@ export default function BlendedFeaturePreview({
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
-                    <h5 className="text-xs sm:text-[13px] font-bold text-slate-900 truncate">
+                    <div className="text-xs sm:text-[13px] font-bold text-slate-900 truncate">
                       Aetheris Pro UI Kit &amp; Tokens (Figma + Code)
-                    </h5>
+                    </div>
                     <span className="text-xs sm:text-[13px] font-black text-slate-900 font-mono shrink-0">
                       +$1,200.00
                     </span>
@@ -4322,7 +4322,7 @@ export default function BlendedFeaturePreview({
                       <Shield size={16} />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900 leading-tight">Deposit</h4>
+                      <div className="text-sm font-bold text-slate-900 leading-tight">Deposit</div>
                       <p className="text-[11px] text-slate-500 mt-0.5">
                         Collect upfront payment before starting work
                       </p>
@@ -4388,7 +4388,7 @@ export default function BlendedFeaturePreview({
                     <CheckSquare size={16} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 leading-tight">On Acceptance</h4>
+                    <div className="text-sm font-bold text-slate-900 leading-tight">On Acceptance</div>
                     <p className="text-[11px] text-slate-500 mt-0.5">
                       What happens when the client accepts this proposal
                     </p>
@@ -4419,7 +4419,7 @@ export default function BlendedFeaturePreview({
                     <Calendar size={13} />
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-slate-800 leading-tight">Validity</h5>
+                    <div className="text-xs font-bold text-slate-800 leading-tight">Validity</div>
                     <p className="text-[10px] text-slate-400">Proposal expires in 30 days if unsigned</p>
                   </div>
                 </div>
@@ -4464,7 +4464,7 @@ export default function BlendedFeaturePreview({
           <BlendMockupCard className="bg-white p-4 sm:p-5 rounded-2xl w-full min-w-0 flex flex-col gap-4 text-slate-800 border border-slate-200/90 shadow-sm">
             {/* CARD 1: Add Domain */}
             <div className="rounded-xl border border-slate-200/80 bg-white p-4 shadow-2xs">
-              <h4 className="text-sm font-bold text-slate-900 leading-tight">Add Domain</h4>
+              <div className="text-sm font-bold text-slate-900 leading-tight">Add Domain</div>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
                 Point your custom domain to your agency platform. You&apos;ll need to add a CNAME record in your DNS provider.
               </p>
@@ -4689,7 +4689,7 @@ export default function BlendedFeaturePreview({
 
                   {/* Ownership Record (TXT) Sub-section */}
                   <div className="mt-4 pt-3.5 border-t border-slate-100">
-                    <h5 className="text-xs font-bold text-slate-900">Ownership record (TXT)</h5>
+                    <div className="text-xs font-bold text-slate-900">Ownership record (TXT)</div>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-0.5">
                       Every workspace uses the same CNAME target, so this TXT record proves the domain is yours. Verification needs both records. Leave it in place after verification.
                     </p>
@@ -4979,7 +4979,7 @@ export default function BlendedFeaturePreview({
                   </div>
                   <div className="flex-1 min-w-0 pr-4">
                     <div className="flex items-center justify-between gap-1">
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">Invoice #INV-00052 is overdue</h4>
+                      <div className="text-xs font-bold text-slate-900 tracking-tight">Invoice #INV-00052 is overdue</div>
                       <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
@@ -5002,9 +5002,9 @@ export default function BlendedFeaturePreview({
                   </div>
                   <div className="flex-1 min-w-0 pr-4">
                     <div className="flex items-center justify-between gap-1">
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight">
                         Alex Morgan mentioned you in Internal Tasks
-                      </h4>
+                      </div>
                       <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600 mt-0.5">
@@ -5091,9 +5091,9 @@ export default function BlendedFeaturePreview({
                   </div>
                   <div className="flex-1 min-w-0 pr-4">
                     <div className="flex items-center justify-between gap-1">
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight">
                         Team member completed task: Design System Sync
-                      </h4>
+                      </div>
                       <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
@@ -5398,9 +5398,9 @@ export default function BlendedFeaturePreview({
             {/* Box 2: Digest Frequency (Screenshot 5) */}
             <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
+                <div className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
                   Digest Frequency
-                </h4>
+                </div>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   How often to receive notification summaries. Critical events always send instantly.
                 </p>
@@ -5449,10 +5449,10 @@ export default function BlendedFeaturePreview({
             {/* Box 3: Quiet Hours (Screenshot 5) */}
             <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs flex flex-col gap-3">
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
+                <div className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
                   <Moon size={14} className="text-indigo-500" />
                   <span>Quiet Hours</span>
-                </h4>
+                </div>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   Mute non-critical notifications during specified hours (optional). Critical events bypass quiet hours.
                 </p>
@@ -5756,9 +5756,9 @@ export default function BlendedFeaturePreview({
                       <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                         Recurring
                       </span>
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
                         Cloud VPS Architecture
-                      </h4>
+                      </div>
                       <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
                         Dedicated cloud VPS resources, isolated environment, and enterprise performance.
                       </p>
@@ -5786,9 +5786,9 @@ export default function BlendedFeaturePreview({
                       <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                         Recurring
                       </span>
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
                         Managed Web Infrastructure
-                      </h4>
+                      </div>
                       <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
                         High-speed cloud hosting with SSL, automated backups, and 99.9% uptime guarantee.
                       </p>
@@ -5815,7 +5815,7 @@ export default function BlendedFeaturePreview({
                     <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                       Recurring
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Security & WAF Shield</h4>
+                    <div className="text-xs font-bold text-slate-900 tracking-tight">Security & WAF Shield</div>
                   </div>
                 </div>
 
@@ -5830,7 +5830,7 @@ export default function BlendedFeaturePreview({
                     <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                       Recurring
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Core Vitals Performance</h4>
+                    <div className="text-xs font-bold text-slate-900 tracking-tight">Core Vitals Performance</div>
                   </div>
                 </div>
               </div>
@@ -5961,9 +5961,9 @@ export default function BlendedFeaturePreview({
                       <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                         Recurring
                       </span>
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
                         ApexSEO Pro + Cache Suite
-                      </h4>
+                      </div>
                       <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
                         Complete search rank optimization, automated schema markup & peak cache engine.
                       </p>
@@ -5993,9 +5993,9 @@ export default function BlendedFeaturePreview({
                       <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1 border border-emerald-100">
                         One-Time
                       </span>
-                      <h4 className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
+                      <div className="text-xs font-bold text-slate-900 tracking-tight leading-snug">
                         CorePortal UI Framework
-                      </h4>
+                      </div>
                       <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
                         Pre-built customer dashboard template with authenticated billing & ticket modules.
                       </p>
@@ -6020,7 +6020,7 @@ export default function BlendedFeaturePreview({
                     <span className="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold mb-1 border border-blue-100">
                       Recurring
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">FlowSync Webhooks</h4>
+                    <div className="text-xs font-bold text-slate-900 tracking-tight">FlowSync Webhooks</div>
                   </div>
                 </div>
 
@@ -6035,7 +6035,7 @@ export default function BlendedFeaturePreview({
                     <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-semibold mb-1 border border-emerald-100">
                       One-Time
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 tracking-tight">Studio Builder Pack</h4>
+                    <div className="text-xs font-bold text-slate-900 tracking-tight">Studio Builder Pack</div>
                   </div>
                 </div>
               </div>
@@ -6320,7 +6320,7 @@ export default function BlendedFeaturePreview({
                   1
                 </div>
                 <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
-                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">Core Architecture & UX</h4>
+                  <div className="text-sm font-bold text-slate-900 tracking-tight">Core Architecture & UX</div>
                   <p className="text-xs text-slate-500 mt-0.5">Design tokens, user journey flows & initial client review</p>
                   <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
@@ -6346,7 +6346,7 @@ export default function BlendedFeaturePreview({
                   2
                 </div>
                 <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
-                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">API Integration & Database</h4>
+                  <div className="text-sm font-bold text-slate-900 tracking-tight">API Integration & Database</div>
                   <p className="text-xs text-slate-500 mt-0.5">Authentication endpoints, webhooks & storage pipeline</p>
                   <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
@@ -6372,7 +6372,7 @@ export default function BlendedFeaturePreview({
                   3
                 </div>
                 <div className="bg-white rounded-xl border border-slate-200/80 p-3.5 sm:p-4 shadow-2xs">
-                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">Production Handover & QA</h4>
+                  <div className="text-sm font-bold text-slate-900 tracking-tight">Production Handover & QA</div>
                   <p className="text-xs text-slate-500 mt-0.5">Staging tests, client sign-off & DNS launch checklist</p>
                   <div className="flex flex-wrap items-center gap-3 mt-3 pt-1">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
@@ -6478,7 +6478,7 @@ export default function BlendedFeaturePreview({
               <div className="p-3 sm:p-3.5 flex items-center justify-between border-b border-slate-100">
                 <div className="flex items-center gap-1.5">
                   <Timer size={14} className="text-slate-500" />
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Time Entries</h4>
+                  <div className="text-xs sm:text-sm font-bold text-slate-900">Time Entries</div>
                   <Info size={12} className="text-slate-300 ml-0.5" />
                 </div>
                 <button
@@ -6759,7 +6759,7 @@ export default function BlendedFeaturePreview({
                       <Folder size={12} />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="font-bold text-slate-900 text-xs truncate">Internal Tasks</h4>
+                      <div className="font-bold text-slate-900 text-xs truncate">Internal Tasks</div>
                       <span className="text-[10px] text-slate-400 block">Project • 2 members</span>
                     </div>
                   </div>
@@ -6917,7 +6917,7 @@ export default function BlendedFeaturePreview({
                   <Folder size={14} />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm truncate">Internal Tasks</h4>
+                  <div className="font-bold text-slate-900 text-xs sm:text-sm truncate">Internal Tasks</div>
                   <span className="text-[10px] text-slate-400 block">Project • 2 members</span>
                 </div>
               </div>
@@ -7296,9 +7296,9 @@ export default function BlendedFeaturePreview({
 
                   {/* CARD 1: Refactor Auth Middleware */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
-                    <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    <div className="text-sm font-bold text-[#0B0B0F] tracking-tight">
                       Refactor Auth Middleware
-                    </h4>
+                    </div>
 
                     {/* Priority & Date Tags */}
                     <div className="flex items-center gap-2">
@@ -7337,9 +7337,9 @@ export default function BlendedFeaturePreview({
 
                   {/* CARD 2: API Endpoint Rate Limiting */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5">
-                    <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    <div className="text-sm font-bold text-[#0B0B0F] tracking-tight">
                       API Endpoint Rate Limiting
-                    </h4>
+                    </div>
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
                         <Flag size={12} strokeWidth={2.5} /> Urgent
@@ -7384,9 +7384,9 @@ export default function BlendedFeaturePreview({
 
                   {/* DONE CARD 1: Design System Tokens Audit */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5 opacity-90">
-                    <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    <div className="text-sm font-bold text-[#0B0B0F] tracking-tight">
                       Design System Tokens Audit
-                    </h4>
+                    </div>
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center gap-1 text-xs font-medium text-[#D97706]">
                         <Flag size={12} strokeWidth={2.2} /> Medium
@@ -7413,9 +7413,9 @@ export default function BlendedFeaturePreview({
 
                   {/* DONE CARD 2: Database Index Optimization */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 flex flex-col gap-2.5 opacity-90">
-                    <h4 className="text-sm font-bold text-[#0B0B0F] tracking-tight">
+                    <div className="text-sm font-bold text-[#0B0B0F] tracking-tight">
                       Database Index Optimization
-                    </h4>
+                    </div>
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center gap-1 text-xs font-bold text-[#DC2626]">
                         <Flag size={12} strokeWidth={2.5} /> Urgent
@@ -7575,7 +7575,7 @@ export default function BlendedFeaturePreview({
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <CheckSquare size={16} className="text-[#0B0B0F]" />
-                    <h5 className="text-sm font-bold text-[#0B0B0F]">Checklist</h5>
+                    <div className="text-sm font-bold text-[#0B0B0F]">Checklist</div>
                     <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold transition-all">
                       {checklistDone}/2
                     </span>
@@ -7649,7 +7649,7 @@ export default function BlendedFeaturePreview({
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-2">
                     <CheckSquare size={16} className="text-[#0B0B0F]" />
-                    <h5 className="text-sm font-bold text-[#0B0B0F]">Subtasks</h5>
+                    <div className="text-sm font-bold text-[#0B0B0F]">Subtasks</div>
                     <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs font-semibold transition-all">
                       {subtasksDoneCount}/3
                     </span>

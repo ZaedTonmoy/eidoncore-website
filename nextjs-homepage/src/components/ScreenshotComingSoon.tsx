@@ -108,9 +108,9 @@ export default function ScreenshotComingSoon({
 
             {/* Feature Title */}
             <div>
-              <h4 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">
+              <h3 className="text-sm sm:text-base font-bold text-[#0F172A] tracking-tight">
                 {featureTitle}
-              </h4>
+              </h3>
               <p className="text-[11px] sm:text-xs text-[#64748B] mt-1 leading-relaxed max-w-xs mx-auto">
                 The authentic interface capture for this <span className="font-semibold text-[#334155]">{moduleName}</span> view is currently being prepared for the live platform showcase.
               </p>

@@ -162,5 +162,17 @@
   "docs": {
     "title": "Help Center & Feature Documentation — Eidoncore Docs",
     "description": "Comprehensive guides and tutorials for every Eidoncore feature: client portals, AI workspace, automations, billing, and team permissions."
+  },
+  "blog/what-is-agency-management-software": {
+    "title": "What Is Agency Management Software? Guide — Eidoncore",
+    "description": "Learn what agency management software is, which disconnected tools it replaces, and how unified platforms help digital agencies manage projects and clients."
+  },
+  "blog/white-label-client-portal-for-agencies": {
+    "title": "Why Every Agency Needs a White-Label Client Portal — Eidoncore",
+    "description": "Discover how a custom-domain white-label client portal centralizes deliverables, approvals, files, tickets, and invoices under your own agency brand."
+  },
+  "blog/mcp-ai-workflows-for-digital-agencies": {
+    "title": "MCP AI Workflows for Digital Agencies — Eidoncore",
+    "description": "Learn how Model Context Protocol (MCP) connects AI assistants like Claude and Cursor to agency projects, tasks, CRM records, and tickets with role security."
   }
 }

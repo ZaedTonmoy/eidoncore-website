@@ -131,9 +131,9 @@ export default function ChangelogPage() {
                     </div>
 
                     {/* Title & Summary */}
-                    <h3 className="text-xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
+                    <h2 className="text-xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                       {rel.title}
-                    </h3>
+                    </h2>
                     <p className="mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                       {rel.summary}
                     </p>

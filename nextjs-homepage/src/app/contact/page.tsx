@@ -78,9 +78,9 @@ export default function ContactPage() {
                     <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5 shadow-xs">
                       <CheckCircle2 size={28} />
                     </div>
-                    <h3 className="text-2xl font-bold text-[#0F172A] tracking-tight">
+                    <h2 className="text-2xl font-bold text-[#0F172A] tracking-tight">
                       Almost there — send it from your email app
-                    </h3>
+                    </h2>
                     <p className="mt-3 text-sm text-[#64748B] max-w-md leading-relaxed">
                       We&apos;ve opened a draft addressed to <strong className="text-[#0F172A]">hello@eidoncore.com</strong> with your details. Press send there and we&apos;ll reply to <strong className="text-[#0F172A]">{formData.email || "your email"}</strong>. Nothing opened? Email us directly at{" "}
                       <a href="mailto:hello@eidoncore.com" className="font-semibold text-[#3F72AF] hover:underline">hello@eidoncore.com</a>.
@@ -96,9 +96,9 @@ export default function ContactPage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>
-                      <h3 className="text-xl font-bold text-[#0F172A] tracking-tight">
+                      <h2 className="text-xl font-bold text-[#0F172A] tracking-tight">
                         Send us a message
-                      </h3>
+                      </h2>
                       <p className="mt-1 text-xs text-[#64748B]">
                         Fill out the details below and we&apos;ll get back to you promptly.
                       </p>
@@ -210,16 +210,16 @@ export default function ContactPage() {
                 
                 {/* Direct Channels */}
                 <div>
-                  <h3 className="text-base font-bold text-[#0F172A] tracking-tight mb-4">
+                  <h2 className="text-base font-bold text-[#0F172A] tracking-tight mb-4">
                     Direct Channels
-                  </h3>
+                  </h2>
                   <div className="flex flex-col gap-3.5">
                     <div className="p-4 bg-white border border-[#E2E8F0] rounded-2xl flex items-start gap-3.5 shadow-2xs">
                       <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#3F72AF] flex items-center justify-center shrink-0">
                         <Mail size={18} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Email Us Directly</h4>
+                        <h3 className="text-xs font-bold text-[#0F172A]">Email Us Directly</h3>
                         <a
                           href="mailto:hello@eidoncore.com"
                           className="text-xs font-mono text-[#3F72AF] hover:underline"
@@ -234,7 +234,7 @@ export default function ContactPage() {
                         <MessageCircle size={18} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Live Support Hours</h4>
+                        <h3 className="text-xs font-bold text-[#0F172A]">Live Support Hours</h3>
                         <p className="text-xs text-[#64748B]">
                           Mon – Fri, 9am – 6pm EST (Average response &lt; 4 hours)
                         </p>
@@ -246,7 +246,7 @@ export default function ContactPage() {
                         <Globe size={18} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-[#0F172A]">Headquarters</h4>
+                        <h3 className="text-xs font-bold text-[#0F172A]">Headquarters</h3>
                         <p className="text-xs text-[#64748B]">
                           Remote-first engineering team serving agencies globally.
                         </p>
@@ -257,9 +257,9 @@ export default function ContactPage() {
 
                 {/* Quick Navigation Links */}
                 <div>
-                  <h3 className="text-base font-bold text-[#0F172A] tracking-tight mb-4">
+                  <h2 className="text-base font-bold text-[#0F172A] tracking-tight mb-4">
                     Quick Resources
-                  </h3>
+                  </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <Link
                       href="/features/"

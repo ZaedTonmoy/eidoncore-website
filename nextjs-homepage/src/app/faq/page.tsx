@@ -44,9 +44,9 @@ export default function FAQPage() {
                   <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#3F72AF] border border-blue-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-200">
                     <MessageSquare size={20} />
                   </div>
-                  <h3 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
+                  <h2 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                     24/7 Live Support
-                  </h3>
+                  </h2>
                   <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                     Have a specific question about your agency setup? Chat with our team or schedule a live screen walkthrough.
                   </p>
@@ -63,9 +63,9 @@ export default function FAQPage() {
                   <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-200">
                     <Sparkles size={20} />
                   </div>
-                  <h3 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
+                  <h2 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                     Free Assisted Migration
-                  </h3>
+                  </h2>
                   <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                     Moving from Asana, ClickUp, or QuickBooks? Our engineers provide complimentary white-glove data migration.
                   </p>
@@ -82,9 +82,9 @@ export default function FAQPage() {
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-200">
                     <ShieldCheck size={20} />
                   </div>
-                  <h3 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
+                  <h2 className="text-base font-semibold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                     Security & Trust Center
-                  </h3>
+                  </h2>
                   <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                     Learn how we protect agency and client data with AES-256 encryption, TLS 1.3, and tenant isolation.
                   </p>

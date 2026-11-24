@@ -58,6 +58,9 @@ Eidoncore eliminates agency tool fragmentation by combining client portals, proj
 - [Developer API & Webhooks](https://eidoncore.com/developers/): REST API endpoints, webhook subscriptions, and MCP server schemas.
 - [Product Changelog](https://eidoncore.com/changelog/): Release notes, continuous feature additions, and platform updates.
 - [Agency Playbook Blog](https://eidoncore.com/blog/): Operational strategies, automation blueprints, and agency growth playbooks.
+- [What Is Agency Management Software?](https://eidoncore.com/blog/what-is-agency-management-software/): Complete guide to unifying agency projects, teams, CRM, portals, and billing.
+- [White-Label Client Portal Guide](https://eidoncore.com/blog/white-label-client-portal-for-agencies/): How custom-domain portals centralize deliverables, approvals, files, and tickets.
+- [MCP AI Workflows for Digital Agencies](https://eidoncore.com/blog/mcp-ai-workflows-for-digital-agencies/): How Model Context Protocol connects Claude and Cursor to live agency operations.
 
 ## Full Context Document
 

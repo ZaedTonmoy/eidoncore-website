@@ -21,6 +21,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://eidoncore.com/blog/mcp-ai-workflows-for-digital-agencies/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eidoncore.com/blog/what-is-agency-management-software/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eidoncore.com/blog/white-label-client-portal-for-agencies/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://eidoncore.com/changelog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

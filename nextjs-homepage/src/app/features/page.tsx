@@ -322,9 +322,9 @@ export default function FeaturesPage() {
                       )}
                     </div>
 
-                    <h3 className="text-base font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
+                    <h2 className="text-base font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors">
                       {mod.title}
-                    </h3>
+                    </h2>
                     <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                       {mod.description}
                     </p>
@@ -369,7 +369,7 @@ export default function FeaturesPage() {
                   <DollarSign size={20} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#0F172A]">Save $200+/Month</h3>
+                  <h2 className="text-lg font-bold text-[#0F172A]">Save $200+/Month</h2>
                   <p className="mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     Replace separate subscriptions for ClickUp, QuickBooks, HubSpot, HoneyBook, and Slack bots. One unified subscription covers your full agency.
                   </p>
@@ -381,7 +381,7 @@ export default function FeaturesPage() {
                   <Layers size={20} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#0F172A]">Zero Data Silos</h3>
+                  <h2 className="text-lg font-bold text-[#0F172A]">Zero Data Silos</h2>
                   <p className="mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     When an invoice is paid, it updates client health in CRM, unlocks deliverables in the portal, and reflects in quarterly revenue reports instantly.
                   </p>
@@ -393,7 +393,7 @@ export default function FeaturesPage() {
                   <Clock size={20} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#0F172A]">Save 10+ Hours/Week</h3>
+                  <h2 className="text-lg font-bold text-[#0F172A]">Save 10+ Hours/Week</h2>
                   <p className="mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     No manual copy-pasting, no broken webhooks, and no hunting through 5 browser tabs to find where a client file or feedback was left.
                   </p>

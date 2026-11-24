@@ -216,9 +216,9 @@ export default function PricingPage() {
                     <div>
                       {/* Plan Header */}
                       <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-bold text-[#0F172A] tracking-tight">
+                        <h2 className="text-xl font-bold text-[#0F172A] tracking-tight">
                           {plan.name}
-                        </h3>
+                        </h2>
                         {plan.id === "enterprise" && (
                           <Shield size={18} className="text-[#3F72AF]" />
                         )}

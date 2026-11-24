@@ -19,6 +19,8 @@ type AnimatedImageProps = {
   delay?: number; // optional delay in seconds
   duration?: number; // optional duration in seconds
   isHero?: boolean; // if in hero section, animates immediately with minimal delay
+  width?: number;
+  height?: number;
 };
 
 const CORNER_POSITION: Record<Corner, string> = {
@@ -37,6 +39,8 @@ export default function AnimatedImage({
   delay,
   duration,
   isHero = false,
+  width = 1440,
+  height = 900,
 }: AnimatedImageProps) {
   const position = CORNER_POSITION[origin];
   const effectiveDelay = delay !== undefined ? delay : isHero ? 0.04 : 0.15;
@@ -84,6 +88,8 @@ export default function AnimatedImage({
       <motion.img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={isHero ? "eager" : "lazy"}
         decoding="async"
         className={`block w-full h-auto ${imgClassName}`}

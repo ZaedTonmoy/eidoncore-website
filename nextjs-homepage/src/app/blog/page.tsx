@@ -14,14 +14,14 @@ import { BookOpen, Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 
 const ARTICLES = [
   {
-    title: "5 Signs Your Agency Has Outgrown Spreadsheets",
+    title: "What Is Agency Management Software? A Complete Guide",
     tag: "Guide",
-    readTime: "4 min read",
-    date: "Feb 2026",
-    isoDate: "2026-02-15",
+    readTime: "6 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
     summary:
-      "If you're still tracking projects in Excel and invoicing in Word, you're losing billable hours and margin. Here is the blueprint for modern agency consolidation.",
-    href: "/features/",
+      "Learn what agency management software is, which fragmented tools it replaces, and how unified platforms help digital agencies track projects, teams, and client portals.",
+    href: "/blog/what-is-agency-management-software/",
   },
   {
     title: "How to Set Up Recurring Invoicing for Retainer Clients",
@@ -36,12 +36,12 @@ const ARTICLES = [
   {
     title: "Why Every Agency Needs a White-Label Client Portal",
     tag: "Strategy",
-    readTime: "6 min read",
-    date: "Jan 2026",
-    isoDate: "2026-01-22",
+    readTime: "5 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
     summary:
-      "A branded portal under your own domain isn't a vanity luxury — it's a massive competitive differentiator that cuts 'status check' emails by over 40%.",
-    href: "/portal/",
+      "A branded portal under your own domain isn't a vanity luxury — it centralizes deliverables, approvals, files, tickets, and invoices under your agency brand.",
+    href: "/blog/white-label-client-portal-for-agencies/",
   },
   {
     title: "Data Security Best Practices for Digital Agencies",
@@ -64,14 +64,14 @@ const ARTICLES = [
     href: "/automations/",
   },
   {
-    title: "Connecting Claude & Cursor via Model Context Protocol",
+    title: "How Agencies Use MCP AI Workflows to Automate Operations",
     tag: "AI Tech",
-    readTime: "6 min read",
-    date: "Dec 2025",
-    isoDate: "2025-12-18",
+    readTime: "5 min read",
+    date: "Nov 2026",
+    isoDate: "2026-11-24",
     summary:
-      "A deep dive into how standard MCP protocols enable modern AI models to inspect project states, draft estimates, and resolve tickets securely.",
-    href: "/ai-workspace/",
+      "A deep dive into how standard MCP protocols enable Claude, Cursor, and Windsurf to inspect project states, draft estimates, and resolve tickets securely.",
+    href: "/blog/mcp-ai-workflows-for-digital-agencies/",
   },
 ];
 
@@ -130,9 +130,9 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <h3 className="text-base font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors leading-snug">
+                    <h2 className="text-base font-bold text-[#0F172A] tracking-tight group-hover:text-[#3F72AF] transition-colors leading-snug">
                       {post.title}
-                    </h3>
+                    </h2>
                     <p className="mt-2.5 text-xs text-[#64748B] leading-relaxed">
                       {post.summary}
                     </p>
