@@ -242,6 +242,7 @@ export const siteContent = {
           { label: "CRM", href: "/crm/" },
           { label: "Proposals", href: "/proposals/" },
           { label: "Automations", href: "/automations/" },
+          { label: "Integrations", href: "/integrations/" },
         ],
       },
       {

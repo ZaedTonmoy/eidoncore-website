@@ -459,6 +459,23 @@ export default function UseCasesPage() {
                         <span>Explore {v.featureName}</span>
                         <ArrowRight size={12} />
                       </Link>
+                      <a
+                        href={`/use-cases/${
+                          v.id === "design"
+                            ? "design-studios"
+                            : v.id === "development"
+                            ? "development-agencies"
+                            : v.id === "consulting"
+                            ? "consulting-firms"
+                            : v.id === "marketing"
+                            ? "marketing-agencies"
+                            : "freelancers"
+                        }/`}
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#3F72AF] hover:underline"
+                      >
+                        <span>{v.name} Guide</span>
+                        <ArrowRight size={12} />
+                      </a>
                     </div>
                   </div>
 
