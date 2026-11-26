@@ -4,38 +4,38 @@ import React from "react";
 import { motion } from "framer-motion";
 import AnimatedText from "./AnimatedText";
 import { fadeUpBlurBox, staggerContainer, TIMING } from "../lib/animations";
-import { Lock, Clock, ShieldCheck, Globe } from "lucide-react";
+import { Lock, ShieldCheck, KeyRound, EyeOff } from "lucide-react";
 
 export default function TrustBento() {
-  const logos = [
-    "Pixel Forge",
-    "Mosaic Digital",
-    "Vanguard Creative",
-    "Nova Studio",
-    "Apex Agency",
-    "Clarity Co.",
+  const capabilities = [
+    "CRM & Proposals",
+    "Client Portals",
+    "Projects & Tasks",
+    "Invoicing & Stripe",
+    "AI Workspace (MCP)",
+    "White-Label Domains",
   ];
 
   const securityCards = [
     {
       icon: <Lock size={18} className="text-[#3F72AF]" />,
-      title: "256-bit Encryption",
-      desc: "Data encrypted in transit and at rest, always.",
+      title: "Encrypted by Default",
+      desc: "Data protected in transit over HTTPS/TLS and encrypted at rest.",
     },
     {
-      icon: <Clock size={18} className="text-emerald-600" />,
-      title: "99.9% Uptime SLA",
-      desc: "Sustained over the trailing 90 days.",
+      icon: <ShieldCheck size={18} className="text-emerald-600" />,
+      title: "Tenant Isolation & RBAC",
+      desc: "Strict workspace separation across 5 team and client permission roles.",
     },
     {
-      icon: <ShieldCheck size={18} className="text-blue-600" />,
-      title: "SOC 2 Ready",
-      desc: "Type II audit currently in progress.",
+      icon: <KeyRound size={18} className="text-blue-600" />,
+      title: "OAuth 2.1 & Audit Trails",
+      desc: "PKCE authentication, 2FA support, and logged workspace activity.",
     },
     {
-      icon: <Globe size={18} className="text-purple-600" />,
-      title: "GDPR Compliant",
-      desc: "Full EU and UK data residency support.",
+      icon: <EyeOff size={18} className="text-purple-600" />,
+      title: "Privacy-First Controls",
+      desc: "Zero third-party ad tracking with full account export and deletion.",
     },
   ];
 
@@ -44,13 +44,13 @@ export default function TrustBento() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-10">
           <AnimatedText
-            text="TRUSTED BY 500+ AGENCIES WORLDWIDE"
+            text="ONE UNIFIED AGENCY OPERATING SYSTEM"
             mode="word"
             className="text-[11px] sm:text-xs font-mono font-semibold tracking-wider text-[#6B7280] uppercase"
           />
         </div>
 
-        {/* 2-Column Split: 500+ Agencies in Left Half alone, 4 Security Cards in Right 2x2 with coordinated delay */}
+        {/* 2-Column Split: 21+ Modules in Left Half, 4 Security & Architecture Cards in Right 2x2 */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch"
           variants={staggerContainer(TIMING.cardStagger, 0.1)}
@@ -58,34 +58,34 @@ export default function TrustBento() {
           whileInView="show"
           viewport={{ once: true, amount: TIMING.viewportAmount }}
         >
-          {/* Left Half (6 cols): 500+ Agencies + Copy + Logos */}
+          {/* Left Half (6 cols): 21+ Modules + Copy + Core Capabilities */}
           <motion.div
             variants={fadeUpBlurBox}
             className="lg:col-span-6 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 flex flex-col justify-between shadow-xs hover:border-[#3F72AF]/40 hover:shadow-xs transition-[border-color,box-shadow,background-color] duration-200"
           >
             <div>
               <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-wider text-[#3F72AF] font-bold">
-                TRUSTED WORLDWIDE
+                BUILT FOR MODERN AGENCIES
               </span>
               <div className="mt-2.5 sm:mt-3 flex items-baseline gap-2">
                 <span className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0F172A]">
-                  500+
+                  21+
                 </span>
-                <span className="text-base sm:text-lg text-[#64748B] font-semibold">agencies</span>
+                <span className="text-base sm:text-lg text-[#64748B] font-semibold">modules</span>
               </div>
               <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-[#64748B] leading-relaxed max-w-md">
-                Agencies run their leads, projects, and invoicing on Eidoncore every day.
+                Run your leads, client portals, projects, invoicing, and AI workflows from a single workspace.
               </p>
             </div>
 
-            {/* Client Logos Grid */}
+            {/* Core Capabilities Grid */}
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#F1F5F9] grid grid-cols-2 sm:grid-cols-3 gap-y-3.5 sm:gap-y-4 gap-x-4 sm:gap-x-6">
-              {logos.map((logo) => (
+              {capabilities.map((item) => (
                 <span
-                  key={logo}
+                  key={item}
                   className="text-xs sm:text-sm font-semibold tracking-wide text-[#64748B] hover:text-[#0F172A] transition-colors select-none"
                 >
-                  {logo}
+                  {item}
                 </span>
               ))}
             </div>

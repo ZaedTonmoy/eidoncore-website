@@ -38,7 +38,7 @@ const VALUES = [
   {
     icon: <Shield size={20} className="text-emerald-600" />,
     title: "Security by Design",
-    desc: "SOC 2-ready architecture with strict tenant isolation, 256-bit encryption, 2FA, and granular role management built into the core.",
+    desc: "Strict tenant isolation, encrypted data storage, 2FA, and granular role management built into the core.",
   },
   {
     icon: <Zap size={20} className="text-amber-500" />,

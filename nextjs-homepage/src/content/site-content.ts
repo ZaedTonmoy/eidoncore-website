@@ -268,7 +268,7 @@ export const siteContent = {
     ],
     legal: {
       copyright: `© ${new Date().getFullYear()} Eidoncore, Inc. All rights reserved.`,
-      badges: ["AES-256 Encrypted", "SOC 2 Ready", "GDPR Compliant"],
+      badges: ["TLS & Encrypted Storage", "Tenant Isolated", "Privacy-First"],
       links: [
         { label: "Privacy Policy", href: "/privacy/" },
         { label: "Terms of Service", href: "/terms/" },

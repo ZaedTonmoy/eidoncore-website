@@ -86,7 +86,7 @@ export default function CustomersPage() {
             { label: "Home", href: "/" },
             { label: "Customers" },
           ]}
-          eyebrow="Trusted by 500+ Agencies"
+          eyebrow="Agency Workflows"
           title="Agencies That Thrive With Eidoncore"
           description="Real case studies from boutique studios and scaling 50-person agencies. Discover how teams reclaimed billable hours, consolidated tool spend, and delighted clients."
           ctaPrimary={{
@@ -105,10 +105,10 @@ export default function CustomersPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8">
               <div className="text-center px-1 py-2.5 sm:p-4 min-w-0">
                 <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] whitespace-nowrap">
-                  500<span className="text-[#3F72AF]">+</span>
+                  21<span className="text-[#3F72AF]">+</span>
                 </div>
                 <div className="mt-1.5 sm:mt-2 text-[10.5px] sm:text-sm font-medium text-[#64748B] whitespace-nowrap">
-                  Agencies Worldwide
+                  Unified Platform Modules
                 </div>
               </div>
               <div className="text-center px-1 py-2.5 sm:p-4 min-w-0">

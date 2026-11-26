@@ -83,7 +83,7 @@ export default function CTA() {
 
             {/* Subheading */}
             <p className="mt-3.5 sm:mt-5 text-[#94A3B8] text-sm sm:text-lg leading-relaxed max-w-xl">
-              Join 500+ agencies running their entire client workflow from a single platform. Start your 14-day free PRO trial — no credit card required.
+              Run your entire client workflow from a single unified platform. Start your 14-day free PRO trial — no credit card required.
             </p>
 
             {/* Action Buttons (100% width on phone for tap ergonomics, auto on desktop) */}
@@ -116,7 +116,7 @@ export default function CTA() {
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Check size={13} className="text-emerald-400" />
-                <span>SOC 2-ready security</span>
+                <span>Tenant-isolated security</span>
               </span>
             </div>
 

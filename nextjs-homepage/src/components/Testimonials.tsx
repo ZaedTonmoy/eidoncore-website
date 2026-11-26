@@ -116,7 +116,7 @@ export default function Testimonials() {
           <SectionBadge text="What Agencies Say" />
           <AnimatedHeading
             as="h2"
-            text="Loved by 500+ Agencies Worldwide"
+            text="Built for Modern Agencies"
             className="mt-3 text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#0F172A] leading-[1.1] justify-center"
           />
           <AnimatedText

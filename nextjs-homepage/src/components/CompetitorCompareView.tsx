@@ -103,14 +103,14 @@ export const COMPETITORS: Record<string, CompetitorData> = {
     summary:
       "Moxie works well for solopreneurs, but scaling a team quickly becomes cumbersome. Eidoncore provides enterprise role security, workload capacity planning, and full AI automation.",
     eidoncoreAdvantage:
-      "Team workload capacity cockpit, SOC 2 ready security, and autonomous AI workflows.",
+      "Team workload capacity cockpit, tenant-isolated security, and autonomous AI workflows.",
     features: [
       { name: "Team Workload & Capacity Planning", eidoncore: true, competitor: false },
       { name: "Model Context Protocol (MCP) Tools", eidoncore: true, competitor: false },
       { name: "Client Portal Custom CNAME Domain", eidoncore: true, competitor: true },
       { name: "Trigger-Action Automation Engine", eidoncore: true, competitor: "Basic" },
       { name: "Digital Product Downloads Storefront", eidoncore: true, competitor: false },
-      { name: "SOC 2 Ready Tenant Isolation", eidoncore: true, competitor: false },
+      { name: "Strict Multi-Tenant Isolation", eidoncore: true, competitor: false },
       { name: "Flat Pricing for Growing Agencies", eidoncore: true, competitor: false },
     ],
   },
