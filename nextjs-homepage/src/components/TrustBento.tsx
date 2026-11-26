@@ -79,11 +79,11 @@ export default function TrustBento() {
             </div>
 
             {/* Core Capabilities Grid */}
-            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#F1F5F9] grid grid-cols-2 sm:grid-cols-3 gap-y-3.5 sm:gap-y-4 gap-x-4 sm:gap-x-6">
+            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#F1F5F9] grid grid-cols-2 sm:grid-cols-3 gap-y-3.5 sm:gap-y-4 gap-x-3 sm:gap-x-4">
               {capabilities.map((item) => (
                 <span
                   key={item}
-                  className="text-xs sm:text-sm font-semibold tracking-wide text-[#64748B] hover:text-[#0F172A] transition-colors select-none"
+                  className="text-[11px] sm:text-xs font-semibold tracking-wide text-[#64748B] hover:text-[#0F172A] transition-colors select-none whitespace-nowrap"
                 >
                   {item}
                 </span>
