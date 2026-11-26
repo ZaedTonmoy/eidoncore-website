@@ -56,7 +56,7 @@ export default function FeaturesBento() {
               href="/features/"
               className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#3F72AF]/40 rounded-full text-xs font-semibold text-[#0F172A] hover:text-[#3F72AF] transition-colors group shadow-2xs whitespace-nowrap"
             >
-              <span>View all 19 modules</span>
+              <span>View all 21 modules</span>
               <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>

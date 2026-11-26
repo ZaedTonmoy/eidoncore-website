@@ -153,7 +153,7 @@ export const siteContent = {
           "30 Services",
           "20 Automations",
           "10 GB Storage",
-          "AI Workspace (19 Modules)",
+          "AI Workspace (21 Modules)",
           "Advanced Reports",
           "Custom Roles & Permissions",
           "Branded Emails & Client Portal",

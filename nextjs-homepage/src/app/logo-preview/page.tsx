@@ -11,7 +11,7 @@ const concepts = [
     badge: "Top Recommendation",
     src: "/images/logo-concepts/01-modular-hexagon.jpg",
     metaphor: "Isometric building blocks forming an interlocked E & C",
-    meaning: "Represents Eidoncore's 19 unified modules (CRM, Portals, Invoicing, AI Agents, Tasks) locked into one solid operating system.",
+    meaning: "Represents Eidoncore's 21 unified modules (CRM, Portals, Invoicing, AI Agents, Tasks) locked into one solid operating system.",
     vibe: "Robust, architectural, futuristic, enterprise AI SaaS",
     bestFor: "Primary brand mark, App icon, Software splash screens",
   },

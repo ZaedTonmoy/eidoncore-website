@@ -49,7 +49,7 @@ export const MODULES_MAP: Record<string, ModulePageProps> = {
     ],
     stats: [
       { value: "111", suffix: "+", label: "Native AI Tools" },
-      { value: "19", label: "Connected Modules" },
+      { value: "21", label: "Connected Modules" },
       { value: "OAuth 2.1", label: "PKCE Protocol Security" },
       { value: "Zero", label: "Cross-Tenant Data Access" },
     ],

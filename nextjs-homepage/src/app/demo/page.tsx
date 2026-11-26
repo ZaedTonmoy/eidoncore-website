@@ -264,7 +264,7 @@ export default function DemoPage() {
               <SectionBadge text="Unified Architecture" />
               <AnimatedHeading
                 as="h2"
-                text="The Power of All 19 Modules Connected"
+                text="The Power of All 21 Modules Connected"
                 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A]"
               />
               <p className="mt-3 text-[#64748B] text-sm sm:text-base leading-relaxed">

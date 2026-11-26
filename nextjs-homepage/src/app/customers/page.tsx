@@ -105,7 +105,7 @@ export default function CustomersPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8">
               <div className="text-center px-1 py-2.5 sm:p-4 min-w-0">
                 <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] whitespace-nowrap">
-                  21<span className="text-[#3F72AF]">+</span>
+                  21
                 </div>
                 <div className="mt-1.5 sm:mt-2 text-[10.5px] sm:text-sm font-medium text-[#64748B] whitespace-nowrap">
                   Unified Platform Modules

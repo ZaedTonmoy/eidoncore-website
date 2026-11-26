@@ -36,7 +36,7 @@ const CARDS: DiffCard[] = [
   {
     num: "04 / 04",
     title: "AI-Native Workspace",
-    desc: "Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace. Role-based access, OAuth 2.1 security, and 111+ tools across 19 modules.",
+    desc: "Connect Claude, Cursor, or any MCP-compatible AI assistant to manage your workspace. Role-based access, OAuth 2.1 security, and 111+ tools across 21 modules.",
     icon: <Cpu size={20} className="text-blue-600" />,
   },
 ];

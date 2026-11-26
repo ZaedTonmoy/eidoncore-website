@@ -69,7 +69,7 @@ export default function TrustBento() {
               </span>
               <div className="mt-2.5 sm:mt-3 flex items-baseline gap-2">
                 <span className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0F172A]">
-                  21+
+                  21
                 </span>
                 <span className="text-base sm:text-lg text-[#64748B] font-semibold">modules</span>
               </div>

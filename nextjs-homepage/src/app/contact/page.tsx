@@ -265,7 +265,7 @@ export default function ContactPage() {
                       href="/features/"
                       className="p-3.5 bg-white border border-[#E2E8F0] rounded-xl text-xs font-semibold text-[#0F172A] hover:border-[#3F72AF]/40 hover:text-[#3F72AF] transition-colors flex items-center justify-between shadow-2xs"
                     >
-                      <span>19 Modules</span>
+                      <span>21 Modules</span>
                       <ArrowRight size={13} />
                     </Link>
                     <Link

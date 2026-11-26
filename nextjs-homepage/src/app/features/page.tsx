@@ -31,6 +31,8 @@ import {
   ClipboardList,
   Palette,
   Package,
+  LayoutDashboard,
+  Plug,
   ArrowRight,
   Sparkles,
   DollarSign,
@@ -212,10 +214,27 @@ const ALL_MODULES: FeatureModule[] = [
     href: "/digital-products/",
     icon: <Package size={22} className="text-emerald-600" />,
   },
+  {
+    id: "dashboard",
+    title: "Dashboard",
+    category: "management",
+    tag: "CORE",
+    description: "Agency command cockpit showing active projects, overdue deliverables, monthly revenue, and recent client activity.",
+    href: "/dashboard/",
+    icon: <LayoutDashboard size={22} className="text-[#3F72AF]" />,
+  },
+  {
+    id: "integrations",
+    title: "Integrations",
+    category: "ai-automation",
+    description: "Connect seamlessly with Stripe, Slack, webhooks, Google Workspace, and GitHub to streamline agency workflows.",
+    href: "/integrations/",
+    icon: <Plug size={22} className="text-indigo-600" />,
+  },
 ];
 
 const CATEGORIES = [
-  { id: "all", label: "All 19 Modules" },
+  { id: "all", label: "All 21 Modules" },
   { id: "operations", label: "Operations" },
   { id: "clients", label: "Clients & Billing" },
   { id: "ai-automation", label: "AI & Automation" },
@@ -246,7 +265,7 @@ export default function FeaturesPage() {
             { label: "Home", href: "/" },
             { label: "Features" },
           ]}
-          eyebrow="19 Core Platform Modules"
+          eyebrow="21 Core Platform Modules"
           title="Every Tool Your Agency Needs. One Platform."
           description="Integrated modules designed to replace your entire disjointed software stack. From project inception to final invoice — every step seamlessly connected."
           ctaPrimary={{ label: "Start Free Trial →", href: "https://register.eidoncore.com/" }}
@@ -291,7 +310,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* 19 Modules Grid */}
+        {/* 21 Modules Grid */}
         <section className="py-16 md:py-24 bg-white border-b border-[#E7E7EA]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 mb-6 sm:mb-8">

@@ -180,7 +180,7 @@ const VERTICALS: Vertical[] = [
 ];
 
 const STATS = [
-  { value: "19", label: "Connected modules" },
+  { value: "21", label: "Connected modules" },
   { value: "5", label: "Agency setups covered" },
   { value: "100", suffix: "%", label: "White-label client portal" },
   { value: "14", suffix: "-day", label: "Free trial, no card" },
@@ -313,7 +313,7 @@ export default function UseCasesPage() {
           title="Built for the way your agency works"
           description="Marketing, design, software, consulting or solo. See how Eidoncore fits your workflow from the first proposal to the final invoice."
           ctaPrimary={{ label: "Start 14-Day Free Trial →", href: "https://register.eidoncore.com/" }}
-          ctaSecondary={{ label: "Explore 19 Modules", href: "/features/" }}
+          ctaSecondary={{ label: "Explore 21 Modules", href: "/features/" }}
         />
 
         {/* Overview: pick your agency type */}
@@ -372,7 +372,7 @@ export default function UseCasesPage() {
                       Something different?
                     </h3>
                     <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
-                      Not on the list? Browse all 19 modules and build the setup that fits your team.
+                      Not on the list? Browse all 21 modules and build the setup that fits your team.
                     </p>
                   </div>
                   <div className="mt-6 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] group-hover:text-[#0F172A] transition-colors">
