@@ -74,7 +74,42 @@ const CASE_STUDIES = [
   },
 ];
 
+const SHOW_CUSTOMERS = false;
+
 export default function CustomersPage() {
+  if (!SHOW_CUSTOMERS) {
+    return (
+      <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
+        <Navbar />
+        <main id="main-content" className="flex-1">
+          <InnerHero
+            breadcrumbs={[
+              { label: "Home", href: "/" },
+              { label: "Customers" },
+            ]}
+            eyebrow="Customer Stories"
+            title="Customer Case Studies Coming Soon"
+            description="We are curating verified agency stories and workflow benchmarks. In the meantime, explore our real platform modules and agency use cases."
+            ctaPrimary={{
+              label: "Explore Use Cases →",
+              href: "/use-cases/",
+            }}
+            ctaSecondary={{
+              label: "Explore 21 Modules",
+              href: "/features/",
+            }}
+          />
+          <CTA />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  return <CustomersPageContent />;
+}
+
+function CustomersPageContent() {
   return (
     <div className="min-h-screen bg-white text-[#0B0B0F] flex flex-col antialiased selection:bg-[#3F72AF]/15 selection:text-[#0B0B0F]">
       <Navbar />

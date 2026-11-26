@@ -259,7 +259,8 @@ export const siteContent = {
         title: "Company",
         links: [
           { label: "About", href: "/about/" },
-          { label: "Customers", href: "/customers/" },
+          // Hidden until real customer stories are ready:
+          // { label: "Customers", href: "/customers/" },
           { label: "Use Cases", href: "/use-cases/" },
           { label: "Partners", href: "/partners/" },
           { label: "Contact", href: "/contact/" },

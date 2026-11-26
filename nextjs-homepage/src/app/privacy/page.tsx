@@ -142,7 +142,7 @@ export default function PrivacyPage() {
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4">6. Your Legal Rights (GDPR & CCPA)</h2>
                 <p>
-                  You hold the legal right to access, export, rectify, or permanently delete all personal data associated with your Eidoncore account at any time. To request a complete data archive or account deletion, contact our privacy team at <a href="mailto:privacy@eidoncore.com" className="text-[#3F72AF] underline">privacy@eidoncore.com</a>.
+                  You hold the legal right to access, export, rectify, or permanently delete all personal data associated with your Eidoncore account at any time. To request a complete data archive or account deletion, contact our privacy team at <a href="mailto:hello@eidoncore.com" className="text-[#3F72AF] underline">hello@eidoncore.com</a>.
                 </p>
               </div>
 

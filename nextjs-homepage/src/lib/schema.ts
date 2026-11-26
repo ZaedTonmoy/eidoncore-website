@@ -26,15 +26,16 @@ export function getOrganizationSchema() {
     description:
       "All-in-one AI-native agency management platform connecting white-label client portals, project delivery, billing, CRM, and autonomous workflows.",
     foundingDate: "2024",
-    sameAs: [
-      "https://twitter.com/eidoncore",
-      "https://github.com/eidoncore",
-      "https://linkedin.com/company/eidoncore",
-    ],
+    // Hidden until official social accounts are created:
+    // sameAs: [
+    //   "https://twitter.com/eidoncore",
+    //   "https://github.com/eidoncore",
+    //   "https://linkedin.com/company/eidoncore",
+    // ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "support@eidoncore.com",
+      email: "hello@eidoncore.com",
       url: `${BASE_URL}/contact/`,
       availableLanguage: ["en"],
     },

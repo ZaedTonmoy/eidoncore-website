@@ -76,7 +76,7 @@ export default function TermsPage() {
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4">6. Contact & Legal Inquiries</h2>
                 <p>
-                  If you have questions regarding these terms, please contact our legal team at <a href="mailto:legal@eidoncore.com" className="text-[#3F72AF] underline">legal@eidoncore.com</a>.
+                  If you have questions regarding these terms, please contact our legal team at <a href="mailto:hello@eidoncore.com" className="text-[#3F72AF] underline">hello@eidoncore.com</a>.
                 </p>
               </div>
 
