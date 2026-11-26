@@ -92,7 +92,14 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
+const SHOW_TESTIMONIALS = false;
+
 export default function Testimonials() {
+  if (!SHOW_TESTIMONIALS) return null;
+  return <TestimonialsContent />;
+}
+
+function TestimonialsContent() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
